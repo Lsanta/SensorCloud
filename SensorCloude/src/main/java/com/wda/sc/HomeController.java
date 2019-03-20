@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wda.sc.domain.memberVO;
 import com.wda.sc.service.LoginService;
 
+import lombok.AllArgsConstructor;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
+@AllArgsConstructor
 public class HomeController {
 	
 	private LoginService loginservice;
@@ -25,7 +24,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		System.out.println("gd");
-		return "main";
+		return "login/login";
 	}
 	
 	@RequestMapping("main")
@@ -36,16 +35,16 @@ public class HomeController {
 	
 	@RequestMapping("/login.do")
 	@ResponseBody
-	public String loginCheck(Model model,HttpSession session, @RequestParam String id,@RequestParam String password) {
-    
+	public String loginCheck(Model model,HttpSession session, @RequestParam String id, @RequestParam String password) {
+
 		ArrayList<memberVO> arr = new ArrayList<memberVO>();
 		arr = loginservice.login(id);
 		
 		if(arr.size() != 0) {
 			
 			if(arr.get(0).getPassword().equals(password)) {
-				model.addAttribute("id",arr.get(0).getUserid());
-				session.setAttribute("id", arr.get(0).getUserid());
+				model.addAttribute("id",arr.get(0).getUser_id());
+				session.setAttribute("id", arr.get(0).getUser_id());
 				return "success";
 			}else {
 				return "fail";
