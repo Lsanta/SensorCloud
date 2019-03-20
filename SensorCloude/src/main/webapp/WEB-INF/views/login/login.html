@@ -35,7 +35,7 @@
              url : "login.do",
              success : function(data) {
               if(data == "success")
-                 window.location.href = "/";
+                 window.location.href = "main";
               else
             	  document.getElementById("loginfail").innerHTML="아이디 또는 비밀번호가 틀렸습니다.";
               console.log("error");
@@ -49,7 +49,7 @@
 <body>
     <div class="login-card">
             <div class="logo-image">
-                    <center><img src="resources/css/images/logo.png" width="160" height="100" >
+                    <center><img src="resources/img/logo.png" width="160" height="100" >
                     </center>
                     </div>
         <h1></h1><br>
