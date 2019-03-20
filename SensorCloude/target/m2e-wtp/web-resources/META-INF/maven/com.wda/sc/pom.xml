@@ -157,6 +157,27 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Thymeleaf 라이브러리  -->
+		<dependency>
+    		<groupId>org.thymeleaf</groupId>
+    		<artifactId>thymeleaf</artifactId>
+    		<version>3.0.11.RELEASE</version>
+		</dependency>
+		<!-- Thymeleaf 라이브러리 -->
+		<dependency>
+    		<groupId>org.thymeleaf</groupId>
+    		<artifactId>thymeleaf-spring5</artifactId>
+    		<version>3.0.11.RELEASE</version>
+		</dependency>
+		
+		<!-- thymeleaf의 레이아웃 추가 라이브러리 -->
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>
