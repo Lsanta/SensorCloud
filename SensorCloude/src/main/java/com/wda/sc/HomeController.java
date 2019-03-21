@@ -55,6 +55,23 @@ public class HomeController {
 		return "check/check";
 	}
 	
+	@RequestMapping(value = "/manage", method = RequestMethod.GET)
+	public String manage(Locale locale, Model model) {
+	
+		return "manage/manage";
+	}
+	
+	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+	public String mypage(Locale locale, Model model) {
+	
+		return "mypage/mypage";
+	}
+	
+	@RequestMapping(value = "/timeline", method = RequestMethod.GET)
+	public String timeline(Locale locale, Model model) {
+	
+		return "timeline/timeline";
+	}
 	
 	@RequestMapping("/login.do")
 	@ResponseBody
