@@ -96,7 +96,7 @@ table th {
 .n1{
   font-size: 1.6em;
   text-align: left;
-  margin: 16% 0 -6% 0;
+  margin: 20% 0 -1% -0.1%;
   display: block;
 }
 .n2{
@@ -124,14 +124,14 @@ table th {
 }
 
 .responsive-image {
-  max-width: 90%; /* 이미지의 최대사이즈 */
+  max-width: 90%; /* �씠誘몄��쓽 理쒕��궗�씠利� */
   width /***/: auto; /* only IE8 */
   height: auto;
   margin:0 auto;
   vertical-align: bottom;
 }
 
-/*페이징부분*/
+/*�럹�씠吏뺣�遺�*/
 .pagination-container {
   margin: 100px auto;
   text-align: center;
