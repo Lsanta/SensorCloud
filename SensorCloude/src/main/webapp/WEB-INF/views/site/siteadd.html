@@ -21,7 +21,7 @@
       <input type="radio" name="chk_scene" value="building
       " checked="checked">건물
       <input type="radio" name="chk_scene" value="mountain
-      " >산
+      "  id = "radio_m">산
    </div>
 
 
@@ -34,9 +34,9 @@
       </div>
       
       <div id="addcontent_right">
-         <input type="text" id="autoname" name="scene_name"><br>
-         <input type="text" id="address" name="address_name"> <input type="submit" value="조회" ><br>
-         <input type="text" id="detailaddress" name="detailadd_name"><br>
+         <input type="text" id="autoname" name="scene_name" class="addcontent_right_input"><br>
+         <input type="text" id="address" name="address_name"> <input type="submit" value="조회"  class="addcontent_right_button" ><br>
+         <input type="text" id="detailaddress" name="detailadd_name"  class="addcontent_right_input"><br>
       </div>
    </div>   
 
@@ -52,27 +52,43 @@
 
 
          <input type="radio" name="chk_net_radio" value="chk_net_radio"
-         >TCP 클라이언트<br>
+         ><label>TCP 서버</label><br><br>
 
          <input type="radio" name="chk_net_raido" value="tcpserver_net_radio
-         " >TCP 서버 <select>
+         " ><label>TCP 서버</label> <select>
             <option value="ipv4">Ipv4</option>
             <option value="ipv41">....</option>
             <option value="ipv42">....</option>
-         </select><br>
+         </select><br><br>
 
          <input type="radio" name="chk_net_raido" value="tcpserver_net_radio
-         " >UDP
+         " ><label>UDP</label>
 
          
       </div>   
 
       <div id="addnetwork_right">
-         호스트 ip주소 :<input type="text" name="hostadress"><br>
-         호스트포트번호:<input type="text" name="hostadress"><br>
-         유선 포트번호 :<input type="text" name="hostadress"><br>
+      
+      	<div id="addnetwork_right1">
+         <p>호스트아이디 주소:</p>
+        
+        <p>호스트포트 번호:</p>
+       
+         <p>유선포트 번호:</p>
+       
 
          <!--<input type="submit" name="확인" style="float:right;" > -->
+
+      </div>
+      
+      <div id ="addnetwork_right2">
+      
+      	<input type="text" name="hostadress" class="addnetwork_right_input"><br>
+      	<input type="text" name="hostadress" class="addnetwork_right_input"><br>
+      	  <input type="text" name="hostadress" class="addnetwork_right_input"><br>
+      
+      </div>
+        
 
       </div>
 
