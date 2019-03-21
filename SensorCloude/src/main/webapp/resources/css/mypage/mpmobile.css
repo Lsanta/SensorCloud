@@ -41,6 +41,14 @@ table th {
     margin:20px auto;
    
 }
+.cell{
+  width:32%;
+  height: 160px;
+  display: inline-flex;
+  background-position:center;
+  float: left;
+
+}
 
 .w1{
   margin-top:100px;
@@ -58,9 +66,9 @@ table th {
 
 }
 .n1{
-  font-size: 1.1em;
+  font-size: 1.0em;
   text-align: left;
-  margin: 27% 0 -8% 0;
+  margin: 55% 0 -1% -0.1%;
   display: block;
 }
 .n2{
@@ -70,22 +78,22 @@ table th {
   
 }
 .up{
-  width:30%;
+  width:45%;
   height: 30%;
- margin-left: 39%;
-  margin-top: 22%;
+ margin-left: 4%;
+  margin-top: 65%;
   box-shadow: 1px 1px 1px 1px;
 
 }
 .update{
-  width:30%;
+  width:48%;
   height: 30%;
   float: right;
-  margin-top: 22%;
+  margin-top: 65%;
   box-shadow: 1px 1px 1px 1px;
 }
 
-/*페이징부분*/
+/*�럹�씠吏뺣�遺�*/
 .pagination-container {
   margin: 100px auto;
   text-align: center;
@@ -98,8 +106,8 @@ table th {
   display: inline-block;
   color: #2c3e50;
   text-decoration: none;
-  font-size: 1.2rem;
-  padding: 8px 16px 10px;
+  font-size: 1.1rem;
+  padding: 8px 6px 10px;
 }
 .pagination a:before {
   z-index: -1;
@@ -132,8 +140,8 @@ table th {
           transform: scale(1);
 }
 .pagination-newer {
-  margin-right: 50px;
+  margin-right: 2px;
 }
 .pagination-older {
-  margin-left: 50px;
+  margin-left: 2px;
 }
