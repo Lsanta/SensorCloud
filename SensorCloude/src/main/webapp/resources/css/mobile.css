@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-header h1 { float: none; position: absolute; left: 27%; top:35px; transform: translateX(50%) scale(0.7); padding:0; }
+header h1 { float: none; position: absolute; left:15%; top:35px; transform: translateX(50%) scale(0.7); padding:0; }
 header .left { padding : 43px 0 0 48px;}
 header .all { display: block; position:relative; width: 32px; height:14px; border-top:2px solid #000000; border-bottom: 2px solid #000000;
 color:transparent; }
@@ -21,7 +21,7 @@ header .close,
 header .all,
 header .left > div > div,
 header h2 { display: block;}
-header .nav { position: absolute; left:-120%; top:0; z-index:101; transition: left 0.5s; padding:15px 24px 15px 22px; width:calc(100% - 300px);
+header .nav { position: absolute; left:-120%; top:0; z-index:101; transition: left 0.5s; padding:15px 24px 15px 22px; width:calc(100% - 100px);
 height:100%; background: #A9D0F5 ; box-sizing : border-box;}
 header .nav.on {left:0; }
 header .nav.on nav { padding : 0 0 24px;border-top:1px solid #0091d0; }
