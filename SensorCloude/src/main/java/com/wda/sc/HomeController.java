@@ -48,7 +48,12 @@ public class HomeController {
 		return "site/sitelist";
 	}
 	
-
+	@RequestMapping(value = "/siteadd", method = RequestMethod.GET)
+	public String siteadd(Locale locale, Model model) {
+	
+		return "site/siteadd";
+	}
+	
 	@RequestMapping(value = "/check", method = RequestMethod.GET)
 	public String check(Locale locale, Model model) {
 	
@@ -72,6 +77,8 @@ public class HomeController {
 	
 		return "timeline/timeline";
 	}
+	
+	
 	
 	@RequestMapping("/login.do")
 	@ResponseBody
