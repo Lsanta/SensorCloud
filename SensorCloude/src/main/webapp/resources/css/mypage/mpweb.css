@@ -1,0 +1,185 @@
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.wrapper{
+    width: 70%;
+    height: 100%;
+    overflow: hidden;
+    margin:20px auto;
+    
+}
+
+.w1{
+  margin-top:100px;
+  height: 160px;
+  margin-bottom:40px;
+  
+}
+.w2{
+  margin-top:20px;
+  margin-bottom:100px;
+  
+}
+.w3{
+  margin-top:100px;
+  margin-bottom:100px;
+
+}
+
+
+.cell{
+  width:18%;
+  height: 160px;
+  display: inline-flex;
+  
+  background-position:center;
+  float: left;
+
+}
+.name01{
+  width:28%;
+  height: 160px;
+  display: inline-block;
+ 
+  float: left;
+
+ 
+}
+.name02{
+  width:40%;
+  height: 160px;
+   display: inline-block;
+    float: right;
+  
+}
+.name11{
+  width:90%;
+  height: 60px;
+  border:1px solid black;
+  
+}
+.name12{
+  width:90%;
+  height: 50px;
+
+ 
+}
+.n1{
+  font-size: 1.6em;
+  text-align: left;
+  margin: 16% 0 -6% 0;
+  display: block;
+}
+.n2{
+  display: block;
+  font-size: 1.4em;
+  text-align: left;
+  
+}
+
+.up{
+  width:30%;
+  height: 30%;
+ margin-left: 38%;
+  margin-top: 15%;
+  box-shadow: 1px 1px 1px 1px;
+
+}
+.update{
+  width:30%;
+  height: 30%;
+  float: right;
+  margin-top: 15%;
+  box-shadow: 1px 1px 1px 1px;
+
+}
+
+.responsive-image {
+  max-width: 90%; /* 이미지의 최대사이즈 */
+  width /***/: auto; /* only IE8 */
+  height: auto;
+  margin:0 auto;
+  vertical-align: bottom;
+}
+
+/*페이징부분*/
+.pagination-container {
+  margin: 100px auto;
+  text-align: center;
+}
+.pagination {
+  position: relative;
+}
+.pagination a {
+  position: relative;
+  display: inline-block;
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 8px 16px 10px;
+}
+.pagination a:before {
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  content: "";
+  top: 0;
+  left: 0;
+  background-color: #2c3e50;
+  border-radius: 24px;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  transition: all 0.2s;
+}
+.pagination a:hover,
+.pagination a .pagination-active {
+  color: #fff;
+}
+.pagination a:hover:before,
+.pagination a .pagination-active:before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.pagination .pagination-active {
+  color: #fff;
+}
+.pagination .pagination-active:before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.pagination-newer {
+  margin-right: 50px;
+}
+.pagination-older {
+  margin-left: 50px;
+}

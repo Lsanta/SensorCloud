@@ -23,19 +23,16 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		System.out.println("gd");
 		return "login/login";
 	}
 	
 	@RequestMapping(value = "/help", method = RequestMethod.GET)
 	public String help(Model model) {
-		 	System.out.println("아이디 비밀번호 찾기");
 			return "login/help";
 	}
 	
 	@RequestMapping(value = "/sign", method = RequestMethod.GET)
 	public String sign(Model model) {
-		 	System.out.println("회원가입");
 			return "login/sign";
 	}
 	
@@ -45,6 +42,43 @@ public class HomeController {
 		return "main";
 	}
 	
+	@RequestMapping(value = "/sitelist", method = RequestMethod.GET)
+	public String sitelist(Locale locale, Model model) {
+	
+		return "site/sitelist";
+	}
+	
+	@RequestMapping(value = "/siteadd", method = RequestMethod.GET)
+	public String siteadd(Locale locale, Model model) {
+	
+		return "site/siteadd";
+	}
+	
+	@RequestMapping(value = "/check", method = RequestMethod.GET)
+	public String check(Locale locale, Model model) {
+	
+		return "check/check";
+	}
+	
+	@RequestMapping(value = "/manage", method = RequestMethod.GET)
+	public String manage(Locale locale, Model model) {
+	
+		return "manage/manage";
+	}
+	
+	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+	public String mypage(Locale locale, Model model) {
+	
+		return "mypage/mypage";
+	}
+	
+	@RequestMapping(value = "/timeline", method = RequestMethod.GET)
+	public String timeline(Locale locale, Model model) {
+	
+		return "timeline/timeline";
+	}
+	
+	
 	
 	@RequestMapping("/login.do")
 	@ResponseBody
@@ -52,7 +86,7 @@ public class HomeController {
 
 		ArrayList<memberVO> arr = new ArrayList<memberVO>();
 		arr = loginservice.login(id);
-		System.out.println(arr);
+		
 		if(arr.size() != 0) {
 			if(arr.get(0).getPassword().equals(password)) {
 				model.addAttribute("id",arr.get(0).getUser_id());
