@@ -23,19 +23,16 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		System.out.println("gd");
 		return "login/login";
 	}
 	
 	@RequestMapping(value = "/help", method = RequestMethod.GET)
 	public String help(Model model) {
-		 	System.out.println("아이디 비밀번호 찾기");
 			return "login/help";
 	}
 	
 	@RequestMapping(value = "/sign", method = RequestMethod.GET)
 	public String sign(Model model) {
-		 	System.out.println("회원가입");
 			return "login/sign";
 	}
 	
@@ -52,7 +49,7 @@ public class HomeController {
 
 		ArrayList<memberVO> arr = new ArrayList<memberVO>();
 		arr = loginservice.login(id);
-		System.out.println(arr);
+		
 		if(arr.size() != 0) {
 			if(arr.get(0).getPassword().equals(password)) {
 				model.addAttribute("id",arr.get(0).getUser_id());
