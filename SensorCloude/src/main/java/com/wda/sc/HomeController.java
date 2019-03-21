@@ -27,11 +27,24 @@ public class HomeController {
 		return "login/login";
 	}
 	
+	@RequestMapping(value = "/help", method = RequestMethod.GET)
+	public String help(Model model) {
+		 	System.out.println("아이디 비밀번호 찾기");
+			return "login/help";
+	}
+	
+	@RequestMapping(value = "/sign", method = RequestMethod.GET)
+	public String sign(Model model) {
+		 	System.out.println("회원가입");
+			return "login/sign";
+	}
+	
 	@RequestMapping("main")
 	public String main(Locale locale, Model model) {
 	
 		return "main";
 	}
+	
 	
 	@RequestMapping("/login.do")
 	@ResponseBody
