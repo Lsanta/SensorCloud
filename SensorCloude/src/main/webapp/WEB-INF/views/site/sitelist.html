@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{include/layout}">
+
+<th:block layout:fragment="page_head">
+	<title>현장 리스트화면</title>
+	<meta charset="utf-8" />
+</th:block>
+
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" type="text/css" href="resources/css/site/sitelist.css">
+</th:block>
+
+<th:block layout:fragment="contents">
+	<div id="container">
+		<div id="main-content">
+			<div class="title-header">
+				<h1>현장목록</h1>
+			</div>
+
+			<table>
+				<thead>
+					<tr>
+						<th scope="col">현재상태</th>
+						<th scope="col">현장이름</th>
+						<th scope="col">주소</th>
+						<th scope="col">데이터갱신시간</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td data-label="Account">Visa - 3412</td>
+						<td data-label="Due Date">04/01/2016</td>
+						<td data-label="Amount">$1,190</td>
+						<td data-label="Period">03/01/2016 - 03/31/2016</td>
+					</tr>
+					<tr>
+						<td scope="row" data-label="Account">Visa - 6076</td>
+						<td data-label="Due Date">03/01/2016</td>
+						<td data-label="Amount">$2,443</td>
+						<td data-label="Period">02/01/2016 - 02/29/2016</td>
+					</tr>
+					<tr>
+						<td scope="row" data-label="Account">Corporate AMEX</td>
+						<td data-label="Due Date">03/01/2016</td>
+						<td data-label="Amount">$1,181</td>
+						<td data-label="Period">02/01/2016 - 02/29/2016</td>
+					</tr>
+					<tr>
+						<td scope="row" data-label="Acount">Visa - 3412</td>
+						<td data-label="Due Date">02/01/2016</td>
+						<td data-label="Amount">$842</td>
+						<td data-label="Period">01/01/2016 - 01/31/2016</td>
+					</tr>
+					<tr>
+						<td scope="row" data-label="Account">Visa - 6076</td>
+						<td data-label="Due Date">03/01/2016</td>
+						<td data-label="Amount">$2,443</td>
+						<td data-label="Period">02/01/2016 - 02/29/2016</td>
+					</tr>
+					<tr>
+						<td scope="row" data-label="Account">Visa - 6076</td>
+						<td data-label="Due Date">03/01/2016</td>
+						<td data-label="Amount">$2,443</td>
+						<td data-label="Period">02/01/2016 - 02/29/2016</td>
+					</tr>
+					<tr>
+						<td scope="row" data-label="Account">Visa - 6076</td>
+						<td data-label="Due Date">03/01/2016</td>
+						<td data-label="Amount">$2,443</td>
+						<td data-label="Period">02/01/2016 - 02/29/2016</td>
+					</tr>
+					<tr>
+						<td scope="row" data-label="Account">Visa - 6076</td>
+						<td data-label="Due Date">03/01/2016</td>
+						<td data-label="Amount">$2,443</td>
+						<td data-label="Period">02/01/2016 - 02/29/2016</td>
+					</tr>
+					<tr>
+						<td scope="row" data-label="Account">Visa - 6076</td>
+						<td data-label="Due Date">03/01/2016</td>
+						<td data-label="Amount">$2,443</td>
+						<td data-label="Period">02/01/2016 - 02/29/2016</td>
+					</tr>
+					<tr>
+						<td scope="row" data-label="Account">Visa - 6076</td>
+						<td data-label="Due Date">03/01/2016</td>
+						<td data-label="Amount">$2,443</td>
+						<td data-label="Period">02/01/2016 - 02/29/2016</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+		<div class="button-container">
+			<button id="modify" value="modify">수정</button>
+			<button id="add" value="add">등록</button>
+		</div>
+
+		<div class="pagination-container">
+			<nav class="pagination-content">
+				<div class="pagination">
+					<a class="pagination-newer" href="#">PREV</a> <span
+						class="pagination-inner"> <a href="#">1</a> <a
+						class="pagination-active" href="#">2</a> <a href="#">3</a> <a
+						href="#">4</a> <a href="#">5</a> <a href="#">6</a>
+					</span> <a class="pagination-older" href="#">NEXT</a>
+				</div>
+			</nav>
+		</div>
+
+		<div class="search">
+			<div class="styled-select">
+				<select>
+					<option>현장목록</option>
+					<option>주소</option>
+				</select> <span class="fa fa-sort-desc"></span>
+			</div>
+			<form class="search-container">
+				<input type="text" id="search-bar" /> <a href="#"><img
+					class="search-icon"
+					src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
+			</form>
+		</div>
+	</div>
+
+</th:block>
+</html>
