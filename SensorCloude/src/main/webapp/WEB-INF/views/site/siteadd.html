@@ -1,10 +1,87 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	현장추가입니다.
-</body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{include/layout}">
+
+<th:block layout:fragment="page_head">
+	<title>현장 추가 화면</title>
+	<meta charset="utf-8" />
+</th:block>
+
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" type="text/css" href="resources/css/site/siteadd.css">
+</th:block>
+
+<th:block layout:fragment="contents">
+	 <h1>현장 추가</h1>
+   
+   
+   <div id="add_scene">   
+      
+      <input type="radio" name="chk_scene" value="building
+      " checked="checked">건물
+      <input type="radio" name="chk_scene" value="mountain
+      " >산
+   </div>
+
+
+   <div id="addcontent">
+
+      <div id="addcontent_left">
+         <p>현장이름:</p>
+         <p>주소:</p>
+         <p>상세주소:</p>
+      </div>
+      
+      <div id="addcontent_right">
+         <input type="text" id="autoname" name="scene_name"><br>
+         <input type="text" id="address" name="address_name"> <input type="submit" value="조회" ><br>
+         <input type="text" id="detailaddress" name="detailadd_name"><br>
+      </div>
+   </div>   
+
+   
+
+
+   <h2>네트워크 설정</h2>
+   
+   <div id="addnetwork">
+
+      <div id="addnetwork_left">
+
+
+
+         <input type="radio" name="chk_net_radio" value="chk_net_radio"
+         >TCP 클라이언트<br>
+
+         <input type="radio" name="chk_net_raido" value="tcpserver_net_radio
+         " >TCP 서버 <select>
+            <option value="ipv4">Ipv4</option>
+            <option value="ipv41">....</option>
+            <option value="ipv42">....</option>
+         </select><br>
+
+         <input type="radio" name="chk_net_raido" value="tcpserver_net_radio
+         " >UDP
+
+         
+      </div>   
+
+      <div id="addnetwork_right">
+         호스트 ip주소 :<input type="text" name="hostadress"><br>
+         호스트포트번호:<input type="text" name="hostadress"><br>
+         유선 포트번호 :<input type="text" name="hostadress"><br>
+
+         <!--<input type="submit" name="확인" style="float:right;" > -->
+
+      </div>
+
+   </div>
+
+   <div id="submit">
+      <button type="button">확인</button>
+
+   </div>
+	
+</th:block>
 </html>
