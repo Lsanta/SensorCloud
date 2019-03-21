@@ -42,6 +42,19 @@ public class HomeController {
 		return "main";
 	}
 	
+	@RequestMapping(value = "/sitelist", method = RequestMethod.GET)
+	public String sitelist(Locale locale, Model model) {
+	
+		return "site/sitelist";
+	}
+	
+
+	@RequestMapping(value = "/check", method = RequestMethod.GET)
+	public String check(Locale locale, Model model) {
+	
+		return "check/check";
+	}
+	
 	
 	@RequestMapping("/login.do")
 	@ResponseBody
