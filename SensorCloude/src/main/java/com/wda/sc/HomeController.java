@@ -39,9 +39,8 @@ public class HomeController {
 
 		ArrayList<memberVO> arr = new ArrayList<memberVO>();
 		arr = loginservice.login(id);
-		
+		System.out.println(arr);
 		if(arr.size() != 0) {
-			
 			if(arr.get(0).getPassword().equals(password)) {
 				model.addAttribute("id",arr.get(0).getUser_id());
 				session.setAttribute("id", arr.get(0).getUser_id());
