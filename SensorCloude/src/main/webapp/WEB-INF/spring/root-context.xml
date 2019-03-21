@@ -13,9 +13,9 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
       <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-      <property name="url" value="jdbc:oracle:thin:@net.yjc.ac.kr:1521:orcl" />
-      <property name="username" value="s1501254" />
-      <property name="password" value="p1501254" />
+      <property name="url" value="jdbc:oracle:thin:@39.127.7.60:1521:orcl" />
+      <property name="username" value="test" />
+      <property name="password" value="1234" />
    </bean>
    
    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

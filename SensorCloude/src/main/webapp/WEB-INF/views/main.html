@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{include/layout}">
+
+
+<th:block layout:fragment="page_head">
+	<title>메인화면</title>
+	<meta charset="utf-8"/>
+</th:block>
+
+<th:block layout:fragment="page_css">
+ 	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+</th:block>
+<th:block layout:fragment="contents">
+	 <div id="main-container">
+    <div id="left-content">
+      <div class="title-header">
+          <h1>현장목록</h1>
+          <a href="@">more</a>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">현재상태</th>
+            <th scope="col">현장이름</th>
+            <th scope="col">주소</th>
+            <th scope="col">데이터갱신시간</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Account">Visa - 3412</td>
+            <td data-label="Due Date">04/01/2016</td>
+            <td data-label="Amount">$1,190</td>
+            <td data-label="Period">03/01/2016 - 03/31/2016</td>
+          </tr>
+          <tr>
+            <td scope="row" data-label="Account">Visa - 6076</td>
+            <td data-label="Due Date">03/01/2016</td>
+            <td data-label="Amount">$2,443</td>
+            <td data-label="Period">02/01/2016 - 02/29/2016</td>
+          </tr>
+          <tr>
+            <td scope="row" data-label="Account">Corporate AMEX</td>
+            <td data-label="Due Date">03/01/2016</td>
+            <td data-label="Amount">$1,181</td>
+            <td data-label="Period">02/01/2016 - 02/29/2016</td>
+          </tr>
+          <tr>
+            <td scope="row" data-label="Acount">Visa - 3412</td>
+            <td data-label="Due Date">02/01/2016</td>
+            <td data-label="Amount">$842</td>
+            <td data-label="Period">01/01/2016 - 01/31/2016</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="right-content">
+      <div id="right-top">
+        <div class="title-header">
+            <h1>점검이력</h1>
+            <a href="@">more</a>
+        </div>
+        <div class="image-container">
+          <div class="grid">
+            <div class="images">
+              <img src="resources/img/ddf.png" class="responsive-image">
+              <h5>XX휴게소 센..</h5>
+              <h5>김개발</h5>
+              <h6>19.02.21 fixed</h6>
+            </div>
+            <div class="images">
+              <img src="resources/img/ddf.png" class="responsive-image">
+              <h5>XX휴게소 센..</h5>
+              <h5>김개발</h5>
+              <h6>19.02.21 fixed</h6>
+            </div>
+            <div class="images">
+              <img src="resources/img/ddf.png" class="responsive-image">
+              <h5>XX휴게소 센..</h5>
+              <h5>김개발</h5>
+              <h6>19.02.21 fixed</h6>
+            </div>
+            <div class="images">
+              <img src="resources/img/ddf.png" class="responsive-image">
+              <h5>XX휴게소 센..</h5>
+              <h5>김개발</h5>
+              <h6>19.02.21 fixed</h6>
+            </div>
+            <div class="images">
+              <img src="resources/img/ddf.png" class="responsive-image">
+              <h5>XX휴게소 센..</h5>
+              <h5>김개발</h5>
+              <h6>19.02.21 fixed</h6>
+            </div>
+            <div class="images">
+              <img src="resources/img/ddf.png" class="responsive-image">
+              <h5>XX휴게소 센..</h5>
+              <h5>김개발</h5>
+              <h6>19.02.21 fixed</h6>
+            </div>
+          </div>
+        </div> 
+      </div>
+
+      <div id="right-bottom">
+        <div class="title-header">
+          <h1>타임라인</h1>
+           <a href="@">more</a>
+        </div>
+        <div class="timeline">
+          <div class="timeline-header">
+              <h3>김개발</h3>
+              <h5>2019.2.19 16:38</h5>
+          </div>
+          <p>XX휴게소 전원 케이블 수리 갔다옴</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-header">
+                <h3>이수리</h3>
+                <h5>2019.2.19 12:12</h5>
+            </div>
+            <p>XX휴게소 갔다옴</p>
+          </div>
+      </div>
+    </div>
+  </div>
+</th:block>
+</html>

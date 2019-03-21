@@ -1,0 +1,64 @@
+body{
+    background-color: aqua; 
+}
+
+.login-card {
+    width: 230px;
+  }
+
+  #btn1 {
+    padding : 10px;
+    font-size : 13px;
+    bottom : 0px;
+    float : right;
+    margin-right : 11%;
+  }
+
+  #hr {
+margin-top : 50px;
+}
+
+  #tel{
+    width : 50%;
+    margin-left : 4.5%;
+   
+  }
+
+  #name {
+    width : 50%;
+    margin-left : 25%;
+  }
+  #name2{
+    width : 50%;
+    margin-left : 10%;
+  }
+
+  #email{
+    width : 65%;
+    margin-left : 3%;
+  }
+
+  #btn2{
+    padding : 10px;
+    float : right;
+    margin-right : 110px;
+    width:60px;
+    font-size : 15px;
+    position: relative;
+    top : -20px;
+  }
+
+  .ijn{
+    padding : 5px;
+    float : right;
+    position: relative;
+    top : -30px;
+    margin-right : 26px;
+   }
+
+   #ijn2 {
+    width : 50%;
+    margin-left : 23.5%;
+    position: relative;
+    top : -40px;
+    }

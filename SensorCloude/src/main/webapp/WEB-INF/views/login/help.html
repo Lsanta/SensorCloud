@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="resources/css/login/help.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" media="(min-width:601px) and (max-width:900px)"
+	href="resources/css/login/helpN.css">
+<link rel="stylesheet" media="(min-width:0px) and (max-width:600px)"
+	href="resources/css/login/helpM.css">
+<title>Document</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function () {
+    $('#btn1').click(function() {
+       	
+    	var name = $("#name").val();
+    	var tel = $("#tel").val();
+    	
+    	if(name == ""){
+            alert("아이디를 입력하세요.");
+            $("#name").focus();
+            return; 
+        }
+        if(tel == ""){
+            alert("휴대폰번호를 입력하세요.");
+            $("#tel").focus();
+            return;
+        }   
+        
+        var query = { name : name, tel : tel };
+        
+        $.ajax({
+        	type : "POST",
+        	dataType : "text",
+        	data : query,
+        	url : "idFind.do",
+        	success : function(data){
+        		var s = "아이디 조회 결과 입력하신 정보는 아래와 같습니다.";
+        		alert(data);
+        		if(data != "isN"){
+        			$("#hidden").css("visibility","visible");
+        			document.getElementById("hidden").innerHTML="<br>"+s+"<br><p>"+data+"</p>";
+        		}
+        		else{
+        			$("#hidden").css("visibility","visible");
+        			document.getElementById("hidden").innerHTML="존재하지 않는 회원입니다.";
+        		}
+        		
+        	}
+        	
+        }); //ajax 종료
+        
+    }); // 클릭 이벤트 종료
+    
+    $('.ijn').click(function() {
+    	var email = $("#email").val();
+    	 $.ajax({
+    		type : "POST",
+         	dataType : "text",
+         	data : email,
+         	url : "mailPost",
+    	 });
+    });
+ }); 
+</script>  
+</head>
+<body>
+	<div class="login-card">
+		<b style="font-size: 30px">아이디찾기</b> <br>
+		<div id="box1">
+			<form>
+				이름<input type="text" id="name" name="name" placeholder="UserId"><br />
+				휴대폰번호<input type="tel" id="tel" name="tel" placeholder="Password">
+				<button type="button" id="btn1">확인</button>
+				<hr id="hr">
+			</form>
+		</div>
+		<div id="hidden" style="visibility : hidden"></div>
+		<b style="font-size: 30px">비밀번호 찾기</b> <br>
+		<div id="box2">
+			<form>
+				이름<input type="password" id="name2" name="name2" placeholder="Password"><br /> 
+				이메일<input type="email" id="email" name="email" placeholder="yjc@ac.kr">
+				<button type="button" class="ijn">인증번호 받기</button>
+				<input type="text" name="ijn2" id="ijn2" disabled /><br />
+				<button type="button" id="btn2">확인</button>
+				<br> <br> <br>
+				<hr>
+				<div id="hidden2"></div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

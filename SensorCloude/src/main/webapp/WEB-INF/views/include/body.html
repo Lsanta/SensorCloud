@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<meta charset="utf-8">
+
+<!-- body 부터 /body 까지 layout.html에 내용이 들어가게 됩니다. -->	
+<body th:fragment="body">
+
+	<header class="main-header" style="height : 150px">
+		<div class="left">
+		<h1><a href="#a">str</a></h1>
+		<a href="#a" class="all">all Menu</a>
+		<div class="nav">
+			<h2>Menu</h2>
+		  <nav>
+		   <ul class="test">
+			<li><a href="#a">현장목록</a></li>
+			<li><a href="#a">점검이력</a></li>
+			<li><a href="#a">타임라인</a></li>
+			<li><a href="#a">사용자관리</a></li>
+		</ul>
+	      </nav>
+	      <div>
+	      	<a href="#a">마이페이지</a>
+	      	<a href="#a">로그아웃</a>
+	      </div>
+	      <a href="#a" class="close">close</a>
+	</div>
+</div>
+	    <ul class="a2">
+	    	<li><a href="#a">마이페이지</a></li>
+	    	<li class="hide"><a href="#a">로그아웃</a></li>
+	    	<a href="#a" class="manclose">close</a>
+	    	<!-- <li class="logout"><a href="#a">man</a></li> -->
+	    </ul>
+	    <div class="man">
+	    	<div class="manmenu">
+	    		<ul>
+	    		<li><a href="#a">마이페이지</a></li>
+	    	    <li><a href="#a">로그아웃</a></li>
+	    	</ul>
+	    	</div>
+	    </div>
+	</header>
+	<div class="dim"></div>
+	<div>
+		<!-- 페이지 별 내용 들어갈 부분 -->
+		<th:block layout:fragment="contents" />
+	</div>
+	<!-- footer -->
+	<th:block th:include="include/footer" />
+	<!-- 공통으로 사용할 js들 -->
+	
+	<!-- 특정 페이지 전용 js들 -->
+	<th:block layout:fragment="page_js" />
+	
+</body>
+</html>

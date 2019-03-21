@@ -1,39 +1,56 @@
 package com.wda.sc;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.Locale;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * Handles requests for the application home page.
- */
+import com.wda.sc.domain.memberVO;
+import com.wda.sc.service.LoginService;
+
+import lombok.AllArgsConstructor;
+
 @Controller
+@AllArgsConstructor
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private LoginService loginservice;
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+		System.out.println("gd");
+		return "login/login";
 	}
 	
+	@RequestMapping("main")
+	public String main(Locale locale, Model model) {
+	
+		return "main";
+	}
+	
+	@RequestMapping("/login.do")
+	@ResponseBody
+	public String loginCheck(Model model,HttpSession session, @RequestParam String id, @RequestParam String password) {
+
+		ArrayList<memberVO> arr = new ArrayList<memberVO>();
+		arr = loginservice.login(id);
+		System.out.println(arr);
+		if(arr.size() != 0) {
+			if(arr.get(0).getPassword().equals(password)) {
+				model.addAttribute("id",arr.get(0).getUser_id());
+				session.setAttribute("id", arr.get(0).getUser_id());
+				return "success";
+			}else {
+				return "fail";
+			}
+		}else {
+			return "fail";
+		}
+		
+	}
 }
