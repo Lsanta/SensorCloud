@@ -1,0 +1,83 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100);
+
+  body {
+    background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .usermodify-card {
+    padding: 40px;
+    width: 400px;
+    background-color: rgb(250, 251, 255);
+    margin: 0 auto 10px;
+    margin-top: 7%;
+    border-radius: 2px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+
+  .usermodify-card h1 {
+    font-weight: 80;
+    text-align: center;
+    font-size: 2.3em;
+  }
+
+  .usermodify-card input[type=submit] {
+    width: 30%;
+    display: block;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .usermodify-card input[type=text] {
+    height: 44px;
+    font-size: 16px;
+    width:100%;
+    margin-bottom: 10px;
+    -webkit-appearance: none;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    padding: 0 8px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+
+  
+  .usermodify-card input[type=text]:hover {
+    border: 1px solid #b9b9b9;
+    border-top: 1px solid #a0a0a0;
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  }
+  
+
+  .confirm-modify {
+    border: 1px;
+    height: 40px;
+    color: #fff;
+    text-shadow: 0 1px rgba(0,0,0,0.1); 
+    background-color: #4d90fe;
+    float:right;
+
+  }
+
+  .confirm-modify:hover {
+    border: 0px;
+    text-shadow: 0 1px rgba(0,0,0,0.3);
+    background-color: #357ae8;
+  }
+
+
+
+  @media (max-width:800px) {
+    .usermodify-card {
+      margin-top:20%;
+    }
+  }
