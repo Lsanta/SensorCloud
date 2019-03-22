@@ -2,14 +2,22 @@
 
 h1{
       text-align: center;
-      margin: 0 auto; 
+      padding-top:35px; 
    }
 
    h2 {
-      width: 100%;
+      
       padding: 20px;
       margin-bottom: 10px;
       margin-left: 8%
+   }
+   
+   p {
+   	margin-top : 20px;
+   }
+   
+   #radio_m {
+   		margin-left : 60px;
    }
 
    #add_scene {
@@ -20,15 +28,16 @@ h1{
       margin-bottom: 10px;
       margin-left: 8%
    }
-
-
+   
+   body {
+   	font-size :1.3em;
+   }
 
 
    #addcontent {
-      
-      width: 100%;
-
-      margin: 0 auto;
+      margin :0 auto;
+      width: 1200px;
+      heigh :200px;
       margin-bottom: 20px;
       border: 1px solid #bcbcbc;
 
@@ -45,7 +54,6 @@ h1{
 
    #addcontent_right {
       width: 45%;
-      margin: 0  auto;
       
       box-sizing: border-box;
       
@@ -56,18 +64,17 @@ h1{
 
 
    #addnetwork {
-
-      width: 100%;
-      margin: 0 auto;
+	margin :0 auto;
+      width: 1200px;
       margin-bottom: 20px;
       border: 1px solid #bcbcbc;
+      
    }    
 
    #addnetwork_left {
-      width: 300px
-      margin: 0 auto;
+     margin-top:30px;
       margin-left: 10%;
-      
+      margin-bottom: 60px;
       box-sizing: border-box;
       display: inline-block
    }
@@ -81,6 +88,19 @@ h1{
       
       display: inline-block;
    }
+   
+   #addnetwork_right1 {
+   display: inline-block;
+    box-sizing: border-box;
+   }
+   
+   #addnetwork_right2 {
+   display: inline-block;
+    box-sizing: border-box;
+    margin-left: 20px;
+   }
+   
+   
 
    #submit {
       
@@ -93,16 +113,31 @@ h1{
 
    }
    
+   .addcontent_right_button {
+   		width :45px;
+   		height:33px;
+   		margin-top:20px;
+   }
+   
 
    input[type=text]:focus {
       border: 3px solid #555;
    }
+   
+  
+   
+   input.addnetwork_right_input {
+   		width : 200px;
+   }
+   
+   
+   
 
    input[type=text] {
       
       width: 400px;
       padding: 8px 20px;
-      margin: 2px;
+      margin-top: 20px;
       box-sizing: border-box;
       border: 3px solid #ccc;
       -webkit-transition: 0.5s;
