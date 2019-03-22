@@ -14,7 +14,6 @@ public class LoginServiceImplement implements LoginService {
 	
 	@Override
 	public ArrayList<memberVO> login(String id) {
-		System.out.println("서비스");
 		return mapper.login(id);
 	}
 }
