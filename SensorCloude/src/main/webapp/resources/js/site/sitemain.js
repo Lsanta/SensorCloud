@@ -17,3 +17,18 @@ $( "#nav-btn" ).click(function() {
 	  $( "#nav" ).toggle( "slow" );
 	  $("#menu").css("display","block");
 	});
+
+$("#down").click(function(){
+	 $("#down").css("display","none");
+	 $("#up").css("display","inline");
+	});
+
+
+$("#up").click(function(){
+	 $("#up").css("display","none");
+	 $("#down").css("display","inline");
+});
+
+$("#number").click(function(){
+	
+});
