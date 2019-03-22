@@ -79,6 +79,11 @@ public class HomeController {
 		return "timeline/timeline";
 	}
 	
+	@RequestMapping(value = "/mysensor", method = RequestMethod.GET)
+	public String mysensor(Locale locale, Model model) {
+	
+		return "mysensor/mysensor";
+	}
 	
 	
 	@RequestMapping("/login.do")
