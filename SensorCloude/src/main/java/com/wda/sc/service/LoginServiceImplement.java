@@ -16,4 +16,10 @@ public class LoginServiceImplement implements LoginService {
 	public ArrayList<memberVO> login(String id) {
 		return mapper.login(id);
 	}
+	
+	@Override
+	public int signup(memberVO member) {
+		// TODO Auto-generated method stub
+		return mapper.signup(member);
+	}
 }

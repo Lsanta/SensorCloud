@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wda.sc.domain.memberVO;
 import com.wda.sc.service.LoginService;
+import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
 
@@ -21,6 +22,7 @@ import lombok.AllArgsConstructor;
 public class HomeController {
 	
 	private LoginService loginservice;
+	private SiteService siteservice;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -39,7 +41,8 @@ public class HomeController {
 	
 	@RequestMapping("main")
 	public String main(Locale locale, Model model) {
-	
+		model.addAttribute("list",siteservice.getList());
+		System.out.println(siteservice.getList());
 		return "main";
 	}
 		
