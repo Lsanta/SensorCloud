@@ -40,9 +40,6 @@ aside{
     text-align : center;
 }
 
-/* #nav { */
-/* 	display : block; */
-/* } */
 
 #nav ul{
 }
@@ -143,12 +140,7 @@ article{
 	header{
 		padding-bottom : 30px;
 	}
- 	
- 	#nav{ 
- 	  display:none; 
-     } 
-    
-     
+ 	     
     #nav ul li{
 	line-height:40px;
 	}
