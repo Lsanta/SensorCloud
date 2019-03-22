@@ -91,6 +91,12 @@ public class HomeController {
 		return "mysensor/mysensor";
 	}
 	
+	@RequestMapping(value = "/modifymypage", method = RequestMethod.GET)
+	public String modifymypage(Locale locale, Model model) {
+	
+		return "mypage/modifymypage";
+	}
+	
 	
 	@RequestMapping("/login.do")
 	@ResponseBody
