@@ -42,36 +42,7 @@ public class HomeController {
 	
 		return "main";
 	}
-	
-	@RequestMapping(value = "/sitelist", method = RequestMethod.GET)
-	public String sitelist(Locale locale, Model model) {
-	
-		return "site/sitelist";
-	}
-	
-	@RequestMapping(value = "/siteadd", method = RequestMethod.GET)
-	public String siteadd(Locale locale, Model model) {
-	
-		return "site/siteadd";
-	}
-	
-	@RequestMapping(value = "/site/{site_id}", method = RequestMethod.GET)
-	public String siteclick(Locale locale, Model model) {
-	
-		return "site/sitemain";
-	}
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	@RequestMapping(value = "/check", method = RequestMethod.GET)
 	public String check(Locale locale, Model model) {
 	
@@ -90,13 +61,6 @@ public class HomeController {
 		return "manage/manage";
 	}
 	
-	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-	public String mypage(Locale locale, Model model) {
-	
-		return "mypage/mypage";
-	}
-	
-
 	@RequestMapping(value = "/timeline", method = RequestMethod.GET)
 	public String timeline(Locale locale, Model model) {
 	
