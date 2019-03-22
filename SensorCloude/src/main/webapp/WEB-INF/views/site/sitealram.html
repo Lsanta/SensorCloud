@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{include/layout}">
+
+<th:block layout:fragment="page_head">
+	<title>현장 알림 화면</title>
+</th:block>
+
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/sitealram.css">
+<!-- 	<script src="/resources/js/site/sitealram.js"></script> -->
+</th:block>
+
+<th:block layout:fragment="contents">
+  <div id="container">
+      
+      <div id="content" >
+      <div class="scroll-table">
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>전화번호</th>
+                    <th>이름</th>
+                </tr>
+            </thead>                
+            <tbody>     
+                <tr>
+                    <td>01012345678</td>
+                    <td>김개발</td>          
+                </tr>             
+                <tr>
+                    <td>01055421556</td>
+                    <td>이수리</td>               
+                </tr>                
+                <tr>
+                    <td>ㅇ</td>
+                    <td>ㅇ</td>
+                </tr> 
+                <tr>
+                   <td>ㅇ</td>
+                    <td>ㅇ</td>
+                </tr>
+                <tr>
+                 <td>ㅇ</td>
+                    <td>ㅇ</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+<button id="plus-btn" type="submit"><img id="plus-img" src="C:\Users\bon300-44\Desktop\캡스톤\plus.png"></button>
+          </div>
+      <div id="sidebar">
+              <textarea name="textarea" id="textarea" 
+              maxlength="300" placeholder="문자내용" autofocus></textarea>
+              <button id="submit">전송</button>
+               <div class="scroll-table2">
+               <div>
+              <table>
+                  <thead>
+                    <tr>
+                      <th>날짜</th>
+                      <th >내용</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>2019-1-1</td>
+                      <td>내용</td>
+                    </tr>
+                     <tr>
+                      <td>2019-1-1</td>
+                      <td>내용</td>
+                       <tr>
+                      <td>2019-1-1</td>
+                      <td>내용</td>
+                    </tr>
+                     <tr>
+                      <td>2019-1-1</td>
+                      <td>내용</td>
+                    </tr>
+                     <tr>
+                      <td>2019-1-1</td>
+                      <td>내용</td>
+                    </tr>
+                     <tr>
+                      <td>2019-1-1</td>
+                      <td>내용</td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
+      </div>
+      </div>
+      <div id="footer">
+ 
+      </div>
+    </div>
+</th:block>
+
+</html>

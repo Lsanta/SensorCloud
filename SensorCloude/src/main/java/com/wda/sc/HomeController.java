@@ -60,6 +60,12 @@ public class HomeController {
 		return "check/check";
 	}
 	
+	@RequestMapping(value = "/checkadd", method = RequestMethod.GET)
+	public String checkadd(Locale locale, Model model) {
+	
+		return "check/checkadd";
+	}
+	
 	@RequestMapping(value = "/manage", method = RequestMethod.GET)
 	public String manage(Locale locale, Model model) {
 	

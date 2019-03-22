@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{include/layout}">
+
+<th:block layout:fragment="page_head">
+	<title>하나의 현장을 눌렀을 때 </title>
+</th:block>
+
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" href="resources/css/site/sitemain.css" />
+</th:block>
+
+<th:block layout:fragment="contents"> 
+		<article style="margin-left : 260px">
+
+		       <h1 id="h1">XX휴게소</h1> <!-- 주소 가져오기--> 
+        <select>
+                <option>All</option><!-- DB에서 센서목록 가져오기-->
+                <option>센서1</option>
+                <option>센서2</option>
+                <option>센서3</option>
+        </select>
+        <p>대구광역시 북구 복현동 35</p> <!-- 세부 주소 DB에서 가져오기--> 
+        <div id="chartdiv"> <!-- 그래프 데이터 삽입-->
+        
+        </div>
+
+        <div class="theadDiv">   
+            <table class="table">
+                <thead>
+                      <tr>
+                         <th></th>
+                         <th>A</th>
+                         <th>B</th>
+                         <th>C</th>
+                      </tr>
+                </thead>
+            </table>
+        </div> <!-- table header 종료-->
+        <div class="tabdiv">
+            <table class="table">
+                <tbody>
+                      <tr>
+                          <td>09:00</td>
+                          <td>센서 데이터</td>
+                          <td>센서 데이터</td>
+                          <td>센서 데이터</td>
+                      </tr>
+                      <tr>
+                            <td>10:00</td>
+                            <td>센서 데이터2</td>
+                            <td>센서 데이터2</td>
+                            <td>센서 데이터2</td>
+                      </tr>
+                      <tr>
+                            <td>11:00</td>
+                            <td>센서 데이터3</td>
+                            <td>센서 데이터3</td>
+                            <td>센서 데이터3</td>
+                      </tr>
+                      <tr>
+                            <td>12:00</td>
+                            <td>센서 데이터4</td>
+                            <td>센서 데이터4</td>
+                            <td>센서 데이터4</td>
+                      </tr>
+                      <tr>
+                            <td>13:00</td>
+                            <td>센서 데이터5</td>
+                            <td>센서 데이터5</td>
+                            <td>센서 데이터5</td>
+                      </tr>
+                      <tr>
+                            <td>14:00</td>
+                            <td>센서 데이터6</td>
+                            <td>센서 데이터6</td>
+                            <td>센서 데이터6</td>
+                      </tr>
+                      <tr>
+                            <td>15:00</td>
+                            <td>센서 데이터7</td>
+                            <td>센서 데이터7</td>
+                            <td>센서 데이터7</td>
+                      </tr>
+                      <tr>
+                            <td>16:00</td>
+                            <td>센서 데이터8</td>
+                            <td>센서 데이터8</td>
+                            <td>센서 데이터8</td>
+                      </tr>
+                      <tr>
+                            <td>17:00</td>
+                            <td>센서 데이터9</td>
+                            <td>센서 데이터9</td>
+                            <td>센서 데이터9</td>
+                      </tr>
+                          <tr>
+                            <td>17:00</td>
+                            <td>센서 데이터9</td>
+                            <td>센서 데이터9</td>
+                            <td>센서 데이터9</td>
+                      </tr>
+                          <tr>
+                            <td>17:00</td>
+                            <td>센서 데이터9</td>
+                            <td>센서 데이터9</td>
+                            <td>센서 데이터9</td>
+                      </tr>
+                 </tbody>
+            </table>
+         </div> <!-- table body 종료-->
+
+        <div class="mapDiv">
+        </div>
+			</article>
+  	  <aside>
+        <a href="#">테스트1</a>
+        <a href="#">테스트2</a>
+        <a href="#">테스트3</a>
+        <a href="#">테스트4</a>
+     </aside>
+
+</th:block>
+</html>

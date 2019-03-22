@@ -1,0 +1,96 @@
+
+#container {
+    width: 1000px;
+    margin: 10px auto;
+    border: 1px solid #bcbcbc;
+  }
+  
+  #content {
+    width: 1000px;
+    height: auto;
+    margin-bottom: 20px;
+    margin-top: 2%;
+    float: left;
+  }
+  #footer {
+    clear: both;
+    padding: 20px;
+  }
+  #write-form td {
+    border: none;
+  }
+  #write-form {
+    width: 100%;
+    float: right;
+  
+  }
+  textarea {
+    width: 99%;
+    min-height: 40px;
+    resize: none;
+  }
+  #input {
+    width: 50%;
+    margin-left: -10%;
+  }
+  #save {
+    float: right;
+    margin-right: 1%;
+
+  }
+
+  @media ( min-width: 992px ) {
+    #container {
+      width: 1000px;
+    }
+    #content {
+      width: 1000px;
+    height: auto;
+    margin-bottom: 20px;
+    float: left;
+    }
+    #textarea {
+      width: 97%;
+      min-height: 250px;
+      resize: none;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+    }
+  }
+  @media (min-width:320px) and (max-width:768px) {
+    #container {
+      width: auto;
+    }
+    #content {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    float: left;
+    }
+
+    #textarea {
+      width: 95%;
+      min-height: 250px;
+      resize: none;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+    }
+
+  }
+
+  @media (max-width:320px) {
+    #container {
+      width: auto;
+      display:relative;
+    }
+    #content {
+      float: none;
+      width: auto;
+    }
+    #textarea {
+      float: none;
+      width: 95%;
+    }
+}
