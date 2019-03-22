@@ -48,12 +48,12 @@ aside{
 	line-height:100px;
 }
 
-#nav ul li a{
+#nav ul li a, #number{
 	color:#e3e2e2;
     font-size : 40px;
 }
 
-#nav ul li a:hover{
+#nav ul li a:hover, #number:hover{
 	color:#2b99ff;
 }
 
@@ -145,7 +145,7 @@ article{
 	line-height:40px;
 	}
 
-	#nav ul li a{
+	#nav ul li a, #number{
 	color:#e3e2e2;
   	font-size : 25px;
 	}
