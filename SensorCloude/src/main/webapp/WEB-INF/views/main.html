@@ -5,7 +5,7 @@
 
 
 <th:block layout:fragment="page_head">
-	<title>메인화면</title>
+	<title>메인페이지</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
@@ -18,7 +18,7 @@
           <h1>현장목록</h1>
           <a href="/site/sitelist">more</a>
       </div>
-      <table>
+      <table id="siteTable">
         <thead>
           <tr>
             <th scope="col">현재상태</th>
@@ -28,30 +28,12 @@
           </tr>
         </thead>
         <tbody id="site">
-          <tr>
-            <td data-label="Account">Visa - 3412</td>
-            <td data-label="Due Date">04/01/2016</td>
-            <td data-label="Amount">$1,190</td>
-            <td data-label="Period">03/01/2016 - 03/31/2016</td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="Account">Visa - 6076</td>
-            <td data-label="Due Date">03/01/2016</td>
-            <td data-label="Amount">$2,443</td>
-            <td data-label="Period">02/01/2016 - 02/29/2016</td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="Account">Corporate AMEX</td>
-            <td data-label="Due Date">03/01/2016</td>
-            <td data-label="Amount">$1,181</td>
-            <td data-label="Period">02/01/2016 - 02/29/2016</td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="Acount">Visa - 3412</td>
-            <td data-label="Due Date">02/01/2016</td>
-            <td data-label="Amount">$842</td>
-            <td data-label="Period">01/01/2016 - 01/31/2016</td>
-          </tr>
+          <tr th:each="list : ${list}">
+            <td th:text="${list.site_status}">status</td>
+            <td th:text="${list.site_name}">status</td>
+            <td th:text="${list.address}">status</td>
+            <td th:text="${list.start_date}">status</td>
+          </tr>  
         </tbody>
       </table>
     </div>
