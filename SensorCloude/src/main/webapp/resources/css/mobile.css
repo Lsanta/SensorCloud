@@ -24,7 +24,7 @@ header h2 { display: block;}
 header .nav { position: absolute; left:-120%; top:0; z-index:101; transition: left 0.5s; padding:15px 24px 15px 22px; width:calc(100% - 100px);
 height:100%; background: #A9D0F5 ; box-sizing : border-box;}
 header .nav.on {left:0; }
-header .nav.on nav { padding : 0 0 24px;border-top:1px solid #0091d0; }
+header .nav.on nav { padding : 0 0 24px;border-top:1px solid #0091d0; display : block;}
 header .nav.on nav a { height: 40px; line-height:40px; color:#111; font-size: 15px; }
 header .nav.on nav a:before{ display: none; }
 header .nav.on nav li {float:none; border-bottom: 1px solid #eee;  }
