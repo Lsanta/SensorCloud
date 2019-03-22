@@ -6,11 +6,12 @@
 
 <th:block layout:fragment="page_head">
 	<title>메인화면</title>
-	<meta charset="utf-8"/>
+	
 </th:block>
 
 <th:block layout:fragment="page_css">
  	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+ 	<script src="/resources/js/main.js"></script>
 </th:block>
 <th:block layout:fragment="contents">
 	 <div id="main-container">
@@ -28,7 +29,7 @@
             <th scope="col">데이터갱신시간</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="site">
           <tr>
             <td data-label="Account">Visa - 3412</td>
             <td data-label="Due Date">04/01/2016</td>
