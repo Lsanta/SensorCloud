@@ -5,6 +5,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wda.sc.domain.memberVO;
 import com.wda.sc.service.LoginService;
+import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
 
@@ -20,6 +22,7 @@ import lombok.AllArgsConstructor;
 public class HomeController {
 	
 	private LoginService loginservice;
+	private SiteService siteservice;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -38,22 +41,11 @@ public class HomeController {
 	
 	@RequestMapping("main")
 	public String main(Locale locale, Model model) {
-	
+		model.addAttribute("list",siteservice.getList());
+		System.out.println(siteservice.getList());
 		return "main";
 	}
-	
-	@RequestMapping(value = "/sitelist", method = RequestMethod.GET)
-	public String sitelist(Locale locale, Model model) {
-	
-		return "site/sitelist";
-	}
-	
-	@RequestMapping(value = "/siteadd", method = RequestMethod.GET)
-	public String siteadd(Locale locale, Model model) {
-	
-		return "site/siteadd";
-	}
-	
+		
 	@RequestMapping(value = "/check", method = RequestMethod.GET)
 	public String check(Locale locale, Model model) {
 	
@@ -72,13 +64,6 @@ public class HomeController {
 		return "manage/manage";
 	}
 	
-	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-	public String mypage(Locale locale, Model model) {
-	
-		return "mypage/mypage";
-	}
-	
-
 	@RequestMapping(value = "/timeline", method = RequestMethod.GET)
 	public String timeline(Locale locale, Model model) {
 	
@@ -96,6 +81,13 @@ public class HomeController {
 	
 		return "mypage/modifymypage";
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping("/login.do")

@@ -5,12 +5,10 @@
 
 <th:block layout:fragment="page_head">
 	<title>현장 리스트화면</title>
-	<meta charset="utf-8" />
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css" href="resources/css/site/sitelist.css">
-	<script src="/resources/js/site/sitelist.js"></script>
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/sitelist.css">
 </th:block>
 
 <th:block layout:fragment="contents">
@@ -29,7 +27,7 @@
 						<th scope="col">데이터갱신시간</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="site">
 					<tr>
 						<td data-label="Account">Visa - 3412</td>
 						<td data-label="Due Date">04/01/2016</td>
@@ -129,4 +127,8 @@
 	</div>
 
 </th:block>
+
+	<th:block layout:fragment="page_js" >
+		<script src="/resources/js/site/sitelist.js"></script>
+	</th:block>
 </html>
