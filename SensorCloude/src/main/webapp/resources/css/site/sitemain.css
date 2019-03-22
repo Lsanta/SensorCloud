@@ -1,64 +1,190 @@
-@charset "UTF-8";
+*{
+	margin:0;
+	padding:0;
+	text-decoration:none;
+	list-style:none;
+}
 
-        #h1 { 
-            display : inline;
-        }
-        #chartdiv{
-            border : 1px solid black;
-            height : 500px;
-        }
-        
-        .tabdiv{
-            overflow: auto;
-            height: 250px;
-            width : 101%;
-            padding : 0 10%;	
-        }
-		
-		.theadDiv{
-			padding : 0 10%;
-			width: 100%;
-		}
-		
-        .table{
-            width : 80%;
-            border-collapse: collapse;  
-            border-top: 2px solid #626e7a;
-            table-layout:fixed;   
-        }
+html {
+	overflow : hidden;
+}
+#nav-btn{
+  fill:white;
+  height:40px;
+  position:absolute;
+  right:10px;
+  top:7px;
+  display:none;
+}
 
+header {
+	border-bottom:#2b99ff 2px solid;
+	padding-bottom : 60px;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+ 
+}
 
-        tr:nth-of-type(odd) { 
-            background: #eee; 
-        }
-        th { 
-            background: #333; 
-            color: white; 
-            font-weight: bold;
-           
-        }
-        td, th { 
-            padding: 6px; 
-            border: 1px solid #ccc; 
-            text-align: center; 
-            height : 25px;
-        }  
+aside{
+	position:fixed;
+	float:left;
+	width:205px;
+	padding-top:30px;
+	padding-left:0px;
+	top:140px;
+	bottom:0;
+	background-color:#474958;
+	z-index:50;
+    text-align : center;
+}
 
-        .mapDiv{
-            border : 1px solid black;
-            width : 80%;
-            height : 30em;
-            margin-top : 1em;
-            margin-left: auto;  
-	    	margin-right: auto;
-        }
-        aside{
-      	position: fixed;
-     	 top:150px;
-     	 left:10;
-     	 width:250px;
-     		 height: 1000px;
-     	 border:2px solid;
-     	 background: white;
-   	 	overflow: hidden;
-  		 }
+/* #nav { */
+/* 	display : block; */
+/* } */
+
+#nav ul{
+}
+
+#nav ul li{
+	line-height:100px;
+}
+
+#nav ul li a{
+	color:#e3e2e2;
+    font-size : 40px;
+}
+
+#nav ul li a:hover{
+	color:#2b99ff;
+}
+
+#scroll{
+	
+    width: 100%;
+    height: 800px;
+    overflow: scroll;
+    overflow-x: hidden;
+	
+}
+
+h1{
+	font-family:Arial, Helvetica, sans-serif;
+	color:white;
+	margin-bottom:50px;
+	font-size: 1.5em;
+}
+
+h2{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:2.4em;
+	font-weight:bold;
+	color:#474958;	
+	-webkit-transition: font-size 0.3s;
+	-moz-transition: font-size 0.3s;
+	-o-transition: font-size 0.3s;
+	transition: font-size 0.3s;
+}
+
+article{
+	float:left;
+	
+	margin-left: calc(230px + 9%);
+	margin-left: -moz-calc(230px + 9%);
+	margin-left: -webkit-calc(230px + 9%);
+	margin-right: 9%;
+	
+	width:calc(82% - 230px);
+	width:-moz-calc(82% - 230px);
+	width:-webkit-calc(82% - 230px);
+	
+	padding-bottom: 150px;
+}
+
+#sensor {
+    padding: 5px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+#chartDiv{
+	height : 370px;
+	border : 1px solid black;
+	overflow : auto;
+}
+
+#dataDiv{
+	margin-top : 20px;
+	height : 380px;
+	border : 1px solid black;
+}
+
+#mapDiv{
+	margin-top : 50px;
+	height : 380px;
+	border : 1px solid black;
+}
+
+@media (max-width: 1000px) {
+	h2{
+  	font-size:2em;
+  }
+  aside{
+		float:left;
+		width:95%;
+		padding-left: 5%;
+		position:relative;
+		float:left;
+		padding-top: 10px;
+		padding-bottom:10px;
+   	    top : 0px;
+	}
+	header{
+		padding-bottom : 30px;
+	}
+ 	
+ 	#nav{ 
+ 	  display:none; 
+     } 
+    
+     
+    #nav ul li{
+	line-height:40px;
+	}
+
+	#nav ul li a{
+	color:#e3e2e2;
+  	font-size : 25px;
+	}
+  #nav-btn{
+    fill:white;
+    height:40px;
+    width:40px;
+    position:absolute;
+    right:7px;
+    top:7px;
+    display:block;
+    cursor: pointer;
+  }
+	h1{
+		margin-bottom: 0px;
+	}
+	
+	article{
+		float:left;
+		width:90%;
+		margin-left: 5%;
+		margin-right: 5%;
+		padding-top:50px;
+	}
+
+	html {
+	overflow : scroll;
+	}
+	#scroll{
+		overflow : hidden;
+		height : 100%;
+	}
+	
+}

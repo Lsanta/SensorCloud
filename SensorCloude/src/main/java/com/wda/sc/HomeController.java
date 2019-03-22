@@ -5,6 +5,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,6 +55,23 @@ public class HomeController {
 		return "site/siteadd";
 	}
 	
+	@RequestMapping(value = "/site/{site_id}", method = RequestMethod.GET)
+	public String siteclick(Locale locale, Model model) {
+	
+		return "site/sitemain";
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/check", method = RequestMethod.GET)
 	public String check(Locale locale, Model model) {
 	
@@ -90,6 +108,13 @@ public class HomeController {
 	
 		return "mysensor/mysensor";
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping("/login.do")
