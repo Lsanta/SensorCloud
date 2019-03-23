@@ -1,7 +1,6 @@
 /**
  * 
  */
-
 $( window ).resize(function() {
 	   //창크기 변화 감지
 		if( $(window).width() >= 1000){
@@ -29,6 +28,14 @@ $("#up").click(function(){
 	 $("#down").css("display","inline");
 });
 
-$("#number").click(function(){
-	
+$("#num").click(function(){
+	var down = $("#down");
+
+	if( down.css('display') == "inline" ) {
+		 $("#down").css("display","none");
+		 $("#up").css("display","inline");
+	} else{
+		 $("#up").css("display","none");
+		 $("#down").css("display","inline");
+	}
 });
