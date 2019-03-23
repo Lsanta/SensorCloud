@@ -4,43 +4,45 @@
 	data-layout-decorate="~{include/layout}">
 
 <th:block layout:fragment="page_head">
-	<title>�쁽�옣 由ъ뒪�듃�솕硫�</title>
+	<title>현장점검</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/site/sitelist.css">
+	<link rel="stylesheet" type="text/css"
+		href="/resources/css/site/sitelist.css">
 </th:block>
 
 <th:block layout:fragment="contents">
 	<div id="container">
 		<div id="main-content">
 			<div class="title-header">
-				<h1>�쁽�옣紐⑸줉</h1>
+				<h1>현장목록</h1>
 			</div>
 
 			<table>
 				<thead>
 					<tr>
-						<th scope="col">�쁽�옱�긽�깭</th>
-						<th scope="col">�쁽�옣�씠由�</th>
-						<th scope="col">二쇱냼</th>
-						<th scope="col">�뜲�씠�꽣媛깆떊�떆媛�</th>
+						<th scope="col">현재상태</th>
+						<th scope="col">현장이름</th>
+						<th scope="col">주소</th>
+						<th scope="col">데이터갱신시간</th>
 					</tr>
 				</thead>
-				<tbody id="site">
+				<tbody>
 					<tr th:each="sitelist : ${sitelist}">
 						<td th:text="${sitelist.site_status}">status</td>
 						<td th:text="${sitelist.site_name}">status</td>
 						<td th:text="${sitelist.address}">status</td>
 						<td th:text="${sitelist.start_date}">status</td>
 					</tr>
+
 				</tbody>
 			</table>
 		</div>
 
 		<div class="button-container">
-			<button id="modify" value="modify">�닔�젙</button>
-			<button id="add" value="add">�벑濡�</button>
+			<button id="modify" value="modify">수정</button>
+			<button id="add" value="add">등록</button>
 		</div>
 
 		<div class="pagination-container">
@@ -48,34 +50,31 @@
 				<div class="pagination">
 					<a class="pagination-newer" href="#">PREV</a> <span
 						class="pagination-inner"> <a href="#">1</a> <a
-						class="pagination-active" href="#">2</a> <a href="#">3</a> <a
-						href="#">4</a> <a href="#">5</a> <a href="#">6</a>
+						class="pagination-active" href="#">2</a> <a href="#">3</a>
 					</span> <a class="pagination-older" href="#">NEXT</a>
 				</div>
 			</nav>
 		</div>
 
 		<div class="search">
-        <div class="select">
-            <select>
-              <option>현장이름</option>
-              <option>주소</option>
-            </select>
-          </div>
-         <section class="search-box">
-                 <div class="search-content">
-                     <input type="text" />
-                 </div>
-                 <div class="search-button">
-                     <button>Search</button>
-                 </div>
-         </section>
-    </div>
-	</div>
-
+			<div class="select">
+				<select>
+					<option>현장이름</option>
+					<option>주소</option>
+				</select>
+			</div>
+			<section class="search-box">
+				<div class="search-content">
+					<input type="text" />
+				</div>
+				<div class="search-button">
+					<button>Search</button>
+				</div>
+			</section>
+		</div>
 </th:block>
 
-	<th:block layout:fragment="page_js" >
-		<script src="/resources/js/site/sitelist.js"></script>
-	</th:block>
+<th:block layout:fragment="page_js">
+	<script src="/resources/js/site/sitelist.js"></script>
+</th:block>
 </html>

@@ -29,7 +29,7 @@ html {
     margin-top: 2%;
   }
 
-  @media ( max-width: 1000px ) {
+  @media ( max-width: 1001px ) {
     #container {
       width: auto;
     }
@@ -141,7 +141,6 @@ table {
   .select {
     float: left;
     width: 100px;
-    left: 190px;
   }
 
   .search {
@@ -257,5 +256,13 @@ select {
   .search-box {
     clear: both;
     width: auto;
+  }
+  select { 
+  width: 90px;
+  }
+  .pagination {
+    left: 15px;
+    position: relative;
+    margin-top: 10px;
   }
 }
