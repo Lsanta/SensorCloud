@@ -4,7 +4,7 @@
 	data-layout-decorate="~{include/layout}">
 
 <th:block layout:fragment="page_head">
-	<title>현장 리스트화면</title>
+	<title>�쁽�옣 由ъ뒪�듃�솕硫�</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
@@ -15,16 +15,16 @@
 	<div id="container">
 		<div id="main-content">
 			<div class="title-header">
-				<h1>현장목록</h1>
+				<h1>�쁽�옣紐⑸줉</h1>
 			</div>
 
 			<table>
 				<thead>
 					<tr>
-						<th scope="col">현재상태</th>
-						<th scope="col">현장이름</th>
-						<th scope="col">주소</th>
-						<th scope="col">데이터갱신시간</th>
+						<th scope="col">�쁽�옱�긽�깭</th>
+						<th scope="col">�쁽�옣�씠由�</th>
+						<th scope="col">二쇱냼</th>
+						<th scope="col">�뜲�씠�꽣媛깆떊�떆媛�</th>
 					</tr>
 				</thead>
 				<tbody id="site">
@@ -39,8 +39,8 @@
 		</div>
 
 		<div class="button-container">
-			<button id="modify" value="modify">수정</button>
-			<button id="add" value="add">등록</button>
+			<button id="modify" value="modify">�닔�젙</button>
+			<button id="add" value="add">�벑濡�</button>
 		</div>
 
 		<div class="pagination-container">
@@ -56,18 +56,21 @@
 		</div>
 
 		<div class="search">
-			<div class="styled-select">
-				<select>
-					<option>현장목록</option>
-					<option>주소</option>
-				</select> <span class="fa fa-sort-desc"></span>
-			</div>
-			<form class="search-container">
-				<input type="text" id="search-bar" /> <a href="#"><img
-					class="search-icon"
-					src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
-			</form>
-		</div>
+        <div class="select">
+            <select>
+              <option>현장이름</option>
+              <option>주소</option>
+            </select>
+          </div>
+         <section class="search-box">
+                 <div class="search-content">
+                     <input type="text" />
+                 </div>
+                 <div class="search-button">
+                     <button>Search</button>
+                 </div>
+         </section>
+    </div>
 	</div>
 
 </th:block>
