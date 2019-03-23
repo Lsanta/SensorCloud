@@ -9,7 +9,7 @@
 	</select>
 	
 	<insert id="signup" parameterType="com.wda.sc.domain.memberVO">
-		insert into MEMBER(user_id,name,password,phone,email) values(#{userid},#{name},#{password},#{phone},#{email})
+		insert into MEMBER(user_id,name,password,phone,email) values(#{user_id},#{name},#{password},#{phone},#{email})
 	</insert>
 	
 </mapper>
