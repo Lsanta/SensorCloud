@@ -4,17 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="resources/css/login/sign.css" rel="stylesheet" type="text/css"/>
+    <link href="/resources/css/login/sign.css" rel="stylesheet" type="text/css"/>
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="  crossorigin="anonymous"></script>
+	<style>
+   		.errorstr{
+   			color : red;
+   		}
+   	</style>
+    <script>
+    	$(document).ready(function() {
+    		$('#user').blur(function(){
+    			var id  = $("#user").val();
+    			
+    			if(id.length < 5 || id.length > 12)
+    				document.getElementById("userstr").innerHTML="5자리 이상 12자리 이하로 작성해주세요";
+    			else{
+    				$.ajax({
+    				    type : "POST",
+    				    dataType : 'text',
+    				    data : id,
+    				    url : "signup_logincheck.do",
+    				    success : function(data) {
+    				    	//구현
+    				    }
+    				});
+    			}
+    		});
+    	});
+    </script>
 </head>
+
 <body>
     <div class="login-card">
         <center> <b style="font-size : 20px">회원가입</b> </center>             
       <br>
-      <form method="post">
-        아이디<input type="text" name="user" placeholder="UserId">
-        비밀번호<input type="password" name="pass" placeholder="Password">
-        비밀번호 확인<input type="password" name="pass2" placeholder="확인">
+      <form method="post" action="/login/signup">
+        아이디<input type="text" name="user_id" id="user" placeholder="UserId">
+         <div class="errorstr" id="userstr"></div>
+        비밀번호<input type="password" name="password" placeholder="Password">
+        비밀번호 확인<input type="password" name="password2" placeholder="확인">
         이름<input type="text" name="name" placeholder="이름">
         이메일<input type="email" name="email" placeholder="yjc@ac.kr">
         휴대폰번호<input type="tel" id="phone" name="phone" placeholder="01012345678"> 
