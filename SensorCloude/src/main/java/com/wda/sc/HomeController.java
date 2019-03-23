@@ -6,11 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.wda.sc.service.SiteService;
-<<<<<<< HEAD
+
 import com.wda.sc.service.TimelineService;
 
-=======
->>>>>>> 110197c94f1b29a5e7632e246ac958eacce959d6
+
 import lombok.AllArgsConstructor;
 
 @Controller
