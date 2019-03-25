@@ -1,37 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: bon300-43
-=======
-<<<<<<< HEAD
-Built-By: bon300-29
-=======
-<<<<<<< HEAD
-Built-By: bon300-44
-=======
-<<<<<<< HEAD
-Built-By: bon300-27
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-Built-By: bon300-43
-=======
-Built-By: bon300-27
->>>>>>> 18551a4f7a6f2ca773c710583827cdcd722cf1ee
-=======
-<<<<<<< HEAD
-Built-By: bon300-44
-=======
-<<<<<<< HEAD
-Built-By: bon300-27
-=======
-Built-By: bon300-29
->>>>>>> 7c511246a59c0649ebe4981054f87a651432d5ab
->>>>>>> 50fffaf45d681d4144f1e6ae5c554ab65d287c26
->>>>>>> d4eaa3c2e07a59fc3ab0c7b096e9a04f34a6e90f
->>>>>>> ee08450257888d98d7527db23218c0b80f9eae56
->>>>>>> 49cf3a067a516951e1ac59b0d7dcef8a72e157b4
->>>>>>> b2d697c0c8af708317b49b1e64f38569eea9c095
->>>>>>> 9673ecb1a4e63a3d105e993f96bbd43393180606
 Build-Jdk: 1.8.0_191
 Created-By: Maven Integration for Eclipse
 
