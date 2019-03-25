@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	타임라인 첫화면 입니다.
-</body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{include/layout}">
+
+<th:block layout:fragment="page_head">
+	<title>점검이력</title>
+</th:block>
+
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/timeline/timeline.css">
+</th:block>
+  <body>
+    <div id="container">
+      <div id="header">
+            <h1>타임라인</h1>
+            <hr size="2" noshade> 
+      </div>
+      <div id="content">
+            <textarea name="textarea" id="textarea" 
+              maxlength="300" autofocus></textarea>
+              <button id="submit">등록</button>
+        <div id="writing">
+        </div>
+    </div>
+      <div id="footer">
+      </div>
+    </div>
+  </body>
+  <th:block layout:fragment="page_js">
+	<!-- <script src="/resources/js/check/checklist.js"></script> -->
+</th:block>
 </html>

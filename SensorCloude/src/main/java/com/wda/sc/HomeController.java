@@ -39,6 +39,12 @@ public class HomeController {
 		return "check/check";
 	}
 	
+	@RequestMapping(value = "/sitelist", method = RequestMethod.GET)
+	public String sitelist(Locale locale, Model model) {
+		model.addAttribute("sitelist",siteservice.getList());
+		return "site/sitelist";
+	}
+	
 	@RequestMapping(value = "/checkadd", method = RequestMethod.GET)
 	public String checkadd(Locale locale, Model model) {
 	
@@ -61,6 +67,12 @@ public class HomeController {
 	public String mysensor(Locale locale, Model model) {
 	
 		return "mysensor/mysensor";
+	}
+	
+	@RequestMapping(value = "/modifymypage", method = RequestMethod.GET)
+	public String modifymypage(Locale locale, Model model) {
+	
+		return "mypage/modifymypage";
 	}
 	
 	
