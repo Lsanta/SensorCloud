@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wda.sc.domain.memberVO;
-import com.wda.sc.service.MyPageModifyService;
 
 import lombok.AllArgsConstructor;
 
@@ -22,7 +21,6 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/mypage")
 public class MyPageController {
 	
-	private MyPageModifyService mypagemodifyservice;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String mypage(Locale locale, Model model) {
@@ -35,30 +33,6 @@ public class MyPageController {
 		return "mypage/modifymypage";
 	}
 	
-	@RequestMapping("mypageconfirmpasswd.do") 
-	@ResponseBody
-	public String MyPageConfirmPasswd(Model model,HttpSession session, @RequestParam String id, @RequestParam String pass) {
-		System.out.println("된다");
-		 String confirmid =(String)session.getAttribute(id);
-		
-		
-		ArrayList<memberVO> arr = new ArrayList<memberVO>();
-		arr = mypagemodifyservice.confirmpasswd(confirmid);
-			
-			if(arr.size() !=0) {
-				if(arr.get(0).getPassword().equals(pass)) {
-					return "success";
-				}
-			}
-			return confirmid;
-			
-			
-			
-		
-				
-		
-	}
-	
-	
+
 	
 }
