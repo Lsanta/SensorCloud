@@ -1,10 +1,80 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	점검이력 입니다.
-</body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{include/layout}">
+
+<th:block layout:fragment="page_head">
+	<title>점검이력</title>
+</th:block>
+
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/check/checklist.css">
+</th:block>
+
+<th:block layout:fragment="contents">
+	<div id="container">
+		<div id="main-content">
+			<div class="title-header">
+				<h1>점검이력</h1>
+			</div>
+
+			<table>
+				<thead>
+					<tr>
+						<th scope="col">이름</th>
+						<th scope="col">제목</th>
+						<th scope="col">글쓴이</th>
+						<th scope="col">상태</th>
+						<th scope="col">날짜</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- 	<tr th:each="sitelist : ${sitelist}">
+						<td th:text="${sitelist.site_status}">status</td>
+						<td th:text="${sitelist.site_name}">status</td>
+						<td th:text="${sitelist.address}">status</td>
+						<td th:text="${sitelist.start_date}">status</td>
+					</tr> -->
+
+				</tbody>
+			</table>
+		</div>
+
+		<div class="button-container">
+			<button id="write" value="write">글쓰기</button>
+		</div>
+
+		<div class="pagination-container">
+			<nav class="pagination-content">
+				<div class="pagination">
+					<a class="pagination-newer" href="#">PREV</a> <span
+						class="pagination-inner"> <a href="#">1</a> <a
+						class="pagination-active" href="#">2</a> <a href="#">3</a>
+					</span> <a class="pagination-older" href="#">NEXT</a>
+				</div>
+			</nav>
+		</div>
+
+		<div class="search">
+			<div class="select">
+				<select>
+					<option>현장이름</option>
+					<option>글쓴이</option>
+				</select>
+			</div>
+			<section class="search-box">
+				<div class="search-content">
+					<input type="text" />
+				</div>
+				<div class="search-button">
+					<button>Search</button>
+				</div>
+			</section>
+		</div>
+</div>
+</th:block>
+
+<th:block layout:fragment="page_js">
+	<script src="/resources/js/check/checklist.js"></script>
+</th:block>
 </html>
