@@ -1,0 +1,297 @@
+@charset "UTF-8";
+
+html {
+  overflow-x: hidden; 
+ }
+
+#container {
+    width: 1000px;
+    height: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #bcbcbc;
+    }
+
+.title-header {
+    height: 50px;
+    border-bottom: 1px solid #000000;
+  }
+  
+  .title-header h1 {
+    float: left;
+    width: 300px;
+    margin: 0;
+    padding: 0 0 0 20px;
+  }
+
+  .button-container {
+    height: 20px;
+    margin-top: 2%;
+  }
+
+  @media ( max-width: 1001px ) {
+    #container {
+      width: auto;
+    }
+    #main-content {
+      float: none;
+      width: auto;
+    }
+    .title-header {
+      float: none;
+      width: auto;
+    }
+    .button-container {
+      float: none;
+      width: auto;
+    }
+    .pagination-container {
+      float: none;
+      width: auto;
+    }
+    .pagination{
+      float: none;
+      width: auto;
+    }
+    .search {
+      float: none;
+      width: auto;
+    }
+    .select {
+      float: none;
+      width: auto;
+    }
+    .search-box {
+      float: none;
+      width: auto;
+    }
+    select { 
+  width: 120px; /* 원하는 너비설정 */
+  padding: .6em .5em; /* 여백으로 높이 설정 */ 
+  font-family: inherit; /* 폰트 상속 */ 
+  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+  border: 1px solid #999; 
+  border-radius: 20; /* iOS 둥근모서리 제거 */ 
+  -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+  -moz-appearance: none; appearance: none;
+  margin-left: 200px;
+}
+}
+
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+  }
+  
+  table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+  }
+  
+  table th,
+  table td {
+    padding: .625em;
+    text-align: center;
+    height: 30px;
+  }
+  
+  table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .button-container button { 
+    float: right;
+  }
+  
+  @media screen and (max-width: 700px) {
+    table {
+      border: 0;
+    }
+  
+    table caption {
+      font-size: 1.3em;
+    }
+    
+    table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+  }
+
+  .select {
+    float: left;
+    width: 100px;
+  }
+
+  .search {
+    width: 100%;
+    padding: 40px 0;
+    margin-left: 5%;
+  }
+  
+  select { 
+  width: 120px; /* 원하는 너비설정 */
+  padding: .6em .5em; /* 여백으로 높이 설정 */ 
+  font-family: inherit; /* 폰트 상속 */ 
+  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+  border: 1px solid #999; 
+  border-radius: 20; /* iOS 둥근모서리 제거 */ 
+  -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+  -moz-appearance: none; appearance: none;
+  margin-left: 200px;
+}
+
+ .pagination-container {
+  margin: 100px auto;
+  text-align: center;
+}
+.pagination {
+  position: relative;
+}
+.pagination a {
+  position: relative;
+  display: inline-block;
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 8px 16px 10px;
+}
+.pagination a:before {
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  content: "";
+  top: 0;
+  left: 0;
+  background-color: #2c3e50;
+  border-radius: 24px;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  transition: all 0.2s;
+}
+.pagination a:hover,
+.pagination a .pagination-active {
+  color: #fff;
+}
+.pagination a:hover:before,
+.pagination a .pagination-active:before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.pagination .pagination-active {
+  color: #fff;
+}
+.pagination .pagination-active:before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.pagination-newer {
+  margin-right: 20px;
+}
+.pagination-older {
+  margin-left: 20px;
+}
+
+.search-box { 
+  display: flex;
+  margin: 0 0 0 33%;
+  width: 400px;
+}
+.search-box .search-content {
+   flex: 1; 
+  }
+.search-box .search-button {
+   flex: 0; 
+  }
+.search-box div input {
+   padding: .5em 1em; 
+   width: 100%; 
+  }
+.search-box div button { 
+  padding: .5em 1em; 
+  white-space: nowrap; 
+}
+
+@media screen and (max-width: 768px) {
+  .search {
+    float: none;
+    width: auto;
+  }
+  .select {
+    clear: both;
+    height: 0;
+    width: auto;
+  }
+  .search-box {
+    clear: both;
+    width: auto;
+  }
+  select { 
+  width: 120px; /* 원하는 너비설정 */
+  padding: .6em .5em; /* 여백으로 높이 설정 */ 
+  font-family: inherit; /* 폰트 상속 */ 
+  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+  border: 1px solid #999; 
+  border-radius: 20; /* iOS 둥근모서리 제거 */ 
+  -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+  -moz-appearance: none; appearance: none;
+  margin-left: 100px;
+}
+}
+
+@media screen and (max-width: 360px) {
+  .search {
+    float: none;
+    width: auto;
+  }
+  .select {
+    clear: both;
+    height: 0;
+    width: auto;
+  }
+  .search-box {
+    clear: both;
+    width: auto;
+  }
+  select { 
+  width: 90px;
+  margin:0;
+  }
+  .pagination {
+    left: 15px;
+    position: relative;
+    margin: 10px 0 0 0;
+  }
+}
