@@ -1,11 +1,15 @@
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="utf-8">
-    <title>CSS</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/resources/css/timeline/timeline.css" rel="stylesheet" type="text/css"/>
-  </head>
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{include/layout}">
+
+<th:block layout:fragment="page_head">
+	<title>점검이력</title>
+</th:block>
+
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/timeline/timeline.css">
+</th:block>
   <body>
     <div id="container">
       <div id="header">
@@ -23,4 +27,7 @@
       </div>
     </div>
   </body>
+  <th:block layout:fragment="page_js">
+	<!-- <script src="/resources/js/check/checklist.js"></script> -->
+</th:block>
 </html>
