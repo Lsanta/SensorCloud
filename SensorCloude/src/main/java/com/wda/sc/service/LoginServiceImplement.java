@@ -23,4 +23,10 @@ public class LoginServiceImplement implements LoginService {
 		System.out.println(member);
 		return mapper.signup(member);
 	}
+
+	@Override
+	public ArrayList<memberVO> idFind(String name) {
+		// TODO Auto-generated method stub
+		return mapper.idFind(name);
+	}
 }
