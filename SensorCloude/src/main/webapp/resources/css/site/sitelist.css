@@ -65,6 +65,17 @@ html {
       float: none;
       width: auto;
     }
+    select { 
+  width: 120px; /* 원하는 너비설정 */
+  padding: .6em .5em; /* 여백으로 높이 설정 */ 
+  font-family: inherit; /* 폰트 상속 */ 
+  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+  border: 1px solid #999; 
+  border-radius: 20; /* iOS 둥근모서리 제거 */ 
+  -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+  -moz-appearance: none; appearance: none;
+  margin-left: 200px;
+}
 }
 
 table {
@@ -148,6 +159,18 @@ table {
     padding: 40px 0;
     margin-left: 5%;
   }
+  
+  select { 
+  width: 120px; /* 원하는 너비설정 */
+  padding: .6em .5em; /* 여백으로 높이 설정 */ 
+  font-family: inherit; /* 폰트 상속 */ 
+  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+  border: 1px solid #999; 
+  border-radius: 20; /* iOS 둥근모서리 제거 */ 
+  -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+  -moz-appearance: none; appearance: none;
+  margin-left: 200px;
+}
 
  .pagination-container {
   margin: 100px auto;
@@ -195,22 +218,10 @@ table {
           transform: scale(1);
 }
 .pagination-newer {
-  margin-right: 50px;
+  margin-right: 20px;
 }
 .pagination-older {
-  margin-left: 50px;
-}
-
-
-select { 
-  width: 120px; /* 원하는 너비설정 */
-  padding: .6em .5em; /* 여백으로 높이 설정 */ 
-  font-family: inherit; /* 폰트 상속 */ 
-  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
-  border: 1px solid #999; 
-  border-radius: 20; /* iOS 둥근모서리 제거 */ 
-  -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
-  -moz-appearance: none; appearance: none; 
+  margin-left: 20px;
 }
 
 .search-box { 
@@ -247,6 +258,17 @@ select {
     clear: both;
     width: auto;
   }
+  select { 
+  width: 120px; /* 원하는 너비설정 */
+  padding: .6em .5em; /* 여백으로 높이 설정 */ 
+  font-family: inherit; /* 폰트 상속 */ 
+  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
+  border: 1px solid #999; 
+  border-radius: 20; /* iOS 둥근모서리 제거 */ 
+  -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
+  -moz-appearance: none; appearance: none;
+  margin-left: 100px;
+}
 }
 
 @media screen and (max-width: 360px) {
@@ -265,10 +287,11 @@ select {
   }
   select { 
   width: 90px;
+  margin:0;
   }
   .pagination {
     left: 15px;
     position: relative;
-    margin-top: 10px;
+    margin: 10px 0 0 0;
   }
 }
