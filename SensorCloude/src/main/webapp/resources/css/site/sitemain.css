@@ -16,6 +16,12 @@
 	border: 1px solid black;
 }
 
+#mapDiv {
+	margin-top: 50px;
+	height: 380px;
+	border: 1px solid black;
+}
+
 table {
 	border: 1px solid #ccc;
 	border-collapse: collapse;
@@ -85,10 +91,4 @@ table th {
 		font-size: .8em;
 		text-align: right;
 	}
-}
-
-#mapDiv {
-	margin-top: 50px;
-	height: 380px;
-	border: 1px solid black;
 }

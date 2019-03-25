@@ -28,7 +28,6 @@
           </tr>
         </thead>
         <tbody id="site">
-<<<<<<< HEAD
           <tr id="${site_id}" th:each="sitelist : ${sitelist}">
             <td th:text="${sitelist.site_status}">status</td>
             <td th:text="${sitelist.site_name}">status</td>
@@ -36,15 +35,6 @@
             <td th:text="${sitelist.start_date}">status</td>
 			<td id="sid" th:text="${sitelist.site_id}" style="display : none"></td>
          </tr>
-=======
-          <tr th:each="sitelist : ${sitelist}">
-            <td th:text="${sitelist.site_status}"></td>
-            <td th:text="${sitelist.site_name}"></td>
-            <td th:text="${sitelist.address}"></td>
-            <td th:text="${sitelist.start_date}"></td>
-            <td id="sid" th:text="${sitelist.site_id}" style="display : none"></td>
-          </tr>  
->>>>>>> 393a5e46a365ae08cc9f23fb1ca337e4a5da8b37
         </tbody>
       </table>
     </div>
