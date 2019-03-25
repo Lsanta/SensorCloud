@@ -74,4 +74,25 @@ public class LoginController {
 		
 		return "login/sign";
 	}
+	
+	 @RequestMapping("idFind.do")
+	 @ResponseBody
+	 public String idCheck(Model model, HttpSession session, @RequestParam String name,@RequestParam String tel) {
+		 ArrayList<memberVO> arr2 = new ArrayList<memberVO>();	 
+		 arr2 = loginservice.idFind(name);
+		 
+		 System.out.println(arr2.get(0).getUser_id());
+		 if(arr2.size() == 0)
+			  return "none"; 
+		 if(arr2.size() != 0) {
+			 if(arr2.get(0).getPhone().equals(tel)) {
+				 //model.addAttribute("find_id",arr2.get(0).getUser_id());
+				 session.setAttribute("find_id", arr2.get(0).getUser_id());
+				 return arr2.get(0).getUser_id(); 
+			 } else {
+				 return "isN"; 
+			 }
+		 }
+		 return "none";
+	 }
 }

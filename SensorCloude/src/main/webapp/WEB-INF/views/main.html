@@ -28,12 +28,13 @@
           </tr>
         </thead>
         <tbody id="site">
-          <tr th:each="sitelist : ${sitelist}">
+          <tr id="${site_id}" th:each="sitelist : ${sitelist}">
             <td th:text="${sitelist.site_status}">status</td>
             <td th:text="${sitelist.site_name}">status</td>
             <td th:text="${sitelist.address}">status</td>
             <td th:text="${sitelist.start_date}">status</td>
-          </tr>  
+			<td id="sid" th:text="${sitelist.site_id}" style="display : none"></td>
+         </tr>
         </tbody>
       </table>
     </div>

@@ -39,6 +39,12 @@ public class HomeController {
 		return "check/check";
 	}
 	
+	@RequestMapping(value = "/sitelist", method = RequestMethod.GET)
+	public String sitelist(Locale locale, Model model) {
+		model.addAttribute("sitelist",siteservice.getList());
+		return "site/sitelist";
+	}
+	
 	@RequestMapping(value = "/checkadd", method = RequestMethod.GET)
 	public String checkadd(Locale locale, Model model) {
 	
