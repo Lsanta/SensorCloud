@@ -121,10 +121,11 @@ article{
 	line-height:40px;
 	}
 
-	#nav ul li a, #number{
+	#nav ul li a, #num{
 	color:#e3e2e2;
   	font-size : 25px;
 	}
+	
   #nav-btn{
     fill:white;
     height:40px;
@@ -132,7 +133,7 @@ article{
     position:absolute;
     right:7px;
     top:7px;
-    display:block;
+    display: block;
     cursor: pointer;
   }
 	h1{
@@ -153,6 +154,10 @@ article{
 	#scroll{
 		overflow : hidden;
 		height : 100%;
+	}
+	
+	#nav {
+		display : none;
 	}
 	
 }
