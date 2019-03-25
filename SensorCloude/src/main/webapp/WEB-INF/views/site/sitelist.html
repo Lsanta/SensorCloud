@@ -27,12 +27,13 @@
 						<th scope="col">데이터갱신시간</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="site">
 					<tr th:each="sitelist : ${sitelist}">
-						<td th:text="${sitelist.site_status}">status</td>
-						<td th:text="${sitelist.site_name}">status</td>
-						<td th:text="${sitelist.address}">status</td>
-						<td th:text="${sitelist.start_date}">status</td>
+						<td th:text="${sitelist.site_status}"></td>
+						<td th:text="${sitelist.site_name}"></td>
+						<td th:text="${sitelist.address}"></td>
+						<td th:text="${sitelist.start_date}"></td>
+						<td id="sid" th:text="${sitelist.site_id}" style="display : none"></td>
 					</tr>
 
 				</tbody>
