@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.wda.sc.service.LoginService;
 import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
@@ -17,14 +16,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/site")
 public class SiteController {
-	private SiteService siteservice;
-
-	@RequestMapping(value = "sitelist", method = RequestMethod.GET)
-	public String sitelist(Locale locale, Model model) {
-		model.addAttribute("sitelist",siteservice.getList());
-		return "site/sitelist";
-	}
-	
+		
 	@RequestMapping(value = "siteadd", method = RequestMethod.GET)
 	public String siteadd(Locale locale, Model model) {
 	

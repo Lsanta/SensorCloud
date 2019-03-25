@@ -35,10 +35,10 @@ $(document).ready(function () {
         	type : "POST",
         	dataType : "text",
         	data : query,
-        	url : "idFind.do",
+        	url : "/login/idFind.do",
         	success : function(data){
         		var s = "아이디 조회 결과 입력하신 정보는 아래와 같습니다.";
-        		alert(data);
+        		
         		if(data != "isN"){
         			$("#hidden").css("visibility","visible");
         			document.getElementById("hidden").innerHTML="<br>"+s+"<br><p>"+data+"</p>";
