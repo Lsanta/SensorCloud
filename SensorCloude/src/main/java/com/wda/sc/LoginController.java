@@ -25,12 +25,18 @@ public class LoginController {
 	
 	@RequestMapping(value = "help", method = RequestMethod.GET)
 	public String help(Model model) {
-			return "login/help";
+		return "login/help";
 	}
 	
 	@RequestMapping(value = "sign", method = RequestMethod.GET)
 	public String sign(Model model) {
-			return "login/sign";
+		return "login/sign";
+	}
+	
+	@RequestMapping(value = "logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "login/login";
 	}
 	
 	@RequestMapping("login.do")
