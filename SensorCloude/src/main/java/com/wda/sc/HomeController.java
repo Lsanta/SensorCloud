@@ -6,6 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.wda.sc.service.SiteService;
+
+import com.wda.sc.service.TimelineService;
+
+
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -14,6 +18,7 @@ public class HomeController {
 	
 	
 	private SiteService siteservice;
+	private TimelineService timelineservice;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -22,8 +27,9 @@ public class HomeController {
 	
 	@RequestMapping("main")
 	public String main(Locale locale, Model model) {
-		model.addAttribute("list",siteservice.getList());
-		System.out.println(siteservice.getList());
+		model.addAttribute("sitelist",siteservice.getList());
+		model.addAttribute("timelinelist",timelineservice.getList());
+		System.out.println(timelineservice.getList());
 		return "main";
 	}
 		
