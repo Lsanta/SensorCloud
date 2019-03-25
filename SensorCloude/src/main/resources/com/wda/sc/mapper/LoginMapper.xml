@@ -12,4 +12,8 @@
 		insert into MEMBER(user_id,name,password,phone,email) values(#{user_id},#{name},#{password},#{phone},#{email})
 	</insert>
 	
+	<select id="idFind" resultType="com.wda.sc.domain.memberVO">
+		select * from MEMBER where name = #{name}
+	</select>
+	
 </mapper>
