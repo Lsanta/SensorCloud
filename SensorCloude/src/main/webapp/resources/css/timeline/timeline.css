@@ -1,0 +1,137 @@
+#container {
+    width: 1000px;
+    margin: 10px auto;
+    padding: 20px;
+    border: 1px solid #bcbcbc;
+  }
+  #content {
+    width: 1000px;
+    margin-bottom: 20px;
+    float: left;
+    /* border: 1px solid #bcbcbc; */
+  }
+  #footer {
+    clear: both;
+    padding: 20px;
+    /* border: 1px solid #bcbcbc; */
+  }
+  textarea {
+    width:60%;
+    height:50px;
+    margin-top:5%;
+  }
+  #submit {
+    float:right;
+    width:65px;
+    height:65px;
+    margin-top:4.6%;
+/*     margin-right:2%; */
+  }
+  #writing {
+    width:80.5%;
+    padding: 6%;
+    margin-top:3%;
+    border: 1px solid #bcbcbc;
+  }
+
+
+  @media ( min-width: 1000px ) {
+    #container {
+      width: 1000px;
+    }
+    #content {
+    width: 1000px;
+    height: auto;
+    margin-bottom: 20px;
+    float: left;
+    }
+    textarea {
+        width:80%;
+        height:55px;
+      }
+      #submit {
+        float:right;
+        width:8%;
+        height:60px;
+        margin-top:5%;
+        margin-right:10%;
+      }
+      #writing {
+        width:68.5%;
+        padding: 6%;
+        margin-top:3%;
+        border: 1px solid #bcbcbc;
+      }
+    
+      
+}
+    @media (min-width:701px) and (max-width:1000px) {
+    #container {
+      width: auto;
+    }
+    #content {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    float: left;
+    }
+
+    #textarea {
+        float: none;
+        width: 80%;
+        height:50px;
+      
+      }
+    #submit { 
+        top:18%;
+        position:fixed;
+        float:right;
+        width:10%;
+        height:8%;
+        margin-top:4.6%;
+        margin-right:3%;
+        margin-left:1%;
+    }
+    #writing {
+        width:68.5%;
+        padding: 6%;
+        margin-top:3%;
+        border: 1px solid #bcbcbc;
+      }
+    
+   
+  } 
+  @media (max-width:700px) {
+    #container {
+        width: auto;
+        display:relative;
+      }
+      #content {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+        float: left;
+        }
+      
+        #textarea {
+        float: none;
+        width: 75%;
+        height:50px;
+      
+      }
+    #submit { 
+        top:5.2%;
+  /*       position:fixed; */
+        float:right;
+        width:14%;
+        height:55px;
+       margin-right:3%;
+        margin-left:4%; 
+    }  
+    #writing {
+        width:85%;
+        padding: 6%;
+        margin-top:3%;
+        border: 1px solid #bcbcbc;
+      }
+  } 
