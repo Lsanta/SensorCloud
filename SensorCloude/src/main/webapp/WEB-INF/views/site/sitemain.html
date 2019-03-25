@@ -15,7 +15,8 @@
 </th:block>
 
 <th:block layout:fragment="contents">
-	<aside class="aside">
+	<aside class="aside" th:object="${siteInfo}">
+	
 		<a> <svg version="1.1" id="nav-btn"
 				xmlns="http://www.w3.org/2000/svg"
 				xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -26,8 +27,7 @@
       V285.429z M462,403.143H50V462h412V403.143z" />
   </svg>
 		</a>
-		<h1>1번 휴게소</h1>
-
+			<h1>1번 휴게소</h1>
 		<nav id="nav">
 			<ul>
 				<li><a href="/site/sitealarm1">알림</a></li>
@@ -80,7 +80,29 @@
 
 			<div id="chartDiv">차트넣을거</div>
 
-			<div id="dataDiv">반응형 표 넣어줘</div>
+			<div id="dataDiv">
+				<div id="main-content">
+					<table>
+						<thead>
+							<tr>
+								<th scope="col">data</th>
+								<th scope="col">data</th>
+								<th scope="col">data</th>
+								<th scope="col">data</th>
+							</tr>
+						</thead>
+						<tbody>
+						<!-- 	<tr th:each="sitelist : ${sitelist}">
+								<td th:text="${sitelist.site_status}">status</td>
+								<td th:text="${sitelist.site_name}">status</td>
+								<td th:text="${sitelist.address}">status</td>
+								<td th:text="${sitelist.start_date}">status</td>
+							</tr> -->
+
+						</tbody>
+					</table>
+				</div>
+			</div>
 
 			<div id="mapDiv">지도넣을거</div>
 

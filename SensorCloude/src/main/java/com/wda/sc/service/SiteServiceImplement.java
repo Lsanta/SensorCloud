@@ -19,6 +19,12 @@ public class SiteServiceImplement implements SiteService {
 	public ArrayList<siteVO> getList() {
 		return mapper.getList();
 	}
+
+	@Override
+	public ArrayList<siteVO> getSite(String site_id) {
+		//site_id를 통한 현장정보 가져오기
+		return mapper.getSite(site_id);
+	}
 	
 
 }
