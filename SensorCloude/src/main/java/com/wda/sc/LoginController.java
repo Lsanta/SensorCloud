@@ -39,7 +39,7 @@ public class LoginController {
 		return "login/login";
 	}
 	
-	@RequestMapping("login.do")
+	@RequestMapping("login.do") 
 	@ResponseBody
 	public String loginCheck(Model model,HttpSession session, @RequestParam String id, @RequestParam String password) {
 
