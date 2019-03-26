@@ -28,7 +28,7 @@ public class SiteController {
 	@RequestMapping(value = "sitealarm", method = RequestMethod.GET)
 	public String sitealarm(Locale locale, Model model) {
 	
-		return "site/sitealarm1";
+		return "site/sitealarm";
 	}
 	
 	@RequestMapping(value = "{site_id}", method = RequestMethod.GET)
