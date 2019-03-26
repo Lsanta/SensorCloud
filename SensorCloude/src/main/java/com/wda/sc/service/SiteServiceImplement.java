@@ -33,5 +33,11 @@ public class SiteServiceImplement implements SiteService {
 		return mapper.getAlarm_member(site_id);
 	}
 	
+	@Override
+	public int siteadd(siteVO site) {
+		System.out.println(site);
+		return mapper.siteadd(site);
+	}
+	
 
 }
