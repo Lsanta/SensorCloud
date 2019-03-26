@@ -256,7 +256,9 @@ table {
   }
   .search-box {
     clear: both;
-    width: auto;
+   /*  width: auto; */
+    margin-left: 180px;
+    width: 450px;
   }
   select { 
   width: 120px; /* 원하는 너비설정 */
@@ -267,7 +269,7 @@ table {
   border-radius: 20; /* iOS 둥근모서리 제거 */ 
   -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
   -moz-appearance: none; appearance: none;
-  margin-left: 100px;
+  margin-left: 50px;
 }
 }
 
@@ -275,6 +277,7 @@ table {
   .search {
     float: none;
     width: auto;
+    margin:30px 0 0 0;
   }
   .select {
     clear: both;
@@ -284,9 +287,10 @@ table {
   .search-box {
     clear: both;
     width: auto;
+    margin-left: 100px;
   }
   select { 
-  width: 90px;
+  width: 95px;
   margin:0;
   }
   .pagination {

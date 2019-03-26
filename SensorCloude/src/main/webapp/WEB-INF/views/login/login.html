@@ -9,38 +9,57 @@
     <title>Document</title>
   <script>
    $(document).ready(function () {
-      $('#login').click(function() {
-         
-         var id  = $("#id").val();
-         var password = $("#pass").val();
-         
-          if(id == ""){
-                   alert("아이디를 입력하세요.");
-                   $("#id").focus();
-                   return; 
-               }
-               if(password == ""){
-                   alert("비밀번호를 입력하세요.");
-                   $("#pass").focus();
-                   return;
-               }   
-               
-          var query = {id:$("#id").val(), password:$("#pass").val()};
-          
-          $.ajax({
-             type : "POST",
-             dataType : 'text',
-             data : query,
-             url : "/login/login.do",
-             success : function(data) {
-              if(data == "success")
-                 window.location.href = "/main";
-              else
-            	  document.getElementById("loginfail").innerHTML="아이디 또는 비밀번호가 틀렸습니다.";
+	   function login(){
+		    var id  = $("#id").val();
+	         var password = $("#pass").val();
+	         
+	          if(id == ""){
+	                   alert("아이디를 입력하세요.");
+	                   $("#id").focus();
+	                   return; 
+	               }
+	               if(password == ""){
+	                   alert("비밀번호를 입력하세요.");
+	                   $("#pass").focus();
+	                   return;
+	               }   
+	               
+	          var query = {id:$("#id").val(), password:$("#pass").val()};
+	          
+	          $.ajax({
+	             type : "POST",
+	             dataType : 'text',
+	             data : query,
+	             url : "/login/login.do",
+	             success : function(data) {
+	              if(data == "success")
+	                 window.location.href = "/main";
+	              else
+	            	  document.getElementById("loginfail").innerHTML="아이디 또는 비밀번호가 틀렸습니다.";
 
-             }
-         });
+	             }
+	         });
+	   }
+	   
+      $('#login').click(function() {
+         	login();
+      }); // 로그인 클릭 이벤트 종료
+
+      //패스워드에 커서를 두고 엔터키를 누르면 로그인 함
+      $("#pass").keydown(function(key) {
+         if (key.keyCode == 13) {
+            login();
+         }
       });
+      
+      //아이디에 커서를 두고 엔터키를 누르면 로그인 함
+      $("#id").keydown(function(key) {
+         if (key.keyCode == 13) {
+            login();
+         }
+      });
+
+      
    });
 </script>
 </head>
@@ -55,7 +74,6 @@
         <input type="password" name="pass" id="pass" placeholder="Password">
         <div id="loginfail" style="color:red"></div>
         <input type="button" name="login" id="login" class="login login-submit" value="login">
-    
 
       <div class="login-help">
         <a href="/login/help">아이디/비밀번호 찾기</a> | <a href="/login/sign">회원가입</a>
