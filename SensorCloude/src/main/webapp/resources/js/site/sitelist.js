@@ -1,11 +1,4 @@
-/**
- * 
- */
-
-/**
- * 
- */
-
+/*현장 리스트*/
 $(document).ready(function(){
 		
 	 $(document).on("click", "#site > tr" , function(){
@@ -17,6 +10,7 @@ $(document).ready(function(){
 	 });
 });
 
+/*pagination*/
 $(document).ready(function() {
 
 	$('.pagination-inner a').on('click', function() {
@@ -25,3 +19,5 @@ $(document).ready(function() {
 	});
 
 });
+
+/*현장 등록*/

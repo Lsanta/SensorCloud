@@ -8,26 +8,30 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/timeline/timeline.css">
+	<link rel="stylesheet" type="text/css"
+		href="/resources/css/timeline/timeline.css">
 </th:block>
-  <body>
-    <div id="container">
-      <div id="header">
-            <h1>타임라인</h1>
-            <hr size="2" noshade> 
-      </div>
-      <div id="content">
-            <textarea name="textarea" id="textarea" 
-              maxlength="300" autofocus></textarea>
-              <button id="submit">등록</button>
-        <div id="writing">
-        </div>
-    </div>
-      <div id="footer">
-      </div>
-    </div>
-  </body>
-  <th:block layout:fragment="page_js">
+<body>
+	<div id="container">
+		<div id="header">
+			<h1>타임라인</h1>
+			<hr size="2" noshade>
+		</div>
+		<div id="content">
+		<div id="text">
+			<textarea name="textarea" id="textarea" maxlength="100" autofocus></textarea>
+			<button id="submit">등록</button>
+			<div id="the_count">
+				<span id="current">0</span> <span id="maximum">/ 100</span>
+				<script src="/resources/js/timeline/timeline.js"></script>
+			</div>
+			</div>
+			<div id="writing"></div>
+		</div>
+		<div id="footer"></div>
+	</div>
+</body>
+<th:block layout:fragment="page_js">
 	<!-- <script src="/resources/js/check/checklist.js"></script> -->
 </th:block>
 </html>

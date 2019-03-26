@@ -35,7 +35,6 @@ public class SiteController {
 	public String siteclick(@PathVariable String site_id, Model model) {
 		System.out.println("현장 iD =" + site_id);
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));
-		
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));
 		
 		return "site/sitemain";
