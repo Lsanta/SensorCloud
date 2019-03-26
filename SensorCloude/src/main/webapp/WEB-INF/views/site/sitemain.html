@@ -29,7 +29,7 @@
   </svg>
 		</a>
 			<h1 th:text="${siteInfo.site_name}"></h1>
-			
+			<span id="sid" th:text="${siteInfo.site_id}" style="display:none"></span>
 		<nav id="nav" th:each="alarmMember : ${alarmMember}">
 			<ul>
 				<li><a href="/site/sitealarm1">알림</a></li>
