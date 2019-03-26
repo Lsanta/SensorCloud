@@ -15,4 +15,8 @@
 	<select id="getAlarm_member" resultType="com.wda.sc.domain.alarm_memberVO">
 		select name,tel from alarm_member where site_id = #{site_id}
 	</select>
+	
+	<insert id="siteadd" parameterType="com.wda.sc.domain.siteVO">
+		insert into site(site_id,type_no,site_name,address,detail_address,start_date) values(#{site_id},#{type_no},#{site_name},#{address},#{detail_address},sysDate)
+	</insert>
 </mapper>
