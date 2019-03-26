@@ -34,7 +34,7 @@ aside{
 	width:205px;
 	padding-top:30px;
 	padding-left:0px;
-	top:120px;
+	top:140px;
 	bottom:0;
 	background-color:#474958;
 	z-index:50;
@@ -99,6 +99,14 @@ article{
 	
 	padding-bottom: 150px;
 }
+
+#phonenumber{
+		position : relative;
+		top : -30px;
+		color : black;
+		font-size : 18px;
+}
+
 @media (max-width: 1000px) {
 	h2{
   	font-size:2em;
