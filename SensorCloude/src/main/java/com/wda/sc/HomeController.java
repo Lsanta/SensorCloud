@@ -34,6 +34,10 @@ public class HomeController {
 	public String main(Locale locale, Model model) {
 		model.addAttribute("sitelist",siteservice.getList());
 		model.addAttribute("timelinelist",timelineservice.getList());
+<<<<<<< HEAD
+=======
+
+>>>>>>> c9c8318660896793a18d16df4b3a682ed3c3567f
 		return "main";
 	}
 		

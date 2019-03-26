@@ -10,6 +10,7 @@ public class siteVO {
 	private String type_no;
 	private String site_name;
 	private String address;
+	private String detail_address;
 	private String start_date;
 	private int site_status;
 }
