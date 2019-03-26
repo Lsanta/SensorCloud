@@ -29,12 +29,13 @@
 					</tr>
 				</thead>
 				<tbody>
-				<!-- 	<tr th:each="sitelist : ${sitelist}">
-						<td th:text="${sitelist.site_status}">status</td>
-						<td th:text="${sitelist.site_name}">status</td>
-						<td th:text="${sitelist.address}">status</td>
-						<td th:text="${sitelist.start_date}">status</td>
-					</tr> -->
+				 	<tr th:each="sensorlist : ${sensorlist}">
+						<td th:text="${sensorlist.sensor_sn}"></td>
+						<td th:text="${sensorlist.sensor_kind}"></td>
+						<td th:text="${sensorlist.model_name}"></td>
+						<td th:text="${sensorlist.voltage}"></td>
+						<td th:text="${sensorlist.manufacturer}"></td>
+					</tr> 
 
 				</tbody>
 			</table>
