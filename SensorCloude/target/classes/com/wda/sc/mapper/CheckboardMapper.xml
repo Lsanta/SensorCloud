@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wda.sc.mapper.CheckboardMapper">
+
+	<select id="getList" resultType="com.wda.sc.domain.checkboardVO">
+		select check_board.user_id,
+        check_board.title,
+        check_board.reg_date,
+        check_board.board_status,
+        check_board.site_id,
+        site.address
+from check_board
+       ,site
+where check_board.site_id = site.site_id
+	</select>
+
+	
+</mapper>

@@ -21,20 +21,21 @@
 			<table>
 				<thead>
 					<tr>
-						<th scope="col">이름</th>
+						<th scope="col">현장이름</th>
 						<th scope="col">제목</th>
-						<th scope="col">글쓴이</th>
 						<th scope="col">상태</th>
+						<th scope="col">글쓴이</th>
 						<th scope="col">날짜</th>
 					</tr>
 				</thead>
 				<tbody>
-				<!-- 	<tr th:each="sitelist : ${sitelist}">
-						<td th:text="${sitelist.site_status}">status</td>
-						<td th:text="${sitelist.site_name}">status</td>
-						<td th:text="${sitelist.address}">status</td>
-						<td th:text="${sitelist.start_date}">status</td>
-					</tr> -->
+				 	<tr th:each="checkboardlist : ${checkboardlist}">
+						<td th:text="${checkboardlist.address}">status</td>
+						<td th:text="${checkboardlist.title}">status</td>
+						<td th:text="${checkboardlist.board_status}">status</td>
+						<td th:text="${checkboardlist.user_id}">status</td>
+						<td th:text="${checkboardlist.user_id}">status</td>
+					</tr> 
 
 				</tbody>
 			</table>

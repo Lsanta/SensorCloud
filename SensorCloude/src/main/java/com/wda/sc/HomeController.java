@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.SiteService;
 
 import com.wda.sc.service.TimelineService;
@@ -19,6 +21,7 @@ public class HomeController {
 	
 	private SiteService siteservice;
 	private TimelineService timelineservice;
+	private CheckboardService checkboardservice;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -35,7 +38,8 @@ public class HomeController {
 		
 	@RequestMapping(value = "/check", method = RequestMethod.GET)
 	public String check(Locale locale, Model model) {
-	
+		model.addAttribute("checkboardlist",checkboardservice.getList());
+		System.out.println(checkboardservice.getList());
 		return "check/check";
 	}
 	
