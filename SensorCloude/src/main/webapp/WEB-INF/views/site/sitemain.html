@@ -83,7 +83,7 @@
 			</select>
 			
 			<p class="addr" th:text="${siteInfo.address}" />
-			<div id="chartDiv">차트넣을거</div>
+			<div id="chartdiv"></div>
 
 			<div id="dataDiv">
 				<div id="main-content">
@@ -117,6 +117,10 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
+	<script src="/resources/js/core.js"></script>
+	<script src="/resources/js/charts.js"></script>
+	<script src="/resources/js/animated.js"></script>
+	<script src="/resources/js/charttest.js"></script>
 	<script src="/resources/js/site/asidebar.js"></script>
 	<script src="/resources/js/site/sitemain.js"></script>
 </th:block>
