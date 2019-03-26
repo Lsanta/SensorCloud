@@ -5,11 +5,11 @@ $(document).ready(function() {
 		$(this).addClass('pagination-active');
 	});
 	
-	$('.update').on('click', function() {
-		window.location.href = "modifymypage";
+	$('.update').click(function(){
+		window.location.href = "mypage/modifymypage";
 	});
 	
-	$(".mypage mpmodify-submit").on('click',function() {
+	$(".mpmodify-submit").on('click',function() {
 		
 		var passwd = $("#pass").val();
 		
@@ -30,11 +30,12 @@ $(document).ready(function() {
 			success : function(data) {
 				 if(data == "success")
 	                 alert("비밀번호 일치");
+				// window.location.href = "/main";
 	             
 			}
 		});
 		
 		
 	});
-	
 });
+	

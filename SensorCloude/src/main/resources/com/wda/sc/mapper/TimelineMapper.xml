@@ -5,7 +5,12 @@
 <mapper namespace="com.wda.sc.mapper.TimelineMapper">
 
 	<select id="getList" resultType="com.wda.sc.domain.timelineVO">
-		select timeline_n,user_id,content,substr(time,0,14) as time from timeline
+		select timeline.content,
+        substr(time,0,14) as time,
+        member.name
+from timeline
+       ,member
+where timeline.user_id = member.user_id
 	</select>
 
 	
