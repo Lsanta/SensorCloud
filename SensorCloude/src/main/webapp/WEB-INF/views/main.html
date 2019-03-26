@@ -28,11 +28,11 @@
           </tr>
         </thead>
         <tbody id="site">
-          <tr id="${site_id}" th:each="sitelist : ${sitelist}">
-            <td th:text="${sitelist.site_status}">status</td>
-            <td th:text="${sitelist.site_name}">status</td>
-            <td th:text="${sitelist.address}">status</td>
-            <td th:text="${sitelist.start_date}">status</td>
+          <tr th:each="sitelist : ${sitelist}">
+            <td th:text="${sitelist.site_status}"></td>
+            <td th:text="${sitelist.site_name}"></td>
+            <td th:text="${sitelist.address}"></td>
+            <td th:text="${sitelist.start_date}"></td>
 			<td id="sid" th:text="${sitelist.site_id}" style="display : none"></td>
          </tr>
         </tbody>
@@ -94,7 +94,7 @@
         </div>
         <div class="timeline" th:each="timelinelist : ${timelinelist}">
             <div class="timeline-header">
-                <h3 th:text="${timelinelist.user_id}">id</h3>
+                <h3 th:text="${timelinelist.name}">id</h3>
                 <h5 th:text="${timelinelist.time}">date</h5>
             </div>
             <p th:text="${timelinelist.content}">content</p>

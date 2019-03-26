@@ -5,15 +5,17 @@
 <mapper namespace="com.wda.sc.mapper.CheckboardMapper">
 
 	<select id="getList" resultType="com.wda.sc.domain.checkboardVO">
-		select check_board.user_id,
+select m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name from 
+(select check_board.user_id,
         check_board.title,
-        check_board.reg_date,
+        substr(check_board.reg_date,0,14) as reg_date,
         check_board.board_status,
         check_board.site_id,
-        site.address
+        site.site_name
 from check_board
        ,site
-where check_board.site_id = site.site_id
+where check_board.site_id = site.site_id) c,member m
+where c.user_id = m.user_id
 	</select>
 
 	
