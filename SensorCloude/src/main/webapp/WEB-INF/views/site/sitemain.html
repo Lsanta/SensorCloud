@@ -139,7 +139,7 @@
    	arr = [[${siteInfo}]];
     var site = arr[0].address;
     //var site = '대구 북구 복현로 35';
-    alert(site);
+
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
@@ -167,11 +167,11 @@ geocoder.addressSearch(site, function(result, status) {
         position: coords
     });
 
-    // 인포윈도우로 장소에 대한 설명을 표시합니다
+/*     // 인포윈도우로 장소에 대한 설명을 표시합니다
     var infowindow = new daum.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+        
     });
-    infowindow.open(map, marker);
+    infowindow.open(map, marker); */
 
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
     map.setCenter(coords);
