@@ -29,10 +29,15 @@
   </svg>
 		</a>
 			<h1 th:text="${siteInfo.site_name}"></h1>
+<<<<<<< HEAD
+			
+		<nav id="nav">
+=======
 			<span id="sid" th:text="${siteInfo.site_id}" style="display:none"></span>
 		<nav id="nav" th:each="alarmMember : ${alarmMember}">
+>>>>>>> 19cb9212db86f824ca0fcea0a3071568de149a27
 			<ul>
-				<li><a href="/site/sitealarm1">알림</a></li>
+				<li><a href="/site/sitealarm">알림</a></li>
 				<li><a href="#">수리내역</a></li>
 				<li><a href="#">센서추가</a></li>
 				<li style="line-height: 40px;"><a href="#">스크립트 다운로드</a></li>
@@ -69,7 +74,7 @@
 				C284.929,199.378,283.984,197.188,282.082,195.285z" /></g></svg>
 				</span></li>
 				
-			<div id="phonenumber" style="display: none">
+			<div id="phonenumber" style="display: none"  th:each="alarmMember : ${alarmMember}">
 				<span th:text="${alarmMember.name}"></span>
 				<span th:text="${alarmMember.tel}"></span>
 			</div>	
