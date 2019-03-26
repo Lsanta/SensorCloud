@@ -38,14 +38,22 @@ public class MyPageController {
 		return "mypage/modifymypage";
 	}
 	
+	@RequestMapping(value = "/modifymyinfo", method = RequestMethod.GET)
+	public String modifymyinfo(Locale locale, Model model) {
+		
+		return "mypage/modifymyinfo";
+	}
+	
+	
+	
 	@RequestMapping("mypageconfirmpasswd.do") 
 	@ResponseBody
 	public String MyPageConfirmPasswd(Model model,HttpSession session,  @RequestParam("password") String password) {
-		System.out.println("된다");
+		
 		
 		
 		String confirmid =(String)session.getAttribute("id");
-		System.out.println(confirmid);
+	
 		
 		ArrayList<memberVO> arr = new ArrayList<memberVO>();
 		arr = mypagemodifyservice.confirmpasswd(confirmid);
