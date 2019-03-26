@@ -21,7 +21,7 @@ public class SiteController {
 	
 	private SiteService siteservice;
 		
-	@RequestMapping(value = "siteadd", method = RequestMethod.GET)
+	@RequestMapping(value = "/siteadd", method = RequestMethod.GET)
 	public String siteadd(Locale locale, Model model) {
 	
 		return "site/siteadd";
