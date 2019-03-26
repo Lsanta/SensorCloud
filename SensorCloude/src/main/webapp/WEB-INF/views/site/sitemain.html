@@ -126,19 +126,23 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d"></script>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d&libraries=services,clusterer,drawing"></script>
 	<script src="/resources/js/core.js"></script>
 	<script src="/resources/js/charts.js"></script>
 	<script src="/resources/js/animated.js"></script>
 	<script src="/resources/js/charttest.js"></script>
 	
-	<!-- <script th:inline="javascript">
+	 <script th:inline="javascript">
+	 /*<![CDATA[*/
    	var arr = new Array();
-   	
+    
+   
+    
    	arr = [[${siteInfo}]];
-    var site = arr[0].address + " " + arr[0].site_name; -->
-<script>
+    var site = arr[0].address;
+    //var site = '대구 북구 복현로 35';
+    alert(site);
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
     center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -152,7 +156,7 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 var geocoder = new daum.maps.services.Geocoder();
 
 //주소로 좌표를 검색합니다
-geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
+geocoder.addressSearch(site, function(result, status) {
 
 // 정상적으로 검색이 완료됐으면 
  if (status === daum.maps.services.Status.OK) {
@@ -175,6 +179,7 @@ geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function
     map.setCenter(coords);
 } 
 });    
+/*]]>*/
 	</script>
 	<script src="/resources/js/site/asidebar.js"></script>
 	<script src="/resources/js/site/sitemain.js"></script>
