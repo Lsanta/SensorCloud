@@ -12,4 +12,7 @@
 		select * from site where site_id = #{site_id}
 	</select>
 	
+	<select id="getAlarm_member" resultType="com.wda.sc.domain.alarm_memberVO">
+		select name,tel from alarm_member where site_id = #{site_id}
+	</select>
 </mapper>
