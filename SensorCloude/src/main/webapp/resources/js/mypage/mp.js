@@ -28,10 +28,11 @@ $(document).ready(function() {
 			data : query,
 			url : "/mypage/mypageconfirmpasswd.do",
 			success : function(data) {
-				 if(data == "success")
+				 if(data == "success"){
 	                 alert("비밀번호 일치");
-				// window.location.href = "/main";
-	             
+				 
+				 window.location.href = "/mypage/modifymyinfo";
+				 }
 			}
 		});
 		
