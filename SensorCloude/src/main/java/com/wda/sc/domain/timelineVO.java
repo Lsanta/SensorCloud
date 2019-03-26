@@ -11,4 +11,5 @@ public class timelineVO {
 	private String user_id;
 	private String content;
 	private String time;
+	private String name; // member 테이블 join 컬럼
 }

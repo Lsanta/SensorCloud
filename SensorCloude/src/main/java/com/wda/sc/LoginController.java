@@ -2,6 +2,7 @@ package com.wda.sc;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.wda.sc.domain.memberVO;
 import com.wda.sc.service.LoginService;
@@ -18,6 +20,7 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
+@SessionAttributes("id")
 @RequestMapping("/login")
 public class LoginController {
 	
@@ -42,10 +45,10 @@ public class LoginController {
 	@RequestMapping("login.do") 
 	@ResponseBody
 	public String loginCheck(Model model,HttpSession session, @RequestParam String id, @RequestParam String password) {
-
+		
 		ArrayList<memberVO> arr = new ArrayList<memberVO>();
 		arr = loginservice.login(id);
-		
+		System.out.println(arr);
 		if(arr.size() != 0) {
 			if(arr.get(0).getPassword().equals(password)) {
 				model.addAttribute("id",arr.get(0).getUser_id());

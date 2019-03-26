@@ -33,6 +33,11 @@
     margin-top:3%;
     border: 1px solid #bcbcbc;
   }
+ /*  #the_count{
+  width:10%;
+  margin:0;
+  margin-right:0;
+  } */
 
 
   @media ( min-width: 1000px ) {
@@ -46,6 +51,7 @@
     float: left;
     }
     textarea {
+    	float:left;
         width:80%;
         height:55px;
       }
@@ -62,7 +68,11 @@
         margin-top:3%;
         border: 1px solid #bcbcbc;
       }
-    
+   #the_count{
+  width:10%;
+  margin:0;
+  margin-right:0;
+  } 
       
 }
     @media (min-width:701px) and (max-width:1000px) {
@@ -77,20 +87,19 @@
     }
 
     #textarea {
-        float: none;
+        float: left;
         width: 80%;
         height:50px;
       
       }
     #submit { 
-        top:18%;
-        position:fixed;
+         top:5.2%;
+  /*       position:fixed; */
         float:right;
-        width:10%;
-        height:8%;
-        margin-top:4.6%;
-        margin-right:3%;
-        margin-left:1%;
+        width:14%;
+        height:55px;
+       margin-right:0;
+        margin-left:0; 
     }
     #writing {
         width:68.5%;
@@ -98,7 +107,11 @@
         margin-top:3%;
         border: 1px solid #bcbcbc;
       }
-    
+    #the_count{
+  width:10%;
+  margin:0;
+  margin-right:0;
+  } 
    
   } 
   @media (max-width:700px) {
@@ -117,13 +130,12 @@
         float: none;
         width: 75%;
         height:50px;
-      
       }
     #submit { 
         top:5.2%;
   /*       position:fixed; */
         float:right;
-        width:14%;
+        width:16%;
         height:55px;
        margin-right:3%;
         margin-left:4%; 

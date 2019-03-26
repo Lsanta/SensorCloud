@@ -30,9 +30,11 @@
 		</a>
 			<h1 th:text="${siteInfo.site_name}"></h1>
 			
-		<nav id="nav" th:each="alarmMember : ${alarmMember}">
+		<nav id="nav">
+			<span id="sid" th:text="${siteInfo.site_id}" style="display:none"></span>
+		<nav id="nav">
 			<ul>
-				<li><a href="/site/sitealarm1">알림</a></li>
+				<li><a href="/site/sitealarm">알림</a></li>
 				<li><a href="#">수리내역</a></li>
 				<li><a href="#">센서추가</a></li>
 				<li style="line-height: 40px;"><a href="#">스크립트 다운로드</a></li>
@@ -69,7 +71,7 @@
 				C284.929,199.378,283.984,197.188,282.082,195.285z" /></g></svg>
 				</span></li>
 				
-			<div id="phonenumber" style="display: none">
+			<div id="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
 				<span th:text="${alarmMember.name}"></span>
 				<span th:text="${alarmMember.tel}"></span>
 			</div>	
@@ -116,7 +118,7 @@
 				</div>
 			</div>
 
-			<div id="mapDiv">지도넣을거</div>
+			<div id="map" style="width:100%;height:350px;"></div>
 
 		</article>
 	</div>
@@ -124,10 +126,12 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d"></script>
 	<script src="/resources/js/core.js"></script>
 	<script src="/resources/js/charts.js"></script>
 	<script src="/resources/js/animated.js"></script>
 	<script src="/resources/js/charttest.js"></script>
+	<script src="/resources/js/map.js"></script>
 	<script src="/resources/js/site/asidebar.js"></script>
 	<script src="/resources/js/site/sitemain.js"></script>
 </th:block>
