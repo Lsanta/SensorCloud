@@ -38,8 +38,6 @@ public class SiteController {
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));
 		
 		return "site/sitemain";
-		
-		
 	}
 	
 	
