@@ -77,14 +77,7 @@ public class SiteController {
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
 		
 		return "site/download";
-	}
-	
-//	@RequestMapping(value = "download", method = RequestMethod.GET)
-//	public String download(Locale locale, Model model) {
-//	
-//		return "site/download";
-//	}
-	
+	}	
 
 	@RequestMapping(value ="/siteadd", method = RequestMethod.POST)
 	public String siteadd(siteVO s) {
