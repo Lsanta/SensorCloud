@@ -20,6 +20,12 @@ import lombok.AllArgsConstructor;
 public class SiteController {
 	
 	private SiteService siteservice;
+	
+	@RequestMapping(value = "/address", method = RequestMethod.GET)
+	public String address(Locale locale, Model model) {
+	
+		return "site/address";
+	}
 		
 	@RequestMapping(value = "/siteadd", method = RequestMethod.GET)
 	public String siteadd(Locale locale, Model model) {
