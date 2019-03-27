@@ -27,30 +27,6 @@ public class SiteController {
 		return "site/siteadd";
 	}
 	
-	@RequestMapping(value = "sitealarm", method = RequestMethod.GET)
-	public String sitealarm(Locale locale, Model model) {
-	
-		return "site/sitealarm";
-	}
-	
-	@RequestMapping(value = "siterepair", method = RequestMethod.GET)
-	public String siterepair(Locale locale, Model model) {
-	
-		return "site/siterepair";
-	}
-	
-	@RequestMapping(value = "sensoradd", method = RequestMethod.GET)
-	public String sensoradd(Locale locale, Model model) {
-	
-		return "site/sensoradd";
-	}
-	
-	@RequestMapping(value = "download", method = RequestMethod.GET)
-	public String download(Locale locale, Model model) {
-	
-		return "site/download";
-	}
-	
 	@RequestMapping(value = "{site_id}", method = RequestMethod.GET)
 	public String siteclick(@PathVariable String site_id, Model model) {
 		System.out.println("현장 iD =" + site_id);
@@ -60,6 +36,50 @@ public class SiteController {
 		return "site/sitemain";
 	}
 	
+	
+	@RequestMapping(value = "{site_id}" + "/sitealarm", method = RequestMethod.GET)
+	public String sitealarm(@PathVariable String site_id, Model model) {
+		System.out.println("알람페이지");
+		model.addAttribute("siteInfo",siteservice.getSite(site_id));
+		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));
+		
+		return "site/sitealarm";
+	}
+		
+	@RequestMapping(value = "{site_id}" + "/siterepair", method = RequestMethod.GET)
+	public String siterepair(@PathVariable String site_id, Model model) {
+		System.out.println("수리내역");
+		model.addAttribute("siteInfo",siteservice.getSite(site_id));
+		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));
+		
+		return "site/siterepair";
+	}
+
+	@RequestMapping(value = "{site_id}" + "/sensoradd", method = RequestMethod.GET)
+	public String sensoradd(@PathVariable String site_id, Model model) {
+		System.out.println("센서추가");
+		model.addAttribute("siteInfo",siteservice.getSite(site_id));
+		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));
+		
+		return "site/sensoradd";
+	}
+	
+	@RequestMapping(value = "{site_id}" + "/download", method = RequestMethod.GET)
+	public String download(@PathVariable String site_id, Model model) {
+		System.out.println("스크립트다운로드");
+		model.addAttribute("siteInfo",siteservice.getSite(site_id));
+		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));
+		
+		return "site/download";
+	}
+	
+//	@RequestMapping(value = "download", method = RequestMethod.GET)
+//	public String download(Locale locale, Model model) {
+//	
+//		return "site/download";
+//	}
+	
+
 	@RequestMapping(value ="/siteadd", method = RequestMethod.POST)
 	public String siteadd(siteVO s) {
 			
