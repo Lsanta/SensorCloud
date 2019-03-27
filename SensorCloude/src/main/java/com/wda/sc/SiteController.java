@@ -55,8 +55,8 @@ public class SiteController {
 	@RequestMapping(value = "{site_id}" + "/siterepair", method = RequestMethod.GET)
 	public String siterepair(@PathVariable String site_id, Model model) {
 		System.out.println("수리내역");
-		model.addAttribute("siteInfo",siteservice.getSite(site_id));
-		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));
+		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
+		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));  //연락망
 		
 		return "site/siterepair";
 	}
@@ -64,8 +64,8 @@ public class SiteController {
 	@RequestMapping(value = "{site_id}" + "/sensoradd", method = RequestMethod.GET)
 	public String sensoradd(@PathVariable String site_id, Model model) {
 		System.out.println("센서추가");
-		model.addAttribute("siteInfo",siteservice.getSite(site_id));
-		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));
+		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
+		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
 		
 		return "site/sensoradd";
 	}
@@ -73,8 +73,8 @@ public class SiteController {
 	@RequestMapping(value = "{site_id}" + "/download", method = RequestMethod.GET)
 	public String download(@PathVariable String site_id, Model model) {
 		System.out.println("스크립트다운로드");
-		model.addAttribute("siteInfo",siteservice.getSite(site_id));
-		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));
+		model.addAttribute("siteInfo",siteservice.getSite(site_id)); //현장정보
+		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
 		
 		return "site/download";
 	}
