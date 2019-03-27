@@ -14,9 +14,18 @@ import lombok.AllArgsConstructor;
 public class TimelineServiceImplement implements TimelineService {
 
 	private TimelineMapper mapper;
-	
+
 	@Override
-	public ArrayList<timelineVO> getList(){
-		return mapper.getList();
+	public int submit(timelineVO timeline) {
+		// TODO Auto-generated method stub
+		return mapper.submit(timeline);
 	}
+
+	@Override
+	public ArrayList<timelineVO> getList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

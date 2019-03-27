@@ -72,7 +72,7 @@ public class LoginController {
 			return "login/login";
 		}
 		else if(checknum == 0) {
-			return "loginh/sign";
+			return "login/sign";
 		}
 		
 		return "login/sign";
