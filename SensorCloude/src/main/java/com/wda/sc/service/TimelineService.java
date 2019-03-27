@@ -7,4 +7,5 @@ import com.wda.sc.domain.timelineVO;
 public interface TimelineService {
 
 	public ArrayList<timelineVO> getList();
+	public int submit(timelineVO timeline);
 }

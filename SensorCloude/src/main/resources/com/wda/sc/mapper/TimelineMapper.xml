@@ -13,5 +13,9 @@ from timeline
 where timeline.user_id = member.user_id
 	</select>
 
+
+<insert id="timeline" parameterType="com.wda.sc.domain.timelineVO">
+		insert into TIMELINE(user_id,content) values(#{user_id},#{content})
+	</insert>
 	
 </mapper>

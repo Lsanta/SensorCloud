@@ -8,4 +8,7 @@
 		select password from MEMBER where user_id = #{user_id}
 	</select>
 	
+	
+	
+	
 </mapper>
