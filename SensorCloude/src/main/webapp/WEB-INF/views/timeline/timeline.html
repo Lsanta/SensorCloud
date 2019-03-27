@@ -13,7 +13,21 @@
 </th:block>
 
 <script>
-
+$(document).ready(function () {
+	$('#submit').click(function() {
+		var textarea  = $("#textarea").val();
+		alert(textarea);
+		
+	        	  $.ajax({
+  				    type : "POST",
+  				    dataType : 'text',
+  				    data : textarea,
+  				    url : "",
+  				    success : function(data) {
+  				  
+  				    }
+	          }
+	          }}}
 </script>
 
 <body>
