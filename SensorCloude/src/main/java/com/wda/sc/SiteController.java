@@ -28,19 +28,34 @@ public class SiteController {
 	@RequestMapping(value = "sitealarm", method = RequestMethod.GET)
 	public String sitealarm(Locale locale, Model model) {
 	
-		return "site/sitealarm1";
+		return "site/sitealarm";
+	}
+	
+	@RequestMapping(value = "siterepair", method = RequestMethod.GET)
+	public String siterepair(Locale locale, Model model) {
+	
+		return "site/siterepair";
+	}
+	
+	@RequestMapping(value = "sensoradd", method = RequestMethod.GET)
+	public String sensoradd(Locale locale, Model model) {
+	
+		return "site/sensoradd";
+	}
+	
+	@RequestMapping(value = "download", method = RequestMethod.GET)
+	public String download(Locale locale, Model model) {
+	
+		return "site/download";
 	}
 	
 	@RequestMapping(value = "{site_id}", method = RequestMethod.GET)
 	public String siteclick(@PathVariable String site_id, Model model) {
 		System.out.println("현장 iD =" + site_id);
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));
-		
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));
 		
 		return "site/sitemain";
-		
-		
 	}
 	
 	
