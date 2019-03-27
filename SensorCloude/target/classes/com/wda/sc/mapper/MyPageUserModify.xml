@@ -8,9 +8,8 @@
 		select password from MEMBER where user_id = #{user_id}
 	</select>
 	
-	
-	<update id="updateuserinfo" parameterType="com.wda.sc.domain.memberVO">
-	update MEMBER set userID = #{userID},
+	<update id="updateuserinfo" parameterType="com.wda.sc.domain.memberVO" >
+	update MEMBER set USER_ID = #{user_id},
     PASSWORD = #{password},
     PHONE = #{phone},
     NAME = #{name}
