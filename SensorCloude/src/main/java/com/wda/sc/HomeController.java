@@ -11,7 +11,7 @@ import com.wda.sc.service.MysensorService;
 import com.wda.sc.service.SiteService;
 
 import com.wda.sc.service.TimelineService;
-
+import com.wda.sc.service.UsermanageService;
 
 import lombok.AllArgsConstructor;
 
@@ -24,6 +24,7 @@ public class HomeController {
 	private TimelineService timelineservice;
 	private CheckboardService checkboardservice;
 	private MysensorService mysensorservice;
+	private UsermanageService usermanageservice;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -33,14 +34,7 @@ public class HomeController {
 	@RequestMapping("main")
 	public String main(Locale locale, Model model) {
 		model.addAttribute("sitelist",siteservice.getList());
-		model.addAttribute("timelinelist",timelineservice.getList());
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> 35ae4c352aa1f96f80fcefb9794157f9db0a61aa
->>>>>>> 185c5dae5376c84af45ae57b8ab1bb6473ccf8be
+		model.addAttribute("timelinelist",timelineservice.timedesc());
 		return "main";
 	}
 		
@@ -63,6 +57,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/manage", method = RequestMethod.GET)
 	public String manage(Locale locale, Model model) {
+		model.addAttribute("userlist",usermanageservice.getList());
 		return "manage/manage";
 	}
 	

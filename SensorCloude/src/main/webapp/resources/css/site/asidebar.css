@@ -100,7 +100,7 @@ article{
 	padding-bottom: 150px;
 }
 
-#phonenumber{
+.phonenumber{
 		position : relative;
 		top : -30px;
 		color : black;
@@ -110,7 +110,7 @@ article{
 @media (max-width: 1000px) {
 	h2{
   	font-size:2em;
-  }
+  	  }
   aside{
 		float:left;
 		width:95%;
@@ -168,4 +168,8 @@ article{
 		display : none;
 	}
 	
+	.mang{
+		position : relative;
+		top : 20px;
+	}
 }
