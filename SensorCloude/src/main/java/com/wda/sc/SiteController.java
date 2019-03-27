@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.wda.sc.domain.memberVO;
+import com.wda.sc.domain.siteVO;
 import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
@@ -38,6 +40,22 @@ public class SiteController {
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));
 		
 		return "site/sitemain";
+	}
+	
+	@RequestMapping(value ="/siteadd", method = RequestMethod.POST)
+	public String siteadd(siteVO s) {
+			
+		System.out.println(s);
+		int checknum = siteservice.siteadd(s);
+		
+		if(checknum == 1) {
+			return "site/sitelist";
+		}
+		else if(checknum == 0) {
+			return null;
+		}
+		
+		return "site/sitelist";
 	}
 	
 	
