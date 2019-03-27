@@ -9,6 +9,12 @@
 	</select>
 	
 	
-	
+	<update id="updateuserinfo" parameterType="com.wda.sc.domain.memberVO">
+	update MEMBER set userID = #{userID},
+    PASSWORD = #{password},
+    PHONE = #{phone},
+    NAME = #{name}
+    where user_id = #{user_id}
+</update>
 	
 </mapper>
