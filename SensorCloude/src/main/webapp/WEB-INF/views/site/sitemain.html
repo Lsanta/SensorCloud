@@ -33,9 +33,9 @@
 		<nav id="nav">
 			<ul>
 				<li><a href="/site/sitealarm">알림</a></li>
-				<li><a href="#">수리내역</a></li>
-				<li><a href="#">센서추가</a></li>
-				<li style="line-height: 40px;"><a href="#">스크립트 다운로드</a></li>
+				<li><a href="/site/siterepair">수리내역</a></li>
+				<li><a href="/site/sensoradd">센서추가</a></li>
+				<li style="line-height: 40px;"><a href="/site/download">스크립트 다운로드</a></li>
 				<li><span id="num">연락망</span> <span id="down"
 					style="display: inline"> <?xml version="1.0" encoding="iso-8859-1"?>
 						<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -139,7 +139,7 @@
    	arr = [[${siteInfo}]];
     var site = arr[0].address;
     //var site = '대구 북구 복현로 35';
-    alert(site);
+
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
@@ -167,11 +167,11 @@ geocoder.addressSearch(site, function(result, status) {
         position: coords
     });
 
-    // 인포윈도우로 장소에 대한 설명을 표시합니다
+/*     // 인포윈도우로 장소에 대한 설명을 표시합니다
     var infowindow = new daum.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+        
     });
-    infowindow.open(map, marker);
+    infowindow.open(map, marker); */
 
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
     map.setCenter(coords);
