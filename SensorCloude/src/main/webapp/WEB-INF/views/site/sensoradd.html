@@ -1,10 +1,164 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
- 해당 현장 센서 추가
-</body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{include/layout}">
+
+<th:block layout:fragment="page_head">
+	<title>센서 추가</title>
+</th:block>
+
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/asidebar.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/sensoradd.css">
+</th:block>
+
+<th:block layout:fragment="contents">
+		<aside class="aside" th:each="siteInfo : ${siteInfo}">
+	
+		<a> <svg version="1.1" id="nav-btn"
+				xmlns="http://www.w3.org/2000/svg"
+				xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				viewBox="0 0 512 512" enable-background="new 0 0 512 512"
+				xml:space="preserve">
+    <path id="list-view-icon"
+					d="M462,108.857H50V50h412V108.857z M462,167.714H50v58.857h412V167.714z M462,285.429H50v58.857h412
+      V285.429z M462,403.143H50V462h412V403.143z" />
+  </svg>
+		</a>
+			<h1 th:text="${siteInfo.site_name}"></h1>
+			<span id="sid" th:text="${siteInfo.site_id}" style="display:none"></span>
+			
+		<nav id="nav">
+			<ul>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair'" >수리내역</a></li>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensoradd'">센서추가</a></li>
+				<li style="line-height: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트 다운로드</a></li>
+				<li><span id="num">연락망</span> <span id="down"
+					style="display: inline"> <?xml version="1.0" encoding="iso-8859-1"?>
+						<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+						<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+							width="30px" height="30px" viewBox="0 0 284.929 284.929"
+							style="enable-background: new 0 0 284.929 284.929;"
+							xml:space="preserve">
+							<g>
+							<path
+								d="M282.082,76.511l-14.274-14.273c-1.902-1.906-4.093-2.856-6.57-2.856c-2.471,0-4.661,0.95-6.563,2.856L142.466,174.441
+				L30.262,62.241c-1.903-1.906-4.093-2.856-6.567-2.856c-2.475,0-4.665,0.95-6.567,2.856L2.856,76.515C0.95,78.417,0,80.607,0,83.082
+				c0,2.473,0.953,4.663,2.856,6.565l133.043,133.046c1.902,1.903,4.093,2.854,6.567,2.854s4.661-0.951,6.562-2.854L282.082,89.647
+				c1.902-1.903,2.847-4.093,2.847-6.565C284.929,80.607,283.984,78.417,282.082,76.511z" /></g>
+				</svg>
+				</span> 
+				<span id="up" style="display: none"> 
+				<?xml version="1.0" encoding="iso-8859-1"?>
+						<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+						<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+							width="30px" height="30px" viewBox="0 0 284.929 284.929"
+							style="enable-background: new 0 0 284.929 284.929;"
+							xml:space="preserve">
+			<g>
+							<path
+								d="M282.082,195.285L149.028,62.24c-1.901-1.903-4.088-2.856-6.562-2.856s-4.665,0.953-6.567,2.856L2.856,195.285
+				C0.95,197.191,0,199.378,0,201.853c0,2.474,0.953,4.664,2.856,6.566l14.272,14.271c1.903,1.903,4.093,2.854,6.567,2.854
+				c2.474,0,4.664-0.951,6.567-2.854l112.204-112.202l112.208,112.209c1.902,1.903,4.093,2.848,6.563,2.848
+				c2.478,0,4.668-0.951,6.57-2.848l14.274-14.277c1.902-1.902,2.847-4.093,2.847-6.566
+				C284.929,199.378,283.984,197.188,282.082,195.285z" /></g></svg>
+				</span></li>
+			<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
+				<span class="mang" th:text="${alarmMember.name}"></span>
+				<span class="mang" th:text="${alarmMember.tel}"></span>
+			</div>	
+		
+			</ul>
+		</nav>
+	</aside>
+
+	<div id="scroll">
+		<article>
+		   <div id = alldiv>
+
+
+      <div id="addsensor">
+         
+         <h2>센서 추가</h2>
+         
+         <div id="addsensortext">
+            
+
+            <p>센서종류</p>
+            <p>데이터 타입</p>
+            <p>전압</p>
+         </div>
+
+         <div id ="addsensorkinds">
+            <select>
+               <option value="Protractor
+               ">각도계</option>
+               <option value="Levelmeter">수평계</option>
+               <option value="crock">crack gauge</option>
+            </select>
+
+            <input type="number" id="sensorcount"
+            name="sensorcount" style="width:40px;"><br>
+            <select>
+               <option value="ieee4_1">ieee4</option>
+               <option value="ieee3_1">ieee3</option>
+               <option value="int_1">int</option>
+            </select>
+
+            <br>
+            <select>
+               <option value="5000mv">5000mv</option>
+               <option value="2500mv">2500mv</option>
+            </select>
+
+         </div>
+
+
+         <div id="portnumber">
+
+            <fieldset id ="fieldsetportnumber">
+               <legend>포트번호</legend>
+
+               <div id="portname">
+                  <p>통신포트</p>
+                  <p>전원포트</p>
+               </div>
+
+               <div id="portkinds">
+                  <input type="text" id="frontport" style="width:60px;" >
+                  <input type="text" id="backport" style="width:60px;" >
+                  <br>
+
+                  <select>
+                     <option value="ieee4_2">ieee4</option>
+                     <option value="ieee3_2">ieee3</option>
+                     <option value="int_2">int</option>
+                  </select>
+               </div>
+
+            </fieldset>
+
+            <div>
+            <button type="button">확인</button>
+            </div>
+         </div>
+
+
+      </div>
+
+
+      
+
+
+   </div>
+	</article>
+</div>
+</th:block>
+
+<th:block layout:fragment="page_js">
+	<script src="/resources/js/site/asidebar.js"></script>
+</th:block>
 </html>
