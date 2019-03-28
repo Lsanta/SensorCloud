@@ -4,19 +4,19 @@
 
 <mapper namespace="com.wda.sc.mapper.SiteMapper">
 
-	<select id="getList" resultType="com.wda.sc.domain.siteVO">
+	<select id="getList" resultType="com.wda.sc.domain.SiteVO">
 		select site_id,type_no,site_name,address,site_status,substr(start_date,0,14) as start_date from site
 	</select>
 
-	<select id="getSite" resultType="com.wda.sc.domain.siteVO">
+	<select id="getSite" resultType="com.wda.sc.domain.SiteVO">
 		select * from site where site_id = #{site_id}
 	</select>
 	
-	<select id="getAlarm_member" resultType="com.wda.sc.domain.alarm_memberVO">
+	<select id="getAlarm_member" resultType="com.wda.sc.domain.AlarmemberVO">
 		select name,tel from alarm_member where site_id = #{site_id}
 	</select>
 	
-	<insert id="siteadd" parameterType="com.wda.sc.domain.siteVO">
+	<insert id="siteadd" parameterType="com.wda.sc.domain.SiteVO">
 		insert into site(site_id,type_no,site_name,address,detail_address,start_date) values(#{site_id},#{type_no},#{site_name},#{address},#{detail_address},sysDate)
 	</insert>
 </mapper>

@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class alarmVO {
+public class AlarmVO {
 	private int alarm_no;
 	private String site_id;
 	private String alarm_content;

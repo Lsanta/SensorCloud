@@ -2,9 +2,9 @@ package com.wda.sc.mapper;
 
 import java.util.ArrayList;
 
-import com.wda.sc.domain.checkboardVO;
+import com.wda.sc.domain.CheckBoardVO;
 
 public interface CheckboardMapper {
 
-	public ArrayList<checkboardVO> getList();
+	public ArrayList<CheckBoardVO> getList();
 }

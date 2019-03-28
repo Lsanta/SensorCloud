@@ -2,11 +2,11 @@ package com.wda.sc.mapper;
 
 import java.util.ArrayList;
 
-import com.wda.sc.domain.timelineVO;
+import com.wda.sc.domain.TimelineVO;
 
 public interface TimelineMapper {
     
-	public ArrayList<timelineVO> timedesc();
-	public ArrayList<timelineVO> getList();
-	public int submit(timelineVO timeline);
+	public ArrayList<TimelineVO> timedesc();
+	public ArrayList<TimelineVO> getList();
+	public int submit(TimelineVO timeline);
 }

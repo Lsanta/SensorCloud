@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import com.wda.sc.domain.timelineVO;
+import com.wda.sc.domain.TimelineVO;
 import com.wda.sc.mapper.TimelineMapper;
 
 import lombok.AllArgsConstructor;
@@ -16,19 +16,19 @@ public class TimelineServiceImplement implements TimelineService {
 	private TimelineMapper mapper;
 
 	@Override
-	public int submit(timelineVO timeline) {
+	public int submit(TimelineVO timeline) {
 		// TODO Auto-generated method stub
 		return mapper.submit(timeline);
 	}
 
 	@Override
-	public ArrayList<timelineVO> getList() {
+	public ArrayList<TimelineVO> getList() {
 		// TODO Auto-generated method stub
 		return mapper.getList();
 	}
 	
 	@Override
-	public ArrayList<timelineVO> timedesc() {
+	public ArrayList<TimelineVO> timedesc() {
 		// TODO Auto-generated method stub
 		return mapper.timedesc();
 	}

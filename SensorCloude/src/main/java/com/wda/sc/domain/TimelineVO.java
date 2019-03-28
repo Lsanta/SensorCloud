@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class timelineVO {
+public class TimelineVO {
 	private String timeline_n;
 	private String user_id;
 	private String content;

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.wda.sc.domain.memberVO;
+import com.wda.sc.domain.MemberVO;
 import com.wda.sc.service.LoginService;
 
 import lombok.AllArgsConstructor;
@@ -46,7 +46,7 @@ public class LoginController {
 	@ResponseBody
 	public String loginCheck(Model model,HttpSession session, @RequestParam String id, @RequestParam String password) {
 		
-		ArrayList<memberVO> arr = new ArrayList<memberVO>();
+		ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
 		arr = loginservice.login(id);
 		System.out.println(arr);
 		if(arr.size() != 0) {
@@ -63,7 +63,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value ="/signup", method = RequestMethod.POST)
-	public String signup(memberVO m) {
+	public String signup(MemberVO m) {
 			
 		System.out.println(m);
 		int checknum = loginservice.signup(m);
@@ -81,7 +81,7 @@ public class LoginController {
 	 @RequestMapping("idFind.do")
 	 @ResponseBody
 	 public String idCheck(Model model, HttpSession session, @RequestParam String name,@RequestParam String tel) {
-		 ArrayList<memberVO> arr2 = new ArrayList<memberVO>();	 
+		 ArrayList<MemberVO> arr2 = new ArrayList<MemberVO>();	 
 		 arr2 = loginservice.idFind(name);
 		 
 		 System.out.println(arr2.get(0).getUser_id());

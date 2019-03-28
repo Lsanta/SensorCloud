@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import com.wda.sc.domain.mysensorVO;
+import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.mapper.MysensorMapper;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ public class MysensorServiceImplement implements MysensorService {
 	private MysensorMapper mapper;
 	
 	@Override
-	public ArrayList<mysensorVO> getList(){
+	public ArrayList<MysensorVO> getList(){
 		return mapper.getList();
 	}
 }

@@ -2,10 +2,10 @@ package com.wda.sc.mapper;
 
 import java.util.ArrayList;
 
-import com.wda.sc.domain.memberVO;
+import com.wda.sc.domain.MemberVO;
 
 public interface MyPageUserModify {
-	public ArrayList<memberVO> confirmpasswd(String confirmid);
+	public ArrayList<MemberVO> confirmpasswd(String confirmid);
 	
 	
 }

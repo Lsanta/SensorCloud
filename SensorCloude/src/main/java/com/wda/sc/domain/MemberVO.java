@@ -3,7 +3,7 @@ package com.wda.sc.domain;
 import lombok.Data;
 
 @Data
-public class memberVO {
+public class MemberVO {
 	private String user_id;
 	private String name;
 	private String password;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import com.wda.sc.domain.memberVO;
+import com.wda.sc.domain.MemberVO;
 import com.wda.sc.mapper.UsermanageMapper;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ public class UsermanageServiceImplement implements UsermanageService{
 	private UsermanageMapper mapper;
 	
 	@Override
-	public ArrayList<memberVO> getList(){
+	public ArrayList<MemberVO> getList(){
 		return mapper.getList();
 	}
 }

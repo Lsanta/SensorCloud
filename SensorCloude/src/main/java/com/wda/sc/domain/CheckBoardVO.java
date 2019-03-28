@@ -4,7 +4,7 @@ package com.wda.sc.domain;
 import lombok.Data;
 
 @Data
-public class checkboardVO {
+public class CheckBoardVO {
 	private int board_no;
 	private String user_id;
 	private String reg_date;

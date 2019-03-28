@@ -2,9 +2,9 @@ package com.wda.sc.mapper;
 
 import java.util.ArrayList;
 
-import com.wda.sc.domain.mysensorVO;
+import com.wda.sc.domain.MysensorVO;
 
 public interface MysensorMapper {
 
-	public ArrayList<mysensorVO> getList();
+	public ArrayList<MysensorVO> getList();
 }

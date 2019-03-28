@@ -4,17 +4,17 @@
 
 <mapper namespace="com.wda.sc.mapper.MyPageUserModify">
 
-	<select id="confirmpasswd" resultType="com.wda.sc.domain.memberVO">
+	<select id="confirmpasswd" resultType="com.wda.sc.domain.MemberVO">
 		select password from MEMBER where user_id = #{user_id}
 	</select>
 	
 	
-	<update id="updateuserinfo" parameterType="com.wda.sc.domain.memberVO">
-	update MEMBER set userID = #{userID},
-    PASSWORD = #{password},
-    PHONE = #{phone},
-    NAME = #{name}
-    where user_id = #{user_id}
-</update>
+	<update id="updateuserinfo" parameterType="com.wda.sc.domain.MemberVO">
+		update MEMBER set userID = #{userID},
+    	PASSWORD = #{password},
+    	PHONE = #{phone},
+   		NAME = #{name}
+    	where user_id = #{user_id}
+	</update>
 	
 </mapper>

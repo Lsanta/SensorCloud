@@ -5,7 +5,7 @@ package com.wda.sc.domain;
 import lombok.Data;
 
 @Data
-public class siteVO {
+public class SiteVO {
 	private String site_id;
 	private String type_no;
 	private String site_name;

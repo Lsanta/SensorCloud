@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.wda.sc.domain.timelineVO;
+import com.wda.sc.domain.TimelineVO;
 import com.wda.sc.service.TimelineService;
 
 import lombok.AllArgsConstructor;
@@ -20,9 +20,9 @@ public class TimelineController {
 	private TimelineService timelineservice;
 	
 	@RequestMapping(value ="submit", method = RequestMethod.POST)
-	public String submit(timelineVO m) {
+	public String submit(TimelineVO m) {
 		
-		ArrayList<timelineVO> arr = new ArrayList<timelineVO>();
+		ArrayList<TimelineVO> arr = new ArrayList<TimelineVO>();
 		System.out.println(m);
 		int checknum = timelineservice.submit(m);
 		

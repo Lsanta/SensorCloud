@@ -2,9 +2,9 @@ package com.wda.sc.service;
 
 import java.util.ArrayList;
 
-import com.wda.sc.domain.checkboardVO;
+import com.wda.sc.domain.CheckBoardVO;
 
 public interface CheckboardService {
 
-	public ArrayList<checkboardVO> getList();
+	public ArrayList<CheckBoardVO> getList();
 }

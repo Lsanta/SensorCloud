@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import com.wda.sc.domain.checkboardVO;
+import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.mapper.CheckboardMapper;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ public class CheckboardServiceImplement implements CheckboardService {
 	private CheckboardMapper mapper;
 	
 	@Override
-	public ArrayList<checkboardVO> getList(){
+	public ArrayList<CheckBoardVO> getList(){
 		return mapper.getList();
 	}
 }

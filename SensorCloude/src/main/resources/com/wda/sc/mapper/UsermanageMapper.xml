@@ -4,8 +4,8 @@
 
 <mapper namespace="com.wda.sc.mapper.UsermanageMapper">
 
-	<select id="getList" resultType="com.wda.sc.domain.memberVO">
-select user_id,name,phone,m_level from member order by m_level desc
+	<select id="getList" resultType="com.wda.sc.domain.MemberVO">
+		select user_id,name,phone,m_level from member order by m_level desc
 	</select>
 
 	

@@ -3,7 +3,7 @@ package com.wda.sc.domain;
 import lombok.Data;
 
 @Data
-public class mysensorVO {
+public class MysensorVO {
 	private String sensor_sn;
 	private String model_name;
 	private String sensor_kind;

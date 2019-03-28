@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class sensor_dataVO {
+public class SensorDataVO {
 	private int sensor_data_n;
 	private int sensor_info_n;
 	private String sensor_id;

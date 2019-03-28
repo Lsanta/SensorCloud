@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class scriptVO {
+public class ScriptVO {
 	private String script_id;
 	private String site_id;
 	private Date script_date;

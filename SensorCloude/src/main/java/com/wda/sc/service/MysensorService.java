@@ -2,9 +2,9 @@ package com.wda.sc.service;
 
 import java.util.ArrayList;
 
-import com.wda.sc.domain.mysensorVO;
+import com.wda.sc.domain.MysensorVO;
 
 public interface MysensorService {
 
-	public ArrayList<mysensorVO> getList();
+	public ArrayList<MysensorVO> getList();
 }

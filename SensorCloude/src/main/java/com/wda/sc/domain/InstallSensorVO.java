@@ -3,7 +3,7 @@ package com.wda.sc.domain;
 import lombok.Data;
 
 @Data
-public class install_sensorVO {
+public class InstallSensorVO {
 	private String sensor_id;
 	private String sensor_sn;
 	private String site_id;

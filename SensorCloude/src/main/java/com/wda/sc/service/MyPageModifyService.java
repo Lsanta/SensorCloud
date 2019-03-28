@@ -2,10 +2,10 @@ package com.wda.sc.service;
 
 import java.util.ArrayList;
 
-import com.wda.sc.domain.memberVO;
+import com.wda.sc.domain.MemberVO;
 
 public interface MyPageModifyService {
-	public ArrayList<memberVO> confirmpasswd(String confirmid);
+	public ArrayList<MemberVO> confirmpasswd(String confirmid);
 	
 	
 }

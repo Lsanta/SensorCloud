@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.wda.sc.domain.memberVO;
+import com.wda.sc.domain.MemberVO;
 import com.wda.sc.service.MyPageModifyService;
 
 import lombok.AllArgsConstructor;
@@ -55,7 +55,7 @@ public class MyPageController {
 		String confirmid =(String)session.getAttribute("id");
 	
 		
-		ArrayList<memberVO> arr = new ArrayList<memberVO>();
+		ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
 		arr = mypagemodifyservice.confirmpasswd(confirmid);
 			
 			if(arr.size() !=0) {

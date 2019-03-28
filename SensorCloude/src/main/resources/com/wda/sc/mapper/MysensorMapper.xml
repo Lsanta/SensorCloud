@@ -4,8 +4,8 @@
 
 <mapper namespace="com.wda.sc.mapper.MysensorMapper">
 
-	<select id="getList" resultType="com.wda.sc.domain.mysensorVO">
-	select * from my_sensor
+	<select id="getList" resultType="com.wda.sc.domain.MysensorVO">
+		select * from my_sensor
 	</select>
 
 	

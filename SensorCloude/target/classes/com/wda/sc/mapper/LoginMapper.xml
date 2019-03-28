@@ -4,15 +4,15 @@
 
 <mapper namespace="com.wda.sc.mapper.LoginMapper">
 
-	<select id="login" resultType="com.wda.sc.domain.memberVO">
+	<select id="login" resultType="com.wda.sc.domain.MemberVO">
 		select user_id,password from MEMBER where user_id = #{user_id}
 	</select>
 	
-	<insert id="signup" parameterType="com.wda.sc.domain.memberVO">
+	<insert id="signup" parameterType="com.wda.sc.domain.MemberVO">
 		insert into MEMBER(user_id,name,password,phone,email) values(#{user_id},#{name},#{password},#{phone},#{email})
 	</insert>
 	
-	<select id="idFind" resultType="com.wda.sc.domain.memberVO">
+	<select id="idFind" resultType="com.wda.sc.domain.MemberVO">
 		select * from MEMBER where name = #{name}
 	</select>
 	

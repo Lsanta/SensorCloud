@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.wda.sc.domain.memberVO;
-import com.wda.sc.domain.siteVO;
+import com.wda.sc.domain.MemberVO;
+import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
@@ -80,7 +80,7 @@ public class SiteController {
 	}	
 
 	@RequestMapping(value ="/siteadd", method = RequestMethod.POST)
-	public String siteadd(siteVO s) {
+	public String siteadd(SiteVO s) {
 			
 		System.out.println(s);
 		int checknum = siteservice.siteadd(s);
