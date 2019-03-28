@@ -1,41 +1,44 @@
-body{
-    background-color: purple;
+body {
+	background-color: purple;
 }
 
 .login-card {
-    width: 500px;
-  }
+	width: 500px;
+}
 
-  #btn1 {
-    padding : 20px;
-    margin-left : 20px;
-  }
+#btn1 {
+	padding: 20px;
+	margin-left: 20px;
+}
 
-  #tel{
-    width : 50%;
-    margin-left : 4.5%;
-  }
+#tel {
+	width: 50%;
+	margin-left: 4.5%;
+}
 
-  #name, #name2 {
-    width : 50%;
-    margin-left : 14%;
-  }
+#name, #name2 {
+	width: 50%;
+	margin-left: 14%;
+}
 
-  #email{
-    width : 50%;
-    margin-left : 11%;
-  }
+#email {
+	width: 50%;
+	margin-left: 11%;
+}
 
-  #ijn2 {
-    width : 50%;
-    margin-left : 20.7%;
-  }
+#ijn2 {
+	width: 50%;
+	margin-left: 20.7%;
+}
 
-  #btn2{
-    padding : 10px;
-    float : right;
-    margin-right : 148px;
-    width:60px;
-    font-size : 15px;
-    
-  }
+#btn2 {
+	padding: 10px;
+	float: right;
+	margin-right: 148px;
+	width: 60px;
+	font-size: 15px;
+}
+
+b {
+	font-size: 30px;
+}
