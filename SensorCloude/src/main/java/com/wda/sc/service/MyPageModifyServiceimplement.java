@@ -19,4 +19,10 @@ public class MyPageModifyServiceimplement implements MyPageModifyService {
 		// TODO Auto-generated method stub
 		return mapper.confirmpasswd(confirmid);
 	}
+	
+	@Override
+	public void updateuserinfo(memberVO vo) {
+		// TODO Auto-generated method stub
+		mapper.updateuserinfo(vo);
+	}
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.service.MyPageModifyService;
 
+
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -25,6 +26,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/mypage")
 public class MyPageController {
 
+	
 	private MyPageModifyService mypagemodifyservice;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -42,6 +44,25 @@ public class MyPageController {
 	public String modifymyinfo(Locale locale, Model model) {
 		
 		return "mypage/modifymyinfo";
+	}
+	
+	
+	
+	@RequestMapping(value = "/mypagemodifymyinfo", method = RequestMethod.POST)
+	@ResponseBody
+	public String mypagemodifymyinfo(Locale locale, Model model, memberVO vo) {
+		
+		
+		
+		System.out.println(vo.getPassword() + vo.getName()+ vo.getUser_id() + vo.getPhone());
+		
+		mypagemodifyservice.updateuserinfo(vo);
+		
+		System.out.println("asdasdasd");
+		
+		
+			return "success";
+		
 	}
 	
 	
