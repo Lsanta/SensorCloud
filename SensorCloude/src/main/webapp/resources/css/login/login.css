@@ -9,6 +9,9 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+#loginfail{
+	color : red;
+}
 .login-card {
   padding: 40px;
   width: 274px;
@@ -100,4 +103,4 @@ body {
   .login-card {
     margin-top:15%;
   }
-  }
+ }
