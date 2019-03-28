@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.wda.sc.domain.MemberVO;
-import com.wda.sc.mapper.MyPageUserModify;
+import com.wda.sc.mapper.MyPageMapper;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class MyPageModifyServiceimplement implements MyPageModifyService {
-	private MyPageUserModify mapper;
+public class MyPageServiceImplement implements MyPageService {
+	private MyPageMapper mapper;
 
 	@Override
 	public ArrayList<MemberVO> confirmpasswd(String confirmid) {
