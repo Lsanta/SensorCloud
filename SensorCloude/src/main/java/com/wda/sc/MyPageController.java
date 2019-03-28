@@ -50,7 +50,7 @@ public class MyPageController {
 	
 	@RequestMapping(value = "/mypagemodifymyinfo", method = RequestMethod.POST)
 	@ResponseBody
-	public String mypagemodifymyinfo(Locale locale, Model model, memberVO vo) {
+	public String mypagemodifymyinfo(Locale locale, Model model, MemberVO vo) {
 		
 		
 		

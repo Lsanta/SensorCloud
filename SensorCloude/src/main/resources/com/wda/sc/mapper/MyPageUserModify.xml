@@ -8,7 +8,6 @@
 		select password from MEMBER where user_id = #{user_id}
 	</select>
 	
-<<<<<<< HEAD
 	
 	<update id="updateuserinfo" parameterType="com.wda.sc.domain.MemberVO">
 		update MEMBER set userID = #{userID},
@@ -17,14 +16,13 @@
    		NAME = #{name}
     	where user_id = #{user_id}
 	</update>
-=======
-	<update id="updateuserinfo" parameterType="com.wda.sc.domain.memberVO" >
+	
+	<update id="updateuserinfo" parameterType="com.wda.sc.domain.MemberVO" >
 	update MEMBER set USER_ID = #{user_id},
     PASSWORD = #{password},
     PHONE = #{phone},
     NAME = #{name}
     where user_id = #{user_id}
 </update>
->>>>>>> d1b066d7dfe311c1ffccf4e0afb7e165c9676636
 	
 </mapper>

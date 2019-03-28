@@ -21,7 +21,7 @@ public class MyPageModifyServiceimplement implements MyPageModifyService {
 	}
 	
 	@Override
-	public void updateuserinfo(memberVO vo) {
+	public void updateuserinfo(MemberVO vo) {
 		// TODO Auto-generated method stub
 		mapper.updateuserinfo(vo);
 	}
