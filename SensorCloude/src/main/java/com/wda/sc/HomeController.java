@@ -1,12 +1,16 @@
 package com.wda.sc;
 
 import java.util.Locale;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.wda.sc.service.CheckboardService;
+import com.wda.sc.service.MyPageService;
 import com.wda.sc.service.MysensorService;
 import com.wda.sc.service.SiteService;
 
@@ -25,6 +29,7 @@ public class HomeController {
 	private CheckboardService checkboardservice;
 	private MysensorService mysensorservice;
 	private UsermanageService usermanageservice;
+	private MyPageService mypageservice;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -73,7 +78,13 @@ public class HomeController {
 		return "mysensor/mysensor";
 	}
 	
-	
-	
-	
+	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+	public String mypage(Locale locale, Model model,HttpSession session) {
+		
+		String id = (String)session.getAttribute("id");
+		System.out.println(mypageservice.getInfo(id));
+		model.addAttribute("userInfo",mypageservice.getInfo(id));
+		model.addAttribute("mychecklist",mypageservice.myList(id));
+		return "mypage/mypage";
+	}
 }
