@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.wda.sc.domain.MemberVO;
-import com.wda.sc.service.MyPageModifyService;
+import com.wda.sc.service.MyPageService;
 
 
 import lombok.AllArgsConstructor;
@@ -26,73 +26,63 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/mypage")
 public class MyPageController {
 
-	
-	private MyPageModifyService mypagemodifyservice;
-	
+
+	private MyPageService mypageservice;
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String mypage(Locale locale, Model model,HttpSession session) {
 		return "mypage/mypage";
 	}
-	
+
 	@RequestMapping(value = "/modifymypage", method = RequestMethod.GET)
 	public String modifymypage(Locale locale, Model model) {
-	
+
 		return "mypage/modifymypage";
 	}
-	
+
 	@RequestMapping(value = "/modifymyinfo", method = RequestMethod.GET)
 	public String modifymyinfo(Locale locale, Model model) {
-		
+
 		return "mypage/modifymyinfo";
 	}
-	
-	
-	
+
+
+
 	@RequestMapping(value = "/mypagemodifymyinfo", method = RequestMethod.POST)
 	@ResponseBody
 	public String mypagemodifymyinfo(Locale locale, Model model, MemberVO vo) {
-		
-		
-		
+
 		System.out.println(vo.getPassword() + vo.getName()+ vo.getUser_id() + vo.getPhone());
-		
-		mypagemodifyservice.updateuserinfo(vo);
-		
+
+		mypageservice.updateuserinfo(vo);
+
 		System.out.println("asdasdasd");
-		
-		
-			return "success";
-		
+
+
+		return "success";
+
 	}
-	
-	
-	
+
+
+
 	@RequestMapping("mypageconfirmpasswd.do") 
 	@ResponseBody
 	public String MyPageConfirmPasswd(Model model,HttpSession session,  @RequestParam("password") String password) {
-		
-		
-		
-		String confirmid =(String)session.getAttribute("id");
-	
-		
-		ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
-		arr = mypagemodifyservice.confirmpasswd(confirmid);
-			
-			if(arr.size() !=0) {
-				if(arr.get(0).getPassword().equals(password)) {
-					return "success";
-				}
-			}
-			return confirmid;
-			
-			
-			
-		
-				
-		
-	}
-	
 
-	
+		String confirmid =(String)session.getAttribute("id");
+
+		ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
+		arr = mypageservice.confirmpasswd(confirmid);
+
+		if(arr.size() !=0) {
+			if(arr.get(0).getPassword().equals(password)) {
+				return "success";
+			}
+		}
+		return confirmid;		
+
+	}
+
+
+
 }

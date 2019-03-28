@@ -2,27 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.wda.sc.mapper.MyPageUserModify">
+<mapper namespace="com.wda.sc.mapper.MyPageMapper">
 
 	<select id="confirmpasswd" resultType="com.wda.sc.domain.MemberVO">
 		select password from MEMBER where user_id = #{user_id}
 	</select>
 	
-	
 	<update id="updateuserinfo" parameterType="com.wda.sc.domain.MemberVO">
-		update MEMBER set userID = #{userID},
+		update MEMBER set USER_ID = #{user_id},
     	PASSWORD = #{password},
-    	PHONE = #{phone},
-   		NAME = #{name}
+   		PHONE = #{phone},
+   	 	NAME = #{name}
     	where user_id = #{user_id}
 	</update>
-	
-	<update id="updateuserinfo" parameterType="com.wda.sc.domain.MemberVO" >
-	update MEMBER set USER_ID = #{user_id},
-    PASSWORD = #{password},
-    PHONE = #{phone},
-    NAME = #{name}
-    where user_id = #{user_id}
-</update>
 	
 </mapper>
