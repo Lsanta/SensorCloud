@@ -1,135 +1,229 @@
 @charset "UTF-8";
 
-html,body {
-         width: 100%; height: 100%;
-         display:table;
-         margin:0 auto;
-      }
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
 
-      h2{
-         text-align: center;
-      }
+h2 {
+	text-align: center;
+}
 
-      p {
-         font-size: 23px;
-      }
+p {
+	font-size: 23px;
+}
 
-      #alldiv {
-         height: 100%;
-         width: 100%;
+span {
+	font-size: 1.7em;
+	margin-left: 10%;
+}
 
-         display: table-cell;
-         vertical-align: middle;
-         margin :0 auto;
-         
-      }
+select {
+	font-size: 20px;
+}
+
+#addsensor {
+	border: 1px solid black;
+	height: 580px;
+	margin-top: 5%;
+}
+
+.leftbox {
+	
+	width: 50%;
+	height: 70%;
+	display: inline-block;
+	margin-left: 5%;
+	position: relative;
+	float: left;
+}
+
+.rightbox {
+	
+	width: 44%;
+	height: 70%;
+	display: inline-block;
+	position: relative;
+	float: right;
+}
+
+#sensorcount {
+	padding: 2px;
+	width: 10%;
+	position: relative;
+	bottom: 6px;
+}
+
+.kinds {
+	height: 20%;
+	margin-top: 20%;
+}
+
+.dataType {
+	height: 20%;
+}
+
+.voltage {
+	height: 20%;
+}
+
+.kindSelect {
+	margin-left: 15%
+}
+
+.dataSelect {
+	margin-left: 11%;
+}
+
+.volSelect {
+	margin-left: 22.5%;
+}
+
+legend {
+	font-size: 1.7em;
+	margin-left: 5%;
+}
+
+.fieldsetportnumber {
+	width: 90%;
+	height: 60%;
+	margin-top: 20%;
+	margin-left: 5%;
+}
+
+#frontport, #backport {
+	width: 70px;
+	margin-left: 5%;
+	width: 15%;
+}
+
+.port1, .port2 {
+	margin-top: 10%;
+}
+
+.portSelect {
+	margin-left: 5%;
+}
+
+.nothink {
+	margin-left: 5%;
+}
+
+button {
+	background-color: white;
+	color: black;
+	border: 2px solid #555555;
+	font-size: 20px;
+	padding : 8px;
+	width : 15%;
+	float : right;
+	margin-right : 3%;
+}
+
+button:hover {
+	background-color: #555555;
+	color: white;
+}
 
 
-      #addsensor {
-         height:500px;
-         max-width: 750px;
-         min-width: 750px;
-         border:1px solid black;
-         margin:0 auto;
 
+@media screen and (min-width: 1001px) and (max-width: 1250px) {
+	span {
+		font-size: 1.5em;
+		margin-left: 5%;
+	}
+	.kindSelect {
+		margin-left: 8%
+	}
+	.dataSelect {
+		margin-left: 4%;
+	}
+	.volSelect {
+		margin-left: 15%;
+	}
+	#frontport, #backport {
+		width: 70px;
+		margin-left: 2%;
+		width: 15%;
+	}
+	select {
+		font-size: 15px;
+	}
+	#sensorcount {
+		bottom: 3px;
+	}
 
+}
 
-      }
+@media screen and (min-width: 701px) and (max-width: 1000px) {
+	span {
+		font-size: 1.3em;
+		margin-left: 2%;
+	}
+	select {
+		font-size: 14px;
+	}
+	.kindSelect {
+		margin-left: 8%
+	}
+	.dataSelect {
+		margin-left: 4%;
+	}
+	.volSelect {
+		margin-left: 15%;
+	}
+	#sensorcount {
+		padding: 0;
+		width: 10%;
+		position: relative;
+		bottom: 2px;
+	}
+	
+}
 
-      #addsensortext{
-         display: inline-block;
-         
-         height: 400px;
-         
-         float: left; width: 25%;
-
-         margin-left :20px;
-      }
-
-      #addsensorkinds {
-         display: inline-block;
-         
-         height: 400px;
-
-         margin: 0 auto;
-
-
-         
-         float: left; width: 25%;
-         
-      }
-
-      #addportnumber{
-
-         display: inline-block;
-         width:50%;
-         height: 400px;
-         margin: 0 auto;
-         text-align: center;
-         
-         float: left; 
-
-      } 
-
-      #sensorcount{
-         margin-top: 10px;
-      }
-      select {
-         margin-top:30px;
-         width: 100px;
-         height: 25px;
-      }
-      #portname{
-
-         display: inline-block;
-         width: 100px;
-         height: 400px;
-         text-align: center;
-         margin: 0 auto;
-         
-
-
-      }
-
-      #portnumber {
-         display: inline-block;
-         width: auto;
-         height: 400px;
-         text-align: center;
-         margin: 0 auto;
-         
-
-      }
-
-      #portkinds{
-         display: inline-block;
-         width: 150px;
-         height: auto;
-         text-align: center;
-         
-         margin top: 10px;
-         
-      }
-
-      #fieldsetportnumber {
-         display: inline-block;
-         width: auto;
-         height: 50%;
-         text-align: center;
-         margin:0 auto;
-         
-
-      }
-
-      button {
-         margin-top: 15px;
-         background-color: white;
-         color: black;
-         border: 2px solid #555555;
-         font-size: 20px;
-      }
-
-      button:hover {
-         background-color: #555555;
-         color: white;
-      }
+@media screen and (min-width: 0px) and (max-width: 700px) {
+	.leftbox {
+		width: 100%;
+		height: 40%;
+		margin-left: 0%;
+	}
+	.rightbox {
+		width: 100%;
+		height: 50%;
+	}
+	select{
+		font-size : 15px;
+	}
+	.kinds{
+		margin-top : 10%;
+	}
+	.kindSelect{
+		margin-left : 50px;
+	}
+	.dataSelect{
+		margin-left : 25px;
+	}
+	.volSelect{
+		margin-left : 100px;
+	}
+	.fieldsetportnumber {
+		margin-top : 5%;
+	}
+	#sensorcount {
+		padding: 0;
+		width: 10%;
+		position: relative;
+		bottom:3px;
+	}
+	.port1, .port2 {
+	margin-top: 2%;
+	}
+	
+	button{
+		width : 100%;
+		bottom :33px;
+		position : relative;
+		float : none;
+	}
+}

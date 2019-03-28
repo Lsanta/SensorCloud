@@ -77,85 +77,64 @@
 
 	<div id="scroll">
 		<article>
-		   <div id = alldiv>
-
-
-      <div id="addsensor">
+     
+     	 <div id="addsensor">
          
          <h2>센서 추가</h2>
          
-         <div id="addsensortext">
-            
-
-            <p>센서종류</p>
-            <p>데이터 타입</p>
-            <p>전압</p>
-         </div>
-
-         <div id ="addsensorkinds">
-            <select>
-               <option value="Protractor
-               ">각도계</option>
-               <option value="Levelmeter">수평계</option>
-               <option value="crock">crack gauge</option>
-            </select>
-
-            <input type="number" id="sensorcount"
-            name="sensorcount" style="width:40px;"><br>
-            <select>
-               <option value="ieee4_1">ieee4</option>
-               <option value="ieee3_1">ieee3</option>
-               <option value="int_1">int</option>
-            </select>
-
-            <br>
-            <select>
-               <option value="5000mv">5000mv</option>
-               <option value="2500mv">2500mv</option>
-            </select>
-
-         </div>
-
-
-         <div id="portnumber">
-
-            <fieldset id ="fieldsetportnumber">
+         <div class="leftbox">
+        	 <div class="kinds">
+        		 <span>센서종류</span>
+         			<select class="kindSelect">
+              		 	<option value="Protractor">각도계</option>
+               		 	<option value="Levelmeter">수평계</option>
+              		 	<option value="crㅁck">crack gauge</option>
+         			</select>
+         			<input type="number" id="sensorcount" name="sensorcount">
+           
+         	</div>
+         	<div class="dataType">
+         	 	<span>데이터타입</span>
+         	  	<select class="dataSelect">
+              		 <option value="ieee4_1">ieee4</option>
+              		 <option value="ieee3_1">ieee3</option>
+               		 <option value="int_1">int</option>
+            	</select>
+         	</div>
+         	<div class="voltage">
+         		<span>전압</span>
+         		<select class="volSelect">
+               		 <option value="5000mv">5000mv</option>
+              		 <option value="2500mv">2500mv</option>
+           		 </select>
+            </div>
+         
+		 </div>
+		 
+         <div class="rightbox">
+         	 <fieldset class ="fieldsetportnumber">
                <legend>포트번호</legend>
 
-               <div id="portname">
-                  <p>통신포트</p>
-                  <p>전원포트</p>
+               <div class="port1">
+                  <span>통신포트</span>
+                  <input type="text" id="frontport" />
+                  <span class="nothink">~</span>
+                  <input type="text" id="backport" />
                </div>
-
-               <div id="portkinds">
-                  <input type="text" id="frontport" style="width:60px;" >
-                  <input type="text" id="backport" style="width:60px;" >
-                  <br>
-
-                  <select>
-                     <option value="ieee4_2">ieee4</option>
-                     <option value="ieee3_2">ieee3</option>
-                     <option value="int_2">int</option>
-                  </select>
+               <div class="port2">
+                   <span>전원포트</span>
+				   <select class="portSelect">
+                     	<option value="ieee4_2">ieee4</option>
+                     	<option value="ieee3_2">ieee3</option>
+                     	<option value="int_2">int</option>
+                   </select>
                </div>
-
-            </fieldset>
-
-            <div>
-            <button type="button">확인</button>
-            </div>
-         </div>
-
-
-      </div>
-
-
-      
-
-
-   </div>
+             </fieldset>
+	     </div>
+		  	<button type="button">확인</button>
+		 </div> <!-- addsensor div 끝 -->
 	</article>
-</div>
+</div> <!-- 스크롤div 끝 -->
 </th:block>
 
 <th:block layout:fragment="page_js">
