@@ -1,9 +1,13 @@
 package com.wda.sc;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.Locale;
 
-import com.wda.sc.service.MyPageService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.wda.sc.service.CheckboardService;
 
 import lombok.AllArgsConstructor;
 
@@ -11,5 +15,11 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/checkboard")
 public class CheckboardCotroller {
-
+	private CheckboardService Checkboardservice;
+	
+	@RequestMapping(value = "checkadd", method = RequestMethod.GET)
+	public String address(Locale locale, Model model) {
+	
+		return "check/checkadd";
+	}
 }

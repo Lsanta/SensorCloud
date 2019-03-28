@@ -8,39 +8,65 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/check/checkadd.css">
+	<link rel="stylesheet" type="text/css"
+		href="/resources/css/check/checkadd.css">
 </th:block>
 
 <th:block layout:fragment="contents">
-	 <div id="container">
-      <div id="header">
-        <h1>점검이력</h1>
-        <hr size="2" noshade> 
-      </div>
-      <div id="content">
- 
-          <table id="write-form">
-          <tr>
-              <td>제목</td>
-              <td><input type="text" name="title" id="input"/></td>
-          </tr>
-          <tr>
-              <td colspan="2">
-                  <textarea name="content" rows="30" cols="100"></textarea>
-              </td>
-          </tr>
-          </table>
-          <div style="text-align: center; padding-bottom: 15px;">
-              <input type="submit" id="save" value="저장" />
-          </div>
-          
-      </div>
-      <div id="footer">
-      </div>
-    </div>
+	<s_guest> <!-- guestbook -->
+	<h2 id="guestbookBody" class="guestbook-title">점검이력</h2>
+	<div class="guestbook-wrap">
+		<s_guest_input_form>
+		<div class="guestbook-form">
+			<fieldset>
+				<legend class="sr-only">글쓰기</legend>
+				<s_guest_member> <s_guest_form>
+				<dl class="guestbook-guest">
+					<dt>
+						<label for="[##_guest_input_name_##]">제목</label>
+					</dt>
+					<dd>
+						<input type="text" name="[##_guest_input_name_##]"
+							id="[##_guest_input_name_##]" placeholder="제목" title="제목">
+					</dd>
+					<dt>
+						<label for="[##_guest_input_file_##]">파일경로</label>
+					</dt>
+					<dd>
+						<input type="text" name="[##_guest_input_password_##]"
+							id="[##_guest_input_password_##]" placeholder="파일경로">
+					</dd>
+					<dt>
+						<label for="[##_guest_input_file-btn_##]">사진첨부</label>
+					</dt>
+					<button type="button" class="file-btn"
+						onclick="[##_guest_onclick_submit_##]">
+						<i class="fa fa-send"></i>사진첨부
+					</button>
+				</dl>
+				</s_guest_form> </s_guest_member>
+				<dl class="guestbook-write">
+					<dt>
+						<label for="[##_guest_input_comment_##]">내용</label>
+					</dt>
+					<dd>
+						<textarea name="[##_guest_input_comment_##]"
+							id="[##_guest_input_comment_##]" placeholder="점검이력"
+							title="방명록 내용 이력"></textarea>
+					</dd>
+				</dl>
+				<button type="submit" class="reply-btn"
+					onclick="[##_guest_onclick_submit_##]">
+					<i class="fa fa-send"></i>저장
+				</button>
+			</fieldset>
+		</div>
+		</s_guest_input_form>
+	</div>
+	</s_guest>
 </th:block>
 
-<th:block layout:fragment="page_js" >
+<th:block layout:fragment="page_js">
 	<!-- 	<script src="/resources/js/site/checkadd.js"></script> -->
 </th:block>
 </html>
