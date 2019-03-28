@@ -22,39 +22,32 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@SessionAttributes("id")
 @RequestMapping("/mypage")
 public class MyPageController {
 
 	private MyPageService mypageservice;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String mypage(Locale locale, Model model,HttpSession session) {
-		return "mypage/mypage";
-	}
-
-	@RequestMapping(value = "/modifymypage", method = RequestMethod.GET)
-	public String modifymypage(Locale locale, Model model) {
-
+	@RequestMapping(value = "modifymypage", method = RequestMethod.GET)
+	public String modifymypage(Locale locale, Model model, HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		model.addAttribute("userInfo",mypageservice.getInfo(id));
 		return "mypage/modifymypage";
 	}
 
-	@RequestMapping(value = "/modifymyinfo", method = RequestMethod.GET)
-	public String modifymyinfo(Locale locale, Model model) {
-
+	@RequestMapping(value = "modifymyinfo", method = RequestMethod.GET)
+	public String modifymyinfo(Locale locale, Model model,HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		model.addAttribute("userInfo",mypageservice.getInfo(id));
 		return "mypage/modifymyinfo";
 	}
 
-	@RequestMapping(value = "/mypagemodifymyinfo", method = RequestMethod.POST)
+	@RequestMapping(value = "mypagemodifymyinfo", method = RequestMethod.POST)
 	@ResponseBody
 	public String mypagemodifymyinfo(Locale locale, Model model, MemberVO vo) {
 
 		System.out.println(vo.getPassword() + vo.getName()+ vo.getUser_id() + vo.getPhone());
 
 		mypageservice.updateuserinfo(vo);
-
-		System.out.println("asdasdasd");
-
 
 		return "success";
 

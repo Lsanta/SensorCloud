@@ -1,175 +1,178 @@
 @charset "UTF-8";
-*{
-	margin:0;
-	padding:0;
-	text-decoration:none;
-	list-style:none;
+
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	list-style: none;
 }
 
 html {
-	overflow : hidden;
+	overflow: hidden;
 }
-#nav-btn{
-  fill:white;
-  height:40px;
-  position:absolute;
-  right:10px;
-  top:7px;
-  display:none;
+
+#nav-btn {
+	fill: white;
+	height: 40px;
+	position: absolute;
+	right: 10px;
+	top: 7px;
+	display: none;
 }
 
 header {
-	border-bottom:#2b99ff 2px solid;
-	padding-bottom : 60px;
+	border-bottom: #2b99ff 2px solid;
+	padding-bottom: 60px;
 }
+
 body {
-  -webkit-font-smoothing: antialiased;
-  font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
- 
+	-webkit-font-smoothing: antialiased;
+	font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-aside{
-	position:fixed;
-	float:left;
-	width:205px;
-	padding-top:30px;
-	padding-left:0px;
-	top:140px;
-	bottom:0;
-	background-color:#474958;
-	z-index:50;
-    text-align : center;
+aside {
+	position: fixed;
+	float: left;
+	width: 205px;
+	padding-top: 30px;
+	padding-left: 0px;
+	top: 140px;
+	bottom: 0;
+	background-color: #474958;
+	z-index: 50;
+	text-align: center;
 }
 
-
-#nav ul{
-}
-
-#nav ul li{
-	line-height:100px;
-}
-
-#nav ul li a, #num{
-	color:#e3e2e2;
-    font-size : 40px;
-}
-
-#nav ul li a:hover, #num:hover{
-	color:#2b99ff;
-}
-
-#scroll{
-	
-    width: 100%;
-    height: 800px;
-    overflow: scroll;
-    overflow-x: hidden;
+#nav ul {
 	
 }
 
-h1{
-	font-family:Arial, Helvetica, sans-serif;
-	color:white;
-	margin-bottom:50px;
+#nav ul li {
+	line-height: 100px;
+}
+
+#nav ul li a, #num {
+	color: #e3e2e2;
+	font-size: 40px;
+}
+
+#nav ul li a:hover, #num:hover {
+	color: #2b99ff;
+}
+
+#scroll {
+	width: 100%;
+	height: 800px;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+h1 {
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+	margin-bottom: 50px;
 	font-size: 1.5em;
 }
 
-h2{
-	font-family:Arial, Helvetica, sans-serif;
-	font-size:2.4em;
-	font-weight:bold;
-	color:#474958;	
+h2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 2.4em;
+	font-weight: bold;
+	color: #474958;
 	-webkit-transition: font-size 0.3s;
 	-moz-transition: font-size 0.3s;
 	-o-transition: font-size 0.3s;
 	transition: font-size 0.3s;
 }
 
-article{
-	float:left;
-	
+article {
+	float: left;
 	margin-left: calc(230px + 9%);
 	margin-left: -moz-calc(230px + 9%);
 	margin-left: -webkit-calc(230px + 9%);
 	margin-right: 9%;
-	
-	width:calc(82% - 230px);
-	width:-moz-calc(82% - 230px);
-	width:-webkit-calc(82% - 230px);
-	
+	width: calc(82% - 230px);
+	width: -moz-calc(82% - 230px);
+	width: -webkit-calc(82% - 230px);
 	padding-bottom: 150px;
 }
 
-.phonenumber{
-		position : relative;
-		top : -30px;
-		color : black;
-		font-size : 18px;
+.phonenumber {
+	position: relative;
+	top: -30px;
+	color: black;
+	font-size: 18px;
 }
 
-@media (max-width: 1000px) {
-	h2{
-  	font-size:2em;
-  	  }
-  aside{
-		float:left;
-		width:95%;
-		padding-left: 5%;
-		position:relative;
-		float:left;
-		padding-top: 10px;
-		padding-bottom:10px;
-   	    top : 0px;
-	}
-	header{
-		padding-bottom : 30px;
-	}
- 	     
-    #nav ul li{
-	line-height:40px;
-	}
+.mang {
+	position: relative;
+	font-size: 18px;
+	margin-left: 0;
+}
 
-	#nav ul li a, #num{
-	color:#e3e2e2;
-  	font-size : 25px;
+#down, #up {
+	margin-left: 0;
+}
+
+#num {
+	margin-left: 0;
+}
+
+@media ( max-width : 1000px) {
+	h2 {
+		font-size: 2em;
 	}
-	
-  #nav-btn{
-    fill:white;
-    height:40px;
-    width:40px;
-    position:absolute;
-    right:7px;
-    top:7px;
-    display: block;
-    cursor: pointer;
-  }
-	h1{
+	aside {
+		float: left;
+		width: 95%;
+		padding-left: 5%;
+		position: relative;
+		float: left;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		top: 0px;
+	}
+	header {
+		padding-bottom: 30px;
+	}
+	#nav ul li {
+		line-height: 40px;
+	}
+	#nav ul li a, #num {
+		color: #e3e2e2;
+		font-size: 25px;
+	}
+	#nav-btn {
+		fill: white;
+		height: 40px;
+		width: 40px;
+		position: absolute;
+		right: 7px;
+		top: 7px;
+		display: block;
+		cursor: pointer;
+	}
+	h1 {
 		margin-bottom: 0px;
 	}
-	
-	article{
-		float:left;
-		width:90%;
+	article {
+		float: left;
+		width: 90%;
 		margin-left: 5%;
 		margin-right: 5%;
-		padding-top:50px;
+		padding-top: 50px;
 	}
-
 	html {
-	overflow : scroll;
+		overflow: scroll;
 	}
-	#scroll{
-		overflow : hidden;
-		height : 100%;
+	#scroll {
+		overflow: hidden;
+		height: 100%;
 	}
-	
 	#nav {
-		display : none;
+		display: none;
 	}
-	
-	.mang{
-		position : relative;
-		top : 20px;
+	.mang {
+		top: 20px;
 	}
 }

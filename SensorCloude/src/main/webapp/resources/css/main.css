@@ -1,5 +1,19 @@
 @charset "UTF-8";
 
+.status {
+	width : 15%;
+}
+
+.sname {
+	width : 20%;
+}
+
+.saddr{
+	width: 43%;
+}
+
+
+
 #main-container {
   width: 1000px;
   height: 750px;

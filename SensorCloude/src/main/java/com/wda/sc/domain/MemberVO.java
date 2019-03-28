@@ -10,4 +10,5 @@ public class MemberVO {
 	private String phone;
 	private String email;
 	private int m_level;
+	
 }

@@ -1,64 +1,68 @@
-body{
-    background-color: aqua; 
+body {
+	background-color: aqua;
 }
 
 .login-card {
-    width: 230px;
-  }
-
-  #btn1 {
-    padding : 10px;
-    font-size : 13px;
-    bottom : 0px;
-    float : right;
-    margin-right : 11%;
-  }
-
-  #hr {
-margin-top : 50px;
+	width: 230px;
 }
 
-  #tel{
-    width : 50%;
-    margin-left : 4.5%;
-   
-  }
+#btn1 {
+	padding: 10px;
+	font-size: 13px;
+	bottom: 0px;
+	float: right;
+	margin-right: 11%;
+}
 
-  #name {
-    width : 50%;
-    margin-left : 25%;
-  }
-  #name2{
-    width : 50%;
-    margin-left : 10%;
-  }
+#hr {
+	margin-top: 50px;
+}
 
-  #email{
-    width : 65%;
-    margin-left : 3%;
-  }
+#tel {
+	width: 50%;
+	margin-left: 4.5%;
+}
 
-  #btn2{
-    padding : 10px;
-    float : right;
-    margin-right : 110px;
-    width:60px;
-    font-size : 15px;
-    position: relative;
-    top : -20px;
-  }
+#name {
+	width: 50%;
+	margin-left: 25%;
+}
 
-  .ijn{
-    padding : 5px;
-    float : right;
-    position: relative;
-    top : -30px;
-    margin-right : 26px;
-   }
+#name2 {
+	width: 50%;
+	margin-left: 10%;
+}
 
-   #ijn2 {
-    width : 50%;
-    margin-left : 23.5%;
-    position: relative;
-    top : -40px;
-    }
+#email {
+	width: 65%;
+	margin-left: 3%;
+}
+
+#btn2 {
+	padding: 10px;
+	float: right;
+	margin-right: 110px;
+	width: 60px;
+	font-size: 15px;
+	position: relative;
+	top: -20px;
+}
+
+.ijn {
+	padding: 5px;
+	float: right;
+	position: relative;
+	top: -30px;
+	margin-right: 26px;
+}
+
+#ijn2 {
+	width: 50%;
+	margin-left: 23.5%;
+	position: relative;
+	top: -40px;
+}
+
+b {
+	font-size: 30px;
+}

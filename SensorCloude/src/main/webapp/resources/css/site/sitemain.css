@@ -15,10 +15,9 @@
 	border: 1px solid black;
 }
 
-#mapDiv {
-	margin-top: 50px;
-	height: 380px;
-	border: 1px solid black;
+#map{
+	width:100%;
+	height:350px;	
 }
 
 table {

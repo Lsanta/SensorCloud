@@ -13,7 +13,7 @@ h1{
    }
    
    p {
-   	margin-top : 20px;
+   	margin-bottom : 30px;
    }
    
    #radio_m {
@@ -23,41 +23,37 @@ h1{
    #add_scene {
       
       
-      width: 100%;
+      width: 80%;
       padding: 20px;
       margin-bottom: 10px;
       margin-left: 8%
    }
    
    body {
-   	font-size :1.3em;
+   	font-size :0.9em;
    }
 
 
    #addcontent {
       margin :0 auto;
-      width: 1200px;
-      heigh :200px;
+      width: 95%;
+     
       margin-bottom: 20px;
       border: 1px solid #bcbcbc;
 
    }
 
    #addcontent_left {
-      width: 30%;
-      
-      margin-left: 10%;
-      
-      box-sizing: border-box;
-      display: inline-block;
+      width: 25%;
+    margin-left: 10%;
+    box-sizing: border-box;
+    display: inline-block;
    }
 
    #addcontent_right {
-      width: 45%;
-      
-      box-sizing: border-box;
-      
-      display: inline-block;
+      width: 60%;
+    box-sizing: border-box;
+    display: inline-block;
 
    }
 
@@ -65,7 +61,7 @@ h1{
 
    #addnetwork {
 	margin :0 auto;
-      width: 1200px;
+      width: 95%;
       margin-bottom: 20px;
       border: 1px solid #bcbcbc;
       
@@ -73,31 +69,35 @@ h1{
 
    #addnetwork_left {
      margin-top:30px;
-      margin-left: 10%;
+      margin-left: 5%;
       margin-bottom: 60px;
       box-sizing: border-box;
-      display: inline-block
+      display: inline-block;
+      width:25%;
    }
 
 
    #addnetwork_right {
       
       margin: 0  auto;
-      margin-left: 13%;
+      margin-left: 10%;
       box-sizing: border-box;
-      
+      width:55%;
       display: inline-block;
    }
    
    #addnetwork_right1 {
    display: inline-block;
     box-sizing: border-box;
+    width:41%;
+    
+   
    }
    
    #addnetwork_right2 {
    display: inline-block;
     box-sizing: border-box;
-    margin-left: 20px;
+    width:50%;
    }
    
    
@@ -114,7 +114,7 @@ h1{
    }
    
    .addcontent_right_button {
-   		width :45px;
+   		width :35px;
    		height:33px;
    		margin-top:20px;
    }
@@ -135,7 +135,7 @@ h1{
 
    input[type=text] {
       
-      width: 400px;
+      width: 80%;
       padding: 8px 20px;
       margin-top: 20px;
       box-sizing: border-box;
@@ -158,3 +158,114 @@ h1{
       background-color: #555555;
       color: white;
    }
+   
+   
+   
+   
+   
+   @media screen and (max-width: 700px) {
+   
+
+  
+   #addcontent {
+     
+     
+      margin-bottom: 0;
+      height:300px;
+    	position :relative;
+
+   }
+   
+   
+   
+   
+   #addcontent_left {
+    position: relative;
+    bottom: 50px;
+    margin-left: 20px;
+    top: 20px;
+   
+   }
+
+   #addcontent_right {
+    position: relative;
+    top: 30px;
+ 
+
+   }
+   
+   p{
+      margin-bottom: 46px;
+   
+   }
+   
+   input[type=text]{
+   
+   
+   margin-top:30px;
+   
+   }
+   
+   h2 {
+   
+   	margin-left:0;
+  
+   }
+   
+   
+   
+   #add_scene {
+      
+      
+     
+      margin-bottom: 0;
+      margin-left: 0;
+      margin-top:20px;
+   }
+   
+   select {
+   	position:relative;
+   	left:30px;
+   }
+   
+   #addnetwork_right1 {
+
+    width:70%;
+    
+   
+   }
+   
+   #addnetwork {
+  
+    position: relative;
+    height: 250px;
+   
+   }
+   
+   #addnetwork_left {
+   
+    position: relative;
+    bottom: 220px;
+   
+   }
+   
+   #addnetwork_right {
+  
+    position: relative;
+    top: 23px;
+   
+   }
+   
+   #addnetwork_right2 {
+  
+    
+  
+    width: 100%;
+    position: relative;
+    bottom: 195px;
+   
+   }
+   }
+   
+   
+   
