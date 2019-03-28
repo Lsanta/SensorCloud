@@ -8,6 +8,16 @@ body {
   background-size: cover;
   font-family: 'Roboto', sans-serif;
 }
+.errorstr{
+   	color : red;
+}
+
+.end{
+	margin-top : 20px;
+}
+b{
+	font-size : 20px;
+}
 
 .login-card {
   padding: 40px;

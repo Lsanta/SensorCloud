@@ -7,11 +7,7 @@
     <link href="/resources/css/login/sign.css" rel="stylesheet" type="text/css"/>
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="  crossorigin="anonymous"></script>
-	<style>
-   		.errorstr{
-   			color : red;
-   		}
-   	</style>
+
     <script>
     	$(document).ready(function() {
     		$('#user').blur(function(){
@@ -37,7 +33,7 @@
 
 <body>
     <div class="login-card">
-        <center> <b style="font-size : 20px">회원가입</b> </center>             
+        <center> <b>회원가입</b> </center>             
       <br>
       <form method="post" action="/login/signup">
         아이디<input type="text" name="user_id" id="user" placeholder="UserId">
@@ -48,7 +44,7 @@
         이메일<input type="email" name="email" placeholder="yjc@ac.kr">
         휴대폰번호<input type="tel" id="phone" name="phone" placeholder="01012345678"> 
         <button type="button" class="ijn">인증번호 전송</button>
-        <input type="password" style="margin-top : 20px;" placeholder="인증번호">
+        <input type="password" class="end" placeholder="인증번호">
 
         <input type="submit" name="login" class="login login-submit" value="가입하기">
       </form>
