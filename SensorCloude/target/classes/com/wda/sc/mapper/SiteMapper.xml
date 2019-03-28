@@ -15,7 +15,7 @@
 	</select>
 	
 	<select id="getAlarm_member" resultType="com.wda.sc.domain.AlarmMemberVO">
-		select name,tel from alarm_member where site_id = #{site_id}
+		select name,tel,company from alarm_member where site_id = #{site_id}
 	</select>
 	
 	<insert id="siteadd" parameterType="com.wda.sc.domain.SiteVO">

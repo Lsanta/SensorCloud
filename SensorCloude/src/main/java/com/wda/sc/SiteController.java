@@ -34,10 +34,6 @@ public class SiteController {
 	}
 	
 
-	@RequestMapping(value = "sitealarm", method = RequestMethod.GET)
-	public String sitealarm(Locale locale, Model model) {
-		return "site/sitealarm";
-}
 	@RequestMapping(value = "{site_id}", method = RequestMethod.GET)
 	public String siteclick(@PathVariable String site_id, Model model) {
 		System.out.println("현장 iD =" + site_id);
@@ -53,6 +49,7 @@ public class SiteController {
 		System.out.println("알람페이지");
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));
+		model.addAttribute("alarm",siteservice.getAlarm(site_id)); //알람 내용 정보
 		
 		return "site/sitealarm";
 	}
