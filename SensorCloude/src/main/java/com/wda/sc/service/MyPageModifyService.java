@@ -7,5 +7,5 @@ import com.wda.sc.domain.memberVO;
 public interface MyPageModifyService {
 	public ArrayList<memberVO> confirmpasswd(String confirmid);
 	
-	
+	public void updateuserinfo(memberVO vo);
 }
