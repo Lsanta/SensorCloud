@@ -6,7 +6,7 @@ $(document).ready(function() {
 	});
 
 	$('.update').click(function() {
-		window.location.href = "mypage/modifymypage";
+		window.location.href = "/mypage/modifymypage";
 	});
 
 	$(".mpmodify-submit").on('click', function() {

@@ -4,6 +4,20 @@
 
 <mapper namespace="com.wda.sc.mapper.MyPageMapper">
 
+	<select id="getInfo" resultType="com.wda.sc.domain.MemberVO">
+		select * from member where user_id = #{user_id}
+	</select>
+	
+	<select id="myList" resultType="com.wda.sc.domain.CheckBoardVO">
+		select m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
+		from (select check_board.user_id, check_board.title,
+        	  substr(check_board.reg_date,0,14) as reg_date,
+        	  check_board.board_status,check_board.site_id, site.site_name
+			  from check_board,site
+			  where check_board.site_id = site.site_id) c,member m
+		where c.user_id = m.user_id and m.user_id = #{user_id}
+	</select>
+	
 	<select id="confirmpasswd" resultType="com.wda.sc.domain.MemberVO">
 		select password from MEMBER where user_id = #{user_id}
 	</select>

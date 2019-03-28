@@ -28,10 +28,12 @@
 			<div class="cell">
 				<img src="http://placehold.it/170x150" class="responsive-image">
 			</div>
-			<div class="name01">
-				<p class="n1">김개발[ admin ]</p>
-				<p class="n2">등급 5</p>
+			
+			<div class="name01" th:each="userInfo : ${userInfo}">
+				<p class="n1" th:text="${userInfo.name}"></p>
+				<p class="n2" th:text="등급 + ${userInfo.m_level}"></p>
 			</div>
+			
 			<div class="name02">
 				<input class="update" type="button" value="정보수정"> <input
 					class="up" type="button" value="승급요청">
@@ -40,29 +42,28 @@
 
 		<hr color="black" width=100%>
 		<div class="w2">
-			<div class="usermodify-card">
+			<div class="usermodify-card" th:each="userInfo : ${userInfo}">
 
-
-
-				<label>아이디</label> <br> <input type="text" name="modify_name" id="id"
-					placeholder="repair"><br><div id="inhere1"></div>
+				<label>아이디</label><br>
+				<input type="text" name="modify_name" id="id" th:value="${userInfo.user_id}" disabled><br>
+				<div id="inhere1"></div>
 				
 				<label>비밀번호</label><br>
-				<input type="password" name="modify_name" id="password"
-					placeholder="********"><br> <div id="inhere2"></div>
+				<input type="password" name="modify_name" id="password"><br> 
+				<div id="inhere2"></div>
 				
 				<label>비밀번호 확인</label><br>
-				<input type="password" name="modify_name" id="passwordconfirm"
-					placeholder="********"><br>  <div id="inhere3"></div>
+				<input type="password" name="modify_name" id="passwordconfirm"><br>
+				<div id="inhere3"></div>
 				
-				<label>이름</label> <input
-					type="text" name="name" id="modify_name" placeholder="이수리"> <br>
-						<div id="inhere4"></div>
+				<label>이름</label><br>
+				<input type="text" name="name" id="modify_name" th:value="${userInfo.name}"><br>
+				<div id="inhere4"></div>
 				
-				<label>휴대폰번호</label> <input type="text" name="modify_name"
-					id="phonenumber" placeholder="01012345678"><div id="inhere5"></div> <br> <br><br> 
-				<input type="submit" name="confirm-modify"
-					id="confirm-modify" class="confirm-modify" value="확인">
+				<label>휴대폰번호</label><br>
+				<input type="text" name="modify_name" id="phonenumber" th:value="${userInfo.phone}"><br>
+				<div id="inhere5"></div><br><br><br> 
+				<input type="submit" name="confirm-modify" id="confirm-modify" class="confirm-modify" value="확인">
 
 			</div>
 		</div>
