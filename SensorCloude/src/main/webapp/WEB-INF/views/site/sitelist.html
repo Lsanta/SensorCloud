@@ -21,15 +21,19 @@
 			<table>
 				<thead>
 					<tr>
-						<th scope="col">현재상태</th>
-						<th scope="col">현장이름</th>
-						<th scope="col">주소</th>
+						<th scope="col" style="width:8%;">현재상태</th>
+						<th scope="col" style="width:20%;">현장이름</th>
+						<th scope="col" style="width:43%;">주소</th>
 						<th scope="col">데이터갱신시간</th>
 					</tr>
 				</thead>
 				<tbody id="site">
 					<tr th:each="sitelist : ${sitelist}">
-						<td th:text="${sitelist.site_status}"></td>
+						 <td th:switch="${sitelist.site_status}">
+<img src="resources/img/gray.svg"  th:case="'0'">
+<img src="resources/img/green.svg" th:case="'1'">
+<img src="resources/img/red.svg"   th:case="'2'">
+</td>
 						<td th:text="${sitelist.site_name}"></td>
 						<td th:text="${sitelist.address}"></td>
 						<td th:text="${sitelist.start_date}"></td>
