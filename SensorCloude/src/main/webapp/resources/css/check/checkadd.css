@@ -1,13 +1,16 @@
 
 .guestbook-title {
-    padding:10px 20px; 
-    margin:10px 0 0 0;
+    width: 70%;
+    margin: 10px auto;
+    padding:10px 20px;
     font-weight:normal; 
     font-size:1.5em; 
     background:#2d2d2d; 
     color:#fff
 }
 .guestbook-wrap {
+    width: 70%;
+    margin: auto;
     padding:20px; 
     border:1px solid #ddd; 
     background:#fff
@@ -72,7 +75,7 @@
     width:100%; 
     margin-bottom:10px; 
     padding:10px 0; 
-    height:200px; 
+    height:500px; 
     border:1px solid #ddd; 
     background:#f9f9f9; 
     color:#999; 
@@ -83,12 +86,13 @@
     color:#111
 }
 .guestbook-form button {
-    display:block; 
-    width:100%; 
-    margin:10px 0 0 0; 
+    display:block;
+    float: right;
+    width:10%; 
+    margin:10px 0; 
     padding:10px 0; 
-    border:1px solid #ff7035; 
-    background:#ff8149; 
+    border:1px solid #8ecef8; 
+    background:#8ecef8; 
     color:#fff; 
     text-align:center;
 }
