@@ -26,7 +26,6 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/mypage")
 public class MyPageController {
 
-
 	private MyPageService mypageservice;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -46,8 +45,6 @@ public class MyPageController {
 		return "mypage/modifymyinfo";
 	}
 
-
-
 	@RequestMapping(value = "/mypagemodifymyinfo", method = RequestMethod.POST)
 	@ResponseBody
 	public String mypagemodifymyinfo(Locale locale, Model model, MemberVO vo) {
@@ -62,8 +59,6 @@ public class MyPageController {
 		return "success";
 
 	}
-
-
 
 	@RequestMapping("mypageconfirmpasswd.do") 
 	@ResponseBody
