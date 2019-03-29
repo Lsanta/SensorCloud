@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.SiteService;
@@ -98,5 +100,27 @@ public class SiteController {
 		return "site/sitelist";
 	}
 	
+	@RequestMapping(value = "{site_id}" + "/sitealarm/add", method = RequestMethod.GET)
+	public String AlarmMemberadd(@PathVariable String site_id) {
+		
+		return "site/alarmadd";
+	}
 	
+	
+	//팝업창에서 Insert
+	@RequestMapping(value ="alarmadd.do")
+	@ResponseBody
+	public String alarmadd(AlarmMemberVO vo) {
+		//연락망 추가 폼을 이용한 추가
+		
+		int a = siteservice.insertAlarmMember(vo);
+		
+		if( a == 0) {
+			return "false";
+		} else if( a == 1){
+			return "success";
+		}
+		
+		return "false";
+	}
 }

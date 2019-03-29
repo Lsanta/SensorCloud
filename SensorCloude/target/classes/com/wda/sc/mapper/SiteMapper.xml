@@ -38,4 +38,8 @@
 	<select id="getAlarm" resultType="com.wda.sc.domain.AlarmVO">
 		select * from alarm where site_id = #{site_id}
 	</select>
+	
+	<insert id="insertAlarmMember" parameterType="com.wda.sc.domain.AlarmMemberVO">
+		insert into alarm_member(alarm_m_no,site_id,tel,name,company) values('4', #{site_id},#{tel},#{name},#{company})
+	</insert>
 </mapper>
