@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" href="/resources/css/mypage/levelup.css">
+</head>
+
+<body>
+	<div id="main">
+		<div id="title">
+			<center>
+				<h2>승급요청</h2>
+			</center>
+		</div>
+
+		<div id="content">
+			<div id="now-level" th:each="userInfo : ${userInfo}">
+				<p th:text="현재  + ${userInfo.name}"></p>
+			</div>
+
+			<div id="next-level">
+				<select>
+					<option>1등급</option>
+					<option>2등급</option>
+					<option>3등급</option>
+					<option>4등급</option>
+					<option>5등급</option>
+				</select>
+				<p>으로 승급 요청 하시겠습니까?</p>
+			</div>
+		</div>
+
+
+		<div id="submit">
+			<input type="submit" id="ok" value="확인" />
+		</div>
+	</div>
+</body>
+</html>

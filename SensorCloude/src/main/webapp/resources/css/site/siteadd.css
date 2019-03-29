@@ -1,274 +1,191 @@
 @charset "UTF-8";
+
 html {
 	width: 70%;
 	margin: 0 auto;
 }
-h1{
-      text-align: center;
-      padding-top:35px; 
-   }
 
-   h2 {
-      
-      padding: 20px;
-      margin-bottom: 10px;
-      margin-left: 8%
-   }
-   
-   p {
-   	margin-bottom : 30px;
-   }
-   
-   #radio_m {
-   		margin-left : 60px;
-   }
+h1 {
+	text-align: center;
+	padding-top: 35px;
+}
 
-   #add_scene {
-      
-      
-      width: 80%;
-      padding: 20px;
-      margin-bottom: 10px;
-      margin-left: 8%
-   }
-   
-   body {
-   	font-size :0.9em;
-   }
+h2 {
+	padding: 20px;
+	margin-bottom: 10px;
+	margin-left: 8%
+}
 
+p {
+	margin-bottom: 30px;
+}
 
-   #addcontent {
-      margin :0 auto;
-      width: 95%;
-     
-      margin-bottom: 20px;
-      border: 1px solid #bcbcbc;
+#radio_m {
+	margin-left: 60px;
+}
 
-   }
+#add_scene {
+	width: 80%;
+	padding: 20px;
+	margin-bottom: 10px;
+	margin-left: 8%
+}
 
-   #addcontent_left {
-      width: 25%;
-    margin-left: 10%;
-    box-sizing: border-box;
-    display: inline-block;
-   }
+body {
+	font-size: 0.9em;
+}
 
-   #addcontent_right {
-      width: 60%;
-    box-sizing: border-box;
-    display: inline-block;
+#addcontent {
+	margin: 0 auto;
+	width: 95%;
+	margin-bottom: 20px;
+	border: 1px solid #bcbcbc;
+}
 
-   }
+#addcontent_left {
+	width: 25%;
+	margin-left: 10%;
+	box-sizing: border-box;
+	display: inline-block;
+}
 
+#addcontent_right {
+	width: 60%;
+	box-sizing: border-box;
+	display: inline-block;
+}
 
+#addnetwork {
+	margin: 0 auto;
+	width: 95%;
+	margin-bottom: 20px;
+	border: 1px solid #bcbcbc;
+}
 
-   #addnetwork {
-	margin :0 auto;
-      width: 95%;
-      margin-bottom: 20px;
-      border: 1px solid #bcbcbc;
-      
-   }    
+#addnetwork_left {
+	margin-top: 30px;
+	margin-left: 5%;
+	margin-bottom: 60px;
+	box-sizing: border-box;
+	display: inline-block;
+	width: 25%;
+}
 
-   #addnetwork_left {
-     margin-top:30px;
-      margin-left: 5%;
-      margin-bottom: 60px;
-      box-sizing: border-box;
-      display: inline-block;
-      width:25%;
-   }
+#addnetwork_right {
+	margin: 0 auto;
+	margin-left: 10%;
+	box-sizing: border-box;
+	width: 55%;
+	display: inline-block;
+}
 
+#addnetwork_right1 {
+	display: inline-block;
+	box-sizing: border-box;
+	width: 41%;
+}
 
-   #addnetwork_right {
-      
-      margin: 0  auto;
-      margin-left: 10%;
-      box-sizing: border-box;
-      width:55%;
-      display: inline-block;
-   }
-   
-   #addnetwork_right1 {
-   display: inline-block;
-    box-sizing: border-box;
-    width:41%;
-    
-   
-   }
-   
-   #addnetwork_right2 {
-   display: inline-block;
-    box-sizing: border-box;
-    width:50%;
-   }
-   
-   
+#addnetwork_right2 {
+	display: inline-block;
+	box-sizing: border-box;
+	width: 50%;
+}
 
-   #submit {
-      
-      
-      margin: auto;
+#submit {
+	margin: auto;
+	text-align: center;
+	width: 50%;
+}
 
-      text-align: center;
-      width: 50%;
-      
+.addcontent_right_button {
+	width: 35px;
+	height: 33px;
+	margin-top: 20px;
+}
 
-   }
-   
-   .addcontent_right_button {
-   		width :35px;
-   		height:33px;
-   		margin-top:20px;
-   }
-   
+input[type=text]:focus {
+	border: 3px solid #555;
+}
 
-   input[type=text]:focus {
-      border: 3px solid #555;
-   }
-   
-  
-   
-   input.addnetwork_right_input {
-   		width : 200px;
-   }
-   
-   
-   
+input.addnetwork_right_input {
+	width: 200px;
+}
 
-   input[type=text] {
-      
-      width: 80%;
-      padding: 8px 20px;
-      margin-top: 20px;
-      box-sizing: border-box;
-      border: 3px solid #ccc;
-      -webkit-transition: 0.5s;
-      transition: 0.5s;
-      outline: none;
-      
-      
-   }
+input[type=text] {
+	width: 80%;
+	padding: 8px 20px;
+	margin-top: 20px;
+	box-sizing: border-box;
+	border: 3px solid #ccc;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	outline: none;
+}
 
-   button {
-      background-color: white;
-      color: black;
-      border: 2px solid #555555;
-      font-size: 25px;
-   }
+button {
+	background-color: white;
+	color: black;
+	border: 2px solid #555555;
+	font-size: 25px;
+}
 
-   button:hover {
-      background-color: #555555;
-      color: white;
-   }
-   
-   
-   
-   
-   
-   @media screen and (max-width: 700px) {
-   
+button:hover {
+	background-color: #555555;
+	color: white;
+}
 
-  
-   #addcontent {
-     
-     
-      margin-bottom: 0;
-      height:300px;
-    	position :relative;
-
-   }
-   
-   
-   
-   
-   #addcontent_left {
-    position: relative;
-    bottom: 50px;
-    margin-left: 20px;
-    top: 20px;
-   
-   }
-
-   #addcontent_right {
-    position: relative;
-    top: 30px;
- 
-
-   }
-   
-   p{
-      margin-bottom: 46px;
-   
-   }
-   
-   input[type=text]{
-   
-   
-   margin-top:30px;
-   
-   }
-   
-   h2 {
-   
-   	margin-left:0;
-  
-   }
-   
-   
-   
-   #add_scene {
-      
-      
-     
-      margin-bottom: 0;
-      margin-left: 0;
-      margin-top:20px;
-   }
-   
-   select {
-   	position:relative;
-   	left:30px;
-   }
-   
-   #addnetwork_right1 {
-
-    width:70%;
-    
-   
-   }
-   
-   #addnetwork {
-  
-    position: relative;
-    height: 250px;
-   
-   }
-   
-   #addnetwork_left {
-   
-    position: relative;
-    bottom: 220px;
-   
-   }
-   
-   #addnetwork_right {
-  
-    position: relative;
-    top: 23px;
-   
-   }
-   
-   #addnetwork_right2 {
-  
-    
-  
-    width: 100%;
-    position: relative;
-    bottom: 195px;
-   
-   }
-   }
-   
-   
-   
+@media screen and (max-width: 700px) {
+	#addcontent {
+		margin-bottom: 0;
+		height: 300px;
+		position: relative;
+	}
+	#addcontent_left {
+		position: relative;
+		bottom: 50px;
+		margin-left: 20px;
+		top: 20px;
+	}
+	#addcontent_right {
+		position: relative;
+		top: 30px;
+	}
+	p {
+		margin-bottom: 46px;
+	}
+	input[type=text] {
+		margin-top: 30px;
+	}
+	h2 {
+		margin-left: 0;
+	}
+	#add_scene {
+		margin-bottom: 0;
+		margin-left: 0;
+		margin-top: 20px;
+	}
+	select {
+		position: relative;
+		left: 30px;
+	}
+	#addnetwork_right1 {
+		width: 70%;
+	}
+	#addnetwork {
+		position: relative;
+		height: 250px;
+	}
+	#addnetwork_left {
+		position: relative;
+		bottom: 220px;
+	}
+	#addnetwork_right {
+		position: relative;
+		top: 23px;
+	}
+	#addnetwork_right2 {
+		width: 100%;
+		position: relative;
+		bottom: 195px;
+	}
+}
