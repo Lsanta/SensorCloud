@@ -14,7 +14,7 @@
 
 <th:block layout:fragment="contents">
 		<aside class="aside" th:each="siteInfo : ${siteInfo}">
-	
+		
 		<a> <svg version="1.1" id="nav-btn"
 				xmlns="http://www.w3.org/2000/svg"
 				xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -52,7 +52,7 @@
 		</nav>
 	</aside>
 	
-	<div id="scroll">
+	<div id="scroll" >
 		<article>
 		
 			<div id="container">
@@ -64,42 +64,28 @@
 								<thead>
 									<tr>
 										<th>전화번호</th>
+										<th>회사</th>
 										<th>이름</th>
+										<th><input type="checkbox" name="checkAll"></th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>01012345678</td>
-										<td>김개발</td>
+									<tr th:each="alarmMember : ${alarmMember}">
+										<td th:text="${alarmMember.tel}"></td>
+										<td th:text="${alarmMember.company}"></td>
+										<td th:text="${alarmMember.name}"></td>
+										<td><input type="checkbox" name="selected"></td>
 									</tr>
-									<tr>
-										<td>01055421556</td>
-										<td>이수리</td>
-									</tr>
-									<tr>
-										<td>ㅇ</td>
-										<td>ㅇ</td>
-									</tr>
-									<tr>
-										<td>ㅇ</td>
-										<td>ㅇ</td>
-									</tr>
-									<tr>
-										<td>ㅇ</td>
-										<td>ㅇ</td>
-									</tr>
-
 								</tbody>
 							</table>
 						</div>
 					</div>
-					<button id="plus-btn" type="submit">
+					<button id="plus-btn" type="button">
 						<img id="plus-img" src="/resources/img/plus.png">
 					</button>
 				</div>
 				<div id="sidebar">
-					<textarea name="textarea" id="textarea" maxlength="300"
-						placeholder="문자내용" autofocus></textarea>
+					<textarea name="textarea" id="textarea" maxlength="300" placeholder="문자내용" autofocus></textarea>
 					<button id="submit">전송</button>
 					<div class="scroll-table2">
 						<div>
@@ -108,34 +94,18 @@
 									<tr>
 										<th>날짜</th>
 										<th>내용</th>
+										<th>보낸이</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>2019-1-1</td>
-										<td>내용</td>
-									</tr>
-									<tr>
-										<td>2019-1-1</td>
-										<td>내용</td>
-									<tr>
-										<td>2019-1-1</td>
-										<td>내용</td>
-									</tr>
-									<tr>
-										<td>2019-1-1</td>
-										<td>내용</td>
-									</tr>
-									<tr>
-										<td>2019-1-1</td>
-										<td>내용</td>
-									</tr>
-									<tr>
-										<td>2019-1-1</td>
-										<td>내용</td>
+									<tr th:each="alarm : ${alarm}">
+										<td th:text="${alarm.alarm_time}"></td>
+										<td th:text="${alarm.alarm_content}"></td>
+										<td th:text="${alarm.send_user}"></td>
 									</tr>
 								</tbody>
 							</table>
+							
 						</div>
 					</div>
 				</div>
@@ -146,7 +116,7 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
-	
+	<script src="/resources/js/site/sitealarm.js"></script>
 	<script src="/resources/js/site/asidebar.js"></script>
 </th:block>
 </html>
