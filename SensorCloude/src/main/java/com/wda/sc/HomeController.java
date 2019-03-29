@@ -54,30 +54,6 @@ public class HomeController {
 		return "check/check";
 	}
 
-	@RequestMapping(value = "/sitelist", method = RequestMethod.GET)
-	public String sitelist(Locale locale, Model model) {
-		
-		Paging page = new Paging();
-
-		ArrayList<Integer> arr = new ArrayList<Integer>();
-
-		page.setTotalNum(siteservice.getPageNum());
-		int pageNum = page.getTotalNum()/page.getOnePageBoard();
-
-		for(int i = 0; i < pageNum; i ++) {
-			arr.add(i+1);
-		}
-
-		page.setEndnum(11);
-		page.setStartnum(page.getEndnum()-10);
-
-		model.addAttribute("content",siteservice.getContent(page));
-		model.addAttribute("pageNum",arr);
-		model.addAttribute("sitelist",siteservice.getList());
-		return "site/sitelist";
-
-	}
-
 	@RequestMapping(value = "/sitelist"+"{num}", method = RequestMethod.GET)
 	public String pageList(@PathVariable String num, Model model) {
 		System.out.println("page");

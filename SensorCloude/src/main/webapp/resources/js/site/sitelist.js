@@ -14,20 +14,33 @@ $(document).on("click", "#site tr" , function(){
 $(document).ready(function() {
 	var num = 0;
 	
+	var newURL =  window.location.pathname;
+	
+	console.log(newURL.substring(9,10));
+	if(newURL.substring(9,10) != null){
+		$("#"+newURL.substring(9,10)+"").addClass('pagination-active');
+	}
+	
 	$('.pagination-inner a').on('click', function() {
-		alert("gd");
-		$(".pagination-inner a:eq("+num+")").removeClass('pagination-active');
 		var a = $(".pagination-inner a").index(this);
 		num = a;
-		
-		$(this).addClass('pagination-active');
-
-		var query = {num:$(this).text()};
-		
 		window.location.href = "/sitelist"+(num+1);
 	});
-
 	
+	$('.pagination-newer').click(function(){
+		if(1 > parseInt(newURL.substring(9,10))-1 )
+			window.location.href = "/sitelist"+(parseInt(newURL.substring(9,10)));
+		else
+			window.location.href = "/sitelist"+(parseInt(newURL.substring(9,10))-1);
+	});
+	
+	$('.pagination-older').click(function(){
+		if(parseInt($('.pagination-inner a:last').text()) < parseInt(newURL.substring(9,10))+1 )
+			window.location.href = "/sitelist"+(parseInt(newURL.substring(9,10)));
+		else
+			window.location.href = "/sitelist"+(parseInt(newURL.substring(9,10))+1);
+	});
+
 });
 
 
