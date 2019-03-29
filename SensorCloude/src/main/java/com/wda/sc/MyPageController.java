@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.service.MyPageService;
 
-
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -29,15 +28,15 @@ public class MyPageController {
 
 	@RequestMapping(value = "modifymypage", method = RequestMethod.GET)
 	public String modifymypage(Locale locale, Model model, HttpSession session) {
-		String id = (String)session.getAttribute("id");
-		model.addAttribute("userInfo",mypageservice.getInfo(id));
+		String id = (String) session.getAttribute("id");
+		model.addAttribute("userInfo", mypageservice.getInfo(id));
 		return "mypage/modifymypage";
 	}
 
 	@RequestMapping(value = "modifymyinfo", method = RequestMethod.GET)
-	public String modifymyinfo(Locale locale, Model model,HttpSession session) {
-		String id = (String)session.getAttribute("id");
-		model.addAttribute("userInfo",mypageservice.getInfo(id));
+	public String modifymyinfo(Locale locale, Model model, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		model.addAttribute("userInfo", mypageservice.getInfo(id));
 		return "mypage/modifymyinfo";
 	}
 
@@ -45,32 +44,32 @@ public class MyPageController {
 	@ResponseBody
 	public String mypagemodifymyinfo(Locale locale, Model model, MemberVO vo) {
 
-		System.out.println(vo.getPassword() + vo.getName()+ vo.getUser_id() + vo.getPhone());
+		if (vo.getPassword().equals("") || vo.getName().equals("") || vo.getUser_id().equals("") || vo.getPhone().equals("")) {
 
-		mypageservice.updateuserinfo(vo);
+			return "false";
 
-		return "success";
-
+		} else {
+			mypageservice.updateuserinfo(vo);
+			return "success";
+		}
 	}
 
-	@RequestMapping("mypageconfirmpasswd.do") 
+	@RequestMapping("mypageconfirmpasswd.do")
 	@ResponseBody
-	public String MyPageConfirmPasswd(Model model,HttpSession session,  @RequestParam("password") String password) {
+	public String MyPageConfirmPasswd(Model model, HttpSession session, @RequestParam("password") String password) {
 
-		String confirmid =(String)session.getAttribute("id");
+		String confirmid = (String) session.getAttribute("id");
 
 		ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
 		arr = mypageservice.confirmpasswd(confirmid);
 
-		if(arr.size() !=0) {
-			if(arr.get(0).getPassword().equals(password)) {
+		if (arr.size() != 0) {
+			if (arr.get(0).getPassword().equals(password)) {
 				return "success";
 			}
 		}
-		return confirmid;		
+		return confirmid;
 
 	}
-
-
 
 }
