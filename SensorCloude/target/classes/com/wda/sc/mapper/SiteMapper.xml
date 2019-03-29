@@ -39,7 +39,6 @@
 		select * from alarm where site_id = #{site_id}
 	</select>
 	
-<<<<<<< HEAD
 	<select id="getPageNum" resultType="int">
 			select count(site_id) from site
 	</select>
@@ -52,9 +51,8 @@
 		where x.rnum >= #{startnum}
 		]]>
 	</select>
-=======
+
 	<insert id="insertAlarmMember" parameterType="com.wda.sc.domain.AlarmMemberVO">
 		insert into alarm_member(alarm_m_no,site_id,tel,name,company) values('4', #{site_id},#{tel},#{name},#{company})
 	</insert>
->>>>>>> 69c6fdae2e1fd28af35d072e5d47f6947f9f59a0
 </mapper>
