@@ -21,4 +21,8 @@
 	<insert id="siteadd" parameterType="com.wda.sc.domain.SiteVO">
 		insert into site(site_id,type_no,site_name,address,detail_address,start_date) values(#{site_id},#{type_no},#{site_name},#{address},#{detail_address},sysDate)
 	</insert>
+	
+	<select id="getAlarm" resultType="com.wda.sc.domain.AlarmVO">
+		select * from alarm where site_id = #{site_id}
+	</select>
 </mapper>
