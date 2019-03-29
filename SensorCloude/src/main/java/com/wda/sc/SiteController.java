@@ -58,8 +58,9 @@ public class SiteController {
 	public String siterepair(@PathVariable String site_id, Model model) {
 		System.out.println("수리내역");
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
+		model.addAttribute("checkboardlist",siteservice.sitecheck(site_id));// 수리내역
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));  //연락망
-		
+		System.out.println(siteservice.sitecheck(site_id));
 		return "site/siterepair";
 	}
 
