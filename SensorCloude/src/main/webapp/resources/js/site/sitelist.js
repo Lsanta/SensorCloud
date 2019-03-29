@@ -12,11 +12,22 @@ $(document).on("click", "#site tr" , function(){
 
 /*pagination*/
 $(document).ready(function() {
+	var num = 0;
+	
 	$('.pagination-inner a').on('click', function() {
-		$(this).siblings().removeClass('pagination-active');
+		alert("gd");
+		$(".pagination-inner a:eq("+num+")").removeClass('pagination-active');
+		var a = $(".pagination-inner a").index(this);
+		num = a;
+		
 		$(this).addClass('pagination-active');
+
+		var query = {num:$(this).text()};
+		
+		window.location.href = "/sitelist"+(num+1);
 	});
 
+	
 });
 
 

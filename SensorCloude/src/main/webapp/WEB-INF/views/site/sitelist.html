@@ -28,16 +28,16 @@
 					</tr>
 				</thead>
 				<tbody id="site">
-					<tr th:each="sitelist : ${sitelist}">
-						 <td th:switch="${sitelist.site_status}">
+					<tr th:each="content : ${content}">
+						 <td th:switch="${content.site_status}">
 							<img src="resources/img/gray.svg"  th:case="'0'">
 							<img src="resources/img/green.svg" th:case="'1'">
 							<img src="resources/img/red.svg"   th:case="'2'">
 						</td>
-						<td th:text="${sitelist.site_name}"></td>
-						<td th:text="${sitelist.address}"></td>
-						<td th:text="${sitelist.start_date}"></td>
-						<td id="sid" th:text="${sitelist.site_id}" style="display : none"></td>
+						<td th:text="${content.site_name}"></td>
+						<td th:text="${content.address}"></td>
+						<td th:text="${content.start_date}"></td>
+						<td id="sid" th:text="${content.site_id}" style="display : none"></td>
 					</tr>
 
 				</tbody>
@@ -52,10 +52,13 @@
 		<div class="pagination-container">
 			<nav class="pagination-content">
 				<div class="pagination">
-					<a class="pagination-newer" href="#">PREV</a> <span
-						class="pagination-inner"> <a href="#">1</a> <a
-						class="pagination-active" href="#">2</a> <a href="#">3</a>
-					</span> <a class="pagination-older" href="#">NEXT</a>
+					<a class="pagination-newer" href="#">PREV</a> 
+					
+					<span class="pagination-inner" th:each="pageNum : ${pageNum}">
+						 <a th:text="${pageNum}"></a>
+					</span> 
+					
+					<a class="pagination-older" href="#">NEXT</a>
 				</div>
 			</nav>
 		</div>

@@ -1,14 +1,20 @@
 package com.wda.sc;
 
+import java.util.ArrayList;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wda.sc.domain.MemberVO;
+import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.SiteService;
 
@@ -94,6 +100,33 @@ public class SiteController {
 			return null;
 		}
 		
+		return "site/sitelist";
+	}
+	
+	@RequestMapping(value = "sitelist.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String sitelistNum(Model model, HttpServletRequest request) {
+		
+		String num = request.getParameter("num");
+		
+		Paging page = new Paging();
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int realNum = Integer.parseInt(num);
+		
+		page.setTotalNum(siteservice.getPageNum());
+		int pageNum = page.getTotalNum()/page.getOnePageBoard();
+		
+		for(int i = 0; i < pageNum; i ++) {
+			arr.add(i+1);
+		}
+		
+		page.setEndnum((realNum*10)+1);
+		page.setStartnum(page.getEndnum()-10);
+
+		model.addAttribute("content",siteservice.getContent(page));
+		
+		System.out.println(siteservice.getContent(page));
+		model.addAttribute("sitelist",siteservice.getList());
 		return "site/sitelist";
 	}
 	
