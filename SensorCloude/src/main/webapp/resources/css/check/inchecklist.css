@@ -1,0 +1,40 @@
+.span {
+	display: inline;
+}
+
+#fixlist_header {
+	margin: 0 auto;
+	width: 60%;
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+.fixlistbody {
+	width: 60%;
+	height: 700px;
+	margin: auto;
+	border: 2px solid black;
+	border: 1px solid black;
+}
+
+#fixlistbody_condition {
+	height: 40px;
+	border: 1px solid black;
+}
+
+.fixlistbutton {
+	float: right;
+}
+
+#fixlistbody_content {
+	width: 100%;
+	height: 300px;
+	border: 1px solid black;
+}
+
+#fixlistbody_addpicture {
+	margin: 0 auto;
+	width: 70%;
+	height: 50%;
+	border: 1px solid black;
+}
