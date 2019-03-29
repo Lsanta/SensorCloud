@@ -42,8 +42,16 @@ public class SiteServiceImplement implements SiteService {
 
 	@Override
 	public ArrayList<AlarmVO> getAlarm(String site_id) {
-		// TODO Auto-generated method stub
+		// 알람 테이블 반환
 		return mapper.getAlarm(site_id);
+	}
+
+	@Override
+	public int insertAlarmMember(AlarmMemberVO vo) {
+		// 알람 멤버 추가
+		
+		return mapper.insertAlarmMember(vo);
+		
 	}
 	
 
