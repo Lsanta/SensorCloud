@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.wda.sc.domain.AlarmMemberVO;
+import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.mapper.SiteMapper;
 
@@ -37,6 +38,12 @@ public class SiteServiceImplement implements SiteService {
 	public int siteadd(SiteVO site) {
 		System.out.println(site);
 		return mapper.siteadd(site);
+	}
+
+	@Override
+	public ArrayList<AlarmVO> getAlarm(String site_id) {
+		// TODO Auto-generated method stub
+		return mapper.getAlarm(site_id);
 	}
 	
 

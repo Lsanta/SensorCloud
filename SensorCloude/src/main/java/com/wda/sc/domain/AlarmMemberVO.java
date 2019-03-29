@@ -8,4 +8,5 @@ public class AlarmMemberVO {
 	private String site_id;
 	private String tel;
 	private String name;
+	private String company;
 }

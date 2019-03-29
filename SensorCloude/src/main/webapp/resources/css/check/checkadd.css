@@ -1,6 +1,6 @@
 
 .guestbook-title {
-    width: 70%;
+    width: 60%;
     margin: 10px auto;
     padding:10px 20px;
     font-weight:normal; 
@@ -9,7 +9,7 @@
     color:#fff
 }
 .guestbook-wrap {
-    width: 70%;
+    width: 60%;
     margin: auto;
     padding:20px; 
     border:1px solid #ddd; 
