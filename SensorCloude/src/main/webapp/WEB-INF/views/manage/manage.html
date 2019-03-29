@@ -21,27 +21,24 @@
 			<table>
 				<thead>
 					<tr>
-						<th scope="col">아이디</th>
-						<th scope="col">이름</th>
-						<th scope="col">전화번호</th>
-						<th scope="col">등급</th>
+						<th scope="col" style="width:10%;">아이디</th>
+						<th scope="col" style="width:10%;">이름</th>
+						<th scope="col" style="width:18%;">전화번호</th>
+						<th scope="col" style="width:5%;">등급</th>
+						<th style="width:5%;"></th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody onClick="goPopup()">
 				 	<tr th:each="userlist : ${userlist}">
 						<td th:text="${userlist.user_id}">status</td>
 						<td th:text="${userlist.name}">status</td>
 						<td th:text="${userlist.phone}">status</td>
 						<td th:text="${userlist.m_level}">status</td>
+						<td><button id="delete">삭제</button></td>
 					</tr>
 
 				</tbody>
 			</table>
-		</div>
-
-		<div class="button-container">
-			<button id="delete" value="delete">삭제</button>
-			<button id="modify" value="modify">수정</button>
 		</div>
 
 		<div class="pagination-container">
@@ -76,5 +73,11 @@
 
 <th:block layout:fragment="page_js">
 	<script src="/resources/js/manage/managelist.js"></script>
+	<script>
+	function goPopup() {
+		var pop = window.open("/manage/usermodify", "pop",
+				"width=570,height=520, resizable=yes");
+	}
+</script>
 </th:block>
 </html>

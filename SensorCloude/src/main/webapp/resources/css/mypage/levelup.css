@@ -14,12 +14,12 @@
     }
     #next-level select{
         position: relative;
-        margin-left: 20%;
+        margin-left: 24%;
     }
     #next-level p{
         position: relative;
         top: -38px;
-        left: 180px;
+        left: 200px;
     }
     #submit {
         float: right;
