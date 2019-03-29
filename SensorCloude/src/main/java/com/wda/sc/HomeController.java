@@ -87,4 +87,10 @@ public class HomeController {
 		model.addAttribute("mychecklist",mypageservice.myList(id));
 		return "mypage/mypage";
 	}
+	
+	@RequestMapping(value = "/alarmadd", method = RequestMethod.GET)
+	public String alarmadd(Locale locale, Model model) {
+		
+		return "site/alarmadd";
+	}
 }
