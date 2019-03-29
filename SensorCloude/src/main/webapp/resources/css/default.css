@@ -11,7 +11,7 @@ body {/*border:none;*/ font-size:14px; color:#727272;}
 ul,ol,li{list-style:none;}
 table{width:100%;border-spacing:0;border-collapse:collapse;}
 address,cite,code,em{font-style:normal;font-weight:normal;}
-label,img,textarea,button{vertical-align:middle;}
+label,textarea,button{vertical-align:middle;}
 .hide,caption{line-height:0;font-size:0;overflow:hidden;}
 hr{display:none;}
 main,header,section,nav,footer,aside,article,figure{display:block;}
