@@ -30,19 +30,18 @@
 					</tr>
 				</thead>
 				<tbody id="site">
-					<tr th:each="sitelist : ${sitelist}">
-<<<<<<< HEAD
+
 						<td th:switch="${sitelist.site_status}"><img
 							src="resources/img/gray.svg" th:case="'0'"> <img
 							src="resources/img/green.svg" th:case="'1'"> <img
 							src="resources/img/red.svg" th:case="'2'"></td>
-=======
+
 						 <td th:switch="${sitelist.site_status}">
 							<img src="resources/img/gray.svg"  th:case="'0'">
 							<img src="resources/img/green.svg" th:case="'1'">
 							<img src="resources/img/red.svg"   th:case="'2'">
 						</td>
->>>>>>> ce15ec4fcd84884c9681a9d6e26202034f9f93c7
+
 						<td th:text="${sitelist.site_name}"></td>
 						<td th:text="${sitelist.address}"></td>
 						<td th:text="${sitelist.start_date}"></td>
