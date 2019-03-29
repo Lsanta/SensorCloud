@@ -183,6 +183,9 @@ button:hover {
 }
 
 @media screen and (min-width: 0px) and (max-width: 700px) {
+	span{
+		font-size : 1.25em;
+	}
 	.leftbox {
 		width: 100%;
 		height: 40%;
@@ -199,19 +202,19 @@ button:hover {
 		margin-top : 10%;
 	}
 	.kindSelect{
-		margin-left : 50px;
+		margin-left : 30px;
 	}
 	.dataSelect{
-		margin-left : 25px;
+		margin-left : 12px;
 	}
 	.volSelect{
-		margin-left : 100px;
+		margin-left : 65px;
 	}
 	.fieldsetportnumber {
 		margin-top : 5%;
 	}
 	#sensorcount {
-		padding: 0;
+		padding: 2px;
 		width: 10%;
 		position: relative;
 		bottom:3px;

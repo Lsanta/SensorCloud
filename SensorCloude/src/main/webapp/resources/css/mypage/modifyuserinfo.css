@@ -90,6 +90,10 @@ body {
     float:right;
 
   }
+  
+ .inhere {
+ 	color:red;
+ }
 
   .confirm-modify:hover {
     border: 0px;

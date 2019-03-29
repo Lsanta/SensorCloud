@@ -10,9 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
+=======
+>>>>>>> 69c6fdae2e1fd28af35d072e5d47f6947f9f59a0
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.SiteVO;
@@ -64,8 +68,9 @@ public class SiteController {
 	public String siterepair(@PathVariable String site_id, Model model) {
 		System.out.println("수리내역");
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
+		model.addAttribute("checkboardlist",siteservice.sitecheck(site_id));// 수리내역
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));  //연락망
-		
+		System.out.println(siteservice.sitecheck(site_id));
 		return "site/siterepair";
 	}
 
@@ -103,6 +108,7 @@ public class SiteController {
 		return "site/sitelist";
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value = "sitelist.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String sitelistNum(Model model, HttpServletRequest request) {
@@ -130,5 +136,29 @@ public class SiteController {
 		return "site/sitelist";
 	}
 	
+=======
+	@RequestMapping(value = "{site_id}" + "/sitealarm/add", method = RequestMethod.GET)
+	public String AlarmMemberadd(@PathVariable String site_id) {
+		
+		return "site/alarmadd";
+	}
+>>>>>>> 69c6fdae2e1fd28af35d072e5d47f6947f9f59a0
 	
+	
+	//팝업창에서 Insert
+	@RequestMapping(value ="alarmadd.do")
+	@ResponseBody
+	public String alarmadd(AlarmMemberVO vo) {
+		//연락망 추가 폼을 이용한 추가
+		
+		int a = siteservice.insertAlarmMember(vo);
+		
+		if( a == 0) {
+			return "false";
+		} else if( a == 1){
+			return "success";
+		}
+		
+		return "false";
+	}
 }

@@ -8,7 +8,8 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/site/sitelist.css">
+	<link rel="stylesheet" type="text/css"
+		href="/resources/css/site/sitelist.css">
 </th:block>
 
 <th:block layout:fragment="contents">
@@ -16,9 +17,11 @@
 		<div id="main-content">
 			<div class="title-header">
 				<h1>현장목록</h1>
+				<a href="/site/siteadd"><button id="add" value="add">현장추가</button></a>
 			</div>
 
 			<table>
+<<<<<<< HEAD
 				<thead>
 					<tr>
 						<th scope="col" style="width:8%;">현재상태</th>
@@ -47,6 +50,30 @@
 		<div class="button-container">
 			<a href="#"><button id="modify" value="modify">수정</button></a>
 			<a href="/site/siteadd"><button id="add" value="add">등록</button></a>
+=======
+            <thead>
+               <tr>
+                  <th scope="col" style="width:8%;">현재상태</th>
+                  <th scope="col" style="width:20%;">현장이름</th>
+                  <th scope="col" style="width:43%;">주소</th>
+                  <th scope="col">데이터갱신시간</th>
+               </tr>
+            </thead>
+            <tbody id="site">
+               <tr th:each="sitelist : ${sitelist}">
+                   <td th:switch="${sitelist.site_status}">
+                     <img src="resources/img/gray.svg"  th:case="'0'">
+                     <img src="resources/img/green.svg" th:case="'1'">
+                     <img src="resources/img/red.svg"   th:case="'2'">
+                  </td>
+                  <td th:text="${sitelist.site_name}"></td>
+                  <td th:text="${sitelist.address}"></td>
+                  <td th:text="${sitelist.start_date}"></td>
+                  <td id="sid" th:text="${sitelist.site_id}" style="display : none"></td>
+               </tr>
+            </tbody>
+         </table>
+>>>>>>> 69c6fdae2e1fd28af35d072e5d47f6947f9f59a0
 		</div>
 
 		<div class="pagination-container">
@@ -79,7 +106,7 @@
 				</div>
 			</section>
 		</div>
-</div>
+	</div>
 </th:block>
 
 <th:block layout:fragment="page_js">

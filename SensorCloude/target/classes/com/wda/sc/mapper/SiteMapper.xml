@@ -6,12 +6,25 @@
 
 	<select id="getList" resultType="com.wda.sc.domain.SiteVO">
 	<![CDATA[
-		select site_id,type_no,site_name,address,site_status,substr(start_date,0,14) as start_date from site where rownum < 18 order by site_id asc
+		select site_id,type_no,site_name,address,site_status,substr(start_date,0,14) as start_date from site where rownum < 17 order by site_id asc
 		]]>
 	</select>
 
 	<select id="getSite" resultType="com.wda.sc.domain.SiteVO">
 		select * from site where site_id = #{site_id}
+	</select>
+	
+	<select id="sitecheck" resultType="com.wda.sc.domain.CheckBoardVO">
+		 select
+  check_board.user_id,
+  substr(check_board.reg_date,0,14) as reg_date,
+  check_board.title,
+  check_board.board_content,
+  check_board.board_status,
+  check_board.site_id,
+  site.site_name
+  from check_board,site
+  where check_board.site_id = site.site_id and check_board.site_id = #{site_id}
 	</select>
 	
 	<select id="getAlarm_member" resultType="com.wda.sc.domain.AlarmMemberVO">
@@ -26,6 +39,7 @@
 		select * from alarm where site_id = #{site_id}
 	</select>
 	
+<<<<<<< HEAD
 	<select id="getPageNum" resultType="int">
 			select count(site_id) from site
 	</select>
@@ -38,4 +52,9 @@
 		where x.rnum >= #{startnum}
 		]]>
 	</select>
+=======
+	<insert id="insertAlarmMember" parameterType="com.wda.sc.domain.AlarmMemberVO">
+		insert into alarm_member(alarm_m_no,site_id,tel,name,company) values('4', #{site_id},#{tel},#{name},#{company})
+	</insert>
+>>>>>>> 69c6fdae2e1fd28af35d072e5d47f6947f9f59a0
 </mapper>

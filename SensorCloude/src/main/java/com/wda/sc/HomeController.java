@@ -136,4 +136,5 @@ public class HomeController {
 		model.addAttribute("mychecklist",mypageservice.myList(id));
 		return "mypage/mypage";
 	}
+	
 }

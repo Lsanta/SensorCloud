@@ -49,54 +49,45 @@ $(document).ready(function() {
 		var passwordconfirm = $("#passwordconfirm").val();
 		var modify_name = $("#modify_name").val();
 		var phonenumber = $("#phonenumber").val();
+
 		
-		alert(password);
-		alert(id);
-		alert(phonenumber);
-		var query = {
-				user_id:id,
-				password:password,
-				name:modify_name,
-				phone:phonenumber
-		}
-
-		if (id = "") {
-			document.getElementById("inhere1").innerHTML = "아이디를 입력해 주세요";
-		}
-
-		if (password = "") {
-			document.getElementById("inhere2").innerHTML = "패스워드를 입력해 주세요";
-		}
+	
 		if (passwordconfirm != password) {
-			document.getElementById("inhere3").innerHTML = "패스워드가 일치하지 않습니다";
-		}
-		if (modify_name = "") {
-			document.getElementById("inhere4").innerHTML = "이름을 입력해주세요";
-
+			document.getElementById("inhere2").innerHTML = "비밀번호확인이 일치하지 않습니다";
 		}
 
-		if (phonenumber = "") {
-			document.getElementById("inhere5").innerHTML = "휴대폰 번호를 입력해주세요";
-		}
-
-		
+		else if(passwordconfirm == password) {
 			
+			var query = {
+				user_id : id,
+				name : modify_name,
+				password : password,
+				phone : phonenumber
+			}
 		
 
-		$.ajax({
+			$.ajax({
 
-			type : "POST",
-			data : query,
-			url : "/mypage/mypagemodifymyinfo",
-			success : function(data) {
-				alert(data);
-				if (data == "success") {
-					alert("업데이트 완료");
+				type : "POST",
+				data : query,
+				url : "/mypage/mypagemodifymyinfo",
+				success : function(data) {
 
-					window.location.href = "/mypage";
+					if (data == "success") {
+
+						window.location.href = "/mypage";
+					}
+					
+					if( data == "false"){
+						document.getElementById("inhere1").innerHTML = "수정 정보를 모두 입력해 주세요";
+					}
+
 				}
-			}
-		});
+			});
+		
+		}
+		
+	
 
 	});
 
