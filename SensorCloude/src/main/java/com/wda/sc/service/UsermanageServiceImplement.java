@@ -19,4 +19,9 @@ public class UsermanageServiceImplement implements UsermanageService{
 	public ArrayList<MemberVO> getList(){
 		return mapper.getList();
 	}
+	
+	@Override
+	public ArrayList<MemberVO> getInfo(String id) {
+		return mapper.getInfo(id);
+	}
 }

@@ -7,6 +7,10 @@
 	<select id="getList" resultType="com.wda.sc.domain.MemberVO">
 		select user_id,name,phone,m_level from member order by m_level desc
 	</select>
+	
+	<select id="getInfo" resultType="com.wda.sc.domain.MemberVO">
+		select user_id,name,phone,m_level from member where user_id=#{user_id}
+	</select>
 
 	
 </mapper>
