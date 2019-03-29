@@ -6,7 +6,11 @@ import org.springframework.stereotype.Service;
 
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
+<<<<<<< HEAD
+import com.wda.sc.domain.Paging;
+=======
 import com.wda.sc.domain.CheckBoardVO;
+>>>>>>> 69c6fdae2e1fd28af35d072e5d47f6947f9f59a0
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.mapper.SiteMapper;
 
@@ -61,5 +65,16 @@ public class SiteServiceImplement implements SiteService {
 		
 	}
 	
+	@Override
+	public int getPageNum() {
+		// TODO Auto-generated method stub
+		return mapper.getPageNum();
+	}
+	
+	@Override
+	public ArrayList<SiteVO> getContent(Paging p) {
+		// TODO Auto-generated method stub
+		return mapper.getContent(p);
+	}
 
 }
