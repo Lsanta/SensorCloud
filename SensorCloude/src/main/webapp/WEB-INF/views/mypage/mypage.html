@@ -15,11 +15,20 @@
 	<link rel="stylesheet" media="(min-width: 0px) and (max-width: 700px)"
 		href="/resources/css/mypage/mpmobile.css" />
 	<script src="/resources/js/mypage/mp.js"></script>
-	<link rel="stylesheet" media="(min-width: 701px) and (max-width: 1000px)" href="/resources/css/mypage/mptablet.css" />
-	<link rel="stylesheet" media="(min-width: 0px) and (max-width: 700px)" href="/resources/css/mypage/mpmobile.css" />
+	<link rel="stylesheet"
+		media="(min-width: 701px) and (max-width: 1000px)"
+		href="/resources/css/mypage/mptablet.css" />
+	<link rel="stylesheet" media="(min-width: 0px) and (max-width: 700px)"
+		href="/resources/css/mypage/mpmobile.css" />
 </th:block>
 
 <th:block layout:fragment="contents">
+	<script>
+		function goPopup() {
+			var pop = window.open("/mypage/levelup", "pop",
+					"width=570,height=420, resizable=yes");
+		}
+	</script>
 	<div class="wrapper">
 		<div class="w1">
 			<div class="cell">
@@ -30,8 +39,8 @@
 				<p class="n2" th:text="등급 + ${userInfo.m_level}"></p>
 			</div>
 			<div class="name02">
-				<input class="update" type="button" value="정보수정"> <input
-					class="up" type="button" value="승급요청">
+				<input class="update" type="button" value="정보수정" />
+				<input class="up" type="button" value="승급요청" onClick="goPopup()" />
 			</div>
 		</div>
 		<hr color="black" width=100%>
@@ -47,13 +56,13 @@
 					</tr>
 				</thead>
 				<tbody>
-				 	<tr th:each="mychecklist : ${mychecklist}">
+					<tr th:each="mychecklist : ${mychecklist}">
 						<td th:text="${mychecklist.site_name}">status</td>
 						<td th:text="${mychecklist.title}">status</td>
 						<td th:text="${mychecklist.board_status}">status</td>
 						<td th:text="${mychecklist.name}">status</td>
 						<td th:text="${mychecklist.reg_date}">status</td>
-					</tr> 
+					</tr>
 
 				</tbody>
 			</table>
@@ -75,7 +84,7 @@
 
 </th:block>
 
-<th:block layout:fragment="page_js" >
+<th:block layout:fragment="page_js">
 	<script src="/resources/js/mypage/mp.js"></script>
 </th:block>
 </html>

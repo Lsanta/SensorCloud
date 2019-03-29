@@ -25,6 +25,13 @@ import lombok.AllArgsConstructor;
 public class MyPageController {
 
 	private MyPageService mypageservice;
+	
+	@RequestMapping(value = "/levelup", method = RequestMethod.GET)
+	public String address(Locale locale, Model model, HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		model.addAttribute("userInfo",mypageservice.getInfo(id));
+		return "mypage/levelup";
+	}
 
 	@RequestMapping(value = "modifymypage", method = RequestMethod.GET)
 	public String modifymypage(Locale locale, Model model, HttpSession session) {
