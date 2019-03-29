@@ -13,7 +13,7 @@ $(document).on("click", "#site tr" , function(){
 /*pagination*/
 $(document).ready(function() {
 	var num = 0;
-	
+
 	$('.pagination-inner a').on('click', function() {
 		alert("gd");
 		$(".pagination-inner a:eq("+num+")").removeClass('pagination-active');
