@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+html {
+	width: 70%;
+	margin: 0 auto;
+}
 h1{
       text-align: center;
       padding-top:35px; 
