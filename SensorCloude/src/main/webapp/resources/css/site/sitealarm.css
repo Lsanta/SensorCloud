@@ -1,275 +1,306 @@
 @charset "UTF-8";
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,700,300italic);
-@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:300');
+@import
+	url(https://fonts.googleapis.com/css?family=Open+Sans:300,700,300italic)
+	;
 
-#container {
-        width: 1100px;
-        margin: 10px auto;
-        border: 1px solid #bcbcbc;
-      }
-      
-      #content {
-        width: 400px;
-        height: auto;
-        padding: 20px;
-        margin-bottom: 20px;
-        float: left;
-        border: 1px solid #bcbcbc;
-      }
-      #sidebar {
-        width: 550px;
-        height: auto;
-        padding: 20px;
-        margin-bottom: 20px;
-        float: right;
-        border: 1px solid #bcbcbc;
-      }
-      #footer {
-        clear: both;
-        padding: 20px;
-    
-      }
+@import
+	url('https://fonts.googleapis.com/css?family=Libre+Franklin:300');
 
+.line {
+	width: 70px;
+	margin-right: 10px;
+}
 
 .scroll-table {
-    width:100%;
-    margin: auto;
-    position: relative;
-    padding-top: 40px;
-    border: 1px solid #d4d4d4;
-
+	width: 100%;
+	margin: auto;
+	position: relative;
+	padding-top: 40px;
+	border: 1px solid #d4d4d4;
 }
+
 .scroll-table div {
-    max-height: 478px;
-    overflow: auto;
-    overflow-x: hidden;
+	max-height: 478px;
+	overflow: auto;
+	overflow-x: hidden;
 }
-.scroll-table table {
-    width: 100%;
-    table-layout: fixed;
-    border-spacing: 0;
-    border-collapse: collapse;
 
+.scroll-table table {
+	width: 100%;
+	table-layout: fixed;
+	border-spacing: 0;
+	border-collapse: collapse;
 }
+
 .scroll-table table thead tr {
-    position: absolute;
-    top: 0;
+	position: absolute;
+	top: 0;
 }
+
 .scroll-table table thead tr th {
-    font-weight: normal;
-    width: 100%;
-    height: 40px;
-    background:#eee;
+	font-weight: normal;
+	width: 100%;
+	height: 40px;
+	background: #eee;
 }
 
 .scroll-table table td {
-    text-align: center;
-    width: 100%;
-    height: 40px;
+	text-align: center;
+	width: 100%;
+	height: 40px;
 }
 
 .scroll-table table tr {
-    display: inline-table;
-    width: 100%;
-    table-layout: fixed;
+	display: inline-table;
+	width: 100%;
+	table-layout: fixed;
 }
-.scroll-table table tr td {
-    border-top: 1px solid #d4d4d4;
 
+.scroll-table table tr td {
+	border-top: 1px solid #d4d4d4;
 }
+
 .scroll-table table tr.even td {
-    background: #eef3f8;
+	background: #eef3f8;
 }
 
 /*------------------------------------*/
-
 .scroll-table2 {
-    width:100%;
-    margin-top: 10%;
-    position: relative;
-    padding-top: 40px;
-    border: 1px solid #d4d4d4;
-
+	width: 100%;
+	margin-top: 10%;
+	position: relative;
+	padding-top: 40px;
+	border: 1px solid #d4d4d4;
 }
+
 .scroll-table2 div {
-    max-height: 150px;
-    overflow: auto;
-    overflow-x: hidden;
+	max-height: 150px;
+	overflow: auto;
+	overflow-x: hidden;
 }
-.scroll-table2 table {
-    width: 100%;
-    table-layout: fixed;
-    border-spacing: 0;
-    border-collapse: collapse;
 
+.scroll-table2 table {
+	width: 100%;
+	table-layout: fixed;
+	border-spacing: 0;
+	border-collapse: collapse;
 }
+
 .scroll-table2 table thead tr {
-    position: absolute;
-    top: 0;
+	position: absolute;
+	top: 0;
 }
+
 .scroll-table2 table thead tr th {
-    font-weight: normal;
-    width: 100%;
-    height: 40px;
-    background:#eee;
+	font-weight: normal;
+	width: 100%;
+	height: 40px;
+	background: #eee;
 }
 
 .scroll-table2 table td {
-    text-align: center;
-    width: 100%;
-    height: 40px;
+	text-align: center;
+	width: 100%;
+	height: 40px;
 }
 
 .scroll-table2 table tr {
-    display: inline-table;
-    width: 100%;
-    table-layout: fixed;
+	display: inline-table;
+	width: 100%;
+	table-layout: fixed;
 }
-.scroll-table2 table tr td {
-    border-top: 1px solid #d4d4d4;
 
+.scroll-table2 table tr td {
+	border-top: 1px solid #d4d4d4;
 }
+
 .scroll-table2 table tr.even td {
-    background: #eef3f8;
+	background: #eef3f8;
 }
 
 textarea {
-  width: 98%;
-  min-height: 250px;
-  resize: none;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  padding: 0.5rem;
-  color: #666;
-  box-shadow: inset 0 0 0.25rem #ddd;
-  &:focus {
-    outline: none;
-    border: 1px solid darken(#ddd, 5%);
-    box-shadow: inset 0 0 0.5rem darken(#ddd, 5%);
-  }
-  &[placeholder] { 
-    font-style: italic;
-    font-size: 0.875rem;
-  }
+	width: 98%;
+	min-height: 250px;
+	resize: none;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+	padding: 0.5rem;
+	color: #666;
+	box-shadow: inset 0 0 0.25rem #ddd; &: focus { outline : none;
+	border: 1px solid darken(#ddd, 5%);
+	box-shadow: inset 0 0 0.5rem darken(#ddd, 5%);
 }
 
-#submit {
-  float: right;
+&
+[placeholder] {
+	font-style: italic;
+	font-size: 0.875rem;
 }
-      
-      @media ( min-width: 992px ) {
-        #container {
-          width: 1100px;
-        }
-        #content {
-          width: 400px;
-        height: auto;
-        padding: 20px;
-        margin-bottom: 20px;
-        float: left;
-        }
-        #sidebar {
-          width: 550px;
-          height: auto;
-          padding: 20px;
-          margin-bottom: 20px;
-          float: right;
-        }
-        #textarea {
-          width: 97%;
-          min-height: 250px;
-          resize: none;
-          border-radius: 8px;
-          border: 1px solid #ddd;
-          padding: 0.5rem;
-        }
-        #scroll-table {
-          float: none;
-          width: auto;
-        }
-        #scroll-table2 {
-          float: none;
-          width: auto;
-        }
-      }
-        @media (min-width:320px) and (max-width:768px) {
-          #container {
-            width: auto;
-          }
-          #content {
-          width: 300px;
-          height: auto;
-          padding: 20px;
-          margin-bottom: 20px;
-          float: left;
-          }
-          #sidebar {
-            width: 300px;
-            height: auto;
-            padding: 20px;
-            margin-bottom: 20px;
-            float: right;
-          }
-          #textarea {
-            width: 95%;
-            min-height: 250px;
-            resize: none;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            padding: 0.5rem;
-          }
-          #scroll-table {
-            float: none;
-            width: auto;
-          }
-          #scroll-table2 {
-            float: none;
-            width: auto;
-          }
-        }
-          @media (max-width:320px) {
-            #container {
-              width: auto;
-              display:relative;
-            }
-            #content {
-              float: none;
-              width: auto;
-            }
-            #sidebar {
-              float: none;
-              width: auto;
-            }
-            #textarea {
-              float: none;
-              width: 95%;
-            }
-            #scroll-table {
-              float: none;
-              width: auto;
-            }
-            #scroll-table2 {
-              float: none;
-              width: auto;
-            }
-        }
 
-        
-     
+}
+/* #submit { */
+/* 	float: right; */
+/* } */
 
-      #plus-btn {   
-        border:0;
-        background-color: white;
-        width: 80px;
-        height: 70px;
-        cursor: pointer;
-        margin-left:38%;
-        
-      }
-      #plus-img {
-        width:80px;
-        height:70px;
-        cursor: pointer;
+#container {
+	width: 100%;
+	margin : 50px auto;
+	
+}
 
-      }
+.leftbox {
+	float: left;
+	width: 50%;
+
+}
+
+.modifybox {
+	float: left;
+	width: 90%;
+	font-size: 1.3em;
+	margin-left: 30px;
+}
+
+.tel {
+	margin-left: 30px;
+}
+
+.name, .company {
+	margin-left: 69px;
+}
+
+#content {
+	width: 90%;
+	height: 450px;
+	padding: 20px;
+	margin-bottom: 20px;
+	float: left;
+}
+
+#sidebar {
+	width: 45%;
+	height: auto;
+	padding: 20px;
+	margin-bottom: 20px;
+	float: right;
+
+}
+
+#textarea {
+	width: 50%;
+	min-height: 150px;
+	resize: none;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+	padding: 0.5rem;
+}
+
+#scroll-table {
+	float: none;
+	width: auto;
+}
+
+#scroll-table2 {
+	float: none;
+	width: auto;
+}
+
+@media (max-width:1380px){
+	.leftbox {
+		width : 45%;
+	}
+	
+	.sidebar {
+		width : 38%;
+	}
+	
+}
+
+
+
+
+
+
+@media ( min-width :320px) and (max-width:768px) {
+	#container {
+		width: auto;
+		
+	}
+	#content {
+		width: 300px;
+		height: auto;
+		padding: 20px;
+		margin-bottom: 20px;
+		float: left;
+	}
+	#sidebar {
+		width: 300px;
+		height: auto;
+		padding: 20px;
+		margin-bottom: 20px;
+		float: none;
+	}
+	#textarea {
+		width: 95%;
+		min-height: 250px;
+		resize: none;
+		border-radius: 8px;
+		border: 1px solid #ddd;
+		padding: 0.5rem;
+	}
+	#scroll-table {
+		float: none;
+		width: auto;
+	}
+	#scroll-table2 {
+		float: none;
+		width: auto;
+	}
+	
+	.modifybox{
+		width : 300px;
+	}
+}
+
+@media ( max-width :320px) {
+	#container {
+		width: auto;
+		display: relative;
+	}
+	#content {
+		float: none;
+		width: auto;
+	}
+	#sidebar {
+		float: none;
+		width: auto;
+	}
+	#textarea {
+		float: none;
+		width: 95%;
+	}
+	#scroll-table {
+		float: none;
+		width: auto;
+	}
+	#scroll-table2 {
+		float: none;
+		width: auto;
+	}
+}
+
+#plus-btn {
+	border: 0;
+	background-color: white;
+	width: 80px;
+	height: 70px;
+	cursor: pointer;
+	margin-left: 38%;
+}
+
+#plus-img {
+	width: 80px;
+	height: 70px;
+	cursor: pointer;
+}
