@@ -107,4 +107,9 @@ body {
     .usermodify-card {
       margin-top:20%;
     }
+    
+ @media (max-width:360px) {
+    .usermodify-card {
+      width: 250px;
+    }
   }
