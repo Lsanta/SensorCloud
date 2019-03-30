@@ -267,9 +267,6 @@ table {
 }
 
 @media screen and (max-width: 360px) {
-  .title-header h1{
-  	width: 120px;
-  }
   .search {
     float: none;
     width: auto;
@@ -284,11 +281,6 @@ table {
     clear: both;
     width: auto;
     margin-left: 100px;
-  }
-  .title-header button { 
-    float: right;
-    width: 40%;
-    height: 50px;
   }
   select { 
   width: 95px;

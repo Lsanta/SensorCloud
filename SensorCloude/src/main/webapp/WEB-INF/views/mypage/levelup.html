@@ -14,7 +14,7 @@
 
 		<div id="content">
 			<div id="now-level" th:each="userInfo : ${userInfo}">
-				<center><p th:text="|현재  ${userInfo.name} 님의 등급은 ${userInfo.m_level}등급 입니다.|"></p></center>
+				<p th:text="현재  + ${userInfo.name}"></p>
 			</div>
 
 			<div id="next-level">

@@ -24,6 +24,10 @@ html {
     padding: 0 0 0 20px;
   }
 
+  .button-container {
+    height: 20px;
+    margin-top: 2%;
+  }
 
   @media ( max-width: 1001px ) {
     #container {
@@ -34,6 +38,10 @@ html {
       width: auto;
     }
     .title-header {
+      float: none;
+      width: auto;
+    }
+    .button-container {
       float: none;
       width: auto;
     }
@@ -103,6 +111,10 @@ table {
     text-transform: uppercase;
   }
 
+  .button-container button { 
+    float: right;
+  }
+  
   @media screen and (max-width: 700px) {
     table {
       border: 0;

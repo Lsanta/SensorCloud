@@ -7,5 +7,4 @@ import com.wda.sc.domain.MysensorVO;
 public interface MysensorMapper {
 
 	public ArrayList<MysensorVO> getList();
-	public int insertmysensor(MysensorVO vo);
 }

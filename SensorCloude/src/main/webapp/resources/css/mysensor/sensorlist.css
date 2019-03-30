@@ -4,12 +4,6 @@ html {
   overflow-x: hidden; 
  }
 
-  .title-header button { 
-    float: right;
-    width: 200px;
-    height: 50px;
-  }
-
 #container {
     width: 1000px;
     height: 800px;

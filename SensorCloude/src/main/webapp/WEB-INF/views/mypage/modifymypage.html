@@ -10,11 +10,12 @@
 
 <th:block layout:fragment="page_css">
 	<link rel="stylesheet" href="/resources/css/mypage/mpweb.css" />
-	<link rel="stylesheet" href="/resources/css/mypage/modifymypage.css" />
-	<link rel="stylesheet" media="(min-width: 701px) and (max-width: 1000px)"
+	<link rel="stylesheet"
+		media="(min-width: 701px) and (max-width: 1000px)"
 		href="/resources/css/mypage/mptablet.css" />
 	<link rel="stylesheet" media="(min-width: 0px) and (max-width: 700px)"
 		href="/resources/css/mypage/mpmobile.css" />
+	<script src="/resources/js/mypage/mp.js"></script>
 </th:block>
 
 
@@ -36,16 +37,16 @@
 			</div>
 		</div>
 		<hr color="black" width=100%>
-		
-		<div class="usermodify-card">
-			<h1>비밀번호</h1>
-			<input type="password" name="pass" id="pass" placeholder="Password"> <br>		
-			<input type="button" name="confirm" id="confirm-modify" class="mpmodify-submit" value="확인">
+		<div class="w2">
+			
+			<label>비밀번호</label> <input type="password" name="pass" id="pass"
+				placeholder="Password">
+		<br>		
+		<input type="button" name="confirm" id="confirm" class="mpmodify-submit" value="confirm">
+			
+
 		</div>
-	</div>
+		</div>
 </th:block>
 
-<th:block layout:fragment="page_js">
-	<script src="/resources/js/mypage/mp.js"></script>
-</th:block>
 </html>

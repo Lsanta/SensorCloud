@@ -34,14 +34,13 @@
 				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair'" >수리내역</a></li>
 				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensoradd'">센서추가</a></li>
 				<li style="line-height: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트 다운로드</a></li>
-				
 				<li><span id="num">연락망</span> 
-					<span id="down" style="display: inline"> 
-				  		<img src="/resources/img/down-arrow.svg">
-					</span> 
-					<span id="up" style="display: none"> 
-						<img src="/resources/img/up-arrow.svg">
-					</span>
+				<span id="down" style="display: inline"> 
+				  	<img src="/resources/img/down-arrow.svg">
+				</span> 
+				<span id="up" style="display: none"> 
+					<img src="/resources/img/up-arrow.svg">
+				</span>
 				</li>
 				
 			<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
@@ -58,9 +57,6 @@
 			<h2 th:text="${siteInfo.site_name}" style="display: inline-block"></h2>
 			
 			<span class="addr" th:text="${siteInfo.address}" ></span>
-			
-			<button id="modify">현장수정</button>
-			
 			<div id="chartdiv"></div>
 
 			<div id="dataDiv">

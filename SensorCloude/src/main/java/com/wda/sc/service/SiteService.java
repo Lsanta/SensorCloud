@@ -19,6 +19,5 @@ public interface SiteService {
 	public ArrayList<SiteVO> getContent(Paging p);
 	public ArrayList<CheckBoardVO> sitecheck(String site_id);
 	public int insertAlarmMember(AlarmMemberVO vo);
-	public int insertAlarm(AlarmVO vo);
 
 }
