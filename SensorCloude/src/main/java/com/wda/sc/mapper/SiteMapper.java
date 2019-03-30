@@ -19,5 +19,5 @@ public interface SiteMapper {
 	public int getPageNum();
 	public ArrayList<SiteVO> getContent(Paging p);
 	public int insertAlarmMember(AlarmMemberVO vo);
-
+	public int insertAlarm(AlarmVO vo);
 }

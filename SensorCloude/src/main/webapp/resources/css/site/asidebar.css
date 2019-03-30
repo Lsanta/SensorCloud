@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+#num, #down, #up{
+	
+}
+
+
 * {
 	margin: 0;
 	padding: 0;
@@ -99,7 +104,7 @@ article {
 
 .phonenumber {
 	position: relative;
-	top: -30px;
+	top: -15px;
 	color: black;
 	font-size: 18px;
 }

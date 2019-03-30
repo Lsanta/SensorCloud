@@ -19,4 +19,11 @@ public class MysensorServiceImplement implements MysensorService {
 	public ArrayList<MysensorVO> getList(){
 		return mapper.getList();
 	}
+
+	@Override
+	public int insertmysensor(MysensorVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.insertmysensor(vo);
+	}
+	
 }

@@ -55,12 +55,12 @@
 	<div id="scroll" >
 		<article>
 		
-			<div id="container">
-
+		<div id="container">
+			<div class="leftbox">
 				<div id="content">
 					<div class="scroll-table">
 						<div>
-							<table>
+							<table id="member">
 								<thead>
 									<tr>
 										<th>전화번호</th>
@@ -80,12 +80,24 @@
 							</table>
 						</div>
 					</div>
+					
 					<button id="plus-btn" type="button">
 						<img id="plus-img" src="/resources/img/plus.png">
 					</button>
+			
 				</div>
+				
+				<div class="modifybox">
+					<div> 전화번호<input type="tel"  id="tel" class="tel" disabled="disabled"/></div>
+					<div> 회사<input type="text" id="company"  class="company" disabled="disabled"/></div>
+					<div> 이름<input type="text" id="name" class="name" disabled="disabled"/>
+					<input type="button" value="수정" id="mod" /> </div>
+				</div>	
+			</div>
+				
+				
 				<div id="sidebar">
-					<textarea name="textarea" id="textarea" maxlength="300" placeholder="문자내용" autofocus></textarea>
+					<textarea name="textarea" id="textarea" maxlength="80" placeholder="문자내용" autofocus></textarea>
 					<button id="submit">전송</button>
 					<div class="scroll-table2">
 						<div>

@@ -74,4 +74,10 @@ public class SiteServiceImplement implements SiteService {
 		return mapper.getContent(p);
 	}
 
+	@Override
+	public int insertAlarm(AlarmVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.insertAlarm(vo);
+	}
+
 }
