@@ -15,10 +15,8 @@
 <th:block layout:fragment="contents">
 
 
-
-
-	<div id="fixlist_header" >
-		<h2 id="infixlist_title" class="span">xx휴게소</h2>
+	<div id="fixlist_header">
+		<h2 id="infixlist_title" class="span" th:each="check : ${cklist}" th:text="${check.site_name}"></h2>
 		<!-- 점검이력을 클릭하면 해당 현장의 이름을 가져오기 -->
 		<input type="button" name="modifyfixlist" id="modifyfixlist" class="fixlistbutton" value="수정"> 
 		<input type="button" name="deletefixlist"
@@ -28,31 +26,28 @@
 
 	<div class="fixlistbody">
 
-		<div id="fixlistbody_condition">
-
+		<div id="fixlistbody_condition" >
+				
 			<!-- 점검상태 / 날짜  가져오기-->
-			<p class="span">센서 2번교체</p>
+			<p class="span" th:each="check : ${cklist}" th:text="${check.title}"></p>
 
-			<p class="span">2019.01.01</p>
+			<p class="span" th:each="check : ${cklist}" th:text="${check.reg_date}"></p>
 		</div>
 
-		<div id="fixlistbody_content">
+		<div id="fixlistbody_content" >
 
 			<!-- 글쓰기에서 등록한 점검이력 긁어오기 -->
-			<p>점검이력</p>
+			<p th:each="check : ${cklist}" th:text="${check.board_content}"></p>
 		</div>
 		<div id="fixlistbody_addpicture">
 
 			<!-- 사진목록 -->
 		</div>
 
-
-
-
 	</div>
 </th:block>
 
 <th:block layout:fragment="page_js">
-	<!-- 	<script src="/resources/js/site/checkadd.js"></script> -->
+		<script src="/resources/js/check/checklist.js"></script>
 </th:block>
 </html>

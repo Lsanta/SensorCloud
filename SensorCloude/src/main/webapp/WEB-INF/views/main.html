@@ -27,6 +27,7 @@
             <th scope="col">데이터갱신시간</th>
           </tr>
         </thead>
+        
         <tbody id="site">
           <tr th:each="sitelist : ${sitelist}">
            <td th:switch="${sitelist.site_status}">
