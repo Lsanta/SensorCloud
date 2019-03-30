@@ -25,7 +25,8 @@ $(document).ready(function(){
 		 	 row += "</tr>";	
 		 	 
 		 	$("#member").append(row);
-	 });
+	 }); // +버튼 누르는거 종료
+	
 	
 	$(document).on("click","#add",function(){
 		//주소창 잘라서 site_id 뽑았는데 내가봐도 구림
@@ -57,11 +58,13 @@ $(document).ready(function(){
 			  
 		}); // ajax 종료
 		
-	});
+	}); // 추가 버튼 클릭 종료
 	
 	$(document).on("click","#remove",function(){
 		$("#example").remove();
-	});
+	}); // 삭제 버튼 클릭 종료
+	
+	
 	
 	$(document).on("dblclick","#member>tbody>tr",function(){
 		
@@ -77,18 +80,23 @@ $(document).ready(function(){
 		$("#company").removeAttr("disabled");
 		$("#name").removeAttr("disabled");
 		
-	});
+	}); // 더블클릭 햇을시 종료
 	
-	$("#submit").click(function({
+
+	$("#submit").click(function(){
 		//주소창 잘라서 site_id 뽑았는데 내가봐도 구림
 		var newURL =  window.location.pathname;
 		var sid = newURL.split("/");
 		sid2 = sid[2].split("/");
 		
 		var site_id = sid2[0];
-		var alarm_content = $("#textarea").text();
+		var alarm_content = $("#textarea").val();
+		
+		console.log(site_id);
+		console.log(alarm_content);
 		
 		var query = { alarm_content : alarm_content, site_id : site_id}
+		
 		
 		$.ajax({
 			  type : "POST",
@@ -106,8 +114,7 @@ $(document).ready(function(){
 			  
 		}); // ajax 종료
 		
-	});
-	
+	}); // 전송했을시 종료
 	
 });
 

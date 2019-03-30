@@ -13,9 +13,7 @@ $(document).on("click", "#site tr" , function(){
 /*pagination*/
 $(document).ready(function() {
 	var num = 0;
-<<<<<<< HEAD
 
-=======
 	
 	var newURL =  window.location.pathname;
 	
@@ -24,7 +22,7 @@ $(document).ready(function() {
 		$("#"+newURL.substring(9,10)+"").addClass('pagination-active');
 	}
 	
->>>>>>> 03a058aed826052bc6a0cf73b81bcc58ef810623
+
 	$('.pagination-inner a').on('click', function() {
 		var a = $(".pagination-inner a").index(this);
 		num = a;
