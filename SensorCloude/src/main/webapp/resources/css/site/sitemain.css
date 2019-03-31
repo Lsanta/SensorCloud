@@ -52,13 +52,6 @@ table th {
 	text-transform: uppercase;
 }
 
- #scroll button {
-    float: right;
-    margin-top: 2%;
-    width: 20%;
-
-   } 
-
  @media ( max-width: 1001px ) {
     #dataDiv {
       width: auto;
