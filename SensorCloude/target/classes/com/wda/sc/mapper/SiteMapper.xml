@@ -38,7 +38,7 @@
 	</insert>
 	
 	<select id="getAlarm" resultType="com.wda.sc.domain.AlarmVO">
-		select * from alarm where site_id = #{site_id}
+		select alarm_no,site_id,alarm_content,substr(alarm_time,0,14) as alarm_time,send_user from alarm where site_id = #{site_id}
 	</select>
 	
 	<select id="getPageNum" resultType="int">
@@ -60,6 +60,6 @@
 	</insert>
 	
 	<insert id="insertAlarm" parameterType="com.wda.sc.domain.AlarmVO">
-		insert into alarm(alarm_no,site_id,alarm_content,alarm_time,send_user) values('2', #{site_id},#{alarm_content},sysdate,#{send_user})
+		insert into alarm(alarm_no,site_id,alarm_content,alarm_time,send_user) values(alarm_seq.nextval, #{site_id},#{alarm_content},sysdate,#{send_user})
 	</insert>
 </mapper>

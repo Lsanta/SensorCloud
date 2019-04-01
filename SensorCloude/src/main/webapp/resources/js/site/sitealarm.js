@@ -92,6 +92,11 @@ $(document).ready(function(){
 		var site_id = sid2[0];
 		var alarm_content = $("#textarea").val();
 		
+		if( alarm_content == ""){
+			alert("문자내용을 적어주세요");
+			 $("#textarea").focus();
+			 return;
+		}
 		var query = { alarm_content : alarm_content, site_id : site_id}
 		
 		
