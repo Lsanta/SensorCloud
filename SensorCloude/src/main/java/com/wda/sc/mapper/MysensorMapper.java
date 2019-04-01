@@ -8,4 +8,5 @@ public interface MysensorMapper {
 
 	public ArrayList<MysensorVO> getList();
 	public int insertmysensor(MysensorVO vo);
+	public int deletemysensor(MysensorVO vo);
 }

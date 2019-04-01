@@ -11,4 +11,8 @@
 	<insert id="insertmysensor" parameterType="com.wda.sc.domain.MysensorVO">
 		insert into my_sensor(sensor_sn,model_name,sensor_kind,manufacturer,voltage) values(#{sensor_sn}, #{model_name},#{sensor_kind},#{manufacturer},#{voltage})
 	</insert>
+	
+	<delete id="deletemysensor" parameterType="com.wda.sc.domain.MysensorVO">
+		delete from my_sensor where sensor_sn = #{sensor_sn}
+	</delete>
 </mapper>

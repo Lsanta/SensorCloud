@@ -25,5 +25,11 @@ public class MysensorServiceImplement implements MysensorService {
 		// TODO Auto-generated method stub
 		return mapper.insertmysensor(vo);
 	}
+
+	@Override
+	public int deletemysensor(MysensorVO vo) {
+
+		return mapper.deletemysensor(vo);
+	}
 	
 }

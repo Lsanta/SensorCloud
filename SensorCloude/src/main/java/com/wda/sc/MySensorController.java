@@ -34,7 +34,7 @@ public class MySensorController {
 	@RequestMapping(value ="mysensoradd.do")
 	@ResponseBody
 		public String mysensoradd(MysensorVO vo) {
-			//연락망 추가 폼을 이용한 추가
+			//보유센서 추가
 			
 			int a = mysensorservice.insertmysensor(vo);
 			
@@ -47,4 +47,19 @@ public class MySensorController {
 			return "false";
 		}
 	
+	// 보유센서 delete
+	@RequestMapping(value ="mysensordelete.do")
+	@ResponseBody
+		public String mysensordelete(MysensorVO vo) {
+			//보유센서 삭제
+				
+			int a = mysensorservice.deletemysensor(vo);
+				
+			if( a == 0) {
+				return "false";
+			} else if( a == 1){
+				return "success";
+			}
+				return "false";
+			}
 }

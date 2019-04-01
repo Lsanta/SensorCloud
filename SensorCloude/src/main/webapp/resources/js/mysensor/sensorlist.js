@@ -9,14 +9,27 @@ $(document).ready(function() {
 	$(".delete").on('click', function(){
 		var sn = $(this).parent();
 		var sn2 = sn.siblings().first();
-		var sn3 = sn2.text(); 
-			
-		console.log(sn3);
-		
-		
+		var sn3 = sn2.text(); // 선택한 것 중 센서 번호
+
 		var query = {
-				sensor_sn : $("#sensor_sn").val(),
+				sensor_sn : sn3
 		}
+		
+		$.ajax({
+			  type : "POST",
+			  url : "/mysensor/mysensordelete.do",
+			  data : query,
+			  success : function(data){
+				  if( data == "success"){
+					  alert("삭제되었습니다");
+					  location.reload();
+				  } else{
+					  alert("삭제에 실패했습니다");
+				  }
+			  }
+			  
+		}); // ajax 종료
+		
 	});
 	
 	
