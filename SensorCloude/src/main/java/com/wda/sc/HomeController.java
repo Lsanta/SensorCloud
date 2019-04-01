@@ -67,6 +67,7 @@ public class HomeController {
 
 		model.addAttribute("pageNum",arr);
 		model.addAttribute("checkboardlist",checkboardservice.getList(page));
+		System.out.println(checkboardservice.getList(page));
 		return "check/check";
 	}
 

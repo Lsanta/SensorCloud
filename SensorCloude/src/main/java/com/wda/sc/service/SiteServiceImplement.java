@@ -25,9 +25,9 @@ public class SiteServiceImplement implements SiteService {
 	}
 	
 	@Override
-	public ArrayList<CheckBoardVO> sitecheck(String site_id) {
+	public ArrayList<CheckBoardVO> repairList(String site_id) {
 		//site_id를 통한 해당현장에 대한 점검이력 가져오기
-		return mapper.sitecheck(site_id);
+		return mapper.repairList(site_id);
 	}
 
 	@Override
