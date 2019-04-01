@@ -1,6 +1,7 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
@@ -19,6 +20,7 @@ public interface SiteService {
 	public ArrayList<SiteVO> getContent(Paging p);
 	public int insertAlarmMember(AlarmMemberVO vo);
 	public int insertAlarm(AlarmVO vo);
-	public ArrayList<CheckBoardVO> repairList(String site_id);
+	public ArrayList<CheckBoardVO> repairList(Map<String, Object> parm);
+	public int repairPageNum(String site_id);
 
 }
