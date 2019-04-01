@@ -8,5 +8,5 @@ public interface TimelineMapper {
     
 	public ArrayList<TimelineVO> timedesc();
 	public ArrayList<TimelineVO> getList();
-	public int submit(TimelineVO timeline);
+	public int submit(TimelineVO vo);
 }
