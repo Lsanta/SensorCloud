@@ -6,8 +6,10 @@
 
 	<select id="getList" resultType="com.wda.sc.domain.SiteVO">
 	<![CDATA[
-		select site_id,type_no,site_name,address,site_status,substr(start_date,0,14) as start_date from site where rownum < 17 order by site_id asc
-		]]>
+		select site_id,type_no,site_name,address,site_status,substr(start_date,0,14) as start_date 
+		from (select * from site order by site_status desc)
+		where rownum < 17 
+	]]>
 	</select>
 
 	<select id="getSite" resultType="com.wda.sc.domain.SiteVO">
@@ -47,8 +49,9 @@
 		<![CDATA[
 		select rownum, x.site_id as site_id,x.type_no as type_no,x.site_name as site_name ,x.address as address ,x.site_status as site_status ,x.start_date as start_date 
 		from (select rownum as rnum,site_id,type_no,site_name,address,site_status,substr(start_date,0,14) as start_date
-			  from site where rownum < #{endnum}) x
+			  from (select * from site order by site_status desc) where rownum < #{endnum}) x
 		where x.rnum >= #{startnum}
+		order by x.site_status desc
 		]]>
 	</select>
 
