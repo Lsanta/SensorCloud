@@ -48,22 +48,49 @@ public class HomeController {
 		return "main";
 	}
 
-	@RequestMapping(value = "/check", method = RequestMethod.GET)
-	public String check(Locale locale, Model model) {
-		model.addAttribute("checkboardlist",checkboardservice.getList());
+	@RequestMapping(value = "/check"+"/{num}", method = RequestMethod.GET)
+	public String check(@PathVariable String num, Model model) {
+		Paging page = new Paging();
+		int pageNum = 0;
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int realNum = Integer.parseInt(num);
+		
+		page.setTotalNum(checkboardservice.getPageNum());
+
+		System.out.println(page.getTotalNum());
+		if(page.getTotalNum() < page.getOnePageBoard()) {
+			pageNum = 1;
+		}else {
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+		}
+		
+		for(int i = 0; i < pageNum; i ++) {
+			arr.add(i+1);
+		}
+
+		page.setEndnum((realNum*10)+1);
+		page.setStartnum(page.getEndnum()-10);
+
+		model.addAttribute("pageNum",arr);
+		model.addAttribute("checkboardlist",checkboardservice.getList(page));
+		System.out.println(checkboardservice.getList(page));
 		return "check/check";
 	}
 
 	@RequestMapping(value = "/sitelist"+"/{num}", method = RequestMethod.GET)
-	public String pageList(@PathVariable String num, Model model) {
-		System.out.println("page");
+	public String siteList(@PathVariable String num, Model model) {
 		Paging page = new Paging();
-
+		int pageNum = 0;
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		int realNum = Integer.parseInt(num);
 		
 		page.setTotalNum(siteservice.getPageNum());
-		int pageNum = page.getTotalNum()/page.getOnePageBoard();
+		
+		if(page.getTotalNum() < page.getOnePageBoard() ) {
+			pageNum = 1;
+		}else {
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+		}
 
 		for(int i = 0; i < pageNum; i ++) {
 			arr.add(i+1);

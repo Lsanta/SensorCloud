@@ -1,7 +1,9 @@
 package com.wda.sc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -62,13 +64,37 @@ public class SiteController {
 		return "site/sitealarm";
 	}
 		
-	@RequestMapping(value = "{site_id}" + "/siterepair", method = RequestMethod.GET)
-	public String siterepair(@PathVariable String site_id, Model model) {
-		System.out.println("수리내역");
-		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
-		model.addAttribute("checkboardlist",siteservice.sitecheck(site_id));// 수리내역
-		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));  //연락망
-		System.out.println(siteservice.sitecheck(site_id));
+	@RequestMapping(value = "{site_id}" + "/siterepair"+"/{num}", method = RequestMethod.GET)
+	public String siterepair(@PathVariable String num ,@PathVariable Object site_id, Model model) {
+		
+		int pageNum=0;
+		Paging page = new Paging();
+		Map<String, Object> parm = new HashMap<String, Object>();
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int realNum = Integer.parseInt(num);
+		
+		page.setTotalNum(siteservice.repairPageNum(site_id.toString()));
+		
+		if(page.getTotalNum() < page.getOnePageBoard() ) {
+			pageNum = 1;
+		}else {
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+		}
+		
+		for(int i = 0; i < pageNum; i ++) {
+			arr.add(i+1);
+		}
+
+		page.setEndnum((realNum*10)+1);
+		page.setStartnum(page.getEndnum()-10);
+		
+		parm.put("paging", page);
+		parm.put("site_id", site_id);
+		
+		model.addAttribute("pageNum",arr);
+		model.addAttribute("siteInfo",siteservice.getSite(site_id.toString()));  //현장정보
+		model.addAttribute("checkboardlist",siteservice.repairList(parm));// 수리내역
+		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id.toString()));  //연락망
 		return "site/siterepair";
 	}
 

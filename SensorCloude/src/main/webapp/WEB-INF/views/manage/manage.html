@@ -28,13 +28,13 @@
 						<th style="width:5%;"></th>
 					</tr>
 				</thead>
-				<tbody onClick="goPopup()">
+				<tbody id="user">
 				 	<tr th:each="userlist : ${userlist}">
 						<td th:text="${userlist.user_id}">status</td>
 						<td th:text="${userlist.name}">status</td>
 						<td th:text="${userlist.phone}">status</td>
 						<td th:text="${userlist.m_level}">status</td>
-						<td><button id="delete">삭제</button></td>
+						<td><button class="delete">삭제</button></td>
 					</tr>
 
 				</tbody>

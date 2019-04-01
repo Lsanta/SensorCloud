@@ -1,6 +1,7 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -25,9 +26,9 @@ public class SiteServiceImplement implements SiteService {
 	}
 	
 	@Override
-	public ArrayList<CheckBoardVO> sitecheck(String site_id) {
+	public ArrayList<CheckBoardVO> repairList(Map<String, Object> parm) {
 		//site_id를 통한 해당현장에 대한 점검이력 가져오기
-		return mapper.sitecheck(site_id);
+		return mapper.repairList(parm);
 	}
 
 	@Override
@@ -66,6 +67,12 @@ public class SiteServiceImplement implements SiteService {
 	public int getPageNum() {
 		// TODO Auto-generated method stub
 		return mapper.getPageNum();
+	}
+	
+	@Override
+	public int repairPageNum(String site_id) {
+		// TODO Auto-generated method stub
+		return mapper.repairPageNum(site_id);
 	}
 	
 	@Override
