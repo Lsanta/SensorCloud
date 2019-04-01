@@ -8,36 +8,40 @@ $(document).ready(function() {
 	$('.update').click(function() {
 		window.location.href = "/mypage/modifymypage";
 	});
+function login() {
 
-	$(".mpmodify-submit").on('click', function() {
+	var passwd = $("#pass").val();
 
-		var passwd = $("#pass").val();
+	if (passwd = "") {
+		alert("사용자 정보 수정을위해 비밀번호를 입력해주세요");
+		$("#pass").focus();
+		return;
+	}
 
-		if (passwd = "") {
-			alert("사용자 정보 수정을위해 비밀번호를 입력해주세요");
-			$("#pass").focus();
-			return;
-		}
+	var query = {
+		password : $("#pass").val()
+	};
 
-		var query = {
-			password : $("#pass").val()
-		};
+	$.ajax({
 
-		$.ajax({
+		type : "POST",
+		dataType : "text",
+		data : query,
+		url : "/mypage/mypageconfirmpasswd.do",
+		success : function(data) {
+			if (data == "success") {
+				alert("비밀번호 일치");
 
-			type : "POST",
-			dataType : "text",
-			data : query,
-			url : "/mypage/mypageconfirmpasswd.do",
-			success : function(data) {
-				if (data == "success") {
-					alert("비밀번호 일치");
-
-					window.location.href = "/mypage/modifymyinfo";
-				}
+				window.location.href = "/mypage/modifymyinfo";
+			} else {
+				alert("비밀번호가 틀렸습니다.");
 			}
-		});
-
+		}
+	});
+}
+	$(".mpmodify-submit").on('click', function() {
+		login();
+		
 	});
 
 	$('.confirm-modify').click(function() {
@@ -86,9 +90,15 @@ $(document).ready(function() {
 			});
 		
 		}
-		
-	
 
 	});
+	
+	 //패스워드에 커서를 두고 엔터키를 누르면 로그인 함
+    $("#pass").keydown(function(key) {
+       if (key.keyCode == 13) {
+          login();
+       }
+    });
+    
 
 });

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.wda.sc.domain.AlarmMemberVO;
+import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.SiteVO;
@@ -103,19 +105,11 @@ public class SiteController {
 		
 		return "site/sitelist";
 	}
-	
-	@RequestMapping(value = "{site_id}" + "/sitealarm/add", method = RequestMethod.GET)
-	public String AlarmMemberadd(@PathVariable String site_id) {
 		
-		return "site/alarmadd";
-	}
-
-	
-	
-	//팝업창에서 Insert
-	@RequestMapping(value ="alarmadd.do")
+	// 알림 Insert
+	@RequestMapping(value ="alarmMemberadd.do")
 	@ResponseBody
-	public String alarmadd(AlarmMemberVO vo) {
+	public String alarmMemberadd(AlarmMemberVO vo) {
 		//연락망 추가 폼을 이용한 추가
 		
 		int a = siteservice.insertAlarmMember(vo);
@@ -128,4 +122,23 @@ public class SiteController {
 		
 		return "false";
 	}
+	
+	@RequestMapping(value ="alarmadd.do")
+	@ResponseBody
+	public String alarmadd(AlarmVO vo, HttpSession session) {
+		//연락망 추가 폼을 이용한 추가
+		String user = (String) session.getAttribute("id");
+		vo.setSend_user(user);
+		
+		int a = siteservice.insertAlarm(vo);
+		
+		if( a == 0) {
+			return "false";
+		} else if( a == 1){
+			return "success";
+		}
+		
+		return "false";
+	}
+	
 }

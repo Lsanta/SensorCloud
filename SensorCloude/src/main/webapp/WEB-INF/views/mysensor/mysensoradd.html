@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>팝업창</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function(){
+		
+		$("#plus").click(function(){
+			var query = { 
+							sensor_sn : $("#sensor_sn").val(),
+							sensor_kind : $("#sensor_kind").val(),
+							model_name : $("#model_name").val(),
+							voltage : $("#voltage").val(),
+							manufacturer : $("#manufacturer").val()
+						}
+			
+			console.log(query);
+			$.ajax({
+				  type : "POST",
+				  url : "/mysensor/mysensoradd.do",
+				  data : query,
+				  success : function(data){
+					  if( data == "success"){
+						  alert("추가되었습니다");
+							
+						  location.reload();
+					  } else{
+						  alert("추가에 실패했습니다");
+					  }
+				  }
+				  
+			}); // ajax 종료
+			
+		}); // #plus 종료
+		
+	});
+</script>
+</head>
+<body>
+	시리얼넘버<input type="text" id="sensor_sn" name="sensor_sn" /><br/>
+	종류<input type="text" id="sensor_kind" name="sensor_kind" /><br/>
+	모델명<input type="text" id="model_name" name="model_name" /><br/>
+	전압<input type="text" id="voltage" name="voltage" /><br/>
+	제조사<input type="text" id="manufacturer" name="manufacturer" /><br/>
+	<input type="button"  value="추가" id="plus" />
+</body> 
+</html>
