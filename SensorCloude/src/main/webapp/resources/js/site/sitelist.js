@@ -14,33 +14,30 @@ $(document).on("click", "#site tr" , function(){
 $(document).ready(function() {
 	var num = 0;
 
-	
 	var newURL =  window.location.pathname;
-	
-	console.log(newURL.substring(10,11));
-	if(newURL.substring(10,11) != null){
-		$("#"+newURL.substring(10,11)+"").addClass('pagination-active');
+	var url = newURL.split('/');
+	if(url[2] != null){
+		$("#"+url[2]+"").addClass('pagination-active');
 	}
-	
 
 	$('.pagination-inner a').on('click', function() {
 		var a = $(".pagination-inner a").index(this);
 		num = a;
 		window.location.href = "/sitelist/"+(num+1);
 	});
-	
+
 	$('.pagination-newer').click(function(){
-		if(1 > parseInt(newURL.substring(10,11))-1 )
-			window.location.href = "/sitelist/"+(parseInt(newURL.substring(10,11)));
+		if(1 > parseInt(url[2])-1 )
+			window.location.href = "/sitelist/"+(parseInt(url[2]));
 		else
-			window.location.href = "/sitelist/"+(parseInt(newURL.substring(10,11))-1);
+			window.location.href = "/sitelist/"+(parseInt(url[2])-1);
 	});
-	
+
 	$('.pagination-older').click(function(){
-		if(parseInt($('.pagination-inner a:last').text()) < parseInt(newURL.substring(10,11))+1 )
-			window.location.href = "/sitelist/"+(parseInt(newURL.substring(10,11)));
+		if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[2])+1 )
+			window.location.href = "/sitelist/"+(parseInt(url[2]));
 		else
-			window.location.href = "/sitelist/"+(parseInt(newURL.substring(10,11))+1);
+			window.location.href = "/sitelist/"+(parseInt(url[2])+1);
 	});
 
 });

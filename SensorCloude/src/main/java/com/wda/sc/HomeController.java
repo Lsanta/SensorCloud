@@ -51,13 +51,19 @@ public class HomeController {
 	@RequestMapping(value = "/check"+"/{num}", method = RequestMethod.GET)
 	public String check(@PathVariable String num, Model model) {
 		Paging page = new Paging();
-
+		int pageNum = 0;
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		int realNum = Integer.parseInt(num);
 		
 		page.setTotalNum(checkboardservice.getPageNum());
-		int pageNum = page.getTotalNum()/page.getOnePageBoard();
 
+		System.out.println(page.getTotalNum());
+		if(page.getTotalNum() < page.getOnePageBoard()) {
+			pageNum = 1;
+		}else {
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+		}
+		
 		for(int i = 0; i < pageNum; i ++) {
 			arr.add(i+1);
 		}
@@ -74,12 +80,17 @@ public class HomeController {
 	@RequestMapping(value = "/sitelist"+"/{num}", method = RequestMethod.GET)
 	public String siteList(@PathVariable String num, Model model) {
 		Paging page = new Paging();
-
+		int pageNum = 0;
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		int realNum = Integer.parseInt(num);
 		
 		page.setTotalNum(siteservice.getPageNum());
-		int pageNum = page.getTotalNum()/page.getOnePageBoard();
+		
+		if(page.getTotalNum() < page.getOnePageBoard() ) {
+			pageNum = 1;
+		}else {
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+		}
 
 		for(int i = 0; i < pageNum; i ++) {
 			arr.add(i+1);

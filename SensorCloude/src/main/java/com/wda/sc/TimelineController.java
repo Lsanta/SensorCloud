@@ -1,11 +1,15 @@
 package com.wda.sc;
 
 import java.util.ArrayList;
+import java.util.Locale;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wda.sc.domain.TimelineVO;
 import com.wda.sc.service.TimelineService;
@@ -19,21 +23,31 @@ public class TimelineController {
 	
 	private TimelineService timelineservice;
 	
-	@RequestMapping(value ="submit", method = RequestMethod.POST)
-	public String submit(TimelineVO m) {
+	@RequestMapping(value = "timeline", method = RequestMethod.GET)
+	public String timeline(Locale locale, Model model, HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		model.addAttribute("userInfo",timelineservice.getInfo(id));
+		System.out.println(id);
 		
-		ArrayList<TimelineVO> arr = new ArrayList<TimelineVO>();
-		System.out.println(m);
-		int checknum = timelineservice.submit(m);
 		
-		if(checknum == 1) {
-			return "";
-		}
-		else if(checknum == 0) {
-			return "";
-		}
-		
-		return "";
+		return "timeline/timeline";
 	}
-
+	
+	
+	
+	@RequestMapping(value ="timeline.do")
+	@ResponseBody
+		public String timeline(TimelineVO vo) {
+			
+			int a = timelineservice.submit(vo);
+			
+			if( a == 0) {
+				return "false";
+			} else if( a == 1){
+				return "success";
+			}
+			
+			return "false";
+		}
+	
 }
