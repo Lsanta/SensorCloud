@@ -54,7 +54,7 @@ public class HomeController {
 		return "check/check";
 	}
 
-	@RequestMapping(value = "/sitelist"+"{num}", method = RequestMethod.GET)
+	@RequestMapping(value = "/sitelist"+"/{num}", method = RequestMethod.GET)
 	public String pageList(@PathVariable String num, Model model) {
 		System.out.println("page");
 		Paging page = new Paging();

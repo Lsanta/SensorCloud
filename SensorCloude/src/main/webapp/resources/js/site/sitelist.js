@@ -17,30 +17,30 @@ $(document).ready(function() {
 	
 	var newURL =  window.location.pathname;
 	
-	console.log(newURL.substring(9,10));
-	if(newURL.substring(9,10) != null){
-		$("#"+newURL.substring(9,10)+"").addClass('pagination-active');
+	console.log(newURL.substring(10,11));
+	if(newURL.substring(10,11) != null){
+		$("#"+newURL.substring(10,11)+"").addClass('pagination-active');
 	}
 	
 
 	$('.pagination-inner a').on('click', function() {
 		var a = $(".pagination-inner a").index(this);
 		num = a;
-		window.location.href = "/sitelist"+(num+1);
+		window.location.href = "/sitelist/"+(num+1);
 	});
 	
 	$('.pagination-newer').click(function(){
-		if(1 > parseInt(newURL.substring(9,10))-1 )
-			window.location.href = "/sitelist"+(parseInt(newURL.substring(9,10)));
+		if(1 > parseInt(newURL.substring(10,11))-1 )
+			window.location.href = "/sitelist/"+(parseInt(newURL.substring(10,11)));
 		else
-			window.location.href = "/sitelist"+(parseInt(newURL.substring(9,10))-1);
+			window.location.href = "/sitelist/"+(parseInt(newURL.substring(10,11))-1);
 	});
 	
 	$('.pagination-older').click(function(){
-		if(parseInt($('.pagination-inner a:last').text()) < parseInt(newURL.substring(9,10))+1 )
-			window.location.href = "/sitelist"+(parseInt(newURL.substring(9,10)));
+		if(parseInt($('.pagination-inner a:last').text()) < parseInt(newURL.substring(10,11))+1 )
+			window.location.href = "/sitelist/"+(parseInt(newURL.substring(10,11)));
 		else
-			window.location.href = "/sitelist"+(parseInt(newURL.substring(9,10))+1);
+			window.location.href = "/sitelist/"+(parseInt(newURL.substring(10,11))+1);
 	});
 
 });

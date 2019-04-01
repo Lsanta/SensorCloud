@@ -16,7 +16,7 @@
     <div id="left-content">
       <div class="title-header">
           <h1>현장목록</h1>
-          <a href="/sitelist">more</a>
+          <a href="/sitelist/1">more</a>
       </div>
       <table id="siteTable">
         <thead>
@@ -31,10 +31,10 @@
         <tbody id="site">
           <tr th:each="sitelist : ${sitelist}">
            <td th:switch="${sitelist.site_status}">
-<img src="resources/img/gray.svg"  th:case="'0'">
-<img src="resources/img/green.svg" th:case="'1'">
-<img src="resources/img/red.svg"   th:case="'2'">
-</td>
+				<img src="resources/img/gray.svg"  th:case="'0'">
+				<img src="resources/img/green.svg" th:case="'1'">
+				<img src="resources/img/red.svg"   th:case="'2'">
+			</td>
             <td th:text="${sitelist.site_name}"></td>
             <td th:text="${sitelist.address}"></td>
             <td th:text="${sitelist.start_date}"></td>

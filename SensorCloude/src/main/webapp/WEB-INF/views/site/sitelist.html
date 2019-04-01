@@ -32,9 +32,9 @@
 				<tbody id="site">
 					<tr th:each="content : ${content}">
 						 <td th:switch="${content.site_status}">
-							<img src="resources/img/gray.svg"  th:case="'0'">
-							<img src="resources/img/green.svg" th:case="'1'">
-							<img src="resources/img/red.svg"   th:case="'2'">
+							<img src="/resources/img/gray.svg"  th:case="'0'">
+							<img src="/resources/img/green.svg" th:case="'1'">
+							<img src="/resources/img/red.svg"   th:case="'2'">
 						</td>
 						<td th:text="${content.site_name}"></td>
 						<td th:text="${content.address}"></td>
