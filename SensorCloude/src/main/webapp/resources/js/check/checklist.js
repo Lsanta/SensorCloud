@@ -1,11 +1,5 @@
 $(document).ready(function() {
 
-	$('.pagination-inner a').on('click', function() {
-		$(this).siblings().removeClass('pagination-active');
-		$(this).addClass('pagination-active');
-	});
-
-
 	$(document).on("click", "#checklist tr" , function(){
 
 		//클릭한 행을 tr 변수로 
@@ -22,9 +16,9 @@ $(document).ready(function() {
 
 	var newURL =  window.location.pathname;
 
-	console.log(newURL.substring(7,8));
-	if(newURL.substring(7,8) != null){
-		$("#"+newURL.substring(7,8)+"").addClass('pagination-active');
+	var url = newURL.split('/');
+	if(url[2] != null){
+		$("#"+url[2]+"").addClass('pagination-active');
 	}
 
 	$('.pagination-inner a').on('click', function() {
@@ -34,17 +28,17 @@ $(document).ready(function() {
 	});
 
 	$('.pagination-newer').click(function(){
-		if(1 > parseInt(newURL.substring(7,8))-1 )
-			window.location.href = "/check/"+(parseInt(newURL.substring(7,8)));
+		if(1 > parseInt(url[2])-1 )
+			window.location.href = "/check/"+(parseInt(url[2]));
 		else
-			window.location.href = "/check/"+(parseInt(newURL.substring(7,8))-1);
+			window.location.href = "/check/"+(parseInt(url[2])-1);
 	});
 
 	$('.pagination-older').click(function(){
-		if(parseInt($('.pagination-inner a:last').text()) < parseInt(newURL.substring(7,8))+1 )
-			window.location.href = "/check/"+(parseInt(newURL.substring(7,8)));
+		if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[2])+1 )
+			window.location.href = "/check/"+(parseInt(url[2]));
 		else
-			window.location.href = "/check/"+(parseInt(newURL.substring(7,8))+1);
+			window.location.href = "/check/"+(parseInt(url[2])+1);
 	});
 
 });
