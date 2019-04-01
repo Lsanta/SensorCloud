@@ -17,8 +17,8 @@ public interface SiteService {
 	public ArrayList<AlarmVO> getAlarm(String site_id);
 	public int getPageNum();
 	public ArrayList<SiteVO> getContent(Paging p);
-	public ArrayList<CheckBoardVO> sitecheck(String site_id);
 	public int insertAlarmMember(AlarmMemberVO vo);
 	public int insertAlarm(AlarmVO vo);
+	public ArrayList<CheckBoardVO> repairList(String site_id);
 
 }

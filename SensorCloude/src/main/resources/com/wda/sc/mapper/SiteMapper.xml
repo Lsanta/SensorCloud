@@ -16,7 +16,7 @@
 		select * from site where site_id = #{site_id}
 	</select>
 	
-	<select id="sitecheck" resultType="com.wda.sc.domain.CheckBoardVO">
+	<select id="repairList" resultType="com.wda.sc.domain.CheckBoardVO">
 		 select
   check_board.user_id,
   substr(check_board.reg_date,0,14) as reg_date,
