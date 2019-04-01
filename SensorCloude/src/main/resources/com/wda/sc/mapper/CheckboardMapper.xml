@@ -5,13 +5,24 @@
 <mapper namespace="com.wda.sc.mapper.CheckboardMapper">
 
 	<select id="getList" resultType="com.wda.sc.domain.CheckBoardVO">
-		select m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
-		from (select check_board.user_id, check_board.title,
+		select c.board_no,m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
+		from (select board_no,check_board.user_id, check_board.title,
         	  substr(check_board.reg_date,0,14) as reg_date,
         	  check_board.board_status,check_board.site_id, site.site_name
 			  from check_board,site
 			  where check_board.site_id = site.site_id) c,member m
 		where c.user_id = m.user_id
+	</select>
+	
+	<select id="viewgetList" resultType="com.wda.sc.domain.CheckBoardVO">
+	select c.board_no,m.name, c.user_id, c.title, c.board_content, c.reg_date,c.board_status,c.site_name 
+		from (select board_no,check_board.user_id, check_board.title, check_board.board_content,
+        	  substr(check_board.reg_date,0,14) as reg_date,
+        	  check_board.board_status,check_board.site_id, site.site_name
+			  from check_board,site
+			  where check_board.site_id = site.site_id) c,member m
+		where c.user_id = m.user_id
+		and c.board_no = #{board_no}
 	</select>
 
 	

@@ -19,4 +19,10 @@ public class CheckboardServiceImplement implements CheckboardService {
 	public ArrayList<CheckBoardVO> getList(){
 		return mapper.getList();
 	}
+
+	@Override
+	public ArrayList<CheckBoardVO> viewgetList(String board_no) {
+		// TODO Auto-generated method stub
+		return mapper.viewgetList(board_no);
+	}
 }

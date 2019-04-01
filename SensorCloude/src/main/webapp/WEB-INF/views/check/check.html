@@ -28,13 +28,15 @@
 						<th scope="col">날짜</th>
 					</tr>
 				</thead>
-				<tbody>
-				 	<tr th:each="checkboardlist : ${checkboardlist}">
+				<tbody id="checklist">
+				 	<tr th:each="checkboardlist : ${checkboardlist}" >
 						<td th:text="${checkboardlist.site_name}">status</td>
 						<td th:text="${checkboardlist.title}">status</td>
 						<td th:text="${checkboardlist.board_status}">status</td>
 						<td th:text="${checkboardlist.name}">status</td>
 						<td th:text="${checkboardlist.reg_date}">status</td>
+						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
+						
 					</tr> 
 
 				</tbody>

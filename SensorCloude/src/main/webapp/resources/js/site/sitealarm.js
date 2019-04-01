@@ -92,9 +92,6 @@ $(document).ready(function(){
 		var site_id = sid2[0];
 		var alarm_content = $("#textarea").val();
 		
-		console.log(site_id);
-		console.log(alarm_content);
-		
 		var query = { alarm_content : alarm_content, site_id : site_id}
 		
 		
