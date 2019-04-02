@@ -50,11 +50,6 @@ public class SiteServiceImplement implements SiteService {
 		return mapper.siteadd(site);
 	}
 	
-	@Override
-	public int insertsite(SiteVO sa) {
-		// 현장추가
-		return mapper.insertsite(sa);
-	}
 
 	@Override
 	public ArrayList<AlarmVO> getAlarm(String site_id) {

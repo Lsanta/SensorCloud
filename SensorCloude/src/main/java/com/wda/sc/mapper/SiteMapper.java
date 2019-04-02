@@ -33,5 +33,5 @@ public interface SiteMapper {
 	public int insertAlarm(AlarmVO vo);
 	
 	public int repairPageNum(String site_id);
-	public int insertsite(SiteVO sa);
+	
 }
