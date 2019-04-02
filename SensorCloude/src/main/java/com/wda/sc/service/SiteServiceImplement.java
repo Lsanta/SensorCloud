@@ -1,6 +1,7 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,7 @@ import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.mapper.SiteMapper;
 
@@ -25,9 +27,9 @@ public class SiteServiceImplement implements SiteService {
 	}
 	
 	@Override
-	public ArrayList<CheckBoardVO> repairList(String site_id) {
+	public ArrayList<CheckBoardVO> repairList(Map<String, Object> parm) {
 		//site_id를 통한 해당현장에 대한 점검이력 가져오기
-		return mapper.repairList(site_id);
+		return mapper.repairList(parm);
 	}
 
 	@Override
@@ -47,6 +49,7 @@ public class SiteServiceImplement implements SiteService {
 		System.out.println(site);
 		return mapper.siteadd(site);
 	}
+	
 
 	@Override
 	public ArrayList<AlarmVO> getAlarm(String site_id) {
@@ -66,6 +69,12 @@ public class SiteServiceImplement implements SiteService {
 	public int getPageNum() {
 		// TODO Auto-generated method stub
 		return mapper.getPageNum();
+	}
+	
+	@Override
+	public int repairPageNum(String site_id) {
+		// TODO Auto-generated method stub
+		return mapper.repairPageNum(site_id);
 	}
 	
 	@Override

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.TimelineVO;
 import com.wda.sc.mapper.TimelineMapper;
 
@@ -16,9 +17,9 @@ public class TimelineServiceImplement implements TimelineService {
 	private TimelineMapper mapper;
 
 	@Override
-	public int submit(TimelineVO timeline) {
+	public int insert(TimelineVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.submit(timeline);
+		return mapper.insert(vo);
 	}
 
 	@Override
@@ -31,6 +32,12 @@ public class TimelineServiceImplement implements TimelineService {
 	public ArrayList<TimelineVO> timedesc() {
 		// TODO Auto-generated method stub
 		return mapper.timedesc();
+	}
+
+	@Override
+	public ArrayList<MemberVO> getInfo(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

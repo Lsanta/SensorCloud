@@ -1,7 +1,9 @@
 package com.wda.sc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.MemberVO;
+import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.SiteService;
@@ -62,13 +65,37 @@ public class SiteController {
 		return "site/sitealarm";
 	}
 		
-	@RequestMapping(value = "{site_id}" + "/siterepair", method = RequestMethod.GET)
-	public String siterepair(@PathVariable String site_id, Model model) {
+	@RequestMapping(value = "{site_id}" + "/siterepair"+"/{num}", method = RequestMethod.GET)
+	public String siterepair(@PathVariable String num ,@PathVariable Object site_id, Model model) {
 		
-		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
-		model.addAttribute("checkboardlist",siteservice.repairList(site_id));// 수리내역
-		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));  //연락망
-		System.out.println(siteservice.repairList(site_id));
+		int pageNum=0;
+		Paging page = new Paging();
+		Map<String, Object> parm = new HashMap<String, Object>();
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int realNum = Integer.parseInt(num);
+		
+		page.setTotalNum(siteservice.repairPageNum(site_id.toString()));
+		
+		if(page.getTotalNum() < page.getOnePageBoard() ) {
+			pageNum = 1;
+		}else {
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+		}
+		
+		for(int i = 0; i < pageNum; i ++) {
+			arr.add(i+1);
+		}
+
+		page.setEndnum((realNum*10)+1);
+		page.setStartnum(page.getEndnum()-10);
+		
+		parm.put("paging", page);
+		parm.put("site_id", site_id);
+		
+		model.addAttribute("pageNum",arr);
+		model.addAttribute("siteInfo",siteservice.getSite(site_id.toString()));  //현장정보
+		model.addAttribute("checkboardlist",siteservice.repairList(parm));// 수리내역
+		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id.toString()));  //연락망
 		return "site/siterepair";
 	}
 
@@ -89,25 +116,27 @@ public class SiteController {
 		
 		return "site/download";
 	}	
+<<<<<<< HEAD
 	
 	
 	
 	
+=======
+
+	//현장추가
+>>>>>>> 32d6b9934308e5c6194e05fd9d2a956166b1373e
 	@RequestMapping(value ="/siteadd", method = RequestMethod.POST)
 	public String siteadd(SiteVO s) {
 			
-		System.out.println(s);
-		int checknum = siteservice.siteadd(s);
-		
-		if(checknum == 1) {
-			return "site/sitelist";
-		}
-		else if(checknum == 0) {
-			return null;
-		}
-		
-		return "site/sitelist";
+		int a = siteservice.siteadd(s);				
+		if( a == 0) {
+			return "false";
+		} else if( a == 1){
+			return "success";
+		}			
+		return "false";
 	}
+
 		
 	// 알림 Insert
 	@RequestMapping(value ="alarmMemberadd.do")
