@@ -87,6 +87,10 @@ public class HomeController {
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		int realNum = Integer.parseInt(num);
 		page.setTotalNum(siteservice.getPageNum());
+<<<<<<< HEAD
+		int pageNum = page.getTotalNum()/page.getOnePageBoard();
+		
+=======
 		
 		if(page.getTotalNum() < page.getOnePageBoard() ) {
 			pageNum = 1;
@@ -94,10 +98,11 @@ public class HomeController {
 			pageNum = page.getTotalNum()/page.getOnePageBoard();
 		}
 
+>>>>>>> 32d6b9934308e5c6194e05fd9d2a956166b1373e
 		for(int i = 0; i < pageNum; i ++) {
 			arr.add(i+1);
 		}
-
+		
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
 

@@ -31,7 +31,11 @@ public interface SiteMapper {
 	public int insertAlarmMember(AlarmMemberVO vo);
 	
 	public int insertAlarm(AlarmVO vo);
+<<<<<<< HEAD
+ 
+=======
 	
 	public int repairPageNum(String site_id);
 	
+>>>>>>> 32d6b9934308e5c6194e05fd9d2a956166b1373e
 }

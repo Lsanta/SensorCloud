@@ -10,6 +10,11 @@ $(document).on("click", "#site tr" , function(){
 });
 
 
+/*검색 기능 */
+
+
+
+
 /*pagination*/
 $(document).ready(function() {
 	var num = 0;
@@ -39,7 +44,9 @@ $(document).ready(function() {
 		else
 			window.location.href = "/sitelist/"+(parseInt(url[2])+1);
 	});
-
+	
+	
+	
 });
 
 

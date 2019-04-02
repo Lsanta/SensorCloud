@@ -19,8 +19,16 @@ public interface SiteService {
 	public ArrayList<SiteVO> getContent(Paging p);
 	public int insertAlarmMember(AlarmMemberVO vo);
 	public int insertAlarm(AlarmVO vo);
+<<<<<<< HEAD
+	public ArrayList<CheckBoardVO> repairList(String site_id);
+	
+=======
 	public ArrayList<CheckBoardVO> repairList(Map<String, Object> parm);
 	public int repairPageNum(String site_id);
+<<<<<<< HEAD
 	public int insertsite(SiteVO site);
+=======
+>>>>>>> 32d6b9934308e5c6194e05fd9d2a956166b1373e
+>>>>>>> 281920c6edf1c3599a394091684898b86ae3b34b
 
 }

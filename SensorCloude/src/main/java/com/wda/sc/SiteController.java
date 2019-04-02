@@ -126,8 +126,33 @@ public class SiteController {
 		System.out.println("스크립트다운로드");
 		model.addAttribute("siteInfo",siteservice.getSite(site_id)); //현장정보
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
+<<<<<<< HEAD
 
 		return "site/download";
+=======
+		
+		return "site/download";
+	}	
+<<<<<<< HEAD
+	
+	
+	
+	
+=======
+
+	//현장추가
+>>>>>>> 32d6b9934308e5c6194e05fd9d2a956166b1373e
+	@RequestMapping(value ="/siteadd", method = RequestMethod.POST)
+	public String siteadd(SiteVO s) {
+			
+		int a = siteservice.siteadd(s);				
+		if( a == 0) {
+			return "false";
+		} else if( a == 1){
+			return "success";
+		}			
+		return "false";
+>>>>>>> 281920c6edf1c3599a394091684898b86ae3b34b
 	}
 
 	// 알림 Insert
