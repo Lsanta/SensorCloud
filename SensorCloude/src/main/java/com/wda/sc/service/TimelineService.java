@@ -11,4 +11,5 @@ public interface TimelineService {
 	public ArrayList<TimelineVO> timedesc();
 	public int insert(TimelineVO vo);
 	public ArrayList<MemberVO> getInfo(String id);
+
 }

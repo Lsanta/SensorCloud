@@ -14,8 +14,8 @@ $(document).ready(function(){
 	
 	$("#submit").click(function(){
 				var textarea  = $("#textarea").val();
-				var query = {user_id:$("#id").val()
-						};
+				
+				var query = {content:$("#textarea").val()};
 				
 		alert(textarea);
 		
@@ -37,6 +37,8 @@ $(document).ready(function(){
 		});
 		
 	}); 
+	
+	
 	
 	
 	

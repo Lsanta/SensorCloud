@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.timeline-header {
+  height: 30px;
+}
+
+.timeline-header h3 {
+  float: left;
+  margin: 0;
+}
+
+.timeline-header h5 {
+  float: right;
+  color: #524f4f;
+  margin: 0;
+}
+
+.timeline {
+  width: 780px;
+  height: 100px;
+  padding: 10px;
+  margin-left: -60px;
+  margin-bottom: 10px;
+  border: 1px solid #bcbcbc;
+}

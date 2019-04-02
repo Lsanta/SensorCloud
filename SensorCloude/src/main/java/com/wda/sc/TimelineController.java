@@ -29,7 +29,7 @@ public class TimelineController {
 	
 	 @RequestMapping(value = "timeline", method = RequestMethod.GET) 
 	 public String timeline(Locale locale, Model model, HttpSession session) {
-		
+		 
 	  return "timeline/timeline"; }
 	 
 	
@@ -39,21 +39,19 @@ public class TimelineController {
 		public String timeline(TimelineVO vo, HttpSession session, Model model) {
 		 String id = (String) session.getAttribute("id");
 		/* model.addAttribute("writingInfo",timelineservice.getInfo(id)); */
-			System.out.println(id);
-			System.out.println(vo);
+		 	vo.setUser_id(id);
+
 			int a = timelineservice.insert(vo);
-			
-			System.out.println(a);
-			System.out.println("fwfsdfwe");
+
 			
 			if( a == 0) {
-				System.out.println("1111111");
+				
 				return "false";
-			} else if( a == 1){
-				System.out.println("ddddd");
+			} else{
+				
 				return "success";
 			}
-			System.out.println("asasasas");
-			return "false";
+			
+		
 		}
 }

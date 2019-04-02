@@ -8,18 +8,19 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css"
-		href="/resources/css/timeline/timeline.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/timeline/timeline.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/timeline/timeline2.css">
 </th:block>
 
 
 
-<body>
+<th:block layout:fragment="contents">
 	<div id="container">
 		<div id="header">
 			<h1>타임라인</h1>
 			<hr size="2" noshade>
 		</div>
+		
 		<div id="content">
 			<div id="text">
 				<textarea name="textarea" id="textarea" maxlength="100" autofocus></textarea>
@@ -29,31 +30,25 @@
 					<!-- <script src="/resources/js/timeline/timeline.js"></script> -->
 				</div>
 			</div>
-			<div id="writing"></div>
-		</div>
-		<div id="footer">
-			<table border="1">
-				<thead>
-					<tr>
-					</tr>
-				</thead>
-				<tbody id="list">
 
-					<tr th:each="timelinelist : ${timelinelist}">
-					<td th:text="${timelinelist.name}"></td>
-					<td th:text="${timelinelist.content}"></td>
-					<td th:text="${timelinelist.time}"></td>
-					<th:if test="{timeline.user_id = member.user_id}">
-					<button type="button" id="btnUpdate">수정</button>
-					</th:if>
-					</tr>
-					
-					
-				</tbody>
-			</table>
-		</div>
+			<div id="writing">
+			<div class="timeline" th:each="timelinelist : ${timelinelist}">
+            <div class="timeline-header">
+                <h3 th:text="${timelinelist.name}"></h3>
+                <h5 th:text="${timelinelist.time}"></h5>             
+          
+            <button type="button" id="btnModify" th:if="${timelinelist.user_id}==${session.id}">수정</button>
+        
+            
+            </div>
+            <p th:text="${timelinelist.content}">content</p>
+          </div>
+      </div>
+			</div>
+			</div>
+		<div id="footer">
 	</div>
-</body>
+</th:block>
 <th:block layout:fragment="page_js">
 	<!-- <script src="/resources/js/check/checklist.js"></script> -->
 	<script src="/resources/js/timeline/timeline.js"></script>

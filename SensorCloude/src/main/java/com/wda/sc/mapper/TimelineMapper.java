@@ -9,4 +9,5 @@ public interface TimelineMapper {
 	public ArrayList<TimelineVO> timedesc();
 	public ArrayList<TimelineVO> getList();
 	public int insert(TimelineVO vo);
+
 }

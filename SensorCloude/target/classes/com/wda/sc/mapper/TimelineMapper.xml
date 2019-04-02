@@ -5,7 +5,7 @@
 <mapper namespace="com.wda.sc.mapper.TimelineMapper">
 
 	<select id="getList" resultType="com.wda.sc.domain.TimelineVO">
-		select timeline.content,substr(time,0,14) as time, member.name
+		select timeline.content,substr(time,0,14) as time, member.name,timeline.user_id
 		from timeline,member
 		where timeline.user_id = member.user_id
 	</select>
@@ -19,9 +19,9 @@
     		order by timeline_n desc
     	]]>
 	</select>
-
+	
 	<insert id="insert" parameterType="com.wda.sc.domain.TimelineVO">
-		insert into TIMELINE(user_id,content) values(#{user_id},#{content})
+		insert into TIMELINE(timeline_n,user_id,content,time) values(timeline_seq.nextval,#{user_id},#{content},sysdate)
 	</insert>
 	
 </mapper>
