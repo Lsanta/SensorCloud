@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	data-layout-decorate="~{include/layout}">
-
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <th:block layout:fragment="page_head">
 	<title>점검이력</title>
 </th:block>
@@ -12,23 +12,7 @@
 		href="/resources/css/timeline/timeline.css">
 </th:block>
 
-<script>
-$(document).ready(function () {
-	$('#submit').click(function() {
-		var textarea  = $("#textarea").val();
-		alert(textarea);
-		
-	        	  $.ajax({
-  				    type : "POST",
-  				    dataType : 'text',
-  				    data : textarea,
-  				    url : "",
-  				    success : function(data) {
-  				  
-  				    }
-	          }
-	          }}}
-</script>
+
 
 <body>
 	<div id="container">
@@ -39,18 +23,34 @@ $(document).ready(function () {
 		<div id="content">
 		<div id="text">
 			<textarea name="textarea" id="textarea" maxlength="100" autofocus></textarea>
-			<button id="submit">등록</button>
+			<input type="button"  value="등록" id="submit" />
 			<div id="the_count">
 				<span id="current">0</span> <span id="maximum">/ 100</span>
-				<script src="/resources/js/timeline/timeline.js"></script>
+				<!-- <script src="/resources/js/timeline/timeline.js"></script> -->
 			</div>
 			</div>
 			<div id="writing"></div>
 		</div>
-		<div id="footer"></div>
+		<div id="footer">
+		<table id="mysensor">
+				<thead>
+					<tr>
+					</tr>
+				</thead>
+				<tbody id="list">
+				 	<tr th:each="timeline : ${timeline}">
+						<td th:text="${timeline.content}"></td>
+						<td th:text="${timeline.user_id}"></td>
+
+					</tr> 
+
+				</tbody>
+			</table>
+		</div>
 	</div>
 </body>
 <th:block layout:fragment="page_js">
 	<!-- <script src="/resources/js/check/checklist.js"></script> -->
+	<script src="/resources/js/timeline/timeline.js"></script>
 </th:block>
 </html>

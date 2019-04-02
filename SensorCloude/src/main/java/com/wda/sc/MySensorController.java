@@ -2,6 +2,7 @@ package com.wda.sc;
 
 
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wda.sc.domain.AlarmMemberVO;
+
+import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.service.MysensorService;
 
@@ -51,15 +53,35 @@ public class MySensorController {
 	@RequestMapping(value ="mysensordelete.do")
 	@ResponseBody
 		public String mysensordelete(MysensorVO vo) {
-			//보유센서 삭제
+			String Sensor_sn = vo.getSensor_sn();
+			
+			ArrayList<InstallSensorVO> arr = new ArrayList<InstallSensorVO>();
+			arr = mysensorservice.installSelect();
+			
+			String ins_sn = arr.get(0).getSensor_sn();
+			
+			if(Sensor_sn.equals(ins_sn)) {
+					// delete 3개다 진행
+				boolean result =  mysensorservice.deleteInstallSensor(Sensor_sn);
+				boolean result2 = mysensorservice.deleteInfoSensor(Sensor_sn);
+				boolean result3 = mysensorservice.deleteMySensor(Sensor_sn);
 				
-			int a = mysensorservice.deletemysensor(vo);
+					if(result && result2 && result3) 
+						return "success";
+					else 
+						return "false";
+						
+					
+			} else {
+					// delete 2개만 진행
+					boolean result2 = mysensorservice.deleteInfoSensor(Sensor_sn);
+					boolean result3 = mysensorservice.deleteMySensor(Sensor_sn);
 				
-			if( a == 0) {
-				return "false";
-			} else if( a == 1){
-				return "success";
+					if(result2 && result3) 
+						return "success";
+					else 
+						return "false";
 			}
-				return "false";
-			}
+
+		}
 }

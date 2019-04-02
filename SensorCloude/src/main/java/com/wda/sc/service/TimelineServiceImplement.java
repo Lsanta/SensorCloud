@@ -16,9 +16,9 @@ public class TimelineServiceImplement implements TimelineService {
 	private TimelineMapper mapper;
 
 	@Override
-	public int submit(TimelineVO timeline) {
+	public int submit(TimelineVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.submit(timeline);
+		return mapper.submit(vo);
 	}
 
 	@Override
@@ -31,6 +31,12 @@ public class TimelineServiceImplement implements TimelineService {
 	public ArrayList<TimelineVO> timedesc() {
 		// TODO Auto-generated method stub
 		return mapper.timedesc();
+	}
+
+	@Override
+	public Object getInfo(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
