@@ -18,4 +18,5 @@ public interface MysensorMapper {
 
 	public boolean deleteMySensor(String sensor_sn);
 	
+	
 }

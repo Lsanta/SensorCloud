@@ -56,11 +56,12 @@ public class MySensorController {
 			String Sensor_sn = vo.getSensor_sn();
 			
 			ArrayList<InstallSensorVO> arr = new ArrayList<InstallSensorVO>();
+			System.out.println(Sensor_sn);
 			arr = mysensorservice.installSelect(Sensor_sn);
 			
 			if(arr.size() != 0) {
 				
-				boolean result =  mysensorservice.deleteInstallSensor(Sensor_sn);
+				boolean result = mysensorservice.deleteInstallSensor(Sensor_sn);
 				boolean result2 = mysensorservice.deleteInfoSensor(Sensor_sn);
 				boolean result3 = mysensorservice.deleteMySensor(Sensor_sn);
 				

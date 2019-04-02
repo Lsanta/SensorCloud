@@ -5,9 +5,14 @@
 <mapper namespace="com.wda.sc.mapper.MysensorMapper">
 
 	<select id="getList" resultType="com.wda.sc.domain.MysensorVO">
-		select A.sensor_sn, A.model_name, A.sensor_kind, A.manufacturer, A.voltage, C.site_name
-		from my_sensor A, install_sensor B, site C
-		where A.sensor_sn = B.sensor_sn and B.site_id = C.site_id
+		select A.sensor_sn, A.model_name, A.sensor_kind, A.manufacturer, A.voltage, B.site_id, C.site_name
+		from my_sensor A
+		FULL OUTER JOIN
+		install_sensor B
+		on A.sensor_sn = B.sensor_sn 
+		LEFT OUTER JOIN
+		site C
+		on B.site_id = C.site_id
 	</select>
 
 	<insert id="insertmysensor" parameterType="com.wda.sc.domain.MysensorVO">
