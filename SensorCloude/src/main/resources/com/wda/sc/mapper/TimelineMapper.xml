@@ -20,7 +20,7 @@
     	]]>
 	</select>
 
-	<insert id="timeline" parameterType="com.wda.sc.domain.TimelineVO">
+	<insert id="insert" parameterType="com.wda.sc.domain.TimelineVO">
 		insert into TIMELINE(user_id,content) values(#{user_id},#{content})
 	</insert>
 	

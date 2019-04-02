@@ -56,12 +56,10 @@ public class MySensorController {
 			String Sensor_sn = vo.getSensor_sn();
 			
 			ArrayList<InstallSensorVO> arr = new ArrayList<InstallSensorVO>();
-			arr = mysensorservice.installSelect();
+			arr = mysensorservice.installSelect(Sensor_sn);
 			
-			String ins_sn = arr.get(0).getSensor_sn();
-			
-			if(Sensor_sn.equals(ins_sn)) {
-					// delete 3개다 진행
+			if(arr.size() != 0) {
+				
 				boolean result =  mysensorservice.deleteInstallSensor(Sensor_sn);
 				boolean result2 = mysensorservice.deleteInfoSensor(Sensor_sn);
 				boolean result3 = mysensorservice.deleteMySensor(Sensor_sn);
@@ -70,18 +68,18 @@ public class MySensorController {
 						return "success";
 					else 
 						return "false";
-						
-					
-			} else {
-					// delete 2개만 진행
-					boolean result2 = mysensorservice.deleteInfoSensor(Sensor_sn);
-					boolean result3 = mysensorservice.deleteMySensor(Sensor_sn);
 				
-					if(result2 && result3) 
-						return "success";
-					else 
-						return "false";
+			} else {
+				// delete 2개만 진행
+				boolean result2 = mysensorservice.deleteInfoSensor(Sensor_sn);
+				boolean result3 = mysensorservice.deleteMySensor(Sensor_sn);
+			
+				if(result2 && result3) 
+					return "success";
+				else 
+					return "false";
 			}
+			
 
 		}
 }

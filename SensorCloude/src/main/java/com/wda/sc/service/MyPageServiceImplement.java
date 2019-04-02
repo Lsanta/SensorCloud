@@ -1,6 +1,7 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,8 @@ public class MyPageServiceImplement implements MyPageService {
 		return mapper.getInfo(id);
 	}
 	
-	public ArrayList<CheckBoardVO> myList(String id){
-		return mapper.myList(id);
+	public ArrayList<CheckBoardVO> myList(Map<String, Object> parm){
+		return mapper.myList(parm);
 	}
 	
 	@Override
@@ -35,5 +36,11 @@ public class MyPageServiceImplement implements MyPageService {
 	public void updateuserinfo(MemberVO vo) {
 		// TODO Auto-generated method stub
 		mapper.updateuserinfo(vo);
+	}
+	
+	@Override
+	public int getPageNum(String id) {
+		// TODO Auto-generated method stub
+		return mapper.getPageNum(id);
 	}
 }
