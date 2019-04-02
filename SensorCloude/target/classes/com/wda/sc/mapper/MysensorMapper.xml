@@ -5,7 +5,9 @@
 <mapper namespace="com.wda.sc.mapper.MysensorMapper">
 
 	<select id="getList" resultType="com.wda.sc.domain.MysensorVO">
-		select * from my_sensor
+		select A.sensor_sn, A.model_name, A.sensor_kind, A.manufacturer, A.voltage, C.site_name
+		from my_sensor A, install_sensor B, site C
+		where A.sensor_sn = B.sensor_sn and B.site_id = C.site_id
 	</select>
 
 	<insert id="insertmysensor" parameterType="com.wda.sc.domain.MysensorVO">
@@ -13,7 +15,7 @@
 	</insert>
 	
 	<select id="installSelect" resultType="com.wda.sc.domain.InstallSensorVO">
-		select * from install_sensor
+		select * from install_sensor where sensor_sn = #{sensor_sn}
 	</select>
 	 
 	 <!-- 설치 센서 삭제   -->
@@ -30,4 +32,5 @@
 	<delete id="deleteMySensor"> 
  		delete from my_sensor where sensor_sn = #{sensor_sn} 
  	</delete> 
+ 	
 </mapper>

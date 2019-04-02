@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.wda.sc.domain.InstallSensorVO;
+import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CheckboardService;
@@ -140,13 +142,17 @@ public class HomeController {
 
 	@RequestMapping(value = "/timeline", method = RequestMethod.GET)
 	public String timeline(Locale locale, Model model) {
-
+		model.addAttribute("timelinelist",timelineservice.getList());
 		return "timeline/timeline";
 	}
 
 	@RequestMapping(value = "/mysensor", method = RequestMethod.GET)
 	public String mysensor(Locale locale, Model model) {
+	
+		System.out.println(mysensorservice.getList());
 		model.addAttribute("sensorlist",mysensorservice.getList());
+		
+		
 		return "mysensor/mysensor";
 	}
 

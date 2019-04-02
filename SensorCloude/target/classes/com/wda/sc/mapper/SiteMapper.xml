@@ -68,4 +68,9 @@
 	<insert id="insertAlarm" parameterType="com.wda.sc.domain.AlarmVO">
 		insert into alarm(alarm_no,site_id,alarm_content,alarm_time,send_user) values(alarm_seq.nextval, #{site_id},#{alarm_content},sysdate,#{send_user})
 	</insert>
+	
+	<!--현장 추가 -->
+	<insert id="insertsite" parameterType="com.wda.sc.domain.SiteVO">
+		insert into site(site_id,type_no,site_name,address,start_date,site_status) values(#{site_id},#{type_no}, #{site_name},#{address},sysdate,#{voltage})
+	</insert>
 </mapper>

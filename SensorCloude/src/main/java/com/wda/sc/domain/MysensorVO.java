@@ -9,4 +9,5 @@ public class MysensorVO {
 	private String sensor_kind;
 	private String manufacturer;
 	private String voltage;
+	private String site_name;
 }

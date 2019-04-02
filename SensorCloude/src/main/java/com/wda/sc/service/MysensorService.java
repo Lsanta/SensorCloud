@@ -11,11 +11,12 @@ public interface MysensorService {
 
 	public int insertmysensor(MysensorVO vo);
 
-	public ArrayList<InstallSensorVO> installSelect();
+	public ArrayList<InstallSensorVO> installSelect(String sensor_sn);
 
 	public boolean deleteInstallSensor(String sensor_sn);
 
 	public boolean deleteInfoSensor(String sensor_sn);
 
 	public boolean deleteMySensor(String sensor_sn);
+
 }

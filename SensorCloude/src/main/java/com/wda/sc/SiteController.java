@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.MemberVO;
+import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.SiteService;
@@ -116,21 +117,19 @@ public class SiteController {
 		return "site/download";
 	}	
 
+	//현장추가
 	@RequestMapping(value ="/siteadd", method = RequestMethod.POST)
 	public String siteadd(SiteVO s) {
 			
-		System.out.println(s);
-		int checknum = siteservice.siteadd(s);
-		
-		if(checknum == 1) {
-			return "site/sitelist";
-		}
-		else if(checknum == 0) {
-			return null;
-		}
-		
-		return "site/sitelist";
+		int a = siteservice.insertsite(s);				
+		if( a == 0) {
+			return "false";
+		} else if( a == 1){
+			return "success";
+		}			
+		return "false";
 	}
+
 		
 	// 알림 Insert
 	@RequestMapping(value ="alarmMemberadd.do")

@@ -9,6 +9,7 @@ import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.mapper.SiteMapper;
 
@@ -47,6 +48,12 @@ public class SiteServiceImplement implements SiteService {
 	public int siteadd(SiteVO site) {
 		System.out.println(site);
 		return mapper.siteadd(site);
+	}
+	
+	@Override
+	public int insertsite(SiteVO sa) {
+		// 현장추가
+		return mapper.insertsite(sa);
 	}
 
 	@Override
