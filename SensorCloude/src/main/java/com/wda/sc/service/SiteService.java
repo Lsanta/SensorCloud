@@ -22,6 +22,5 @@ public interface SiteService {
 	public int insertAlarm(AlarmVO vo);
 	public ArrayList<CheckBoardVO> repairList(Map<String, Object> parm);
 	public int repairPageNum(String site_id);
-	public int insertsite(SiteVO sa);
 
 }

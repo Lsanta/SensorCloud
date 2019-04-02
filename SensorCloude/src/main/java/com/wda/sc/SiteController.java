@@ -121,7 +121,7 @@ public class SiteController {
 	@RequestMapping(value ="/siteadd", method = RequestMethod.POST)
 	public String siteadd(SiteVO s) {
 			
-		int a = siteservice.insertsite(s);				
+		int a = siteservice.siteadd(s);				
 		if( a == 0) {
 			return "false";
 		} else if( a == 1){
