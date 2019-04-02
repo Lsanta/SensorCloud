@@ -1,7 +1,9 @@
 package com.wda.sc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -148,13 +150,38 @@ public class HomeController {
 		return "mysensor/mysensor";
 	}
 
-	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-	public String mypage(Locale locale, Model model,HttpSession session) {
+	@RequestMapping(value = "/mypage"+"/{num}", method = RequestMethod.GET)
+	public String mypage(@PathVariable String num, Model model,HttpSession session) {
 
-		String id = (String)session.getAttribute("id");
-		System.out.println(mypageservice.getInfo(id));
-		model.addAttribute("userInfo",mypageservice.getInfo(id));
-		model.addAttribute("mychecklist",mypageservice.myList(id));
+		Object id = (Object)session.getAttribute("id");
+		int pageNum=0;
+		
+		Paging page = new Paging();
+		Map<String, Object> parm = new HashMap<String, Object>();
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int realNum = Integer.parseInt(num);
+		
+		page.setTotalNum(mypageservice.getPageNum(id.toString()));
+		
+		if(page.getTotalNum() < page.getOnePageBoard() ) {
+			pageNum = 1;
+		}else {
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+		}
+		
+		for(int i = 0; i < pageNum; i ++) {
+			arr.add(i+1);
+		}
+
+		page.setEndnum((realNum*10)+1);
+		page.setStartnum(page.getEndnum()-10);
+		
+		parm.put("paging", page);
+		parm.put("user_id", id);
+
+		model.addAttribute("pageNum",arr);
+		model.addAttribute("userInfo",mypageservice.getInfo(id.toString()));
+		model.addAttribute("mychecklist",mypageservice.myList(parm));
 		return "mypage/mypage";
 	}
 	
