@@ -14,8 +14,8 @@
             			from check_board,site
             			where check_board.site_id = site.site_id) c,member m
       			  where c.user_id = m.user_id
-      			  order by reg_date desc) p where rownum < #{endnum}) x
-		where x.rnum >= #{startnum}
+      			  order by reg_date desc) p where rownum < #{paging.endnum}) x
+		where x.rnum >= #{paging.startnum}
 		order by x.reg_date desc
 		]]>
 	</select>
