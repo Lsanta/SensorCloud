@@ -4,13 +4,22 @@
 
 <mapper namespace="com.wda.sc.mapper.UsermanageMapper">
 
-	<select id="getList" resultType="com.wda.sc.domain.MemberVO">
-		select user_id,name,phone,m_level from member order by m_level desc
+	<select id="getList" resultType="com.wda.sc.domain.MemberVO" parameterType="com.wda.sc.domain.Paging">
+		<![CDATA[
+		select x.* 
+		from (select rownum as rnum,before_ord.*
+			  from (select * from member order by name) before_ord
+              where rownum < #{endnum}) x
+		where x.rnum >= #{startnum}
+		order by x.name
+		]]>
 	</select>
 	
 	<select id="getInfo" resultType="com.wda.sc.domain.MemberVO">
 		select user_id,name,phone,m_level from member where user_id=#{user_id}
 	</select>
 
-	
+	<select id="getPageNum" resultType="int">
+		select count(user_id) from member 
+	</select>	
 </mapper>

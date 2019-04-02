@@ -8,14 +8,19 @@
 		select * from member where user_id = #{user_id}
 	</select>
 	
-	<select id="myList" resultType="com.wda.sc.domain.CheckBoardVO">
-		select m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
-		from (select check_board.user_id, check_board.title,
-        	  substr(check_board.reg_date,0,14) as reg_date,
-        	  check_board.board_status,check_board.site_id, site.site_name
-			  from check_board,site
-			  where check_board.site_id = site.site_id) c,member m
-		where c.user_id = m.user_id and m.user_id = #{user_id}
+	<select id="myList" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="map">
+		<![CDATA[
+		select x.* 
+		from (select rownum as rnum,before_ord.*
+		      from (select m.name, before_tab.*
+		            from (select c.user_id, c.title, substr(c.reg_date,0,14) as reg_date,c.board_status,c.site_id, s.site_name
+		                  from check_board c,site s
+		                  where c.site_id = s.site_id) before_tab ,member m
+		            where before_tab.user_id = m.user_id and m.user_id = #{user_id}) before_ord
+              	    where rownum < #{paging.endnum}) x
+		where x.rnum >= #{paging.startnum}
+		order by x.name
+		]]>
 	</select>
 	
 	<select id="confirmpasswd" resultType="com.wda.sc.domain.MemberVO">
@@ -29,5 +34,9 @@
    	 	NAME = #{name}
     	where user_id = #{user_id}
 	</update>
+	
+	<select id="getPageNum" resultType="int">
+			select count(board_no) from check_board where user_id = #{user_id}
+	</select>
 	
 </mapper>
