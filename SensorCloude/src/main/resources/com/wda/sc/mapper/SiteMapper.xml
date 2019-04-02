@@ -71,6 +71,7 @@
 	
 	<!--현장 추가 -->
 	<insert id="insertsite" parameterType="com.wda.sc.domain.SiteVO">
-		insert into site(site_id,type_no,site_name,address,start_date,site_status) values(#{site_id},#{type_no}, #{site_name},#{address},sysdate,#{voltage})
+		insert into site(site_id,type_no,site_name,address,start_date,site_status) values(#{site_id},#{type_no}, #{site_name},#{address},sysdate,#{site_status})
+		insert into network(sig_id,site_id,sig_protocol,host_ip,sig_port_num,port_num) values(#{sig_id},#{site_id},#{sig_protocol},#{host_ip},#{sig_port_num},#{port_num})
 	</insert>
 </mapper>

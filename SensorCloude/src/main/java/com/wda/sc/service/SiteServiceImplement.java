@@ -45,7 +45,7 @@ public class SiteServiceImplement implements SiteService {
 	}
 	
 	@Override
-	public int siteadd(SiteVO site) {
+	public int insertsite(SiteVO site) {
 		System.out.println(site);
 		return mapper.siteadd(site);
 	}
