@@ -73,7 +73,6 @@ public class HomeController {
 
 		model.addAttribute("pageNum",arr);
 		model.addAttribute("checkboardlist",checkboardservice.getList(page));
-		System.out.println(checkboardservice.getList(page));
 		return "check/check";
 	}
 
@@ -83,7 +82,6 @@ public class HomeController {
 		int pageNum = 0;
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		int realNum = Integer.parseInt(num);
-		
 		page.setTotalNum(siteservice.getPageNum());
 		
 		if(page.getTotalNum() < page.getOnePageBoard() ) {
@@ -102,7 +100,6 @@ public class HomeController {
 		model.addAttribute("content",siteservice.getContent(page));
 		model.addAttribute("pageNum",arr);
 		model.addAttribute("sitelist",siteservice.getList());
-		System.out.println(siteservice.getContent(page));
 		return "site/sitelist";
 	}
 
@@ -112,9 +109,30 @@ public class HomeController {
 		return "check/checkadd";
 	}
 
-	@RequestMapping(value = "/manage", method = RequestMethod.GET)
-	public String manage(Locale locale, Model model) {
-		model.addAttribute("userlist",usermanageservice.getList());
+	@RequestMapping(value = "/manage"+"/{num}", method = RequestMethod.GET)
+	public String manage(@PathVariable String num, Model model) {
+		
+		Paging page = new Paging();
+		int pageNum = 0;
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int realNum = Integer.parseInt(num);
+		page.setTotalNum(usermanageservice.getPageNum());
+		
+		if(page.getTotalNum() < page.getOnePageBoard() ) {
+			pageNum = 1;
+		}else {
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+		}
+
+		for(int i = 0; i < pageNum; i ++) {
+			arr.add(i+1);
+		}
+
+		page.setEndnum((realNum*10)+1);
+		page.setStartnum(page.getEndnum()-10);
+
+		model.addAttribute("pageNum",arr);
+		model.addAttribute("userlist",usermanageservice.getList(page));
 		return "manage/manage";
 	}
 
