@@ -12,7 +12,22 @@
 		insert into my_sensor(sensor_sn,model_name,sensor_kind,manufacturer,voltage) values(#{sensor_sn}, #{model_name},#{sensor_kind},#{manufacturer},#{voltage})
 	</insert>
 	
-	<delete id="deletemysensor" parameterType="com.wda.sc.domain.MysensorVO">
-		delete from my_sensor where sensor_sn = #{sensor_sn}
-	</delete>
+	<select id="installSelect" resultType="com.wda.sc.domain.InstallSensorVO">
+		select * from install_sensor
+	</select>
+	 
+	 <!-- 설치 센서 삭제   -->
+	<delete id="deleteInstallSensor"> 
+		delete from install_sensor where sensor_sn = #{sensor_sn} 
+ 	</delete> 
+ 	
+	<!-- 센서 정보 삭제  -->
+	<delete id="deleteInfoSensor"> 
+ 		delete from sensor_info where sensor_sn = #{sensor_sn} 
+ 	</delete> 
+ 	
+ 	<!-- 보유 센서  삭제  -->
+	<delete id="deleteMySensor"> 
+ 		delete from my_sensor where sensor_sn = #{sensor_sn} 
+ 	</delete> 
 </mapper>
