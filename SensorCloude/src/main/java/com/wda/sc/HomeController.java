@@ -120,7 +120,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/timeline", method = RequestMethod.GET)
 	public String timeline(Locale locale, Model model) {
-
+		model.addAttribute("timelinelist",timelineservice.getList());
 		return "timeline/timeline";
 	}
 
