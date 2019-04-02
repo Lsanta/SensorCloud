@@ -33,6 +33,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class HomeController {
 
+
 	private SiteService siteservice;
 	private TimelineService timelineservice;
 	private CheckboardService checkboardservice;
@@ -148,10 +149,9 @@ public class HomeController {
 
 	@RequestMapping(value = "/mysensor", method = RequestMethod.GET)
 	public String mysensor(Locale locale, Model model) {
-	
-		System.out.println(mysensorservice.getList());
+			
 		model.addAttribute("sensorlist",mysensorservice.getList());
-		
+	
 		
 		return "mysensor/mysensor";
 	}
@@ -192,3 +192,4 @@ public class HomeController {
 	}
 	
 }
+
