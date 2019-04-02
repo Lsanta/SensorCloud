@@ -51,6 +51,4 @@ public class MysensorServiceImplement implements MysensorService {
 		return mapper.deleteMySensor(sensor_sn);
 	}
 
-
-	
 }
