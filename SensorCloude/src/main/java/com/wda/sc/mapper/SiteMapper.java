@@ -7,6 +7,7 @@ import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
 
 public interface SiteMapper {
@@ -22,4 +23,5 @@ public interface SiteMapper {
 	public int insertAlarmMember(AlarmMemberVO vo);
 	public int insertAlarm(AlarmVO vo);
 	public int repairPageNum(String site_id);
+	public int insertsite(SiteVO sa);
 }
