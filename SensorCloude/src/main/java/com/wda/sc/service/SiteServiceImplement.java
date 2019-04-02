@@ -9,6 +9,7 @@ import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.mapper.SiteMapper;
 
@@ -48,6 +49,7 @@ public class SiteServiceImplement implements SiteService {
 		System.out.println(site);
 		return mapper.siteadd(site);
 	}
+	
 
 	@Override
 	public ArrayList<AlarmVO> getAlarm(String site_id) {
