@@ -3,7 +3,7 @@ $(document).ready(function() {
 	
 	$("#add").click(function(){
 		window.open("/mysensor/mysensoradd", "pop",
-		"width=570,height=420, resizable=yes");
+		"width=570,height=420,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 	});
 	
 	$(".delete").on('click', function(){

@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: bon300-44
+=======
+Built-By: bon300-43
+>>>>>>> eb3691677b2b47cb26d05046f1dec0ddc5810f37
 Build-Jdk: 1.8.0_191
 Created-By: Maven Integration for Eclipse
 
