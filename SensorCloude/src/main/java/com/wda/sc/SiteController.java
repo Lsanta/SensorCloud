@@ -89,7 +89,10 @@ public class SiteController {
 		
 		return "site/download";
 	}	
-
+	
+	
+	
+	
 	@RequestMapping(value ="/siteadd", method = RequestMethod.POST)
 	public String siteadd(SiteVO s) {
 			

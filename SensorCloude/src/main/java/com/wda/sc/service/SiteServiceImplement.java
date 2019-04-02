@@ -80,4 +80,6 @@ public class SiteServiceImplement implements SiteService {
 		return mapper.insertAlarm(vo);
 	}
 
+	
+
 }

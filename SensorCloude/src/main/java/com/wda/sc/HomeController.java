@@ -80,11 +80,11 @@ public class HomeController {
 		
 		page.setTotalNum(siteservice.getPageNum());
 		int pageNum = page.getTotalNum()/page.getOnePageBoard();
-
+		
 		for(int i = 0; i < pageNum; i ++) {
 			arr.add(i+1);
 		}
-
+		
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
 

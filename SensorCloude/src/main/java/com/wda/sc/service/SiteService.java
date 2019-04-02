@@ -20,5 +20,6 @@ public interface SiteService {
 	public int insertAlarmMember(AlarmMemberVO vo);
 	public int insertAlarm(AlarmVO vo);
 	public ArrayList<CheckBoardVO> repairList(String site_id);
+	
 
 }
