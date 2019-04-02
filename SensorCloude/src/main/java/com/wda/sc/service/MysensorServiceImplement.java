@@ -28,9 +28,9 @@ public class MysensorServiceImplement implements MysensorService {
 	}
 
 	@Override
-	public ArrayList<InstallSensorVO> installSelect() {
+	public ArrayList<InstallSensorVO> installSelect(String sensor_sn) {
 		//설치 센서 정보 조회
-		return mapper.installSelect();
+		return mapper.installSelect(sensor_sn);
 	}
 
 	@Override
