@@ -33,6 +33,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class HomeController {
 
+<<<<<<< HEAD
 	private SiteService siteservice;
 	private TimelineService timelineservice;
 	private CheckboardService checkboardservice;
@@ -191,3 +192,164 @@ public class HomeController {
 	}
 	
 }
+=======
+   private SiteService siteservice;
+   private TimelineService timelineservice;
+   private CheckboardService checkboardservice;
+   private MysensorService mysensorservice;
+   private UsermanageService usermanageservice;
+   private MyPageService mypageservice;
+
+   @RequestMapping(value = "/", method = RequestMethod.GET)
+   public String home(Locale locale, Model model) {
+      return "login/login";
+   }
+
+   @RequestMapping("main")
+   public String main(Locale locale, Model model) {
+      model.addAttribute("sitelist",siteservice.getList());
+      model.addAttribute("timelinelist",timelineservice.timedesc());
+      return "main";
+   }
+
+   @RequestMapping(value = "/check"+"/{num}", method = RequestMethod.GET)
+   public String check(@PathVariable String num, Model model) {
+      Paging page = new Paging();
+      int pageNum = 0;
+      ArrayList<Integer> arr = new ArrayList<Integer>();
+      int realNum = Integer.parseInt(num);
+      
+      page.setTotalNum(checkboardservice.getPageNum());
+
+      System.out.println(page.getTotalNum());
+      if(page.getTotalNum() < page.getOnePageBoard()) {
+         pageNum = 1;
+      }else {
+         pageNum = page.getTotalNum()/page.getOnePageBoard();
+      }
+      
+      for(int i = 0; i < pageNum; i ++) {
+         arr.add(i+1);
+      }
+
+      page.setEndnum((realNum*10)+1);
+      page.setStartnum(page.getEndnum()-10);
+
+      model.addAttribute("pageNum",arr);
+      model.addAttribute("checkboardlist",checkboardservice.getList(page));
+      return "check/check";
+   }
+
+   @RequestMapping(value = "/sitelist"+"/{num}", method = RequestMethod.GET)
+   public String siteList(@PathVariable String num, Model model) {
+      Paging page = new Paging();
+      int pageNum = 0;
+      ArrayList<Integer> arr = new ArrayList<Integer>();
+      int realNum = Integer.parseInt(num);
+      page.setTotalNum(siteservice.getPageNum());
+      
+      if(page.getTotalNum() < page.getOnePageBoard() ) {
+         pageNum = 1;
+      }else {
+         pageNum = page.getTotalNum()/page.getOnePageBoard();
+      }
+
+      for(int i = 0; i < pageNum; i ++) {
+         arr.add(i+1);
+      }
+
+      page.setEndnum((realNum*10)+1);
+      page.setStartnum(page.getEndnum()-10);
+
+      model.addAttribute("content",siteservice.getContent(page));
+      model.addAttribute("pageNum",arr);
+      model.addAttribute("sitelist",siteservice.getList());
+      return "site/sitelist";
+   }
+
+
+   @RequestMapping(value = "/checkadd", method = RequestMethod.GET)
+   public String checkadd(Locale locale, Model model) {
+      return "check/checkadd";
+   }
+
+   @RequestMapping(value = "/manage"+"/{num}", method = RequestMethod.GET)
+   public String manage(@PathVariable String num, Model model) {
+      
+      Paging page = new Paging();
+      int pageNum = 0;
+      ArrayList<Integer> arr = new ArrayList<Integer>();
+      int realNum = Integer.parseInt(num);
+      page.setTotalNum(usermanageservice.getPageNum());
+      
+      if(page.getTotalNum() < page.getOnePageBoard() ) {
+         pageNum = 1;
+      }else {
+         pageNum = page.getTotalNum()/page.getOnePageBoard();
+      }
+
+      for(int i = 0; i < pageNum; i ++) {
+         arr.add(i+1);
+      }
+
+      page.setEndnum((realNum*10)+1);
+      page.setStartnum(page.getEndnum()-10);
+
+      model.addAttribute("pageNum",arr);
+      model.addAttribute("userlist",usermanageservice.getList(page));
+      return "manage/manage";
+   }
+
+   @RequestMapping(value = "/timeline", method = RequestMethod.GET)
+   public String timeline(Locale locale, Model model) {
+      model.addAttribute("timelinelist",timelineservice.getList());
+      return "timeline/timeline";
+   }
+
+   @RequestMapping(value = "/mysensor", method = RequestMethod.GET)
+   public String mysensor(Locale locale, Model model) {
+   
+      System.out.println(mysensorservice.getList());
+      model.addAttribute("sensorlist",mysensorservice.getList());
+      
+      
+      return "mysensor/mysensor";
+   }
+
+   @RequestMapping(value = "/mypage"+"/{num}", method = RequestMethod.GET)
+   public String mypage(@PathVariable String num, Model model,HttpSession session) {
+
+      Object id = (Object)session.getAttribute("id");
+      int pageNum=0;
+      
+      Paging page = new Paging();
+      Map<String, Object> parm = new HashMap<String, Object>();
+      ArrayList<Integer> arr = new ArrayList<Integer>();
+      int realNum = Integer.parseInt(num);
+      
+      page.setTotalNum(mypageservice.getPageNum(id.toString()));
+      
+      if(page.getTotalNum() < page.getOnePageBoard() ) {
+         pageNum = 1;
+      }else {
+         pageNum = page.getTotalNum()/page.getOnePageBoard();
+      }
+      
+      for(int i = 0; i < pageNum; i ++) {
+         arr.add(i+1);
+      }
+
+      page.setEndnum((realNum*10)+1);
+      page.setStartnum(page.getEndnum()-10);
+      
+      parm.put("paging", page);
+      parm.put("user_id", id);
+
+      model.addAttribute("pageNum",arr);
+      model.addAttribute("userInfo",mypageservice.getInfo(id.toString()));
+      model.addAttribute("mychecklist",mypageservice.myList(parm));
+      return "mypage/mypage";
+   }
+   
+}
+>>>>>>> e8f8eac403b2288fd3b920b13bb54cef02ce229d
