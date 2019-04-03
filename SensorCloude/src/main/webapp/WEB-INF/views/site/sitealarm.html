@@ -74,6 +74,7 @@
 										<td th:text="${alarmMember.tel}"></td>
 										<td th:text="${alarmMember.company}"></td>
 										<td th:text="${alarmMember.name}"></td>
+										<td style="display : none" th:text="${alarmMember.alarm_m_no}"></td>
 										<td><input type="checkbox" name="selected"></td>
 									</tr>
 								</tbody>
@@ -88,10 +89,12 @@
 				</div>
 				
 				<div class="modifybox">
-					<div> 전화번호<input type="tel"  id="tel" class="tel" disabled="disabled"/></div>
-					<div> 회사<input type="text" id="company"  class="company" disabled="disabled"/></div>
-					<div> 이름<input type="text" id="name" class="name" disabled="disabled"/>
-					<input type="button" value="수정" id="mod" /> </div>
+					<div> 전화번호<input type="tel"  id="tel2" class="tel2" disabled="disabled"/></div>
+					<div> 회사<input type="text" id="company2"  class="company2" disabled="disabled"/></div>
+					<div> 이름<input type="text" id="name2" class="name2" disabled="disabled"/>
+					<input type="text" id="alarmNum" style="display : none">
+					<input type="button" value="수정" id="mod" /> 
+					<input type="button" value="삭제" id="drop" /> </div>
 				</div>	
 			</div>
 				

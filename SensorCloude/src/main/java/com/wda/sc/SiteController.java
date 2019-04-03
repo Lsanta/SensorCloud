@@ -40,7 +40,8 @@ public class SiteController {
       
    @RequestMapping(value = "/siteadd", method = RequestMethod.GET)
    public String siteadd(Locale locale, Model model) {
-   
+	   
+	  
       return "site/siteadd";
    }
    
@@ -99,11 +100,16 @@ public class SiteController {
       return "site/siterepair";
    }
 
+   //센서추가 페이지
    @RequestMapping(value = "{site_id}" + "/sensoradd", method = RequestMethod.GET)
    public String sensoradd(@PathVariable String site_id, Model model) {
       System.out.println("센서추가");
       model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
       model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
+     
+      model.addAttribute("sensor_kind",siteservice.getSensorKind());
+      
+      System.out.println(siteservice.getSensorKind());
       
       return "site/sensoradd";
    }
@@ -135,7 +141,7 @@ public class SiteController {
    @RequestMapping(value ="alarmMemberadd.do")
    @ResponseBody
    public String alarmMemberadd(AlarmMemberVO vo) {
-      //연락망 추가 폼을 이용한 추가
+      //연락망에 사람 추가
       
       int a = siteservice.insertAlarmMember(vo);
       
@@ -151,7 +157,7 @@ public class SiteController {
    @RequestMapping(value ="alarmadd.do")
    @ResponseBody
    public String alarmadd(AlarmVO vo, HttpSession session) {
-      //연락망 추가 폼을 이용한 추가
+      //문자 내용 전송
       String user = (String) session.getAttribute("id");
       vo.setSend_user(user);
       
@@ -166,4 +172,37 @@ public class SiteController {
       return "false";
    }
    
+   
+   
+   
+   @RequestMapping(value ="alarmmod.do")
+   @ResponseBody
+   public String alarmmod(AlarmMemberVO vo) {
+	 //연락망 사람 수정      
+	   
+	  int a = siteservice.modAlarm(vo);
+	      
+	      if( a == 0) {
+	         return "false";
+	      } else if( a == 1){
+	         return "success";
+	      }
+	      
+	      return "false";
+	    
+   }
+   
+   
+   @RequestMapping(value ="alarmdel.do")
+   @ResponseBody
+   public String alarmdel(AlarmMemberVO vo) {
+	 //연락망 사람 삭제
+
+      boolean result = siteservice.delAlarm(vo);
+      
+      if(result) 
+    	  return "success";
+      else
+    	  return "false";
+   }
 }
