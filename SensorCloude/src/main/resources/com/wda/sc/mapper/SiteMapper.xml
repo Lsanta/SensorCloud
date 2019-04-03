@@ -35,10 +35,6 @@
 		select name,tel,company from alarm_member where site_id = #{site_id}
 	</select>
 	
-	<insert id="siteadd" parameterType="com.wda.sc.domain.SiteVO">
-		insert into site(site_id,type_no,site_name,address,detail_address,start_date) values(#{site_id},#{type_no},#{site_name},#{address},#{detail_address},sysDate)
-	</insert>
-	
 	<select id="getAlarm" resultType="com.wda.sc.domain.AlarmVO">
 		select alarm_no,site_id,alarm_content,substr(alarm_time,0,14) as alarm_time,send_user from alarm where site_id = #{site_id}
 	</select>
@@ -60,7 +56,6 @@
 		order by x.site_status desc
 		]]>
 	</select>
-	
 
 	<insert id="insertAlarmMember" parameterType="com.wda.sc.domain.AlarmMemberVO">
 		insert into alarm_member(alarm_m_no,site_id,tel,name,company) values('4', #{site_id},#{tel},#{name},#{company})
@@ -71,8 +66,10 @@
 	</insert>
 	
 	<!--현장 추가 -->
-	<insert id="insertsite" parameterType="com.wda.sc.domain.SiteVO">
-		insert into site(site_id,type_no,site_name,address,start_date,site_status) values(#{site_id},#{type_no}, #{site_name},#{address},sysdate,#{site_status})
-		insert into network(sig_id,site_id,sig_protocol,host_ip,sig_port_num,port_num) values(#{sig_id},#{site_id},#{sig_protocol},#{host_ip},#{sig_port_num},#{port_num})
+	<insert id="siteadd" parameterType="com.wda.sc.domain.SiteVO">
+		insert into site(site_id,type_no,site_name,address,start_date,site_status) values(site_seq.nextval,#{type_no}, #{site_name},#{address},sysdate,'1')
 	</insert>
+	<insert id="networkadd" parameterType="com.wda.sc.domain.SiteVO">
+		insert into network(sig_id,site_id,sig_protocol,host_ip,sig_port_num,port_num) values(network_seq.nextval,site_seq.currval,'tcp',#{host_ip},#{sig_port_num},#{port_num})
+	</insert>	
 </mapper>

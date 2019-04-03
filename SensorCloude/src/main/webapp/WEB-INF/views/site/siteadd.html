@@ -89,9 +89,8 @@
 
    </div>
 
-   <div id="submit">
+   <div id="btn">
       <button type="button" id="plus">확인</button>
-
    </div>
 </th:block>
 
@@ -153,10 +152,12 @@ $(document).ready(function(){
 	
 	$("#plus").click(function(){
 		var query = { 
+						//현장 데이터
 						type_no : $('input[name="chk_scene"]:checked').val(),
 						address : $("#sample6_address").val(),
 						site_name : $("#sample6_detailAddress").val(),
 						
+						//네트워크 데이터
 						sig_protocol : $('input[name="chk_net_raido"]:checked').val(),
 						host_ip : $("#host_ip").val(),
 						sig_port_num : $("#sig_port_num").val(),
@@ -172,6 +173,7 @@ $(document).ready(function(){
 			  success : function(data){
 				  if( data == "success"){
 					  alert("추가되었습니다");
+					  window.location.href = "/sitelist/1"
 				  } else{
 					  alert("추가에 실패했습니다");
 				  }
