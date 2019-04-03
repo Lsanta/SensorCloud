@@ -46,8 +46,11 @@ public class SiteServiceImplement implements SiteService {
    
    @Override
    public int siteadd(SiteVO site) {
-      System.out.println(site);
       return mapper.siteadd(site);
+   }
+   @Override
+   public int networkadd(SiteVO site) {
+      return mapper.networkadd(site);
    }
    
 

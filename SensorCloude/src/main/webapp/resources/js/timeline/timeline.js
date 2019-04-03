@@ -25,11 +25,11 @@ $(document).ready(function(){
 			  data : query,
 			  success : function(data){
 				  if( data == "success"){
-					  alert("ㅇ");
+					  alert("타임라인이 등록되었습니다.");
 			
 					  location.reload();
 				  } else{
-					  alert("ㄴ");
+					  alert("타임라인 등록에 실패하셨습니다.");
 					
 				  }
 			  }
