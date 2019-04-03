@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.wda.sc.domain.MemberVO;
+import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.MyPageService;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +27,7 @@ import lombok.AllArgsConstructor;
 public class MyPageController {
 
 	private MyPageService mypageservice;
+	private CheckboardService Checkboardservice;
 	
 	@RequestMapping(value = "/levelup", method = RequestMethod.GET)
 	public String address(Locale locale, Model model, HttpSession session) {
@@ -39,6 +42,23 @@ public class MyPageController {
 		model.addAttribute("userInfo", mypageservice.getInfo(id));
 		return "mypage/modifymypage";
 	}
+	
+	
+	
+	@RequestMapping(value= "/mypagecheckview/"+"{board_no}", method = RequestMethod.GET)
+	public String checkin(Locale locale,@PathVariable  String board_no, Model model) {
+	
+		System.out.println("마이페이지 보드넘버=" +board_no);
+		
+		//model.addAttribute("mpviewgetlist",Checkboardservice.viewgetList(board_no));
+		
+		//System.out.println("되라"+Checkboardservice.viewgetList(board_no));
+		
+		return "mypage/mypagecheckview";
+	}
+	
+	
+	
 
 	@RequestMapping(value = "modifymyinfo", method = RequestMethod.GET)
 	public String modifymyinfo(Locale locale, Model model, HttpSession session) {
@@ -60,6 +80,9 @@ public class MyPageController {
 			return "success";
 		}
 	}
+	
+	
+	
 
 	@RequestMapping("mypageconfirmpasswd.do")
 	@ResponseBody
