@@ -43,4 +43,10 @@ public class MyPageServiceImplement implements MyPageService {
 		// TODO Auto-generated method stub
 		return mapper.getPageNum(id);
 	}
+
+	@Override
+	public ArrayList<CheckBoardVO> myListView(String board_no) {
+		// TODO Auto-generated method stub
+		return mapper.myListView(board_no);
+	}
 }

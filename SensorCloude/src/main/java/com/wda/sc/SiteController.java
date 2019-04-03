@@ -29,6 +29,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/site")
 public class SiteController {
+
    
    private SiteService siteservice;
    
@@ -205,4 +206,8 @@ public class SiteController {
       else
     	  return "false";
    }
+
+
+	
+
 }

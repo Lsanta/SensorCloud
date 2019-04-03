@@ -20,7 +20,9 @@ public interface SiteMapper {
    
    public ArrayList<AlarmMemberVO> getAlarm_member(String site_id);
    
-   public int siteadd(SiteVO site);
+   public int siteadd(SiteVO site);  
+   
+   public int networkadd(SiteVO site);
    
    public ArrayList<AlarmVO> getAlarm(String site_id);
    
@@ -28,7 +30,7 @@ public interface SiteMapper {
    
    public ArrayList<SiteVO> getContent(Paging p);
    
-   public int insertAlarmMember(AlarmMemberVO vo);
+   public int insertAlarmMember(AlarmMemberVO vo); 
    
    public int insertAlarm(AlarmVO vo);
    

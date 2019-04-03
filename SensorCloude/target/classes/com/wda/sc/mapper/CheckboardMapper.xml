@@ -6,7 +6,6 @@
 
 	<select id="getList" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="com.wda.sc.domain.Paging">
 		<![CDATA[
-
 		select x.rnum, x.* from
 			(select rownum as rnum, p.* from
      			 (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
