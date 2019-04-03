@@ -1,7 +1,9 @@
 package com.wda.sc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,7 +29,7 @@ import lombok.AllArgsConstructor;
 public class MyPageController {
 
 	private MyPageService mypageservice;
-	private CheckboardService Checkboardservice;
+	
 	
 	@RequestMapping(value = "/levelup", method = RequestMethod.GET)
 	public String address(Locale locale, Model model, HttpSession session) {
@@ -47,12 +49,13 @@ public class MyPageController {
 	
 	@RequestMapping(value= "/mypagecheckview/"+"{board_no}", method = RequestMethod.GET)
 	public String checkin(Locale locale,@PathVariable  String board_no, Model model) {
-	
-		System.out.println("마이페이지 보드넘버=" +board_no);
 		
-		//model.addAttribute("mpviewgetlist",Checkboardservice.viewgetList(board_no));
+		System.out.println("mypageboard_no=" +board_no);
 		
-		//System.out.println("되라"+Checkboardservice.viewgetList(board_no));
+		
+		model.addAttribute("mpviewgetlist",mypageservice.myListView(board_no));
+		
+		
 		
 		return "mypage/mypagecheckview";
 	}
