@@ -17,14 +17,14 @@
 
 
 #main-container {
-  width: 1000px;
+  width: 1130px;
   height: 750px;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #bcbcbc;
 }
 #left-content {
-  width: 550px;
+  width: 650px;
   height: 730px;
   padding: 10px;
   margin-bottom: 20px;

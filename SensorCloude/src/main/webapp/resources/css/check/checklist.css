@@ -5,7 +5,7 @@ html {
  }
 
 #container {
-    width: 1000px;
+    width: 1130px;
     height: 750px;
     margin: 20px auto;
     padding: 20px;
@@ -28,6 +28,10 @@ html {
     height: 20px;
     margin-top: 2%;
   }
+  
+ #checklist tr:hover {
+	background-color: #D8D8D8;
+}
 
   @media ( max-width: 1001px ) {
     #container {
