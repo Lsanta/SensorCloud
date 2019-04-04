@@ -166,7 +166,7 @@ table {
   border-radius: 20; /* iOS 둥근모서리 제거 */ 
   -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
   -moz-appearance: none; appearance: none;
-  margin-left: 200px;
+  margin-left: 240px;
 }
 
  .pagination-container {

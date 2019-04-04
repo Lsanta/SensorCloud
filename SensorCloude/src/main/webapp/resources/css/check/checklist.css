@@ -23,13 +23,13 @@ html {
     margin: 0;
     padding: 0 0 0 20px;
   }
-
-  .button-container {
+  
+ .button-container {
     height: 20px;
     margin-top: 2%;
   }
-  
- #checklist tr:hover {
+
+ #site tr:hover {
 	background-color: #D8D8D8;
 }
 
@@ -160,7 +160,7 @@ table {
 
   .search {
     width: 100%;
-    padding: 40px 0;
+    padding: 20px 0;
     margin-left: 5%;
   }
   
@@ -173,7 +173,7 @@ table {
   border-radius: 20; /* iOS 둥근모서리 제거 */ 
   -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
   -moz-appearance: none; appearance: none;
-  margin-left: 200px;
+  margin-left: 240px;
 }
 
  .pagination-container {
@@ -260,7 +260,9 @@ table {
   }
   .search-box {
     clear: both;
-    width: auto;
+   /*  width: auto; */
+    margin-left: 180px;
+    width: 450px;
   }
   select { 
   width: 120px; /* 원하는 너비설정 */
@@ -271,14 +273,18 @@ table {
   border-radius: 20; /* iOS 둥근모서리 제거 */ 
   -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
   -moz-appearance: none; appearance: none;
-  margin-left: 100px;
+  margin-left: 50px;
 }
 }
 
 @media screen and (max-width: 360px) {
+  .title-header h1{
+  	width: 120px;
+  }
   .search {
     float: none;
     width: auto;
+    margin:30px 0 0 0;
   }
   .select {
     clear: both;
@@ -288,12 +294,13 @@ table {
   .search-box {
     clear: both;
     width: auto;
+    margin-left: 100px;
   }
   select { 
-  width: 90px;
+  width: 95px;
   margin:0;
   }
-  .pagination-container {
+ .pagination-container {
   margin: 100px auto;
   text-align: center;
 }
