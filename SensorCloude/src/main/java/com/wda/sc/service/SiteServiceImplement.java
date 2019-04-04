@@ -1,6 +1,7 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -9,7 +10,6 @@ import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.CheckBoardVO;
-import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.mapper.SiteMapper;
 
@@ -46,8 +46,11 @@ public class SiteServiceImplement implements SiteService {
    
    @Override
    public int siteadd(SiteVO site) {
-      System.out.println(site);
       return mapper.siteadd(site);
+   }
+   @Override
+   public int networkadd(SiteVO site) {
+      return mapper.networkadd(site);
    }
    
 
@@ -88,5 +91,23 @@ public class SiteServiceImplement implements SiteService {
       // TODO Auto-generated method stub
       return mapper.insertAlarm(vo);
    }
+
+@Override
+public int modAlarm(AlarmMemberVO vo) {
+    //연락망 사람 수정
+	return mapper.modAlarm(vo);
+}
+
+@Override
+public boolean delAlarm(AlarmMemberVO vo) {
+	//연락망 사람 삭제
+	return mapper.delAlarm(vo);
+}
+
+@Override
+public List<String> getSensorKind() {
+	//보유 센서 종류 조회
+	return mapper.getSensorKind();
+}
 
 }

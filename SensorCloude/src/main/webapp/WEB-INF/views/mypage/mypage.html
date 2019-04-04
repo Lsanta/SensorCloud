@@ -56,13 +56,14 @@
 						<th scope="col">날짜</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="mypagechecklist">
 					<tr th:each="mychecklist : ${mychecklist}">
 						<td th:text="${mychecklist.site_name}">status</td>
 						<td th:text="${mychecklist.title}">status</td>
 						<td th:text="${mychecklist.board_status}">status</td>
 						<td th:text="${mychecklist.name}">status</td>
 						<td th:text="${mychecklist.reg_date}">status</td>
+						<td th:text="${mychecklist.board_no}" style="display : none">status</td>
 					</tr>
 
 				</tbody>

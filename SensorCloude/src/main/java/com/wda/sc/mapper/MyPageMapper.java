@@ -17,4 +17,7 @@ public interface MyPageMapper {
 	
 	public int getPageNum(String id);
 	
+	public ArrayList<CheckBoardVO> myListView(String board_no);
+	
+	
 }

@@ -16,4 +16,6 @@ public interface MyPageService {
 	public void updateuserinfo(MemberVO vo);
 	
 	public int getPageNum(String id);
+
+	public ArrayList<CheckBoardVO> myListView(String board_no);
 }
