@@ -27,7 +27,7 @@
     padding:0; 
     margin:-1px; 
     overflow:hidden; 
-    clip:rect(0,0,0,0); 
+    clip:rect(0,0,0,0);
     border:0;
 }
 .guestbook-form dl.guestbook-guest dd {
@@ -79,7 +79,7 @@
     border:1px solid #ddd; 
     background:#f9f9f9; 
     color:#999; 
-    text-indent:10px;
+  	text-indent:10px;
 }
 .guestbook-form dl.guestbook-write dd textarea:focus, .guestbook-form dl.guestbook-write dd textarea:active {
     background:#fff; 

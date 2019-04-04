@@ -20,6 +20,22 @@
 	height:350px;	
 }
 
+ h2 {
+	position: relative;
+	margin: 0;
+}
+
+.addr {
+	position: relative;
+	left: 4%;
+	top: -30px;
+}
+
+#start_date {
+	float: left;
+	font-size: 1.1em;
+}
+
 table {
 	border: 1px solid #ccc;
 	border-collapse: collapse;
@@ -54,9 +70,9 @@ table th {
 
  #scroll button {
     float: right;
-    margin-top: 2%;
+    margin-top: -30px;
     width: 20%;
-
+	height: 50px;
    } 
 
  @media ( max-width: 1001px ) {
@@ -96,4 +112,24 @@ table th {
 		font-size: .8em;
 		text-align: right;
 	}
+	
+}
+
+@media screen and (max-width: 360px) {
+h2 {
+	position: relative;
+	margin: 0;
+}
+
+.addr {
+	position: relative;
+	left: 1px;
+	top: 1px;
+}
+
+#start_date {
+	float: left;
+	font-size: 1.1em;
+}
+ 
 }

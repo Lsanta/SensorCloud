@@ -64,6 +64,7 @@ public class SiteController {
 
 		return "site/sitealarm";
 	}
+	
 
 	@RequestMapping(value = "{site_id}" + "/siterepair"+"/{num}", method = RequestMethod.GET)
 	public String siterepair(@PathVariable String num ,@PathVariable Object site_id, Model model) {
