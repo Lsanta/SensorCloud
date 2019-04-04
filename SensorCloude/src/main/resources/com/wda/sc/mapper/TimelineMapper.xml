@@ -20,8 +20,13 @@
     	]]>
 	</select>
 	
+	<!-- 글 등록 -->
 	<insert id="insert" parameterType="com.wda.sc.domain.TimelineVO">
 		insert into TIMELINE(timeline_n,user_id,content,time) values(timeline_seq.nextval,#{user_id},#{content},sysdate)
 	</insert>
 	
+	<!-- 글 삭제   -->
+	<delete id="timelinedelete"> 
+		delete from timeline where content = #{content} 
+ 	</delete> 
 </mapper>

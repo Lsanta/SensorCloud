@@ -18,27 +18,29 @@ public class TimelineServiceImplement implements TimelineService {
 
 	@Override
 	public int insert(TimelineVO vo) {
-		// TODO Auto-generated method stub
+		
 		return mapper.insert(vo);
 	}
 
 	@Override
 	public ArrayList<TimelineVO> getList() {
-		// TODO Auto-generated method stub
+		
 		return mapper.getList();
 	}
 	
 	@Override
 	public ArrayList<TimelineVO> timedesc() {
-		// TODO Auto-generated method stub
+		
 		return mapper.timedesc();
 	}
 
 	@Override
-	public ArrayList<MemberVO> getInfo(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public int timelinedelete(String content) {
+
+		return mapper.timelinedelete(content);
 	}
+
+	
 
 
 }

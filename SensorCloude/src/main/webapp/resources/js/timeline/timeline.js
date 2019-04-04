@@ -11,10 +11,9 @@ $(document).ready(function(){
 		});
 
 	
-	
+	/*글 등록*/
 	$("#submit").click(function(){
 				var textarea  = $("#textarea").val();
-				
 				var query = {content:$("#textarea").val()};
 				
 		alert(textarea);
@@ -25,11 +24,10 @@ $(document).ready(function(){
 			  data : query,
 			  success : function(data){
 				  if( data == "success"){
-					  alert("ㅇ");
-			
+		
 					  location.reload();
 				  } else{
-					  alert("ㄴ");
+					
 					
 				  }
 			  }
@@ -38,8 +36,7 @@ $(document).ready(function(){
 		
 	}); 
 	
-	
-	
+
 	
 	
 	

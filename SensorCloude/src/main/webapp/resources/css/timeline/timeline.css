@@ -21,6 +21,7 @@
     width:60%;
     height:50px;
     margin-top:5%;
+    resize:none;
   }
   #submit {
     float:right;
