@@ -55,11 +55,14 @@
 	<div id="scroll" th:each="siteInfo : ${siteInfo}" >
 		<article>
 	
-			<h2 th:text="${siteInfo.site_name}" style="display: inline-block"></h2>
+			<span class="addr" th:text="${siteInfo.site_name}"></span>
 			
-			<span class="addr" th:text="${siteInfo.address}" ></span>
-			
+			<span th:text="${siteInfo.address}" ></span><br>
 			<button id="modify">현장수정</button>
+			<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|" ></span>
+			
+			
+			<!-- <button id="modify">현장수정</button> -->
 			
 			<div id="chartdiv"></div>
 

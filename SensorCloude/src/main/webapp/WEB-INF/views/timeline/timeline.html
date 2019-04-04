@@ -37,7 +37,8 @@
                 <h3 th:text="${timelinelist.name}"></h3>
                 <h5 th:text="${timelinelist.time}"></h5>             
           
-            <button type="button" id="btnModify" th:if="${timelinelist.user_id}==${session.id}">수정</button>
+            <button type="button" class="modify" th:if="${timelinelist.user_id}==${session.id}">수정</button>
+             <button type="button" class="delete" th:if="${timelinelist.user_id}==${session.id}">삭제</button>
         
             
             </div>
@@ -52,5 +53,41 @@
 <th:block layout:fragment="page_js">
 	<!-- <script src="/resources/js/check/checklist.js"></script> -->
 	<script src="/resources/js/timeline/timeline.js"></script>
+	<script>
+$(".delete").on('click',function(){
+		
+		if(confirm("정말 삭제하시겠습니까?") == true) {
+			
+		} else {
+			return;
+		}
+
+			if(true){
+			var content = $(this).parent();
+			var content2 = content.siblings().first();
+			var content3 = content2.text(); 
+
+			var query = {
+					content : content3
+			}
+			
+			$.ajax({
+				  type : "POST",
+				  url : "/timeline/timelinedelete.do",
+				  data : query,
+				  success : function(data){
+					  if( data == "success"){
+						  alert("삭제되었습니다");
+						  location.reload();
+					  } else{
+						  alert("삭제에 실패했습니다");
+					  }
+				  }
+				  
+			}); // ajax 종료
+				/*}*/
+}
+	});
+	</script>
 </th:block>
 </html>

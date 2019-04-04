@@ -30,10 +30,10 @@
 				</thead>
 				<tbody id="user">
 				 	<tr th:each="userlist : ${userlist}">
-						<td th:text="${userlist.user_id}">status</td>
-						<td th:text="${userlist.name}">status</td>
-						<td th:text="${userlist.phone}">status</td>
-						<td th:text="${userlist.m_level}">status</td>
+						<td th:text="${userlist.user_id}"></td>
+						<td th:text="${userlist.name}"></td>
+						<td th:text="${userlist.phone}"></td>
+						<td th:text="${userlist.m_level}"></td>
 						<td><button class="delete">삭제</button></td>
 					</tr>
 

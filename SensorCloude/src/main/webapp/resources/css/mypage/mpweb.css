@@ -1,3 +1,7 @@
+#mypagechecklist tr:hover {
+	background-color: #D8D8D8;
+}
+
 table {
   border: 1px solid #ccc;
   border-collapse: collapse;
@@ -22,6 +26,7 @@ table th,
 table td {
   padding: .625em;
   text-align: center;
+  height: 30px;
 }
 
 table th {

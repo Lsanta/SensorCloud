@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.TimelineVO;
 import com.wda.sc.service.TimelineService;
 
@@ -45,13 +46,29 @@ public class TimelineController {
 
 			
 			if( a == 0) {
-				
 				return "false";
 			} else{
-				
 				return "success";
 			}
-			
-		
 		}
-}
+	
+	
+	@RequestMapping(value="timelinedelete.do")
+	@ResponseBody
+		public String timelinedelete(TimelineVO vo) {
+		String content = vo.getContent();
+		
+		System.out.println(content);
+	
+		int a = timelineservice.timelinedelete(content);
+		System.out.println(a);
+				
+		if(a != 0) {
+			
+			return "success";
+			
+		}else {
+			return "false";
+		
+	}
+}}
