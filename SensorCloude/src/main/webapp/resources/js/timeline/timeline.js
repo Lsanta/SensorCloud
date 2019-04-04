@@ -24,29 +24,16 @@ $(document).ready(function(){
 			  data : query,
 			  success : function(data){
 				  if( data == "success"){
-<<<<<<< HEAD
-		
-					  location.reload();
-				  } else{
-					
-=======
 					  alert("타임라인이 등록되었습니다.");
-			
 					  location.reload();
 				  } else{
 					  alert("타임라인 등록에 실패하셨습니다.");
->>>>>>> 8c96b4cc8c8f3c59b8a7f2038f076e68e466f1af
+					  location.reload();
 					
 				  }
 			  }
 			  
 		});
 		
-	}); 
-	
-
-	
-	
-	
-	
+	}); 	
 });
