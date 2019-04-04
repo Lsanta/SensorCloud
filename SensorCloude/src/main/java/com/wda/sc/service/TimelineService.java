@@ -10,6 +10,8 @@ public interface TimelineService {
 	public ArrayList<TimelineVO> getList();
 	public ArrayList<TimelineVO> timedesc();
 	public int insert(TimelineVO vo);
-	public ArrayList<MemberVO> getInfo(String id);
+	public int timelinedelete(String content);
+
+	
 
 }
