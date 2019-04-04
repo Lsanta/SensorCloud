@@ -21,7 +21,7 @@ $(document).ready(function(){
 		 	 row += '<td><input type="text" class="line" name="company" id="company"></td>';
 			 row += '<td><input type="text" class="line" name="name" id="name"></td>';
 		 	 row += '<td><input type="button" value="추가" id="add">';
-		 	 row += '<input type="button" value="삭제" id="remove"></td>';
+		 	 row += '<input type="button" value="취소" id="remove"></td>';
 		 	 row += "</tr>";	
 		 	 
 		 	$("#member").append(row);
@@ -66,21 +66,23 @@ $(document).ready(function(){
 	
 	
 	
-	$(document).on("dblclick","#member>tbody>tr",function(){
+	$(document).on("click","#member>tbody>tr",function(){
 		
 		var location = $(this).children();
 		$(this).css("background-color","aliceblue");
 		$(this).siblings().css("background-color","white");
 
-		$("#tel").val(location.eq(0).text());
-		$("#company").val(location.eq(1).text());
-		$("#name").val(location.eq(2).text());
+		$("#tel2").val(location.eq(0).text());
+		$("#company2").val(location.eq(1).text());
+		$("#name2").val(location.eq(2).text());
+		$("#alarmNum").val(location.eq(3).text());
 		
-		$("#tel").removeAttr("disabled");
-		$("#company").removeAttr("disabled");
-		$("#name").removeAttr("disabled");
+		$("#tel2").removeAttr("disabled");
+		$("#company2").removeAttr("disabled");
+		$("#name2").removeAttr("disabled");
 		
-	}); // 더블클릭 햇을시 종료
+		
+	}); // 클릭 햇을시 종료
 	
 
 	$("#submit").click(function(){
@@ -97,7 +99,9 @@ $(document).ready(function(){
 			 $("#textarea").focus();
 			 return;
 		}
-		var query = { alarm_content : alarm_content, site_id : site_id}
+		var query = { 
+				alarm_content : alarm_content, site_id : site_id
+			}
 		
 		
 		$.ajax({
@@ -117,6 +121,61 @@ $(document).ready(function(){
 		}); // ajax 종료
 		
 	}); // 전송했을시 종료
+	
+	//수정 버튼 클릭시 연락망 내 사람 정보 변경
+	$("#mod").click(function(){
+		
+		var query = {
+			tel : $("#tel2").val(),
+			company : $("#company2").val(),
+			name : $("#name2").val(),
+			alarm_m_no : $("#alarmNum").val()
+		}
+		
+		
+		
+		$.ajax({
+			  type : "POST",
+			  url : "/site/alarmmod.do",
+			  data : query,
+			  success : function(data){
+				  if( data == "success"){
+					  alert("업데이트 성공");
+					  $("#example").remove();
+					  location.reload();
+				  } else{
+					  alert("수정에 실패했습니다");
+				  }
+			  }
+			  
+		}); // ajax 종료
+		
+	});
+	
+	//삭제 버튼 클릭시 연락망 내 사람 정보 삭제
+	$("#drop").click(function(){
+		var query = {
+				alarm_m_no : $("#alarmNum").val()
+			}
+
+			$.ajax({
+				  type : "POST",
+				  url : "/site/alarmdel.do",
+				  data : query,
+				  success : function(data){
+					  if( data == "success"){
+						  alert("삭제 성공");
+						  $("#example").remove();
+						  location.reload();
+					  } else{
+						  alert("삭제에 실패했습니다");
+					  }
+				  }
+				  
+			}); // ajax 종료
+		});
+	
+	
 	
 });
 

@@ -1,6 +1,7 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.wda.sc.domain.AlarmMemberVO;
@@ -34,5 +35,12 @@ public interface SiteService {
    public ArrayList<CheckBoardVO> repairList(Map<String, Object> parm);
    
    public int repairPageNum(String site_id);
+   
+   //연락망 사람 수정
+   public int modAlarm(AlarmMemberVO vo);
+   //연락망 사람 삭제
+   public boolean delAlarm(AlarmMemberVO vo);
+   //보유 센서 종류 조회
+   public List<String> getSensorKind();
 
 }

@@ -61,10 +61,8 @@
          <div class="leftbox">
         	 <div class="kinds">
         		 <span>센서종류</span>
-         			<select class="kindSelect">
-              		 	<option value="Protractor">각도계</option>
-               		 	<option value="Levelmeter">수평계</option>
-              		 	<option value="crㅁck">crack gauge</option>
+         			<select class="kindSelect"> 
+              		 	<option th:each="kind : ${sensor_kind}" th:text="${kind.sensor_kind}"></option>
          			</select>
          			<input type="number" id="sensorcount" name="sensorcount">
            

@@ -6,36 +6,29 @@ $(document).ready(function() {
 		"width=570,height=420,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 	});
 	
-	$(".delete").on('click', function(){
+	
+	 $(document).on("click", "#list tr" , function(){
+		 /*현장 아이디를 가지고와서 /1자리에 넣어야함 */
+		var tr = $(this);
+		var sensor_sn = tr.children().eq(0).text();
+		var sensor_kind = tr.children().eq(1).text();
+		var model_name = tr.children().eq(2).text();
+		var voltage = tr.children().eq(3).text();
+		var manufacturer = tr.children().eq(4).text(); 
 		
-		confirm("삭제 하시겠습니까?")
-		if(true){
-			
-			var sn = $(this).parent();
-			var sn2 = sn.siblings().first();
-			var sn3 = sn2.text(); // 선택한 것 중 센서 번호
+		
+		var openWin = window.open("/mysensor/mysensormod", "pop",
+					  "width=570,height=420,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+		
+		openWin.document.getElementById("sensor_sn").value = document.getElementById("sensor_sn").value;
+		openWin.document.getElementById("sensor_kind").value = document.getElementById("sensor_kind").value;
+		openWin.document.getElementById("model_name").value = document.getElementById("model_name").value;
+		openWin.document.getElementById("voltage").value = document.getElementById("voltage").value;
+		openWin.document.getElementById("manufacturer").value = document.getElementById("manufacturer").value;
+		
 
-			var query = {
-					sensor_sn : sn3
-			}
-			
-			$.ajax({
-				  type : "POST",
-				  url : "/mysensor/mysensordelete.do",
-				  data : query,
-				  success : function(data){
-					  if( data == "success"){
-						  alert("삭제되었습니다");
-						  location.reload();
-					  } else{
-						  alert("삭제에 실패했습니다");
-					  }
-				  }
-				  
-			}); // ajax 종료
-		}
 		
-	});
+	 });
 	
 	
 	$('.pagination-inner a').on('click', function() {
