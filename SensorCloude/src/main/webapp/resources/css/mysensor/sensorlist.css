@@ -24,7 +24,7 @@ html {
     padding: 0 0 0 20px;
   }
   
- #site tr:hover {
+ #list tr:hover {
 	background-color: #D8D8D8;
 }
 

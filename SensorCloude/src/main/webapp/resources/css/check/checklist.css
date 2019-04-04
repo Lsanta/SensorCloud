@@ -29,7 +29,7 @@ html {
     margin-top: 2%;
   }
 
- #site tr:hover {
+#checklist tr:hover {
 	background-color: #D8D8D8;
 }
 

@@ -15,6 +15,9 @@
 	width: 24%;
 }
 
+#site tr:hover {
+	background-color: #D8D8D8;
+}
 
 #main-container {
   width: 1130px;
@@ -24,7 +27,7 @@
   border: 1px solid #bcbcbc;
 }
 #left-content {
-  width: 650px;
+  width: 670px;
   height: 730px;
   padding: 10px;
   margin-bottom: 20px;
