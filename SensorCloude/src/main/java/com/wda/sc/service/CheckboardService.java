@@ -13,4 +13,5 @@ public interface CheckboardService {
 
 	public int getPageNum();
 	
+	public ArrayList<CheckBoardVO> mainList();
 }
