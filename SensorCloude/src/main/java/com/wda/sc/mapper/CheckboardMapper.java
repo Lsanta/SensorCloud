@@ -12,4 +12,6 @@ public interface CheckboardMapper {
 	public ArrayList<CheckBoardVO> viewgetList(String board_no);
 	
 	public int getPageNum();
+
+	public ArrayList<CheckBoardVO> mainList();
 }
