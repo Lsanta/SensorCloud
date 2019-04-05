@@ -36,7 +36,7 @@
 	
 	<select id="mainList" resultType="com.wda.sc.domain.CheckBoardVO">
 	<![CDATA[
-select rownum,b.*,f.file_path from
+	select rownum,b.*,f.file_path from
     (select a.*,m.name
      from(select c.board_no,c.user_id,substr(c.reg_date,0,8)as reg_date,c.title,c.board_content,c.board_status,c.site_id, s.site_name 
          from check_board c, site s
