@@ -14,4 +14,7 @@ public class CheckBoardVO {
 	private String site_id;
 	private String site_name; // site join 컬럼
 	private String name;
+	private String board_file_id;
+	private String file_path;
+	private String file_name;
 }
