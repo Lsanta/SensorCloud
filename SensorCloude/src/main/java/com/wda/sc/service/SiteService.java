@@ -42,5 +42,8 @@ public interface SiteService {
    public boolean delAlarm(AlarmMemberVO vo);
    //보유 센서 종류 조회
    public List<String> getSensorKind();
+   
+   //점검이력 글쓰기 현장이름 조회
+   public ArrayList<SiteVO> getchecksite();
 
 }

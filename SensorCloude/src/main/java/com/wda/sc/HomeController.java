@@ -51,7 +51,6 @@ public class HomeController {
 		model.addAttribute("sitelist",siteservice.getList());
 		model.addAttribute("timelinelist",timelineservice.timedesc());
 		model.addAttribute("mainchecklist",checkboardservice.mainList());
-		System.out.println(checkboardservice.mainList());
 		return "main";
 	}
 
