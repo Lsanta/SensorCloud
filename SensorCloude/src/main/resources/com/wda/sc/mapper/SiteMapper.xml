@@ -57,6 +57,12 @@
 		order by x.site_status desc
 		]]>
 	</select>
+	<!-- 현장 클릭시 현장상태  -->
+	<select id="getStatus" resultType="com.wda.sc.domain.SiteVO" parameterType="com.wda.sc.domain.Paging">
+		
+		select site_status from site
+		
+	</select>
 
 	
 	<!--알람 내용 추가 -->

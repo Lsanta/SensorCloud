@@ -106,6 +106,7 @@ public class HomeController {
 		model.addAttribute("content",siteservice.getContent(page));
 		model.addAttribute("pageNum",arr);
 		model.addAttribute("sitelist",siteservice.getList());
+		
 		return "site/sitelist";
 	}
 

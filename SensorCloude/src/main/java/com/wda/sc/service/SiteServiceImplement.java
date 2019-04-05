@@ -115,5 +115,8 @@ public ArrayList<SiteVO> getchecksite(){
 	//점검이력 글쓰기 현장이름
 	return mapper.getchecksite();
 }
-
+public ArrayList<SiteVO> getStatus() {
+	// TODO Auto-generated method stub
+	return mapper.getStatus();
+}
 }
