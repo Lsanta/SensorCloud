@@ -8,14 +8,16 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/site/asidebar.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/site/sitemain.css">
+	<link rel="stylesheet" type="text/css"
+		href="/resources/css/site/asidebar.css">
+	<link rel="stylesheet" type="text/css"
+		href="/resources/css/site/sitemain.css">
 </th:block>
 
 <th:block layout:fragment="contents">
 
 	<aside class="aside" th:each="siteInfo : ${siteInfo}">
-	
+
 		<a> <svg version="1.1" id="nav-btn"
 				xmlns="http://www.w3.org/2000/svg"
 				xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -26,44 +28,56 @@
       V285.429z M462,403.143H50V462h412V403.143z" />
   </svg>
 		</a>
-			<h1 th:text="${siteInfo.site_name}"></h1>
-			<span id="sid" th:text="${siteInfo.site_id}" style="display:none"></span>
+		<h1 th:text="${siteInfo.site_name}"></h1>
+		<span id="sid" th:text="${siteInfo.site_id}" style="display: none"></span>
 		<nav id="nav">
 			<ul>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'" >수리내역</a></li>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensoradd'">센서추가</a></li>
-				<li style="line-height: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트 다운로드</a></li>
-				
-				<li><span id="num">연락망</span> 
-					<span id="down" style="display: inline"> 
-				  		<img src="/resources/img/down-arrow.svg">
-					</span> 
-					<span id="up" style="display: none"> 
-						<img src="/resources/img/up-arrow.svg">
-					</span>
-				</li>
-				
-			<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
-				<span class="mang" th:text="${alarmMember.name}"></span>
-				<span class="mang" th:text="${alarmMember.tel}"></span>
-			</div>	
+				<li><a href="/site/"
+					th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
+				<li><a href="/site/"
+					th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'">수리내역</a></li>
+				<li><a href="/site/"
+					th:attrappend="href=${siteInfo.site_id} + '/sensoradd'">센서추가</a></li>
+				<li style="line-height: 40px;"><a href="/site/"
+					th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트
+						다운로드</a></li>
+
+				<li><span id="num">연락망</span> <span id="down"
+					style="display: inline"> <img
+						src="/resources/img/down-arrow.svg">
+				</span> <span id="up" style="display: none"> <img
+						src="/resources/img/up-arrow.svg">
+				</span></li>
+
+				<div class="phonenumber" style="display: none"
+					th:each="alarmMember : ${alarmMember}">
+					<span class="mang" th:text="${alarmMember.name}"></span> <span
+						class="mang" th:text="${alarmMember.tel}"></span>
+				</div>
 			</ul>
 		</nav>
 	</aside>
 
-	<div id="scroll" th:each="siteInfo : ${siteInfo}" >
+	<div id="scroll" th:each="siteInfo : ${siteInfo}">
 		<article>
-	
-			<span class="addr" th:text="${siteInfo.site_name}"></span>
+			<span class="sitestatus" th:each="siteStatus : ${siteStatus}"
+				th:switch="${siteStatus.site_status}"> 
+				<img src="/resources/img/gray.svg" th:case="'0'"> 
+				<img src="/resources/img/green.svg" th:case="'1'"> 
+				<img src="/resources/img/red.svg" th:case="'2'">
+
+			</span> 
 			
-			<span th:text="${siteInfo.address}" ></span><br>
+			<span class="addr" th:text="${siteInfo.site_name}"></span> 
+			
+			<span
+				th:text="${siteInfo.address}"></span><br>
 			<button id="modify">현장수정</button>
-			<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|" ></span>
-			
-			
+			<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
+
+
 			<!-- <button id="modify">현장수정</button> -->
-			
+
 			<div id="chartdiv"></div>
 
 			<div id="dataDiv">
@@ -78,7 +92,7 @@
 							</tr>
 						</thead>
 						<tbody>
-						<!-- 	<tr th:each="sitelist : ${sitelist}">
+							<!-- 	<tr th:each="sitelist : ${sitelist}">
 								<td th:text="${sitelist.site_status}">status</td>
 								<td th:text="${sitelist.site_name}">status</td>
 								<td th:text="${sitelist.address}">status</td>
@@ -94,17 +108,18 @@
 
 		</article>
 	</div>
-	
+
 </th:block>
 
 <th:block layout:fragment="page_js">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d&libraries=services,clusterer,drawing"></script>
 	<script src="/resources/js/core.js"></script>
 	<script src="/resources/js/charts.js"></script>
 	<script src="/resources/js/animated.js"></script>
 	<script src="/resources/js/charttest.js"></script>
-	
-	 <script th:inline="javascript">
+
+	<script th:inline="javascript">
 	 /*<![CDATA[*/
    	var arr = new Array();
     

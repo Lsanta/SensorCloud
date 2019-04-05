@@ -1,3 +1,17 @@
+
+
+$(document).on("click", "#repairchecklist tr", function() {
+
+	// 클릭한 행을 tr 변수로
+	var tr = $("#repairchecklist tr").index(this);
+
+	var a = $("#repairchecklist tr:eq(" + tr + ") td:eq(5)").text();
+	// 내가클릭한 테이블의 행을 판별해야하기위해 board_no 정보를 넘긴다
+	
+	window.location.href = "/site/sitecheckview/" + a;
+});
+
+
 $(document).ready(function() {
 
 /*pagination*/

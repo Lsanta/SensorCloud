@@ -110,4 +110,10 @@ public List<String> getSensorKind() {
 	return mapper.getSensorKind();
 }
 
+@Override
+public ArrayList<SiteVO> getStatus() {
+	// TODO Auto-generated method stub
+	return mapper.getStatus();
+}
+
 }
