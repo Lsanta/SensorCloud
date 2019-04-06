@@ -58,9 +58,9 @@
 		]]>
 	</select>
 	<!-- 현장 클릭시 현장상태  -->
-	<select id="getStatus" resultType="com.wda.sc.domain.SiteVO" parameterType="com.wda.sc.domain.Paging">
+	<select id="getStatus" resultType="com.wda.sc.domain.SiteVO">
 		
-		select site_status from site
+		select site_status from site where site_id = #{site_id}
 		
 	</select>
 

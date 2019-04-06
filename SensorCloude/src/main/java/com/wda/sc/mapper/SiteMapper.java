@@ -49,6 +49,6 @@ public interface SiteMapper {
    public ArrayList<SiteVO> getchecksite();
 
    //현장 상태 띄우기
-   public ArrayList<SiteVO> getStatus();
+   public ArrayList<SiteVO> getStatus(String site_id);
    	
 }
