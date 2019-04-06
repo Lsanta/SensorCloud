@@ -21,6 +21,7 @@ import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.SiteVO;
+import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
@@ -31,7 +32,7 @@ import lombok.AllArgsConstructor;
 public class SiteController {
 
 	private SiteService siteservice;
-
+	private CheckboardService checkboardservice;
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
 	public String address(Locale locale, Model model) {
 
@@ -49,7 +50,9 @@ public class SiteController {
 	public String siteclick(@PathVariable String site_id, Model model) {
 		System.out.println("현장 iD =" + site_id);
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));
-		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id));   
+		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); 
+		model.addAttribute("siteStatus" , siteservice.getStatus(site_id));
+		System.out.println(siteservice.getStatus(site_id));
 		return "site/sitemain";
 
 	}
@@ -175,4 +178,19 @@ public class SiteController {
 
 		return "false";
 	}
+	
+	@RequestMapping(value="/sitecheckview/" +"{board_no}", method = RequestMethod.GET)
+	public String checkin(Locale locale,@PathVariable  String board_no, Model model) {
+	
+		System.out.println("현장점검이력보드넘버=" +board_no);
+		
+		model.addAttribute("sitecheckview",checkboardservice.viewgetList(board_no));
+		
+		System.out.println(checkboardservice.viewgetList(board_no));
+		
+		return "site/sitecheckview";
+	}
+	
+	
+	
 }

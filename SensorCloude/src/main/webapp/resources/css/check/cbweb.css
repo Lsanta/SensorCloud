@@ -45,12 +45,28 @@
 	margin :20px 20px 20px 20px;
 }
 .th03{
-	width: 90%;
+	width: 30%;
 	background-color: #F2F2F2;
 	text-align: left;
 }
 .se{
-	width: 35%;
+	width: 95%;
+	height: 60%;
+	text-align: center;
+}
+.status{
+	width: 10%;
+	background-color: #D8D8D8;
+}
+.stse{
+	width:15%;
+	text-align: left;
+}
+.cc{
+	text-align: center;
+}
+.sse{
+	width:55%;
 	height: 60%;
 }
 .content{
@@ -64,6 +80,11 @@
 	height: 99.5%;
 	font-size: 1.4em;
 }
+.th05{
+	width: 5%;
+	background-color: #D8D8D8;
+}
+
 
 .f0{
 	width:97%;

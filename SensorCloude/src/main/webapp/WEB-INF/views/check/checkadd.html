@@ -28,10 +28,16 @@
 	<th class="th03">
 		<select name="site" class="se">
    	      <option value="">현장선택</option>
-  		  <option value="1">1</option>
-  		  <option value="2">2</option>
-  		  <option value="3">3</option>
+  		  <option th:each="checksitelist : ${checksitelist}" th:value="${checksitelist.site_name}" th:text="${checksitelist.site_name}"></option>
 		</select>
+	</th>
+	<th class="status">게시글 상태</th>
+	<th class="stse">
+		<select name="status" class="sse">
+  		  <option value="1">open</option>
+  		  <option value="2">fixed</option>
+		</select>
+	</th>
 	</th>
 	</table>
 	</div>
@@ -40,7 +46,7 @@
 	</div>
 	<div class="f0">
 		<table class="table0">
-		<th class="th01">첨부파일</th>
+		<th class="th05">첨부파일</th>
 		<th class="th03"><input type="file" id="files[0]" name="files[0]" value=""></th>
 	</table>
 	</div>
