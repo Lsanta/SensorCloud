@@ -52,7 +52,7 @@ public class SiteController {
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); 
 		model.addAttribute("siteStatus" , siteservice.getStatus(site_id));
-		System.out.println(siteservice.getStatus(site_id));
+		System.out.println(siteservice.getStatus(site_id));//현장클릭시 상태정보
 		return "site/sitemain";
 
 	}
