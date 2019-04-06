@@ -61,18 +61,13 @@ table th {
 }
 
 .w1{
-  margin-top:100px;
+  margin-top: 50px;
   height: 160px;
  
 }
 
 .w2{
-  margin-bottom:100px; 
-}
-
-.w3{
-  margin-top:100px;
-  margin-bottom:100px;
+  margin-bottom: 70px; 
 }
 
 .cell{
@@ -161,7 +156,7 @@ table th {
 
 /*�럹�씠吏뺣�遺�*/
 .pagination-container {
-  margin: 100px auto;
+  margin: 30px auto;
   text-align: center;
 }
 .pagination {

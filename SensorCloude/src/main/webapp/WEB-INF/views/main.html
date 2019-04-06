@@ -59,7 +59,7 @@
     		<div th:if="${mainchecklist.file_path != 'null'}">
               <img src="${mainchecklist.file_path}" class="responsive-image">
     		</div>
-              <h5 th:text=${mainchecklist.title}></h5>
+              <h5 th:text="${mainchecklist.title}"></h5>
               <h5 th:text=${mainchecklist.name}></h5>
               <span id="chdate" th:text=${mainchecklist.reg_date}></span>
               <span id="chstatus" th:switch=${mainchecklist.board_status}>
@@ -92,10 +92,6 @@
 	
 	<th:block layout:fragment="page_js" >
 		<script src="/resources/js/main.js"></script>
-		<script>
-		  var str = "${mainchecklist.title}";
-	      document.write(str.substring( 9, 16 ));
-		</script>
 	</th:block>
 	
 </html>

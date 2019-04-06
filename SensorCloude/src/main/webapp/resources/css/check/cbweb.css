@@ -1,6 +1,6 @@
 .a{
-    width: 70%;
-    height: 100%;
+    width: 65%;
+    height: 790px;
     overflow: hidden;
     margin:20px auto;
     border: 1px solid #ddd;
@@ -97,9 +97,9 @@
 .but{
 	width:97%;
 	height:50px;
-	margin :20px 20px 20px 20px;
+	margin :20px;
 }
 .but0{
-	margin-top: 25px;
+	margin: 20px 0;
 	text-align:center;
 }
