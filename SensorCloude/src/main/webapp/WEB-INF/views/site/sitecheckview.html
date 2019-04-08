@@ -16,28 +16,38 @@
 
 
 	<div id="fixlist_header">
-		<h2 id="infixlist_title" class="span" th:each="sitecheckview : ${sitecheckview}" th:text="${sitecheckview.site_name}"></h2>
+		<h2 id="infixlist_title" class="span"
+			th:each="sitecheckview : ${sitecheckview}"
+			th:text="${sitecheckview.site_name}"></h2>
 		<!-- 점검이력을 클릭하면 해당 현장의 이름을 가져오기 -->
-		<input type="button" name="modifyfixlist" id="modifyfixlist" class="fixlistbutton" value="수정"> 
-		<input type="button" name="deletefixlist"
-		id="deleteyfixlist" class="fixlistbutton" value="삭제">
+		<input type="button" name="modifyfixlist" id="modifyfixlist"
+			class="fixlistbutton" value="수정"> <input type="button"
+			name="deletefixlist" id="deleteyfixlist" class="fixlistbutton"
+			value="삭제">
 
 	</div>
 
 	<div class="fixlistbody">
 
-		<div id="fixlistbody_condition" >
-				
-			<!-- 점검상태 / 날짜  가져오기-->
-			<p class="span" th:each="sitecheckview : ${sitecheckview}" th:text="${sitecheckview.title}"></p>
+		<div id="fixlistbody_condition">
 
-			<p class="span" th:each="sitecheckview: ${sitecheckview}" th:text="${sitecheckview.reg_date}"></p>
+			<!-- 점검상태 / 날짜  가져오기-->
+			<p class="span" th:each="sitecheckview : ${sitecheckview}"
+				th:text="${sitecheckview.title}"></p>
+			<select name="job" class="span">
+				<option value="fixed"  selected="selected">fixed</option>
+				<option value="open">open</option>
+				<option value="closed">closed</option>
+			</select>
+			<p class="span" id="regdate" th:each="sitecheckview: ${sitecheckview}"
+				th:text="${sitecheckview.reg_date}"></p>
 		</div>
 
-		<div id="fixlistbody_content" >
+		<div id="fixlistbody_content">
 
 			<!-- 글쓰기에서 등록한 점검이력 긁어오기 -->
-			<p th:each="sitecheckview : ${sitecheckview}" th:text="${sitecheckview.board_content}"></p>
+			<p th:each="sitecheckview : ${sitecheckview}"
+				th:text="${sitecheckview.board_content}"></p>
 		</div>
 		<div id="fixlistbody_addpicture">
 
@@ -48,6 +58,6 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
-		
+
 </th:block>
 </html>
