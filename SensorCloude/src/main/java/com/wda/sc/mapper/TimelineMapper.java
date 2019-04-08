@@ -10,6 +10,8 @@ public interface TimelineMapper {
 	public ArrayList<TimelineVO> getList();
 	public int insert(TimelineVO vo);
 	public int timelinedelete(String content);
+	public int timelinemodify(TimelineVO vo);
+
 
 	
 }

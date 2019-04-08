@@ -125,7 +125,7 @@ public class SiteController {
 	@RequestMapping(value ="siteadd.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String insertSite(SiteVO site) { 
-		System.out.println("현장 추가 컨트롤러 입니다.");
+		System.out.println("현장 추가 컨트롤러입니다.");
 		switch (site.getType_no()) {
 		case "building":
 			site.setType_no("1");

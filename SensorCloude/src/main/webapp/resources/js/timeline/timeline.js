@@ -16,7 +16,7 @@ $(document).ready(function(){
 				var textarea  = $("#textarea").val();
 				var query = {content:$("#textarea").val()};
 				
-		alert(textarea);
+
 		
 		$.ajax({
 			  type : "POST",
@@ -24,16 +24,19 @@ $(document).ready(function(){
 			  data : query,
 			  success : function(data){
 				  if( data == "success"){
-					  alert("타임라인이 등록되었습니다.");
-					  location.reload();
+						  location.reload();
 				  } else{
-					  alert("타임라인 등록에 실패하셨습니다.");
-					  location.reload();
+				  location.reload();
 					
 				  }
 			  }
 			  
 		});
 		
-	}); 	
-});
+	}); 
+	
+
+	
+	
+	
+	});

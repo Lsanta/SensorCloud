@@ -25,9 +25,16 @@ public class UsermanageServiceImplement implements UsermanageService{
 	public ArrayList<MemberVO> getInfo(String id) {
 		return mapper.getInfo(id);
 	}
+	
 	@Override
 	public int getPageNum() {
 		// TODO Auto-generated method stub
 		return mapper.getPageNum();
 	}
+	
+	@Override
+	public int updateuser(MemberVO vo) {
+		return mapper.updateuser(vo);
+	}
+	
 }

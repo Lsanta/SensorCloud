@@ -40,6 +40,18 @@ public class TimelineServiceImplement implements TimelineService {
 		return mapper.timelinedelete(content);
 	}
 
+	@Override
+	public int timelinemodify(TimelineVO vo) {
+	
+		return mapper.timelinemodify(vo);
+	}
+
+	
+
+
+
+
+
 	
 
 

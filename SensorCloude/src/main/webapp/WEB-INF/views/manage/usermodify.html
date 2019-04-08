@@ -2,7 +2,43 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <link rel="stylesheet" type="text/css" href="/resources/css/manage/usermodify.css">
-<script src="/resources/js/manage/managelist.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="  crossorigin="anonymous"></script>
+<script src="/resources/js/manage/manage.js"></script>
+<script>
+/*사용자 수정*/
+$(document).ready(function() {
+$("#confirm-modify").on("click", function() {
+	var target = document.getElementById("selectBox");
+	
+	var user_id = $("#id").val();
+	var name = $("#modify_name").val();
+	var phone = $("#phonenumber").val();
+	var m_level = target.options[target.selectedIndex].value;
+
+	var query = {
+			user_id : user_id,
+			name : name,
+			phone : phone,
+			m_level : m_level
+	}
+	
+	$.ajax({
+		type : "POST",
+		url : "/manage/updateuser.do",
+		data : query,
+		success : function(data) {
+			if (data == "success") {
+				alert("수정완료");
+				window.location.href = "manage";
+			} else{
+				  alert("수정실패");
+			}
+		}
+	
+	});	// ajax 종료
+}); // #confirm-modify 종료
+});
+</script>
 </head>
 
 <body>
@@ -16,21 +52,24 @@
 		<div class="usermodify-card" th:each="userInfo : ${userInfo}">
 
 			<label>아이디</label><br>
-			<input type="text" name="modify_name" id="id" th:value="${userInfo.user_id}"><br>
+			<input type="text" name="modify_name" id="id" th:value="${userInfo.user_id}" disabled="disabled"><br>
 			
 			<label>이름</label><br>
 			<input type="text" name="name" id="modify_name" th:value="${userInfo.name}"><br>
+			
+			<label>이메일</label><br>
+			<input type="text" name="modify_name" id="email" th:value="${userInfo.email}" disabled="disabled"><br>
 				
 			<label>휴대폰번호</label><br>
 			<input type="text" name="modify_name" id="phonenumber" th:value="${userInfo.phone}"><br>
 			
 			<label id="level">등급</label><br>
-			<select>
-				<option>1. 권한없음</option>
-				<option>2. 읽기권한</option>
-				<option>3. 쓰기권한</option>
-				<option>4. 수정권한</option>
-				<option>5. 관리자</option>
+			<select id="selectBox">
+				<option value="1">1. 권한없음</option>
+				<option value="2">2. 읽기권한</option>
+				<option value="3">3. 쓰기권한</option>
+				<option value="4">4. 수정권한</option>
+				<option value="5">5. 관리자</option>
 			</select>
 				
 			<input type="submit" name="confirm-modify" id="confirm-modify" class="confirm-modify" value="수정">
