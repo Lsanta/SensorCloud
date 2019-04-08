@@ -102,6 +102,9 @@
 				<div id="sidebar">
 					<textarea name="textarea" id="textarea" maxlength="80" placeholder="문자내용" autofocus></textarea>
 					<button id="submit">전송</button>
+					<div id="the_count">
+					<span id="current">0</span> <span id="maximum">/ 80</span>
+				</div>
 					<div class="scroll-table2">
 						<div>
 							<table>
@@ -131,7 +134,11 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
-	<script src="/resources/js/site/sitealarm.js"></script>
+	
 	<script src="/resources/js/site/asidebar.js"></script>
+	<script src="/resources/js/site/sitealarm.js"></script>
+	<script>
+	
+	</script>
 </th:block>
 </html>

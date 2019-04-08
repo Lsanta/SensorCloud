@@ -175,9 +175,22 @@ $(document).ready(function(){
 			}); // ajax 종료
 		});
 	
-	
+		/*글자수 제한*/
+		$('textarea').keyup(function() {
+		    
+			  var characterCount = $(this).val().length,
+			      current = $('#current'),
+			      maximum = $('#maximum'),
+			      theCount = $('#the-count');
+			    
+			  current.text(characterCount);
+			      
+			});
 	
 });
+
+
+
 
 
 

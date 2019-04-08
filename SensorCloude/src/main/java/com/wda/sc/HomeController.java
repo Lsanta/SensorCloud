@@ -148,6 +148,16 @@ public class HomeController {
 		
 		return "timeline/timeline";
 	}
+	
+
+	@RequestMapping(value = "/timelinemodify", method = RequestMethod.GET)
+	public String timelinemodify(Locale locale, Model model) {
+		model.addAttribute("timelinelist",timelineservice.getList());
+		System.out.println(timelineservice.getList());
+		
+		return "timeline/timelinemodify";
+	}
+	
 
 	@RequestMapping(value = "/mysensor", method = RequestMethod.GET)
 	public String mysensor(Locale locale, Model model) {
