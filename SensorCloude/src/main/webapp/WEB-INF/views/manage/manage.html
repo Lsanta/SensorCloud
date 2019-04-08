@@ -31,12 +31,14 @@
 				</thead>
 				<tbody id="user">
 				 	<tr th:each="userlist : ${userlist}">
+
 						<td th:text="${userlist.user_id}"></td>
 						<td th:text="${userlist.name}"></td>
 						<td th:text="${userlist.email}"></td>
 						<td th:text="${userlist.phone}"></td>
 						<td th:text="${userlist.m_level}"></td>
 						<td></td>
+
 					</tr>
 
 				</tbody>

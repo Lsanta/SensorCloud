@@ -1,22 +1,22 @@
 @charset "UTF-8";
 
 .status {
-	width : 15%;
+   width : 15%;
 }
 
 .sname {
-	width : 15%;
+   width : 15%;
 }
 
 .saddr{
-	width: 50%;
+   width: 50%;
 }
 .stime{
-	width: 24%;
+   width: 24%;
 }
 
 #site tr:hover {
-	background-color: #D8D8D8;
+   background-color: #D8D8D8;
 }
 
 #main-container {
@@ -212,8 +212,8 @@ table th {
 }
 
 #chdate {
-	margin-left: 10%;
-	font-size: 0.8em;
+   margin-left: 10%;
+   font-size: 0.8em;
 }
 
 #chstatus {
