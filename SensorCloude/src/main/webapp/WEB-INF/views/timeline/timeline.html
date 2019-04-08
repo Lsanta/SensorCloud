@@ -34,6 +34,7 @@
 			</div>
 
 			<div id="writing">
+
 				<div class="timeline" th:each="timelinelist : ${timelinelist}">
 					<div class="timeline-header" th:id="${timelinelist.timeline_n}">
 						<h3 th:text="${timelinelist.name}"></h3>
@@ -48,6 +49,7 @@
 					<p th:text="${timelinelist.content}">content</p>
 
 				</div>
+
 			</div>
 		</div>
 	</div>

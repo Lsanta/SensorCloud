@@ -30,8 +30,12 @@
 				
 			<!-- 점검상태 / 날짜  가져오기-->
 			<p class="span" th:each="check : ${cklist}" th:text="${check.title}"></p>
-
-			<p class="span" th:each="check : ${cklist}" th:text="${check.reg_date}"></p>
+			<select name="job" class="span">
+				<option value="fixed"  selected="selected">fixed</option>
+				<option value="open">open</option>
+				<option value="closed">closed</option>
+			</select>
+			<p class="span"  id="regdate" th:each="check : ${cklist}" th:text="${check.reg_date}"></p>
 		</div>
 
 		<div id="fixlistbody_content" >
