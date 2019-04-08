@@ -37,4 +37,11 @@ public class CheckboardServiceImplement implements CheckboardService {
 	public ArrayList<CheckBoardVO> mainList(){
 		return mapper.mainList();
 	}
+	
+	@Override
+	public int insertcheckboard(CheckBoardVO checkboard) {
+		// TODO Auto-generated method stub
+		System.out.println(checkboard);
+		return mapper.insertcheckboard(checkboard);
+	}
 }
