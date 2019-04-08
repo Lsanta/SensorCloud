@@ -57,6 +57,12 @@
 		order by x.site_status desc
 		]]>
 	</select>
+	<!-- 현장 클릭시 현장상태  -->
+	<select id="getStatus" resultType="com.wda.sc.domain.SiteVO">
+		
+		select site_status from site where site_id = #{site_id}
+		
+	</select>
 
 	
 	<!--알람 내용 추가 -->
@@ -94,5 +100,10 @@
 	<insert id="networkadd" parameterType="com.wda.sc.domain.SiteVO">
 		insert into network(sig_id,site_id,sig_protocol,host_ip,sig_port_num,port_num) values(network_seq.nextval,site_seq.currval,'tcp',#{host_ip},#{sig_port_num},#{port_num})
 	</insert>	
+	
+	<!-- 점검이력 셀렉트박스  -->
+	<select id="getchecksite" resultType="com.wda.sc.domain.SiteVO">
+		select * from site
+	</select>
 
 </mapper>

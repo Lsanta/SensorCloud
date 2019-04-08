@@ -1,3 +1,27 @@
+#mypagechecklist tr:hover {
+	background-color: #D8D8D8;
+}
+
+.title-header {
+    height: 40px;
+    border-bottom: 1px solid #000000;
+    margin: 12% 0 0 -0.2%;
+  }
+  
+  .title-header h1 {
+    float: left;
+    margin: 0;
+    padding: 0 0 0 20px;
+    font-size: 1.8em;
+  }
+
+button {
+	margin: 0 0 0 5%;
+	width: 80px;
+	font-size: 10px;
+	float: left;
+}
+
 table {
   border: 1px solid #ccc;
   border-collapse: collapse;
@@ -50,13 +74,14 @@ table th {
 
 }
 
+img {
+	width: 100px;
+}
+
 .w1{
-  margin-top:10px;
-  margin-bottom:40px;
-  
+  margin-top:10px;  
 }
 .w2{
-  margin-top:20px;
   margin-bottom:100px;
   
 }
@@ -65,23 +90,41 @@ table th {
   margin-bottom:100px;
 
 }
+
 .n1{
-  font-size: 1.0em;
+  font-size: 1.8em;
   text-align: left;
-  margin: 55% 0 -1% -0.1%;
+  margin: 50% 0 -1% 1%;
   display: block;
 }
 .n2{
   display: block;
-  font-size: 0.9em;
+  font-size: 1.4em;
   text-align: left;
+  margin: 0 0 0 1.6%;
+  
+}
+.n3{
+  display: block;
+  font-size: 1em;
+  text-align: left;
+  position: relative;
+  left: 2px;
+  top: 2px;
+}
+
+.name02{
+  width:40%;
+  height: 160px;
+  display: inline-block;
+  float: right;
+  margin-top: -25%;
   
 }
 .up{
   width:45%;
   height: 30%;
- margin-left: 4%;
-  margin-top: 65%;
+  margin-left: 4%;
   box-shadow: 1px 1px 1px 1px;
 
 }
@@ -89,7 +132,6 @@ table th {
   width:48%;
   height: 30%;
   float: right;
-  margin-top: 65%;
   box-shadow: 1px 1px 1px 1px;
 }
 

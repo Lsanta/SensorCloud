@@ -32,4 +32,9 @@ public class CheckboardServiceImplement implements CheckboardService {
 		// TODO Auto-generated method stub
 		return mapper.getPageNum();
 	}
+	
+	@Override
+	public ArrayList<CheckBoardVO> mainList(){
+		return mapper.mainList();
+	}
 }

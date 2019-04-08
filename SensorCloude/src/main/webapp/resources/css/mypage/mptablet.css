@@ -1,3 +1,26 @@
+#mypagechecklist tr:hover {
+	background-color: #D8D8D8;
+}
+
+.title-header {
+    height: 40px;
+    border-bottom: 1px solid #000000;
+    margin: 5% 0 0 0.3%;
+  }
+  
+  .title-header h1 {
+    float: left;
+    margin: 0;
+    padding: 0 0 0 20px;
+    font-size: 1.8em;
+  }
+
+button {
+	margin: 0 0 0 6%;
+	width: 125px;
+}
+
+
 table {
   border: 1px solid #ccc;
   border-collapse: collapse;
@@ -40,11 +63,9 @@ table th {
 
 .w1{
   margin-top:100px;
-  margin-bottom:40px;
  
 }
 .w2{
-  margin-top:20px;
   margin-bottom:100px;
  
 }
@@ -54,17 +75,28 @@ table th {
   
 }
 .n1{
-  font-size: 1.4em;
+  font-size: 2.5em;
   text-align: left;
   margin: 25% 0 -1% -0.1%;
   display: block;
 }
+
 .n2{
   display: block;
-  font-size: 1.2em;
+  font-size: 1.8em;
   text-align: left;
+  margin: 0 0 0 1.5%;
   
 }
+.n3{
+  display: block;
+  font-size: 1.4em;
+  text-align: left;
+  position: relative;
+  left: 75px;
+  top: -28px;
+}
+
 .up{
   width:30%;
   height: 30%;
@@ -80,6 +112,7 @@ table th {
   margin-top: 18%;
   box-shadow: 1px 1px 1px 1px;
 }
+
 
 /*�럹�씠吏뺣�遺�*/
 .pagination-container {

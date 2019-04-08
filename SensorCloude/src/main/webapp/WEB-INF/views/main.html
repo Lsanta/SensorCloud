@@ -21,10 +21,10 @@
       <table id="siteTable">
         <thead>
           <tr>
-            <th scope="col" class="status">현재상태</th>
-            <th scope="col" class="sname">현장이름</th>
-            <th scope="col" class="saddr">주소</th>
-            <th scope="col" class="stime">데이터갱신시간</th>
+            <th scope="col" class="status" style="width:8%;" >현재상태</th>
+            <th scope="col" class="sname" style="width:15%;" >현장이름</th>
+            <th scope="col" class="saddr" style="width:22%;" >주소</th>
+            <th scope="col" class="stime" style="width:15%;" >데이터갱신시간</th>
           </tr>
         </thead>
         
@@ -52,42 +52,23 @@
         </div>
         <div class="image-container">
           <div class="grid">
-            <div class="images">
-              <img src="resources/img/ddf.png" class="responsive-image">
-              <h5>XX휴게소 센..</h5>
-              <h5>김개발</h5>
-              <h6>19.02.21 fixed</h6>
+            <div class="images" th:each="mainchecklist : ${mainchecklist}">
+            <div th:if="${mainchecklist.file_path = 'null'}">
+              <img src="/resources/img/addimage.svg" class="responsive-image">
+    		</div>
+    		<div th:if="${mainchecklist.file_path != 'null'}">
+              <img src="${mainchecklist.file_path}" class="responsive-image">
+    		</div>
+              <h5 th:text="${mainchecklist.title}"></h5>
+              <h5 th:text=${mainchecklist.name}></h5>
+              <span id="chdate" th:text=${mainchecklist.reg_date}></span>
+              <span id="chstatus" th:switch=${mainchecklist.board_status}>
+              	<span th:case="'0'">open</span>
+              	<span th:case="'1'">fixed</span>
+              	<span th:case="'2'">closed</span>
+              </span>
             </div>
-            <div class="images">
-              <img src="resources/img/ddf.png" class="responsive-image">
-              <h5>XX휴게소 센..</h5>
-              <h5>김개발</h5>
-              <h6>19.02.21 fixed</h6>
-            </div>
-            <div class="images">
-              <img src="resources/img/ddf.png" class="responsive-image">
-              <h5>XX휴게소 센..</h5>
-              <h5>김개발</h5>
-              <h6>19.02.21 fixed</h6>
-            </div>
-            <div class="images">
-              <img src="resources/img/ddf.png" class="responsive-image">
-              <h5>XX휴게소 센..</h5>
-              <h5>김개발</h5>
-              <h6>19.02.21 fixed</h6>
-            </div>
-            <div class="images">
-              <img src="resources/img/ddf.png" class="responsive-image">
-              <h5>XX휴게소 센..</h5>
-              <h5>김개발</h5>
-              <h6>19.02.21 fixed</h6>
-            </div>
-            <div class="images">
-              <img src="resources/img/ddf.png" class="responsive-image">
-              <h5>XX휴게소 센..</h5>
-              <h5>김개발</h5>
-              <h6>19.02.21 fixed</h6>
-            </div>
+            
           </div>
         </div> 
       </div>
