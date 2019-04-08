@@ -4,7 +4,7 @@
 	data-layout-decorate="~{include/layout}">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <th:block layout:fragment="page_head">
-	<title>점검이력</title>
+	<title>타임라인</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
@@ -37,12 +37,13 @@
                 <h3 th:text="${timelinelist.name}"></h3>
                 <h5 th:text="${timelinelist.time}"></h5>          
           
-            <button type="button" class="modify" th:if="${timelinelist.user_id}==${session.id}">수정</button>
+          <button type="button" class="modify" th:if="${timelinelist.user_id}==${session.id}">수정</button>
              <button type="button" class="delete" th:if="${timelinelist.user_id}==${session.id}">삭제</button>
         
             
             </div>
             <p th:text="${timelinelist.content}">content</p>
+            
           </div>
       </div>
 			</div>
@@ -87,7 +88,26 @@ $(".delete").on('click',function(){
 			}); // ajax 종료
 				/*}*/
 }
-	});
+
+});
+
+		
+$(".modify").on('click',function(){
+	
+		var content = $(this).parent();
+		var content2 = content.siblings().first();
+		var content3 = content2.text(); 
+
+		var query = {
+				content : content3
+		}
+		
+		window.location.href = "timeline/timelinemodify?content="+content3;
+		
+
+});
+
+	
 	</script>
 </th:block>
 </html>

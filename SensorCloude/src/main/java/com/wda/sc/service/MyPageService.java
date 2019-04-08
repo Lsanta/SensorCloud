@@ -7,6 +7,7 @@ import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MemberVO;
 
 public interface MyPageService {
+	
 	public ArrayList<MemberVO> getInfo(String id);
 	
 	public ArrayList<CheckBoardVO> myList(Map<String, Object> parm);

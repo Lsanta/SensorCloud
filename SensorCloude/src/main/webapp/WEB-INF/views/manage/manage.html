@@ -23,18 +23,20 @@
 					<tr>
 						<th scope="col" style="width:10%;">아이디</th>
 						<th scope="col" style="width:10%;">이름</th>
-						<th scope="col" style="width:18%;">전화번호</th>
+						<th scope="col" style="width:18%;">이메일</th>
+						<th scope="col" style="width:15%;">전화번호</th>
 						<th scope="col" style="width:5%;">등급</th>
-						<th style="width:5%;"></th>
+						<th style="width:8%;">비고</th>
 					</tr>
 				</thead>
 				<tbody id="user">
 				 	<tr th:each="userlist : ${userlist}">
 						<td th:text="${userlist.user_id}"></td>
 						<td th:text="${userlist.name}"></td>
+						<td th:text="${userlist.email}"></td>
 						<td th:text="${userlist.phone}"></td>
 						<td th:text="${userlist.m_level}"></td>
-						<td><button class="delete">삭제</button></td>
+						<td></td>
 					</tr>
 
 				</tbody>
@@ -75,7 +77,6 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
-	<script src="/resources/js/manage/managelist.js"></script>
-	<script src="/resources/js/manage/usermodify.js"></script>
+	<script src="/resources/js/manage/manage.js"></script>
 </th:block>
 </html>

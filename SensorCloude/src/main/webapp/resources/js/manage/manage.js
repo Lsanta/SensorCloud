@@ -12,11 +12,14 @@ $(document).ready(function() {
 		 var id = $("#user tr:eq("+tr+") td:eq(0)").text();		 
 		 goPopup(id);
 		 
-	});
+	}); 
+	
 	function goPopup(id) {
 		var pop = window.open("/manage/usermodify/"+ id, "pop",
-				"width=570,height=520,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");		
+				"width=570,height=530,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+		
 	}
+
 	
 	/*pagination*/
 	var num = 0;

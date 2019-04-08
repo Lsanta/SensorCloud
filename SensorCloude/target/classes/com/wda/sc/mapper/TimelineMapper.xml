@@ -5,11 +5,15 @@
 <mapper namespace="com.wda.sc.mapper.TimelineMapper">
 
 	<select id="getList" resultType="com.wda.sc.domain.TimelineVO">
-		select timeline.content,substr(time,0,14) as time, member.name,timeline.user_id
+		select
+		timeline.timeline_n, timeline.content,substr(time,0,14) as time,
+		member.name,timeline.user_id
 		from timeline,member
-		where timeline.user_id = member.user_id
+		where timeline.user_id
+		= member.user_id
+		order by time desc
 	</select>
-	
+
 	<select id="timedesc" resultType="com.wda.sc.domain.TimelineVO">
 		<![CDATA[
 			select timeline.timeline_n, timeline.content, substr(time,0,14) as time, member.name
@@ -19,14 +23,21 @@
     		order by timeline_n desc
     	]]>
 	</select>
-	
+
 	<!-- 글 등록 -->
 	<insert id="insert" parameterType="com.wda.sc.domain.TimelineVO">
-		insert into TIMELINE(timeline_n,user_id,content,time) values(timeline_seq.nextval,#{user_id},#{content},sysdate)
+		insert into
+		TIMELINE(timeline_n,user_id,content,time)
+		values(timeline_seq.nextval,#{user_id},#{content},sysdate)
 	</insert>
-	
-	<!-- 글 삭제   -->
-	<delete id="timelinedelete"> 
-		delete from timeline where content = #{content} 
- 	</delete> 
+
+	<!-- 글 삭제 -->
+	<delete id="timelinedelete">
+		delete from timeline where content = #{content}
+	</delete>
+
+	<!-- 글 수정 -->
+	<update id="timelinemodify" parameterType="com.wda.sc.domain.TimelineVO">
+		update timeline set content = #{content} <!-- where timeline_n = #{timeline_n} -->
+	</update>
 </mapper>

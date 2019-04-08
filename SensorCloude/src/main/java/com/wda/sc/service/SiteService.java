@@ -17,9 +17,9 @@ public interface SiteService {
    public ArrayList<SiteVO> getSite(String site_id);
    
    public ArrayList<AlarmMemberVO> getAlarm_member(String site_id);
-   
+   //현장추가
    public int siteadd(SiteVO site);
-   
+   //현장추가
    public int networkadd(SiteVO site);
    
    public ArrayList<AlarmVO> getAlarm(String site_id);

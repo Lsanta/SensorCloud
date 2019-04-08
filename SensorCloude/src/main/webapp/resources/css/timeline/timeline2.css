@@ -1,15 +1,15 @@
 @charset "UTF-8";
 
-.timeline-header {
-  height: 30px;
+.timeline {
+  height: 150px;
 }
 
-.timeline-header h3 {
+.timeline h3 {
   float: left;
   margin: 0;
 }
 
-.timeline-header h5 {
+.timeline h5 {
   float: right;
   color: #524f4f;
   margin: 0;
