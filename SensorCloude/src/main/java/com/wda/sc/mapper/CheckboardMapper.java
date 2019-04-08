@@ -14,4 +14,6 @@ public interface CheckboardMapper {
 	public int getPageNum();
 
 	public ArrayList<CheckBoardVO> mainList();
+	
+	public int insertcheckboard(CheckBoardVO checkboard);
 }

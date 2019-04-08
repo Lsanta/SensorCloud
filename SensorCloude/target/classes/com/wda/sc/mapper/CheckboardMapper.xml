@@ -47,6 +47,12 @@
 	]]>
 	</select>
 	
+	<!-- 점검이력 글쓰기 -->
+	<insert id="insertcheckboard" parameterType="com.wda.sc.domain.CheckBoardVO">
+	insert into check_board(board_no,user_id,reg_date,title,board_content,board_status,site_id)
+	values(check_seq.nextval, #{user_id}, sysdate,#{title},#{board_content},#{board_status},#{site_id})
+	</insert>
+	
 
 	
 </mapper>
