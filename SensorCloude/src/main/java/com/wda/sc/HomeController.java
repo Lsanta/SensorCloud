@@ -34,7 +34,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class HomeController {
 
-
 	private SiteService siteservice;
 	private TimelineService timelineservice;
 	private CheckboardService checkboardservice;

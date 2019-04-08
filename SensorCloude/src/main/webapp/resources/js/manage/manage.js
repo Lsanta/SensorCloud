@@ -12,11 +12,39 @@ $(document).ready(function() {
 		 var id = $("#user tr:eq("+tr+") td:eq(0)").text();		 
 		 goPopup(id);
 		 
-	});
+	}); 
+	
 	function goPopup(id) {
 		var pop = window.open("/manage/usermodify/"+ id, "pop",
-				"width=570,height=520,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");		
+				"width=570,height=530,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");	
+		
+		/*사용자 수정*/
+		$('#confirm-modify').on('click', function() {
+			var query = {
+					modify_name : $("#modify_name").val(),
+					phonenumber : $("#phonenumber").val(),
+					level : $('options[target.selectedIndex].value').val()
+			}
+			
+			console.log(query);
+			
+			$.ajax({
+				type : "POST",
+				url : "/usermanage/updateuser.do",
+				data : query,
+				success : function(data) {
+					if (data == "success") {
+						alert("수정완료");
+						window.location.href = "/manage"
+					} else{
+						  alert("추가에 실패했습니다");
+					}
+				}
+			
+			});	// ajax 종료
+		}); // #confirm-modify 종료
 	}
+
 	
 	/*pagination*/
 	var num = 0;
