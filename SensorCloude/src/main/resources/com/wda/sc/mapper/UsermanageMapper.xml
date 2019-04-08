@@ -23,8 +23,9 @@
 		select count(user_id) from member 
 	</select>
 	
+	<!-- 사용자 수정 -->
 	<update id="updateuser" parameterType="com.wda.sc.domain.MemberVO">
-		update MEMBER set PHONE = #{phone}, M_LEVEL = #{m_level}, NAME = #{name}
+		update MEMBER set phone = #{phone}, m_level = #{m_level}, name = #{name}
     	where user_id = #{user_id}
 	</update>
 	

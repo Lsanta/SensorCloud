@@ -36,7 +36,6 @@ private UsermanageService usermanageservice;
 	@RequestMapping(value ="updateuser.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String insertSite(MemberVO vo) { 
-		System.out.println("현장 추가 컨트롤러입니다.");
 		
 		int a = usermanageservice.updateuser(vo);
 		
