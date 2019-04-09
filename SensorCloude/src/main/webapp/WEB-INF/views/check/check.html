@@ -32,7 +32,11 @@
 				 	<tr th:each="checkboardlist : ${checkboardlist}" >
 						<td th:text="${checkboardlist.site_name}">status</td>
 						<td th:text="${checkboardlist.title}">status</td>
-						<td th:text="${checkboardlist.board_status}">status</td>
+						<td th:switch="${checkboardlist.board_status}">
+						<span th:case="'0'">open</span>
+						<span th:case="'1'">fixed</span>
+						<span th:case="'2'">closed</span>
+						</td>
 						<td th:text="${checkboardlist.name}">status</td>
 						<td th:text="${checkboardlist.reg_date}">status</td>
 						<td th:text="${checkboardlist.board_no}" style="display : none"></td>

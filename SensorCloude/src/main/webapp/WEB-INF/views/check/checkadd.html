@@ -19,7 +19,7 @@
 	<div class="title1">
 		<table class="table0">
 	<th class="th01">&nbsp;&nbsp;제 목&nbsp;&nbsp;</th>
-		<th class="th02"><input type="text" name="title" class="title00" maxlength="50"></input></th>
+		<th class="th02"><input type="text" name="title" id="title" class="title00" maxlength="50"></input></th>
 		</table>
 	</div>
 	<div class="site1">
@@ -28,21 +28,21 @@
 	<th class="th03">
 		<select name="site" class="se">
    	      <option value="">현장선택</option>
-  		  <option th:each="checksitelist : ${checksitelist}" th:value="${checksitelist.site_name}" th:text="${checksitelist.site_name}"></option>
+  		  <option th:each="checksitelist : ${checksitelist}" th:value="${checksitelist.site_id}" th:text="${checksitelist.site_name}"></option>
 		</select>
 	</th>
 	<th class="status">게시글 상태</th>
 	<th class="stse">
-		<select name="status" class="sse">
-  		  <option value="1">open</option>
-  		  <option value="2">fixed</option>
+		<select name="status" id="sse">
+  		  <option value="0">open</option>
+  		  <option value="1">fixed</option>
 		</select>
 	</th>
 	</th>
 	</table>
 	</div>
 	<div class="content">
-		<textarea name="boardcontent" id="boardcontent" maxlength="1000" style="resize:none;"></textarea>
+		<textarea name="board_content" id="boardcontent" maxlength="1000" style="resize:none;"></textarea>
 	</div>
 	<div class="f0">
 		<table class="table0">
@@ -53,13 +53,48 @@
 	<div class="but">
 		<div class="but0">
 		<button type="button" class="back">목록으로</button>
-        <button type="button" class="insert">등록하기</button>
+        <button type="submit" class="insert">등록하기</button>
     	</div>
 	</div>
 </div>
 </th:block>
 
 <th:block layout:fragment="page_js">
-	<!-- 	<script src="/resources/js/site/checkadd.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	$(".back").click(function(){
+		window.history.back();
+	});
+	
+	$(".insert").click(function(){
+		var query = { 
+				title :$(".title00").val(),
+				site_id : $(".se option:selected").val(),
+				board_status : $("#sse option:selected").val(),
+				board_content : $("#boardcontent").val()
+					}
+		
+		console.log(query);
+		
+		$.ajax({
+			  type : "POST",
+			  url : "/checkboard/checkadd.do",
+			  data : query,
+			  success : function(data){
+				  if( data == "success"){
+					  alert("추가되었습니다");
+					  window.location.href = "/check/1"
+				  } else{
+					  alert("추가에 실패했습니다");
+				  }
+			  }
+			  
+		}); // ajax 종료
+		
+	}); 
+	
+});
+</script>
 </th:block>
 </html>

@@ -24,9 +24,12 @@
 
 	<div class="wrapper">
 
-		<div class="w1">
-			<div class="cell">
-				<img src="http://placehold.it/170x150" class="responsive-image">
+		<div class="w1" th:each="userInfo : ${userInfo} ">
+			<div class="cell" th:if="${userInfo.file_path = 'null'}">
+				<img src="/resources/img/manager.svg" />
+			</div>
+			<div class="cell" th:if="${userInfo.file_path != 'null'}">
+				<img src="${userInfo.file_path}" />
 			</div>
 			
 			<div class="name01" th:each="userInfo : ${userInfo}">

@@ -72,11 +72,8 @@
 			
 			<span
 				th:text="${siteInfo.address}"></span><br>
-			<button id="modify">현장수정</button>
+			<a href="/site/sitemodify"><button id="modify" >현장수정</button></a>
 			<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
-
-
-			<!-- <button id="modify">현장수정</button> -->
 
 			<div id="chartdiv"></div>
 
@@ -169,5 +166,6 @@ geocoder.addressSearch(site, function(result, status) {
 /*]]>*/
 	</script>
 	<script src="/resources/js/site/asidebar.js"></script>
+	<script src="/resources/js/site/sitemodify.js"></script>
 </th:block>
 </html>
