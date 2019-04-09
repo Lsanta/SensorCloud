@@ -80,19 +80,11 @@ public class TimelineController {
 		}
 	}
 	
-	@DateTimeFormat
+	
 	@RequestMapping(value = "timelinemodify.do")
 	@ResponseBody
 	public String timelinemodify(TimelineVO vo, HttpSession session) {
-		String content = vo.getContent();
 
-	
-		System.out.println(content);
-
-		vo.setContent(content);
-		System.out.println(vo);
-		
-		
 		int a = timelineservice.timelinemodify(vo);
 		System.out.println(a);
 		

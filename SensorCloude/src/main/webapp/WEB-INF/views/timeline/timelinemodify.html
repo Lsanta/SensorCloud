@@ -20,7 +20,7 @@
 
 <th:block layout:fragment="contents">
 	<div id="container">
-		<div id="header">
+		<div>
 			<h1>타임라인</h1>
 			
 			
@@ -28,12 +28,12 @@
 		</div>
 	
 		<div id="content">
-			<div id="text">
+			<div class="text">
 				
 				<textarea  name="textarea" id="textarea" maxlength="100" autofocus >
 					
 				</textarea>
-				<input type="button" value="수정" class="modifycheck" />
+				<input type="button" value="수정" class="modifycheck" id="modifycheck"/>
 				<div id="the_count">
 					<span id="current">0</span> <span id="maximum">/ 100</span>
 					<script src="/resources/js/timeline/timeline.js"></script>
@@ -55,13 +55,18 @@ function GetURLParameter(sParam) {
 
     for (var i = 0; i < sURLVariables.length; i++){
         var sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] == sParam) {
+        if (sParameterName[0] == sParam) { 
             return sParameterName[1];
         }
     }
 }
 var getContent= GetURLParameter('content');
-$('#textarea').val(getContent);
+var num = getContent.split('/');
+
+
+var div = $(".text").attr('id',num[1]);
+var a = div.attr('id');
+$('#textarea').val(num[0]);
 
 
 </script>
@@ -69,8 +74,10 @@ $('#textarea').val(getContent);
 <script>
 	$(".modifycheck").on('click',function(){
 		var textarea  = $("#textarea").val();
+
 		var query = {
-			content:$("#textarea").val()
+			content:$("#textarea").val(),
+			timeline_n:$(".text").attr("id")
 			};
 		
 		$.ajax({
@@ -80,7 +87,7 @@ $('#textarea').val(getContent);
 			  success : function(data){
 				  if( data == "success"){
 					  alert("ㅇㅇ");
-					window.location.href = "timeline";
+					window.location.href = "/timeline";
 					 
 				  } else{
 					alert("ㄴㄴ");
@@ -90,6 +97,14 @@ $('#textarea').val(getContent);
 		
 		}); 
 });
+	$('#textarea').keypress(function(event){
+	     if ( event.which == 13 ) {
+	         $('.modifycheck').click();
+	         
+	     }
+	});
+
+
 </script>
 
 

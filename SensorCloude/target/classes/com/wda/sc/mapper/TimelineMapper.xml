@@ -38,6 +38,6 @@
 
 	<!-- 글 수정 -->
 	<update id="timelinemodify" parameterType="com.wda.sc.domain.TimelineVO">
-		update timeline set content = #{content} <!-- where timeline_n = #{timeline_n} -->
+		update timeline set content = #{content} where timeline_n = #{timeline_n}
 	</update>
 </mapper>
