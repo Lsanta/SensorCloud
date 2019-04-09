@@ -13,8 +13,10 @@
 	</select>
 
 	<select id="getSite" resultType="com.wda.sc.domain.SiteVO">
+	<![CDATA[ 
 		select site_id,type_no,site_name,address,site_status,substr(start_date,0,8) as start_date
 		from site where site_id = #{site_id}
+		]]>
 	</select>
 	
 	<select id="repairList" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="map">
@@ -63,7 +65,6 @@
 		select site_status from site where site_id = #{site_id}
 		
 	</select>
-
 	
 	<!--알람 내용 추가 -->
 	<insert id="insertAlarm" parameterType="com.wda.sc.domain.AlarmVO">
@@ -80,6 +81,10 @@
 	</insert>	
 	
 	<!--현장 수정 -->
+	<select id="joinSite" resultType="com.wda.sc.domain.SiteVO">
+		select * from site s,network n where s.site_id = n.site_id and s.site_id = #{site_id}
+	</select>
+	
 	<update id="updatesite" parameterType="com.wda.sc.domain.SiteVO">
 		update site set type_no = #{type_no}, site_name = #{site_name}, address = #{address}
     	where site_id = #{site_id}
@@ -87,7 +92,7 @@
 	
 	<update id="updatenetwork" parameterType="com.wda.sc.domain.SiteVO">
 		update network set sig_protocol = #{sig_protocol}, host_ip = #{host_ip}, sig_port_num = #{sig_port_num}, port_num = #{port_num}
-    	where site_id = #{site_id}
+    	where sig_id = #{sig_id}
 	</update>
 	
 	<!--연락망 사람 추가-->
