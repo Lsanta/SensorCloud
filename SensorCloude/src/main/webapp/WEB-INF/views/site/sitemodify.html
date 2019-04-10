@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{include/layout}">
+
+<th:block layout:fragment="page_head">
+	<title>현장 수정 화면</title>
+	<meta charset="utf-8" />
+</th:block>
+
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/siteadd.css">
+</th:block>
+
+<th:block layout:fragment="contents">
+	 
+	<h1>현장 수정</h1>
+   
+   <div id="addcontent" >
+   
+   <div id="add_scene">   
+      <input type="radio" name="chk_scene" value="building" checked="checked">건물
+      <input type="radio" name="chk_scene" value="mountain"  id = "radio_m">산
+   </div>
+
+   <div id="addcontent_right" th:each="joinSite : ${joinSite}">
+      <!-- <input type="text" id="sample6_postcode" class="addcontent_right_input" placeholder="우편번호" > -->
+      <p id="p">주소:</p>
+	  <input type="text" id="sample6_address" th:value="${joinSite.address}" placeholder="주소" class="addcontent_right_input"><br>
+	  <input type="button" id="addressBtn" onclick="DaumPostcode()" value="조회" class="addcontent_right_button" ><br>
+	  <p id="p">현장이름:</p>
+	  <input type="text" id="sample6_detailAddress" th:value="${joinSite.site_name}" placeholder="현장이름" class="addcontent_right_input">
+	  <!-- <input type="text" id="sample6_extraAddress" placeholder="참고항목" class="addcontent_right_input"> -->
+      </div>
+
+
+   <h2>네트워크 설정</h2>
+   
+   <div id="addnetwork">
+
+      <div id="addnetwork_left">
+
+         <input type="radio" name="chk_net_raido" value="chk_net_radio">
+         	<label>TCP 클라이언트</label><br><br>
+
+         <input type="radio" name="chk_net_raido" value="tcpserver_net_radio" >
+         	<label>TCP 서버</label>
+          <select>
+            <option value="ipv4">Ipv4</option>
+            <option value="ipv41">Ipv6</option>
+         </select>
+         <br><br>
+
+         <input type="radio" name="chk_net_raido" value="tcpserver_net_radio" >
+         	<label>UDP</label>
+
+         
+      </div>   
+
+      <div id="addnetwork_right">
+      
+      	<div id="addnetwork_right1">
+         <p>호스트아이디 주소:</p>  
+         <p>호스트포트 번호:</p>     
+         <p>유선포트 번호:</p>
+       </div>
+      
+      <div id ="addnetwork_right2" th:each="joinSite : ${joinSite}">
+      
+      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="host_ip" th:value="${joinSite.host_ip}"><br>
+      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="sig_port_num" th:value="${joinSite.sig_port_num}"><br>
+      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="port_num" th:value="${joinSite.port_num}"><br>
+      
+      </div>
+     </div>
+
+   </div>
+   
+</div>
+
+   <div id="btn">
+      <button type="button" id="plus">확인</button>
+   </div>
+</th:block>
+
+<th:block layout:fragment="page_js">
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    function DaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                /* var extraAddr = ''; // 참고항목 변수 */
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                /* // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                } */
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                /* document.getElementById('sample6_postcode').value = data.zonecode; */
+                document.getElementById("sample6_address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("sample6_detailAddress").focus();
+            }
+        }).open();
+    } 
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function(){	
+	$("#plus").click(function(){	
+		var newURL =  window.location.pathname;
+
+		var url = newURL.split('/');
+		var site_id = url[3];
+		
+		//현장 데이터
+		var type_no = $('input[name="chk_scene"]:checked').val();
+		var address = $("#sample6_address").val();
+		var site_name = $("#sample6_detailAddress").val();
+		
+		//네트워크 데이터
+		var sig_protocol = $('input[name="chk_net_raido"]:checked').val();
+		var host_ip = $("#host_ip").val();
+		var sig_port_num = $("#sig_port_num").val();
+		var port_num = $("#port_num").val();
+		
+		console.log(query);
+		
+		var query = { 
+						site_id : site_id,
+						type_no : type_no,
+						address : address,
+						site_name : site_name,
+						
+						sig_protocol : sig_protocol,
+						host_ip : host_ip,
+						sig_port_num : sig_port_num,
+						port_num : port_num
+						
+					}
+		
+		$.ajax({
+			  type : "POST",
+			  url : "/site/sitemodify.do",
+			  data : query,
+			  success : function(data){
+				  if( data == "success"){
+					  alert("수정 성공");
+					 window.location.href = "/site/" + site_id; 
+				  } else{
+					  alert("수정 실패");
+				  }
+			  }
+			  
+		}); // ajax 종료
+		
+	}); // #plus 종료
+	
+});
+</script>
+</th:block>
+
+</html>

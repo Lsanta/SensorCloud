@@ -1,7 +1,51 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" type="text/css" href="/resources/css/mypage/levelup.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/mypage/levelup.css">
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"
+	integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	crossorigin="anonymous"></script>
+
+<script>
+	
+	$(document).ready(function() {
+
+		$("#ok").click(function() {
+
+			var select_level = $("#select_level option:selected").val();
+
+			var user_id = $("#user_id").text();
+
+			var query = {
+
+				userid : user_id,
+				selectlevel : select_level
+			}
+
+			$.ajax({
+
+				type : "POST",
+				data : query,
+				url : "/manage/userlevelmanage.do",
+				success : function(data) {
+
+					if (data == "success") {
+						alert("승급요청이 완료 되었습니다.");
+						
+						window.close();
+
+					}
+				}
+
+			});
+
+		});
+
+	});
+</script>
+
 </head>
 
 <body>
@@ -14,16 +58,21 @@
 
 		<div id="content">
 			<div id="now-level" th:each="userInfo : ${userInfo}">
-				<center><p th:text="|현재  ${userInfo.name} 님의 등급은 ${userInfo.m_level}등급 입니다.|"></p></center>
+				<center>
+					<p
+						th:text="|현재  ${userInfo.name} 님의 등급은 ${userInfo.m_level}등급 입니다.|"></p>
+				</center>
+				<p th:text="${userInfo.user_id}" id="user_id" style="display: none"></p>
+				<!-- 승급요청시 사용자 관리에 id를 넘기기위함 -->
 			</div>
 
 			<div id="next-level">
-				<select>
-					<option>1등급</option>
-					<option>2등급</option>
-					<option>3등급</option>
-					<option>4등급</option>
-					<option>5등급</option>
+				<select id="select_level">
+					<option value="1">1. 권한없음</option>
+					<option value="2">2. 읽기권한</option>
+					<option value="3">3. 쓰기권한</option>
+					<option value="4">4. 수정권한</option>
+					<option value="5">5. 관리자</option>
 				</select>
 				<p>으로 승급 요청 하시겠습니까?</p>
 			</div>
@@ -31,7 +80,7 @@
 
 
 		<div id="submit">
-			<input type="submit" id="ok" value="확인" />
+			<input type="button" id="ok" value="확인" />
 		</div>
 	</div>
 </body>

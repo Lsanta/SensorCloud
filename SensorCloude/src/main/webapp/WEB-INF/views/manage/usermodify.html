@@ -27,9 +27,11 @@ $("#confirm-modify").on("click", function() {
 		url : "/manage/updateuser.do",
 		data : query,
 		success : function(data) {
-			if (data == "success") {
+			if (data == "success") { 
 				alert("수정완료");
-				window.location.href = "manage";
+				opener.parent.location="/manage/1"
+				close();
+				
 			} else{
 				  alert("수정실패");
 			}

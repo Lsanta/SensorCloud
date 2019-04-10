@@ -2,6 +2,7 @@ package com.wda.sc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -38,11 +39,20 @@ public class SiteController {
 
 		return "site/address";
 	}
-
+	
+	//현장 추가
 	@RequestMapping(value = "/siteadd", method = RequestMethod.GET)
 	public String siteadd(Locale locale, Model model) {
 
 		return "site/siteadd";
+	}
+	
+	//현장 수정
+	@RequestMapping(value = "/sitemodify" + "/{site_id}", method = RequestMethod.GET)
+	public String sitemodify(@PathVariable String site_id, Model model) {
+		System.out.println(site_id);
+		model.addAttribute("joinSite",siteservice.joinSite(site_id));
+		return "site/sitemodify";
 	}
 
 
@@ -108,7 +118,8 @@ public class SiteController {
 		System.out.println("센서추가");
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
-
+		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
+		System.out.println("안됨");
 		return "site/sensoradd";
 	}
 
@@ -125,7 +136,6 @@ public class SiteController {
 	@RequestMapping(value ="siteadd.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String insertSite(SiteVO site) { 
-		System.out.println("현장 추가 컨트롤러입니다.");
 		switch (site.getType_no()) {
 		case "building":
 			site.setType_no("1");
@@ -137,6 +147,29 @@ public class SiteController {
 
 		int a = siteservice.siteadd(site);
 		int b = siteservice.networkadd(site); 
+		if( a == 0 && b == 0)  {
+			return "false";
+		} else {
+			return "success";
+		}   
+	} 
+	
+	//현장수정
+	@RequestMapping(value ="sitemodify.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateSite(SiteVO site) { 
+		System.out.println(site);
+		switch (site.getType_no()) {
+		case "building":
+			site.setType_no("1");
+			break;
+		case "mountain":
+			site.setType_no("0");
+			break;
+		}
+
+		int a = siteservice.updatesite(site);
+		int b = siteservice.updatenetwork(site); 
 		if( a == 0 && b == 0)  {
 			return "false";
 		} else {

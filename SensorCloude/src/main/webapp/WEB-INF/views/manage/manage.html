@@ -26,18 +26,24 @@
 						<th scope="col" style="width:18%;">이메일</th>
 						<th scope="col" style="width:15%;">전화번호</th>
 						<th scope="col" style="width:5%;">등급</th>
-						<th style="width:8%;">비고</th>
+						<th style="width:8%;">승급요청</th>
 					</tr>
 				</thead>
 				<tbody id="user">
-				 	<tr th:each="userlist : ${userlist}">
+				 	<tr th:each="userlist : ${userlist}" >
 						<td th:text="${userlist.user_id}"></td>
 						<td th:text="${userlist.name}"></td>
 						<td th:text="${userlist.email}"></td>
 						<td th:text="${userlist.phone}"></td>
 						<td th:text="${userlist.m_level}"></td>
-						<td></td>
+						<td th:if="${userlist.user_id == luserId}" 
+						th:text="${selectlevel} + '  ' + 승급요청"></td>
+						<td th:unless="${userlist.user_id == luserId}" th:text="x"></td>
 					</tr>
+
+
+
+
 
 				</tbody>
 			</table>

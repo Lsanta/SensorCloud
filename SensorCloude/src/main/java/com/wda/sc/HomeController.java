@@ -126,7 +126,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/manage"+"/{num}", method = RequestMethod.GET)
-	public String manage(@PathVariable String num, Model model) {
+	public String manage(@PathVariable String num, Model model ,HttpSession session) {
 
 		Paging page = new Paging();
 		int pageNum = 0;
@@ -146,9 +146,17 @@ public class HomeController {
 
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
-
+		
+		//사용자관리에 승급요청등급과 승급요청한 아이디를 넘긴다.
+		String luserId = (String)session.getAttribute("luserId");
+		String selectlevel =(String)session.getAttribute("selectlevel");
+		model.addAttribute("luserId" , luserId );
+		model.addAttribute("selectlevel" , selectlevel );
+		//
+		
 		model.addAttribute("pageNum",arr);
 		model.addAttribute("userlist",usermanageservice.getList(page));
+		
 		return "manage/manage";
 	}
 

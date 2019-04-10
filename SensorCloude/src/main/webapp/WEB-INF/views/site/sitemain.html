@@ -70,13 +70,9 @@
 			
 			<span class="addr" th:text="${siteInfo.site_name}"></span> 
 			
-			<span
-				th:text="${siteInfo.address}"></span><br>
-			<button id="modify">현장수정</button>
+			<span th:text="${siteInfo.address}"></span><br>
+			<button id="modify" th:class ="${siteInfo.site_id}">현장수정</button>
 			<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
-
-
-			<!-- <button id="modify">현장수정</button> -->
 
 			<div id="chartdiv"></div>
 
@@ -167,7 +163,15 @@ geocoder.addressSearch(site, function(result, status) {
 } 
 });    
 /*]]>*/
+$(document).ready(function() {
+	$("#modify").click(function(){
+		var site_id = $("#modify").attr('class');
+		window.location.href = "/site/sitemodify/"+site_id;
+	});
+});
+
 	</script>
 	<script src="/resources/js/site/asidebar.js"></script>
+	<script src="/resources/js/site/sitemodify.js"></script>
 </th:block>
 </html>
