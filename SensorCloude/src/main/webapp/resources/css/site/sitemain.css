@@ -17,19 +17,28 @@
 	height: 380px;
 	border: 1px solid black;
 }
+.map {
+	position: relative;
+}
 
 #map{
 	width:70%;
 	height:400px;
 	margin: 0 auto;
-	border: 1px solid black;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-radius: 5px;
 }
 
 #m-detail {
 	width:70%;
 	height: 90px; 
 	margin: 0 auto; 
-	border: 1px solid black;
+	border-bottom: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-radius: 5px;
 }
 
 #m-title {
@@ -46,6 +55,13 @@
  h2 {
 	position: relative;
 	margin: 0;
+}
+
+h3 {
+	margin-top: 2%;
+	font-size: 1.5em;
+	position: relative;
+	top: 30px;
 }
 
 .addr {
