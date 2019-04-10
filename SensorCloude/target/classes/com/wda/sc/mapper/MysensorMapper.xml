@@ -5,7 +5,8 @@
 <mapper namespace="com.wda.sc.mapper.MysensorMapper">
 
 	<select id="getList" resultType="com.wda.sc.domain.MysensorVO">
-		select A.sensor_sn, A.model_name, A.sensor_kind, A.manufacturer, A.voltage, B.site_id, C.site_name
+		select A.sensor_sn, A.model_name, A.sensor_kind, A.manufacturer, A.voltage, 
+		substr(A.create_day,0,14) as create_day,B.site_id, C.site_name
 		from my_sensor A
 		FULL OUTER JOIN
 		install_sensor B
