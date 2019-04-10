@@ -1,5 +1,6 @@
 #main {
 	margin: 0 auto;
+	overflow: hidden;
 }
 
 @media screen and (max-width: 570px) {
@@ -14,12 +15,13 @@
     }
     #next-level select{
         position: relative;
-        margin-left: 24%;
+        margin-left: 22%;
+        height: 23px;
     }
     #next-level p{
         position: relative;
         top: -38px;
-        left: 200px;
+        left: 220px;
     }
     #submit {
         float: right;
