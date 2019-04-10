@@ -25,5 +25,5 @@ $(document).ready(function(){
         $(".a2").removeClass("open");
         $(".dim").hide();
     });
-            
+  
 });

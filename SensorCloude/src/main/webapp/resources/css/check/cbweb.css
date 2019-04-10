@@ -1,6 +1,6 @@
 .a{
     width: 65%;
-    height: 790px;
+    height: 700px;
     overflow: hidden;
     margin:20px auto;
     border: 1px solid #ddd;
@@ -37,6 +37,7 @@
 	width:99.9%;
 	height: 70%;
 	margin-top: 3px;
+	
 }
 .site1{
 	width:97%;
