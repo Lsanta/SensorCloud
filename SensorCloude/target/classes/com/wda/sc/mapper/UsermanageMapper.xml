@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="getInfo" resultType="com.wda.sc.domain.MemberVO">
-		select user_id,name,phone,email,m_level from member where user_id=#{user_id}
+		select user_id,name,phone,email,m_level,re_level from member where user_id=#{user_id}
 	</select>
 
 	<select id="getPageNum" resultType="int">
