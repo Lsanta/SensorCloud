@@ -14,12 +14,13 @@ $("#confirm-modify").on("click", function() {
 	var name = $("#modify_name").val();
 	var phone = $("#phonenumber").val();
 	var m_level = target.options[target.selectedIndex].value;
-
+	
 	var query = {
 			user_id : user_id,
 			name : name,
 			phone : phone,
 			m_level : m_level
+			
 	}
 	
 	$.ajax({
@@ -73,6 +74,9 @@ $("#confirm-modify").on("click", function() {
 				<option value="4">4. 수정권한</option>
 				<option value="5">5. 관리자</option>
 			</select>
+			
+
+			<p id="re_level" th:each="userInfo : ${userInfo}" th:text="'사용자 요청등급:'+' '+ ${userInfo.re_level}+'등급'"></p>
 				
 			<input type="submit" name="confirm-modify" id="confirm-modify" class="confirm-modify" value="수정">
 		

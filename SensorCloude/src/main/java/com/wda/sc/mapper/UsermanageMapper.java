@@ -14,4 +14,6 @@ public interface UsermanageMapper {
 	public int getPageNum();
 	
 	public int updateuser(MemberVO vo);
+
+	public int requestlevel(MemberVO vo);
 }

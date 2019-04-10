@@ -36,5 +36,11 @@ public class UsermanageServiceImplement implements UsermanageService{
 	public int updateuser(MemberVO vo) {
 		return mapper.updateuser(vo);
 	}
+
+	@Override
+	public int requestlevel(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.requestlevel(vo);
+	}
 	
 }

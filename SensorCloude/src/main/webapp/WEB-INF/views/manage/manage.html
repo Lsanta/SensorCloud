@@ -36,9 +36,9 @@
 						<td th:text="${userlist.email}"></td>
 						<td th:text="${userlist.phone}"></td>
 						<td th:text="${userlist.m_level}"></td>
-						<td th:if="${userlist.user_id == luserId}" 
-						th:text="${selectlevel} + '  ' + 승급요청"></td>
-						<td th:unless="${userlist.user_id == luserId}" th:text="x"></td>
+						<td th:if="${userlist.re_level != 0}" th:text ="o"></td>
+						<td th:if="${userlist.re_level == 0}" th:text ="x"></td>
+						
 					</tr>
 
 

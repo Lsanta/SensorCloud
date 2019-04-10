@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>팝업창</title>
+<link href="/resources/css/mysensor/sensoradd.css" rel="stylesheet" type="text/css"/>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -39,11 +40,14 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+ <div class="sensoradd">
+ 
 	시리얼넘버<input type="text" id="sensor_sn" name="sensor_sn" /><br/>
 	종류<input type="text" id="sensor_kind" name="sensor_kind" /><br/>
 	모델명<input type="text" id="model_name" name="model_name" /><br/>
 	전압<input type="text" id="voltage" name="voltage" /><br/>
 	제조사<input type="text" id="manufacturer" name="manufacturer" /><br/>
 	<input type="button"  value="추가" id="plus" />
+	</div>
 </body> 
 </html>

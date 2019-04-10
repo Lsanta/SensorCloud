@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="getInfo" resultType="com.wda.sc.domain.MemberVO">
-		select user_id,name,phone,email,m_level from member where user_id=#{user_id}
+		select user_id,name,phone,email,m_level,re_level from member where user_id=#{user_id}
 	</select>
 
 	<select id="getPageNum" resultType="int">
@@ -25,8 +25,15 @@
 	
 	<!-- 사용자 수정 -->
 	<update id="updateuser" parameterType="com.wda.sc.domain.MemberVO">
-		update MEMBER set phone = #{phone}, m_level = #{m_level}, name = #{name}
+		update MEMBER set phone = #{phone}, m_level = #{m_level}, name = #{name}, re_level=0
     	where user_id = #{user_id}
 	</update>
+	<!-- 승급요청 시 요청 레벨을 update해서 사용자관리에 띄우기위함 -->
+	<update id="requestlevel" parameterType="com.wda.sc.domain.MemberVO">
+		update MEMBER set re_level = #{re_level}
+    	where user_id = #{user_id}
+	</update>
+	
+	
 	
 </mapper>

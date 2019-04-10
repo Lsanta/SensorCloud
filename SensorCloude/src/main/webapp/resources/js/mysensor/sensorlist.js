@@ -3,14 +3,14 @@ $(document).ready(function() {
 	
 	$("#add").click(function(){
 		window.open("/mysensor/mysensoradd", "pop",
-		"width=570,height=420,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+		"width=570,height=600,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 	});
 	
 	
 	 $(document).on("click", "#list tr" , function(){
 		 
 		var openWin = window.open("/mysensor/mysensormod", "pop",
-				 "width=570,height=420,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+				 "width=570,height=600,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 		
 		var tr = $(this);
 		var sensor_sn = tr.children().eq(0).addClass("1");
