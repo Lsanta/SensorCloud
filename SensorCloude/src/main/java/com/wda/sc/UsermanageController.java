@@ -37,7 +37,7 @@ private UsermanageService usermanageservice;
 	//사용자 수정(update)
 	@RequestMapping(value ="updateuser.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String insertSite(MemberVO vo) { 
+	public String updateUser(MemberVO vo) { 
 		
 		int a = usermanageservice.updateuser(vo);
 		
@@ -47,6 +47,7 @@ private UsermanageService usermanageservice;
 			return "success";
 		}   
 	}  
+	
 	/// 승급요청시 요청승급과 유저 아이디를 세션에 저장//levelup에서 호출
 	@RequestMapping(value ="userlevelmanage.do", method = RequestMethod.POST)
 	@ResponseBody

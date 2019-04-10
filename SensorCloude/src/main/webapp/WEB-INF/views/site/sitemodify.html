@@ -137,24 +137,28 @@
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-$(document).ready(function(){
-	
-	$("#plus").click(function(){
-		
+$(document).ready(function(){	
+	$("#plus").click(function(){	
+		var newURL =  window.location.pathname;
+
+		var url = newURL.split('/');
+		var site_id = url[3];
 		
 		//현장 데이터
-		var type_no = input[name="chk_scene"]:checked;
+		var type_no = $('input[name="chk_scene"]:checked').val();
 		var address = $("#sample6_address").val();
 		var site_name = $("#sample6_detailAddress").val();
 		
 		//네트워크 데이터
-		var sig_protocol = input[name="chk_net_raido"]:checked;
+		var sig_protocol = $('input[name="chk_net_raido"]:checked').val();
 		var host_ip = $("#host_ip").val();
 		var sig_port_num = $("#sig_port_num").val();
 		var port_num = $("#port_num").val();
 		
+		console.log(query);
 		
 		var query = { 
+						site_id : site_id,
 						type_no : type_no,
 						address : address,
 						site_name : site_name,
@@ -166,8 +170,6 @@ $(document).ready(function(){
 						
 					}
 		
-		console.log(query);
-		
 		$.ajax({
 			  type : "POST",
 			  url : "/site/sitemodify.do",
@@ -175,7 +177,7 @@ $(document).ready(function(){
 			  success : function(data){
 				  if( data == "success"){
 					  alert("수정 성공");
-					  window.location.href = "/sitemain/1"
+					 window.location.href = "/site/" + site_id; 
 				  } else{
 					  alert("수정 실패");
 				  }

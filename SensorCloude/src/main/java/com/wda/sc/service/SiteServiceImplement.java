@@ -125,12 +125,14 @@ public class SiteServiceImplement implements SiteService {
 
 	@Override
 	public int updatesite(SiteVO site) {
-		return mapper.siteadd(site);
+		//현장수정
+		return mapper.updatesite(site);
 	}
 
 	@Override
 	public int updatenetwork(SiteVO site) {
-		return mapper.networkadd(site);
+		//현장수정
+		return mapper.updatenetwork(site);
 	}
 
 	@Override
