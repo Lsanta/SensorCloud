@@ -54,8 +54,9 @@ public interface SiteService {
 
    //점검이력 글쓰기 현장이름 조회
    public ArrayList<SiteVO> getchecksite();
-
+   //현장 상태 띄우기
    public ArrayList<SiteVO> getStatus(String site_id);
+   
+
 }
- //현장 상태 띄우기
   

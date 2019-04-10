@@ -62,7 +62,7 @@ public class HomeController {
 		model.addAttribute("mainchecklist",arr);
 		return "main";
 	}
-
+	
 	@RequestMapping(value = "/check"+"/{num}", method = RequestMethod.GET)
 	public String check(@PathVariable String num, Model model) {
 		Paging page = new Paging();
