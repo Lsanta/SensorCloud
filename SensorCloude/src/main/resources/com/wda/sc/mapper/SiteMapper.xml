@@ -91,8 +91,10 @@
 	</update>
 	
 	<update id="updatenetwork" parameterType="com.wda.sc.domain.SiteVO">
-		update network set sig_protocol = #{sig_protocol}, host_ip = #{host_ip}, sig_port_num = #{sig_port_num}, port_num = #{port_num}
-    	where sig_id = #{sig_id}
+		<![CDATA[
+		update network set sig_protocol = 'tcp', host_ip = #{host_ip}, sig_port_num = #{sig_port_num}, port_num = #{port_num}
+    	where site_id = #{site_id}
+    	]]>
 	</update>
 	
 	<!--연락망 사람 추가-->

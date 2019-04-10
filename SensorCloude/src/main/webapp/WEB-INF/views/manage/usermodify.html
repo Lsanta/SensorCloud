@@ -29,8 +29,9 @@ $("#confirm-modify").on("click", function() {
 		success : function(data) {
 			if (data == "success") { 
 				alert("수정완료");
+				opener.parent.location="/manage/1"
 				close();
-				location.reload();
+				
 			} else{
 				  alert("수정실패");
 			}
