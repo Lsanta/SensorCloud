@@ -8,6 +8,7 @@ import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
 
 public interface SiteMapper {
@@ -42,7 +43,7 @@ public interface SiteMapper {
    public boolean delAlarm(AlarmMemberVO vo);
    
    //보유 센서 종류 조회
-   public List<String> getSensorKind();
+   public ArrayList<MysensorVO> getSensorKind();
    
 
    //점검이력 글쓰기 현장이름 조회

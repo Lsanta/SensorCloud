@@ -2,6 +2,7 @@ package com.wda.sc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -108,7 +109,8 @@ public class SiteController {
 		System.out.println("센서추가");
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
-
+		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
+		System.out.println("안됨");
 		return "site/sensoradd";
 	}
 

@@ -10,6 +10,7 @@ import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.mapper.SiteMapper;
 
@@ -105,7 +106,7 @@ public boolean delAlarm(AlarmMemberVO vo) {
 }
 
 @Override
-public List<String> getSensorKind() {
+public ArrayList<MysensorVO> getSensorKind() {
 	//보유 센서 종류 조회
 	return mapper.getSensorKind();
 }
