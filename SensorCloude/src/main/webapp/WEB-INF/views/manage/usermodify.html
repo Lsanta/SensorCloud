@@ -73,6 +73,8 @@ $("#confirm-modify").on("click", function() {
 				<option value="4">4. 수정권한</option>
 				<option value="5">5. 관리자</option>
 			</select>
+			
+			<p th:each="userInfo : ${userInfo}" th:text="${userInfo.re_level}"></p>
 				
 			<input type="submit" name="confirm-modify" id="confirm-modify" class="confirm-modify" value="수정">
 		

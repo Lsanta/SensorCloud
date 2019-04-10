@@ -11,5 +11,6 @@ public class MemberVO {
 	private String email;
 	private int m_level;
 	private String file_path;
+	private int re_level;
 	
 }
