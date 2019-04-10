@@ -26,7 +26,7 @@
 						<th scope="col" style="width:18%;">이메일</th>
 						<th scope="col" style="width:15%;">전화번호</th>
 						<th scope="col" style="width:5%;">등급</th>
-						<th style="width:8%;">승급요청</th>
+						<th style="width:8%;">승급요청등급</th>
 					</tr>
 				</thead>
 				<tbody id="user">
@@ -36,9 +36,9 @@
 						<td th:text="${userlist.email}"></td>
 						<td th:text="${userlist.phone}"></td>
 						<td th:text="${userlist.m_level}"></td>
-						<td th:if="${userlist.user_id == luserId}" 
-						th:text="${selectlevel} + '  ' + 승급요청"></td>
-						<td th:unless="${userlist.user_id == luserId}" th:text="x"></td>
+						<td th:if="${userlist.re_level != 0}" th:text ="${userlist.re_level}"></td>
+						<td th:if="${userlist.re_level == 0}" th:text ="x"></td>
+						
 					</tr>
 
 

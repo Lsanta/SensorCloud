@@ -212,6 +212,37 @@ public class SiteController {
 		return "false";
 	}
 	
+	@RequestMapping(value ="alarmmod.do")
+	   @ResponseBody
+	   public String alarmmod(AlarmMemberVO vo) {
+		 //연락망 사람 수정      
+		   
+		  int a = siteservice.modAlarm(vo);
+		      
+		      if( a == 0) {
+		         return "false";
+		      } else if( a == 1){
+		         return "success";
+		      }
+		      
+		      return "false";
+		    
+	   }
+	   
+	   
+	 @RequestMapping(value ="alarmdel.do")
+	 @ResponseBody
+	   public String alarmdel(AlarmMemberVO vo) {
+		 //연락망 사람 삭제
+
+	      boolean result = siteservice.delAlarm(vo);
+	      
+	      if(result) 
+	    	  return "success";
+	      else
+	    	  return "false";
+	   }
+	
 	@RequestMapping(value="/sitecheckview/" +"{board_no}", method = RequestMethod.GET)
 	public String checkin(Locale locale,@PathVariable  String board_no, Model model) {
 	
