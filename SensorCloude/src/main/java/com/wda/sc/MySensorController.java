@@ -52,5 +52,21 @@ public class MySensorController {
 			return "false";
 		}
 	
+		// 보유센서 수정
+		@RequestMapping(value ="mysensormod.do")
+		@ResponseBody
+			public String mysensormod(MysensorVO vo) {
+				//보유센서 수정
+				
+				int a = mysensorservice.modmysensor(vo);
+				
+				if( a == 0) {
+					return "false";
+				} else if( a == 1){
+					return "success";
+				}
+				
+				return "false";
+			}
 	
 }

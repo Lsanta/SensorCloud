@@ -11,12 +11,8 @@ public interface MysensorMapper {
 	public int insertmysensor(MysensorVO vo);
 	
 	public ArrayList<InstallSensorVO> installSelect(String sensor_sn);
-	
-	public boolean deleteInstallSensor(String sensor_sn);
-
-	public boolean deleteInfoSensor(String sensor_sn);
-
-	public boolean deleteMySensor(String sensor_sn);
+	// 보유 센서 수정
+	public int modmysensor(MysensorVO vo);
 	
 	
 }
