@@ -90,8 +90,10 @@ $(document).ready(function() {
 					});
 				}
 			});
+	
 
-	// 마이페이지 점검이력 클릭시 점검이력 창을 출력함
+
+	// 
 
 	// 패스워드에 커서를 두고 엔터키를 누르면 로그인 함
 	$("#pass").keydown(function(key) {

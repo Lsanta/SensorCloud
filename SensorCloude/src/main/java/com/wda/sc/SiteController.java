@@ -45,6 +45,14 @@ public class SiteController {
 
 		return "site/siteadd";
 	}
+	
+	//현장 수정
+	@RequestMapping(value = "/sitemodify" + "/{site_id}", method = RequestMethod.GET)
+	public String sitemodify(@PathVariable String site_id, Model model) {
+		System.out.println(site_id);
+		model.addAttribute("joinSite",siteservice.joinSite(site_id));
+		return "site/sitemodify";
+	}
 
 
 	@RequestMapping(value = "{site_id}", method = RequestMethod.GET)
