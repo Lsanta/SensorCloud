@@ -8,6 +8,7 @@ import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
 
 public interface SiteService {
@@ -17,10 +18,17 @@ public interface SiteService {
    public ArrayList<SiteVO> getSite(String site_id);
    
    public ArrayList<AlarmMemberVO> getAlarm_member(String site_id);
-   //현장추가
+   //현장추가 site
    public int siteadd(SiteVO site);
-   //현장추가
+   //현장추가 network
    public int networkadd(SiteVO site);
+   
+   //현장수정 select
+   public ArrayList<SiteVO> joinSite(String site_id);
+   //현장수정 site
+   public int updatesite(SiteVO site);
+   //현장수정 network
+   public int updatenetwork(SiteVO site);
    
    public ArrayList<AlarmVO> getAlarm(String site_id);
    
@@ -41,7 +49,7 @@ public interface SiteService {
    //연락망 사람 삭제
    public boolean delAlarm(AlarmMemberVO vo);
    //보유 센서 종류 조회
-   public List<String> getSensorKind();
+   public ArrayList<MysensorVO> getSensorKind();
    
 
    //점검이력 글쓰기 현장이름 조회

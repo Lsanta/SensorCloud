@@ -16,20 +16,20 @@
 	 
 	<h1>현장 수정</h1>
    
-   <div id="addcontent" th:each="siteInfo : ${siteInfo}">
+   <div id="addcontent" >
    
    <div id="add_scene">   
       <input type="radio" name="chk_scene" value="building" checked="checked">건물
       <input type="radio" name="chk_scene" value="mountain"  id = "radio_m">산
    </div>
 
-   <div id="addcontent_right" >
+   <div id="addcontent_right" th:each="joinSite : ${joinSite}">
       <!-- <input type="text" id="sample6_postcode" class="addcontent_right_input" placeholder="우편번호" > -->
       <p id="p">주소:</p>
-	  <input type="text" id="sample6_address" th:value="${siteInfo.address}" placeholder="주소" class="addcontent_right_input"><br>
+	  <input type="text" id="sample6_address" th:value="${joinSite.address}" placeholder="주소" class="addcontent_right_input"><br>
 	  <input type="button" id="addressBtn" onclick="DaumPostcode()" value="조회" class="addcontent_right_button" ><br>
 	  <p id="p">현장이름:</p>
-	  <input type="text" id="sample6_detailAddress" th:value="${siteInfo.site_name}" placeholder="현장이름" class="addcontent_right_input">
+	  <input type="text" id="sample6_detailAddress" th:value="${joinSite.site_name}" placeholder="현장이름" class="addcontent_right_input">
 	  <!-- <input type="text" id="sample6_extraAddress" placeholder="참고항목" class="addcontent_right_input"> -->
       </div>
 
@@ -65,11 +65,11 @@
          <p>유선포트 번호:</p>
        </div>
       
-      <div id ="addnetwork_right2">
+      <div id ="addnetwork_right2" th:each="joinSite : ${joinSite}">
       
-      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="host_ip" th:value="${siteInfo.host_ip}"><br>
-      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="sig_port_num" th:value="${siteInfo.sig_port_num}"><br>
-      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="port_num" th:value="${siteInfo.port_num}"><br>
+      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="host_ip" th:value="${joinSite.host_ip}"><br>
+      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="sig_port_num" th:value="${joinSite.sig_port_num}"><br>
+      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="port_num" th:value="${joinSite.port_num}"><br>
       
       </div>
      </div>
@@ -155,6 +155,14 @@ $(document).ready(function(){
 		
 		
 		var query = { 
+						type_no : type_no,
+						address : address,
+						site_name : site_name,
+						
+						sig_protocol : sig_protocol,
+						host_ip : host_ip,
+						sig_port_num : sig_port_num,
+						port_num : port_num
 						
 					}
 		
@@ -167,7 +175,7 @@ $(document).ready(function(){
 			  success : function(data){
 				  if( data == "success"){
 					  alert("수정 성공");
-					  window.location.href = "/sitelist/1"
+					  window.location.href = "/sitemain/1"
 				  } else{
 					  alert("수정 실패");
 				  }

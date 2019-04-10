@@ -62,9 +62,12 @@
         	 <div class="kinds">
         		 <span>센서종류</span>
          			<select class="kindSelect"> 
-              		 	<option th:each="kind : ${sensor_kind}" th:text="${kind.sensor_kind}"></option>
+         				<option>선택</option>
+              		 	<option th:each="kind : ${sensor_kind}" th:text="${kind.sensor_kind}" 
+              		 	th:value="${kind.count}"></option>	
          			</select>
-         			<input type="number" id="sensorcount" name="sensorcount">
+         			
+         			<input type="number" id="sensorcount" name="sensorcount" min=0 max=0>
            
          	</div>
          	<div class="dataType">
@@ -113,5 +116,6 @@
 
 <th:block layout:fragment="page_js">
 	<script src="/resources/js/site/asidebar.js"></script>
+	<script src="/resources/js/site/sensoradd.js"></script>
 </th:block>
 </html>

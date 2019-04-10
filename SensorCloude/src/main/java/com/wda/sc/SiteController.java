@@ -2,6 +2,7 @@ package com.wda.sc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -46,9 +47,10 @@ public class SiteController {
 	}
 	
 	//현장 수정
-	@RequestMapping(value = "/sitemodify" + "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/sitemodify" + "/{site_id}", method = RequestMethod.GET)
 	public String sitemodify(@PathVariable String site_id, Model model) {
-		model.addAttribute("siteInfo",siteservice.getSite(site_id));
+		System.out.println(site_id);
+		model.addAttribute("joinSite",siteservice.joinSite(site_id));
 		return "site/sitemodify";
 	}
 
@@ -115,7 +117,8 @@ public class SiteController {
 		System.out.println("센서추가");
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
-
+		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
+		System.out.println("안됨");
 		return "site/sensoradd";
 	}
 
