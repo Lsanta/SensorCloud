@@ -99,8 +99,12 @@
 					</table>
 				</div>
 			</div>
-
+		
 			<div id="map"></div>
+			<div id="m-detail" th:each="siteInfo : ${siteInfo}"><br/>
+				<span id="m-title" th:text="${siteInfo.site_name}"></span><br/>
+				<span id="m-addr" th:text="${siteInfo.address}"></span>			
+			</div>
 
 		</article>
 	</div>
