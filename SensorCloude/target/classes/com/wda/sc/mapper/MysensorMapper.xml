@@ -22,20 +22,11 @@
 	<select id="installSelect" resultType="com.wda.sc.domain.InstallSensorVO">
 		select * from install_sensor where sensor_sn = #{sensor_sn}
 	</select>
-	 
-	 <!-- 설치 센서 삭제   -->
-	<delete id="deleteInstallSensor"> 
-		delete from install_sensor where sensor_sn = #{sensor_sn} 
- 	</delete> 
- 	
-	<!-- 센서 정보 삭제  -->
-	<delete id="deleteInfoSensor"> 
- 		delete from sensor_info where sensor_sn = #{sensor_sn} 
- 	</delete> 
- 	
- 	<!-- 보유 센서  삭제  -->
-	<delete id="deleteMySensor"> 
- 		delete from my_sensor where sensor_sn = #{sensor_sn} 
- 	</delete> 
+
+	<update id="modmysensor" parameterType="com.wda.sc.domain.MysensorVO">
+		update my_sensor set sensor_sn=#{sensor_sn}, sensor_kind=#{sensor_kind}, 
+		model_name=#{model_name}, voltage=#{voltage}, manufacturer=#{manufacturer} 
+		where sensor_sn=#{sensor_sn} 
+	</update>
  	
 </mapper>

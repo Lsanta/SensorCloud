@@ -12,5 +12,4 @@ public class MysensorVO {
 	private String site_name;
 	//임시
 	private int count;
-	private int rank;
 }

@@ -110,7 +110,7 @@
 	
 	<!--보유 센서 종류 -->
 	<select id="getSensorKind" resultType="com.wda.sc.domain.MysensorVO">
-		select rank() over (order by sensor_kind) as rank, sensor_kind, count(*) as count
+		select sensor_kind, count(*) as count
 		from my_sensor
 		group by sensor_kind
 	</select>

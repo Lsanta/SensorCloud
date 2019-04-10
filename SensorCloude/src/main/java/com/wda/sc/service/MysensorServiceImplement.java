@@ -34,21 +34,10 @@ public class MysensorServiceImplement implements MysensorService {
 	}
 
 	@Override
-	public boolean deleteInstallSensor(String sensor_sn) {
-		
-		return mapper.deleteInstallSensor(sensor_sn);
+	public int modmysensor(MysensorVO vo) {
+		// 보유 센서 수정
+		return mapper.modmysensor(vo);
 	}
 
-	@Override
-	public boolean deleteInfoSensor(String sensor_sn) {
-		// TODO Auto-generated method stub
-		return mapper.deleteInfoSensor(sensor_sn);
-	}
-
-	@Override
-	public boolean deleteMySensor(String sensor_sn) {
-		// TODO Auto-generated method stub
-		return mapper.deleteMySensor(sensor_sn);
-	}
 
 }
