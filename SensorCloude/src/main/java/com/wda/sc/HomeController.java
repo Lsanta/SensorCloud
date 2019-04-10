@@ -148,10 +148,8 @@ public class HomeController {
 		page.setStartnum(page.getEndnum()-10);
 		
 		//사용자관리에 승급요청등급과 승급요청한 아이디를 넘긴다.
-		String luserId = (String)session.getAttribute("luserId");
-		String selectlevel =(String)session.getAttribute("selectlevel");
-		model.addAttribute("luserId" , luserId );
-		model.addAttribute("selectlevel" , selectlevel );
+		
+		
 		//
 		
 		model.addAttribute("pageNum",arr);

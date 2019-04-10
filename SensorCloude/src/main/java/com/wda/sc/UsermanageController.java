@@ -30,6 +30,7 @@ private UsermanageService usermanageservice;
 	@RequestMapping(value = "usermodify" + "/{id}", method = RequestMethod.GET)
 	public String address(@PathVariable String id, Model model) {
 		
+	
 		model.addAttribute("userInfo",usermanageservice.getInfo(id));
 		return "manage/usermodify";
 	}
@@ -51,15 +52,19 @@ private UsermanageService usermanageservice;
 	/// 승급요청시 요청승급과 유저 아이디를 세션에 저장//levelup에서 호출
 	@RequestMapping(value ="userlevelmanage.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String userlevelup(HttpSession session , @RequestParam(value="userid") String userId , 
-			@RequestParam(value="selectlevel") String selectlevel){
-		session.setAttribute("selectlevel", selectlevel);
-		session.setAttribute("luserId", userId);
+	public String userlevelup(MemberVO vo){
 		
-		System.out.println(selectlevel);
 		
-		return "success";
+		int requestlevel =usermanageservice.requestlevel(vo);
 		
+		if(requestlevel == 0) {
+		
+		return "false";
+		}
+		
+		else {
+			return "success";
+		}
 	}  
 	
 	
