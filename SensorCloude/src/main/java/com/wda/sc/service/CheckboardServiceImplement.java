@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.mapper.CheckboardMapper;
 
@@ -43,5 +44,11 @@ public class CheckboardServiceImplement implements CheckboardService {
 		// TODO Auto-generated method stub
 		System.out.println(checkboard);
 		return mapper.insertcheckboard(checkboard);
+	}
+
+	@Override
+	public int checkauthority(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.checkauthority(user_id);
 	}
 }

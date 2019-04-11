@@ -3,6 +3,7 @@ package com.wda.sc.mapper;
 import java.util.ArrayList;
 
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
 
 public interface CheckboardMapper {
@@ -16,4 +17,6 @@ public interface CheckboardMapper {
 	public ArrayList<CheckBoardVO> mainList();
 	
 	public int insertcheckboard(CheckBoardVO checkboard);
+	
+	public int checkauthority(String user_id);
 }
