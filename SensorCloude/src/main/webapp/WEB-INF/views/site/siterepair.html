@@ -8,10 +8,8 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css"
-		href="/resources/css/check/checklist.css">
-	<link rel="stylesheet" type="text/css"
-		href="/resources/css/site/asidebar.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/check/checklist.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/asidebar.css">
 </th:block>
 
 <th:block layout:fragment="contents">
@@ -32,22 +30,14 @@
 
 		<nav id="nav">
 			<ul>
-				<li><a href="/site/"
-					th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
-				<li><a href="/site/"
-					th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'">수리내역</a></li>
-				<li><a href="/site/"
-					th:attrappend="href=${siteInfo.site_id} + '/sensoradd'">센서추가</a></li>
-				<li style="line-height: 40px;"><a href="/site/"
-					th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트
-						다운로드</a></li>
-				<li><span id="num">연락망</span> 
-					<span id="down" style="display: inline"> 
-						<img src="/resources/img/down-arrow.svg">
-					</span> 
-				<span id="up" style="display: none"> 
-					<img src="/resources/img/up-arrow.svg">
-				</span>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'">수리내역</a></li>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensoradd'">센서추가</a></li>
+				<li style="line-height: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트다운로드</a></li>
+				<li>
+					<span id="num">연락망</span> 
+					<span id="down" style="display: inline"><img src="/resources/img/down-arrow.svg"></span> 
+					<span id="up" style="display: none"><img src="/resources/img/up-arrow.svg"></span>
 				</li>
 				
 				<div class="phonenumber" style="display:none" th:each="alarmMember : ${alarmMember}">
@@ -64,6 +54,7 @@
 				<div id="main-content">
 					<div class="title-header">
 						<h1>수리내역</h1>
+						<button id="write" value="write">글쓰기</button>
 					</div>
 
 					<table>
@@ -87,10 +78,6 @@
 							</tr>
 						</tbody>
 					</table>
-				</div>
-
-				<div class="button-container">
-					<button id="write" value="write">글쓰기</button>
 				</div>
 
 				<div class="pagination-container">

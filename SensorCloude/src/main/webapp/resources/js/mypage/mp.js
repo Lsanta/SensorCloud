@@ -18,6 +18,10 @@ $(document).ready(function() {
 	$('.update').click(function() {
 		window.location.href = "/mypage/modifymypage";
 	});
+	$('.up').click(function(){
+		window.open("/mypage/levelup", "pop",
+				"width=570,height=420,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+	});
 
 	function login() {
 

@@ -32,27 +32,20 @@
 		<span id="sid" th:text="${siteInfo.site_id}" style="display: none"></span>
 		<nav id="nav">
 			<ul>
-				<li><a href="/site/"
-					th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
-				<li><a href="/site/"
-					th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'">수리내역</a></li>
-				<li><a href="/site/"
-					th:attrappend="href=${siteInfo.site_id} + '/sensoradd'">센서추가</a></li>
-				<li style="line-height: 40px;"><a href="/site/"
-					th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트
-						다운로드</a></li>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'">수리내역</a></li>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensoradd'">센서추가</a></li>
+				<li style="line-height: 40px;"><a href="/site/"th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트다운로드</a></li>
 
-				<li><span id="num">연락망</span> <span id="down"
-					style="display: inline"> <img
-						src="/resources/img/down-arrow.svg">
-				</span> <span id="up" style="display: none"> <img
-						src="/resources/img/up-arrow.svg">
-				</span></li>
+				<li>
+					<span id="num">연락망</span>
+					<span id="down" style="display: inline"><img src="/resources/img/down-arrow.svg"></span>
+					<span id="up" style="display: none"><img src="/resources/img/up-arrow.svg"></span>
+				</li>
 
-				<div class="phonenumber" style="display: none"
-					th:each="alarmMember : ${alarmMember}">
-					<span class="mang" th:text="${alarmMember.name}"></span> <span
-						class="mang" th:text="${alarmMember.tel}"></span>
+				<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
+					<span class="mang" th:text="${alarmMember.name}"></span>
+					<spanclass="mang" th:text="${alarmMember.tel}"></span>
 				</div>
 			</ul>
 		</nav>
@@ -99,12 +92,15 @@
 					</table>
 				</div>
 			</div>
-		
+			
+		<h3>현장 위치</h3>
+		<div class="map">
 			<div id="map"></div>
 			<div id="m-detail" th:each="siteInfo : ${siteInfo}"><br/>
 				<span id="m-title" th:text="${siteInfo.site_name}"></span><br/>
 				<span id="m-addr" th:text="${siteInfo.address}"></span>			
 			</div>
+		</div>
 
 		</article>
 	</div>
