@@ -51,10 +51,10 @@ public class CheckboardCotroller {
 	
 		System.out.println("보드넘버=" +board_no);
 		
-		//수정클릭시 권한체크 위해 id와 m_level을 넘긴다.
+		//수정클릭시 권한체크 위해 id에 해당하는 m_level을 넘긴다.
 		String user_id = (String) session.getAttribute("id");
 		model.addAttribute("checkauthority",Checkboardservice.checkauthority(user_id));
-		model.addAttribute("id",user_id);
+		System.out.println(Checkboardservice.checkauthority(user_id));
 		
 		model.addAttribute("cklist",Checkboardservice.viewgetList(board_no));
 		
