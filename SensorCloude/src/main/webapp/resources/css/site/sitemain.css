@@ -25,20 +25,20 @@
 	width:70%;
 	height:400px;
 	margin: 0 auto;
-	border-top: 1px solid black;
+	/* border-top: 1px solid black;
 	border-left: 1px solid black;
 	border-right: 1px solid black;
-	border-radius: 5px;
+	border-radius: 5px; */
 }
 
 #m-detail {
 	width:70%;
 	height: 90px; 
 	margin: 0 auto; 
-	border-bottom: 1px solid black;
+	/* border-bottom: 1px solid black;
 	border-left: 1px solid black;
 	border-right: 1px solid black;
-	border-radius: 5px;
+	border-radius: 5px; */
 }
 
 #m-title {
@@ -165,5 +165,16 @@ h2 {
 	float: left;
 	font-size: 1.1em;
 }
+
+#map{
+	width:50%;
+	height:200px;
+	margin: 0 auto;
+	/* border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-radius: 5px; */
+}
+
  
 }
