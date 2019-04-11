@@ -18,5 +18,8 @@ public interface CheckboardMapper {
 	
 	public int insertcheckboard(CheckBoardVO checkboard);
 	
+
 	public int checkauthority(String user_id);
+
+
 }

@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.none{
+	display : none;
+}
 
 html {
   overflow-x: hidden; 

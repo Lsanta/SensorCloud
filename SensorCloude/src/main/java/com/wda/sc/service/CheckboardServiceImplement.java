@@ -46,9 +46,12 @@ public class CheckboardServiceImplement implements CheckboardService {
 		return mapper.insertcheckboard(checkboard);
 	}
 
+
 	@Override
 	public int checkauthority(String user_id) {
 		// TODO Auto-generated method stub
 		return mapper.checkauthority(user_id);
 	}
+
+
 }

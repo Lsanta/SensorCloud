@@ -18,7 +18,7 @@
 		order by x.reg_date desc
 		]]>
 	</select>
-	
+		
 	<select id="viewgetList" resultType="com.wda.sc.domain.CheckBoardVO">
 	select c.board_no,m.name, c.user_id, c.title, c.board_content, c.reg_date,c.board_status,c.site_name
 		from (select board_no,check_board.user_id, check_board.title, check_board.board_content,
