@@ -44,4 +44,5 @@ public class CheckboardServiceImplement implements CheckboardService {
 		System.out.println(checkboard);
 		return mapper.insertcheckboard(checkboard);
 	}
+
 }

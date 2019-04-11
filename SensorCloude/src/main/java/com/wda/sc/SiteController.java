@@ -119,7 +119,7 @@ public class SiteController {
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
 		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
-		System.out.println("안됨");
+		
 		return "site/sensoradd";
 	}
 

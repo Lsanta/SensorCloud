@@ -63,5 +63,4 @@ public class CheckboardCotroller {
 		return "check/checkview";
 	}
 	
-
 }
