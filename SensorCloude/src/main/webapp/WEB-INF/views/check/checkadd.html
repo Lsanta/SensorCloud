@@ -14,6 +14,7 @@
 </th:block>
 
 <th:block layout:fragment="contents">
+<form name="check" method="post" action="/checkboard/checkadd.do">
 	<div class="a">
 	<div class="index">점검이력</div>
 	<div class="title1">
@@ -26,7 +27,7 @@
 		<table class="table0">
 		<th class="th01">&nbsp;현장선택&nbsp;</th>
 	<th class="th03">
-		<select name="site" class="se">
+		<select name="site_id" class="se">
    	      <option value="">현장선택</option>
   		  <option th:each="checksitelist : ${checksitelist}" th:value="${checksitelist.site_id}" th:text="${checksitelist.site_name}"></option>
 		</select>
@@ -57,44 +58,11 @@
     	</div>
 	</div>
 </div>
+</form>
 </th:block>
 
 <th:block layout:fragment="page_js">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
-$(document).ready(function(){
-	$(".back").click(function(){
-		window.history.back();
-	});
-	
-	$(".insert").click(function(){
-		var query = { 
-				title :$(".title00").val(),
-				site_id : $(".se option:selected").val(),
-				board_status : $("#sse option:selected").val(),
-				board_content : $("#boardcontent").val()
-					}
-		
-		console.log(query);
-		
-		$.ajax({
-			  type : "POST",
-			  url : "/checkboard/checkadd.do",
-			  data : query,
-			  success : function(data){
-				  if( data == "success"){
-					  alert("추가되었습니다");
-					  window.location.href = "/check/1"
-				  } else{
-					  alert("추가에 실패했습니다");
-				  }
-			  }
-			  
-		}); // ajax 종료
-		
-	}); 
-	
-});
-</script>
+
 </th:block>
 </html>

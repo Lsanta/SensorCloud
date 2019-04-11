@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wda.sc.domain.CheckBoardVO;
-import com.wda.sc.domain.TimelineVO;
+
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.SiteService;
 
@@ -32,21 +32,16 @@ public class CheckboardCotroller {
 	}
 	
 	
-	@RequestMapping(value ="checkadd.do")
-	@ResponseBody
-		public String timeline(CheckBoardVO vo, HttpSession session, Model model) {
+	@RequestMapping(value ="checkadd.do", method = RequestMethod.POST)
+		public String insertcheckboard(CheckBoardVO vo, HttpSession session, Model model) {
+		System.out.println("1");
 		 String id = (String) session.getAttribute("id");
-		/* model.addAttribute("writingInfo",timelineservice.getInfo(id)); */
+		 System.out.println("2");
 		 	vo.setUser_id(id);
-
-			int a = Checkboardservice.insertcheckboard(vo);
-
-			
-			if( a == 0) {
-				return "false";
-			} else{
-				return "success";
-			}
+		 	System.out.println("3");
+		 	System.out.println(vo);
+			Checkboardservice.insertcheckboard(vo);
+			return "redirect: /check/1";
 		}
 
 	
@@ -56,10 +51,10 @@ public class CheckboardCotroller {
 	
 		System.out.println("보드넘버=" +board_no);
 		
-		//수정클릭시 권한체크 위해 id와 m_level을 넘긴다.
+		//수정클릭시 권한체크 위해 id에 해당하는 m_level을 넘긴다.
 		String user_id = (String) session.getAttribute("id");
 		model.addAttribute("checkauthority",Checkboardservice.checkauthority(user_id));
-		model.addAttribute("id",user_id);
+		System.out.println(Checkboardservice.checkauthority(user_id));
 		
 		model.addAttribute("cklist",Checkboardservice.viewgetList(board_no));
 		
