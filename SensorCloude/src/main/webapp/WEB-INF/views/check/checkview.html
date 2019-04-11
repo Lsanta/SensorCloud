@@ -9,46 +9,60 @@
 
 <th:block layout:fragment="page_css">
 	<link rel="stylesheet" type="text/css"
-		href="/resources/css/check/inchecklist.css">
+		href="/resources/css/check/cbweb.css">
 </th:block>
 
 <th:block layout:fragment="contents">
 
+<div class="a">
 
-	<div id="fixlist_header">
-		<h2 id="infixlist_title" class="span" th:each="check : ${cklist}" th:text="${check.site_name}"></h2>
-		<!-- 점검이력을 클릭하면 해당 현장의 이름을 가져오기 -->
-		<input type="button" name="modifyfixlist" id="modifyfixlist" class="fixlistbutton" value="수정"> 
-		<input type="button" name="deletefixlist"
-		id="deleteyfixlist" class="fixlistbutton" value="삭제">
-
+	<div class="index" th:each="check : ${cklist}" th:text="${check.site_name}">
 	</div>
-
-	<div class="fixlistbody">
-
-		<div id="fixlistbody_condition" >
-				
-			<!-- 점검상태 / 날짜  가져오기-->
-			<p class="span" th:each="check : ${cklist}" th:text="${check.title}"></p>
-			<select name="job" class="span">
-				<option value="fixed"  selected="selected">fixed</option>
-				<option value="open">open</option>
-				<option value="closed">closed</option>
-			</select>
-			<p class="span"  id="regdate" th:each="check : ${cklist}" th:text="${check.reg_date}"></p>
-		</div>
-
-		<div id="fixlistbody_content" >
-
-			<!-- 글쓰기에서 등록한 점검이력 긁어오기 -->
-			<p th:each="check : ${cklist}" th:text="${check.board_content}"></p>
-		</div>
-		<div id="fixlistbody_addpicture">
-
-			<!-- 사진목록 -->
-		</div>
-
+	
+	
+	
+	<div class="title1">
+		<table class="table0">
+	<th class="th01">&nbsp;&nbsp;제 목&nbsp;&nbsp;</th>
+		<th class="th02"><h2 class="title00" maxlength="50"
+		  th:each="check : ${cklist}" th:text="${check.title}"></h2> 
+		
+		</th>
+		</table>
 	</div>
+	
+	
+	<div class="site1">
+		<table class="table0">
+		<th class="th01">&nbsp;글 쓴 날짜&nbsp;</th>
+	<th class="th03"><h3 class="se" maxlength="50"
+		  th:each="check : ${cklist}" th:text="${check.reg_date}"></h3></th>
+	
+	<th class="status">게시글 상태</th>
+	
+	<th class="stse"><h3 class="sse" maxlength="50">fixed</h3></th>
+	
+	</table>
+	</div>
+	
+	
+	<div class="content">
+		<p name="board_content" id="boardcontent" maxlength="1000" 
+		th:each="check : ${cklist}" th:text="${check.board_content}" style="resize:none;" >
+			
+		</p>
+	</div>
+	
+
+	
+	<div class="but">
+		<div class="but0">
+		<button type="button">수정</button>
+		<button type="button">저장</button>
+        <button type="button">삭제</button>
+    	</div>
+	</div>
+</div>
 </th:block>
 
 <th:block layout:fragment="page_js">
