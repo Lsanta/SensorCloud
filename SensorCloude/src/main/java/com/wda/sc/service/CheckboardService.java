@@ -21,4 +21,5 @@ public interface CheckboardService {
 	public int checkauthority(String user_id);
 	
 	public void register(CheckBoardVO board);
+
 }

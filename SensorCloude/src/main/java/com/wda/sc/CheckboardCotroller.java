@@ -1,14 +1,17 @@
 package com.wda.sc;
 
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,10 +31,22 @@ public class CheckboardCotroller {
 	
 	@RequestMapping(value = "checkadd", method = RequestMethod.GET)
 	public String address(Locale locale, Model model) {
+		System.out.println("글쓰기누름");
 		model.addAttribute("checksitelist",siteservice.getchecksite());
 		return "check/checkadd";
 	}
 	
+	@RequestMapping(value = "/checkmod"+ "/{board_no}", method = RequestMethod.GET)
+	public String checkmod(Locale locale, Model model, @PathVariable String board_no,HttpSession session) {
+		System.out.println("수정누름");
+		
+		model.addAttribute("modlist",Checkboardservice.viewgetList(board_no));
+		
+		String user_id = (String) session.getAttribute("id");
+		model.addAttribute("auth",Checkboardservice.checkauthority(user_id));
+		model.addAttribute("checksitelist",siteservice.getchecksite());
+		return "check/checkadd";
+	}
 	
 	@RequestMapping(value ="checkadd.do", method = RequestMethod.POST)
 		public String insertcheckboard(CheckBoardVO vo, HttpSession session,RedirectAttributes rttr) {
@@ -69,6 +84,6 @@ public class CheckboardCotroller {
 		System.out.println(Checkboardservice.viewgetList(board_no));
 		
 		return "check/checkview";
-	}
+	}	
 	
 }

@@ -21,7 +21,11 @@
 	<div class="title1">
 		<table class="table0">
 	<th class="th01">&nbsp;&nbsp;제 목&nbsp;&nbsp;</th>
-		<th class="th02"><input type="text" name="title" id="title" class="title00" maxlength="50"></input></th>
+		<th class="th02">
+		<!-- modList(수정값)이 비어있는지 체크 -->
+		<input type="text" name="title" id="title" class="title00" maxlength="50" th:if="${modlist == null}"></input>
+		<input type="text" name="title" id="title" class="title00" maxlength="50" th:if="${modlist != null}" th:each="modlist : ${modlist}" th:value="${modlist.title}"></input>
+		</th>
 		</table>
 	</div>
 	<div class="site1">
