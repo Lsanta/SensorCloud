@@ -19,4 +19,6 @@ public interface CheckboardService {
 	public int insertcheckboard(CheckBoardVO checkboard);
 
 	public int checkauthority(String user_id);
+	
+	public void register(CheckBoardVO board);
 }

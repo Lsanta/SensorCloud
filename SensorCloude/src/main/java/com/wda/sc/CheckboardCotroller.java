@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wda.sc.domain.CheckBoardVO;
 
@@ -33,14 +34,21 @@ public class CheckboardCotroller {
 	
 	
 	@RequestMapping(value ="checkadd.do", method = RequestMethod.POST)
-		public String insertcheckboard(CheckBoardVO vo, HttpSession session, Model model) {
-		System.out.println("1");
+		public String insertcheckboard(CheckBoardVO vo, HttpSession session,RedirectAttributes rttr) {
+
 		 String id = (String) session.getAttribute("id");
-		 System.out.println("2");
 		 	vo.setUser_id(id);
-		 	System.out.println("3");
-		 	System.out.println(vo);
-			Checkboardservice.insertcheckboard(vo);
+		 	System.out.println("------------------------");
+		 	System.out.println("checkboard:" + vo);
+		 	if(vo.getAttachList() != null) {
+		 		vo.getAttachList().forEach(attach -> System.out.println(attach));
+		 	}
+		 	System.out.println("-----------------------------");
+		 	
+		 	Checkboardservice.register(vo);
+
+			rttr.addFlashAttribute("result", vo.getBoard_no());
+
 			return "redirect: /check/1";
 		}
 

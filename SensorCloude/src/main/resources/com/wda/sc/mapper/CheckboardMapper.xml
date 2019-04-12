@@ -56,6 +56,11 @@
 	insert into check_board(board_no,user_id,reg_date,title,board_content,board_status,site_id)
 	values(check_seq.nextval, #{user_id}, sysdate,#{title},#{board_content},#{board_status},#{site_id})
 	</insert>
+	<insert id="insertSelectKey">
+	<selectKey resultType="int" order="BEFORE" keyProperty="board_no">select check_seq.nextval from dual</selectKey>
+	insert into check_board(board_no,user_id,reg_date,title,board_content,board_status,site_id)
+	values(#{board_no}, #{user_id}, sysdate,#{title},#{board_content},#{board_status},#{site_id})
+	</insert>
 	
 	<!-- 점검이력 수정 권한체크 -->
 	
