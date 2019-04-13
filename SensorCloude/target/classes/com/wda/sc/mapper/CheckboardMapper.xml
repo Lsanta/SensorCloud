@@ -65,12 +65,20 @@
 	<!-- 점검이력 수정 권한체크 -->
 	
 	<select id="checkauthority" resultType="int">
-	select m_level
+		select m_level
 		from member
 		where user_id = #{user_id}
 		
 	</select>
 	
-
+	<!-- 첨부파일 테이블 삭제 -->
+	<delete id="filedelete">
+		DELETE FROM check_board_file WHERE board_no = #{board_no}
+	</delete>
+	
+	<!-- 첨부파일 테이블 삭제 -->
+	<delete id="checkboardDelete">
+		DELETE FROM check_board WHERE board_no = #{board_no}
+	</delete>
 	
 </mapper>

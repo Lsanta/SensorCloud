@@ -15,6 +15,13 @@ $(document).on("click", "#repairchecklist tr", function() {
 	window.location.href = "/site/"+ url[2] +"/sitecheckview/" + a;
 });
 
+$("#write").click(function(){
+	alert("글쓰기 클릭");
+	var newURL =  window.location.pathname;
+	var url = newURL.split('/');
+	window.location.href = "/checkboard/checkadd";
+});
+
 
 $(document).ready(function() {
 

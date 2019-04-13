@@ -21,8 +21,16 @@ $(document).ready(function(){
 		var url = newURL.split('/');
 		console.log(url);
 		
-		window.location.href = "/checkboard/checkmod/"+url[4];
-
+		//url[4] = board_no , url[2] = site_id
+		window.location.href = "/checkboard/checkmod/"+url[4]+"/"+url[2];
+	});
 	
+	$("#del").click(function(){
+		//삭제 버튼을 클릭하면 board_no를 통해 게시글 삭제 + 첨부파일도 삭제해야한다.
+		var newURL =  window.location.pathname;
+		var url = newURL.split('/');
+		
+		window.location.href = "/checkboard/checkdel/"+url[4]+"/"+url[2];
+		
 	});
 });

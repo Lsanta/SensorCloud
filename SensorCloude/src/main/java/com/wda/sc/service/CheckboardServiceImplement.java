@@ -79,6 +79,20 @@ public class CheckboardServiceImplement implements CheckboardService {
 		return mapper.checkauthority(user_id);
 	}
 
+
+	@Override
+	public int filedelete(String board_no) {
+		// 첨부파일 삭제
+		return mapper.filedelete(board_no);
+	}
+
+
+	@Override
+	public int checkboardDelete(String board_no) {
+		// 게시글 삭제
+		return mapper.checkboardDelete(board_no);
+	}
+
 	
 
 }
