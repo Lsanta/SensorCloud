@@ -105,7 +105,12 @@ public class CheckboardCotroller {
 		
 		return "redirect: /site/"+site_id+"/siterepair/1";
 	}
-	
-	
+	//수리내역에서 글쓰기 누를시 site_id 전달
+	@RequestMapping(value = "/checkadd/" + "{site_id}", method = RequestMethod.GET)
+	public String address(Locale locale, Model model, @PathVariable String site_id) {
+		model.addAttribute("site_id",site_id);
+		model.addAttribute("checksitelist",siteservice.getchecksite());
+		return "check/checkadd";
+	}
 	
 }
