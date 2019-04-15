@@ -21,4 +21,11 @@ public interface CheckboardService {
 	public int checkauthority(String user_id);
 	
 	public void register(CheckBoardVO board);
+
+	//첨부파일 테이블 삭제
+	public int filedelete(String board_no);
+
+	//게시글 삭제
+	public int checkboardDelete(String board_no);
+
 }

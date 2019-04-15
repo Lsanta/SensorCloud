@@ -201,12 +201,10 @@ public class HomeController {
 		if(page.getTotalNum() < page.getOnePageBoard() ) {
 			pageNum = 1;
 		}else {
-			if(page.getTotalNum()/page.getOnePageBoard() == 0) {
-				pageNum = page.getTotalNum()/page.getOnePageBoard();
-			}else {
-				pageNum = (page.getTotalNum()/page.getOnePageBoard())+1;
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
 			}
-				
 		}
 
 		for(int i = 0; i < pageNum; i ++) {

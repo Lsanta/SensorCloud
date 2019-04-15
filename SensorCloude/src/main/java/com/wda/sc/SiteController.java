@@ -243,15 +243,12 @@ public class SiteController {
 	    	  return "false";
 	   }
 	
-	@RequestMapping(value="/sitecheckview/" +"{board_no}", method = RequestMethod.GET)
-	public String checkin(Locale locale,@PathVariable  String board_no, Model model) {
+	@RequestMapping(value="/"+"{site_id}"+ "/sitecheckview/" +"{board_no}", method = RequestMethod.GET)
+	public String checkin(Locale locale,@PathVariable String board_no, @PathVariable String site_id, Model model) {
 	
-		System.out.println("현장점검이력보드넘버=" +board_no);
-		
+
 		model.addAttribute("sitecheckview",checkboardservice.viewgetList(board_no));
-		
-		System.out.println(checkboardservice.viewgetList(board_no));
-		
+
 		return "site/sitecheckview";
 	}
 	

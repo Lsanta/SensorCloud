@@ -26,5 +26,9 @@ public interface CheckboardMapper {
 	
 	public List<CheckBoardFileVO> findByBno(int board_no);
 
-
+	//첨부파일 테이블 삭제
+	public int filedelete(String board_no);
+	
+	//게시글 삭제
+	public int checkboardDelete(String board_no);
 }
