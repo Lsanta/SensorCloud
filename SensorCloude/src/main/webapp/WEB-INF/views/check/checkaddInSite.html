@@ -5,7 +5,7 @@
 
 <th:block layout:fragment="page_head">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>점검이력 글쓰기</title>
+	<title>수리내역에서 글 쓰기페이지</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
@@ -15,14 +15,17 @@
 </th:block>
 
 <th:block layout:fragment="contents">
-<form role="form" name="check" method="post" action="/checkboard/checkadd.do">
+<form role="form" name="check" method="post" action="/checkboard/checkaddInSite.do">
 	<div class="a">
 	<div class="index">점검이력</div>
 	<div class="title1">
 		<table class="table0">
 	<th class="th01">&nbsp;&nbsp;제 목&nbsp;&nbsp;</th>
 		<th class="th02">
-		<input type="text" name="title" id="title" class="title00" maxlength="50"></input>
+		
+		<!-- modList(수정값)이 비어있는지 체크 -->
+		<input type="text" name="title" id="title" class="title00" maxlength="50" th:if="${modlist == null}"></input>
+		<input type="text" name="title" id="title" class="title00" maxlength="50" th:if="${modlist != null}" th:each="modlist : ${modlist}" th:value="${modlist.title}"></input>
 		</th>
 		</table>
 	</div>
@@ -30,27 +33,42 @@
 		<table class="table0">
 		<th class="th01">&nbsp;현장선택&nbsp;</th>
 	<th class="th03">
-		
+		<!-- 넘어온 값 을 selected 된 상태로 띄움 -->
 		<select name="site_id" class="se">
    	      <option value="">현장선택</option>
   		  <option th:each="checksitelist : ${checksitelist}" th:value="${checksitelist.site_id}" th:text="${checksitelist.site_name}"></option>
+  		  <option th:if="${modlist != null}" th:each="modlist : ${modlist}" th:value="${modlist.site_id}" th:text="${modlist.site_name}" style="display:none"></option>
 		</select>
+		
+		<!-- 수리내역에서 넘긴 site_id -->
+	    <div id="repairid" name="site_id" th:if="${site_id != null}" th:text="${site_id}" style="display:none"></div>
 	</th>
 	<th class="status">게시글 상태</th>
 		
-		
-		<th class="stse">
+		<!-- 비어있거나 권한이 5 이하면 원래대로 -->
+		<th th:if="${auth == null || auth < 5}" class="stse">
 			<select name="status" id="sse">
   		 	 	<option value="0">open</option>
   		 	 	<option value="1">fixed</option>
 			</select>
 		</th>
-		
+		<!-- 비어있지 않고 권한이 5이면 -->
+		<th th:if="${auth != null && auth == 5}" class="stse">
+			<select name="status" id="sse">
+				<option value="0">open</option>
+  		 	 	<option value="1">fixed</option>
+  		 	 	<option value="2">closed</option>
+			</select>
+		</th>
+		<!-- 숨겨놓는 board_status -->
+		<div id="hidden_status" th:if="${modlist == null}" th:text="99" style="display:none" ></div>
+		<div id="hidden_status" th:if="${modlist != null}" th:each="modlist : ${modlist}" th:text="${modlist.board_status}" style="display:none"></div>
 	</th>
 	</table>
 	</div>
 	<div class="content">
-		<textarea name="board_content" id="boardcontent" maxlength="1000" style="resize:none;"></textarea>
+		<textarea th:if="${modlist == null}" name="board_content" id="boardcontent" maxlength="1000" style="resize:none;"></textarea>
+		<textarea th:each="modlist : ${modlist}" th:if="${modlist != null}" name="board_content" id="boardcontent" maxlength="1000" style="resize:none;" th:text="${modlist.board_content}" ></textarea>
 	</div>
 	<div class="f0">
 		<table class="table0">
@@ -62,17 +80,10 @@
 		</th>
 	</table>
 	</div>
-	<div class="uploadarea">
-	<div class="uploadtitle">
-	파일 첨부 내역
-	</div>
-	<div class="totalupload">
 	<div class="uploadResult">
 		<ul>
 		
 		</ul>
-		</div>
-		</div>
 		</div>
 		<div class="bigPictureWrapper">
 		<div class="bigPicture">
@@ -81,7 +92,8 @@
 	<div class="but">
 		<div class="but0">
 		<button type="button" class="back">목록으로</button>
-        <button type="submit" class="insert">등록하기</button>
+        <button th:if="${modlist == null}" type="submit" class="insert">등록하기</button>
+        <button th:if="${modlist != null}" th:each="modlist : ${modlist}" type="button" class="modify">수정하기</button>
     	</div>
 	</div>
 </div>
@@ -120,7 +132,53 @@ $(document).ready(function(){
 	    
 	  });
 	   */
-	    
+	   
+	   //select들 중의 site_id 값 과 숨겨놓은 site_id가 일치하면 selected 속성 부여 
+	   var opt_vals = [];
+	   $(".se > option").each(function(){
+		  opt_vals.push($(this).val()); 
+	   });
+	   
+	   var repairid = $("#repairid").text();
+	   
+	   //숨겨놓은 site_id
+	   var aa =   $(".se > option:last").val();
+	   
+	   for(var i=1; i < opt_vals.length; i++ ){
+		      var optV = opt_vals[i];
+	
+		      if(optV == aa)
+				 $(".se > option").eq(i).prop("selected", true);
+		      
+		      
+		      if(Number(repairid) == optV)
+		    	 $(".se > option").eq(i).prop("selected", true);
+	   }
+	   
+	   
+	   //select들 중의 value 값 과 숨겨놓은 board_status가 일치하면 selected 속성 부여 
+	   var opt_vals2 = [];
+	   $("#sse > option").each(function(){
+			  opt_vals2.push($(this).val()); 
+		 });
+	   
+	   //숨겨놓은 board_status
+	   var bb =  $("#hidden_status").text();
+	   
+	   if(bb != 99){
+		   for(var i=0; i < opt_vals2.length; i++ ){
+			    var optV2 = opt_vals2[i];
+			    console.log("번호 :" + optV2);
+			    console.log(bb);
+			    
+				if(optV2 == bb){
+					 $("#sse > option").eq(i).prop("selected", true);
+		   		}
+
+		   }
+	   }
+
+	   
 	   var formObj = $("form[role='form']");
 	   
 	   $("button[type='submit']").on("click", function(e){
@@ -289,6 +347,35 @@ $(document).ready(function(){
 	  }
 
 	 
+	 $.getJSON("/checkboard/getAttachList", {board_no : board_no}, function(arr){
+		 
+		 console.log(arr);
+		 
+		 var str = "";
+		 
+		 $(arr).each(function(i, attach){
+			//image type
+			if(attach.fileType){
+				var fileCallPath = encodeURIComponent( attach.uploadPath+ "/s_"+attach.uuid + "_"+attach.fileName);
+			
+				str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
+				str += "<img src='/display?fileName="+fileCallPath+"'>";
+				str += "</div>";
+				str += "</li>";
+			
+			} else {
+				str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
+				str += "<span>" + attach.fileName + "</span><br />";
+				str += "<img src='/resources/img/attach.png'>";
+				str += "</div>";
+				str += "</li>";
+			}
+			 
+		 });
+		 
+		 $(".uploadResult ul").html(str);
+		 
+	 }); //end getjson
 	 
 	 
 });

@@ -8,7 +8,9 @@ body {
   background-size: cover;
   font-family: 'Roboto', sans-serif;
 }
-
+h1{
+	text-align: center;
+}
 .sensormodify {
   padding: 40px;
   width: 274px;
