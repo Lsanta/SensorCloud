@@ -40,5 +40,5 @@ $(document).ready(function() {
 		else
 			window.location.href = "/check/"+(parseInt(url[2])+1);
 	});
-
+	
 });

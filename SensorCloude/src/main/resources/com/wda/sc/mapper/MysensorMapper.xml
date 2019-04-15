@@ -5,6 +5,7 @@
 <mapper namespace="com.wda.sc.mapper.MysensorMapper">
 
 	<select id="getList" resultType="com.wda.sc.domain.MysensorVO">
+	<![CDATA[
 		select A.sensor_sn, A.model_name, A.sensor_kind, A.manufacturer, A.voltage, 
 		substr(A.create_day,0,14) as create_day,B.site_id, C.site_name
 		from my_sensor A
@@ -14,10 +15,12 @@
 		LEFT OUTER JOIN
 		site C
 		on B.site_id = C.site_id
+		order by create_day desc
+	]]>
 	</select>
 
 	<insert id="insertmysensor" parameterType="com.wda.sc.domain.MysensorVO">
-		insert into my_sensor(sensor_sn,model_name,sensor_kind,manufacturer,voltage) values(#{sensor_sn}, #{model_name},#{sensor_kind},#{manufacturer},#{voltage})
+		insert into my_sensor(sensor_sn,model_name,sensor_kind,manufacturer,voltage,create_day) values(#{sensor_sn}, #{model_name},#{sensor_kind},#{manufacturer},#{voltage},sysdate)
 	</insert>
 	
 	<select id="installSelect" resultType="com.wda.sc.domain.InstallSensorVO">

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>점검이력 글쓰기</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+	
+	$("#uploadBtn").on("click",function(e){
+		var formData = new FormData();
+		var inputFile = $("input[name="uploadFile"]");
+		var files = inputFile[0].files;
+		
+		console.log(files);
+	});
+});
+</script>
+
+<body>
+<h1>Upload with Ajax</h1>
+<div class="uploadDiv">
+<input type = "file" name="uploadFile" multiple>
+</div>
+<button id="uploadBtn">Upload</button>
+</body>
+
+
+
+</html>

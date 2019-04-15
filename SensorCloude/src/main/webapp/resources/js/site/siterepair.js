@@ -8,7 +8,18 @@ $(document).on("click", "#repairchecklist tr", function() {
 	var a = $("#repairchecklist tr:eq(" + tr + ") td:eq(5)").text();
 	// 내가클릭한 테이블의 행을 판별해야하기위해 board_no 정보를 넘긴다
 	
-	window.location.href = "/site/sitecheckview/" + a;
+	var newURL =  window.location.pathname;
+	var url = newURL.split('/');
+	
+	
+	window.location.href = "/site/"+ url[2] +"/sitecheckview/" + a;
+});
+
+$("#write").click(function(){
+	alert("글쓰기 클릭");
+	var newURL =  window.location.pathname;
+	var url = newURL.split('/');
+	window.location.href = "/checkboard/checkadd/"+url[2];
 });
 
 

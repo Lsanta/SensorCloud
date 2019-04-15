@@ -11,15 +11,15 @@
 	<select id="myList" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="map">
 		<![CDATA[
 		select x.* 
-		from (select rownum as rnum,before_ord.*
-		      from (select m.name, before_tab.*
-		            from (select c.board_no,c.user_id, c.title, substr(c.reg_date,0,14) as reg_date,c.board_status,c.site_id, s.site_name
-		                  from check_board c,site s
-		                  where c.site_id = s.site_id) before_tab ,member m
-		            where before_tab.user_id = m.user_id and m.user_id = #{user_id}) before_ord
-              	    where rownum < #{paging.endnum}) x
-		where x.rnum >= #{paging.startnum}
-		order by x.name
+      	from (select rownum as rnum,before_ord.*
+                    from (select m.name, before_tab.*
+                  from (select c.board_no,c.user_id, c.title, substr(c.reg_date,0,14) as reg_date,c.board_status,c.site_id, s.site_name
+                        from check_board c,site s
+                        where c.site_id = s.site_id) before_tab, member m
+                  where before_tab.user_id = m.user_id and m.user_id = #{user_id}
+                    order by before_tab.reg_date desc) before_ord
+                     where rownum < #{paging.endnum}) x
+      	where x.rnum >= #{paging.startnum}
 		]]>
 	</select>
 	

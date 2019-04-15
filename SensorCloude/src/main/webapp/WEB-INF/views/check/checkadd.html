@@ -4,6 +4,7 @@
 	data-layout-decorate="~{include/layout}">
 
 <th:block layout:fragment="page_head">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>점검이력 글쓰기</title>
 </th:block>
 
@@ -14,42 +15,78 @@
 </th:block>
 
 <th:block layout:fragment="contents">
+<form role="form" name="check" method="post" action="/checkboard/checkadd.do">
 	<div class="a">
 	<div class="index">점검이력</div>
 	<div class="title1">
 		<table class="table0">
 	<th class="th01">&nbsp;&nbsp;제 목&nbsp;&nbsp;</th>
-		<th class="th02"><input type="text" name="title" id="title" class="title00" maxlength="50"></input></th>
+		<th class="th02">
+		
+		<!-- modList(수정값)이 비어있는지 체크 -->
+		<input type="text" name="title" id="title" class="title00" maxlength="50" th:if="${modlist == null}"></input>
+		<input type="text" name="title" id="title" class="title00" maxlength="50" th:if="${modlist != null}" th:each="modlist : ${modlist}" th:value="${modlist.title}"></input>
+		</th>
 		</table>
 	</div>
 	<div class="site1">
 		<table class="table0">
 		<th class="th01">&nbsp;현장선택&nbsp;</th>
 	<th class="th03">
-		<select name="site" class="se">
+		<!-- 넘어온 값 을 selected 된 상태로 띄움 -->
+		<select name="site_id" class="se">
    	      <option value="">현장선택</option>
   		  <option th:each="checksitelist : ${checksitelist}" th:value="${checksitelist.site_id}" th:text="${checksitelist.site_name}"></option>
+  		  <option th:if="${modlist != null}" th:each="modlist : ${modlist}" th:value="${modlist.site_id}" th:text="${modlist.site_name}" style="display:none"></option>
 		</select>
+		<!-- 수리내역에서 넘긴 site_id -->
+	    <div id="repairid" th:if="${site_id != null}" th:text="${site_id}" style="display:none"></div>
 	</th>
 	<th class="status">게시글 상태</th>
-	<th class="stse">
-		<select name="status" id="sse">
-  		  <option value="0">open</option>
-  		  <option value="1">fixed</option>
-		</select>
-	</th>
+		
+		<!-- 비어있거나 권한이 5 이하면 원래대로 -->
+		<th th:if="${auth == null || auth < 5}" class="stse">
+			<select name="status" id="sse">
+  		 	 	<option value="0">open</option>
+  		 	 	<option value="1">fixed</option>
+			</select>
+		</th>
+		<!-- 비어있지 않고 권한이 5이면 -->
+		<th th:if="${auth != null && auth == 5}" class="stse">
+			<select name="status" id="sse">
+				<option value="0">open</option>
+  		 	 	<option value="1">fixed</option>
+  		 	 	<option value="2">closed</option>
+  		 	 	<option th:each="modlist : ${modlist}" th:value="${modlist.board_status}" style="display:none"></option>
+			</select>
+		</th>
+		
 	</th>
 	</table>
 	</div>
 	<div class="content">
-		<textarea name="board_content" id="boardcontent" maxlength="1000" style="resize:none;"></textarea>
+		<textarea th:if="${modlist == null}" name="board_content" id="boardcontent" maxlength="1000" style="resize:none;"></textarea>
+		<textarea th:each="modlist : ${modlist}" th:if="${modlist != null}" name="board_content" id="boardcontent" maxlength="1000" style="resize:none;" th:text="${modlist.board_content}" ></textarea>
 	</div>
 	<div class="f0">
 		<table class="table0">
 		<th class="th05">첨부파일</th>
-		<th class="th03"><input type="file" id="files[0]" name="files[0]" value=""></th>
+		<th class="th03">
+		<div class="uploadDiv">
+		<input type="file" name="uploadFile" multiple>
+		</div>
+		</th>
 	</table>
 	</div>
+	<div class="uploadResult">
+		<ul>
+		
+		</ul>
+		</div>
+		<div class="bigPictureWrapper">
+		<div class="bigPicture">
+		</div>
+		</div>
 	<div class="but">
 		<div class="but0">
 		<button type="button" class="back">목록으로</button>
@@ -57,44 +94,254 @@
     	</div>
 	</div>
 </div>
+</form>
 </th:block>
 
 <th:block layout:fragment="page_js">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
+function showImage(fileCallPath){
+	  
+	 $(".bigPictureWrapper").css("display","flex").show();
+	  
+	  $(".bigPicture")
+	  .html("<img src='/display?fileName="+ encodeURI(fileCallPath)+"'>")
+	  .animate({width:'100%', height: '100%'}, 1000);
+	  
+	  $(".bigPictureWrapper").on("click", function(e){
+		  $(".bigPicture").animate({width:'0%', height: '0%'}, 1000);
+ 	 		 setTimeout(function() {
+			  $(".bigPicture").hide();
+		  }, 1000);
+		  
+		});
+	}
+</script>
+<script>
 $(document).ready(function(){
-	$(".back").click(function(){
-		window.history.back();
-	});
+	 /*  var formObj = $("form[role='form']");
+	  
+	  $("button[type='submit']").on("click", function(e){
+	    
+	    e.preventDefault();
+	    
+	    console.log("submit clicked");
+	    
+	  });
+	   */
+	   
+	   //select들 중의 site_id 값 과 숨겨놓은 site_id가 일치하면 selected 속성 부여 
+	   var opt_vals = [];
+	   $(".se > option").each(function(){
+		  opt_vals.push($(this).val()); 
+	   });
+	   
+	   var repairid = $("#repairid").text();
+	   
+	   //숨겨놓은 site_id
+	   var aa =   $(".se > option:last").val();
+	   
+	   for(var i=1; i < opt_vals.length-1; i++ ){
+		      var optV = opt_vals[i];
+		     
+		      if(optV == aa)
+				 $(".se > option").eq(i).prop("selected", true);
+		      
+		      
+		      if(Number(repairid) == optV)
+		    	 $(".se > option").eq(i).prop("selected", true);
+	   }
+	   
+	   //select들 중의 value 값 과 숨겨놓은 board_status가 일치하면 selected 속성 부여 
+	   var opt_vals2 = [];
+	   $("#sse > option").each(function(){
+			  opt_vals2.push($(this).val()); 
+		 });
+	   
+	   //숨겨놓은 board_status
+	   var bb =  $("#sse > option:last").val();
+	   
+	   for(var i=0; i < opt_vals2.length-1; i++ ){
+		      var optV2 = opt_vals2[i];
+		      
+			if(optV2 == bb){
+				 $("#sse > option").eq(i).prop("selected", true);
+	   		}
+
+	   }
+	   
+	   var formObj = $("form[role='form']");
+	   
+	   $("button[type='submit']").on("click", function(e){
+	     
+	     e.preventDefault();
+	     
+	     console.log("submit clicked");
+	     
+	     var str = "";
+	     
+	     $(".uploadResult ul li").each(function(i, obj){
+	       
+	       var jobj = $(obj);
+	       
+	       console.dir(jobj);
+	       console.log("-------------------------");
+	       console.log(jobj.data("filename"));
+	       
+	       
+	       str += "<input type='hidden' name='attachList["+i+"].file_name' value='"+jobj.data("filename")+"'>";
+	       str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
+	       str += "<input type='hidden' name='attachList["+i+"].file_Path' value='"+jobj.data("path")+"'>";
+	       str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
+	       
+	     });
+	     
+	     console.log(str);
+	     
+	     formObj.append(str).submit();
+	     
+	   });
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	var maxSize = 5242880;
 	
-	$(".insert").click(function(){
-		var query = { 
-				title :$(".title00").val(),
-				site_id : $(".se option:selected").val(),
-				board_status : $("#sse option:selected").val(),
-				board_content : $("#boardcontent").val()
-					}
+	function checkExtension(fileName,fileSize){
+		if(fileSize >= maxSize){
+			alert("파일 사이즈 초과");
+			return false;
+		}
+		if(regex.test(fileName)){
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	var cloneObj = $(".uploadDiv").clone();
+	
+	var uploadResult = $(".uploadResult ul");
+	
+	
+	$("input[type='file']").change(function(e){
+		var formData = new FormData();
+		var inputFile = $("input[name='uploadFile']");
+		var files = inputFile[0].files;
 		
-		console.log(query);
+		console.log(files);
+		
+		for(var i =0; i<files.length; i++){
+			if(!checkExtension(files[i].name,files[i].size) ){
+				return false;
+			}
+			formData.append("uploadFile",files[i]);
+		}
+		
 		
 		$.ajax({
-			  type : "POST",
-			  url : "/checkboard/checkadd.do",
-			  data : query,
-			  success : function(data){
-				  if( data == "success"){
-					  alert("추가되었습니다");
-					  window.location.href = "/check/1"
-				  } else{
-					  alert("추가에 실패했습니다");
-				  }
-			  }
-			  
-		}); // ajax 종료
-		
-	}); 
-	
+			url:"/uploadAjaxAction",
+			processData : false,
+			contentType : false,
+			data: formData,
+			type: "POST",
+			dataType:"json",
+			success: function(result){
+				console.log(result);
+				showUploadResult(result);
+				//$(".uploadDiv").html(cloneObj.html());
+			}
+		}); //$.ajax
+	});
+
+	/*  function showUploadedFile(uploadResultArr){
+	   
+	   var str = "";
+	   
+	   $(uploadResultArr).each(function(i, obj){
+	     
+	     if(!obj.image){
+	       
+	       var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);
+	       
+	       str += "<li><a href='/download?fileName="+fileCallPath+"'><img src='/resources/img/attach.png'>"+obj.fileName+"</a></li>"
+	     }else{
+	       
+	       var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
+	       
+	       var originPath = obj.uploadPath+ "\\"+obj.uuid +"_"+obj.fileName;
+	       
+	       originPath = originPath.replace(new RegExp(/\\/g),"/");
+	       
+	       str += "<li><a href=\"javascript:showImage(\'"+originPath+"\')\"><img src='/display?fileName="+fileCallPath+"'></a><li>";
+	     }
+	   });
+	   
+	   uploadResult.append(str);
+	 }  */
+	function showUploadResult(uploadResultArr){
+	    
+	    if(!uploadResultArr || uploadResultArr.length == 0){ return; }
+	    
+	    var uploadUL = $(".uploadResult ul");
+	    
+	    var str ="";
+	    
+	    $(uploadResultArr).each(function(i, obj){
+	    
+	        /*  //image type
+	        if(obj.image){
+	          var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
+	          str += "<li><div>";
+	          str += "<span> "+ obj.fileName+"</span>";
+	          str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+	          str += "<img src='/display?fileName="+fileCallPath+"'>";
+	          str += "</div>";
+	          str +"</li>";
+	        }else{
+	          var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);            
+	            var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+	              
+	          str += "<li><div>";
+	          str += "<span> "+ obj.fileName+"</span>";
+	          str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+	          str += "<img src='/resources/img/attach.png'></a>";
+	          str += "</div>";
+	          str +"</li>";
+	        }  */
+			//image type
+			 
+			if(obj.image){
+				var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
+				str += "<li data-path='"+obj.uploadPath+"'";
+				str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
+				str +" ><div>";
+				str += "<span> "+ obj.fileName+"</span>";
+				str += "<button type='button' data-file=\'"+fileCallPath+"\' "
+				str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+				str += "<img src='/display?fileName="+fileCallPath+"'>";
+				str += "</div>";
+				str +"</li>";
+			}else{
+				var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);			      
+			    var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+			      
+				str += "<li "
+				str += "data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"' ><div>";
+				str += "<span> "+ obj.fileName+"</span>";
+				str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' " 
+				str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+				str += "<img src='/resources/img/attach.png'></a>";
+				str += "</div>";
+				str +"</li>";
+			} 
+
+	    });
+	    
+	    uploadUL.append(str);
+	  }
+
+	 
+	 
+	 
 });
 </script>
+
 </th:block>
 </html>

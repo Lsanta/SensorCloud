@@ -3,6 +3,7 @@ package com.wda.sc.service;
 import java.util.ArrayList;
 
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
 
 public interface CheckboardService {
@@ -16,4 +17,15 @@ public interface CheckboardService {
 	public ArrayList<CheckBoardVO> mainList();
 	
 	public int insertcheckboard(CheckBoardVO checkboard);
+
+	public int checkauthority(String user_id);
+	
+	public void register(CheckBoardVO board);
+
+	//첨부파일 테이블 삭제
+	public int filedelete(String board_no);
+
+	//게시글 삭제
+	public int checkboardDelete(String board_no);
+
 }

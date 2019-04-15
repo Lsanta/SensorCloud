@@ -71,7 +71,6 @@ public class HomeController {
 		int realNum = Integer.parseInt(num);
 
 		page.setTotalNum(checkboardservice.getPageNum());
-
 		System.out.println(page.getTotalNum());
 		if(page.getTotalNum() < page.getOnePageBoard()) {
 			pageNum = 1;
@@ -197,19 +196,23 @@ public class HomeController {
 		int realNum = Integer.parseInt(num);
 
 		page.setTotalNum(mypageservice.getPageNum(id.toString()));
-
+		page.setOnePageBoard(5);
+		
 		if(page.getTotalNum() < page.getOnePageBoard() ) {
 			pageNum = 1;
 		}else {
 			pageNum = page.getTotalNum()/page.getOnePageBoard();
+			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
 		}
 
 		for(int i = 0; i < pageNum; i ++) {
 			arr.add(i+1);
 		}
 
-		page.setEndnum((realNum*10)+1);
-		page.setStartnum(page.getEndnum()-10);
+		page.setEndnum((realNum*5)+1);
+		page.setStartnum(page.getEndnum()-5);
 
 		parm.put("paging", page);
 		parm.put("user_id", id);

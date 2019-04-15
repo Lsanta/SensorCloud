@@ -119,7 +119,7 @@ public class SiteController {
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
 		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
-		System.out.println("안됨");
+		
 		return "site/sensoradd";
 	}
 
@@ -243,15 +243,12 @@ public class SiteController {
 	    	  return "false";
 	   }
 	
-	@RequestMapping(value="/sitecheckview/" +"{board_no}", method = RequestMethod.GET)
-	public String checkin(Locale locale,@PathVariable  String board_no, Model model) {
+	@RequestMapping(value="/"+"{site_id}"+ "/sitecheckview/" +"{board_no}", method = RequestMethod.GET)
+	public String checkin(Locale locale,@PathVariable String board_no, @PathVariable String site_id, Model model) {
 	
-		System.out.println("현장점검이력보드넘버=" +board_no);
-		
+
 		model.addAttribute("sitecheckview",checkboardservice.viewgetList(board_no));
-		
-		System.out.println(checkboardservice.viewgetList(board_no));
-		
+
 		return "site/sitecheckview";
 	}
 	
