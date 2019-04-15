@@ -1,6 +1,8 @@
 package com.wda.sc.domain;
 
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -17,4 +19,6 @@ public class CheckBoardVO {
 	private String board_file_id;
 	private String file_path;
 	private String file_name;
+	
+	private List<CheckBoardFileVO> attachList;
 }

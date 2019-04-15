@@ -4,8 +4,9 @@ import lombok.Data;
 
 @Data
 public class CheckBoardFileVO {
-	private String board_file_id;
 	private int board_no;
-	private String file_path;
+	private String uuid;
+	private String file_Path;
 	private String file_name;
+	private boolean fileType;
 }

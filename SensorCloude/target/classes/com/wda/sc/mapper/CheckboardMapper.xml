@@ -20,7 +20,7 @@
 	</select>
 		
 	<select id="viewgetList" resultType="com.wda.sc.domain.CheckBoardVO">
-	select c.board_no,m.name, c.user_id, c.title, c.board_content, c.reg_date,c.board_status,c.site_name 
+	select c.board_no,m.name, c.user_id, c.title, c.board_content, c.reg_date,c.board_status,c.site_name
 		from (select board_no,check_board.user_id, check_board.title, check_board.board_content,
         	  substr(check_board.reg_date,0,14) as reg_date,
         	  check_board.board_status,check_board.site_id, site.site_name
@@ -29,6 +29,10 @@
 		where c.user_id = m.user_id
 		and c.board_no = #{board_no}
 	</select>
+	
+	
+	
+	
 	
 	<select id="getPageNum" resultType="int">
 			select count(board_no) from check_board
@@ -52,7 +56,29 @@
 	insert into check_board(board_no,user_id,reg_date,title,board_content,board_status,site_id)
 	values(check_seq.nextval, #{user_id}, sysdate,#{title},#{board_content},#{board_status},#{site_id})
 	</insert>
+	<insert id="insertSelectKey">
+	<selectKey resultType="int" order="BEFORE" keyProperty="board_no">select check_seq.nextval from dual</selectKey>
+	insert into check_board(board_no,user_id,reg_date,title,board_content,board_status,site_id)
+	values(#{board_no}, #{user_id}, sysdate,#{title},#{board_content},#{board_status},#{site_id})
+	</insert>
 	
-
+	<!-- 점검이력 수정 권한체크 -->
+	
+	<select id="checkauthority" resultType="int">
+		select m_level
+		from member
+		where user_id = #{user_id}
+		
+	</select>
+	
+	<!-- 첨부파일 테이블 삭제 -->
+	<delete id="filedelete">
+		DELETE FROM check_board_file WHERE board_no = #{board_no}
+	</delete>
+	
+	<!-- 첨부파일 테이블 삭제 -->
+	<delete id="checkboardDelete">
+		DELETE FROM check_board WHERE board_no = #{board_no}
+	</delete>
 	
 </mapper>
