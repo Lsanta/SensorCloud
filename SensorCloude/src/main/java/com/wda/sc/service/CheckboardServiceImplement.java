@@ -28,7 +28,7 @@ public class CheckboardServiceImplement implements CheckboardService {
 	@Transactional
 	@Override
 	public void register(CheckBoardVO board) {
-		System.out.println("오냐 시발럼아");
+
 		mapper.insertSelectKey(board);
 		
 		if (board.getAttachList() == null || board.getAttachList().size() <= 0) {
