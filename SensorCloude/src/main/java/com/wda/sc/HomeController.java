@@ -76,6 +76,9 @@ public class HomeController {
 			pageNum = 1;
 		}else {
 			pageNum = page.getTotalNum()/page.getOnePageBoard();
+			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
 		}
 
 		for(int i = 0; i < pageNum; i ++) {
@@ -99,12 +102,16 @@ public class HomeController {
 		int realNum = Integer.parseInt(num);
 		page.setTotalNum(siteservice.getPageNum());
 
-		if(page.getTotalNum() < page.getOnePageBoard() ) {
+		if(page.getTotalNum() <= page.getOnePageBoard() ) {
 			pageNum = 1;
 		}else {
 			pageNum = page.getTotalNum()/page.getOnePageBoard();
+			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
 		}
 
+		
 		for(int i = 0; i < pageNum; i ++) {
 			arr.add(i+1);
 		}
@@ -134,10 +141,13 @@ public class HomeController {
 		int realNum = Integer.parseInt(num);
 		page.setTotalNum(usermanageservice.getPageNum());
 
-		if(page.getTotalNum() < page.getOnePageBoard() ) {
+		if(page.getTotalNum() <= page.getOnePageBoard() ) {
 			pageNum = 1;
 		}else {
 			pageNum = page.getTotalNum()/page.getOnePageBoard();
+			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
 		}
 
 		for(int i = 0; i < pageNum; i ++) {
@@ -199,7 +209,7 @@ public class HomeController {
 		page.setTotalNum(mypageservice.getPageNum(id.toString()));
 		page.setOnePageBoard(5);
 		
-		if(page.getTotalNum() < page.getOnePageBoard() ) {
+		if(page.getTotalNum() <= page.getOnePageBoard() ) {
 			pageNum = 1;
 		}else {
 			pageNum = page.getTotalNum()/page.getOnePageBoard();
