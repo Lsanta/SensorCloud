@@ -27,5 +27,9 @@ public interface CheckboardService {
 
 	//게시글 삭제
 	public int checkboardDelete(String board_no);
+	//현장아이디 넘기기
+	public int getsiteid(String board_no);
+
+
 
 }

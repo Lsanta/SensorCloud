@@ -28,7 +28,7 @@ public class CheckboardServiceImplement implements CheckboardService {
 	@Transactional
 	@Override
 	public void register(CheckBoardVO board) {
-		System.out.println("오냐 시발럼아");
+
 		mapper.insertSelectKey(board);
 		
 		if (board.getAttachList() == null || board.getAttachList().size() <= 0) {
@@ -91,6 +91,13 @@ public class CheckboardServiceImplement implements CheckboardService {
 	public int checkboardDelete(String board_no) {
 		// 게시글 삭제
 		return mapper.checkboardDelete(board_no);
+	}
+
+
+	@Override
+	public int getsiteid(String board_no) {
+		// TODO Auto-generated method stub
+		return mapper.getsiteid(board_no);
 	}
 
 	
