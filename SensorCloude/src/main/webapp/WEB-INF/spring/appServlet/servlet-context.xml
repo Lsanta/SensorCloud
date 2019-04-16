@@ -64,13 +64,4 @@
 	<context:component-scan
 		base-package="com.wda.sc" />
 
-	<!-- interceptor 설정 -->
-	<interceptors>
-		<interceptor>
-			<mapping path="/**" />
-			<exclude-mapping path="/" />
-			<beans:bean id="commonInterceptor"
-				class="com.wda.sc.interceptor.CommonInterceptor" />
-		</interceptor>
-	</interceptors>
 </beans:beans>
