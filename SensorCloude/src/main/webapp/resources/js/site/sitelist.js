@@ -9,9 +9,14 @@ $(document).on("click", "#site tr" , function(){
 	 
 });
 
-
 /*검색 기능 */
-
+$("#search").click(function(){
+	alert("Gd");
+	var select = $("#se").options[target.selectedIndex].value;
+	var text = $("#searchWord").text();
+	alert(select);
+	alert(text);
+});
 
 
 
