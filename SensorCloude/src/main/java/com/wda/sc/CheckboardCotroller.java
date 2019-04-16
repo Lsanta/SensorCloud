@@ -65,15 +65,17 @@ public class CheckboardCotroller {
 		System.out.println(Checkboardservice.checkauthority(user_id));
 		
 		model.addAttribute("cklist",Checkboardservice.viewgetList(board_no));
-		
 		System.out.println(Checkboardservice.viewgetList(board_no));
+		model.addAttribute("siteid", Checkboardservice.getsiteid(board_no));
+		model.addAttribute("board_no", board_no);
 		
+		System.out.println("사이트아이디="+Checkboardservice.getsiteid(board_no));
 		return "check/checkview";
 	}	
 	
 	//현장 에서 해당 글을 클릭후  수정버튼을 누르면 글쓰기 폼으로 되돌아가면서 정보 전달
 	@RequestMapping(value = "/checkmod"+ "/{board_no}" + "/{site_id}", method = RequestMethod.GET)
-	public String checkmod(Locale locale, Model model, @PathVariable String board_no, @PathVariable String site_id, HttpSession session) {
+	public String checkmod(Locale locale, Model model, @PathVariable String board_no, @PathVariable int site_id, HttpSession session) {
 		
 		//board_no를 통해 점검이력 내용 가져오기 + site_id 넣기
 		ArrayList<CheckBoardVO> cvo = Checkboardservice.viewgetList(board_no);
@@ -86,10 +88,37 @@ public class CheckboardCotroller {
 		//사이트 이름 등등의 정보 
 		model.addAttribute("checksitelist",siteservice.getchecksite());
 		
-		return "check/checkadd";
+		//파일 정보
+		
+		
+		return "check/checkaddInSite";
+	}
+	
+	///점검이력에서 해당글 클릭후 수정버튼을 누를시 글쓰기폼에 해당 데이터 전달
+	@RequestMapping(value = "/checkmod2"+ "/{board_no}" , method = RequestMethod.GET)
+	public String checkmod2(Locale locale, Model model, @PathVariable String board_no, HttpSession session) {
+		
+		System.out.println(board_no);
+		//board_no를 통해 점검이력 내용 가져오기
+		model.addAttribute("modlist",Checkboardservice.viewgetList(board_no));
+		System.out.println("여기까지되나");
+		//ID를 통해 권한레벨 가져오기
+		String user_id = (String) session.getAttribute("id");
+		model.addAttribute("auth",Checkboardservice.checkauthority(user_id));
+		
+		//사이트 이름,점검이력 제목,점검이력내용 정보 가져오기
+		model.addAttribute("checksitelist",siteservice.getchecksite());
+		
+		//현장아이디 
+		model.addAttribute("siteid", Checkboardservice.getsiteid(board_no));
+		
+		return "check/checklistmodify";
 	}
 	
 	//현장 에서 해당 글을 클릭후  삭제버튼을 누른 후
+
+	
+
 	@RequestMapping(value = "/checkdel"+ "/{board_no}" + "/{site_id}", method = RequestMethod.GET)
 	public String checkdel(Locale locale, Model model, @PathVariable String board_no, @PathVariable String site_id) {
 		
@@ -105,12 +134,53 @@ public class CheckboardCotroller {
 		
 		return "redirect: /site/"+site_id+"/siterepair/1";
 	}
+	
+	//점검이력에서 해당 글을 클릭후  삭제버튼을 누른 후
+		@RequestMapping(value = "/checkdel2"+ "/{board_no}", method = RequestMethod.GET)
+		public String checkdel2(Locale locale, Model model, @PathVariable String board_no) {
+			
+			
+			//board_no를 통해 첨부파일 삭제
+			int delN = Checkboardservice.filedelete(board_no);
+			
+			//board_no를 통해 게시글 삭제
+			int delN2 = Checkboardservice.checkboardDelete(board_no);
+			
+			System.out.println("삭제 완료 점검이력화면으로");
+			
+			return "redirect: /check/1";
+		}
+	
+	
+	
 	//수리내역에서 글쓰기 누를시 site_id 전달
 	@RequestMapping(value = "/checkadd/" + "{site_id}", method = RequestMethod.GET)
 	public String address(Locale locale, Model model, @PathVariable String site_id) {
 		model.addAttribute("site_id",site_id);
 		model.addAttribute("checksitelist",siteservice.getchecksite());
-		return "check/checkadd";
+		return "check/checkaddInSite";
+	}
+	
+	//수리내역에서 글쓰기를 누른 후 파일 업로드 및 글쓰기
+	@RequestMapping(value ="checkaddInSite.do", method = RequestMethod.POST)
+	public String insertcheckboardIn(CheckBoardVO vo, HttpSession session,RedirectAttributes rttr) {
+
+	 int site_id=vo.getSite_id();
+	 String id = (String) session.getAttribute("id");
+	 	vo.setUser_id(id);
+	 	
+	 	System.out.println("------------------------");
+	 	System.out.println("checkboard:" + vo);
+	 	if(vo.getAttachList() != null) {
+	 		vo.getAttachList().forEach(attach -> System.out.println(attach));
+	 	}
+	 	System.out.println("-----------------------------");
+	 	
+	 	Checkboardservice.register(vo);
+
+		rttr.addFlashAttribute("result", vo.getBoard_no());
+
+		return "redirect: /site/"+site_id+"/siterepair/1";
 	}
 	
 }

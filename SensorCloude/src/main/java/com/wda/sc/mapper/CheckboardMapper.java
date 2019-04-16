@@ -31,4 +31,9 @@ public interface CheckboardMapper {
 	
 	//게시글 삭제
 	public int checkboardDelete(String board_no);
+
+	public int getsiteid(String board_no);
+	
+	
+	
 }

@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class InstallSensorVO {
-	private String sensor_id;
+	private int sensor_id;
 	private String sensor_sn;
-	private String site_id;
+	private int site_id;
 	private String sig_port;
 	private String pow_port;
 	private String rx_time;

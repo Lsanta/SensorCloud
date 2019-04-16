@@ -31,7 +31,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/site")
 public class SiteController {
-
+	
 	private SiteService siteservice;
 	private CheckboardService checkboardservice;
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
@@ -94,6 +94,9 @@ public class SiteController {
 			pageNum = 1;
 		}else {
 			pageNum = page.getTotalNum()/page.getOnePageBoard();
+			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
 		}
 
 		for(int i = 0; i < pageNum; i ++) {
