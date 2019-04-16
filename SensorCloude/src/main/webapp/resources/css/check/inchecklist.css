@@ -129,3 +129,25 @@ button {
     font-size: 1.3em;
     color: #6E6E6E;
 }
+.uploadResult{
+	width:100%;
+	background-color:gray;
+}
+.uploadResult ul{
+	display:flex;
+	flex-flow:row;
+	justity-content:center;
+	align-tiems:center;
+}
+.uploadResult ul li{
+	list-style : none;
+	padding:10px;
+	align-content:center;
+	text-align: center;
+}
+.uploadResult ul li img{
+	width:100px;
+}
+.uploadResult ul li span{
+	color:white;
+}

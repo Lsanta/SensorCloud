@@ -1,11 +1,13 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wda.sc.domain.CheckBoardFileVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
@@ -91,6 +93,14 @@ public class CheckboardServiceImplement implements CheckboardService {
 	public int checkboardDelete(String board_no) {
 		// 게시글 삭제
 		return mapper.checkboardDelete(board_no);
+	}
+	
+	@Override
+	public List<CheckBoardFileVO> getAttachList(int board_no) {
+		// 첨부파일 반환
+		System.out.println("get Attach list by board_no" + board_no);
+
+		return attachMapper.findByBno(board_no);
 	}
 
 	

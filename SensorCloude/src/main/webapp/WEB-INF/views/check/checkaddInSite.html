@@ -87,6 +87,7 @@
 		</div>
 		<div class="bigPictureWrapper">
 		<div class="bigPicture">
+		
 		</div>
 		</div>
 	<div class="but">
@@ -97,11 +98,13 @@
     	</div>
 	</div>
 </div>
+<!-- <div id="ddd" th:text="${vo.board_no}" style="display:none"></div> -->
 </form>
 </th:block>
 
 <th:block layout:fragment="page_js">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <script>
 function showImage(fileCallPath){
 	  
@@ -122,17 +125,17 @@ function showImage(fileCallPath){
 </script>
 <script>
 $(document).ready(function(){
-	 /*  var formObj = $("form[role='form']");
-	  
-	  $("button[type='submit']").on("click", function(e){
-	    
-	    e.preventDefault();
-	    
-	    console.log("submit clicked");
-	    
-	  });
-	   */
-	   
+		var newURL =  window.location.pathname;
+
+		var url = newURL.split('/');
+	
+	
+		var board_no = parseInt(url[3]);
+	 	  $.getJSON("/checkboard/getAttachList",{board_no : board_no},function(arr){
+		   console.log(arr);
+	  	 });
+
+
 	   //select들 중의 site_id 값 과 숨겨놓은 site_id가 일치하면 selected 속성 부여 
 	   var opt_vals = [];
 	   $(".se > option").each(function(){
