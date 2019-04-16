@@ -116,7 +116,7 @@ public class CheckboardCotroller {
 	}
 	
 	//현장 에서 해당 글을 클릭후  삭제버튼을 누른 후
-	@RequestMapping(value = "/checkdel"+ "/{board_no}", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkdel"+ "/{board_no}" + "/{site_id}", method = RequestMethod.GET)
 	public String checkdel(Locale locale, Model model, @PathVariable String board_no, @PathVariable String site_id) {
 		
 		System.out.println("삭제버튼 후 board_no :" + board_no );
