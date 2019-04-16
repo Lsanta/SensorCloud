@@ -1,10 +1,12 @@
 package com.wda.sc.mapper;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.Search;
 
 public interface MysensorMapper {
 
@@ -17,5 +19,7 @@ public interface MysensorMapper {
 	
 	public int getPageNum();
 	
+	public ArrayList<MysensorVO> mysensorSearch(Search s);
 	
+	public ArrayList<MysensorVO> getSearchResult(Map<Object, Object> parm);
 }

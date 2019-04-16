@@ -31,7 +31,7 @@
 						<th scope="col">등록일</th> 
 					</tr>
 				</thead>
-				<tbody id="list">
+				<tbody id="list" th:if="${sensor == null}">
 				 	<tr th:each="sensorlist : ${sensorlist}">
 						<td th:text="${sensorlist.sensor_sn}"></td>
 						<td th:text="${sensorlist.sensor_kind}"></td>
@@ -41,7 +41,18 @@
 						<td th:text="${sensorlist.site_name}"></td>
 						<td th:text="${sensorlist.create_day}"></td>
 					</tr> 
-
+				</tbody>
+				
+				<tbody id="list" th:if="${sensor != null}">
+					<tr th:each="sensor : ${sensor}">
+						<td th:text="${sensor.sensor_sn}"></td>
+						<td th:text="${sensor.sensor_kind}"></td>
+						<td th:text="${sensor.model_name}"></td>
+						<td th:text="${sensor.voltage}"></td>
+						<td th:text="${sensor.manufacturer}"></td>
+						<td th:text="${sensor.site_name}"></td>
+						<td th:text="${sensor.create_day}"></td>
+					</tr> 
 				</tbody>
 			</table>
 		</div>
@@ -62,16 +73,17 @@
 
 		<div class="search">
 			<div class="select">
-				<select>
+				<select id="search-select">
 					<option>종류</option>
+					<option>제조사</option>
 				</select>
 			</div>
 			<section class="search-box">
 				<div class="search-content">
-					<input type="text" />
+					<input type="text" id="keyword"/>
 				</div>
 				<div class="search-button">
-					<button>Search</button>
+					<button id="search">Search</button>
 				</div>
 			</section>
 		</div>
