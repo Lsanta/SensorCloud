@@ -1,8 +1,60 @@
 @charset "UTF-8";
-
+ .pagination-container {
+  /* margin: 40px auto; */
+  margin-right:13%;
+  text-align: center;
+  
+}
+.pagination {
+  position: relative;
+}
+.pagination a {
+  position: relative;
+  display: inline-block;
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 8px 16px 10px;
+}
+.pagination a:before {
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  content: "";
+  top: 0;
+  left: 0;
+  background-color: #2c3e50;
+  border-radius: 24px;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  transition: all 0.2s;
+}
+.pagination a:hover,
+.pagination a .pagination-active {
+  color: #fff;
+}
+.pagination a:hover:before,
+.pagination a .pagination-active:before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.pagination .pagination-active {
+  color: #fff;
+}
+.pagination .pagination-active:before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.pagination-newer {
+  margin-right: 20px;
+}
+.pagination-older {
+  margin-left: 20px;
+}
 #container {
     width: 1000px;
-    margin: 50px auto;
+    margin: 10px auto;
     padding: 20px;
     border: 1px solid #bcbcbc;
   }
@@ -38,9 +90,8 @@
   }
   #writing {
     width:80.5%;
-    padding: 6%;
-    margin-top:3%;
-    border: 1px solid #bcbcbc;
+   margin-left: 6%;
+/*     border: 1px solid #bcbcbc; */
   }
   
   
@@ -63,7 +114,7 @@
 
 .timeline {
   width: 340x;
-  height: 70px;
+  height: 60px;
   padding: 10px;
   margin: 20px;
   border: 1px solid #bcbcbc;
@@ -103,9 +154,8 @@
       
       #writing {
         width:68.5%;
-        padding: 6%;
-        margin-top:3%;
-        border: 1px solid #bcbcbc;
+    margin-left: 6%;
+    /*     border: 1px solid #bcbcbc; */
       }
    #the_count{
   width:10%;
@@ -150,9 +200,8 @@
     
     #writing {
         width:68.5%;
-        padding: 6%;
-        margin-top:3%;
-        border: 1px solid #bcbcbc;
+  margin-left: 6%;
+  /*       border: 1px solid #bcbcbc; */
       }
     #the_count{
   width:10%;
@@ -197,8 +246,7 @@
     
     #writing {
         width:85%;
-        padding: 6%;
-        margin-top:3%;
-        border: 1px solid #bcbcbc;
+margin-left: 6%;
+      /*   border: 1px solid #bcbcbc; */
       }
   } 

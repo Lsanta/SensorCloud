@@ -53,7 +53,7 @@ html {
       width: auto;
     }
     .select {
-      float: none;
+      float: left;
       width: auto;
     }
     .search-box {
