@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="/resources/css/check/cbweb.css">
 	<link rel="stylesheet" media="(min-width:501px) and (max-width:800px)" href="/resources/css/check/cbtablet.css">
 	<link rel="stylesheet" media="(min-width:0px) and (max-width:500px)" href="/resources/css/check/cbmobile.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </th:block>
 
 <th:block layout:fragment="contents">
@@ -80,10 +81,17 @@
 		</th>
 	</table>
 	</div>
+	<div class="uploadarea">
+	<div class="uploadtitle">
+	파일 첨부 내역
+	</div>
+	<div class="totalupload">
 	<div class="uploadResult">
 		<ul>
 		
 		</ul>
+		</div>
+		</div>
 		</div>
 		<div class="bigPictureWrapper">
 		<div class="bigPicture">
@@ -92,9 +100,9 @@
 		</div>
 	<div class="but">
 		<div class="but0">
-		<button type="button" class="back">목록으로</button>
+		<button data-oper='list' type="button" class="back">목록으로</button>
         <button th:if="${modlist == null}" type="submit" class="insert">등록하기</button>
-        <button th:if="${modlist != null}" th:each="modlist : ${modlist}" type="button" class="modify">수정하기</button>
+        <button data-oper='modify' th:if="${modlist != null}" th:each="modlist : ${modlist}" type="button" class="modify">수정하기</button>
     	</div>
 	</div>
 </div>
@@ -104,7 +112,49 @@
 
 <th:block layout:fragment="page_js">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
 
+
+	  var formObj = $("form");
+
+	  $('button').on("click", function(e){
+	    
+	    e.preventDefault(); 
+	    
+	    var operation = $(this).data("oper");
+	    
+	    console.log(operation);
+	    
+	    if(operation === 'list'){
+	    	 //move to list
+		      formObj.attr("action", "/checkboard/check/1").attr("method","get");
+	    	 
+	    }else if(operation === 'modify'){
+   			 console.log("submit clicked");
+	        
+	        var str = "";
+	        
+	        $(".uploadResult ul li").each(function(i, obj){
+	          
+	          var jobj = $(obj);
+	          
+	          console.dir(jobj);
+	          
+	          str += "<input type='hidden' name='attachList["+i+"].file_name' value='"+jobj.data("filename")+"'>";
+	          str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
+	          str += "<input type='hidden' name='attachList["+i+"].file_Path' value='"+jobj.data("path")+"'>";
+	          str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
+	          
+	        });
+	        formObj.append(str).submit();
+	    }
+ 
+	    formObj.submit();
+	  });
+
+});
+</script>
 <script>
 function showImage(fileCallPath){
 	  
@@ -125,17 +175,7 @@ function showImage(fileCallPath){
 </script>
 <script>
 $(document).ready(function(){
-		var newURL =  window.location.pathname;
-
-		var url = newURL.split('/');
 	
-	
-		var board_no = parseInt(url[3]);
-	 	  $.getJSON("/checkboard/getAttachList",{board_no : board_no},function(arr){
-		   console.log(arr);
-	  	 });
-
-
 	   //select들 중의 site_id 값 과 숨겨놓은 site_id가 일치하면 selected 속성 부여 
 	   var opt_vals = [];
 	   $(".se > option").each(function(){
@@ -262,31 +302,7 @@ $(document).ready(function(){
 		}); //$.ajax
 	});
 
-	/*  function showUploadedFile(uploadResultArr){
-	   
-	   var str = "";
-	   
-	   $(uploadResultArr).each(function(i, obj){
-	     
-	     if(!obj.image){
-	       
-	       var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);
-	       
-	       str += "<li><a href='/download?fileName="+fileCallPath+"'><img src='/resources/img/attach.png'>"+obj.fileName+"</a></li>"
-	     }else{
-	       
-	       var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
-	       
-	       var originPath = obj.uploadPath+ "\\"+obj.uuid +"_"+obj.fileName;
-	       
-	       originPath = originPath.replace(new RegExp(/\\/g),"/");
-	       
-	       str += "<li><a href=\"javascript:showImage(\'"+originPath+"\')\"><img src='/display?fileName="+fileCallPath+"'></a><li>";
-	     }
-	   });
-	   
-	   uploadResult.append(str);
-	 }  */
+	
 	function showUploadResult(uploadResultArr){
 	    
 	    if(!uploadResultArr || uploadResultArr.length == 0){ return; }
@@ -296,28 +312,7 @@ $(document).ready(function(){
 	    var str ="";
 	    
 	    $(uploadResultArr).each(function(i, obj){
-	    
-	        /*  //image type
-	        if(obj.image){
-	          var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
-	          str += "<li><div>";
-	          str += "<span> "+ obj.fileName+"</span>";
-	          str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-	          str += "<img src='/display?fileName="+fileCallPath+"'>";
-	          str += "</div>";
-	          str +"</li>";
-	        }else{
-	          var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);            
-	            var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
-	              
-	          str += "<li><div>";
-	          str += "<span> "+ obj.fileName+"</span>";
-	          str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-	          str += "<img src='/resources/img/attach.png'></a>";
-	          str += "</div>";
-	          str +"</li>";
-	        }  */
-			//image type
+   
 			 
 			if(obj.image){
 				var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
@@ -350,36 +345,56 @@ $(document).ready(function(){
 	  }
 
 	 
-	 $.getJSON("/checkboard/getAttachList", {board_no : board_no}, function(arr){
-		 
-		 console.log(arr);
-		 
-		 var str = "";
-		 
-		 $(arr).each(function(i, attach){
-			//image type
-			if(attach.fileType){
-				var fileCallPath = encodeURIComponent( attach.uploadPath+ "/s_"+attach.uuid + "_"+attach.fileName);
-			
-				str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
-				str += "<img src='/display?fileName="+fileCallPath+"'>";
-				str += "</div>";
-				str += "</li>";
-			
-			} else {
-				str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
-				str += "<span>" + attach.fileName + "</span><br />";
-				str += "<img src='/resources/img/attach.png'>";
-				str += "</div>";
-				str += "</li>";
-			}
-			 
-		 });
-		 
-		 $(".uploadResult ul").html(str);
-		 
-	 }); //end getjson
+	 var newURL =  window.location.pathname;
+
+		var url = newURL.split('/');
+		
+		
+		var board_no = parseInt(url[3]);
+		   $.getJSON("/checkboard/getAttachList",{board_no : board_no},function(arr){
+			   console.log(arr);
+			   
+			   var str = "";
+				 
+				 $(arr).each(function(i, attach){
+					//image type
+					if(attach.fileType){
+						var fileCallPath = encodeURIComponent( attach.file_Path+ "/s_"+attach.uuid + "_"+attach.file_name);
+						  str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' "
+				            str +=" data-filename='"+attach.file_Name+"' data-type='"+attach.fileType+"' ><div>";
+				            str += "<span> "+ attach.file_Name+"</span>";
+				            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' "
+				            str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+				            str += "<img src='/display?fileName="+fileCallPath+"'>";
+				            str += "</div>";
+				            str +"</li>";
+					
+					} else {
+					    str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' "
+			            str += "data-filename='"+attach.file_Name+"' data-type='"+attach.fileType+"' ><div>";
+			            str += "<span> "+ attach.file_Name+"</span><br/>";
+			            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' "
+			            str += " class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+			            str += "<img src='/resources/img/attach.png'></a>";
+			            str += "</div>";
+			            str +"</li>";
+					}
+					 
+				 });
+				 
+				 $(".uploadResult ul").html(str);
+				 
+			 }); //end getjson
 	 
+	 $(".uploadResult").on("click", "button", function(e){
+		    
+		    console.log("delete file");
+		      
+		    if(confirm("이 파일을 삭제 하시겠습니까?")){
+		    	var targetLi = $(this).closest("li");
+		    	targetLi.remove();
+		    }
+		   });
 	 
 });
 </script>

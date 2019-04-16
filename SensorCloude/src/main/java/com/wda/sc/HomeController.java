@@ -1,11 +1,14 @@
 package com.wda.sc;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -43,6 +46,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		
 		return "login/login";
 	}
 
@@ -168,7 +172,7 @@ public class HomeController {
 		return "manage/manage";
 	}
 
-	@RequestMapping(value = "/timeline"+"/{num}", method = RequestMethod.GET)
+	@RequestMapping(value = "/time"+"/{num}", method = RequestMethod.GET)
 	public String timeline(@PathVariable String num, Locale locale, Model model) {
 		Paging page = new Paging();
 		int pageNum = 0;

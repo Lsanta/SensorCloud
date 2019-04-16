@@ -29,7 +29,7 @@ import lombok.AllArgsConstructor;
 public class MyPageController {
 
 	private MyPageService mypageservice;
-	
+	private CheckboardService checkboardservice;
 	
 	@RequestMapping(value = "/levelup", method = RequestMethod.GET)
 	public String address(Locale locale, Model model, HttpSession session) {
@@ -55,7 +55,9 @@ public class MyPageController {
 		
 		model.addAttribute("mpviewgetlist",mypageservice.myListView(board_no));
 		
+		System.out.println("마이페이지"+mypageservice.myListView(board_no));
 		
+		model.addAttribute("siteid", checkboardservice.getsiteid(board_no));
 		
 		return "mypage/mypagecheckview";
 	}

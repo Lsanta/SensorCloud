@@ -1,8 +1,11 @@
 	package com.wda.sc;
 
+
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -41,6 +44,9 @@ public class LoginController {
 		session.invalidate();
 		return "login/login";
 	}
+	
+	
+	
 	
 	@RequestMapping("login.do") 
 	@ResponseBody
