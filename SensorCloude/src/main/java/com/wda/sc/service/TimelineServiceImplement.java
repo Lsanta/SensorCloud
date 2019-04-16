@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.wda.sc.domain.MemberVO;
+import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.TimelineVO;
 import com.wda.sc.mapper.TimelineMapper;
 
@@ -18,19 +19,19 @@ public class TimelineServiceImplement implements TimelineService {
 
 	@Override
 	public int insert(TimelineVO vo) {
-		
+
 		return mapper.insert(vo);
 	}
 
 	@Override
-	public ArrayList<TimelineVO> getList() {
-		
-		return mapper.getList();
+	public ArrayList<TimelineVO> getList(Paging p) {
+
+		return mapper.getList(p);
 	}
-	
+
 	@Override
 	public ArrayList<TimelineVO> timedesc() {
-		
+
 		return mapper.timedesc();
 	}
 
@@ -42,17 +43,14 @@ public class TimelineServiceImplement implements TimelineService {
 
 	@Override
 	public int timelinemodify(TimelineVO vo) {
-	
+
 		return mapper.timelinemodify(vo);
 	}
 
-	
+	@Override
+	public int getPageNum() {
 
-
-
-
-
-	
-
+		return mapper.getPageNum();
+	}
 
 }
