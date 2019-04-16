@@ -1,17 +1,24 @@
 package com.wda.sc;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.wda.sc.domain.CheckBoardFileVO;
 import com.wda.sc.domain.CheckBoardVO;
 
 import com.wda.sc.service.CheckboardService;
@@ -92,6 +99,13 @@ public class CheckboardCotroller {
 		
 		
 		return "check/checkaddInSite";
+	}
+	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<CheckBoardFileVO>> getAttachList(int board_no){
+		System.out.println("getAttachList" + board_no);
+		
+		return new ResponseEntity<>(Checkboardservice.getAttachList(board_no), HttpStatus.OK);
 	}
 	
 	///점검이력에서 해당글 클릭후 수정버튼을 누를시 글쓰기폼에 해당 데이터 전달
