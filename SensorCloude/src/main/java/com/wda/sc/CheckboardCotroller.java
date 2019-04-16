@@ -65,9 +65,11 @@ public class CheckboardCotroller {
 		System.out.println(Checkboardservice.checkauthority(user_id));
 		
 		model.addAttribute("cklist",Checkboardservice.viewgetList(board_no));
-		
 		System.out.println(Checkboardservice.viewgetList(board_no));
+		model.addAttribute("siteid", Checkboardservice.getsiteid(board_no));
+		model.addAttribute("board_no", board_no);
 		
+		System.out.println("사이트아이디="+Checkboardservice.getsiteid(board_no));
 		return "check/checkview";
 	}	
 	
@@ -89,8 +91,29 @@ public class CheckboardCotroller {
 		return "check/checkadd";
 	}
 	
+	///점검이력에서 해당글 클릭후 수정버튼을 누를시 글쓰기폼에 해당 데이터 전달
+	@RequestMapping(value = "/checkmod2"+ "/{board_no}", method = RequestMethod.GET)
+	public String checkmod2(Locale locale, Model model, @PathVariable String board_no, HttpSession session) {
+		
+		System.out.println(board_no);
+		//board_no를 통해 점검이력 내용 가져오기
+		model.addAttribute("modlist",Checkboardservice.viewgetList(board_no));
+		System.out.println("여기까지되나");
+		//ID를 통해 권한레벨 가져오기
+		String user_id = (String) session.getAttribute("id");
+		model.addAttribute("auth",Checkboardservice.checkauthority(user_id));
+		
+		//사이트 이름,점검이력 제목,점검이력내용 정보 가져오기
+		model.addAttribute("checksitelist",siteservice.getchecksite());
+		
+		//현장아이디 
+		model.addAttribute("siteid", Checkboardservice.getsiteid(board_no));
+		
+		return "check/checklistmodify";
+	}
+	
 	//현장 에서 해당 글을 클릭후  삭제버튼을 누른 후
-	@RequestMapping(value = "/checkdel"+ "/{board_no}" + "/{site_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkdel"+ "/{board_no}", method = RequestMethod.GET)
 	public String checkdel(Locale locale, Model model, @PathVariable String board_no, @PathVariable String site_id) {
 		
 		System.out.println("삭제버튼 후 board_no :" + board_no );

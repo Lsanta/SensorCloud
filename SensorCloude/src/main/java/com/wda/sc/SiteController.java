@@ -31,7 +31,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/site")
 public class SiteController {
-
+	
 	private SiteService siteservice;
 	private CheckboardService checkboardservice;
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
