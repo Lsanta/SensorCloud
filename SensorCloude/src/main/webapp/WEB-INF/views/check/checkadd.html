@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="/resources/css/check/cbweb.css">
 	<link rel="stylesheet" media="(min-width:501px) and (max-width:800px)" href="/resources/css/check/cbtablet.css">
 	<link rel="stylesheet" media="(min-width:0px) and (max-width:500px)" href="/resources/css/check/cbmobile.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </th:block>
 
 <th:block layout:fragment="contents">
@@ -110,16 +111,7 @@ function showImage(fileCallPath){
 </script>
 <script>
 $(document).ready(function(){
-	 /*  var formObj = $("form[role='form']");
-	  
-	  $("button[type='submit']").on("click", function(e){
-	    
-	    e.preventDefault();
-	    
-	    console.log("submit clicked");
-	    
-	  });
-	   */
+
 	    
 	   var formObj = $("form[role='form']");
 	   
@@ -201,31 +193,7 @@ $(document).ready(function(){
 		}); //$.ajax
 	});
 
-	/*  function showUploadedFile(uploadResultArr){
-	   
-	   var str = "";
-	   
-	   $(uploadResultArr).each(function(i, obj){
-	     
-	     if(!obj.image){
-	       
-	       var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);
-	       
-	       str += "<li><a href='/download?fileName="+fileCallPath+"'><img src='/resources/img/attach.png'>"+obj.fileName+"</a></li>"
-	     }else{
-	       
-	       var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
-	       
-	       var originPath = obj.uploadPath+ "\\"+obj.uuid +"_"+obj.fileName;
-	       
-	       originPath = originPath.replace(new RegExp(/\\/g),"/");
-	       
-	       str += "<li><a href=\"javascript:showImage(\'"+originPath+"\')\"><img src='/display?fileName="+fileCallPath+"'></a><li>";
-	     }
-	   });
-	   
-	   uploadResult.append(str);
-	 }  */
+
 	function showUploadResult(uploadResultArr){
 	    
 	    if(!uploadResultArr || uploadResultArr.length == 0){ return; }
@@ -236,26 +204,7 @@ $(document).ready(function(){
 	    
 	    $(uploadResultArr).each(function(i, obj){
 	    
-	        /*  //image type
-	        if(obj.image){
-	          var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
-	          str += "<li><div>";
-	          str += "<span> "+ obj.fileName+"</span>";
-	          str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-	          str += "<img src='/display?fileName="+fileCallPath+"'>";
-	          str += "</div>";
-	          str +"</li>";
-	        }else{
-	          var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);            
-	            var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
-	              
-	          str += "<li><div>";
-	          str += "<span> "+ obj.fileName+"</span>";
-	          str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-	          str += "<img src='/resources/img/attach.png'></a>";
-	          str += "</div>";
-	          str +"</li>";
-	        }  */
+	   
 			//image type
 			 
 			if(obj.image){
@@ -287,6 +236,26 @@ $(document).ready(function(){
 	    
 	    uploadUL.append(str);
 	  }
+	
+	$(".uploadResult").on("click", "button", function(e){
+	    
+	    console.log("delete file");
+	      
+	    var targetFile = $(this).data("file");
+	    var type = $(this).data("type");
+	    
+	    var targetLi = $(this).closest("li");
+	    
+	    $.ajax({
+	      url: '/deleteFile',
+	      data: {fileName: targetFile, type:type},
+	      dataType:'text',
+	      type: 'POST',
+	        success: function(result){  
+	           targetLi.remove();
+	         }
+	    }); //$.ajax
+	   });
 
 	 
 	 

@@ -159,8 +159,8 @@ public class CheckboardCotroller {
 		@RequestMapping(value = "/checkdel2"+ "/{board_no}", method = RequestMethod.GET)
 		public String checkdel2(Locale locale, Model model, @PathVariable String board_no) {
 			System.out.println("gg");
-//			int num = Integer.parseInt(board_no);
-//			List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
+			int num = Integer.parseInt(board_no);
+			List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
 			
 		
 			
@@ -170,7 +170,7 @@ public class CheckboardCotroller {
 			//board_no를 통해 게시글 삭제
 			int delN2 = Checkboardservice.checkboardDelete(board_no);
 			
-//			deleteFiles(attachList);
+			deleteFiles(attachList);
 			
 			System.out.println("삭제 완료 점검이력화면으로");
 			
