@@ -172,7 +172,7 @@ public class HomeController {
 		return "manage/manage";
 	}
 
-	@RequestMapping(value = "/timeline"+"/{num}", method = RequestMethod.GET)
+	@RequestMapping(value = "/time"+"/{num}", method = RequestMethod.GET)
 	public String timeline(@PathVariable String num, Locale locale, Model model) {
 		Paging page = new Paging();
 		int pageNum = 0;

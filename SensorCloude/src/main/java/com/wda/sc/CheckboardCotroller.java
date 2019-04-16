@@ -152,26 +152,29 @@ public class CheckboardCotroller {
 
 		return "redirect: /site/" + site_id + "/siterepair/1";
 	}
+	
+	//점검이력에서 해당 글을 클릭후  삭제버튼을 누른 후
+		@RequestMapping(value = "/checkdel2"+ "/{board_no}", method = RequestMethod.GET)
+		public String checkdel2(Locale locale, Model model, @PathVariable String board_no) {
+			System.out.println("gg");
+			int num = Integer.parseInt(board_no);
+			List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
+			
+		
+			
+			//board_no를 통해 첨부파일 삭제
+			int delN = Checkboardservice.filedelete(board_no);
+			
+			//board_no를 통해 게시글 삭제
+			int delN2 = Checkboardservice.checkboardDelete(board_no);
+			
+			deleteFiles(attachList);
+			
+			System.out.println("삭제 완료 점검이력화면으로");
+			
+			return "redirect: /check/1";
+		}
 
-	// 점검이력에서 해당 글을 클릭후 삭제버튼을 누른 후
-	@RequestMapping(value = "/checkdel2" + "/{board_no}", method = RequestMethod.GET)
-	public String checkdel2(Locale locale, Model model, @PathVariable String board_no) {
-		System.out.println("gg");
-//			int num = Integer.parseInt(board_no);
-//			List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
-
-		// board_no를 통해 첨부파일 삭제
-		int delN = Checkboardservice.filedelete(board_no);
-
-		// board_no를 통해 게시글 삭제
-		int delN2 = Checkboardservice.checkboardDelete(board_no);
-
-//			deleteFiles(attachList);
-
-		System.out.println("삭제 완료 점검이력화면으로");
-
-		return "redirect: /check/1";
-	}
 
 	// 마이페이지에서 해당 글을 클릭후 수정 버튼을 눌렀을 시 글쓰기 폼으로
 	@RequestMapping(value = "/checkmod3" + "/{board_no}", method = RequestMethod.GET)
@@ -195,8 +198,7 @@ public class CheckboardCotroller {
 	}
 
 	@RequestMapping(value = "/checkdel3" + "/{board_no}", method = RequestMethod.GET)
-	public String checkdel3(Locale locale, Model model, @PathVariable String board_no) {
-		
+	public String checkdel3(Locale locale, Model model, @PathVariable String board_no) {		
 		// int num = Integer.parseInt(board_no);
 		// List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
 
