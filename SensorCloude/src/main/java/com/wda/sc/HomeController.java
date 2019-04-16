@@ -168,10 +168,38 @@ public class HomeController {
 		return "manage/manage";
 	}
 
-	@RequestMapping(value = "/timeline", method = RequestMethod.GET)
-	public String timeline(Locale locale, Model model) {
-		model.addAttribute("timelinelist",timelineservice.getList());
-		System.out.println(timelineservice.getList());
+	@RequestMapping(value = "/timeline"+"/{num}", method = RequestMethod.GET)
+	public String timeline(@PathVariable String num, Locale locale, Model model) {
+		Paging page = new Paging();
+		int pageNum = 0;
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int realNum = Integer.parseInt(num);
+
+		page.setTotalNum(timelineservice.getPageNum());
+		page.setOnePageBoard(5);
+		
+		
+		if(page.getTotalNum() < page.getOnePageBoard()) {
+			pageNum = 1;
+		}else {
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+	         if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+	            pageNum = pageNum + 1;
+	         }
+		}
+
+		for(int i = 0; i < pageNum; i ++) {
+			arr.add(i+1);
+		}
+
+		page.setEndnum((realNum*5)+1);
+		page.setStartnum(page.getEndnum()-5);
+		
+		model.addAttribute("pageNum",arr);
+		model.addAttribute("timelinelist",timelineservice.getList(page));
+		System.out.println(timelineservice.getList(page));
+		
+		
 
 		return "timeline/timeline";
 	}
@@ -179,18 +207,40 @@ public class HomeController {
 
 	@RequestMapping(value = "/timelinemodify", method = RequestMethod.GET)
 	public String timelinemodify(Locale locale, Model model) {
-		model.addAttribute("timelinelist",timelineservice.getList());
-		System.out.println(timelineservice.getList());
+
 		
 		return "timeline/timelinemodify";
 	}
 	
 
-	@RequestMapping(value = "/mysensor", method = RequestMethod.GET)
-	public String mysensor(Locale locale, Model model) {
+	@RequestMapping(value = "/mysensor"+"/{num}", method = RequestMethod.GET)
+	public String mysensor(@PathVariable String num, Locale locale, Model model, HttpSession session) {
 
-		model.addAttribute("sensorlist",mysensorservice.getList());
+		Paging page = new Paging();
+		int pageNum = 0;
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int realNum = Integer.parseInt(num);
+		page.setTotalNum(mysensorservice.getPageNum());
 
+		if(page.getTotalNum() <= page.getOnePageBoard() ) {
+			pageNum = 1;
+		}else {
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
+		}
+
+		for(int i = 0; i < pageNum; i ++) {
+			arr.add(i+1);
+		}
+
+		page.setEndnum((realNum*10)+1);
+		page.setStartnum(page.getEndnum()-10);
+		
+		
+		model.addAttribute("pageNum",arr);
+		model.addAttribute("sensorlist",mysensorservice.getList(page));
 
 		return "mysensor/mysensor";
 	}
