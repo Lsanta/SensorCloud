@@ -101,7 +101,7 @@ public class CheckboardCotroller {
 		System.out.println(board_no);
 		//board_no를 통해 점검이력 내용 가져오기
 		model.addAttribute("modlist",Checkboardservice.viewgetList(board_no));
-		System.out.println("여기까지되나");
+		
 		//ID를 통해 권한레벨 가져오기
 		String user_id = (String) session.getAttribute("id");
 		model.addAttribute("auth",Checkboardservice.checkauthority(user_id));

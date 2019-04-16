@@ -4,7 +4,7 @@
 	data-layout-decorate="~{include/layout}">
 
 <th:block layout:fragment="page_head">
-	<title>점검이력 리스트 클릭시</title>
+	<title>마이페이지 리스트 클릭시</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
@@ -14,50 +14,86 @@
 
 <th:block layout:fragment="contents">
 
+<div class="a">
 
-	<div id="fixlist_header">
-		<h2 id="infixlist_title" class="span"
-			th:each="mpviewgetlist : ${mpviewgetlist}"
-			th:text="${mpviewgetlist.site_name}"></h2>
-		<!-- 점검이력을 클릭하면 해당 현장의 이름을 가져오기 -->
-		<input type="button" name="modifyfixlist" id="modifyfixlist"
-			class="fixlistbutton" value="수정"> <input type="button"
-			name="deletefixlist" id="deleteyfixlist" class="fixlistbutton"
-			value="삭제">
-
+	<div id="site_name" class="index" th:each="mpviewgetlist : ${mpviewgetlist}" th:text="${mpviewgetlist.site_name}">
+	
+		
 	</div>
-
-	<div class="fixlistbody">
-
-		<div id="fixlistbody_condition">
-
-			<!-- 점검상태 / 날짜  가져오기-->
-			<p class="span" th:each="mpviewgetlist : ${mpviewgetlist}"
-				th:text="${mpviewgetlist.title}"></p>
-			<select name="job" class="span">
-				<option value="fixed" selected="selected">fixed</option>
-				<option value="open">open</option>
-				<option value="closed">closed</option>
-			</select>
-			<p class="span"  id="regdate" th:each="mpviewgetlist: ${mpviewgetlist}"
-				th:text="${mpviewgetlist.reg_date}"></p>
-		</div>
-
-		<div id="fixlistbody_content">
-
-			<!-- 글쓰기에서 등록한 점검이력 긁어오기 -->
-			<p th:each="mpviewgetlist : ${mpviewgetlist}"
-				th:text="${mpviewgetlist.board_content}"></p>
-		</div>
-		<div id="fixlistbody_addpicture">
-
-			<!-- 사진목록 -->
-		</div>
-
+	
+	
+	<div id="board_no"  th:each="mpviewgetlist : ${mpviewgetlist}"  th:text="${mpviewgetlist.board_no}" 
+	style="display: none" >
+		
 	</div>
+	
+	
+	<div id="site_id" th:each="siteid : ${siteid}"  th:text="${siteid}" 
+	style="display: none" >
+	
+	</div>
+	
+	
+	
+	<div class="title1">
+		<table class="table0">
+	<th class="th01">&nbsp;&nbsp;제 목&nbsp;&nbsp;</th>
+		<th class="th02"><h2 class="title00" id="checktitle"
+		  th:each="mpviewgetlist : ${mpviewgetlist}" th:text="${mpviewgetlist.title}"></h2> 
+		
+		</th>
+		</table>
+	</div>
+	
+	
+	<div class="site1">
+		<table class="table0">
+		<th class="th01">&nbsp;글쓴 날짜&nbsp;</th>
+	<th class="th03"><h3 class="se" maxlength="50"
+		  th:each="mpviewgetlist : ${mpviewgetlist}" th:text="${mpviewgetlist.reg_date}"></h3></th>
+	
+	<th class="status">게시글 상태</th>
+	
+	<th class="stse">
+	<h3 class="sse"
+	th:each="mpviewgetlist: ${mpviewgetlist}" th:if="${mpviewgetlist.board_status ==0}" th:text ="open"></h3>
+	
+	<h3 class="sse" 
+	th:each="mpviewgetlist : ${mpviewgetlist}" th:if="${mpviewgetlist.board_status ==1}" th:text ="fixed"></h3>
+	
+	
+	
+	
+	</th>
+	</table>
+	</div>
+	
+	
+	<div class="content">
+		<p name="board_content" id="boardcontent" 
+		th:each="mpviewgetlist : ${mpviewgetlist}" th:text="${mpviewgetlist.board_content}" style="resize:none;" >
+			
+		</p>
+		
+		<!-- 사진 들어갈 부분 -->
+		<div class="picturespot">
+			
+		</div>
+		
+	</div>
+	
+
+	
+	<div class="but">
+		<div class="but0">
+		<button type="button" id="mb">수정</button>
+        <button type="button" id="db">삭제</button>
+    	</div>
+	</div>
+</div>
 </th:block>
 
 <th:block layout:fragment="page_js">
-	<script src="/resources/js/mypage/mp.js"></script>
+		<script src="/resources/js/check/mypagecheckview.js"></script>
 </th:block>
 </html>
