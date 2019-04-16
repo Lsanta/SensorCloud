@@ -73,7 +73,7 @@ public class CheckboardCotroller {
 	
 	//현장 에서 해당 글을 클릭후  수정버튼을 누르면 글쓰기 폼으로 되돌아가면서 정보 전달
 	@RequestMapping(value = "/checkmod"+ "/{board_no}" + "/{site_id}", method = RequestMethod.GET)
-	public String checkmod(Locale locale, Model model, @PathVariable String board_no, @PathVariable String site_id, HttpSession session) {
+	public String checkmod(Locale locale, Model model, @PathVariable String board_no, @PathVariable int site_id, HttpSession session) {
 		
 		//board_no를 통해 점검이력 내용 가져오기 + site_id 넣기
 		ArrayList<CheckBoardVO> cvo = Checkboardservice.viewgetList(board_no);
@@ -121,7 +121,7 @@ public class CheckboardCotroller {
 	@RequestMapping(value ="checkaddInSite.do", method = RequestMethod.POST)
 	public String insertcheckboardIn(CheckBoardVO vo, HttpSession session,RedirectAttributes rttr) {
 
-	 String site_id=vo.getSite_id();
+	 int site_id=vo.getSite_id();
 	 String id = (String) session.getAttribute("id");
 	 	vo.setUser_id(id);
 	 	
