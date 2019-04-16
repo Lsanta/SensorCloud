@@ -8,7 +8,7 @@ import lombok.Data;
 public class SensorDataVO {
 	private int sensor_data_n;
 	private int sensor_info_n;
-	private String sensor_id;
+	private int sensor_id;
 	private Date rx_time;
 	private String sensing_data;
 }

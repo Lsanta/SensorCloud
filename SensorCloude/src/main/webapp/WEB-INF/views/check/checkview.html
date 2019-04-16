@@ -16,7 +16,7 @@
 
 <div class="a">
 
-	<div id="titletext" class="index" th:each="check : ${cklist}" th:text="${check.site_name}">
+	<div id="site_name" class="index" th:each="check : ${cklist}" th:text="${check.site_name}">
 	
 		
 	</div>
@@ -25,12 +25,16 @@
 		
 	</div>
 	
-	<div id="memberlevel"  th:each="checkauthority : ${checkauthority}"  th:text="${checkauthority}" 
+	<div id="board_no"  th:each="board_no : ${board_no}"  th:text="${board_no}" 
 	style="display: none" >
 		
 	</div>
 
 	
+	<div id="site_id" th:each="siteid : ${siteid}"  th:text="${siteid}" 
+	style="display: none" >
+	
+	</div>
 	
 	
 	
@@ -90,8 +94,7 @@
 	<div class="but">
 		<div class="but0">
 		<button type="button" id="mb">수정</button>
-		<button type="button">저장</button>
-        <button type="button">삭제</button>
+        <button type="button" id="db">삭제</button>
     	</div>
 	</div>
 </div>

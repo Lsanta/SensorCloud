@@ -103,6 +103,13 @@ public class CheckboardServiceImplement implements CheckboardService {
 		return attachMapper.findByBno(board_no);
 	}
 
+
+	@Override
+	public int getsiteid(String board_no) {
+		// TODO Auto-generated method stub
+		return mapper.getsiteid(board_no);
+	}
+
 	
 
 }

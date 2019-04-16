@@ -13,7 +13,7 @@ public class CheckBoardVO {
 	private String title;
 	private String board_content;
 	private int board_status;
-	private String site_id;
+	private int site_id;
 	private String site_name; // site join 컬럼
 	private String name;
 	private String board_file_id;
