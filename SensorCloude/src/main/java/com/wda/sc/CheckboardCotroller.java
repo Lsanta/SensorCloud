@@ -1,5 +1,8 @@
 package com.wda.sc;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -135,6 +138,8 @@ public class CheckboardCotroller {
 
 	@RequestMapping(value = "/checkdel"+ "/{board_no}" + "/{site_id}", method = RequestMethod.GET)
 	public String checkdel(Locale locale, Model model, @PathVariable String board_no, @PathVariable String site_id) {
+		int num = Integer.parseInt(board_no);
+		List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
 		
 		System.out.println("삭제버튼 후 board_no :" + board_no );
 		System.out.println("삭제버튼 후 site_id :" + site_id );
@@ -143,6 +148,7 @@ public class CheckboardCotroller {
 		
 		//board_no를 통해 게시글 삭제
 		int delN2 = Checkboardservice.checkboardDelete(board_no);
+		deleteFiles(attachList);
 		
 		System.out.println("삭제 완료 수리내역화면으로");
 		
@@ -152,7 +158,11 @@ public class CheckboardCotroller {
 	//점검이력에서 해당 글을 클릭후  삭제버튼을 누른 후
 		@RequestMapping(value = "/checkdel2"+ "/{board_no}", method = RequestMethod.GET)
 		public String checkdel2(Locale locale, Model model, @PathVariable String board_no) {
+			System.out.println("gg");
+//			int num = Integer.parseInt(board_no);
+//			List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
 			
+		
 			
 			//board_no를 통해 첨부파일 삭제
 			int delN = Checkboardservice.filedelete(board_no);
@@ -160,9 +170,29 @@ public class CheckboardCotroller {
 			//board_no를 통해 게시글 삭제
 			int delN2 = Checkboardservice.checkboardDelete(board_no);
 			
+//			deleteFiles(attachList);
+			
 			System.out.println("삭제 완료 점검이력화면으로");
 			
 			return "redirect: /check/1";
+		}
+		
+		private void deleteFiles(List<CheckBoardFileVO> attachList) {
+			if(attachList == null || attachList.size() ==0) {
+				return;
+			}
+			attachList.forEach(attach -> {
+				try {
+					Path file = Paths.get("C:\\upload\\"+attach.getFile_Path()+"\\"+attach.getUuid()+"_"+attach.getFile_name());
+					Files.deleteIfExists(file);
+					if(Files.probeContentType(file).startsWith("image")) {
+						Path thumbNail = Paths.get("C:\\upload\\"+attach.getFile_Path()+"\\s_"+attach.getUuid()+"_"+attach.getFile_name());
+						Files.delete(thumbNail);
+					}
+				}catch(Exception e) {
+					System.out.println("delete file error" + e.getMessage());
+				}
+			});
 		}
 	
 	
