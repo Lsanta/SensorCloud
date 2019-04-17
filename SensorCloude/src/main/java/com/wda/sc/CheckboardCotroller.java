@@ -114,6 +114,14 @@ public class CheckboardCotroller {
 
 		return new ResponseEntity<>(Checkboardservice.getAttachList(board_no), HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/getAttachListmain", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<CheckBoardFileVO>> getAttachListmain(int board_no) {
+		System.out.println("getAttachList" + board_no);
+
+		return new ResponseEntity<>(Checkboardservice.getAttachListmain(board_no), HttpStatus.OK);
+	}
 
 	/// 점검이력에서 해당글 클릭후 수정버튼을 누를시 글쓰기폼에 해당 데이터 전달
 	@RequestMapping(value = "/checkmod2" + "/{board_no}", method = RequestMethod.GET)

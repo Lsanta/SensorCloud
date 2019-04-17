@@ -100,11 +100,14 @@ public class CheckboardServiceImplement implements CheckboardService {
 	@Override
 	public List<CheckBoardFileVO> getAttachList(int board_no) {
 		// 첨부파일 반환
-		System.out.println("get Attach list by board_no" + board_no);
-
 		return attachMapper.findByBno(board_no);
 	}
-
+	@Override
+	public List<CheckBoardFileVO> getAttachListmain(int board_no) {
+		// 중복된 board_no 제거후 첨부파일 반환
+		System.out.println("맵퍼" + board_no);
+		return attachMapper.findByBnomain(board_no);
+	}
 
 	@Override
 	public int getsiteid(String board_no) {

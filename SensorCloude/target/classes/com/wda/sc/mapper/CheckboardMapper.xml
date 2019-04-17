@@ -40,14 +40,15 @@
    
    <select id="mainList" resultType="com.wda.sc.domain.CheckBoardVO">
    <![CDATA[
-   select rownum,b.*,f.file_path from
-    (select a.*,m.name
-     from(select c.board_no,c.user_id,substr(c.reg_date,0,8)as reg_date,c.title,c.board_content,c.board_status,c.site_id, s.site_name 
-         from check_board c, site s
-     where c.site_id=s.site_id) a, member m
-   where a.user_id=m.user_id  order by reg_date desc)b full outer join check_board_file f
-   on b.board_no = f.board_no
-   where rownum < 7
+select rownum, a.*, b.site_name, c.name, d.filetype, d.uuid
+from (select board_no,user_id, reg_date, title, board_content, board_status, site_id from check_board order by reg_date desc) a , site b, member c, 
+(select *
+from check_board_file 
+where rowid in (select max(rowid) from check_board_file group by board_no)) d
+where a.site_id = b.site_id
+and a.user_id = c.user_id
+and a.board_no = d.board_no(+)
+and rownum < 7
    ]]>
    </select>
    
