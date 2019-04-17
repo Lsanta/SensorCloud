@@ -28,12 +28,30 @@
 		update MEMBER set phone = #{phone}, m_level = #{m_level}, name = #{name}, re_level=0
     	where user_id = #{user_id}
 	</update>
+	
 	<!-- 승급요청 시 요청 레벨을 update해서 사용자관리에 띄우기위함 -->
 	<update id="requestlevel" parameterType="com.wda.sc.domain.MemberVO">
 		update MEMBER set re_level = #{re_level}
     	where user_id = #{user_id}
 	</update>
 	
+	<!-- 점검이력 검색 -->
+    <select id="manageSearch" resultType="com.wda.sc.domain.MemberVO">
+  		select * from member 
+  		where ${searchType} LIKE '%' || '${keyword}' || '%'
+  		order by name
+  	</select>
 	
+	<!-- 점검이력 검색 + 페이징 -->
+   <select id="getSearchResult" resultType="com.wda.sc.domain.MemberVO" parameterType="map">
+   		<![CDATA[
+		select x.* 
+		from (select rownum as rnum,before_ord.*
+			  from (select * from member where ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%' order by name) before_ord
+              where rownum < #{Paging.endnum}) x
+		where x.rnum >= #{Paging.startnum}
+		order by x.name
+		]]>
+   </select>
 	
 </mapper>
