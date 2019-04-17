@@ -16,8 +16,7 @@
 </th:block>
 
 <th:block layout:fragment="contents">
-<form th:if="${modlist == null}" role="form" name="check" method="post" action="/checkboard/checkaddInSite.do">
-
+<form role="form" name="check" method="post" action="/checkboard/checkaddInSite.do">
 	<div class="a">
 	<div class="index">점검이력</div>
 	<div class="title1">
@@ -109,17 +108,14 @@
 </div>
 <!-- <div id="ddd" th:text="${vo.board_no}" style="display:none"></div> -->
 </form>
-
-
 </th:block>
+
 <th:block layout:fragment="page_js">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	
-	  var newURL =  window.location.pathname;
-	  var url = newURL.split('/');
-	  
+
+
 	  var formObj = $("form");
 
 	  $('button').on("click", function(e){
@@ -132,10 +128,10 @@ $(document).ready(function() {
 	    
 	    if(operation === 'list'){
 	    	 //move to list
-		      formObj.attr("action", "/site/"+url[4]+"/siterepair/1").attr("method","get");
+		      formObj.attr("action", "/checkboard/check/1").attr("method","get");
 	    	 
 	    }else if(operation === 'modify'){
-   			alert("submit clicked");
+   			 console.log("submit clicked");
 	        
 	        var str = "";
 	        
@@ -215,6 +211,9 @@ $(document).ready(function(){
 	   if(bb != 99){
 		   for(var i=0; i < opt_vals2.length; i++ ){
 			    var optV2 = opt_vals2[i];
+			    console.log("번호 :" + optV2);
+			    console.log(bb);
+			    
 				if(optV2 == bb){
 					 $("#sse > option").eq(i).prop("selected", true);
 		   		}
@@ -225,7 +224,7 @@ $(document).ready(function(){
 	   
 	   var formObj = $("form[role='form']");
 	   
-	   $(".insert").on("click", function(e){
+	   $("button[type='submit']").on("click", function(e){
 	     
 	     e.preventDefault();
 	     
