@@ -4,7 +4,7 @@
 	data-layout-decorate="~{include/layout}">
 
 <th:block layout:fragment="page_head">
-	<title>사용자관리</title>
+	<title>보유센서</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
@@ -29,7 +29,7 @@
 						<th style="width:8%;">승급요청</th>
 					</tr>
 				</thead>
-				<tbody id="user" th:if="${manage == null}">
+				<tbody id="user">
 				 	<tr th:each="userlist : ${userlist}" >
 						<td th:text="${userlist.user_id}"></td>
 						<td th:text="${userlist.name}"></td>
@@ -38,19 +38,13 @@
 						<td th:text="${userlist.m_level}"></td>
 						<td th:if="${userlist.re_level != 0}" th:text ="o"></td>
 						<td th:if="${userlist.re_level == 0}" th:text ="x"></td>
-			        </tr>
-				</tbody>
-				
-				<tbody id="user" th:if="${manage != null}">
-				 	<tr th:each="userlist : ${manage}" >
-						<td th:text="${userlist.user_id}"></td>
-						<td th:text="${userlist.name}"></td>
-						<td th:text="${userlist.email}"></td>
-						<td th:text="${userlist.phone}"></td>
-						<td th:text="${userlist.m_level}"></td>
-						<td th:if="${userlist.re_level != 0}" th:text ="o"></td>
-						<td th:if="${userlist.re_level == 0}" th:text ="x"></td>
-			        </tr>
+						
+					</tr>
+
+
+
+
+
 				</tbody>
 			</table>
 		</div>
@@ -71,17 +65,17 @@
 
 		<div class="search">
 			<div class="select">
-				<select id="search-select">
-					<option value="name">이름</option>
-					<option value="user_id">아이디</option>
+				<select>
+					<option>이름</option>
+					<option>아이디</option>
 				</select>
 			</div>
 			<section class="search-box">
 				<div class="search-content">
-					<input type="text" id="keyword"/>
+					<input type="text" />
 				</div>
 				<div class="search-button">
-					<button id="search">Search</button>
+					<button>Search</button>
 				</div>
 			</section>
 		</div>

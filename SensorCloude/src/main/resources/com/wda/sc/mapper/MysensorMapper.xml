@@ -37,12 +37,10 @@
 		select count(sensor_sn) from my_sensor
 	</select>
 	
-	<!-- 보유센서 검색 -->
 	<select id="mysensorSearch" resultType="com.wda.sc.domain.MysensorVO">
 		select * from my_sensor where ${searchType} LIKE '%' || '${keyword}' || '%'
 	</select>
 	
-	<!-- 보유센서 검색 + 페이징 -->
 	<select id="getSearchResult" resultType="com.wda.sc.domain.MysensorVO" parameterType="map">
 	<![CDATA[	
 	select x.rnum, x.* from

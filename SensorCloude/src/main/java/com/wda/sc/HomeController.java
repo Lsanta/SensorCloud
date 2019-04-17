@@ -1,17 +1,14 @@
 package com.wda.sc;
 
-import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -19,13 +16,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.wda.sc.domain.CheckBoardVO;
-import com.wda.sc.domain.InstallSensorVO;
-import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
-import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.MyPageService;
 import com.wda.sc.service.MysensorService;
@@ -39,9 +33,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @AllArgsConstructor
 public class HomeController {
-
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
+	
 	private SiteService siteservice;
 	private TimelineService timelineservice;
 	private CheckboardService checkboardservice;
@@ -54,7 +46,7 @@ public class HomeController {
 		
 		return "login/login";
 	}
-
+	
 	@RequestMapping("main")
 	public String main(Locale locale, Model model) {
 		
@@ -258,7 +250,6 @@ public class HomeController {
 	@RequestMapping(value = "/my"+"/{num}", method = RequestMethod.GET)
 	public String mypage(@PathVariable String num, Model model,HttpSession session) {
 
-		 
 		String id = (String)session.getAttribute("id");
 		int pageNum=0;
 		System.out.println("/my/" + id);
@@ -290,7 +281,7 @@ public class HomeController {
 		parm.put("user_id", id);
 
 		model.addAttribute("pageNum",arr);
-		model.addAttribute("userInfo",mypageservice.getInfo(id));//
+		model.addAttribute("userInfo",mypageservice.getInfo(id));
 		model.addAttribute("mychecklist",mypageservice.myList(parm));
 		return "mypage/mypage";
 	}
