@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.Search;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
@@ -139,6 +140,18 @@ public class SiteServiceImplement implements SiteService {
 	public ArrayList<SiteVO> getStatus(String site_id) {
 		return mapper.getStatus(site_id);
 
+	}
+
+	@Override
+	public ArrayList<SiteVO> siteSearch(Search s) {
+		// 검색1
+		return mapper.siteSearch(s);
+	}
+
+	@Override
+	public ArrayList<SiteVO> getSearchResult(Map<Object, Object> parm) {
+		// 검색2
+		return mapper.getSearchResult(parm);
 	}
 
 

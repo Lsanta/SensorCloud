@@ -21,6 +21,7 @@ import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.Search;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.SiteService;
@@ -255,6 +256,65 @@ public class SiteController {
 		return "site/sitecheckview";
 	}
 	
-	
+	//현장관리 검색
+	@RequestMapping(value ="/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
+	  public String mysensorSearch(
+			  @PathVariable int page, 
+			  @PathVariable String searchType, 
+			  @PathVariable String keyword, Model model) {
+		  
+		  Paging p = new Paging();
+		  Search s = new Search();
+		  ArrayList<SiteVO> searchArr = new ArrayList<SiteVO>();
+		  ArrayList<Integer> arr = new ArrayList<Integer>();
+		  Map<Object, Object> parm = new HashMap<Object, Object>();
+		  
+		  p.getOnePageBoard(); // 페이지 당 보여지는 데이터 수 
+		  
+		  s.setPage(page);
+		  s.setKeyword(keyword);
+		  s.setSearchType(searchType);
+		  
+		  System.out.println(page); //현재 페이지 번호
+		  System.out.println(searchType); //검색 옵션
+		  System.out.println(keyword); //검색 키워드
+		  
+		  searchArr = siteservice.siteSearch(s);
+		  
+		  System.out.println(searchArr);
+		  
+		  int pageNum = 0;
+		  int realNum = 1;
+		  p.setTotalNum(searchArr.size());
+		  
+		  System.out.println("전체숫자" +p.getTotalNum());
+		  
+		  if(p.getTotalNum() <= p.getOnePageBoard() ) {
+				pageNum = 1;
+			}else {
+				pageNum = p.getTotalNum()/p.getOnePageBoard();
+				if(p.getTotalNum()%p.getOnePageBoard() > 0) {
+					pageNum = pageNum + 1;
+				}
+			}
+		  
+		  for(int i = 0; i < pageNum; i ++) {
+				arr.add(i+1);
+			}
+		  
+		  p.setEndnum((realNum*10)+1);
+		  p.setStartnum(p.getEndnum()-10);
+		  
+		  parm.put("Paging", p);
+		  parm.put("Search", s);
+		  
+		  model.addAttribute("pageNum",arr);
+		  System.out.println("pageNum"+ arr);
+		  
+		  model.addAttribute("site",siteservice.getSearchResult(parm));
+		  System.out.println("site" + siteservice.getSearchResult(parm));
+		  
+		  return "/site/sitelist";
+		}
 	
 }

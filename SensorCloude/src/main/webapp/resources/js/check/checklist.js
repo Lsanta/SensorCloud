@@ -75,49 +75,28 @@ $(document).ready(function() {
 		if(url[2] != 'search'){
 			var page = 1; // 현재 페이지 번호
 			var searchType = $("#search-select option:selected").val();
-			if( searchType == "현장이름"){
-				searchType = "site_name";
-			} else if( searchType == "글쓴이"){
-					searchType = "name";
-			}
-			
 			var keyword = $("#keyword").val();
 			
 			if(keyword == ""){
 				alert("검색내용을 입력하세요");
 				return false;
 			}
-			
-			console.log(page);
-			console.log(searchType);
-			console.log(keyword);
 			
 			window.location.href = "/checkboard/search/"+page+"/"+searchType+"/"+keyword;
 		} else{
 			var page = 1; // 현재 페이지 번호
 			var searchType = $("#search-select option:selected").val();
-			if( searchType == "현장이름"){
-				searchType = "site_name";
-			} else if( searchType == "글쓴이"){
-					searchType = "name";
-			}
-			
-			
 			var keyword = $("#keyword").val();
 			
 			if(keyword == ""){
 				alert("검색내용을 입력하세요");
 				return false;
 			}
-			
-			console.log(page);
-			console.log(searchType);
-			console.log(keyword);
 			
 			window.location.href = "/checkboard/search/"+page+"/"+searchType+"/"+keyword;
 		}
 		
 		
 		
-	});
+	}); // 검색 이벤트 종료
 });
