@@ -1,6 +1,7 @@
 	package com.wda.sc;
 
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -40,8 +41,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
-	public String logout(HttpSession session) {
-		session.invalidate();
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		//session.invalidate();
+		session.removeAttribute("id");
 		return "login/login";
 	}
 	
@@ -57,7 +60,7 @@ public class LoginController {
 		System.out.println(arr);
 		if(arr.size() != 0) {
 			if(arr.get(0).getPassword().equals(password)) {
-				model.addAttribute("id",arr.get(0).getUser_id());
+				//model.addAttribute("id",arr.get(0).getUser_id());
 				session.setAttribute("id", arr.get(0).getUser_id());
 				return "success";
 			}else {

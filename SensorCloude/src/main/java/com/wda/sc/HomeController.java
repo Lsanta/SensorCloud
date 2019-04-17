@@ -1,6 +1,9 @@
 package com.wda.sc;
 
 import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,6 +39,8 @@ import lombok.AllArgsConstructor;
 @Controller
 @AllArgsConstructor
 public class HomeController {
+
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	private SiteService siteservice;
 	private TimelineService timelineservice;
@@ -252,18 +257,19 @@ public class HomeController {
 		return "mysensor/mysensor";
 	}
 
-	@RequestMapping(value = "/mypage"+"/{num}", method = RequestMethod.GET)
+	@RequestMapping(value = "/my"+"/{num}", method = RequestMethod.GET)
 	public String mypage(@PathVariable String num, Model model,HttpSession session) {
 
-		Object id = (Object)session.getAttribute("id");
+		 
+		String id = (String)session.getAttribute("id");
 		int pageNum=0;
-
+		System.out.println("/my/" + id);
 		Paging page = new Paging();
 		Map<String, Object> parm = new HashMap<String, Object>();
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		int realNum = Integer.parseInt(num);
 
-		page.setTotalNum(mypageservice.getPageNum(id.toString()));
+		page.setTotalNum(mypageservice.getPageNum(id));
 		page.setOnePageBoard(5);
 		
 		if(page.getTotalNum() <= page.getOnePageBoard() ) {
@@ -286,7 +292,7 @@ public class HomeController {
 		parm.put("user_id", id);
 
 		model.addAttribute("pageNum",arr);
-		model.addAttribute("userInfo",mypageservice.getInfo(id.toString()));
+		model.addAttribute("userInfo",mypageservice.getInfo(id));//
 		model.addAttribute("mychecklist",mypageservice.myList(parm));
 		return "mypage/mypage";
 	}
