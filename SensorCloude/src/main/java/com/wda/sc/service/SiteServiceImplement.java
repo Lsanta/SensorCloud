@@ -1,7 +1,6 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.Search;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
@@ -141,6 +141,28 @@ public class SiteServiceImplement implements SiteService {
 
 	}
 
+	@Override
+	public ArrayList<SiteVO> siteSearch(Search s) {
+		// 현장관리 검색1
+		return mapper.siteSearch(s);
+	}
 
+	@Override
+	public ArrayList<SiteVO> getSearchResult(Map<Object, Object> parm) {
+		// 현장관리 검색2
+		return mapper.getSearchResult(parm);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> repairSearch(Search s) {
+		// 수리내역 검색1
+		return mapper.repairSearch(s);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> getSearchResultRepair(Map<Object, Object> parm) {
+		// 수리내역 검색2
+		return mapper.getSearchResultRepair(parm);
+	}
 
 }

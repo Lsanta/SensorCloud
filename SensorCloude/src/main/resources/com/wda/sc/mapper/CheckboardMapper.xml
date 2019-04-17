@@ -115,4 +115,5 @@ and rownum < 7
       order by x.reg_date desc
       ]]>
    </select>
+   
 </mapper>

@@ -19,7 +19,8 @@ public interface MysensorMapper {
 	
 	public int getPageNum();
 	
+	//검색1
 	public ArrayList<MysensorVO> mysensorSearch(Search s);
-	
+	//검색2
 	public ArrayList<MysensorVO> getSearchResult(Map<Object, Object> parm);
 }

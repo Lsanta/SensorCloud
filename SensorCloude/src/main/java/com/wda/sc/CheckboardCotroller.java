@@ -25,7 +25,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wda.sc.domain.CheckBoardFileVO;
 import com.wda.sc.domain.CheckBoardVO;
-import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
 import com.wda.sc.service.CheckboardService;
@@ -277,10 +276,9 @@ public class CheckboardCotroller {
 		return "redirect: /site/" + site_id + "/siterepair/1";
 	}
 
-	
 	  //점검이력 검색
 	  @RequestMapping(value ="/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
-	  public String mysensorSearch(
+	  public String checkSearch(
 			  @PathVariable int page, 
 			  @PathVariable String searchType, 
 			  @PathVariable String keyword, Model model) {
@@ -304,7 +302,7 @@ public class CheckboardCotroller {
 		  System.out.println("체크 검색 :" + searchArr);
 		  
 		  int pageNum = 0;
-		  int realNum = 1;
+		  int realNum = page;
 		  p.setTotalNum(searchArr.size());
 		  
 		  System.out.println("체크 전체숫자" +p.getTotalNum());

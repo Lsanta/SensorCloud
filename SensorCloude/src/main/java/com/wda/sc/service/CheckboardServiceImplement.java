@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.wda.sc.domain.CheckBoardFileVO;
 import com.wda.sc.domain.CheckBoardVO;
-import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
 import com.wda.sc.mapper.BoardAttachMapper;
@@ -115,7 +114,6 @@ public class CheckboardServiceImplement implements CheckboardService {
 		return mapper.getsiteid(board_no);
 	}
 
-
 	@Override
 	public ArrayList<CheckBoardVO> checkSearch(Search s) {
 		// 검색1
@@ -128,7 +126,5 @@ public class CheckboardServiceImplement implements CheckboardService {
 		// 검색2
 		return mapper.getSearchResult(parm);
 	}
-
-	
 
 }

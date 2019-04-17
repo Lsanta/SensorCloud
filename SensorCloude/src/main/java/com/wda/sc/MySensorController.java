@@ -74,8 +74,7 @@ public class MySensorController {
 				
 				return "false";
 			}
-	
-	  //보유센서 검색
+		
 	  @RequestMapping(value ="/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
 	  public String mysensorSearch(
 			  @PathVariable int page, 
@@ -93,21 +92,15 @@ public class MySensorController {
 		  s.setPage(page);
 		  s.setKeyword(keyword);
 		  s.setSearchType(searchType);
-		  
-		  System.out.println(page); //현재 페이지 번호
-		  System.out.println(searchType); //검색 옵션
-		  System.out.println(keyword); //검색 키워드
-		  
+		  	  
 		  searchArr = mysensorservice.mysensorSearch(s);
 		  
 		  System.out.println(searchArr);
 		  
 		  int pageNum = 0;
-		  int realNum = 1;
+		  int realNum = page;
 		  p.setTotalNum(searchArr.size());
-		  
-		  System.out.println("전체숫자" +p.getTotalNum());
-		  
+		   
 		  if(p.getTotalNum() <= p.getOnePageBoard() ) {
 				pageNum = 1;
 			}else {
