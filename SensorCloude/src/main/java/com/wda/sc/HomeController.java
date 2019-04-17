@@ -224,8 +224,6 @@ public class HomeController {
 
 	@RequestMapping(value = "/mysensor"+"/{num}", method = RequestMethod.GET)
 	public String mysensor(@PathVariable String num, Locale locale, Model model, HttpSession session) {
-
-		System.out.println("오면안돼");
 		
 		Paging page = new Paging();
 		int pageNum = 0;

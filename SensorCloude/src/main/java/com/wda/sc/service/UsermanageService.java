@@ -1,9 +1,11 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.Search;
 
 public interface UsermanageService {
 
@@ -16,4 +18,9 @@ public interface UsermanageService {
 	public int updateuser(MemberVO vo);
 
 	public int requestlevel(MemberVO vo);
+	
+	//검색2
+	public ArrayList<MemberVO> getSearchResult(Map<Object, Object> parm);
+	//검색1
+	public ArrayList<MemberVO> manageSearch(Search s);
 }
