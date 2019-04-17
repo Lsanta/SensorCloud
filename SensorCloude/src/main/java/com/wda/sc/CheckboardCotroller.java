@@ -4,10 +4,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,9 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wda.sc.domain.CheckBoardFileVO;
 import com.wda.sc.domain.CheckBoardVO;
-import com.wda.sc.domain.MysensorVO;
-import com.wda.sc.domain.Paging;
-import com.wda.sc.domain.Search;
+
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.SiteService;
 
@@ -269,60 +265,4 @@ public class CheckboardCotroller {
 		return "redirect: /site/" + site_id + "/siterepair/1";
 	}
 
-	
-	  //점검이력 검색
-	  @RequestMapping(value ="/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
-	  public String checkSearch(
-			  @PathVariable int page, 
-			  @PathVariable String searchType, 
-			  @PathVariable String keyword, Model model) {
-		  
-		  Paging p = new Paging();
-		  Search s = new Search();
-		  ArrayList<CheckBoardVO> searchArr = new ArrayList<CheckBoardVO>();
-		  ArrayList<Integer> arr = new ArrayList<Integer>();
-		  Map<Object, Object> parm = new HashMap<Object, Object>();
-		  
-		  s.setPage(page);
-		  s.setKeyword(keyword);
-		  s.setSearchType(searchType);
-		  
-		  System.out.println(page); //현재 페이지 번호
-		  System.out.println(searchType); //검색 옵션
-		  System.out.println(keyword); //검색 키워드
-		  
-		  searchArr = Checkboardservice.checkSearch(s);
-		  
-		  System.out.println("체크 검색 :" + searchArr);
-		  
-		  int pageNum = 0;
-		  int realNum = 1;
-		  p.setTotalNum(searchArr.size());
-		  
-		  System.out.println("체크 전체숫자" +p.getTotalNum());
-		  
-		  if(p.getTotalNum() <= p.getOnePageBoard() ) {
-				pageNum = 1;
-			}else {
-				pageNum = p.getTotalNum()/p.getOnePageBoard();
-				if(p.getTotalNum()%p.getOnePageBoard() > 0) {
-					pageNum = pageNum + 1;
-				}
-			}
-		  
-		  for(int i = 0; i < pageNum; i ++) {
-				arr.add(i+1);
-			}
-		  
-		  p.setEndnum((realNum*10)+1);
-		  p.setStartnum(p.getEndnum()-10);
-		  
-		  parm.put("Paging", p);
-		  parm.put("Search", s);
-		  
-		  model.addAttribute("pageNum",arr);
-		  model.addAttribute("check",Checkboardservice.getSearchResult(parm));
-		  System.out.println("체크 검색 결과 :" + Checkboardservice.getSearchResult(parm));
-		  return "check/check";
-	  }
 }

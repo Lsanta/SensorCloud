@@ -74,8 +74,7 @@ public class MySensorController {
 				
 				return "false";
 			}
-	
-	  //보유센서 검색
+		
 	  @RequestMapping(value ="/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
 	  public String mysensorSearch(
 			  @PathVariable int page, 

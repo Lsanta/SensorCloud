@@ -1,13 +1,11 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
-import com.wda.sc.domain.Search;
 import com.wda.sc.mapper.UsermanageMapper;
 
 import lombok.AllArgsConstructor;
@@ -43,18 +41,6 @@ public class UsermanageServiceImplement implements UsermanageService{
 	public int requestlevel(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.requestlevel(vo);
-	}
-
-	@Override
-	public ArrayList<MemberVO> getSearchResult(Map<Object, Object> parm) {
-		// 검색2
-		return mapper.getSearchResult(parm);
-	}
-
-	@Override
-	public ArrayList<MemberVO> manageSearch(Search s) {
-		// 검색1
-		return mapper.manageSearch(s);
 	}
 	
 }

@@ -1,11 +1,9 @@
 package com.wda.sc.mapper;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
-import com.wda.sc.domain.Search;
 
 public interface UsermanageMapper {
 
@@ -18,9 +16,4 @@ public interface UsermanageMapper {
 	public int updateuser(MemberVO vo);
 
 	public int requestlevel(MemberVO vo);
-	
-	//검색2
-	public ArrayList<MemberVO> getSearchResult(Map<Object, Object> parm);
-	//검색1
-	public ArrayList<MemberVO> manageSearch(Search s);
 }
