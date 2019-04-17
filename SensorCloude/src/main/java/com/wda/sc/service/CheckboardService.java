@@ -29,7 +29,8 @@ public interface CheckboardService {
 	public List<CheckBoardFileVO> getAttachList(int board_no);
 	//첨부파일 테이블 삭제
 	public int filedelete(String board_no);
-
+	//메인 중복된 board_no 제거후 첨부파일 조회
+	public List<CheckBoardFileVO> getAttachListmain(int board_no);
 	//게시글 삭제
 	public int checkboardDelete(String board_no);
 	//현장아이디 넘기기

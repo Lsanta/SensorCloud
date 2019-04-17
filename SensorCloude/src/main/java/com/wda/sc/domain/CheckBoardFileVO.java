@@ -9,4 +9,5 @@ public class CheckBoardFileVO {
 	private String file_Path;
 	private String file_name;
 	private boolean fileType;
+
 }
