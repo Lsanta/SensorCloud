@@ -2,11 +2,13 @@ package com.wda.sc.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.wda.sc.domain.CheckBoardFileVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.Search;
 
 public interface CheckboardService {
 
@@ -33,6 +35,10 @@ public interface CheckboardService {
 	public int checkboardDelete(String board_no);
 	//현장아이디 넘기기
 	public int getsiteid(String board_no);
+	//검색1
+	public ArrayList<CheckBoardVO> checkSearch(Search s);
+	//검색2
+	public ArrayList<CheckBoardVO> getSearchResult(Map<Object, Object> parm);
 
 
 

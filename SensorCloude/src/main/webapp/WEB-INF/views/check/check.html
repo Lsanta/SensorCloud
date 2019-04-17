@@ -29,7 +29,7 @@
 						<th scope="col" style="width:10%;">날짜</th>
 					</tr>
 				</thead>
-				<tbody id="checklist">
+				<tbody id="checklist" th:if="${check == null}">
 				 	<tr th:each="checkboardlist : ${checkboardlist}" >
 						<td th:text="${checkboardlist.site_name}">status</td>
 						<td th:text="${checkboardlist.title}">status</td>
@@ -42,7 +42,21 @@
 						<td th:text="${checkboardlist.reg_date}">status</td>
 						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
 					</tr> 
-
+				</tbody>
+				
+				<tbody id="checklist" th:if="${check != null}">
+				 	<tr th:each="checkboardlist : ${check}" >
+						<td th:text="${checkboardlist.site_name}">status</td>
+						<td th:text="${checkboardlist.title}">status</td>
+						<td th:switch="${checkboardlist.board_status}">
+						<span th:case="'0'">open</span>
+						<span th:case="'1'">fixed</span>
+						<span th:case="'2'">closed</span>
+						</td>
+						<td th:text="${checkboardlist.name}">status</td>
+						<td th:text="${checkboardlist.reg_date}">status</td>
+						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
+					</tr> 
 				</tbody>
 			</table>
 		</div>
@@ -63,17 +77,17 @@
 
 		<div class="search">
 			<div class="select">
-				<select>
+				<select id="search-select">
 					<option>현장이름</option>
 					<option>글쓴이</option>
 				</select>
 			</div>
 			<section class="search-box">
 				<div class="search-content">
-					<input type="text" />
+					<input type="text" id="keyword"/>
 				</div>
 				<div class="search-button">
-					<button>Search</button>
+					<button id="search">Search</button>
 				</div>
 			</section>
 		</div>
