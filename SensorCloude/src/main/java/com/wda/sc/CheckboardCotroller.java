@@ -272,7 +272,7 @@ public class CheckboardCotroller {
 	
 	  //점검이력 검색
 	  @RequestMapping(value ="/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
-	  public String mysensorSearch(
+	  public String checkSearch(
 			  @PathVariable int page, 
 			  @PathVariable String searchType, 
 			  @PathVariable String keyword, Model model) {

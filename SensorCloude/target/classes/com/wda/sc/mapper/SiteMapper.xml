@@ -132,10 +132,10 @@
 		where ${searchType} LIKE '%' || '${keyword}' || '%'
 	</select>
 	
-		<!-- 현장 검색 + 페이징-->
-		<select id="getSearchResult" resultType="com.wda.sc.domain.SiteVO" parameterType="map">
-		<![CDATA[	
-			select x.* 
+	<!-- 현장 검색 + 페이징-->
+	<select id="getSearchResult" resultType="com.wda.sc.domain.SiteVO" parameterType="map">
+	<![CDATA[	
+		select x.* 
 		from (select rownum as rnum,site_id,type_no,site_name,address,site_status,substr(start_date,0,14) as start_date, before_num
 			  from (select rownum as before_num, s.* 
                     from (select * 
@@ -145,5 +145,31 @@
                 where a.before_num < ${Paging.endnum}) x
 		where x.before_num >= ${Paging.startnum}
 		]]>
-		</select>
+	</select>
+		
+	<!-- 수리내역 검색 -->
+	<select id="repairSearch" resultType="com.wda.sc.domain.CheckBoardVO">
+		select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
+         from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+               from check_board,site
+               where check_board.site_id = site.site_id and check_board.site_id = ${site_id}) c,member m
+         where c.user_id = m.user_id and ${searchType} LIKE '%' || '${keyword}' || '%'
+         order by reg_date desc
+	</select>
+		
+	<!-- 수리내역 검색  + 페이징-->	
+	<select id="getSearchResultRepair" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="map">
+	<![CDATA[	
+		select x.rnum, x.* from
+   		(select rownum as rnum, p.* from
+        (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
+         from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+               from check_board,site
+               where check_board.site_id = site.site_id and check_board.site_id = ${Search.site_id} ) c,member m
+         where c.user_id = m.user_id  and ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%'
+         order by reg_date desc) p where rownum < #{Paging.endnum}) x
+		 where x.rnum >= #{Paging.startnum}
+		 order by x.reg_date desc
+	]]>
+	</select>
 </mapper>

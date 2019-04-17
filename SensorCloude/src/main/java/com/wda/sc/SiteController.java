@@ -2,11 +2,9 @@ package com.wda.sc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -14,12 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
-import com.wda.sc.domain.MemberVO;
-import com.wda.sc.domain.MysensorVO;
+import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
 import com.wda.sc.domain.SiteVO;
@@ -258,7 +254,7 @@ public class SiteController {
 	
 	//현장관리 검색
 	@RequestMapping(value ="/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
-	  public String mysensorSearch(
+	  public String sitelistSearch(
 			  @PathVariable int page, 
 			  @PathVariable String searchType, 
 			  @PathVariable String keyword, Model model) {
@@ -317,4 +313,66 @@ public class SiteController {
 		  return "/site/sitelist";
 		}
 	
+		//수리내역 검색
+		@RequestMapping(value = "/{site_id}" + "/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
+		  public String repairSearch(
+				  @PathVariable int page, 
+				  @PathVariable String searchType, 
+				  @PathVariable String keyword,  @PathVariable String site_id, Model model) {
+			  
+			  Paging p = new Paging();
+			  Search s = new Search();
+			  ArrayList<CheckBoardVO> searchArr = new ArrayList<CheckBoardVO>();
+			  ArrayList<Integer> arr = new ArrayList<Integer>();
+			  Map<Object, Object> parm = new HashMap<Object, Object>();
+			  
+			  p.getOnePageBoard(); // 페이지 당 보여지는 데이터 수 
+			  
+			  s.setPage(page);
+			  s.setKeyword(keyword);
+			  s.setSearchType(searchType);
+			  s.setSite_id(site_id); 
+			  
+			  System.out.println(page);
+			  System.out.println(keyword);
+			  System.out.println(searchType);
+			  System.out.println(site_id);
+			  searchArr = siteservice.repairSearch(s);
+			  
+			  System.out.println(searchArr);
+			  
+			  int pageNum = 0;
+			  int realNum = 1;
+			  p.setTotalNum(searchArr.size());
+			  
+			  System.out.println("전체숫자" +p.getTotalNum());
+			  
+			  if(p.getTotalNum() <= p.getOnePageBoard() ) {
+					pageNum = 1;
+				}else {
+					pageNum = p.getTotalNum()/p.getOnePageBoard();
+					if(p.getTotalNum()%p.getOnePageBoard() > 0) {
+						pageNum = pageNum + 1;
+					}
+				}
+			  
+			  for(int i = 0; i < pageNum; i ++) {
+					arr.add(i+1);
+				}
+			  
+			  p.setEndnum((realNum*10)+1);
+			  p.setStartnum(p.getEndnum()-10);
+			  
+			  parm.put("Paging", p);
+			  parm.put("Search", s);
+			  
+			  model.addAttribute("pageNum",arr);
+			  System.out.println("pageNum"+ arr);
+			  
+			  model.addAttribute("repair",siteservice.getSearchResultRepair(parm));
+			  model.addAttribute("siteInfo",siteservice.getSite(site_id.toString()));  //현장정보
+			  model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id.toString()));  //연락망
+			  
+			  return "/site/siterepair";
+			}
 }

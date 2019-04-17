@@ -8,5 +8,5 @@ public class Search {
 	private int page;
 	private String searchType;
 	private String keyword;
-
+	private String site_id;
 }

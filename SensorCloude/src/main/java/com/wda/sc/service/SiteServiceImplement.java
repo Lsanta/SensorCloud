@@ -144,14 +144,26 @@ public class SiteServiceImplement implements SiteService {
 
 	@Override
 	public ArrayList<SiteVO> siteSearch(Search s) {
-		// 검색1
+		// 현장관리 검색1
 		return mapper.siteSearch(s);
 	}
 
 	@Override
 	public ArrayList<SiteVO> getSearchResult(Map<Object, Object> parm) {
-		// 검색2
+		// 현장관리 검색2
 		return mapper.getSearchResult(parm);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> repairSearch(Search s) {
+		// 수리내역 검색1
+		return mapper.repairSearch(s);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> getSearchResultRepair(Map<Object, Object> parm) {
+		// 수리내역 검색2
+		return mapper.getSearchResultRepair(parm);
 	}
 
 

@@ -75,7 +75,7 @@ private UsermanageService usermanageservice;
 	
 	  //사용자관리 검색
 	  @RequestMapping(value ="/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
-	  public String mysensorSearch(
+	  public String manageSearch(
 			  @PathVariable int page, 
 			  @PathVariable String searchType, 
 			  @PathVariable String keyword, Model model) {
