@@ -25,7 +25,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wda.sc.domain.CheckBoardFileVO;
 import com.wda.sc.domain.CheckBoardVO;
-import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
 import com.wda.sc.service.CheckboardService;
@@ -103,7 +102,7 @@ public class CheckboardCotroller {
 		model.addAttribute("checksitelist", siteservice.getchecksite());
 
 		// 파일 정보
-
+		
 		return "check/checkaddInSite";
 	}
 
@@ -250,7 +249,7 @@ public class CheckboardCotroller {
 	// 수리내역에서 글쓰기를 누른 후 파일 업로드 및 글쓰기
 	@RequestMapping(value = "checkaddInSite.do", method = RequestMethod.POST)
 	public String insertcheckboardIn(CheckBoardVO vo, HttpSession session, RedirectAttributes rttr) {
-
+		
 		int site_id = vo.getSite_id();
 		String id = (String) session.getAttribute("id");
 		vo.setUser_id(id);
