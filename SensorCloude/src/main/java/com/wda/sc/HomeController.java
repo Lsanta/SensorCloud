@@ -41,12 +41,7 @@ public class HomeController {
 	private UsermanageService usermanageservice;
 	private MyPageService mypageservice;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		return "login/login";
-	}
-
-	@RequestMapping("main")
+	@RequestMapping(value ="/", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
 		
 		//메인화면 점검이력 제목 substring
