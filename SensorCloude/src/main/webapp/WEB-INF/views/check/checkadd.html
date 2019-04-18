@@ -129,10 +129,12 @@ $(document).ready(function(){
 
 	     if(title.value.trim() == ""){
 	            alert("제목을 입력해주세요.");
+	            title.val('');
 	            title.focus();
 	            return false;
 	        }else if(boardcontent.value.trim()==""){
 	            alert("내용을 입력해주세요.");
+	            boardcontent.val('');
 	            board_content.focus();
 	            return false;
 	        } else if($(".se > option:selected").val() == ""){
