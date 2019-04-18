@@ -28,10 +28,10 @@ public interface CheckboardMapper {
 	public List<CheckBoardFileVO> findByBno(int board_no);
 
 	//첨부파일 테이블 삭제
-	public int filedelete(String board_no);
+	public int filedelete(int board_no);
 	
 	//게시글 삭제
-	public int checkboardDelete(String board_no);
+	public int checkboardDelete(int board_no);
 
 	public int getsiteid(String board_no);
 	
@@ -40,4 +40,9 @@ public interface CheckboardMapper {
 	//검색2
 	public ArrayList<CheckBoardVO> getSearchResult(Map<Object, Object> parm);
 	
+	//수리내역 게시글 수정
+	public int updateCheck(CheckBoardVO vo);
+	
+	//파일 수정(삭제 후 다시 추가)
+	public void fileupdate(CheckBoardVO vo);
 }
