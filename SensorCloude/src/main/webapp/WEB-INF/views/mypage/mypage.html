@@ -55,8 +55,12 @@
 			</div>
 		</div>
 
-		<button id="mpbtn" value="mpbtn">대표이미지 설정</button>
-
+		<h3>대표이미지 설정</h3>
+		<div id="buttons">
+			<input type="button" class="imgbtn" id="btnok" onClick="goPopupImg()" value="등록" />
+			<input type="button" class="imgbtn" id="btnno" value="삭제" />
+		</div>
+		
 		<hr color="black" width=100%>
 
 		<div class="title-header">
@@ -114,6 +118,12 @@
 			var pop = window.open("/mypage/levelup", "pop",
 					"width=570,height=420,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 		}
+		
+		function goPopupImg() {
+			var pop = window.open("/mypage/imgupload", "pop",
+					"width=400,height=300,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-150)+"resizable=yes");
+		}
+		
 	</script>
 </th:block>
 </html>
