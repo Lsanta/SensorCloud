@@ -99,4 +99,56 @@ $(document).ready(function() {
 		
 		
 	}); // 검색 이벤트 종료
+	
+	
+	
+	$("#dateChange").change(function(){
+		
+		alert("바뀜");
+		var data = $("#dateChange > option:selected").val();
+		window.location.href = "/checkboard/dataSearch/1/"+ data;
+	});
+		
+	if(url[2] == "dataSearch"){
+		
+		
+		   var opt_vals = [];
+		   $("#dateChange > option").each(function(){
+			  opt_vals.push($(this).val()); 
+		   });
+		   
+		   for(var i=0; i < opt_vals.length; i++ ){
+			      var optV = opt_vals[i];
+
+			      if(optV == Number(url[4]) )
+			    	  $("#dateChange > option").eq(i).prop("selected", true);
+		   	} 
+		 
+		
+		if(url[3] != null){
+			$("#"+url[3]+"").addClass('pagination-active');
+		}
+
+		$('.pagination-inner a').on('click', function() {
+			var a = $(".pagination-inner a").index(this);
+			num = a;
+			window.location.href = "/checkboard/dataSearch/"+(num+1)+"/"+url[4];
+		});
+
+		$('.pagination-newer').click(function(){
+			if(1 > parseInt(url[3])-1 )
+				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3]))+"/"+url[4];
+			else
+				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])-1)+"/"+url[4];
+		});
+
+		$('.pagination-older').click(function(){
+			if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[3])+1)
+				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+"/"+url[4]);
+			else
+				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+1)+"/"+url[4];
+		});
+	}
+	
+	
 });

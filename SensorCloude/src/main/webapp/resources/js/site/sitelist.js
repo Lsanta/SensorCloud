@@ -72,12 +72,6 @@ $(document).ready(function() {
 		if(url[2] != 'search'){
 			var page = 1; // 현재 페이지 번호
 			var searchType = $("#search-select option:selected").val();
-			if( searchType == "현장이름"){
-				searchType = "site_name";
-			} else if( searchType == "주소"){
-					searchType = "address";
-			}
-			
 			var keyword = $("#keyword").val();
 			
 			if(keyword == ""){
@@ -88,14 +82,7 @@ $(document).ready(function() {
 			window.location.href = "/site/search/"+page+"/"+searchType+"/"+keyword;
 		} else{
 			var page = 1; // 현재 페이지 번호
-			var searchType = $("#search-select option:selected").val();
-			if( searchType == "현장이름"){
-				searchType = "site_name";
-			} else if( searchType == "주소"){
-					searchType = "address";
-			}
-			
-			
+			var searchType = $("#search-select option:selected").val();	
 			var keyword = $("#keyword").val();
 			
 			if(keyword == ""){

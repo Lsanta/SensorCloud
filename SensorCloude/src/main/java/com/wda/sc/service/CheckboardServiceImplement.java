@@ -44,7 +44,26 @@ public class CheckboardServiceImplement implements CheckboardService {
 			attachMapper.insert(attach);
 		});
 	}
+	
+	@Transactional
+	@Override
+	public void fileupdate(CheckBoardVO vo) {
+		
+		filedelete(vo.getBoard_no());
+		
+		System.out.println(vo.getBoard_no());
+		
+		if (vo.getAttachList() == null || vo.getAttachList().size() <= 0) {
+	         return;
+	      }
 
+	      vo.getAttachList().forEach(attach -> {
+
+	         attach.setBoard_no(vo.getBoard_no());
+	         attachMapper.insert(attach);
+	      });
+	}
+	
 	
 	@Override
 	public ArrayList<CheckBoardVO> getList(Paging p){
@@ -84,14 +103,14 @@ public class CheckboardServiceImplement implements CheckboardService {
 
 
 	@Override
-	public int filedelete(String board_no) {
+	public int filedelete(int board_no) {
 		// 첨부파일 삭제
 		return mapper.filedelete(board_no);
 	}
 
 
 	@Override
-	public int checkboardDelete(String board_no) {
+	public int checkboardDelete(int board_no) {
 		// 게시글 삭제
 		return mapper.checkboardDelete(board_no);
 	}
@@ -125,6 +144,31 @@ public class CheckboardServiceImplement implements CheckboardService {
 	public ArrayList<CheckBoardVO> getSearchResult(Map<Object, Object> parm) {
 		// 검색2
 		return mapper.getSearchResult(parm);
+	}
+
+
+	@Override
+	public int updateCheck(CheckBoardVO vo) {
+		// 수리내역 게시글 수정
+		return mapper.updateCheck(vo);
+	}
+
+	@Override
+	public int updateCheckBoard(CheckBoardVO vo) {
+		//점검이력  게시글 수정
+		return mapper.updateCheckBoard(vo);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> dateChange(int data) {
+		// 최근 ?개월 
+		return mapper.dateChange(data);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> getTermList(Map<Object, Object> parm) {
+		//기간 검색 + 페이징
+		return mapper.getTermList(parm);
 	}
 
 }

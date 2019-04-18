@@ -214,7 +214,7 @@ button:hover {
     }
     
 p {
-	margin-bottom: 20px;
+	margin-bottom: 45--+px;
 }    
 	
 h2 {
@@ -258,12 +258,13 @@ input[type=text] {
 #addnetwork_right {
 	width: 55%;
 	display: inline-block;
+	top: -50px;                             
 }
 
 #addnetwork_right1 {
 	display: inline-block;
 	box-sizing: border-box;
-	width: 45%;
+	width: 100%;
 }
 
 #addnetwork_right2 {
