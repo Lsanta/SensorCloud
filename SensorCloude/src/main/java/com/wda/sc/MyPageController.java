@@ -50,24 +50,6 @@ public class MyPageController {
 		
 		return "mypage/imgupload";
 	}
-	
-	@RequestMapping(value= "/mypagecheckview/"+"{board_no}", method = RequestMethod.GET)
-	public String checkin(Locale locale,@PathVariable  String board_no, Model model) {
-		
-		System.out.println("mypageboard_no=" +board_no);
-		
-		
-		model.addAttribute("mpviewgetlist",mypageservice.myListView(board_no));
-		
-		System.out.println("마이페이지"+mypageservice.myListView(board_no));
-		
-		model.addAttribute("siteid", checkboardservice.getsiteid(board_no));
-		
-		return "mypage/mypagecheckview";
-	}
-	
-	
-	
 
 	@RequestMapping(value = "modifymyinfo", method = RequestMethod.GET)
 	public String modifymyinfo(Locale locale, Model model, HttpSession session) {

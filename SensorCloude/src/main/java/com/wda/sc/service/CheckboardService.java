@@ -49,6 +49,12 @@ public interface CheckboardService {
 	//점검이력  게시글 수정
 	public int updateCheckBoard(CheckBoardVO vo);
 
+	//최근 ?개월
+	public ArrayList<CheckBoardVO> dateChange(int data);
+
+	//기간 검색 + 페이징
+	public ArrayList<CheckBoardVO> getTermList(Map<Object, Object> parm);
+
 
 
 

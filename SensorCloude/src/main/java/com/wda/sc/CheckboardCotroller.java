@@ -149,9 +149,7 @@ public class CheckboardCotroller {
 	public String checkdel(Locale locale, Model model, @PathVariable int board_no, @PathVariable String site_id) {
 		int num = board_no;
 		List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
-
-		System.out.println("삭제버튼 후 board_no :" + board_no);
-		System.out.println("삭제버튼 후 site_id :" + site_id);
+		
 		// board_no를 통해 첨부파일 삭제
 		int delN = Checkboardservice.filedelete(board_no);
 
@@ -167,8 +165,8 @@ public class CheckboardCotroller {
 		//점검이력에서 해당 글을 클릭후  삭제버튼을 누른 후
 		@RequestMapping(value = "/checkdel2"+ "/{board_no}", method = RequestMethod.GET)
 		public String checkdel2(Locale locale, Model model, @PathVariable int board_no) {
-			System.out.println("gg");
-			int num =board_no;
+			
+			int num = board_no;
 			List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
 			
 			//board_no를 통해 첨부파일 삭제
@@ -189,7 +187,6 @@ public class CheckboardCotroller {
 	@RequestMapping(value = "/checkmod3" + "/{board_no}", method = RequestMethod.GET)
 	public String checkmod3(Locale locale, Model model, @PathVariable String board_no, HttpSession session) {
 
-		System.out.println(board_no);
 		// board_no를 통해 점검이력 내용 가져오기
 		model.addAttribute("modlist", Checkboardservice.viewgetList(board_no));
 
@@ -208,8 +205,8 @@ public class CheckboardCotroller {
 
 	@RequestMapping(value = "/checkdel3" + "/{board_no}", method = RequestMethod.GET)
 	public String checkdel3(Locale locale, Model model, @PathVariable int board_no) {		
-		// int num = Integer.parseInt(board_no);
-		// List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
+		int num = board_no;
+		List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
 
 		// board_no를 통해 첨부파일 삭제
 		int delN = Checkboardservice.filedelete(board_no);
@@ -217,7 +214,7 @@ public class CheckboardCotroller {
 		// board_no를 통해 게시글 삭제
 		int delN2 = Checkboardservice.checkboardDelete(board_no);
 
-		//deleteFiles(attachList);
+		deleteFiles(attachList);
 
 		System.out.println("삭제 완료 마이페이지점검이력화면으로");
 
@@ -375,4 +372,53 @@ public class CheckboardCotroller {
 		  System.out.println("체크 검색 결과 :" + Checkboardservice.getSearchResult(parm));
 		  return "check/check";
 	  }
+	  
+	  
+	  @RequestMapping(value ="/dataSearch" + "/{page}"+ "/{data}", method = RequestMethod.GET)
+	  public String dataSearch(@PathVariable int page, @PathVariable int data, Model model) {
+		  
+		  Paging p = new Paging();
+		  ArrayList<CheckBoardVO> term = new ArrayList<CheckBoardVO>();
+		  ArrayList<Integer> arr = new ArrayList<Integer>();
+		  Map<Object, Object> parm = new HashMap<Object, Object>();
+		  
+		  if( data != 0) {
+		  System.out.println("데이터가 0이아님");
+		  term = Checkboardservice.dateChange(data);
+		 
+		  int pageNum = 0;
+		  int realNum = page;
+		  p.setTotalNum(term.size());
+
+		  if(p.getTotalNum() <= p.getOnePageBoard() ) {
+				pageNum = 1;
+			}else {
+				pageNum = p.getTotalNum()/p.getOnePageBoard();
+				if(p.getTotalNum()%p.getOnePageBoard() > 0) {
+					pageNum = pageNum + 1;
+				}
+			}
+		  
+		  for(int i = 0; i < pageNum; i ++) {
+				arr.add(i+1);
+			}
+		  
+		  p.setEndnum((realNum*10)+1);
+		  p.setStartnum(p.getEndnum()-10);
+		  
+		  parm.put("paging", p);
+		  parm.put("data", data);
+		  
+		  model.addAttribute("pageNum",arr);
+		  model.addAttribute("checkboardlist",Checkboardservice.getTermList(parm));
+		  
+		  System.out.println("검색완료 점검이력으로");
+		  return "check/check";
+	 } else {
+		 	
+			return "redirect: /check/1";
+	 	}
+		  
+	    
+	 }
 }

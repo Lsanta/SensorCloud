@@ -87,8 +87,10 @@ $(document).ready(function() {
 				var searchType = $("#search-select option:selected").val();
 				var keyword = $("#keyword").val();
 				
-				if(keyword == ""){
+				if(keyword.trim() == ""){
 					alert("검색내용을 입력하세요");
+					$("#keyword").focus();
+					$("#keyword").val("");
 					return false;
 				}
 				
@@ -98,8 +100,10 @@ $(document).ready(function() {
 				var searchType = $("#search-select option:selected").val();
 				var keyword = $("#keyword").val();
 				
-				if(keyword == ""){
+				if(keyword.trim() == ""){
 					alert("검색내용을 입력하세요");
+					$("#keyword").focus();
+					$("#keyword").val("");
 					return false;
 				}
 				
