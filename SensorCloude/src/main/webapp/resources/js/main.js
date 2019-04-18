@@ -12,16 +12,22 @@ $(document).ready(function(){
 	 });
 	 
 	 var tr = $("#site tr:gt(3)");
+	 var div = $(".grid .images:gt(2)");
 	 
 	 if($(window).width() <= 700){
 			tr.addClass("none");
+			div.removeClass().addClass("none");
 		} 
+	 
+	 
 	 
 	 $( window ).resize(function(){
 		 if($(window).width() <= 700){
 				tr.addClass("none");
+				div.removeClass().addClass("none");
 			} else{
 				tr.removeClass("none");
+				div.removeClass().addClass("images");
 			} 
 	 });
 

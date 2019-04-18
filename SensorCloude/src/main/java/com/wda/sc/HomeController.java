@@ -1,11 +1,14 @@
 package com.wda.sc;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -43,6 +46,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		
 		return "login/login";
 	}
 
@@ -60,6 +64,7 @@ public class HomeController {
 		model.addAttribute("sitelist",siteservice.getList());
 		model.addAttribute("timelinelist",timelineservice.timedesc());
 		model.addAttribute("mainchecklist",arr);
+		System.out.println(arr);
 		return "main";
 	}
 	
@@ -76,6 +81,9 @@ public class HomeController {
 			pageNum = 1;
 		}else {
 			pageNum = page.getTotalNum()/page.getOnePageBoard();
+			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
 		}
 
 		for(int i = 0; i < pageNum; i ++) {
@@ -87,6 +95,7 @@ public class HomeController {
 
 		model.addAttribute("pageNum",arr);
 		model.addAttribute("checkboardlist",checkboardservice.getList(page));
+		
 		return "check/check";
 	}
 
@@ -98,12 +107,16 @@ public class HomeController {
 		int realNum = Integer.parseInt(num);
 		page.setTotalNum(siteservice.getPageNum());
 
-		if(page.getTotalNum() < page.getOnePageBoard() ) {
+		if(page.getTotalNum() <= page.getOnePageBoard() ) {
 			pageNum = 1;
 		}else {
 			pageNum = page.getTotalNum()/page.getOnePageBoard();
+			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
 		}
 
+		
 		for(int i = 0; i < pageNum; i ++) {
 			arr.add(i+1);
 		}
@@ -133,10 +146,13 @@ public class HomeController {
 		int realNum = Integer.parseInt(num);
 		page.setTotalNum(usermanageservice.getPageNum());
 
-		if(page.getTotalNum() < page.getOnePageBoard() ) {
+		if(page.getTotalNum() <= page.getOnePageBoard() ) {
 			pageNum = 1;
 		}else {
 			pageNum = page.getTotalNum()/page.getOnePageBoard();
+			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
 		}
 
 		for(int i = 0; i < pageNum; i ++) {
@@ -157,10 +173,38 @@ public class HomeController {
 		return "manage/manage";
 	}
 
-	@RequestMapping(value = "/timeline", method = RequestMethod.GET)
-	public String timeline(Locale locale, Model model) {
-		model.addAttribute("timelinelist",timelineservice.getList());
-		System.out.println(timelineservice.getList());
+	@RequestMapping(value = "/time"+"/{num}", method = RequestMethod.GET)
+	public String timeline(@PathVariable String num, Locale locale, Model model) {
+		Paging page = new Paging();
+		int pageNum = 0;
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int realNum = Integer.parseInt(num);
+
+		page.setTotalNum(timelineservice.getPageNum());
+		page.setOnePageBoard(5);
+		
+		
+		if(page.getTotalNum() < page.getOnePageBoard()) {
+			pageNum = 1;
+		}else {
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+	         if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+	            pageNum = pageNum + 1;
+	         }
+		}
+
+		for(int i = 0; i < pageNum; i ++) {
+			arr.add(i+1);
+		}
+
+		page.setEndnum((realNum*5)+1);
+		page.setStartnum(page.getEndnum()-5);
+		
+		model.addAttribute("pageNum",arr);
+		model.addAttribute("timelinelist",timelineservice.getList(page));
+		System.out.println(timelineservice.getList(page));
+		
+		
 
 		return "timeline/timeline";
 	}
@@ -168,18 +212,41 @@ public class HomeController {
 
 	@RequestMapping(value = "/timelinemodify", method = RequestMethod.GET)
 	public String timelinemodify(Locale locale, Model model) {
-		model.addAttribute("timelinelist",timelineservice.getList());
-		System.out.println(timelineservice.getList());
+
 		
 		return "timeline/timelinemodify";
 	}
 	
 
-	@RequestMapping(value = "/mysensor", method = RequestMethod.GET)
-	public String mysensor(Locale locale, Model model) {
+	@RequestMapping(value = "/mysensor"+"/{num}", method = RequestMethod.GET)
+	public String mysensor(@PathVariable String num, Locale locale, Model model, HttpSession session) {
+		
+		Paging page = new Paging();
+		int pageNum = 0;
+		
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int realNum = Integer.parseInt(num);
+		page.setTotalNum(mysensorservice.getPageNum());
 
-		model.addAttribute("sensorlist",mysensorservice.getList());
+		if(page.getTotalNum() <= page.getOnePageBoard() ) {
+			pageNum = 1;
+		}else {
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
+		}
 
+		for(int i = 0; i < pageNum; i ++) {
+			arr.add(i+1);
+		}
+
+		page.setEndnum((realNum*10)+1);
+		page.setStartnum(page.getEndnum()-10);
+		
+		
+		model.addAttribute("pageNum",arr);
+		model.addAttribute("sensorlist",mysensorservice.getList(page));
 
 		return "mysensor/mysensor";
 	}
@@ -198,15 +265,13 @@ public class HomeController {
 		page.setTotalNum(mypageservice.getPageNum(id.toString()));
 		page.setOnePageBoard(5);
 		
-		if(page.getTotalNum() < page.getOnePageBoard() ) {
+		if(page.getTotalNum() <= page.getOnePageBoard() ) {
 			pageNum = 1;
 		}else {
-			if(page.getTotalNum()/page.getOnePageBoard() == 0) {
-				pageNum = page.getTotalNum()/page.getOnePageBoard();
-			}else {
-				pageNum = (page.getTotalNum()/page.getOnePageBoard())+1;
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
 			}
-				
 		}
 
 		for(int i = 0; i < pageNum; i ++) {

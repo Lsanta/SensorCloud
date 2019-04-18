@@ -26,7 +26,7 @@
 #main-container {
   width: 1130px;
   height: 750px;
-  margin: 20px auto;
+  margin: 0px auto;
   padding: 20px;
   border: 1px solid #bcbcbc;
 }
@@ -86,9 +86,9 @@
 
 .timeline {
   width: 340x;
-  height: 70px;
+  height: 25px;
   padding: 10px;
-  margin: 20px;
+  margin: 15px;
   border: 1px solid #bcbcbc;
 }
 
@@ -190,17 +190,22 @@ table th {
     font-size: .8em;
     text-align: right;
   }
+  .images h5 {
+  margin: 0 0 0 10%;
+  font-size: 1.5em;
+}
 
 }
 
 .image-container {
   margin: auto;
+  margin-left: 2%;
   max-width: 1000px;
 }
 
 .responsive-image {
   max-width: 80%; /* 이미지의 최대사이즈 */
-  width /***/: auto; /* only IE8 */
+  width /***/: 100%; /* only IE8 */
   height: auto;
   padding: 10%;
   margin:0;
@@ -214,6 +219,7 @@ table th {
 .images h5 {
   margin: 0 0 0 10%;
 }
+
 
 #chdate {
    margin-left: 10%;
@@ -236,10 +242,12 @@ table th {
   .images {
     width: 50%;
   }
+
 }
 
 @media screen and (min-width: 1000px) {
   .images {
     width: calc(100% / 3);
   }
+
 }

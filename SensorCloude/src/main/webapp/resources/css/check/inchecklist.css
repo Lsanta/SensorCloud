@@ -1,44 +1,153 @@
-.span {
-	display: inline;
+.a{
+    width: 65%;
+    height: 860px;
+    overflow: hidden;
+    margin:20px auto;
+    border: 1px solid #ddd;
+    background-color: #F2F2F2;
+    
 }
-
-#fixlist_header {
-	margin: 0 auto;
-	width: 60%;
-	margin-top: 30px;
-	margin-bottom: 10px;
+.index{
+	width:97%;
+	height: 50px;
+	margin :20px 20px 20px 20px;
+	font-size: 2.4em;
+	color:#6E6E6E;
 }
-
-.fixlistbody {
-	width: 60%;
-	height: 600px;
-	margin: auto;
-	border: 1px solid black;
+.title1{
+	width:97%;
+	height:50px;
+	border: 3px solid white;
+	margin :20px 20px 20px 20px;
 }
-
-#fixlistbody_condition {
-	height: 40px;
-	border: 1px solid black;
-}
-
-.fixlistbutton {
-	float: right;
-}
-
-#fixlistbody_content {
+.table0{
 	width: 100%;
-	height: 200px;
-	border: 1px solid black;
+	height: 100%;
 }
-
-#fixlistbody_addpicture {
-	margin: 0 auto;
-	margin-top:20px;
+.th01{
+	width: 10%;
+	background-color: #D8D8D8;
+}
+.th02{
 	width: 90%;
-	height: 52%;
-	border: 1px solid black;
+	background-color: #F2F2F2;
 }
 
-#regdate {
-	float:right;
+.title00{
+	width:99.9%;
+	height: 70%;
+	margin-top: 3px;
+	
+}
+.site1{
+	width:97%;
+	height:50px;
+	border: 3px solid white;
+	margin :20px 20px 20px 20px;
+}
+.th03{
+	width: 30%;
+	background-color: #F2F2F2;
+	text-align: left;
+}
+.se{
+	width: 95%;
+	height: 60%;
+	text-align: center;
+}
+.status{
+	width: 10%;
+	background-color: #D8D8D8;
+}
+.stse{
+	width:15%;
+	text-align: center;
+}
+.cc{
+	text-align: center;
+}
+#sse{
+	width:55%;
+	height: 60%;
+}
+.content{
+	width:97%;
+	height:500px;
+	border: 3px solid white;
+	margin :20px 20px 20px 20px;
+}
+#boardcontent{
+	width:99.6%;
+	height: 50%;
+	font-size: 1.4em;
+}
+
+.picturespot {
+	border: 3px solid white;
+    width: 60%;
+    height: 47%;
+    margin: 0 auto;
+	
+}
+.th05{
+	width: 5%;
+	background-color: #D8D8D8;
+}
+
+
+.f0{
+	width:97%;
+	height:50px;
+	border: 3px solid white;
+	margin :20px 20px 20px 20px;
+}
+
+
+.but{
+	width:97%;
+	height:50px;
+	margin :20px;
+}
+.but0{
+	margin: 20px 0;
+	text-align:center;
+}
+
+button {
+	width: 50px;
+    height: 40px;
+}
+
+#span {
+	display :inline;
+}
+
+#writername {
+	width: 97%;
+    height: 25px;
+    margin: 20px 20px 20px 20px;
+    font-size: 1.3em;
+    color: #6E6E6E;
+}
+.uploadResult{
+	width:100%;
+	background-color:gray;
+}
+.uploadResult ul{
+	display:flex;
+	flex-flow:row;
+	justity-content:center;
+	align-tiems:center;
+}
+.uploadResult ul li{
+	list-style : none;
+	padding:10px;
+	align-content:center;
+	text-align: center;
+}
+.uploadResult ul li img{
+	width:100px;
+}
+.uploadResult ul li span{
+	color:white;
 }

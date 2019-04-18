@@ -4,7 +4,7 @@
 	data-layout-decorate="~{include/layout}">
 
 <th:block layout:fragment="page_head">
-	<title>점검이력 리스트 클릭시</title>
+	<title>게시글을 눌렀을때 나오는 페이지</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
@@ -14,50 +14,131 @@
 
 <th:block layout:fragment="contents">
 
-
-	<div id="fixlist_header">
-		<h2 id="infixlist_title" class="span"
-			th:each="sitecheckview : ${sitecheckview}"
-			th:text="${sitecheckview.site_name}"></h2>
-		<!-- 점검이력을 클릭하면 해당 현장의 이름을 가져오기 -->
-		<input type="button" name="modifyfixlist" id="modifyfixlist"
-			class="fixlistbutton" value="수정"> <input type="button"
-			name="deletefixlist" id="deleteyfixlist" class="fixlistbutton"
-			value="삭제">
-
+<div class="a">
+	<!-- 현장이름 -->
+	<div id="titletext" name="site_name" class="index" th:each="check : ${sitecheckview}" th:text="${check.site_name}">
+	
 	</div>
-
-	<div class="fixlistbody">
-
-		<div id="fixlistbody_condition">
-
-			<!-- 점검상태 / 날짜  가져오기-->
-			<p class="span" th:each="sitecheckview : ${sitecheckview}"
-				th:text="${sitecheckview.title}"></p>
-			<select name="job" class="span">
-				<option value="fixed"  selected="selected">fixed</option>
-				<option value="open">open</option>
-				<option value="closed">closed</option>
-			</select>
-			<p class="span" id="regdate" th:each="sitecheckview: ${sitecheckview}"
-				th:text="${sitecheckview.reg_date}"></p>
-		</div>
-
-		<div id="fixlistbody_content">
-
-			<!-- 글쓰기에서 등록한 점검이력 긁어오기 -->
-			<p th:each="sitecheckview : ${sitecheckview}"
-				th:text="${sitecheckview.board_content}"></p>
-		</div>
-		<div id="fixlistbody_addpicture">
-
-			<!-- 사진목록 -->
-		</div>
-
+	
+	<!-- 세션로그인 값 -->
+	<div id ="id" th:text="${session.id}" style="display: none"></div>
+	<!-- 작성자 -->
+	<div id="writername"  th:each="check : ${sitecheckview}"  th:text="${check.user_id}" style="display : none"></div>
+	
+	
+	<div id="memberlevel"  th:each="checkauthority : ${checkauthority}"  th:text="${checkauthority}"  style="display: none" >
+		
 	</div>
+	
+	
+	
+	
+	
+	<div class="title1">
+		<table class="table0">
+	<th class="th01">&nbsp;&nbsp;제 목&nbsp;&nbsp;</th>
+		<!-- 제목 -->
+		<th class="th02"><h2 class="title00" id="checktitle" name="title"
+		  th:each="check : ${sitecheckview}" th:text="${check.title}"></h2> 
+		
+		</th>
+		</table>
+	</div>
+	
+	
+	<div class="site1">
+		<table class="table0">
+		<!-- 작성일 -->
+		<th class="th01">&nbsp;글쓴 날짜&nbsp;</th>
+	<th class="th03"><h3 class="se" maxlength="50" name="reg_date"
+		  th:each="check : ${sitecheckview}" th:text="${check.reg_date}"></h3></th>
+	
+	<th class="status">게시글 상태</th>
+	
+	<th class="stse">
+	<h3 class="sse"
+	th:each="check : ${sitecheckview}" th:if="${check.board_status ==0}" th:text ="open" name="board_status"></h3>
+	
+	<h3 class="sse" 
+	th:each="check : ${sitecheckview}" th:if="${check.board_status ==1}" th:text ="fixed" name="board_status"></h3>
+	
+	
+	
+	
+	</th>
+	</table>
+	</div>
+	
+	
+	<div class="content">
+		<p name="board_content" id="boardcontent" 
+		th:each="check : ${sitecheckview}" th:text="${check.board_content}" style="resize:none;" >
+			
+		</p>
+		
+		<!-- 사진 들어갈 부분 -->
+		<div class="picturespot">
+		<div class="uploadResult">
+		<ul>
+		
+		</ul>
+		</div>
+		</div>
+		
+	</div>
+	
+
+	
+	<div class="but">
+		<div class="but0">
+		<button type="button" id="mod">수정</button>
+        <button type="button" id="del">삭제</button>
+    	</div>
+	</div>
+</div>
 </th:block>
 
 <th:block layout:fragment="page_js">
+		<script src="/resources/js/site/sitecheckview.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script>
+		$(document).ready(function(){
+	
+			var newURL =  window.location.pathname;
 
+			var url = newURL.split('/');
+			
+			
+			var board_no = parseInt(url[4]);
+			   $.getJSON("/checkboard/getAttachList",{board_no : board_no},function(arr){
+				   console.log(arr);
+				   
+				   var str = "";
+					 
+					 $(arr).each(function(i, attach){
+						//image type
+						if(attach.fileType){
+							var fileCallPath = encodeURIComponent( attach.file_Path+ "/s_"+attach.uuid + "_"+attach.file_name);
+						
+							str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' ><div>";
+							str += "<img src='/display?fileName="+fileCallPath+"'>";
+							str += "</div>";
+							str += "</li>";
+						
+						} else {
+							str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' ><div>";
+							str += "<span>" + attach.file_name + "</span><br />";
+							str += "<img src='/resources/img/attach.png'>";
+							str += "</div>";
+							str += "</li>";
+						}
+						 
+					 });
+					 
+					 $(".uploadResult ul").html(str);
+					 
+				 }); //end getjson
+			   });
+		</script>
 </th:block>
 </html>

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class AlarmMemberVO {
 	private int alarm_m_no;
-	private String site_id;
+	private int site_id;
 	private String tel;
 	private String name;
 	private String company;

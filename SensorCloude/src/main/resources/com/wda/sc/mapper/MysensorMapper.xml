@@ -5,19 +5,22 @@
 <mapper namespace="com.wda.sc.mapper.MysensorMapper">
 
 	<select id="getList" resultType="com.wda.sc.domain.MysensorVO">
-		select A.sensor_sn, A.model_name, A.sensor_kind, A.manufacturer, A.voltage, 
-		substr(A.create_day,0,14) as create_day,B.site_id, C.site_name
-		from my_sensor A
-		FULL OUTER JOIN
-		install_sensor B
-		on A.sensor_sn = B.sensor_sn 
-		LEFT OUTER JOIN
-		site C
-		on B.site_id = C.site_id
+	<![CDATA[
+    select x.rnum, x.* from
+    ( select rownum as rnum, p.* from
+    ( select c.sensor_sn, c.model_name, c.sensor_kind, c.manufacturer, c.voltage, c.create_day, c.site_id, s.site_name
+    from (select my_sensor.sensor_sn, my_sensor.model_name, my_sensor.sensor_kind, my_sensor.manufacturer, my_sensor.voltage, substr(my_sensor.create_day,0,14) as create_day, install_sensor.site_id
+    from my_sensor FULL OUTER JOIN install_sensor
+    on my_sensor.sensor_sn = install_sensor.sensor_sn) c  LEFT OUTER JOIN site s
+    on c.site_id = s.site_id 
+    order by create_day desc ) p where rownum < #{endnum}) x
+    where x.rnum >= #{startnum}
+    order by x.create_day desc
+    ]]>
 	</select>
 
 	<insert id="insertmysensor" parameterType="com.wda.sc.domain.MysensorVO">
-		insert into my_sensor(sensor_sn,model_name,sensor_kind,manufacturer,voltage) values(#{sensor_sn}, #{model_name},#{sensor_kind},#{manufacturer},#{voltage})
+		insert into my_sensor(sensor_sn,model_name,sensor_kind,manufacturer,voltage,create_day) values(#{sensor_sn}, #{model_name},#{sensor_kind},#{manufacturer},#{voltage},sysdate)
 	</insert>
 	
 	<select id="installSelect" resultType="com.wda.sc.domain.InstallSensorVO">
@@ -30,4 +33,28 @@
 		where sensor_sn=#{sensor_sn} 
 	</update>
  	
+ 	<select id="getPageNum" resultType="int">
+		select count(sensor_sn) from my_sensor
+	</select>
+	
+	<!-- 보유센서 검색 -->
+	<select id="mysensorSearch" resultType="com.wda.sc.domain.MysensorVO">
+		select * from my_sensor where ${searchType} LIKE '%' || '${keyword}' || '%'
+	</select>
+	
+	<!-- 보유센서 검색 + 페이징 -->
+	<select id="getSearchResult" resultType="com.wda.sc.domain.MysensorVO" parameterType="map">
+	<![CDATA[	
+	select x.rnum, x.* from
+    ( select rownum as rnum, p.* from
+    ( select c.sensor_sn, c.model_name, c.sensor_kind, c.manufacturer, c.voltage, c.create_day, c.site_id, s.site_name
+    from (select my_sensor.sensor_sn, my_sensor.model_name, my_sensor.sensor_kind, my_sensor.manufacturer, my_sensor.voltage, substr(my_sensor.create_day,0,14) as create_day, install_sensor.site_id
+    from my_sensor FULL OUTER JOIN install_sensor
+    on my_sensor.sensor_sn = install_sensor.sensor_sn where ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%') c  LEFT OUTER JOIN site s
+    on c.site_id = s.site_id 
+    order by create_day desc ) p where rownum < #{Paging.endnum}) x
+    where x.rnum >= #{Paging.startnum}
+    order by x.create_day desc
+    ]]>
+	</select>
 </mapper>

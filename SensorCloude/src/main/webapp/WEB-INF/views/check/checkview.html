@@ -9,14 +9,32 @@
 
 <th:block layout:fragment="page_css">
 	<link rel="stylesheet" type="text/css"
-		href="/resources/css/check/cbweb.css">
+		href="/resources/css/check/inchecklist.css">
+		
 </th:block>
 
 <th:block layout:fragment="contents">
 
 <div class="a">
 
-	<div class="index" th:each="check : ${cklist}" th:text="${check.site_name}">
+	<div id="site_name" class="index" th:each="check : ${cklist}" th:text="${check.site_name}">
+	
+		
+	</div>
+	
+	<div id="writername"  th:each="check : ${cklist}"  th:text="'작성자 : ' + ${check.name} ">
+		
+	</div>
+	
+	<div id="board_no"  th:each="board_no : ${board_no}"  th:text="${board_no}" 
+	style="display: none" >
+		
+	</div>
+
+	
+	<div id="site_id" th:each="siteid : ${siteid}"  th:text="${siteid}" 
+	style="display: none" >
+	
 	</div>
 	
 	
@@ -24,7 +42,7 @@
 	<div class="title1">
 		<table class="table0">
 	<th class="th01">&nbsp;&nbsp;제 목&nbsp;&nbsp;</th>
-		<th class="th02"><h2 class="title00" maxlength="50"
+		<th class="th02"><h2 class="title00" id="checktitle"
 		  th:each="check : ${cklist}" th:text="${check.title}"></h2> 
 		
 		</th>
@@ -34,38 +52,96 @@
 	
 	<div class="site1">
 		<table class="table0">
-		<th class="th01">&nbsp;글 쓴 날짜&nbsp;</th>
+		<th class="th01">&nbsp;글쓴 날짜&nbsp;</th>
 	<th class="th03"><h3 class="se" maxlength="50"
 		  th:each="check : ${cklist}" th:text="${check.reg_date}"></h3></th>
 	
 	<th class="status">게시글 상태</th>
 	
-	<th class="stse"><h3 class="sse" maxlength="50">fixed</h3></th>
+	<th class="stse">
+	<h3 class="sse"
+	th:each="check : ${cklist}" th:if="${check.board_status ==0}" th:text ="open"></h3>
 	
+	<h3 class="sse" 
+	th:each="check : ${cklist}" th:if="${check.board_status ==1}" th:text ="fixed"></h3>
+	
+	
+	
+	
+	</th>
 	</table>
 	</div>
 	
 	
 	<div class="content">
-		<p name="board_content" id="boardcontent" maxlength="1000" 
+		<p name="board_content" id="boardcontent" 
 		th:each="check : ${cklist}" th:text="${check.board_content}" style="resize:none;" >
 			
 		</p>
+		
+		<!-- 사진 들어갈 부분 -->
+		
+		<div class="picturespot">
+		<div class="uploadResult">
+		<ul>
+		</ul>
+		</div>
+		</div>
+		
 	</div>
 	
 
 	
 	<div class="but">
 		<div class="but0">
-		<button type="button">수정</button>
-		<button type="button">저장</button>
-        <button type="button">삭제</button>
+		<button type="button" id="mb">수정</button>
+        <button type="button" id="db">삭제</button>
     	</div>
 	</div>
 </div>
 </th:block>
 
 <th:block layout:fragment="page_js">
-		<script src="/resources/js/check/checklist.js"></script>
+		<script src="/resources/js/check/checkview.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script>
+		$(document).ready(function(){
+	
+			var newURL =  window.location.pathname;
+
+			var url = newURL.split('/');
+			
+			
+			var board_no = parseInt(url[2]);
+			   $.getJSON("/checkboard/getAttachList",{board_no : board_no},function(arr){
+				   console.log(arr);
+				   
+				   var str = "";
+					 
+					 $(arr).each(function(i, attach){
+						//image type
+						if(attach.fileType){
+							var fileCallPath = encodeURIComponent( attach.file_Path+ "/s_"+attach.uuid + "_"+attach.file_name);
+						
+							str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' ><div>";
+							str += "<img src='/display?fileName="+fileCallPath+"'>";
+							str += "</div>";
+							str += "</li>";
+						
+						} else {
+							str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' ><div>";
+							str += "<span>" + attach.file_name + "</span><br />";
+							str += "<img src='/resources/img/attach.png'>";
+							str += "</div>";
+							str += "</li>";
+						}
+						 
+					 });
+					 
+					 $(".uploadResult ul").html(str);
+					 
+				 }); //end getjson
+			   });
+		</script>
 </th:block>
 </html>

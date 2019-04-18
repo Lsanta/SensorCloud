@@ -3,14 +3,14 @@ $(document).ready(function() {
 	
 	$("#add").click(function(){
 		window.open("/mysensor/mysensoradd", "pop",
-		"width=570,height=600,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+		"width=570,height=650,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 	});
 	
-	
+
 	 $(document).on("click", "#list tr" , function(){
 		 
 		var openWin = window.open("/mysensor/mysensormod", "pop",
-				 "width=570,height=600,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+				 "width=570,height=650,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 		
 		var tr = $(this);
 		var sensor_sn = tr.children().eq(0).addClass("1");
@@ -18,23 +18,94 @@ $(document).ready(function() {
 		var model_name = tr.children().eq(2).addClass("3");
 		var voltage = tr.children().eq(3).addClass("4");
 		var manufacturer = tr.children().eq(4).addClass("5");
-		
-		
-//		openWin.document.getElementById("sensor_sn").value = sensor_sn;
-//		openWin.document.getElementById("sensor_kind").value = sensor_kind;
-//		openWin.document.getElementById("model_name").value = model_name;
-//		openWin.document.getElementById("voltage").value = voltage;
-//		openWin.document.getElementById("manufacturer").value = manufacturer;
-	
-	
+			
 	 });
 	
 
 	
-	$('.pagination-inner a').on('click', function() {
-		$(this).siblings().removeClass('pagination-active');
-		$(this).addClass('pagination-active');
-	});
+	 /*pagination*/
+		var num = 0;
+
+		var newURL =  window.location.pathname;
+
+		var url = newURL.split('/');
+		if(url[2] != 'search'){
+			
+			if(url[2] != null){
+				$("#"+url[2]+"").addClass('pagination-active');
+			}
+
+			$('.pagination-inner a').on('click', function() {
+				var a = $(".pagination-inner a").index(this);
+				num = a;
+				window.location.href = "/mysensor/"+(num+1);
+			});
+
+			$('.pagination-newer').click(function(){
+				if(1 > parseInt(url[2])-1 )
+					window.location.href = "/mysensor/"+(parseInt(url[2]));
+				else
+					window.location.href = "/mysensor/"+(parseInt(url[2])-1);
+			});
+
+			$('.pagination-older').click(function(){
+				if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[2])+1 )
+					window.location.href = "/mysensor/"+(parseInt(url[2]));
+				else
+					window.location.href = "/mysensor/"+(parseInt(url[2])+1);
+			});
+		} else {
+			
+			if(url[3] != null){
+				$("#"+url[3]+"").addClass('pagination-active');
+			}
+
+			$('.pagination-inner a').on('click', function() {
+				var a = $(".pagination-inner a").index(this);
+				num = a;
+				window.location.href = "/mysensor/search/"+(num+1)+"/"+url[4]+"/"+url[5];
+			});
+
+			$('.pagination-newer').click(function(){
+				if(1 > parseInt(url[3])-1 )
+					window.location.href = "/mysensor/search/"+(parseInt(url[3]))+"/"+url[4]+"/"+url[5];
+				else
+					window.location.href = "/mysensor/search/"+(parseInt(url[3])-1)+"/"+url[4]+"/"+url[5];
+			});
+
+			$('.pagination-older').click(function(){
+				if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[3])+1 )
+					window.location.href = "/mysensor/search/"+(parseInt(url[3]))+"/"+url[4]+"/"+url[5];
+				else
+					window.location.href = "/mysensor/search/"+(parseInt(url[3])+1)+"/"+url[4]+"/"+url[5];
+			});
+		}
 	
+		$("#search").click(function(){
+			if(url[2] != 'search'){
+				var page = 1; // 현재 페이지 번호
+				var searchType = $("#search-select option:selected").val();
+				var keyword = $("#keyword").val();
+				
+				if(keyword == ""){
+					alert("검색내용을 입력하세요");
+					return false;
+				}
+				
+				window.location.href = "/mysensor/search/"+page+"/"+searchType+"/"+keyword;
+			} else{
+				var page = 1; // 현재 페이지 번호
+				var searchType = $("#search-select option:selected").val();
+				var keyword = $("#keyword").val();
+				
+				if(keyword == ""){
+					alert("검색내용을 입력하세요");
+					return false;
+				}
+				
+				window.location.href = "/mysensor/search/"+page+"/"+searchType+"/"+keyword;
+			}
+
+		}); //검색 이벤트 종료
 	
 });

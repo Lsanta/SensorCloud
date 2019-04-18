@@ -1,11 +1,14 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
+import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.Search;
 import com.wda.sc.mapper.MysensorMapper;
 
 import lombok.AllArgsConstructor;
@@ -17,8 +20,8 @@ public class MysensorServiceImplement implements MysensorService {
 	private MysensorMapper mapper;
 	
 	@Override
-	public ArrayList<MysensorVO> getList(){
-		return mapper.getList();
+	public ArrayList<MysensorVO> getList(Paging page){
+		return mapper.getList(page);
 	}
 
 	@Override
@@ -39,5 +42,22 @@ public class MysensorServiceImplement implements MysensorService {
 		return mapper.modmysensor(vo);
 	}
 
+	@Override
+	public int getPageNum() {
+		return mapper.getPageNum();
+	}
 
+	@Override
+	public ArrayList<MysensorVO> mysensorSearch(Search s) {
+		return mapper.mysensorSearch(s);
+	}
+
+	@Override
+	public ArrayList<MysensorVO> getSearchResult(Map<Object, Object> parm) {
+		
+		return mapper.getSearchResult(parm);
+	}
+
+
+	
 }

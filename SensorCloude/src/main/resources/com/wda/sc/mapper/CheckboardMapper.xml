@@ -4,55 +4,116 @@
 
 <mapper namespace="com.wda.sc.mapper.CheckboardMapper">
 
-	<select id="getList" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="com.wda.sc.domain.Paging">
-		<![CDATA[
-		select x.rnum, x.* from
-			(select rownum as rnum, p.* from
-     			 (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
-     			  from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
-            			from check_board,site
-            			where check_board.site_id = site.site_id) c,member m
-      			  where c.user_id = m.user_id
-      			  order by reg_date desc) p where rownum < #{endnum}) x
-		where x.rnum >= #{startnum}
-		order by x.reg_date desc
-		]]>
+   <select id="getList" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="com.wda.sc.domain.Paging">
+      <![CDATA[
+      select x.rnum, x.* from
+         (select rownum as rnum, p.* from
+               (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
+                from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+                     from check_board,site
+                     where check_board.site_id = site.site_id) c,member m
+                 where c.user_id = m.user_id
+                 order by reg_date desc) p where rownum < #{endnum}) x
+      where x.rnum >= #{startnum}
+      order by x.reg_date desc
+      ]]>
+   </select>
+      
+   <select id="viewgetList" resultType="com.wda.sc.domain.CheckBoardVO">
+   select c.board_no,m.name, c.user_id, c.title, c.board_content, c.reg_date,c.board_status,c.site_name
+      from (select board_no,check_board.user_id, check_board.title, check_board.board_content,
+             substr(check_board.reg_date,0,14) as reg_date,
+             check_board.board_status,check_board.site_id, site.site_name
+           from check_board,site
+           where check_board.site_id = site.site_id) c,member m
+      where c.user_id = m.user_id
+      and c.board_no = #{board_no}
+   </select>
+   
+   
+   
+   
+   
+   <select id="getPageNum" resultType="int">
+         select count(board_no) from check_board
+   </select>
+   
+   <select id="mainList" resultType="com.wda.sc.domain.CheckBoardVO">
+   <![CDATA[
+select rownum, a.*, b.site_name, c.name, d.filetype, d.uuid
+from (select board_no,user_id, reg_date, title, board_content, board_status, site_id from check_board order by reg_date desc) a , site b, member c, 
+(select *
+from check_board_file 
+where rowid in (select max(rowid) from check_board_file group by board_no)) d
+where a.site_id = b.site_id
+and a.user_id = c.user_id
+and a.board_no = d.board_no(+)
+and rownum < 7
+   ]]>
+   </select>
+   
+   <!-- 점검이력 글쓰기 -->
+   <insert id="insertcheckboard" parameterType="com.wda.sc.domain.CheckBoardVO">
+   insert into check_board(board_no,user_id,reg_date,title,board_content,board_status,site_id)
+   values(check_seq.nextval, #{user_id}, sysdate,#{title},#{board_content},#{board_status},#{site_id})
+   </insert>
+   <insert id="insertSelectKey">
+   <selectKey resultType="int" order="BEFORE" keyProperty="board_no">select check_seq.nextval from dual</selectKey>
+   insert into check_board(board_no,user_id,reg_date,title,board_content,board_status,site_id)
+   values(#{board_no}, #{user_id}, sysdate,#{title},#{board_content},#{board_status},#{site_id})
+   </insert>
+   
+   <!-- 점검이력 수정 권한체크 -->
+   
+   <select id="checkauthority" resultType="int">
+      select m_level
+      from member
+      where user_id = #{user_id}
+      
+   </select>
+   
+   <!-- 현장아이디 넘기기 -->
+	
+	<select id="getsiteid" resultType="int">
+		select site_id
+		from check_board
+		WHERE board_no = #{board_no}
+		
 	</select>
-	
-	<select id="viewgetList" resultType="com.wda.sc.domain.CheckBoardVO">
-	select c.board_no,m.name, c.user_id, c.title, c.board_content, c.reg_date,c.board_status,c.site_name 
-		from (select board_no,check_board.user_id, check_board.title, check_board.board_content,
-        	  substr(check_board.reg_date,0,14) as reg_date,
-        	  check_board.board_status,check_board.site_id, site.site_name
-			  from check_board,site
-			  where check_board.site_id = site.site_id) c,member m
-		where c.user_id = m.user_id
-		and c.board_no = #{board_no}
-	</select>
-	
-	<select id="getPageNum" resultType="int">
-			select count(board_no) from check_board
-	</select>
-	
-	<select id="mainList" resultType="com.wda.sc.domain.CheckBoardVO">
-	<![CDATA[
-	select rownum,b.*,f.file_path from
-    (select a.*,m.name
-     from(select c.board_no,c.user_id,substr(c.reg_date,0,8)as reg_date,c.title,c.board_content,c.board_status,c.site_id, s.site_name 
-         from check_board c, site s
-     where c.site_id=s.site_id) a, member m
-	where a.user_id=m.user_id  order by reg_date desc)b full outer join check_board_file f
-	on b.board_no = f.board_no
-	where rownum < 7
-	]]>
-	</select>
-	
-	<!-- 점검이력 글쓰기 -->
-	<insert id="insertcheckboard" parameterType="com.wda.sc.domain.CheckBoardVO">
-	insert into check_board(board_no,user_id,reg_date,title,board_content,board_status,site_id)
-	values(check_seq.nextval, #{user_id}, sysdate,#{title},#{board_content},#{board_status},#{site_id})
-	</insert>
-	
-
-	
+   
+   <!-- 첨부파일 테이블 삭제 -->
+   <delete id="filedelete">
+      DELETE FROM check_board_file WHERE board_no = #{board_no}
+   </delete>
+   
+   <!-- 첨부파일 테이블 삭제 -->
+   <delete id="checkboardDelete">
+      DELETE FROM check_board WHERE board_no = #{board_no}
+   </delete>
+   
+   <!-- 점검이력 검색 -->
+    <select id="checkSearch" resultType="com.wda.sc.domain.CheckBoardVO">
+      select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
+	from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+      from check_board,site
+      where check_board.site_id = site.site_id) c,member m
+	where c.user_id = m.user_id and ${searchType} LIKE '%' || '${keyword}' || '%'
+   </select>
+   
+   <!-- 점검이력 검색 + 페이징 -->
+   <select id="getSearchResult" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="map">
+    <![CDATA[
+      select x.rnum, x.* from
+         (select rownum as rnum, p.* from
+               (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
+                from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+                     from check_board,site
+                     where check_board.site_id = site.site_id) c,member m
+                 where c.user_id = m.user_id and ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%'
+                 order by reg_date desc) p where rownum < #{Paging.endnum}) x
+      where x.rnum >= #{Paging.startnum}
+      order by x.reg_date desc
+      ]]>
+   </select>
+   
 </mapper>

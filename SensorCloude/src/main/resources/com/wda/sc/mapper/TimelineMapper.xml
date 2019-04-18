@@ -4,14 +4,17 @@
 
 <mapper namespace="com.wda.sc.mapper.TimelineMapper">
 
-	<select id="getList" resultType="com.wda.sc.domain.TimelineVO">
-		select
-		timeline.timeline_n, timeline.content,substr(time,0,14) as time,
-		member.name,timeline.user_id
-		from timeline,member
-		where timeline.user_id
-		= member.user_id
-		order by time desc
+	<select id="getList" resultType="com.wda.sc.domain.TimelineVO" parameterType="com.wda.sc.domain.Paging">
+	<![CDATA[
+	  select c.*
+    from(select b.*
+        from(select rownum as rnum, a.timeline_n, a.user_id, a.content, substr(a.time,0,14),a.name
+            from(select t.*, m.name from timeline t, member m 
+                  where t.user_id = m.user_id
+                order by time desc)a)b
+        where b.rnum < #{endnum})c
+    where c.rnum >= #{startnum}
+    ]]>
 	</select>
 
 	<select id="timedesc" resultType="com.wda.sc.domain.TimelineVO">
@@ -19,9 +22,14 @@
 			select timeline.timeline_n, timeline.content, substr(time,0,14) as time, member.name
 			from timeline,member
 			where timeline.user_id = member.user_id and 
-			rownum < 3
+			rownum < 5
     		order by timeline_n desc
     	]]>
+	</select>
+	
+	<select id="getPageNum" resultType="int">
+	select count(timeline_n) 
+	from timeline
 	</select>
 
 	<!-- 글 등록 -->
