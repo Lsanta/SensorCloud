@@ -22,7 +22,7 @@
 			select timeline.timeline_n, timeline.content, substr(time,0,14) as time, member.name
 			from timeline,member
 			where timeline.user_id = member.user_id and 
-			rownum < 3
+			rownum < 5
     		order by timeline_n desc
     	]]>
 	</select>
