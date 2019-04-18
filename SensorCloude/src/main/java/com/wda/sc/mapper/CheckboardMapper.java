@@ -45,4 +45,8 @@ public interface CheckboardMapper {
 	
 	//파일 수정(삭제 후 다시 추가)
 	public void fileupdate(CheckBoardVO vo);
+	
+	//점검이력  게시글 수정
+	public int updateCheckBoard(CheckBoardVO vo);
 }
+

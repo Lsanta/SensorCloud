@@ -112,7 +112,10 @@ function showImage(fileCallPath){
 <script>
 $(document).ready(function(){
 
-	    
+		$(".back").click(function(){
+			window.location.href="/check/1";
+		});  
+	
 	   var formObj = $("form[role='form']");
 	   
 	   $("button[type='submit']").on("click", function(e){

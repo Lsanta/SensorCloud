@@ -133,7 +133,7 @@ public class CheckboardCotroller {
 		// ID를 통해 권한레벨 가져오기
 		String user_id = (String) session.getAttribute("id");
 		model.addAttribute("auth", Checkboardservice.checkauthority(user_id));
-
+		System.out.println(Checkboardservice.viewgetList(board_no));
 		// 사이트 이름,점검이력 제목,점검이력내용 정보 가져오기
 		model.addAttribute("checksitelist", siteservice.getchecksite());
 
@@ -274,19 +274,16 @@ public class CheckboardCotroller {
 		return "redirect: /site/" + site_id + "/siterepair/1";
 	}
 	
-		// 수리내역에서 글쓰기를 누른 후  수정버튼을 누른 후  수정
+	// 수리내역에서 글쓰기를 누른 후  수정버튼을 누른 후  수정
 		@RequestMapping(value = "checkmodInSite.do", method = RequestMethod.POST)
 		public String modcheckboardIn(CheckBoardVO vo, HttpSession session, RedirectAttributes rttr) {
 
-			
 			int site_id = vo.getSite_id();
 			String id = (String) session.getAttribute("id");
 			vo.setUser_id(id);
 			
 			//vo안에 있는 site_id 로 site_name 가져오기		
 			vo.setSite_name(siteservice.getSiteName(vo.getSite_id()));
-			
-			System.out.println("VO뭐야" + vo);
 						
 			int i = Checkboardservice.updateCheck(vo);
 			
@@ -295,22 +292,34 @@ public class CheckboardCotroller {
 				Checkboardservice.fileupdate(vo);
 			}
 			
-//			System.out.println("------------------------");
-//			System.out.println("checkboard:" + vo);
-//			if (vo.getAttachList() != null) {
-//				vo.getAttachList().forEach(attach -> System.out.println(attach));
-//			}
-//			System.out.println("-----------------------------");
-//
-//			Checkboardservice.register(vo);
-//
-//			rttr.addFlashAttribute("result", vo.getBoard_no());
-			
-			
 			System.out.println("수정 성공 수리내역으로");
 			return "redirect: /site/" + site_id + "/siterepair/1";
 	}
 	
+	// 점검이력에서 글쓰기를 누른 후 수정버튼을 누른 후 수정
+	@RequestMapping(value = "checkmod.do", method = RequestMethod.POST)
+	public String modcheckboard(CheckBoardVO vo, HttpSession session, RedirectAttributes rttr) {
+
+		String id = (String) session.getAttribute("id");
+		vo.setUser_id(id);
+
+		// vo안에 있는 site_id 로 site_name 가져오기
+		vo.setSite_name(siteservice.getSiteName(vo.getSite_id()));
+
+		System.out.println("수정할 때 vo : " + vo);
+
+		int i = Checkboardservice.updateCheckBoard(vo);
+
+		System.out.println("결과 : " + i);
+		if (i == 1) {
+			Checkboardservice.fileupdate(vo);
+		}
+
+		System.out.println("수정 성공 점검이력으로");
+		return "redirect: /check/1";
+	}
+		
+		
 	  //점검이력 검색
 	  @RequestMapping(value ="/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
 	  public String checkSearch(
