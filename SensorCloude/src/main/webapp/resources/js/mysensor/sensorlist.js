@@ -111,5 +111,10 @@ $(document).ready(function() {
 			}
 
 		}); //검색 이벤트 종료
-	
+		$('#keyword').keypress(function(event){
+		     if ( event.which == 13 ) {
+		         $('#search').click();
+		     
+		     }
+		});
 });

@@ -108,5 +108,10 @@ $("#search").click(function(){
 			window.location.href = "/manage/search/"+page+"/"+searchType+"/"+keyword;
 		}
 	}); // 검색 이벤트 종료
-
+$('#keyword').keypress(function(event){
+    if ( event.which == 13 ) {
+        $('#search').click();
+    
+    }
+});
 });
