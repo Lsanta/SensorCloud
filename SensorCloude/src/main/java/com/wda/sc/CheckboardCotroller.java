@@ -171,8 +171,6 @@ public class CheckboardCotroller {
 			int num =board_no;
 			List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
 			
-		
-			
 			//board_no를 통해 첨부파일 삭제
 			int delN = Checkboardservice.filedelete(board_no);
 			
