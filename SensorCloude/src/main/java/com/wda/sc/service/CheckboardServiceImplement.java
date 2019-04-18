@@ -48,20 +48,20 @@ public class CheckboardServiceImplement implements CheckboardService {
 	@Transactional
 	@Override
 	public void fileupdate(CheckBoardVO vo) {
-		// TODO Auto-generated method stub
-		checkboardDelete(vo.getBoard_no());
 		
-		mapper.insertSelectKey(vo);
+		filedelete(vo.getBoard_no());
+		
+		System.out.println(vo.getBoard_no());
 		
 		if (vo.getAttachList() == null || vo.getAttachList().size() <= 0) {
-			return;
-		}
+	         return;
+	      }
 
-		vo.getAttachList().forEach(attach -> {
+	      vo.getAttachList().forEach(attach -> {
 
-			attach.setBoard_no(vo.getBoard_no());
-			attachMapper.insert(attach);
-		});
+	         attach.setBoard_no(vo.getBoard_no());
+	         attachMapper.insert(attach);
+	      });
 	}
 	
 	
