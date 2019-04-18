@@ -65,11 +65,11 @@
     		</div>
               <h5 th:text="${mainchecklist.title}"></h5>
               <h5 th:text=${mainchecklist.name}></h5>
-              <span id="chdate" th:text=${mainchecklist.reg_date}></span>
+              <span id="chdate" th:text=${mainchecklist.reg_date}></span></br>
               <span id="chstatus" th:switch=${mainchecklist.board_status}>
-              	<span th:case="'0'">open</span>
-              	<span th:case="'1'">fixed</span>
-              	<span th:case="'2'">closed</span>
+              	<span class="status00" th:case="'0'">open</span>
+              	<span class="status00" th:case="'1'">fixed</span>
+              	<span class="status00" th:case="'2'">closed</span>
               </span>
             </div>
             

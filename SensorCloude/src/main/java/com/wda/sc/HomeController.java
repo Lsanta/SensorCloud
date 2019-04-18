@@ -54,6 +54,9 @@ public class HomeController {
 			if(arr.get(i).getTitle().length() > 6) {
 				arr.get(i).setTitle(arr.get(i).getTitle().substring(0,6)+"...");
 			}
+			if(arr.get(i).getReg_date().length() >16) {
+				arr.get(i).setReg_date(arr.get(i).getReg_date().substring(0,16));
+			}
 		}
 		model.addAttribute("sitelist",siteservice.getList());
 		model.addAttribute("timelinelist",timelineservice.timedesc());
