@@ -26,7 +26,7 @@
 #main-container {
   width: 1130px;
   height: 850px;
-  margin: 20px auto;
+  margin: 0px auto;
   padding: 20px;
   border: 1px solid #bcbcbc;
 }
@@ -50,6 +50,7 @@
 }
 #right-bottom {
   width: 400px;
+  margin-top:-30px;
 }
 
 .title-header {
@@ -86,9 +87,9 @@
 
 .timeline {
   width: 340x;
-  height: 38px;
+  height: 45                        px;
   padding: 10px;
-  margin: 10px;
+  margin: 7px;
   border: 1px solid #bcbcbc;
 }
 
@@ -213,8 +214,8 @@ table th {
 }
 
 .images img {
-  width:120px;
-  height:120px;
+  width:100%;
+  height:100%;
   display: block;
   justify-content: center;
   align-items: center;
