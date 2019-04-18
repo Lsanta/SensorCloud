@@ -67,12 +67,23 @@
 								<th scope="col">날짜</th>
 							</tr>
 						</thead>
-						<tbody id="repairchecklist">
+						<tbody id="repairchecklist"  th:if="${repair == null}">
 							<tr th:each="checkboardlist : ${checkboardlist}">
 								<td th:text="${checkboardlist.site_name}">status</td>
 								<td th:text="${checkboardlist.title}">status</td>
 								<td th:text="${checkboardlist.board_status}">status</td>
-								<td th:text="${checkboardlist.user_id}">status</td>
+								<td th:text="${checkboardlist.name}">status</td>
+								<td th:text="${checkboardlist.reg_date}">status</td>
+								<td th:text="${checkboardlist.board_no}" style="display: none"></td>
+							</tr>
+						</tbody>
+						
+						<tbody id="repairchecklist"  th:if="${repair != null}">
+							<tr th:each="checkboardlist : ${repair}">
+								<td th:text="${checkboardlist.site_name}">status</td>
+								<td th:text="${checkboardlist.title}">status</td>
+								<td th:text="${checkboardlist.board_status}">status</td>
+								<td th:text="${checkboardlist.name}">status</td>
 								<td th:text="${checkboardlist.reg_date}">status</td>
 								<td th:text="${checkboardlist.board_no}" style="display: none"></td>
 							</tr>
@@ -89,25 +100,25 @@
 						 		<a th:id="${pageNum}" th:text="${pageNum}"></a>
 							</span> 
 					
-					<a class="pagination-older">NEXT</a>
-					</span> 
+						<a class="pagination-older">NEXT</a>
+					
 						</div>
 					</nav>
 				</div>
 
 				<div class="search">
 					<div class="select">
-						<select>
-							<option>현장이름</option>
-							<option>글쓴이</option>
+						<select id="search-select">
+							<option value="site_name">현장이름</option>
+							<option value="name">글쓴이</option>
 						</select>
 					</div>
 					<section class="search-box">
 						<div class="search-content">
-							<input type="text" />
+							<input type="text" id="keyword"/>
 						</div>
 						<div class="search-button">
-							<button>Search</button>
+							<button id="search">Search</button>
 						</div>
 					</section>
 				</div>

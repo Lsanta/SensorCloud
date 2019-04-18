@@ -19,6 +19,7 @@ public class CheckBoardVO {
 	private String board_file_id;
 	private String file_path;
 	private String file_name;
+	private String filetype;
 	
 	private List<CheckBoardFileVO> attachList;
 }

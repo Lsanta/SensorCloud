@@ -4,8 +4,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,7 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wda.sc.domain.CheckBoardFileVO;
 import com.wda.sc.domain.CheckBoardVO;
-
+import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.Search;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.SiteService;
 
@@ -99,7 +102,7 @@ public class CheckboardCotroller {
 		model.addAttribute("checksitelist", siteservice.getchecksite());
 
 		// 파일 정보
-
+		System.out.println("modlist" + cvo);
 		return "check/checkaddInSite";
 	}
 
@@ -109,6 +112,14 @@ public class CheckboardCotroller {
 		System.out.println("getAttachList" + board_no);
 
 		return new ResponseEntity<>(Checkboardservice.getAttachList(board_no), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/getAttachListmain", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<CheckBoardFileVO>> getAttachListmain(int board_no) {
+		System.out.println("getAttachList" + board_no);
+
+		return new ResponseEntity<>(Checkboardservice.getAttachListmain(board_no), HttpStatus.OK);
 	}
 
 	/// 점검이력에서 해당글 클릭후 수정버튼을 누를시 글쓰기폼에 해당 데이터 전달
@@ -128,7 +139,7 @@ public class CheckboardCotroller {
 
 		// 현장아이디
 		model.addAttribute("siteid", Checkboardservice.getsiteid(board_no));
-
+		
 		return "check/checklistmodify";
 	}
 
@@ -264,5 +275,88 @@ public class CheckboardCotroller {
 
 		return "redirect: /site/" + site_id + "/siterepair/1";
 	}
+	
+		// 수리내역에서 글쓰기를 누른 후  수정버튼을 누른 후  수정
+		@RequestMapping(value = "checkmodInSite.do", method = RequestMethod.POST)
+		public String modcheckboardIn(CheckBoardVO vo, HttpSession session, RedirectAttributes rttr) {
 
+			
+			int site_id = vo.getSite_id();
+			String id = (String) session.getAttribute("id");
+			vo.setUser_id(id);
+			
+			vo.setSite_name(siteservice.getSiteName(vo.getSite_id()));
+			
+			System.out.println("VO뭐야" + vo);
+			//vo안에 있는 site_id 로 site_name뽑기 ?			
+			
+//			System.out.println("------------------------");
+//			System.out.println("checkboard:" + vo);
+//			if (vo.getAttachList() != null) {
+//				vo.getAttachList().forEach(attach -> System.out.println(attach));
+//			}
+//			System.out.println("-----------------------------");
+//
+//			Checkboardservice.register(vo);
+//
+//			rttr.addFlashAttribute("result", vo.getBoard_no());
+
+			return "redirect: /site/" + site_id + "/siterepair/1";
+	}
+	
+	  //점검이력 검색
+	  @RequestMapping(value ="/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
+	  public String checkSearch(
+			  @PathVariable int page, 
+			  @PathVariable String searchType, 
+			  @PathVariable String keyword, Model model) {
+		  
+		  Paging p = new Paging();
+		  Search s = new Search();
+		  ArrayList<CheckBoardVO> searchArr = new ArrayList<CheckBoardVO>();
+		  ArrayList<Integer> arr = new ArrayList<Integer>();
+		  Map<Object, Object> parm = new HashMap<Object, Object>();
+		  
+		  s.setPage(page);
+		  s.setKeyword(keyword);
+		  s.setSearchType(searchType);
+		  
+		  System.out.println(page); //현재 페이지 번호
+		  System.out.println(searchType); //검색 옵션
+		  System.out.println(keyword); //검색 키워드
+		  
+		  searchArr = Checkboardservice.checkSearch(s);
+		  
+		  System.out.println("체크 검색 :" + searchArr);
+		  
+		  int pageNum = 0;
+		  int realNum = page;
+		  p.setTotalNum(searchArr.size());
+		  
+		  System.out.println("체크 전체숫자" +p.getTotalNum());
+		  
+		  if(p.getTotalNum() <= p.getOnePageBoard() ) {
+				pageNum = 1;
+			}else {
+				pageNum = p.getTotalNum()/p.getOnePageBoard();
+				if(p.getTotalNum()%p.getOnePageBoard() > 0) {
+					pageNum = pageNum + 1;
+				}
+			}
+		  
+		  for(int i = 0; i < pageNum; i ++) {
+				arr.add(i+1);
+			}
+		  
+		  p.setEndnum((realNum*10)+1);
+		  p.setStartnum(p.getEndnum()-10);
+		  
+		  parm.put("Paging", p);
+		  parm.put("Search", s);
+		  
+		  model.addAttribute("pageNum",arr);
+		  model.addAttribute("check",Checkboardservice.getSearchResult(parm));
+		  System.out.println("체크 검색 결과 :" + Checkboardservice.getSearchResult(parm));
+		  return "check/check";
+	  }
 }

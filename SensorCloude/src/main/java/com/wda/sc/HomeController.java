@@ -64,6 +64,7 @@ public class HomeController {
 		model.addAttribute("sitelist",siteservice.getList());
 		model.addAttribute("timelinelist",timelineservice.timedesc());
 		model.addAttribute("mainchecklist",arr);
+		System.out.println(arr);
 		return "main";
 	}
 	
@@ -219,9 +220,10 @@ public class HomeController {
 
 	@RequestMapping(value = "/mysensor"+"/{num}", method = RequestMethod.GET)
 	public String mysensor(@PathVariable String num, Locale locale, Model model, HttpSession session) {
-
+		
 		Paging page = new Paging();
 		int pageNum = 0;
+		
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		int realNum = Integer.parseInt(num);
 		page.setTotalNum(mysensorservice.getPageNum());

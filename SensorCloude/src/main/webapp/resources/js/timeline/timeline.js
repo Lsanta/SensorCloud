@@ -104,21 +104,21 @@ $(document).ready(function(){
 	$('.pagination-inner a').on('click', function() {
 		var a = $(".pagination-inner a").index(this);
 		num = a;
-		window.location.href = "/timeline/"+(num+1);
+		window.location.href = "/time/"+(num+1);
 	});
 
 	$('.pagination-newer').click(function(){
 		if(1 > parseInt(url[2])-1 )
-			window.location.href = "/timeline/"+(parseInt(url[2]));
+			window.location.href = "/time/"+(parseInt(url[2]));
 		else
-			window.location.href = "/timeline/"+(parseInt(url[2])-1);
+			window.location.href = "/time/"+(parseInt(url[2])-1);
 	});
 
 	$('.pagination-older').click(function(){
 		if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[2])+1 )
-			window.location.href = "/timeline/"+(parseInt(url[2]));
+			window.location.href = "/time/"+(parseInt(url[2]));
 		else
-			window.location.href = "/timeline/"+(parseInt(url[2])+1);
+			window.location.href = "/time/"+(parseInt(url[2])+1);
 	});
 
 	
