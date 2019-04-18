@@ -19,24 +19,35 @@
 			<li><a href="/manage/1">사용자관리</a></li>
 		</ul>
 	      </nav>
-	      <div>
+	      <div th:if="${session.id != null}" >
 	      	<a href="/mypage/1">마이페이지</a>
-	      	<a href="/login/logout">로그아웃</a>
+	      	<a href="/logout">로그아웃</a>
+	      </div>
+	      <div th:if="${session.id == null}" >
+	      	<a href="/login">로그인</a>
 	      </div>
 	      <a href="#a" class="close">close</a>
 	</div>
 </div>
-	    <ul class="a2">
+	    <ul class="a2" th:if="${session.id != null}" >
 	    	<li><a href="/mypage/1">마이페이지</a></li>
-	    	<li class="hide"><a href="/login/logout">로그아웃</a></li>
+	    	<li class="hide"><a href="/logout">로그아웃</a></li>
+	    	<a href="#a" class="manclose">close</a>
+	    	<!-- <li class="logout"><a href="#a">man</a></li> -->
+	    </ul>
+	     <ul class="a2" th:if="${session.id == null}" >
+	    	<li class="hide"><a href="/login">로그인</a></li>
 	    	<a href="#a" class="manclose">close</a>
 	    	<!-- <li class="logout"><a href="#a">man</a></li> -->
 	    </ul>
 	    <div class="man">
 	    	<div class="manmenu">
-	    		<ul>
+	    	<ul th:if="${session.id != null}">
 	    		<li><a href="/mypage">마이페이지</a></li>
-	    	    <li><a href="/login/logout">로그아웃</a></li>
+	    	    <li><a href="/logout">로그아웃</a></li>
+	    	</ul>
+	    	<ul th:if="${session.id == null}">
+	    	    <li><a href="/login">로그인</a></li>
 	    	</ul>
 	    	</div>
 	    </div>

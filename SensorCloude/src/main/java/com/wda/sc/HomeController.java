@@ -62,6 +62,12 @@ public class HomeController {
 		return "main";
 	}
 	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect: /";
+	}
+	
 	@RequestMapping(value = "/check"+"/{num}", method = RequestMethod.GET)
 	public String check(@PathVariable String num, Model model) {
 		Paging page = new Paging();
