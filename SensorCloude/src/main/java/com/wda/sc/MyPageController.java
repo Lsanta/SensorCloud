@@ -45,7 +45,11 @@ public class MyPageController {
 		return "mypage/modifymypage";
 	}
 	
-	
+	@RequestMapping(value = "/imgupload", method = RequestMethod.GET)
+	public String address(Locale locale, Model model) {
+		
+		return "mypage/imgupload";
+	}
 	
 	@RequestMapping(value= "/mypagecheckview/"+"{board_no}", method = RequestMethod.GET)
 	public String checkin(Locale locale,@PathVariable  String board_no, Model model) {

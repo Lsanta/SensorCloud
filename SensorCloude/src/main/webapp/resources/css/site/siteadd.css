@@ -258,19 +258,19 @@ input[type=text] {
 #addnetwork_right {
 	width: 55%;
 	display: inline-block;
+	top: -50px;                             
 }
 
 #addnetwork_right1 {
 	display: inline-block;
 	box-sizing: border-box;
-	width: 45%;
+	width: 100%;
 }
 
 #addnetwork_right2 {
 	display: inline-block;
 	box-sizing: border-box;
 	width: 53%;
-	top: -230px;
 }
 
 #sample6_address {
