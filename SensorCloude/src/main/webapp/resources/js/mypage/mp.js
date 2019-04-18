@@ -3,10 +3,10 @@ $(document).on("click", "#mypagechecklist tr", function() {
 	// 클릭한 행을 tr 변수로
 	var tr = $("#mypagechecklist tr").index(this);
 
-	var a = $("#mypagechecklist tr:eq(" + tr + ") td:eq(5)").text();
+	var board_no = $("#mypagechecklist tr:eq(" + tr + ") td:eq(4)").text();
 	// 내가클릭한 테이블의 행을 판별해야하기위해 board_no 정보를 넘긴다
-
-	window.location.href = "/mypage/mypagecheckview/" + a;
+	
+	window.location.href = "/mypage/mypagecheckview/" + board_no;
 });
 
 $(document).ready(function() {

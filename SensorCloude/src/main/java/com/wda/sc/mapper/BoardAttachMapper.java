@@ -9,5 +9,9 @@ public interface BoardAttachMapper {
 	public void insert(CheckBoardFileVO vo);
 	
 	public List<CheckBoardFileVO> findByBno(int board_no);
+	
+	public void deleteAll(int board_no);
+	
+	public List<CheckBoardFileVO> findByBnomain(int board_no);
 
 }

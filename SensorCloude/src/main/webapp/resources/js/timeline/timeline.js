@@ -34,6 +34,64 @@ $(document).ready(function(){
 		});
 		
 	}); 
+	
+	$(".delete").on('click', function() {
+
+		if (confirm("정말 삭제하시겠습니까?") == true) {
+
+		} else {
+			return;
+		}
+
+		if (true) {
+			var content = $(this).parent();
+			var content2 = content.siblings().first();
+			var content3 = content2.text();
+
+			var query = {
+				content : content3
+			}
+
+			$.ajax({
+				type : "POST",
+				url : "/timeline/timelinedelete.do",
+				data : query,
+				success : function(data) {
+					if (data == "success") {
+						alert("삭제되었습니다");
+						location.reload();
+					} else {
+						alert("삭제에 실패했습니다");
+					}
+				}
+
+			}); // ajax 종료
+			/*}*/
+		}
+
+	});
+
+	$(".modify").on('click',function() {
+
+				var div = $(this).parent().attr('id');
+							
+				var content = $(this).parent();
+				var content2 = content.siblings().first();
+				var content3 = content2.text();
+
+				var query = {
+					content : content3
+				}
+
+				window.location.href = "timeline/timelinemodify?content="+ content3+"/"+div;
+
+			});
+	$('#textarea').keypress(function(event){
+	     if ( event.which == 13 ) {
+	         $('#submit').click();
+	     
+	     }
+	});
 	var num = 0;
 
 	var newURL =  window.location.pathname;
@@ -46,21 +104,21 @@ $(document).ready(function(){
 	$('.pagination-inner a').on('click', function() {
 		var a = $(".pagination-inner a").index(this);
 		num = a;
-		window.location.href = "/timeline/"+(num+1);
+		window.location.href = "/time/"+(num+1);
 	});
 
 	$('.pagination-newer').click(function(){
 		if(1 > parseInt(url[2])-1 )
-			window.location.href = "/timeline/"+(parseInt(url[2]));
+			window.location.href = "/time/"+(parseInt(url[2]));
 		else
-			window.location.href = "/timeline/"+(parseInt(url[2])-1);
+			window.location.href = "/time/"+(parseInt(url[2])-1);
 	});
 
 	$('.pagination-older').click(function(){
 		if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[2])+1 )
-			window.location.href = "/timeline/"+(parseInt(url[2]));
+			window.location.href = "/time/"+(parseInt(url[2]));
 		else
-			window.location.href = "/timeline/"+(parseInt(url[2])+1);
+			window.location.href = "/time/"+(parseInt(url[2])+1);
 	});
 
 	

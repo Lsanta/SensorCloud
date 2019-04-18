@@ -4,15 +4,54 @@
 	data-layout-decorate="~{include/layout}">
 
 <th:block layout:fragment="page_head">
-	<title>보유센서</title>
+	<title>센서 추가</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/asidebar.css">
 	<link rel="stylesheet" type="text/css" href="/resources/css/mysensor/sensorlist.css">
 </th:block>
 
 <th:block layout:fragment="contents">
-	<div id="container">
+		<aside class="aside" th:each="siteInfo : ${siteInfo}">
+	
+		<a> <svg version="1.1" id="nav-btn"
+				xmlns="http://www.w3.org/2000/svg"
+				xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				viewBox="0 0 512 512" enable-background="new 0 0 512 512"
+				xml:space="preserve">
+    <path id="list-view-icon"
+					d="M462,108.857H50V50h412V108.857z M462,167.714H50v58.857h412V167.714z M462,285.429H50v58.857h412
+      V285.429z M462,403.143H50V462h412V403.143z" />
+  </svg>
+		</a>
+			<h1 th:text="${siteInfo.site_name}"></h1>
+			<span id="sid" th:text="${siteInfo.site_id}" style="display:none"></span>
+			
+		<nav id="nav">
+			<ul>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'" >수리내역</a></li>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage'">센서관리</a></li>
+				<li style="line-height: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트 다운로드</a></li>
+				<li><span id="num">연락망</span> 
+				<span id="down" style="display: inline"> 
+					<img src="/resources/img/down-arrow.svg">
+				</span> 
+				<span id="up" style="display: none"> 
+					<img src="/resources/img/up-arrow.svg">
+				</span>
+				</li>
+			<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
+				<span class="mang" th:text="${alarmMember.name}"></span>
+				<span class="mang" th:text="${alarmMember.tel}"></span>
+			</div>	
+		
+			</ul>
+		</nav>
+	</aside>
+
+<div id="container">
 		<div id="main-content">
 			<div class="title-header">
 				<h1>보유센서</h1>
@@ -31,7 +70,7 @@
 						<th scope="col">등록일</th> 
 					</tr>
 				</thead>
-				<tbody id="list" th:if="${sensor == null}">
+				<tbody id="list">
 				 	<tr th:each="sensorlist : ${sensorlist}">
 						<td th:text="${sensorlist.sensor_sn}"></td>
 						<td th:text="${sensorlist.sensor_kind}"></td>
@@ -41,18 +80,7 @@
 						<td th:text="${sensorlist.site_name}"></td>
 						<td th:text="${sensorlist.create_day}"></td>
 					</tr> 
-				</tbody>
-				
-				<tbody id="list" th:if="${sensor != null}">
-					<tr th:each="sensor : ${sensor}">
-						<td th:text="${sensor.sensor_sn}"></td>
-						<td th:text="${sensor.sensor_kind}"></td>
-						<td th:text="${sensor.model_name}"></td>
-						<td th:text="${sensor.voltage}"></td>
-						<td th:text="${sensor.manufacturer}"></td>
-						<td th:text="${sensor.site_name}"></td>
-						<td th:text="${sensor.create_day}"></td>
-					</tr> 
+
 				</tbody>
 			</table>
 		</div>
@@ -73,17 +101,16 @@
 
 		<div class="search">
 			<div class="select">
-				<select id="search-select">
-					<option value="sensor_kind">종류</option>
-					<option value="manufacturer">제조사</option>
+				<select>
+					<option>종류</option>
 				</select>
 			</div>
 			<section class="search-box">
 				<div class="search-content">
-					<input type="text" id="keyword"/>
+					<input type="text" />
 				</div>
 				<div class="search-button">
-					<button id="search">Search</button>
+					<button>Search</button>
 				</div>
 			</section>
 		</div>
@@ -91,6 +118,7 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
-	<script src="/resources/js/mysensor/sensorlist.js"></script>
+	<script src="/resources/js/site/asidebar.js"></script>
+	<script src="/resources/js/site/sensormanage.js"></script>
 </th:block>
 </html>

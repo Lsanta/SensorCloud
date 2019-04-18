@@ -2,6 +2,7 @@ package com.wda.sc.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.wda.sc.domain.CheckBoardFileVO;
 import com.wda.sc.domain.CheckBoardVO;
-import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.Search;
 import com.wda.sc.mapper.BoardAttachMapper;
 import com.wda.sc.mapper.CheckboardMapper;
 
@@ -98,11 +99,14 @@ public class CheckboardServiceImplement implements CheckboardService {
 	@Override
 	public List<CheckBoardFileVO> getAttachList(int board_no) {
 		// 첨부파일 반환
-		System.out.println("get Attach list by board_no" + board_no);
-
 		return attachMapper.findByBno(board_no);
 	}
-
+	@Override
+	public List<CheckBoardFileVO> getAttachListmain(int board_no) {
+		// 중복된 board_no 제거후 첨부파일 반환
+		System.out.println("맵퍼" + board_no);
+		return attachMapper.findByBnomain(board_no);
+	}
 
 	@Override
 	public int getsiteid(String board_no) {
@@ -110,6 +114,17 @@ public class CheckboardServiceImplement implements CheckboardService {
 		return mapper.getsiteid(board_no);
 	}
 
-	
+	@Override
+	public ArrayList<CheckBoardVO> checkSearch(Search s) {
+		// 검색1
+		return mapper.checkSearch(s);
+	}
+
+
+	@Override
+	public ArrayList<CheckBoardVO> getSearchResult(Map<Object, Object> parm) {
+		// 검색2
+		return mapper.getSearchResult(parm);
+	}
 
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.Search;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
@@ -57,7 +58,18 @@ public interface SiteService {
    //현장 상태 띄우기
    public ArrayList<SiteVO> getStatus(String site_id);
 
-   
+   //현장관리 검색1
+   public ArrayList<SiteVO> siteSearch(Search s);
+   //현장관리 검색2
+   public ArrayList<SiteVO> getSearchResult(Map<Object, Object> parm);
+
+   //수리내역 검색1
+   public ArrayList<CheckBoardVO> repairSearch(Search s);
+   //수리내역 검색2
+   public ArrayList<CheckBoardVO> getSearchResultRepair(Map<Object, Object> parm);
+
+   //site id로 site name가져오기
+   public String getSiteName(int site_id);
 
 }
   
