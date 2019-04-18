@@ -159,4 +159,16 @@ public class CheckboardServiceImplement implements CheckboardService {
 		return mapper.updateCheckBoard(vo);
 	}
 
+	@Override
+	public ArrayList<CheckBoardVO> dateChange(int data) {
+		// 최근 ?개월 
+		return mapper.dateChange(data);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> getTermList(Map<Object, Object> parm) {
+		//기간 검색 + 페이징
+		return mapper.getTermList(parm);
+	}
+
 }
