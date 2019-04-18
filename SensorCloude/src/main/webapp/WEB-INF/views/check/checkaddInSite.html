@@ -169,7 +169,7 @@
 	<div class="but">
 		<div class="but0">
 		<button data-oper='list' type="button" class="back">목록으로</button>
-        <button data-oper='modify' th:if="${modlist != null}" th:each="modlist : ${modlist}" type="button" class="modify">수정하기</button>
+        <button data-oper='modify' th:if="${modlist != null}" th:each="modlist : ${modlist}" type="submit" class="modify">수정하기</button>
     	</div>
 	</div>
 </div>
@@ -256,14 +256,12 @@ $(document).ready(function(){
 	   });
 	   
 	   var repairid = $("#repairid").text();
-	   
-	   //숨겨놓은 site_id
-	   var aa =   $(".se > option:last").val();
-	   
+	  	   
 	   for(var i=1; i < opt_vals.length; i++ ){
 		      var optV = opt_vals[i];
-	
-		      if(optV == aa)
+
+		      
+		      if(optV == Number(repairid))
 				 $(".se > option").eq(i).prop("selected", true);
 		      
 		      
@@ -295,7 +293,7 @@ $(document).ready(function(){
 	   
 	   var formObj = $("form[role='form']");
 	   
-	   $(".insert").on("click", function(e){
+	   $("input[type=submit]").on("click", function(e){
 	     
 	     e.preventDefault();
 	     

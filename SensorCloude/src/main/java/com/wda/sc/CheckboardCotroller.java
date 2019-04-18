@@ -146,8 +146,8 @@ public class CheckboardCotroller {
 	// 현장 에서 해당 글을 클릭후 삭제버튼을 누른 후
 
 	@RequestMapping(value = "/checkdel" + "/{board_no}" + "/{site_id}", method = RequestMethod.GET)
-	public String checkdel(Locale locale, Model model, @PathVariable String board_no, @PathVariable String site_id) {
-		int num = Integer.parseInt(board_no);
+	public String checkdel(Locale locale, Model model, @PathVariable int board_no, @PathVariable String site_id) {
+		int num = board_no;
 		List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
 
 		System.out.println("삭제버튼 후 board_no :" + board_no);
@@ -164,11 +164,11 @@ public class CheckboardCotroller {
 		return "redirect: /site/" + site_id + "/siterepair/1";
 	}
 	
-	//점검이력에서 해당 글을 클릭후  삭제버튼을 누른 후
+		//점검이력에서 해당 글을 클릭후  삭제버튼을 누른 후
 		@RequestMapping(value = "/checkdel2"+ "/{board_no}", method = RequestMethod.GET)
-		public String checkdel2(Locale locale, Model model, @PathVariable String board_no) {
+		public String checkdel2(Locale locale, Model model, @PathVariable int board_no) {
 			System.out.println("gg");
-			int num = Integer.parseInt(board_no);
+			int num =board_no;
 			List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
 			
 		
@@ -209,7 +209,7 @@ public class CheckboardCotroller {
 	}
 
 	@RequestMapping(value = "/checkdel3" + "/{board_no}", method = RequestMethod.GET)
-	public String checkdel3(Locale locale, Model model, @PathVariable String board_no) {		
+	public String checkdel3(Locale locale, Model model, @PathVariable int board_no) {		
 		// int num = Integer.parseInt(board_no);
 		// List<CheckBoardFileVO> attachList = Checkboardservice.getAttachList(num);
 
@@ -285,10 +285,17 @@ public class CheckboardCotroller {
 			String id = (String) session.getAttribute("id");
 			vo.setUser_id(id);
 			
+			//vo안에 있는 site_id 로 site_name 가져오기		
 			vo.setSite_name(siteservice.getSiteName(vo.getSite_id()));
 			
 			System.out.println("VO뭐야" + vo);
-			//vo안에 있는 site_id 로 site_name뽑기 ?			
+						
+			int i = Checkboardservice.updateCheck(vo);
+			
+			System.out.println("결과 : " + i );
+			if( i == 1) {
+				Checkboardservice.fileupdate(vo);
+			}
 			
 //			System.out.println("------------------------");
 //			System.out.println("checkboard:" + vo);
@@ -300,7 +307,9 @@ public class CheckboardCotroller {
 //			Checkboardservice.register(vo);
 //
 //			rttr.addFlashAttribute("result", vo.getBoard_no());
-
+			
+			
+			System.out.println("수정 성공 수리내역으로");
 			return "redirect: /site/" + site_id + "/siterepair/1";
 	}
 	
