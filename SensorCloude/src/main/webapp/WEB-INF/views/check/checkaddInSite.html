@@ -113,9 +113,7 @@
 	<th class="th03">
 		<!-- 넘어온 값 을 selected 된 상태로 띄움 -->
 		<select name="site_id" class="se">
-   	      <option value="">현장선택</option>
-  		  <option th:each="checksitelist : ${checksitelist}" th:value="${checksitelist.site_id}" th:text="${checksitelist.site_name}"></option>
-  		  <option th:if="${modlist != null}" th:each="modlist : ${modlist}" th:value="${modlist.site_id}" th:text="${modlist.site_name}" style="display:none"></option>
+  		  <option th:if="${modlist != null}" th:each="modlist : ${modlist}" th:value="${modlist.site_id}" th:text="${modlist.site_name}"></option>
 		</select>
 		
 		<!-- 수리내역에서 넘긴 site_id -->
@@ -201,7 +199,8 @@ $(document).ready(function() {
 	    
 	    if(operation === 'list'){
 	    	 //move to list
-		      formObj.attr("action", "/site/"+url[4]+"/siterepair/1").attr("method","get");
+	    	  var back = $("#repairid").text();
+		      formObj.attr("action", "/site/"+back+"/siterepair/1").attr("method","get");
 	    	 
 	    }else if(operation === 'modify'){
    			 alert("submit clicked");
@@ -250,7 +249,7 @@ function showImage(fileCallPath){
 $(document).ready(function(){
 	
 	   //select들 중의 site_id 값 과 숨겨놓은 site_id가 일치하면 selected 속성 부여 
-	   var opt_vals = [];
+	 /*  var opt_vals = [];
 	   $(".se > option").each(function(){
 		  opt_vals.push($(this).val()); 
 	   });
@@ -267,7 +266,7 @@ $(document).ready(function(){
 		      
 		      if(Number(repairid) == optV)
 		    	 $(".se > option").eq(i).prop("selected", true);
-	   }
+	   } */
 	   
 	   
 	   //select들 중의 value 값 과 숨겨놓은 board_status가 일치하면 selected 속성 부여 
@@ -293,7 +292,7 @@ $(document).ready(function(){
 	   
 	   var formObj = $("form[role='form']");
 	   
-	   $("input[type=submit]").on("click", function(e){
+	   $(".insert").on("click", function(e){
 	     
 	     e.preventDefault();
 	     
@@ -430,8 +429,8 @@ $(document).ready(function(){
 					if(attach.fileType){
 						var fileCallPath = encodeURIComponent( attach.file_Path+ "/s_"+attach.uuid + "_"+attach.file_name);
 						  str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' "
-				            str +=" data-filename='"+attach.file_Name+"' data-type='"+attach.fileType+"' ><div>";
-				            str += "<span> "+ attach.file_Name+"</span>";
+				            str +=" data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' ><div>";
+				            str += "<span> "+ attach.file_name+"</span>";
 				            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' "
 				            str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
 				            str += "<img src='/display?fileName="+fileCallPath+"'>";
@@ -440,8 +439,8 @@ $(document).ready(function(){
 					
 					} else {
 					    str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' "
-			            str += "data-filename='"+attach.file_Name+"' data-type='"+attach.fileType+"' ><div>";
-			            str += "<span> "+ attach.file_Name+"</span><br/>";
+			            str += "data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' ><div>";
+			            str += "<span> "+ attach.file_name+"</span><br/>";
 			            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' "
 			            str += " class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
 			            str += "<img src='/resources/img/attach.png'></a>";
