@@ -212,6 +212,10 @@ button:hover {
 #container {
     width: 80%;
     }
+    
+p {
+	margin-bottom: 20px;
+}    
 	
 h2 {
 	margin-left: 8%
@@ -236,10 +240,19 @@ input[type=text] {
 	display: inline-block;
 }
 
+
+#addnetwork {
+	position: relative;
+	height: 250px;
+}
+
 #addnetwork_left {
-    margin-left: 5%;
+	position: relative;
+	bottom: 220px;
+	margin-left: 5%;
     display: inline-block;
     width: 25%;
+    margin-top: 250px;
 }
 
 #addnetwork_right {

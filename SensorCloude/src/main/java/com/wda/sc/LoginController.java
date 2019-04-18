@@ -60,14 +60,6 @@ public class LoginController {
 	public String sign(Model model) {
 		return "login/sign";
 	}
-	
-	@RequestMapping(value = "logout", method = RequestMethod.GET)
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "login/login";
-	}
-	
-
 
 	@RequestMapping(value ="/signup", method = RequestMethod.POST)
 	public String signup(MemberVO m) {
