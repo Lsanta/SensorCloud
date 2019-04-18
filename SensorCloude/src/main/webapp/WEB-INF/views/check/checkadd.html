@@ -112,15 +112,36 @@ function showImage(fileCallPath){
 <script>
 $(document).ready(function(){
 
-	    
+	
+	   var title = document.check.title;
+	   var boardcontent = document.check.board_content;
+
+
+		$(".back").click(function(){
+			window.location.href="/check/1";
+		});  
+	
 	   var formObj = $("form[role='form']");
 	   
 	   $("button[type='submit']").on("click", function(e){
-	     
+	
 	     e.preventDefault();
-	     
-	     console.log("submit clicked");
-	     
+
+	     if(title.value.trim() == ""){
+	            alert("제목을 입력해주세요.");
+	            title.val('');
+	            title.focus();
+	            return false;
+	        }else if(boardcontent.value.trim()==""){
+	            alert("내용을 입력해주세요.");
+	            boardcontent.val('');
+	            board_content.focus();
+	            return false;
+	        } else if($(".se > option:selected").val() == ""){
+	        	alert("현장을 선택하세요.")
+	        	return false;
+	        	
+	        }
 	     var str = "";
 	     
 	     $(".uploadResult ul li").each(function(i, obj){
@@ -139,10 +160,9 @@ $(document).ready(function(){
 	       
 	     });
 	     
-	     console.log(str);
 	     
 	     formObj.append(str).submit();
-	     
+		    
 	   });
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 	var maxSize = 5242880;

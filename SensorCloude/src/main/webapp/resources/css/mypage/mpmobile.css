@@ -15,12 +15,18 @@
     font-size: 1.8em;
   }
 
-button {
-	margin: 0 0 0 5%;
-	width: 80px;
-	font-size: 10px;
-	float: left;
+h3 {
+	margin-left: 16px;
+	font-size: 0.9em;
 }
+
+.imgbtn {
+	width:14%;
+}
+
+#buttons {
+	margin-left: 4%;
+} 
 
 table {
   border: 1px solid #ccc;

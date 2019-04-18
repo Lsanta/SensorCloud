@@ -12,10 +12,11 @@
 	<link rel="stylesheet" href="/resources/css/check/cbweb.css">
 	<link rel="stylesheet" media="(min-width:501px) and (max-width:800px)" href="/resources/css/check/cbtablet.css">
 	<link rel="stylesheet" media="(min-width:0px) and (max-width:500px)" href="/resources/css/check/cbmobile.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </th:block>
 
 <th:block layout:fragment="contents">
-<form role="form" name="check" method="post" action="/checkboard/checkadd.do">
+<form role="form" name="check" method="post" action="/checkboard/checkmod.do">
 	<div class="a">
 	<div class="index">점검이력</div>
 	<div class="title1">
@@ -37,23 +38,22 @@
 		<select name="site_id" class="se">
    	      <option value="">현장선택</option>
   		  <option th:each="checksitelist : ${checksitelist}" th:value="${checksitelist.site_id}" th:text="${checksitelist.site_name}"></option>
-  		  <option th:if="${modlist != null}" th:each="modlist : ${modlist}" th:value="${modlist.site_id}" th:text="${modlist.site_name}" style="display:none"></option>
 		</select>
 		<!-- 수리내역에서 넘긴 site_id -->
-	    <div id="repairid" th:if="${site_id != null}" th:text="${site_id}" style="display:none"></div>
+	    <div id="repairid" th:if="${siteid != null}" th:text="${siteid}" style="display:none"></div>
 	</th>
 	<th class="status">게시글 상태</th>
 		
 		<!-- 비어있거나 권한이 5 이하면 원래대로 -->
 		<th th:if="${auth == null || auth < 5}" class="stse">
-			<select name="status" id="sse">
+			<select name="board_status" id="sse">
   		 	 	<option value="0">open</option>
   		 	 	<option value="1">fixed</option>
 			</select>
 		</th>
 		<!-- 비어있지 않고 권한이 5이면 -->
 		<th th:if="${auth != null && auth == 5}" class="stse">
-			<select name="status" id="sse">
+			<select name="board_status" id="sse">
 				<option value="0">open</option>
   		 	 	<option value="1">fixed</option>
   		 	 	<option value="2">closed</option>
@@ -90,10 +90,12 @@
 	<div class="but">
 		<div class="but0">
 		<button type="button" class="back">목록으로</button>
-        <button type="submit" class="insert">등록하기</button>
+        <button type="submit" class="insert">수정하기</button>
     	</div>
 	</div>
 </div>
+	<!-- 숨겨놓는 board_no -->
+	<input th:if="${modlist != null}" name="board_no" th:each="modlist : ${modlist}" th:value="${modlist.board_no}" style="display:none"></input>
 </form>
 </th:block>
 
@@ -135,21 +137,16 @@ $(document).ready(function(){
 	   $(".se > option").each(function(){
 		  opt_vals.push($(this).val()); 
 	   });
-	   
-	   var repairid = $("#repairid").text();
-	   
+	  
+	   var repairid = $("#repairid").text(); 
 	   //숨겨놓은 site_id
 	   var aa =   $(".se > option:last").val();
 	   
-	   for(var i=1; i < opt_vals.length-1; i++ ){
+	   for(var i=1; i < opt_vals.length; i++ ){
 		      var optV = opt_vals[i];
-		     
-		      if(optV == aa)
-				 $(".se > option").eq(i).prop("selected", true);
 		      
-		      
-		      if(Number(repairid) == optV)
-		    	 $(".se > option").eq(i).prop("selected", true);
+		      if(optV == Number(repairid))
+					 $(".se > option").eq(i).prop("selected", true);
 	   }
 	   
 	   //select들 중의 value 값 과 숨겨놓은 board_status가 일치하면 selected 속성 부여 
@@ -172,7 +169,7 @@ $(document).ready(function(){
 	   
 	   var formObj = $("form[role='form']");
 	   
-	   $("button[type='submit']").on("click", function(e){
+	   $(".insert").on("click", function(e){
 	     
 	     e.preventDefault();
 	     
@@ -250,7 +247,7 @@ $(document).ready(function(){
 		}); //$.ajax
 	});
 
-	/*  function showUploadedFile(uploadResultArr){
+	  function showUploadedFile(uploadResultArr){
 	   
 	   var str = "";
 	   
@@ -274,69 +271,99 @@ $(document).ready(function(){
 	   });
 	   
 	   uploadResult.append(str);
-	 }  */
-	function showUploadResult(uploadResultArr){
-	    
-	    if(!uploadResultArr || uploadResultArr.length == 0){ return; }
-	    
-	    var uploadUL = $(".uploadResult ul");
-	    
-	    var str ="";
-	    
-	    $(uploadResultArr).each(function(i, obj){
-	    
-	        /*  //image type
-	        if(obj.image){
-	          var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
-	          str += "<li><div>";
-	          str += "<span> "+ obj.fileName+"</span>";
-	          str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-	          str += "<img src='/display?fileName="+fileCallPath+"'>";
-	          str += "</div>";
-	          str +"</li>";
-	        }else{
-	          var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);            
-	            var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
-	              
-	          str += "<li><div>";
-	          str += "<span> "+ obj.fileName+"</span>";
-	          str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-	          str += "<img src='/resources/img/attach.png'></a>";
-	          str += "</div>";
-	          str +"</li>";
-	        }  */
-			//image type
-			 
-			if(obj.image){
-				var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
-				str += "<li data-path='"+obj.uploadPath+"'";
-				str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
-				str +" ><div>";
-				str += "<span> "+ obj.fileName+"</span>";
-				str += "<button type='button' data-file=\'"+fileCallPath+"\' "
-				str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-				str += "<img src='/display?fileName="+fileCallPath+"'>";
-				str += "</div>";
-				str +"</li>";
-			}else{
-				var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);			      
-			    var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+	 } 
+	  
+	 function showUploadResult(uploadResultArr){
+		    
+		    if(!uploadResultArr || uploadResultArr.length == 0){ return; }
+		    
+		    var uploadUL = $(".uploadResult ul");
+		    
+		    var str ="";
+		    
+		    $(uploadResultArr).each(function(i, obj){
+	   
+				 
+				if(obj.image){
+					var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
+					str += "<li data-path='"+obj.uploadPath+"'";
+					str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
+					str +" ><div>";
+					str += "<span> "+ obj.fileName+"</span>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\' "
+					str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+					str += "<img src='/display?fileName="+fileCallPath+"'>";
+					str += "</div>";
+					str +"</li>";
+				}else{
+					var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);			      
+				    var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+				      
+					str += "<li "
+					str += "data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"' ><div>";
+					str += "<span> "+ obj.fileName+"</span>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' " 
+					str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+					str += "<img src='/resources/img/attach.png'></a>";
+					str += "</div>";
+					str +"</li>";
+				} 
+
+		    });
+		    
+		    uploadUL.append(str);
+		  }
+
+		 
+		 var newURL =  window.location.pathname;
+		 var url = newURL.split('/');
+			
+			
+			var board_no = parseInt(url[3]);
+			   $.getJSON("/checkboard/getAttachList",{board_no : board_no},function(arr){
+				   console.log(arr);
+				   
+				   var str = "";
+					 
+					 $(arr).each(function(i, attach){
+						//image type
+						if(attach.fileType){
+							var fileCallPath = encodeURIComponent( attach.file_Path+ "/s_"+attach.uuid + "_"+attach.file_name);
+							  str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' "
+					            str +=" data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' ><div>";
+					            str += "<span> "+ attach.file_name+"</span>";
+					            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' "
+					            str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+					            str += "<img src='/display?fileName="+fileCallPath+"'>";
+					            str += "</div>";
+					            str +"</li>";
+						
+						} else {
+						    str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' "
+				            str += "data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' ><div>";
+				            str += "<span> "+ attach.file_name+"</span><br/>";
+				            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' "
+				            str += " class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+				            str += "<img src='/resources/img/attach.png'></a>";
+				            str += "</div>";
+				            str +"</li>";
+						}
+						 
+					 });
+					 
+					 $(".uploadResult ul").html(str);
+					 
+				 }); //end getjson
+		 
+		 $(".uploadResult").on("click", "button", function(e){
+			    
+			    console.log("delete file");
 			      
-				str += "<li "
-				str += "data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"' ><div>";
-				str += "<span> "+ obj.fileName+"</span>";
-				str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' " 
-				str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-				str += "<img src='/resources/img/attach.png'></a>";
-				str += "</div>";
-				str +"</li>";
-			} 
-
-	    });
-	    
-	    uploadUL.append(str);
-	  }
-
+			    if(confirm("이 파일을 삭제 하시겠습니까?")){
+			    	var targetLi = $(this).closest("li");
+			    	targetLi.remove();
+			    }
+			});
 	 
 	 
 	 
