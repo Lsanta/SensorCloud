@@ -6,7 +6,7 @@ $(document).on("click", "#mypagechecklist tr", function() {
 	var board_no = $("#mypagechecklist tr:eq(" + tr + ") td:eq(4)").text();
 	// 내가클릭한 테이블의 행을 판별해야하기위해 board_no 정보를 넘긴다
 	
-	window.location.href = "/mypage/mypagecheckview/" + board_no;
+	window.location.href = "/checkboard/" + board_no;
 });
 
 $(document).ready(function() {

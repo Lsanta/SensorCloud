@@ -15,9 +15,16 @@
     font-size: 1.8em;
   }
 
-button {
-	margin: 0 0 0 6%;
-	width: 125px;
+h3 {
+	margin-left: 44px;
+}
+
+.imgbtn {
+	width: 9%;
+}
+
+#buttons {
+	margin-left: 6%;
 }
 
 
