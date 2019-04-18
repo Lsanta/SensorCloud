@@ -25,7 +25,7 @@
 
 #main-container {
   width: 1130px;
-  height: 750px;
+  height: 850px;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #bcbcbc;
@@ -213,7 +213,12 @@ table th {
 }
 
 .images img {
+  width:120px;
+  height:120px;
   display: block;
+  justify-content: center;
+  align-items: center;
+  padding: 13px;
 }
 
 .images h5 {
