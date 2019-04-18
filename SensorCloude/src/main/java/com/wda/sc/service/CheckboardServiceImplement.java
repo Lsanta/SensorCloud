@@ -149,8 +149,14 @@ public class CheckboardServiceImplement implements CheckboardService {
 
 	@Override
 	public int updateCheck(CheckBoardVO vo) {
-		// TODO Auto-generated method stub
+		// 수리내역 게시글 수정
 		return mapper.updateCheck(vo);
+	}
+
+	@Override
+	public int updateCheckBoard(CheckBoardVO vo) {
+		//점검이력  게시글 수정
+		return mapper.updateCheckBoard(vo);
 	}
 
 }

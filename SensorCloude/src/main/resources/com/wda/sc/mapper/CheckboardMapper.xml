@@ -121,4 +121,11 @@ and rownum < 7
 		update ( select * from check_board where board_no = #{board_no})
 		set reg_date = sysdate, title = #{title}, board_content = #{board_content}, board_status = #{board_status}
 	</update>
+	
+   <!-- 점검이력 글 수정 -->
+   <update id="updateCheckBoard" parameterType="com.wda.sc.domain.CheckBoardVO">
+		update ( select * from check_board where board_no = #{board_no})
+		set reg_date = sysdate, title = #{title}, board_content = #{board_content}, board_status = #{board_status}, site_id = #{site_id}
+	</update>
+
 </mapper>
