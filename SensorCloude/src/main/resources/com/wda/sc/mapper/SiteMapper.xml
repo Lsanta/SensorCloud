@@ -172,4 +172,12 @@
 		 order by x.reg_date desc
 	]]>
 	</select>
+	
+	<!-- site_id로  site_name 가져오기 -->
+	<select id="getSiteName" resultType="String">
+	<![CDATA[ 
+		select site_name
+		from site where site_id = #{site_id}
+		]]>
+	</select>
 </mapper>

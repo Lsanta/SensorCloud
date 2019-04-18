@@ -68,5 +68,8 @@ public interface SiteService {
    //수리내역 검색2
    public ArrayList<CheckBoardVO> getSearchResultRepair(Map<Object, Object> parm);
 
+   //site id로 site name가져오기
+   public String getSiteName(int site_id);
+
 }
   

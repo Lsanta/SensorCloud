@@ -1,6 +1,7 @@
 package com.wda.sc;
 
-
+import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
@@ -25,26 +26,12 @@ public class LoginController {
 	
 	private LoginService loginservice;
 	
-	@RequestMapping(value = "help", method = RequestMethod.GET)
-	public String help(Model model) {
-		return "login/help";
-	}
-	
-	@RequestMapping(value = "sign", method = RequestMethod.GET)
-	public String sign(Model model) {
-		return "login/sign";
-	}
-	
-	@RequestMapping(value = "logout", method = RequestMethod.GET)
-	public String logout(HttpSession session) {
-		session.invalidate();
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
 		return "login/login";
 	}
 	
-	
-	
-	
-	@RequestMapping("login.do") 
+	@RequestMapping(value = "", method = RequestMethod.POST) 
 	@ResponseBody
 	public String loginCheck(Model model,HttpSession session, @RequestParam String id, @RequestParam String password) {
 		
@@ -63,6 +50,24 @@ public class LoginController {
 			return "fail";
 		}
 	}
+	
+	@RequestMapping(value = "help", method = RequestMethod.GET)
+	public String help(Model model) {
+		return "login/help";
+	}
+	
+	@RequestMapping(value = "sign", method = RequestMethod.GET)
+	public String sign(Model model) {
+		return "login/sign";
+	}
+	
+	@RequestMapping(value = "logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "login/login";
+	}
+	
+
 
 	@RequestMapping(value ="/signup", method = RequestMethod.POST)
 	public String signup(MemberVO m) {

@@ -102,7 +102,7 @@ public class CheckboardCotroller {
 		model.addAttribute("checksitelist", siteservice.getchecksite());
 
 		// 파일 정보
-
+		System.out.println("modlist" + cvo);
 		return "check/checkaddInSite";
 	}
 
@@ -139,7 +139,7 @@ public class CheckboardCotroller {
 
 		// 현장아이디
 		model.addAttribute("siteid", Checkboardservice.getsiteid(board_no));
-
+		
 		return "check/checklistmodify";
 	}
 
@@ -275,7 +275,35 @@ public class CheckboardCotroller {
 
 		return "redirect: /site/" + site_id + "/siterepair/1";
 	}
+	
+		// 수리내역에서 글쓰기를 누른 후  수정버튼을 누른 후  수정
+		@RequestMapping(value = "checkmodInSite.do", method = RequestMethod.POST)
+		public String modcheckboardIn(CheckBoardVO vo, HttpSession session, RedirectAttributes rttr) {
 
+			
+			int site_id = vo.getSite_id();
+			String id = (String) session.getAttribute("id");
+			vo.setUser_id(id);
+			
+			vo.setSite_name(siteservice.getSiteName(vo.getSite_id()));
+			
+			System.out.println("VO뭐야" + vo);
+			//vo안에 있는 site_id 로 site_name뽑기 ?			
+			
+//			System.out.println("------------------------");
+//			System.out.println("checkboard:" + vo);
+//			if (vo.getAttachList() != null) {
+//				vo.getAttachList().forEach(attach -> System.out.println(attach));
+//			}
+//			System.out.println("-----------------------------");
+//
+//			Checkboardservice.register(vo);
+//
+//			rttr.addFlashAttribute("result", vo.getBoard_no());
+
+			return "redirect: /site/" + site_id + "/siterepair/1";
+	}
+	
 	  //점검이력 검색
 	  @RequestMapping(value ="/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
 	  public String checkSearch(

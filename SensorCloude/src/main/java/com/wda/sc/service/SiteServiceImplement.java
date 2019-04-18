@@ -165,4 +165,10 @@ public class SiteServiceImplement implements SiteService {
 		return mapper.getSearchResultRepair(parm);
 	}
 
+	@Override
+	public String getSiteName(int site_id) {
+		//site id로 site name가져오기
+		return mapper.getSiteName(site_id);
+	}
+
 }
