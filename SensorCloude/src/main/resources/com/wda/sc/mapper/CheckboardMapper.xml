@@ -116,4 +116,9 @@ and rownum < 7
       ]]>
    </select>
    
+   <!-- 수리내역 글 수정 -->
+   <update id="updateCheck" parameterType="com.wda.sc.domain.CheckBoardVO">
+		update ( select a.*, b.site_name from check_board a, site b where board_no = #{board_no} and a.site_id = b.site_id )
+		set reg_date = sysdate, title = #{title}, board_content = #{board_content}, board_status = #{board_status}, site_name = #{site_name}, site_id = #{site_id}
+	</update>
 </mapper>

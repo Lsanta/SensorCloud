@@ -86,9 +86,9 @@
 
 .timeline {
   width: 340x;
-  height: 25px;
+  height: 38px;
   padding: 10px;
-  margin: 15px;
+  margin: 10px;
   border: 1px solid #bcbcbc;
 }
 
@@ -255,4 +255,8 @@ table th {
     width: calc(100% / 3);
   }
 
+}
+
+.status00{
+	margin-left: 10px;
 }
