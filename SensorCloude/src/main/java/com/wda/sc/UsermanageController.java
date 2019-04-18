@@ -29,8 +29,6 @@ private UsermanageService usermanageservice;
 	
 	@RequestMapping(value = "usermodify" + "/{id}", method = RequestMethod.GET)
 	public String address(@PathVariable String id, Model model) {
-		
-	
 		model.addAttribute("userInfo",usermanageservice.getInfo(id));
 		return "manage/usermodify";
 	}
