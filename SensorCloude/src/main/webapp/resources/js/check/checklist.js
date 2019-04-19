@@ -152,6 +152,11 @@ $(document).ready(function() {
 				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+1)+"/"+url[4];
 		});
 	}
-	
+	$('#keyword').keypress(function(event){
+	     if ( event.which == 13 ) {
+	         $('#search').click();
+	     
+	     }
+	});
 	
 });

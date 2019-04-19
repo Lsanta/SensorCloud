@@ -25,6 +25,7 @@ import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CheckboardService;
+import com.wda.sc.service.MysensorService;
 import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
@@ -36,6 +37,7 @@ public class SiteController {
 	
 	private SiteService siteservice;
 	private CheckboardService checkboardservice;
+	private MysensorService mysensorservice;
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
 	public String address(Locale locale, Model model) {
 
@@ -65,10 +67,10 @@ public class SiteController {
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); 
 		model.addAttribute("siteStatus" , siteservice.getStatus(site_id));
 		System.out.println(siteservice.getStatus(site_id));//현장클릭시 상태정보
+		model.addAttribute("sensordata",mysensorservice.getData(site_id));
 		return "site/sitemain";
 
 	}
-
 
 	@RequestMapping(value = "{site_id}" + "/sitealarm", method = RequestMethod.GET)
 	public String sitealarm(@PathVariable String site_id, Model model) {
@@ -121,10 +123,11 @@ public class SiteController {
 	@RequestMapping(value = "{site_id}" + "/sensormanage", method = RequestMethod.GET)
 	public String sensormanage(@PathVariable String site_id, Model model) {
 		System.out.println("센서관리");
+		
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
 		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
-		
+		model.addAttribute("sensorlist",siteservice.installSensorList(site_id));
 		return "site/sensormanage";
 	}
 	

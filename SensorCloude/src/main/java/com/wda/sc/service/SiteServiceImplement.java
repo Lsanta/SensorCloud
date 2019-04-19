@@ -10,6 +10,7 @@ import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.mapper.SiteMapper;
@@ -170,5 +171,14 @@ public class SiteServiceImplement implements SiteService {
 		//site id로 site name가져오기
 		return mapper.getSiteName(site_id);
 	}
+
+	@Override
+	public ArrayList<InstallSensorVO> installSensorList(String site_id) {
+		//현장에 설치된 센서 조회
+		return mapper.installSensorList(site_id);
+	}
+
+
+
 
 }
