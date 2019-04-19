@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wda.sc.mapper.MemberAttachMapper">
+
+
+	<insert id="insert">
+	insert into member_file(uuid,file_path,file_name,filetype,user_id) values(#{uuid},#{file_path},#{file_name},#{filetype},#{user_id})
+	</insert>
+	<select id="findByui" resultType="com.wda.sc.domain.MemberFileVO">
+	select * from member_file where user_id = #{user_id}
+	</select>
+	
+	
+</mapper>
