@@ -182,10 +182,10 @@
 	</select>
 	
 	<!-- 설치센서조회 -->
-	<select id="installSensorList" resultType="com.wda.sc.domain.MySensorVO">
-	select my_sensor.sensor_sn, my_sensor.model_name, my_sensor.sensor_kind, my_sensor.manufacturer, my_sensor.voltage,substr(my_sensor.create_day,0,14) as create_day,install_sensor.site_id 
-	from my_sensor,install_sensor 
-	where site_id = #{site_id}
+	<select id="installSensorList" resultType="com.wda.sc.domain.MysensorVO">
+		select my_sensor.sensor_sn, my_sensor.model_name, my_sensor.sensor_kind, my_sensor.manufacturer, my_sensor.voltage,substr(my_sensor.create_day,0,14) as create_day,install_sensor.site_id 
+		from my_sensor,install_sensor 
+		where site_id = #{site_id}
 	</select>
 	
 	
