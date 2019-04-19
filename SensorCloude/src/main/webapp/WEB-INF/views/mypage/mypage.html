@@ -81,7 +81,11 @@
 					<tr th:each="mychecklist : ${mychecklist}">
 						<td th:text="${mychecklist.site_name}"></td>
 						<td th:text="${mychecklist.title}"></td>
-						<td th:text="${mychecklist.board_status}"></td>
+						<td th:switch="${mychecklist.board_status}">
+							<span th:case="'0'">open</span>
+							<span th:case="'1'">fixed</span>
+							<span th:case="'2'">closed</span>
+						</td>
 						<td th:text="${mychecklist.reg_date}"></td>
 						<td th:text="${mychecklist.board_no}" style="display: none"></td>
 					</tr>

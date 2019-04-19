@@ -63,24 +63,29 @@
 	</beans:bean>
 	<context:component-scan
 		base-package="com.wda.sc" />
+
+	<!-- intercept 설정 -->
+	
 		
-		<!-- intercept 설정 -->
-	<interceptors>
+		<!-- 권한없음 mypage 제외 아무데도 못들어감 -->
+		<interceptors>
+		
 		<interceptor>
-			<!-- 처음 부팅시 다른 url을 적어도 login으로 redirect -->
+			<!-- login url로 가는 path를 제외하고 모두  -->
 			<mapping path="/**" />
-			<exclude-mapping path ="/login"/>
-			<exclude-mapping path ="/resources/css/**"/>
-			<exclude-mapping path ="/resources/js/**"/>
-			<exclude-mapping path ="/resources/img/**"/>
+			
+			<exclude-mapping path="/login" />
+			<exclude-mapping path="/resources/css/**" />
+			<exclude-mapping path="/resources/js/**" />
+			<exclude-mapping path="/resources/img/**" />
 			<beans:bean id="CommonInterceptor"
 				class="com.wda.sc.interceptor.CommonInterceptor" />
 		</interceptor>
 		
 		
-	</interceptors>	
+	</interceptors>
 
 
-		
+
 
 </beans:beans>

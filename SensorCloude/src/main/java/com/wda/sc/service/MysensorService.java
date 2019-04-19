@@ -7,6 +7,7 @@ import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
+import com.wda.sc.domain.SensorDataVO;
 
 public interface MysensorService {
 
@@ -23,6 +24,8 @@ public interface MysensorService {
 	public ArrayList<MysensorVO> mysensorSearch(Search s);
 
 	public ArrayList<MysensorVO> getSearchResult(Map<Object, Object> parm);
+	
+	public ArrayList<SensorDataVO> getData(String site_id);
 
 
 }
