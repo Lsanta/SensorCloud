@@ -8,6 +8,7 @@ import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
 
@@ -71,4 +72,8 @@ public interface SiteMapper {
    
    //site id로 site name가져오기
    public String getSiteName(int site_id);
+
+   //현장에 설치된 센서리스트 조회
+   public ArrayList<InstallSensorVO> installSensorList(String site_id);
+
 }
