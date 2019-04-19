@@ -1,5 +1,7 @@
 package com.wda.sc.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -10,7 +12,14 @@ public class MemberVO {
 	private String phone;
 	private String email;
 	private int m_level;
-	private String file_path;
 	private int re_level;
+	
+	
+	private String uuid;
+	private String file_path;
+	private String file_name;
+	private boolean filetype;
+	
+	private List<MemberFileVO> attachList;
 	
 }
