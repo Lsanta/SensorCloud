@@ -216,9 +216,17 @@ public class SiteController {
 //		}
 		
 		System.out.println("센서관리");
+
 		model.addAttribute("siteInfo", siteservice.getSite(site_id)); // 현장정보
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id)); // 연락망
 		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
+
+
+		
+		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
+		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
+		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
+		model.addAttribute("sensorlist",siteservice.installSensorList(site_id));
 
 		return "site/sensormanage";
 	}
