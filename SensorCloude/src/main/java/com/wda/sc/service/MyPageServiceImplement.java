@@ -6,7 +6,9 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.MemberFileVO;
 import com.wda.sc.domain.MemberVO;
+import com.wda.sc.mapper.MemberAttachMapper;
 import com.wda.sc.mapper.MyPageMapper;
 
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class MyPageServiceImplement implements MyPageService {
 	private MyPageMapper mapper;
+	private MemberAttachMapper mymapper;
 
 	@Override
 	public ArrayList<MemberVO> getInfo(String id) {
@@ -49,4 +52,17 @@ public class MyPageServiceImplement implements MyPageService {
 		// TODO Auto-generated method stub
 		return mapper.myListView(board_no);
 	}
+	
+	@Override
+	public void insert(MemberVO member) {
+		if(member.getAttachList() == null || member.getAttachList().size() <=0) {
+			return;
+		}
+		member.getAttachList().forEach(attach ->{
+			attach.setUser_id(member.getUser_id());
+			mymapper.insert(attach);
+		});
+	}
+	
+	
 }

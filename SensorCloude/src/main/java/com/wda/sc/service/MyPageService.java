@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.MemberFileVO;
 import com.wda.sc.domain.MemberVO;
+
 
 public interface MyPageService {
 	
@@ -19,4 +21,6 @@ public interface MyPageService {
 	public int getPageNum(String id);
 
 	public ArrayList<CheckBoardVO> myListView(String board_no);
+	
+	public void insert(MemberVO member);
 }
