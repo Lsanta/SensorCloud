@@ -1,8 +1,11 @@
 package com.wda.sc;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,21 +32,40 @@ public class TimelineController {
 	private TimelineService timelineservice;
 
 	@RequestMapping(value = "timeline", method = RequestMethod.GET)
-	public String timeline(Locale locale, Model model, HttpSession session) {
+	public String timeline(Locale locale, Model model,HttpSession session, HttpServletResponse response) throws IOException {
+
+		int mlevel = (int) session.getAttribute("mlevel");
+
+		if (mlevel ==1) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n 2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
 
 		return "timeline/timeline";
 	}
-	
-	
-	
-	
-	@RequestMapping(value = "/timelinemodify", method = RequestMethod.GET)
-	public String timelinemodify(Locale locale, Model model) {
 
+	@RequestMapping(value = "/timelinemodify", method = RequestMethod.GET)
+	public String timelinemodify(Locale locale, Model model,HttpSession session, HttpServletResponse response) throws IOException {
+
+		int mlevel = (int) session.getAttribute("mlevel");
+
+		if (mlevel ==1) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n 2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
 		return "timeline/timelinemodify";
 	}
-	
-	
+
 	@RequestMapping(value = "timeline.do")
 	@ResponseBody
 	public String timeline(TimelineVO vo, HttpSession session, Model model) {
@@ -67,7 +89,7 @@ public class TimelineController {
 		System.out.println(content);
 
 		int a = timelineservice.timelinedelete(content);
-		
+
 		System.out.println(a);
 
 		if (a != 0) {
@@ -79,23 +101,21 @@ public class TimelineController {
 
 		}
 	}
-	
-	
+
 	@RequestMapping(value = "timelinemodify.do")
 	@ResponseBody
 	public String timelinemodify(TimelineVO vo, HttpSession session) {
 
 		int a = timelineservice.timelinemodify(vo);
 		System.out.println(a);
-		
+
 		if (a > 0) {
 			return "success";
 		} else {
 			return "false";
 
 		}
-		
-		
+
 	}
 
 }

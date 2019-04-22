@@ -53,18 +53,19 @@ public class SiteController {
 	public String siteadd(Locale locale, Model model, HttpSession session, HttpServletResponse response)
 			throws IOException {
 
-		int mlevel = (int) session.getAttribute("mlevel");
-		System.out.println("레벨" + mlevel);
-
-		if (mlevel == 1 || mlevel == 2) {
+		
+		
+		int mlevel = (int)session.getAttribute("mlevel");
+		
+		if (mlevel==1 || mlevel==2) {
 
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script langauge='javascript'>");
-			out.println("alert('권한이 없습니다.\n 3등급(쓰기권한)이상이 열람가능합니다'); location.href='/sitelist/1';");
+			out.println("alert('권한이 없습니다. \\n 3등급(쓰기권한)이상이 열람가능합니다'); history.go(-1);");
 			out.println("</script>");
 
-			// response.sendRedirect("/sitelist/1");
+			//response.sendRedirect("/sitelist/1");
 		}
 
 		return "site/siteadd";
@@ -85,7 +86,7 @@ public class SiteController {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script langauge='javascript'>");
-			out.println("alert('권한이 없습니다.\n 4등급(수정권한)이상이 열람가능합니다'); history.go(-1);");
+			out.println("alert('권한이 없습니다.\\n 4등급(수정권한)이상이 열람가능합니다'); history.go(-1);");
 			out.println("</script>");
 
 			// response.sendRedirect("/sitelist/1");
@@ -105,18 +106,18 @@ public class SiteController {
 		System.out.println(siteservice.getStatus(site_id));// 현장클릭시 상태정보
 		model.addAttribute("sensordata", mysensorservice.getData(site_id));
 
-//		int mlevel = (int) session.getAttribute("mlevel");
-//		System.out.println("레벨" + mlevel);
-//		
-//		if (mlevel == 1) {
-//
-//			response.setContentType("text/html; charset=UTF-8");
-//			PrintWriter out = response.getWriter();
-//			out.println("<script langauge='javascript'>");
-//			out.println("alert('권한이 없습니다.\n 2등급(읽기권한)이상이 열람가능합니다');  location.href='/';");
-//			out.println("</script>");
-//
-//		}
+		int mlevel = (int) session.getAttribute("mlevel");
+		
+		
+		if (mlevel == 1) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n 2등급(읽기권한)이상이 열람가능합니다');  location.href='/';");
+			out.println("</script>");
+
+		}
 		return "site/sitemain";
 
 	}
@@ -127,18 +128,18 @@ public class SiteController {
 	
 		System.out.println("알람페이지");
 		
-//		int mlevel = (int) session.getAttribute("mlevel");
-//		System.out.println("레벨" + mlevel);
-//		//관리자만 알림 메시지 보내기 가능 
-////		if (mlevel != 5) {
-////
-////			response.setContentType("text/html; charset=UTF-8");
-////			PrintWriter out = response.getWriter();
-////			out.println("<script langauge='javascript'>");
-////			out.println("alert('권한이 없습니다.\n 관리자만 열람가능합니다');history.go(-1);");
-////			out.println("</script>");
-////
-////		}
+		int mlevel = (int) session.getAttribute("mlevel");
+		System.out.println("레벨" + mlevel);
+		//관리자만 알림 메시지 보내기 가능 
+		if (mlevel != 5) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n 관리자만 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
 		model.addAttribute("siteInfo", siteservice.getSite(site_id));
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
 		model.addAttribute("alarm", siteservice.getAlarm(site_id)); // 알람 내용 정
@@ -150,19 +151,19 @@ public class SiteController {
 	public String siterepair(@PathVariable String num, @PathVariable Object site_id, Model model,HttpSession session,
 			HttpServletResponse response) throws IOException {
 
-//		int mlevel = (int) session.getAttribute("mlevel");
-//		System.out.println("레벨" + mlevel);
-//		
-//		if (mlevel == 1) {
-//
-//			response.setContentType("text/html; charset=UTF-8");
-//			PrintWriter out = response.getWriter();
-//			out.println("<script langauge='javascript'>");
-//			out.println("alert('권한이 없습니다.\n2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
-//			out.println("</script>");
-//
-//		}
-//		
+		int mlevel = (int) session.getAttribute("mlevel");
+		System.out.println("레벨" + mlevel);
+		
+		if (mlevel == 1) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
+		
 		
 		int pageNum = 0;
 		Paging page = new Paging();
@@ -202,18 +203,18 @@ public class SiteController {
 	public String sensormanage(@PathVariable String site_id, Model model,HttpSession session,
 			HttpServletResponse response) throws IOException {
 		
-//		int mlevel = (int) session.getAttribute("mlevel");
-//		System.out.println("레벨" + mlevel);
-//		
-//		if (mlevel == 1) {
-//
-//			response.setContentType("text/html; charset=UTF-8");
-//			PrintWriter out = response.getWriter();
-//			out.println("<script langauge='javascript'>");
-//			out.println("alert('권한이 없습니다.\n2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
-//			out.println("</script>");
-//
-//		}
+		int mlevel = (int) session.getAttribute("mlevel");
+		System.out.println("레벨" + mlevel);
+		
+		if (mlevel == 1) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
 		
 		System.out.println("센서관리");
 
@@ -235,18 +236,18 @@ public class SiteController {
 	public String sensoradd(@PathVariable String site_id, Model model,HttpSession session,
 			HttpServletResponse response) throws IOException {
 		
-//		int mlevel = (int) session.getAttribute("mlevel");
-//		System.out.println("레벨" + mlevel);
-//		
-//		if (mlevel != 4 || mlevel !=5) {
-//
-//			response.setContentType("text/html; charset=UTF-8");
-//			PrintWriter out = response.getWriter();
-//			out.println("<script langauge='javascript'>");
-//			out.println("alert('권한이 없습니다.\n4등급(수정권한)이상이 열람가능합니다');history.go(-1);");
-//			out.println("</script>");
-//
-//		}
+		int mlevel = (int) session.getAttribute("mlevel");
+		System.out.println("레벨" + mlevel);
+		
+		if (mlevel < 4) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n4등급(수정권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
 		
 		
 		System.out.println("센서추가");
@@ -263,17 +264,17 @@ public class SiteController {
 		
 		
 	int mlevel = (int) session.getAttribute("mlevel");
-	System.out.println("레벨" + mlevel);
+	
 		
-//		if (mlevel ==1 ) {
-//
-//			response.setContentType("text/html; charset=UTF-8");
-//			PrintWriter out = response.getWriter();
-//			out.println("<script langauge='javascript'>");
-//			out.println("alert('권한이 없습니다.\n2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
-//			out.println("</script>");
-//
-//		}
+		if (mlevel ==1) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
 		System.out.println("스크립트다운로드");
 		model.addAttribute("siteInfo", siteservice.getSite(site_id)); // 현장정보
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id)); // 연락망
@@ -397,12 +398,12 @@ public class SiteController {
 
 		int mlevel = (int) session.getAttribute("mlevel");
 		
-		if (mlevel < 3) {
+		if (mlevel < 2) {
 
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script langauge='javascript'>");
-			out.println("alert('권한이 없습니다.\n3등급(쓰기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("alert('권한이 없습니다.\\n2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
 			out.println("</script>");
 
 		}
