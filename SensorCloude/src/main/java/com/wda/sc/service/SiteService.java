@@ -73,7 +73,9 @@ public interface SiteService {
    public String getSiteName(int site_id);
    
    //설치센서조회
-   public ArrayList<InstallSensorVO> installSensorList(String site_id);
-   
+   public ArrayList<InstallSensorVO> installSensorList(Map<String, Object> parm);
+
+   public int sensorPageNum(String site_id);
+ 
 }
   
