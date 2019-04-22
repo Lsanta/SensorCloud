@@ -198,6 +198,36 @@ public class SiteController {
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id.toString())); // 연락망
 		return "site/siterepair";
 	}
+	
+	@RequestMapping(value = "{site_id}" + "/sensormanage"+"/{num}", method = RequestMethod.GET)
+	public String sensormanage(@PathVariable String num ,@PathVariable String site_id, Model model) {
+		int pageNum=0;
+		Paging page = new Paging();
+		Map<String, Object> parm = new HashMap<String, Object>();
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int realNum = Integer.parseInt(num);
+
+		page.setTotalNum(siteservice.sensorPageNum(site_id.toString()));
+
+		if(page.getTotalNum() < page.getOnePageBoard() ) {
+			pageNum = 1;
+		}else {
+			pageNum = page.getTotalNum()/page.getOnePageBoard();
+			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
+		}
+
+		for(int i = 0; i < pageNum; i ++) {
+			arr.add(i+1);
+		}
+
+		page.setEndnum((realNum*10)+1);
+		page.setStartnum(page.getEndnum()-10);
+
+		parm.put("paging", page);
+		parm.put("site_id", site_id);
+
 
 	@RequestMapping(value = "{site_id}" + "/sensormanage", method = RequestMethod.GET)
 	public String sensormanage(@PathVariable String site_id, Model model,HttpSession session,
@@ -216,18 +246,18 @@ public class SiteController {
 
 		}
 		
+
 		System.out.println("센서관리");
 
 		model.addAttribute("siteInfo", siteservice.getSite(site_id)); // 현장정보
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id)); // 연락망
 		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
-
-
 		
+		model.addAttribute("pageNum",arr);
 		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
 		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
 		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
-		model.addAttribute("sensorlist",siteservice.installSensorList(site_id));
+		model.addAttribute("sensorlist",siteservice.installSensorList(parm));
 
 		return "site/sensormanage";
 	}
