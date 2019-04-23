@@ -132,13 +132,13 @@ public class SiteServiceImplement implements SiteService {
 
 	@Override
 	public int updatesite(SiteVO site) {
-		//현장수정
+		// 현장수정
 		return mapper.updatesite(site);
 	}
 
 	@Override
 	public int updatenetwork(SiteVO site) {
-		//현장수정
+		// 현장수정
 		return mapper.updatenetwork(site);
 	}
 
@@ -174,18 +174,20 @@ public class SiteServiceImplement implements SiteService {
 
 	@Override
 	public String getSiteName(int site_id) {
-		//site id로 site name가져오기
+		// site id로 site name가져오기
 		return mapper.getSiteName(site_id);
 	}
 
 	@Override
 	public ArrayList<InstallSensorVO> installSensorList(Map<String, Object> parm) {
-		//현장에 설치된 센서 조회
+		// 현장에 설치된 센서 조회
 		return mapper.installSensorList(parm);
 	}
 
-
-
-
+	@Override
+	public ArrayList<MysensorVO> getSensor(String sensor_sn) {
+		// TODO Auto-generated method stub
+		return mapper.getSensor(sensor_sn);
+	}
 
 }

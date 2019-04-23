@@ -51,12 +51,15 @@
 		</nav>
 	</aside>
 
-	<div id="scroll">
+	<div id="scroll" th:each="sensorInfo : ${sensorInfo}">
+	
 		<article>
-     
-     	 <div id="addsensor">
-         
-         <h2>센서 추가</h2>
+        
+     	 <div id="addsensor" >
+      <p th:text="${sensorInfo.sensor_sn}"></p>
+           <p th:text="${sensorInfo.sensor_kind}"></p>
+
+         <h2>센서정보수정</h2>
          
          <div class="leftbox">
         	 <div class="kinds">
