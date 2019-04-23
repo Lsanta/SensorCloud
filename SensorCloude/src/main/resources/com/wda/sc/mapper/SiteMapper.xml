@@ -62,11 +62,10 @@
 		where x.before_num >= ${startnum}
 		]]>
 	</select>
+	
 	<!-- 현장 클릭시 현장상태  -->
-	<select id="getStatus" resultType="com.wda.sc.domain.SiteVO">
-		
-		select site_status from site where site_id = #{site_id}
-		
+	<select id="getStatus" resultType="com.wda.sc.domain.SiteVO">	
+		select site_status from site where site_id = #{site_id}	
 	</select>
 	
 	<!--알람 내용 추가 -->
@@ -182,6 +181,7 @@
 	</select>
 	
 	<!-- 설치센서조회 -->
+
 	<select id="installSensorList" resultType="com.wda.sc.domain.MysensorVO" parameterType="map">
 	 <![CDATA[
 	 	select x.rnum, x.* from
@@ -206,5 +206,6 @@
 		where sensor_sn = #{sensor_sn}
 	</select>
 	
+
 
 </mapper>
