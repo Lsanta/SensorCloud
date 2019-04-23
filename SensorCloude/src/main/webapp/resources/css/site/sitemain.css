@@ -14,7 +14,7 @@
 
 #dataDiv {
 	margin: 20px 0;
-	height: 380px;
+	height: 330px;
 	border: 1px solid black;
 	overflow: auto;
 }
