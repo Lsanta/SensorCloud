@@ -103,7 +103,8 @@ public class SiteController {
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
 		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
 		System.out.println(siteservice.getStatus(site_id));// 현장클릭시 상태정보
-		model.addAttribute("sensordata", mysensorservice.getData(site_id));
+		model.addAttribute("sensordata", mysensorservice.getData(site_id)); //센서데이터 표
+		System.out.println(mysensorservice.getData(site_id));
 
 //		int mlevel = (int) session.getAttribute("mlevel");
 //		System.out.println("레벨" + mlevel);

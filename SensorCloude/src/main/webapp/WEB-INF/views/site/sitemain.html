@@ -8,10 +8,8 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css"
-		href="/resources/css/site/asidebar.css">
-	<link rel="stylesheet" type="text/css"
-		href="/resources/css/site/sitemain.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/asidebar.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/sitemain.css">
 </th:block>
 
 <th:block layout:fragment="contents">
@@ -73,19 +71,14 @@
 				<div id="main-content">
 					<table>
 						<thead>
-							<tr>
-								<th scope="col">TimeStamp</th>
-								<th scope="col">Tilt(1)x</th>
-								<th scope="col">Tilt(1)y</th>
+							<tr th:each="sensordata : ${sensordata}">
+								<th scope="col" th:text="${sensordata.sensor_name}"></th>
 							</tr>
 						</thead>
-						<tbody>
-							<!-- <tr th:each="sensordata : ${sensordata}">
-								<td th:text="${sensordata.sensing_data}"></td>
-								<td th:text="${sensordata.sensing_data}"></td>
-								<td th:text="${sensordata.sensing_data}"></td>
-							</tr> -->
-
+						<tbody id="sensing-data">
+							<tr th:each="sensordata : ${sensordata}">
+								<td th:text="313243"></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -165,6 +158,16 @@ $(document).ready(function() {
 	$("#modify").click(function(){
 		var site_id = $("#modify").attr('class');
 		window.location.href = "/site/sitemodify/"+site_id;
+	});
+	
+	
+	$('#append_row').on("click", function () {
+		$('#list_table').append(
+			$('<tr>').append(
+				$('<th>').append($('#add_no').val()),
+				$('<td>').append('13241324').val()),
+			)
+		);
 	});
 });
 
