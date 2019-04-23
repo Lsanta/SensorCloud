@@ -1,10 +1,124 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{include/layout}">
 
-</body>
+<th:block layout:fragment="page_head">
+	<title>센서 추가</title>
+</th:block>
+
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/asidebar.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/sensoradd.css">
+</th:block>
+
+<th:block layout:fragment="contents">
+		<aside class="aside" th:each="siteInfo : ${siteInfo}">
+	
+		<a> <svg version="1.1" id="nav-btn"
+				xmlns="http://www.w3.org/2000/svg"
+				xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				viewBox="0 0 512 512" enable-background="new 0 0 512 512"
+				xml:space="preserve">
+    <path id="list-view-icon"
+					d="M462,108.857H50V50h412V108.857z M462,167.714H50v58.857h412V167.714z M462,285.429H50v58.857h412
+      V285.429z M462,403.143H50V462h412V403.143z" />
+  </svg>
+		</a>
+			<h1 th:text="${siteInfo.site_name}"></h1>
+			<span id="sid" th:text="${siteInfo.site_id}" style="display:none"></span>
+			
+		<nav id="nav">
+			<ul>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'" >수리내역</a></li>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage'">센서관리</a></li>
+				<li style="line-height: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트 다운로드</a></li>
+				<li><span id="num">연락망</span> 
+				<span id="down" style="display: inline"> 
+					<img src="/resources/img/down-arrow.svg">
+				</span> 
+				<span id="up" style="display: none"> 
+					<img src="/resources/img/up-arrow.svg">
+				</span>
+				</li>
+			<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
+				<span class="mang" th:text="${alarmMember.name}"></span>
+				<span class="mang" th:text="${alarmMember.tel}"></span>
+			</div>	
+		
+			</ul>
+		</nav>
+	</aside>
+
+	<div id="scroll" th:each="sensorInfo : ${sensorInfo}">
+	
+		<article>
+        
+     	 <div id="addsensor" >
+      <p th:text="${sensorInfo.sensor_sn}"></p>
+           <p th:text="${sensorInfo.sensor_kind}"></p>
+
+         <h2>센서정보수정</h2>
+         
+         <div class="leftbox">
+        	 <div class="kinds">
+        		 <span>센서종류</span>
+         			<select class="kindSelect"> 
+         				<option>선택</option>
+              		 	<option th:each="kind : ${sensor_kind}" th:text="${kind.sensor_kind}" 
+              		 	th:value="${kind.count}"></option>	
+         			</select>
+         			
+         			<input type="number" id="sensorcount" name="sensorcount" min=0 max=0>
+           
+         	</div>
+         	<div class="dataType">
+         	 	<span>데이터타입</span>
+         	  	<select class="dataSelect">
+              		 <option value="ieee4_1">ieee4</option>
+              		 <option value="ieee3_1">ieee3</option>
+               		 <option value="int_1">int</option>
+            	</select>
+         	</div>
+         	<div class="voltage">
+         		<span>전압</span>
+         		<select class="volSelect">
+               		 <option value="5000mv">5000mv</option>
+              		 <option value="2500mv">2500mv</option>
+           		 </select>
+            </div>
+         
+		 </div>
+		 
+         <div class="rightbox">
+         	 <fieldset class ="fieldsetportnumber">
+               <legend>포트번호</legend>
+
+               <div class="port1">
+                  <span>통신포트</span>
+                  <input type="text" id="frontport" />
+                  <span class="nothink">~</span>
+                  <input type="text" id="backport" />
+               </div>
+               <div class="port2">
+                   <span>전원포트</span>
+				   <select class="portSelect">
+                     	<option value="ieee4_2">ieee4</option>
+                     	<option value="ieee3_2">ieee3</option>
+                     	<option value="int_2">int</option>
+                   </select>
+               </div>
+             </fieldset>
+	     </div>
+		  	<button type="button">확인</button>
+		 </div> <!-- addsensor div 끝 -->
+	</article>
+</div> <!-- 스크롤div 끝 -->
+</th:block>
+
+<th:block layout:fragment="page_js">
+	<script src="/resources/js/site/asidebar.js"></script>
+	<script src="/resources/js/site/sensoradd.js"></script>
+</th:block>
 </html>

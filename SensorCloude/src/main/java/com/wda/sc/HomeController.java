@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.InstallSensorVO;
+import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.SiteVO;
@@ -71,7 +72,21 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/check"+"/{num}", method = RequestMethod.GET)
-	public String check(@PathVariable String num, Model model) {
+	public String check(@PathVariable String num, Model model,HttpSession session, HttpServletResponse response) throws IOException {
+		
+		int mlevel = (int) session.getAttribute("mlevel");
+
+		if (mlevel < 2) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다. \\n 2등급(읽기권한)이상이 열람가능합니다'); history.go(-1);");
+			out.println("</script>");
+
+			
+		}
+		
 		Paging page = new Paging();
 		int pageNum = 0;
 		ArrayList<Integer> arr = new ArrayList<Integer>();
@@ -102,7 +117,23 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/sitelist"+"/{num}", method = RequestMethod.GET)
-	public String siteList(@PathVariable String num, Model model) {
+	public String siteList(@PathVariable String num, Model model,HttpServletResponse response,HttpSession session) throws IOException {
+		
+		
+		int mlevel = (int) session.getAttribute("mlevel");
+		System.out.println("레벨" + mlevel);
+		
+		if (mlevel == 1) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
+		
+		
 		Paging page = new Paging();
 		int pageNum = 0;
 		ArrayList<Integer> arr = new ArrayList<Integer>();
@@ -122,7 +153,12 @@ public class HomeController {
 		for(int i = 0; i < pageNum; i ++) {
 			arr.add(i+1);
 		}
-
+		
+		
+		
+		
+		
+		
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
 
@@ -135,13 +171,42 @@ public class HomeController {
 
 
 	@RequestMapping(value = "/checkadd", method = RequestMethod.GET)
-	public String checkadd(Locale locale, Model model) {
+	public String checkadd(Locale locale, Model model ,HttpServletResponse response,HttpSession session) throws IOException {
+		
+		
+		int mlevel = (int) session.getAttribute("mlevel");
+		
+		
+		if (mlevel < 3) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n3등급(쓰기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
+		
+		
 		return "check/checkadd";
 	}
 
 	@RequestMapping(value = "/manage"+"/{num}", method = RequestMethod.GET)
-	public String manage(@PathVariable String num, Model model ,HttpSession session) {
+	public String manage(@PathVariable String num, Model model ,HttpSession session,HttpServletResponse response) throws IOException {
 
+		int mlevel = (int) session.getAttribute("mlevel");
+		System.out.println("레벨" + mlevel);
+		
+		if (mlevel !=5) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n 관리자만 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
+		
 		Paging page = new Paging();
 		int pageNum = 0;
 		ArrayList<Integer> arr = new ArrayList<Integer>();
@@ -176,7 +241,23 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/time"+"/{num}", method = RequestMethod.GET)
-	public String timeline(@PathVariable String num, Locale locale, Model model) {
+	public String timeline(@PathVariable String num, Locale locale, Model model,HttpSession session , HttpServletResponse response) throws IOException {
+		
+		
+		int mlevel = (int) session.getAttribute("mlevel");
+
+		if (mlevel ==1) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n 2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
+		
+		
+		
 		Paging page = new Paging();
 		int pageNum = 0;
 		ArrayList<Integer> arr = new ArrayList<Integer>();
@@ -213,15 +294,42 @@ public class HomeController {
 	
 
 	@RequestMapping(value = "/timelinemodify", method = RequestMethod.GET)
-	public String timelinemodify(Locale locale, Model model) {
+	public String timelinemodify(Locale locale, Model model,HttpServletResponse response,HttpSession session) throws IOException {
+		 
+		int mlevel = (int) session.getAttribute("mlevel");
 
+		if (mlevel ==1) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n 2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
+		
 		
 		return "timeline/timelinemodify";
 	}
 	
 
 	@RequestMapping(value = "/mysensor"+"/{num}", method = RequestMethod.GET)
-	public String mysensor(@PathVariable String num, Locale locale, Model model, HttpSession session) {
+	public String mysensor(@PathVariable String num, Locale locale, Model model, HttpSession session,HttpServletResponse response) throws IOException {
+		
+
+		int mlevel = (int) session.getAttribute("mlevel");
+		System.out.println("레벨" + mlevel);
+		
+		if (mlevel == 1) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
+		
 		
 		Paging page = new Paging();
 		int pageNum = 0;
@@ -289,6 +397,8 @@ public class HomeController {
 		model.addAttribute("pageNum",arr);
 		model.addAttribute("userInfo",mypageservice.getInfo(id.toString()));
 		model.addAttribute("mychecklist",mypageservice.myList(parm));
+		System.out.println(mypageservice.getInfo(id.toString()));
+		
 		return "mypage/mypage";
 	}
 

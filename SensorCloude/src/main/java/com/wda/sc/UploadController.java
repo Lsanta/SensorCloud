@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -28,11 +30,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wda.sc.domain.AttachFileVO;
+import com.wda.sc.domain.MemberFileVO;
+import com.wda.sc.service.MyPageService;
 
+import lombok.AllArgsConstructor;
 import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
+@AllArgsConstructor
 public class UploadController {
+	private MyPageService mypageservice;
 	private boolean checkImageType(File file) {
 
 		try {
@@ -192,4 +199,39 @@ public class UploadController {
 
 		}
 	
+	 @PostMapping("/deleteFilemypage")
+		@ResponseBody
+		public ResponseEntity<String> deleteFilemypage(String fileName, String type, String user_id) {
+		 	
+			File file;
+
+			System.out.println("제발"+user_id);
+			System.out.println("Type"+type);
+			try {
+				file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
+
+			/* mypageservice.mypagedelete(memberfileVo); */
+				file.delete();
+				
+
+				if (type.equals("true")) {
+
+					String largeFileName = file.getAbsolutePath().replace("s_", "");
+
+					
+					file = new File(largeFileName);
+					System.out.println("뭐게" +user_id);
+					mypageservice.mypagedelete(user_id);
+					file.delete();
+					
+				}
+
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+
+			return new ResponseEntity<String>("deleted", HttpStatus.OK);
+
+		}
 }

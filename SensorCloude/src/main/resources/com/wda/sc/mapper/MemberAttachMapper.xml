@@ -9,8 +9,13 @@
 	insert into member_file(uuid,file_path,file_name,filetype,user_id) values(#{uuid},#{file_path},#{file_name},#{filetype},#{user_id})
 	</insert>
 	<select id="findByui" resultType="com.wda.sc.domain.MemberFileVO">
-	select * from member_file where user_id = #{user_id}
+	select * from member m full outer join member_file f
+		on(m.user_id = f.user_id)
+		where m.user_id = #{user_id}
 	</select>
 	
+	<delete id="mypagedelete" parameterType="String">
+      delete from member_file where user_id = #{user_id}
+   </delete>
 	
 </mapper>
