@@ -84,4 +84,9 @@ public interface SiteMapper {
 
 	public int sensorPageNum(String site_id);
 
+	public ArrayList<MysensorVO> getSensor(String sensor_sn);
+
+
+
+
 }

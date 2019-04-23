@@ -8,10 +8,8 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css"
-		href="/resources/css/site/asidebar.css">
-	<link rel="stylesheet" type="text/css"
-		href="/resources/css/site/sitemain.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/asidebar.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/sitemain.css">
 </th:block>
 
 <th:block layout:fragment="contents">
@@ -74,18 +72,19 @@
 					<table>
 						<thead>
 							<tr>
-								<th scope="col">TimeStamp</th>
-								<th scope="col">Tilt(1)x</th>
-								<th scope="col">Tilt(1)y</th>
+								<th>시간</th> 
+								<th th:each="sensordata : ${sensordata}">
+									<span scope="col" th:text="${sensordata.sensor_name}"></span>
+								</th>
 							</tr>
 						</thead>
-						<tbody>
-							<!-- <tr th:each="sensordata : ${sensordata}">
-								<td th:text="${sensordata.sensing_data}"></td>
-								<td th:text="${sensordata.sensing_data}"></td>
-								<td th:text="${sensordata.sensing_data}"></td>
-							</tr> -->
-
+						<tbody id="sensing-data">
+							<tr>
+								<td> 19/04/23.10:20 </td>
+								<td th:each="sensordata : ${sensordata}">
+									<span th:text = "1234"></span>
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -166,8 +165,17 @@ $(document).ready(function() {
 		var site_id = $("#modify").attr('class');
 		window.location.href = "/site/sitemodify/"+site_id;
 	});
+	
+	
+/* 	$('#append_row').on("click", function () {
+		$('#list_table').append(
+			$('<tr>').append(
+				$('<th>').append($('#add_no').val()),
+				$('<td>').append('13241324').val()),
+			)
+		);
+	}); */
 });
-
 	</script>
 	<script src="/resources/js/site/asidebar.js"></script>
 	<script src="/resources/js/site/sitemodify.js"></script>
