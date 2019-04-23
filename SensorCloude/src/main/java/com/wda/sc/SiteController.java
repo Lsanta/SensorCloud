@@ -199,68 +199,64 @@ public class SiteController {
 		return "site/siterepair";
 	}
 	
-	@RequestMapping(value = "{site_id}" + "/sensormanage"+"/{num}", method = RequestMethod.GET)
-	public String sensormanage(@PathVariable String num ,@PathVariable String site_id, Model model) {
-		int pageNum=0;
-		Paging page = new Paging();
-		Map<String, Object> parm = new HashMap<String, Object>();
-		ArrayList<Integer> arr = new ArrayList<Integer>();
-		int realNum = Integer.parseInt(num);
+	 @RequestMapping(value = "{site_id}" + "/sensormanage"+"/{num}", method = RequestMethod.GET)
+	   public String sensormanage(@PathVariable String num ,@PathVariable String site_id, Model model,HttpSession session,HttpServletResponse response) throws IOException {
+		 
+		 
+		 
+		 int mlevel = (int) session.getAttribute("mlevel");
+			System.out.println("레벨" + mlevel);
+			
+			if (mlevel == 1) {
 
-		page.setTotalNum(siteservice.sensorPageNum(site_id.toString()));
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script langauge='javascript'>");
+				out.println("alert('권한이 없습니다.\\n2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
+				out.println("</script>");
 
-		if(page.getTotalNum() < page.getOnePageBoard() ) {
-			pageNum = 1;
-		}else {
-			pageNum = page.getTotalNum()/page.getOnePageBoard();
-			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
-				pageNum = pageNum + 1;
 			}
-		}
+		 
+		 
+		 
+	      int pageNum=0;
+	      Paging page = new Paging();
+	      Map<String, Object> parm = new HashMap<String, Object>();
+	      ArrayList<Integer> arr = new ArrayList<Integer>();
+	      int realNum = Integer.parseInt(num);
 
-		for(int i = 0; i < pageNum; i ++) {
-			arr.add(i+1);
-		}
+	      page.setTotalNum(siteservice.sensorPageNum(site_id.toString()));
 
-		page.setEndnum((realNum*10)+1);
-		page.setStartnum(page.getEndnum()-10);
+	      if(page.getTotalNum() < page.getOnePageBoard() ) {
+	         pageNum = 1;
+	      }else {
+	         pageNum = page.getTotalNum()/page.getOnePageBoard();
+	         if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+	            pageNum = pageNum + 1;
+	         }
+	      }
 
-		parm.put("paging", page);
-		parm.put("site_id", site_id);
+	      for(int i = 0; i < pageNum; i ++) {
+	         arr.add(i+1);
+	      }
 
+	      page.setEndnum((realNum*10)+1);
+	      page.setStartnum(page.getEndnum()-10);
 
-	@RequestMapping(value = "{site_id}" + "/sensormanage", method = RequestMethod.GET)
-	public String sensormanage(@PathVariable String site_id, Model model,HttpSession session,
-			HttpServletResponse response) throws IOException {
-		
-		int mlevel = (int) session.getAttribute("mlevel");
-		System.out.println("레벨" + mlevel);
-		
-		if (mlevel == 1) {
+	      parm.put("paging", page);
+	      parm.put("site_id", site_id);
 
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script langauge='javascript'>");
-			out.println("alert('권한이 없습니다.\\n2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
-			out.println("</script>");
+	      System.out.println("센서관리");
 
-		}
-		
-
-		System.out.println("센서관리");
-
-		model.addAttribute("siteInfo", siteservice.getSite(site_id)); // 현장정보
-		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id)); // 연락망
-		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
-		
-		model.addAttribute("pageNum",arr);
-		model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
-		model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
-		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
-		model.addAttribute("sensorlist",siteservice.installSensorList(parm));
-
-		return "site/sensormanage";
-	}
+	   
+	      model.addAttribute("pageNum",arr);
+	      model.addAttribute("siteInfo",siteservice.getSite(site_id));  //현장정보
+	      model.addAttribute("alarmMember",siteservice.getAlarm_member(site_id)); //연락망
+	      model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
+	      model.addAttribute("sensorlist",siteservice.installSensorList(parm));
+	  
+	      return "site/sensormanage";
+	   }
 
 	@RequestMapping(value = "{site_id}" + "/sensoradd", method = RequestMethod.GET)
 	public String sensoradd(@PathVariable String site_id, Model model,HttpSession session,
