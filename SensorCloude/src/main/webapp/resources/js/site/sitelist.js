@@ -9,8 +9,9 @@ $(document).on("click", "#site tr" , function(){
 	 
 });
 
-/*pagination*/
+
 $(document).ready(function() {
+	/*pagination*/
 	var num = 0;
 
 	var newURL =  window.location.pathname;
@@ -104,4 +105,20 @@ $(document).ready(function() {
 	     
 	     }
 	});
+	
+	/*화면 줄어들 때 리스트 자르기 */
+	var tr = $("#site tr:gt(3)");
+	
+	if($(window).width() <= 700){
+			tr.addClass("none");
+		} 
+	 
+	 $( window ).resize(function(){
+		 if($(window).width() <= 700){
+				tr.addClass("none");	
+			} else{
+				tr.removeClass("none");
+			} 
+	 });
+	 
 });

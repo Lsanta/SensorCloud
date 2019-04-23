@@ -4,6 +4,10 @@ html {
   overflow-x: hidden; 
  }
 
+.none{
+	display : none;
+}
+
 #container {
     width: 1130px;
     height: 750px;
@@ -280,13 +284,16 @@ table {
 }
 
 @media screen and (max-width: 360px) {
+#container {
+    height: 1050px;
+    }
+    
   .title-header h1{
   	width: 120px;
   }
   .search {
     float: none;
     width: auto;
-    margin:30px 0 0 0;
   }
   .select {
     clear: both;
