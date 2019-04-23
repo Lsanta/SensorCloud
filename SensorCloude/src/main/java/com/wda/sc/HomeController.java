@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.InstallSensorVO;
+import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.SiteVO;
@@ -289,6 +290,8 @@ public class HomeController {
 		model.addAttribute("pageNum",arr);
 		model.addAttribute("userInfo",mypageservice.getInfo(id.toString()));
 		model.addAttribute("mychecklist",mypageservice.myList(parm));
+		System.out.println(mypageservice.getInfo(id.toString()));
+		
 		return "mypage/mypage";
 	}
 

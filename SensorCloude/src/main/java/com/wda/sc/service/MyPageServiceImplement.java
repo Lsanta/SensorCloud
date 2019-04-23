@@ -1,6 +1,7 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -64,5 +65,17 @@ public class MyPageServiceImplement implements MyPageService {
 		});
 	}
 	
+	@Override
+	public List<MemberFileVO> getAttachListmypage(String user_id) {
+		// 첨부파일 반환
+		return mymapper.findByui(user_id);
+	}
+	
+	@Override
+	public void mypagedelete(String user_id) {
+		// TODO Auto-generated method stub
+		 mymapper.mypagedelete(user_id);
+	}
+
 	
 }
