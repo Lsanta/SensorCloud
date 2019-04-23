@@ -9,4 +9,6 @@ public class SensorInfoVO {
 	private String data_type;
 	private String sensor_name;
 	private String sensor_mark;
+	
+	private String sensor_kind;
 }

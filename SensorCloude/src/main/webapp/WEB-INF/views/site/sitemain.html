@@ -71,13 +71,20 @@
 				<div id="main-content">
 					<table>
 						<thead>
-							<tr th:each="sensordata : ${sensordata}">
-								<th scope="col" th:text="${sensordata.sensor_name}"></th>
+							<tr>
+								<th>시간</th> 
+								<th th:each="sensordata : ${sensordata}">
+									<span scope="col" th:text="${sensordata.sensor_kind}"></span>
+									<span scope="col" th:text="${sensordata.sensor_name}"></span>
+								</th>
 							</tr>
 						</thead>
 						<tbody id="sensing-data">
-							<tr th:each="sensordata : ${sensordata}">
-								<td th:text="313243"></td>
+							<tr>
+								<td> 19/04/23.10:20 </td>
+								<td th:each="sensordata : ${sensordata}">
+									<span th:text="1234"></span>
+								</td>
 							</tr>
 						</tbody>
 					</table>
