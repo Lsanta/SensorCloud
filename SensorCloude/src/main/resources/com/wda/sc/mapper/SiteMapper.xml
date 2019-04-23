@@ -181,11 +181,31 @@
 	</select>
 	
 	<!-- 설치센서조회 -->
-	<select id="installSensorList" resultType="com.wda.sc.domain.MysensorVO">
-		select my_sensor.sensor_sn, my_sensor.model_name, my_sensor.sensor_kind, my_sensor.manufacturer, my_sensor.voltage,substr(my_sensor.create_day,0,14) as create_day,install_sensor.site_id 
-		from my_sensor,install_sensor 
-		where site_id = #{site_id}
+
+	<select id="installSensorList" resultType="com.wda.sc.domain.MysensorVO" parameterType="map">
+	 <![CDATA[
+	 	select x.rnum, x.* from
+    	(select rownum as rnum, p.* from
+        	(select m.sensor_sn, m.model_name, m.sensor_kind, m.manufacturer, m.voltage, substr(create_day,0,14) as create_day
+		from install_sensor i, my_sensor m
+		where i.site_id = #{site_id}
+		and i.sensor_sn = m.sensor_sn
+   		order by create_day desc) p where rownum < #{paging.endnum}) x
+		where x.rnum >= #{paging.startnum}
+		order by x.create_day desc
+    ]]>
 	</select>
 	
+	<select id="sensorPageNum" resultType="int">
+		select count(site_id) from install_sensor where site_id = #{site_id}
+	</select> 
 	
+	<select id="getSensor" resultType="com.wda.sc.domain.MysensorVO">
+		select sensor_sn, sensor_kind, model_name
+		from my_sensor 
+		where sensor_sn = #{sensor_sn}
+	</select>
+	
+
+
 </mapper>

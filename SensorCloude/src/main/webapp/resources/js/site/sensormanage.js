@@ -1,11 +1,24 @@
 $(document).ready(function() {
 
+	var newURL =  window.location.pathname;
+	var url = newURL.split('/');
 
+	$(document).on("click", "#sensorlist tr", function() {
 
-	$("#add").click(function(){
+	// 클릭한 행을 tr 변수로
+	var tr = $("#sensorlist tr").index(this);
 	
+	var sensor_sn = $("#sensorlist tr:eq(" + tr + ") td:eq(0)").text();
+	var sensor_kind = $("#sensorlist tr:eq(" + tr + ") td:eq(1)").text();
 
-		window.location.href = "/site/1/sensoradd/";
+	window.location.href = "/site/"+ url[2] +"/sensormodify/" + sensor_sn;
+	alert(sensor_sn);
+	
+});
+	
+                                                           
+	$("#add").click(function(){
+		window.location.href = "/site/"+ url[2] +"/sensoradd/" + a;
 	});
 	
 

@@ -217,6 +217,7 @@ public class SiteController {
 				out.println("</script>");
 
 			}
+
 		 
 		 
 		 
@@ -259,7 +260,8 @@ public class SiteController {
 	      return "site/sensormanage";
 	   }
 
-	@RequestMapping(value = "{site_id}" + "/sensoradd", method = RequestMethod.GET)
+
+	@RequestMapping(value = "{site_id}" + "/sensoradd"+ "/{num}", method = RequestMethod.GET)
 	public String sensoradd(@PathVariable String site_id, Model model,HttpSession session,
 			HttpServletResponse response) throws IOException {
 		
@@ -281,8 +283,24 @@ public class SiteController {
 		model.addAttribute("siteInfo", siteservice.getSite(site_id)); // 현장정보
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id)); // 연락망
 		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
-
+		
 		return "site/sensoradd";
+	}
+	
+	@RequestMapping(value = "{site_id}" + "/sensormodify" + "/{sensor_sn}", method = RequestMethod.GET)
+	public String sensormodify(@PathVariable String site_id, @PathVariable String sensor_sn, Model model,HttpSession session,
+			HttpServletResponse response) throws IOException {
+				
+		System.out.println("센서수정");
+		model.addAttribute("siteInfo", siteservice.getSite(site_id)); // 현장정보
+		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id)); // 연락망
+		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
+		model.addAttribute("sensorInfo", siteservice.getSensor(sensor_sn));
+		
+		System.out.println(sensor_sn);
+
+		
+		return "site/sensormodify";
 	}
 
 	@RequestMapping(value = "{site_id}" + "/download", method = RequestMethod.GET)

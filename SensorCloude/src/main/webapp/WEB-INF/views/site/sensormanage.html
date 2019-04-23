@@ -66,18 +66,16 @@
 						<th scope="col">모델명</th>
 						<th scope="col">전압</th>
 						<th scope="col">제조사</th>
-						<th scope="col">현장이름</th>
 						<th scope="col">등록일</th> 
 					</tr>
 				</thead>
-				<tbody id="list">
+				<tbody id="sensorlist">
 				 	<tr th:each="sensorlist : ${sensorlist}">
 						<td th:text="${sensorlist.sensor_sn}"></td>
 						<td th:text="${sensorlist.sensor_kind}"></td>
 						<td th:text="${sensorlist.model_name}"></td>
 						<td th:text="${sensorlist.voltage}"></td>
 						<td th:text="${sensorlist.manufacturer}"></td>
-						<td th:text="${sensorlist.site_name}"></td>
 						<td th:text="${sensorlist.create_day}"></td>
 					</tr> 
 
