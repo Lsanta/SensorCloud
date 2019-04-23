@@ -9,4 +9,6 @@ public interface MemberAttachMapper {
 	public int insert(MemberFileVO vo);
 	
 	public List<MemberFileVO> findByui(String user_id);
+	
+	public void mypagedelete(String user_id);
 }

@@ -1,6 +1,7 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.wda.sc.domain.CheckBoardVO;
@@ -23,4 +24,9 @@ public interface MyPageService {
 	public ArrayList<CheckBoardVO> myListView(String board_no);
 	
 	public void insert(MemberVO member);
+	
+	public List<MemberFileVO> getAttachListmypage(String user_id);
+	
+	public void mypagedelete(String user_id);
+
 }

@@ -32,7 +32,7 @@
 			<ul>
 				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
 				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'" >수리내역</a></li>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage'">센서관리</a></li>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage/1'">센서관리</a></li>
 				<li style="line-height: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트 다운로드</a></li>
 				<li><span id="num">연락망</span> 
 				<span id="down" style="display: inline"> 
@@ -55,7 +55,7 @@
 		<div id="main-content">
 			<div class="title-header">
 				<h1>보유센서</h1>
-				<button id="add" value="add">보유센서 추가</button>
+				<button id="add" value="add" >보유센서 추가</button>
 			</div>
 
 			<table id="mysensor">
@@ -66,7 +66,6 @@
 						<th scope="col">모델명</th>
 						<th scope="col">전압</th>
 						<th scope="col">제조사</th>
-						<th scope="col">현장이름</th>
 						<th scope="col">등록일</th> 
 					</tr>
 				</thead>
@@ -77,7 +76,6 @@
 						<td th:text="${sensorlist.model_name}"></td>
 						<td th:text="${sensorlist.voltage}"></td>
 						<td th:text="${sensorlist.manufacturer}"></td>
-						<td th:text="${sensorlist.site_name}"></td>
 						<td th:text="${sensorlist.create_day}"></td>
 					</tr> 
 

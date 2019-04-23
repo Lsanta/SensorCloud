@@ -83,6 +83,12 @@ public class SiteServiceImplement implements SiteService {
 	}
 
 	@Override
+	public int sensorPageNum(String site_id) {
+		// TODO Auto-generated method stub
+		return mapper.sensorPageNum(site_id);
+	}
+
+	@Override
 	public ArrayList<SiteVO> getContent(Paging p) {
 		// TODO Auto-generated method stub
 		return mapper.getContent(p);
@@ -173,10 +179,11 @@ public class SiteServiceImplement implements SiteService {
 	}
 
 	@Override
-	public ArrayList<InstallSensorVO> installSensorList(String site_id) {
+	public ArrayList<InstallSensorVO> installSensorList(Map<String, Object> parm) {
 		//현장에 설치된 센서 조회
-		return mapper.installSensorList(site_id);
+		return mapper.installSensorList(parm);
 	}
+
 
 
 

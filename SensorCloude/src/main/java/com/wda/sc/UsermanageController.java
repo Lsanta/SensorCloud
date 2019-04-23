@@ -2,9 +2,14 @@ package com.wda.sc;
 
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +33,25 @@ public class UsermanageController {
 private UsermanageService usermanageservice;
 	
 	@RequestMapping(value = "usermodify" + "/{id}", method = RequestMethod.GET)
-	public String address(@PathVariable String id, Model model) {
+	public String address(@PathVariable String id, Model model, HttpSession session, HttpServletResponse response) throws IOException {
+		
+		
+
+		int mlevel = (int) session.getAttribute("mlevel");
+		
+		
+		if (mlevel !=5) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n 관리자만 열람가능합니다');history.go(-1);");
+			out.println("</script>");
+
+		}
+		
+		
+		
 		model.addAttribute("userInfo",usermanageservice.getInfo(id));
 		return "manage/usermodify";
 	}

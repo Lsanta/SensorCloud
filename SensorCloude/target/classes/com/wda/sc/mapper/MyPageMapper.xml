@@ -5,7 +5,9 @@
 <mapper namespace="com.wda.sc.mapper.MyPageMapper">
 
 	<select id="getInfo" resultType="com.wda.sc.domain.MemberVO">
-		select * from member where user_id = #{user_id}
+		select * from member m full outer join member_file f
+		on(m.user_id = f.user_id)
+		where m.user_id = #{user_id}
 	</select>
 	
 	<select id="myList" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="map">
@@ -50,5 +52,6 @@
 	<select id="getPageNum" resultType="int">
 			select count(board_no) from check_board where user_id = #{user_id}
 	</select>
+	
 	
 </mapper>
