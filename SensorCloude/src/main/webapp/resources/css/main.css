@@ -220,14 +220,14 @@ table th {
   vertical-align: bottom;
 }
 
-/* .images img {
+ .images img {
   width:120px;
   height:120px;
   display: block;
   justify-content: center;
   align-items: center;
   padding: 13px;
-} */
+} 
 
 .images h5 {
   margin: 0 0 0 10%;
