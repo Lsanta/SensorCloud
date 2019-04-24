@@ -12,9 +12,9 @@
 	list-style: none;
 }
 
-html {
+/* html {
 	overflow: hidden;
-}
+} */
 
 #nav-btn {
 	fill: white;
@@ -67,9 +67,6 @@ aside {
 
 #scroll {
 	width: 100%;
-	height: 800px;
-	overflow: scroll;
-	overflow-x: hidden;
 }
 
 h1 {
