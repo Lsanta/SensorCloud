@@ -371,6 +371,7 @@ public class HomeController {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		int realNum = Integer.parseInt(num);
+		//Map<Integer, ArrayList<Integer>> pagemap = new HashMap<Integer, ArrayList<Integer>>();
 
 		page.setTotalNum(mypageservice.getPageNum(id.toString()));
 		page.setOnePageBoard(5);
@@ -387,6 +388,12 @@ public class HomeController {
 		for(int i = 0; i < pageNum; i ++) {
 			arr.add(i+1);
 		}
+		
+		/*
+		 * if(realNum/5 == 0) { if(realNum/5 == 1 && realNum%5 == 0) { for(int i=0;
+		 * i<=page.getTotalNum(); i++) { pagemap.put(i++, (String).get(i)); }
+		 * System.out.println(pagemap); } }
+		 */
 
 		page.setEndnum((realNum*5)+1);
 		page.setStartnum(page.getEndnum()-5);
