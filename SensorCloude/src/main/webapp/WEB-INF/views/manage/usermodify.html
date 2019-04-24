@@ -122,9 +122,18 @@ $("#confirm-modify").on("click", function() {
 				</select>
 			
 
+			
+			<p id="re_level"  th:each="userInfo : ${userInfo}" th:if="${userInfo.re_level != 0}"  th:text="'사용자 요청등급:'+' '+ ${userInfo.re_level}+'등급'"></p>
+			
+			
+			
+			<input type="submit" name="confirm-modify" id="confirm-modify" class="confirm-modify" value="수정">
+
+
 				<p id="re_level" th:each="userInfo : ${userInfo}" th:text="'사용자 요청등급:'+' '+ ${userInfo.re_level}+'등급'"></p>
 				
 				<input type="submit" name="confirm-modify" id="confirm-modify" class="confirm-modify" value="수정">
+
 		
 			</div>
 
