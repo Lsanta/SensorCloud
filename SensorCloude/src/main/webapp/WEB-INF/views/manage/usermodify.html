@@ -7,6 +7,34 @@
 <script>
 /*사용자 수정*/
 $(document).ready(function() {
+	var user_id = $(".zzz").text();
+	
+	
+	   $.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr){
+		   console.log(arr);
+		   
+		   var str = "";
+			 
+			 $(arr).each(function(i, attach){
+				//image type
+				if(attach.filetype){
+					var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
+				
+					str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";
+					str += "<img class='delete1' src='/display?fileName="+fileCallPath+"'>";
+					str += "</div>";
+					str += "</li>";
+				
+				} else {
+					str += "<img src='/resources/img/manager.svg'>";
+					
+				}
+				 
+			 });
+			 
+			 $(".cell ul").html(str);
+			
+		 }); //end getjson
 $("#confirm-modify").on("click", function() {
 	var target = document.getElementById("selectBox");
 	
@@ -40,6 +68,8 @@ $("#confirm-modify").on("click", function() {
 	
 	});	// ajax 종료
 }); // #confirm-modify 종료
+
+
 });
 </script>
 </head>
@@ -61,7 +91,19 @@ $("#confirm-modify").on("click", function() {
 				<input type="text" name="name" id="modify_name" th:value="${userInfo.name}"><br>	
 			</div>
 			
-			<div id="images"></div>
+			<div id="images">
+			<div class="cell" th:if="${userInfo.filetype = 'false'}">
+         <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
+           <ul>
+           </ul>
+         </div>
+         
+         <div class="cell" th:if="${userInfo.filetype = 'true'}">
+         <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
+			<ul>
+			</ul>       
+         </div>
+			</div>
 			
 			<div id="ep">
 				<label>이메일</label><br>
