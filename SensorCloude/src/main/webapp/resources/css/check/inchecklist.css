@@ -134,9 +134,10 @@ button {
 }
 .uploadResult ul{
 	display:flex;
-	flex-flow:row;
-	justity-content:center;
-	align-tiems:center;
+	align-content:flex-start;
+	flex-direction:column;
+	flew-wrap:wrap;
+	overflow:auto;
 }
 .uploadResult ul li{
 	list-style : none;
