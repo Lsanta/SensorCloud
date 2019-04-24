@@ -40,7 +40,7 @@
 
 		   });
 		   
-		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+		 var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 		var maxSize = 5242880;
 		
 		function checkExtension(fileName,fileSize){
@@ -53,7 +53,9 @@
 				return false;
 			}
 			return true;
-		}
+		} 
+	
+
 		$("input[type='file']").change(function(e){
 			var formData = new FormData();
 			var inputFile = $("input[name='uploadFile']");
