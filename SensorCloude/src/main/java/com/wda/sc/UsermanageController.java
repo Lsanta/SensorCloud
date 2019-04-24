@@ -53,6 +53,7 @@ private UsermanageService usermanageservice;
 		
 		
 		model.addAttribute("userInfo",usermanageservice.getInfo(id));
+		System.out.println(usermanageservice.getInfo(id));
 		return "manage/usermodify";
 	}
 	

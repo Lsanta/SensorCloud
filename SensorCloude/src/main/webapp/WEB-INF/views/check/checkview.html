@@ -10,10 +10,34 @@
 <th:block layout:fragment="page_css">
 	<link rel="stylesheet" type="text/css"
 		href="/resources/css/check/inchecklist.css">
-		
+		<style>
+.bigPictureWrapper {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  top:0%;
+  width:100%;
+  height:100%;
+
+
+  z-index: 100;
+}
+
+.bigPicture {
+  position: relative;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
 </th:block>
 
 <th:block layout:fragment="contents">
+<div class='bigPictureWrapper'>
+  <div class='bigPicture'>
+  </div>
+</div>
 
 <div class="a">
 
@@ -99,6 +123,7 @@
     	</div>
 	</div>
 </div>
+
 </th:block>
 
 <th:block layout:fragment="page_js">
@@ -106,6 +131,41 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<script>
 		$(document).ready(function(){
+			 $(".uploadResult").on("click","li", function(e){
+			      
+				 
+				    
+				    var liObj = $(this);
+				    
+				    var path = encodeURIComponent(liObj.data("path")+"/" + liObj.data("uuid")+"_" + liObj.data("filename"));
+				    
+				    if(liObj.data("type")){
+				      showImage(path.replace(new RegExp(/\\/g),"/"));
+				    }else {
+				      //download 
+				      self.location ="/download?fileName="+path
+				    }
+				    
+				    
+				  });
+				  
+				  function showImage(fileCallPath){
+				
+				    
+				    $(".bigPictureWrapper").css("display","flex").show();
+				    
+				    $(".bigPicture")
+				    .html("<img src='/display?fileName="+fileCallPath+"' >")
+				    .animate({width:'100%', height: '100%'}, 1000);
+				    
+				  }
+
+				  $(".bigPictureWrapper").on("click", function(e){
+				    $(".bigPicture").animate({width:'0%', height: '0%'}, 1000);
+				    setTimeout(function(){
+				      $('.bigPictureWrapper').hide();
+				    }, 1000);
+				  });
 	
 			var newURL =  window.location.pathname;
 
@@ -143,5 +203,6 @@
 				 }); //end getjson
 			   });
 		</script>
+
 </th:block>
 </html>

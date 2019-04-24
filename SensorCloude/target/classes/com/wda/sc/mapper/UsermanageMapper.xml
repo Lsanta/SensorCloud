@@ -16,7 +16,9 @@
 	</select>
 	
 	<select id="getInfo" resultType="com.wda.sc.domain.MemberVO">
-		select user_id,name,phone,email,m_level,re_level from member where user_id=#{user_id}
+		select * from member m full outer join member_file f
+		on(m.user_id = f.user_id)
+		where m.user_id = #{user_id}
 	</select>
 
 	<select id="getPageNum" resultType="int">
