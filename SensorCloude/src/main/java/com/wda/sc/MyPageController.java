@@ -104,17 +104,16 @@ public class MyPageController {
 		
 		String id = (String) session.getAttribute("id");
 		member.setUser_id(id);
-		System.out.println("------------------------");
-		System.out.println("mypageimage:" + member);
+	
 		if (member.getAttachList() != null) {
 			member.getAttachList().forEach(attach -> System.out.println(attach));
 		}
-		System.out.println("-----------------------------");
+
 
 		mypageservice.insert(member);
 
 		 rttr.addFlashAttribute("result", member.getUser_id());
-		System.out.println("gg");
+
 		return "redirect: /mypage/imagecomplete";
 	}
 	@RequestMapping(value = "/imagecomplete", method = RequestMethod.GET)
