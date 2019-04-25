@@ -138,6 +138,12 @@ button {
 	justity-content:center;
 	align-tiems:center;
 	width:100%;
+
+	align-content:flex-start;
+	flex-direction:column;
+	flew-wrap:wrap;
+	overflow:auto;
+
 }
 .uploadResult ul li{
 	list-style : none;

@@ -7,10 +7,12 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,10 +46,13 @@ public class HomeController {
 	private MysensorService mysensorservice;
 	private UsermanageService usermanageservice;
 	private MyPageService mypageservice;
+	
+	@Autowired private ServletContext servletContext;
 
 	@RequestMapping(value ="/", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
 		
+		System.out.println(servletContext.getRealPath("/"));
 		//메인화면 점검이력 제목 substring
 		ArrayList<CheckBoardVO> arr = checkboardservice.mainList();
 	
@@ -371,6 +376,7 @@ public class HomeController {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		int realNum = Integer.parseInt(num);
+		//Map<Integer, ArrayList<Integer>> pagemap = new HashMap<Integer, ArrayList<Integer>>();
 
 		page.setTotalNum(mypageservice.getPageNum(id.toString()));
 		page.setOnePageBoard(5);
@@ -387,6 +393,12 @@ public class HomeController {
 		for(int i = 0; i < pageNum; i ++) {
 			arr.add(i+1);
 		}
+		
+		/*
+		 * if(realNum/5 == 0) { if(realNum/5 == 1 && realNum%5 == 0) { for(int i=0;
+		 * i<=page.getTotalNum(); i++) { pagemap.put(i++, (String).get(i)); }
+		 * System.out.println(pagemap); } }
+		 */
 
 		page.setEndnum((realNum*5)+1);
 		page.setStartnum(page.getEndnum()-5);
