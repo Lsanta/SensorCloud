@@ -7,10 +7,12 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,10 +46,13 @@ public class HomeController {
 	private MysensorService mysensorservice;
 	private UsermanageService usermanageservice;
 	private MyPageService mypageservice;
+	
+	@Autowired private ServletContext servletContext;
 
 	@RequestMapping(value ="/", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
 		
+		System.out.println(servletContext.getRealPath("/"));
 		//메인화면 점검이력 제목 substring
 		ArrayList<CheckBoardVO> arr = checkboardservice.mainList();
 	
