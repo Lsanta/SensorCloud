@@ -5,9 +5,60 @@
 <title>팝업창</title>
 <link href="/resources/css/mysensor/sensoradd.css" rel="stylesheet" type="text/css"/>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-messaging.js"></script>
 <script>
 $(document).ready(function(){
-		
+
+		var config = {
+				  apiKey: "AIzaSyCvPX3WEIFtsNbN3JGsQzIvVSDFAOKGoqI",
+				  authDomain: "sensorcloud-cb820.firebaseapp.com",
+				  databaseURL: "https://sensorcloud-cb820.firebaseio.com",
+				  projectId: "sensorcloud-cb820",
+				  storageBucket: "sensorcloud-cb820.appspot.com",
+				  messagingSenderId: "544037446198"
+			};
+			firebase.initializeApp(config);
+			
+			const messaging = firebase.messaging();
+
+			messaging.usePublicVapidKey("BAiJYfYEXBiHRzsKJFqW5en4dEkOwKFr3KRPJIpNZ3kWk6QP0DHXOIMtoKdN6ca9Tk_JUo25btDxXFtheXjGRuE");
+			
+			messaging.getToken().then(function(currentToken) {
+				  if (currentToken) {
+				    console.log(currentToken);
+					
+				    var payload = {
+				    		token : currentToken,
+							message : 'test'
+				    }
+
+					$.ajax({
+						type : "POST",
+						url : "/send/message.do",
+						data : JSON.stringify(payload),
+						contentType : 'application/json',
+						success : function(data){
+							console.log("갔따옴");
+							console.log(data);
+						}
+					});
+						    
+				
+				  } else {
+				    // Show permission request.
+				    console.log('No Instance ID token available. Request permission to generate one.');
+			
+				  }
+				}).catch(function(err) {
+				 	
+				});
+			
+	
+	
+	
+	
+	
 		$("#plus").click(function(){
 			var query = { 
 							sensor_sn : $("#sensor_sn").val(),
