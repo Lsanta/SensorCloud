@@ -37,7 +37,7 @@
 
 		messaging.usePublicVapidKey("BAiJYfYEXBiHRzsKJFqW5en4dEkOwKFr3KRPJIpNZ3kWk6QP0DHXOIMtoKdN6ca9Tk_JUo25btDxXFtheXjGRuE");
 		
-// 		 navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registartion){
+ 		 navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registartion){
 			 
 // 			 messaging.requestPermission().then(function(){
 // 					console.log('요청 허용');
@@ -53,29 +53,29 @@
 			 var sessionid = $("#sessionid").text();
 								
 			 if(sessionid == "admin"){
-				alert('관리자');
+				
 				messaging.onMessage(function(payload) {
 					  console.log('Message received. ', payload);
-					  //JSON.stringify(payload.data).substr(29,5) == 'admin'
+					  var sender = JSON.stringify(payload.data).substr(29,5);
 					  var sessionid = $("#sessionid").text();
 						 setTimeout(function() {
-							  notify();
+							  notify(sender);
 						  }, 3000);
 					  console.log("메시지 출력");	 
 				});
 				
 			 } // admin 체크 종료
 			 
-// 		 }); // register 종료
+ }); // register 종료
 		
-		function notify() {
+		function notify(sender) {
             if (Notification.permission !== 'granted') {
                 alert('notification is disabled');
             }
             else {
-                var notification = new Notification('Notification title', {
+                var notification = new Notification('승급 요청', {
                     icon: '/resources/img/logo.png',
-                    body: '알림 왔어요'
+                    body:  sender + '가 승급 요청을 하였습니다.' 
                 });
  
                 notification.onclick = function () {

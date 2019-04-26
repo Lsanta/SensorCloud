@@ -78,6 +78,12 @@ public class MessageController {
 //	    notification.put("webpush", fcm_options);
 
 	    body.put("notification", notification);
+	    
+	    
+	    JSONObject data = new JSONObject();
+	    data.put("status", "push alarm!!");
+	    body.put("data", data);
+	    
 	    System.out.println(body.toString());
 	    
 	    HttpEntity<String> request = new HttpEntity<>(body.toString());
