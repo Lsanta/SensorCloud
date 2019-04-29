@@ -37,6 +37,7 @@ public class MyPageController {
 
 	private MyPageService mypageservice;
 	private CheckboardService checkboardservice;
+	private UploadController uploadController;
 	
 	@RequestMapping(value = "/levelup", method = RequestMethod.GET)
 	public String address(Locale locale, Model model, HttpSession session) {
@@ -100,21 +101,32 @@ public class MyPageController {
 
 	}
 	@RequestMapping(value = "mypageimage.do", method = RequestMethod.POST)
-	public String insertmypageimage(MemberVO member,HttpSession session, RedirectAttributes rttr) {
+	public String insertmypageimage(MemberVO member,MemberFileVO vo,HttpSession session, RedirectAttributes rttr) {
+		String user_id = (String) session.getAttribute("id");
+		String type = "true";
+	
+		ArrayList<MemberFileVO> arr = (ArrayList<MemberFileVO>) mypageservice.getAttachListmypage(user_id);
+		String fileName = arr.get(0).getFile_name();
 		
+//		String fileName = ((MemberFileVO) mypageservice.getAttachListmypage(user_id)).getFile_name();
+
+
+		System.out.println("sddddd"+fileName);
+
 		String id = (String) session.getAttribute("id");
 		member.setUser_id(id);
-		System.out.println("------------------------");
-		System.out.println("mypageimage:" + member);
+	
 		if (member.getAttachList() != null) {
 			member.getAttachList().forEach(attach -> System.out.println(attach));
 		}
-		System.out.println("-----------------------------");
+		if(fileName != null) {
+		uploadController.deleteFilemypage(fileName, type, user_id);
+		}
 
 		mypageservice.insert(member);
 
 		 rttr.addFlashAttribute("result", member.getUser_id());
-		System.out.println("gg");
+
 		return "redirect: /mypage/imagecomplete";
 	}
 	@RequestMapping(value = "/imagecomplete", method = RequestMethod.GET)

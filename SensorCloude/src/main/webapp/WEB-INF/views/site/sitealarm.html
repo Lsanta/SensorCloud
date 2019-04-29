@@ -69,7 +69,7 @@
 										<th><input type="checkbox" name="checkAll"></th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="amember">
 									<tr th:each="alarmMember : ${alarmMember}">
 										<td th:text="${alarmMember.tel}"></td>
 										<td th:text="${alarmMember.company}"></td>
@@ -88,7 +88,7 @@
 			
 				</div>
 				
-				<div class="modifybox">
+				<div class="modifybox" style="display : none">
 					<div> 전화번호<input type="tel"  id="tel2" class="tel2" disabled="disabled"/></div>
 					<div> 회사<input type="text" id="company2"  class="company2" disabled="disabled"/></div>
 					<div> 이름<input type="text" id="name2" class="name2" disabled="disabled"/>

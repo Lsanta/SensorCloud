@@ -6,6 +6,9 @@
 
 @import
 	url('https://fonts.googleapis.com/css?family=Libre+Franklin:300');
+.none {
+	display : none;
+}
 
 .line {
 	width: 70px;
@@ -204,6 +207,10 @@ textarea {
 #scroll-table2 {
 	float: none;
 	width: auto;
+}
+
+#amember tr:hover {
+	background-color: #D8D8D8;
 }
 
 @media (max-width:1380px){
