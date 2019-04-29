@@ -65,23 +65,14 @@ public class MessageController {
 	    JSONObject notification = new JSONObject();
 	    notification.put("title", "FCM test");
 	    notification.put("body", paramInfo.get("message"));
-	    notification.put("click_action", "https://localhost:8443/");
+//	    notification.put("click_action", "https://localhost:8443/");
 	    notification.put("user_id",session.getAttribute("id"));
-	 
-//	    JSONObject fcm_options = new JSONObject();
-//	    JSONObject link = new JSONObject();
-//	    
-//	    link.put("link","https://dummypage.com");
-//	    fcm_options.put("fcm_options", link);
-//	    
-//	    
-//	    notification.put("webpush", fcm_options);
 
 	    body.put("notification", notification);
 	    
 	    
 	    JSONObject data = new JSONObject();
-	    data.put("status", "push alarm!!");
+	    data.put("Room", "push alarm!!");
 	    body.put("data", data);
 	    
 	    System.out.println(body.toString());
