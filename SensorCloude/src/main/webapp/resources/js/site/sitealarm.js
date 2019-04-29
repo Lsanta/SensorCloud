@@ -15,7 +15,7 @@ $(document).ready(function(){
 		//window.open(newURL + "/add" ,"add","width=300,height=300, scrollbars=no, resizable=yes");
 		
 	$(document).on("click","#plus-btn",function(){
-			
+		
 		 var row ="<tr id='example'>"
 			 row += '<td><input type="tel" class="line" name="tel" id="tel"></td>';
 		 	 row += '<td><input type="text" class="line" name="company" id="company"></td>';
@@ -67,6 +67,8 @@ $(document).ready(function(){
 	
 	
 	$(document).on("click","#member>tbody>tr",function(){
+		
+		$(".modifybox").css("display","block");
 		
 		var location = $(this).children();
 		$(this).css("background-color","aliceblue");

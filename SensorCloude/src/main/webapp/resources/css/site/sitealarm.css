@@ -6,6 +6,9 @@
 
 @import
 	url('https://fonts.googleapis.com/css?family=Libre+Franklin:300');
+.none {
+	display : none;
+}
 
 .line {
 	width: 70px;
