@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" type="text/css"
-	href="/resources/css/mypage/levelup.css">
-<link rel="manifest" crossorigin= use-credentials href="/resources/google/manifest.json">
+<link rel="stylesheet" type="text/css" href="/resources/css/mypage/levelup.css">
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"
-	integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-	crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-messaging.js"></script>
 
 <script>
-	
-	
-	$(document).ready(function() {
-		
+
+	function send(){
 		var config = {
 				  apiKey: "AIzaSyCvPX3WEIFtsNbN3JGsQzIvVSDFAOKGoqI",
 				  authDomain: "sensorcloud-cb820.firebaseapp.com",
@@ -59,10 +54,13 @@
 				}).catch(function(err) {
 				 	
 				});
-			
-			
-			$("#ok").click(function() {
+	}
 
+	$(document).ready(function() {	
+		
+			$("#ok").click(function() {
+				send();
+				
 				var select_level = $("#select_level option:selected").val();
 
 				var user_id = $("#user_id").text();
@@ -73,7 +71,6 @@
 						re_level : select_level
 				}
 
-		
 				$.ajax({
 
 					type : "POST",
@@ -82,10 +79,8 @@
 					success : function(data) {
 
 						if (data == "success") {
-							alert("승급요청이 완료 되었습니다.");					
-							//알림 or 메시지 전달 ?
-							
-									
+						
+							alert("승급요청이 완료 되었습니다.");											
 							window.close();
 
 						}
@@ -97,6 +92,7 @@
 
 				});
 			}); //ajax 종료
+			
 			
 			
 			
