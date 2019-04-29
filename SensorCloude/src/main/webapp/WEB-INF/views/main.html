@@ -53,24 +53,28 @@
         <div class="image-container">
           <div class="grid">
             <div class="images" th:each="mainchecklist : ${mainchecklist}">
-            <div class="ddd" th:if="${mainchecklist.filetype != '1'}">
-            <div th:text="${mainchecklist.board_no}" style="display:none;"></div>
-              <img src="/resources/img/addimage.svg" class="responsive-image">
-    		</div>
-    		<div class="ddd" th:if="${mainchecklist.filetype == '1'}">
-    		 <div th:text="${mainchecklist.board_no}" style="display:none;"></div>
-            <ul>
+            	<div class="ddd" th:if="${mainchecklist.filetype != '1'}">
+
+              		<img src="/resources/img/addimage.svg" class="responsive-image">
+    			</div>
+    			
+    			<div class="ddd" th:if="${mainchecklist.filetype == '1'}">
+    		 	<div th:text="${mainchecklist.board_no}" style="display:none;"></div>
+            		<ul>
             
-            </ul>
-    		</div>
-              <h5 th:text="${mainchecklist.title}"></h5>
-              <h5 th:text=${mainchecklist.name}></h5>
-              <span id="chdate" th:text=${mainchecklist.reg_date}></span></br>
-              <span id="chstatus" th:switch=${mainchecklist.board_status}>
-              	<span class="status00" th:case="'0'">open</span>
-              	<span class="status00" th:case="'1'">fixed</span>
-              	<span class="status00" th:case="'2'">closed</span>
-              </span>
+            		</ul>
+    			</div>
+    			
+              	<h5 th:text="${mainchecklist.title}"></h5>
+              	<h5 th:text=${mainchecklist.name}></h5>
+              	<span th:text="${mainchecklist.board_no}" style="display:none;"></span>
+              	<span id="chdate" th:text=${mainchecklist.reg_date}></span></br>
+              	
+              	<span id="chstatus" th:switch=${mainchecklist.board_status}>
+              		<span class="status00" th:case="'0'">open</span>
+              		<span class="status00" th:case="'1'">fixed</span>
+              		<span class="status00" th:case="'2'">closed</span>
+              	</span>
             </div>
             
           </div>
@@ -96,7 +100,7 @@
 	
 	<th:block layout:fragment="page_js" >
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-		<script src="/resources/js/main.js"></script>
+		
 		
 		<script>
 		$(document).ready(function(){
@@ -146,6 +150,7 @@
 			}
 			   });
 		</script>
+		<script src="/resources/js/main.js"></script>
 	</th:block>
 	
 </html>
