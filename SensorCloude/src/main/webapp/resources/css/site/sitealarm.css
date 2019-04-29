@@ -206,6 +206,10 @@ textarea {
 	width: auto;
 }
 
+#amember tr:hover {
+	background-color: #D8D8D8;
+}
+
 @media (max-width:1380px){
 	.leftbox {
 		width : 45%;

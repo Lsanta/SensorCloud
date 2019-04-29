@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -16,14 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wda.sc.domain.CheckBoardVO;
-import com.wda.sc.domain.InstallSensorVO;
-import com.wda.sc.domain.MemberVO;
-import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
-import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.MyPageService;
 import com.wda.sc.service.MysensorService;
@@ -371,8 +365,8 @@ public class HomeController {
 		Map<String, Object> parm = new HashMap<String, Object>();
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		int realNum = Integer.parseInt(num);
-		//Map<Integer, ArrayList<Integer>> pagemap = new HashMap<Integer, ArrayList<Integer>>();
-
+		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
+		
 		page.setTotalNum(mypageservice.getPageNum(id.toString()));
 		page.setOnePageBoard(5);
 		
@@ -383,28 +377,40 @@ public class HomeController {
 			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
 				pageNum = pageNum + 1;
 			}
-		}
+		} 
 
 		for(int i = 0; i < pageNum; i ++) {
 			arr.add(i+1);
 		}
 		
-		/*
-		 * if(realNum/5 == 0) { if(realNum/5 == 1 && realNum%5 == 0) { for(int i=0;
-		 * i<=page.getTotalNum(); i++) { pagemap.put(i++, (String).get(i)); }
-		 * System.out.println(pagemap); } }
-		 */
+		
+		 if(pageNum > 5) { 
+			 int i = 0;
+		 	 
+		 for(i=0; i<pageNum; i++) { 
+			for(int j=0; j<pageNum; j++) {
+				ArrayList<Integer> arr2 = new ArrayList<Integer>();		
+				if(realNum/5 == 0) {
+					if(realNum/5 == 1 && realNum%5 == 0) {
+						arr2.add(j+1);
+					}else break;
+				}
+				map.put(i, arr2);
+			}
+		 } 
+	}
 
 		page.setEndnum((realNum*5)+1);
 		page.setStartnum(page.getEndnum()-5);
-
+		
 		parm.put("paging", page);
 		parm.put("user_id", id);
 
-		model.addAttribute("pageNum",arr);
+		//model.addAttribute("pageNum",arr);
 		model.addAttribute("userInfo",mypageservice.getInfo(id.toString()));
 		model.addAttribute("mychecklist",mypageservice.myList(parm));
 		System.out.println(mypageservice.getInfo(id.toString()));
+		model.addAttribute("pageNum",map.get(0));
 		
 		return "mypage/mypage";
 	}

@@ -92,6 +92,7 @@ $(document).ready(function(){
 	     
 	     }
 	});
+	
 	var num = 0;
 
 	var newURL =  window.location.pathname;
