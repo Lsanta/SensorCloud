@@ -30,9 +30,9 @@ $(document).ready(function(){
 	 });
 	 
 	 $(document).on("click", ".images" , function(){
-	
+		 
 		var title = $(".images").index(this);
-		var n = $(".images:eq("+title+") div:eq(1)").text();
+		var n = $(".images:eq("+title+") span:eq(0)").text();
 
 			
 			alert(n);
