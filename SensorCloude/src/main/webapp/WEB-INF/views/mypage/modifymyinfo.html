@@ -62,9 +62,12 @@
 				<label>이름</label><br>
 				<input type="text" name="name" id="modify_name" th:value="${userInfo.name}"><br>
 				
+				<label>이메일</label><br>
+				<input type="text" name="name" id="modify_name" th:value="${userInfo.email}" disabled><br>
 				
 				<label>휴대폰번호</label><br>
 				<input type="text" name="modify_name" id="phonenumber" th:value="${userInfo.phone}"><br>
+				
 				<input type="submit" name="confirm-modify" id="confirm-modify" class="confirm-modify" value="확인">
 
 			</div>
