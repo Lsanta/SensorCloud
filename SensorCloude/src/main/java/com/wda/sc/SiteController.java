@@ -388,7 +388,13 @@ public class SiteController {
 
 		return "false";
 	}
+	
+	@RequestMapping(value = "sitealarmmod", method = RequestMethod.GET)
+	public String sensormod(Locale locale, Model model, HttpSession session , HttpServletResponse response) throws IOException {
 
+		return "site/sitealarmmod";
+	}
+	
 	@RequestMapping(value = "alarmadd.do")
 	@ResponseBody
 	public String alarmadd(AlarmVO vo, HttpSession session) {

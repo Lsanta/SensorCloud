@@ -3,7 +3,6 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/resources/css/mypage/levelup.css">
 
-
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-messaging.js"></script>
@@ -45,7 +44,7 @@
 						data : JSON.stringify(payload),
 						contentType : 'application/json',
 						success : function(data){
-							console.log("갔따옴");
+							console.log("갔다옴");
 							console.log(data);
 						}
 					});
@@ -119,8 +118,7 @@
 		<div id="content">
 			<div id="now-level" th:each="userInfo : ${userInfo}">
 				<center>
-					<p
-						th:text="|현재  ${userInfo.name} 님의 등급은 ${userInfo.m_level}등급 입니다.|"></p>
+					<p th:text="|현재  ${userInfo.name} 님의 등급은 ${userInfo.m_level}등급 입니다.|"></p>
 				</center>
 				<p th:text="${userInfo.user_id}" id="user_id" style="display: none"></p>
 				<!-- 승급요청시 사용자 관리에 id를 넘기기위함 -->

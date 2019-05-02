@@ -68,12 +68,17 @@ $(document).ready(function(){
 	
 	$(document).on("click","#member>tbody>tr",function(){
 		
+		var openWin = window.open("/site/sitealarmmod", "pop",
+				 "width=570,height=650,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+		
 		$(".modifybox").css("display","block");
 		
-		var location = $(this).children();
-		$(this).css("background-color","aliceblue");
-		$(this).siblings().css("background-color","white");
-
+		var tr = $(this);
+		var tel2 = tr.children().eq(0).addClass("1");
+		var company2 = tr.children().eq(1).addClass("2");
+		var name2 = tr.children().eq(2).addClass("3");
+		var alarmNum = tr.children().eq(3).addClass("4");
+		
 		$("#tel2").val(location.eq(0).text());
 		$("#company2").val(location.eq(1).text());
 		$("#name2").val(location.eq(2).text());
@@ -144,7 +149,9 @@ $(document).ready(function(){
 				  if( data == "success"){
 					  alert("업데이트 성공");
 					  $("#example").remove();
-					  location.reload();
+					  window.opener.location.reload();
+					  remove();
+					  window.close();
 				  } else{
 					  alert("수정에 실패했습니다");
 				  }
@@ -168,7 +175,9 @@ $(document).ready(function(){
 					  if( data == "success"){
 						  alert("삭제 성공");
 						  $("#example").remove();
-						  location.reload();
+						  window.opener.location.reload();
+						  remove();
+						  window.close();
 					  } else{
 						  alert("삭제에 실패했습니다");
 					  }
