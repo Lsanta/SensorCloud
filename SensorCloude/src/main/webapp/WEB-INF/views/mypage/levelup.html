@@ -29,11 +29,16 @@
 				  if (currentToken) {
 				    console.log(currentToken);
 					
+				    var select_level = $("#select_level option:selected").val();
+
+					var user_id = $("#user_id").text();
+					
+					
 				    var payload = {
 				    		token : currentToken,
-							message : 'test'
+							message : user_id + "님의" + select_level + "등급 승급요청이 왔습니다."
 				    }
-
+					
 					$.ajax({
 						type : "POST",
 						url : "/send/message.do",
@@ -81,7 +86,7 @@
 						if (data == "success") {
 						
 							alert("승급요청이 완료 되었습니다.");											
-							window.close();
+// 							window.close();
 
 						}
 						

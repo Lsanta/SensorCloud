@@ -19,7 +19,7 @@
 
 	<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-messaging.js"></script>
-
+	<script src="/resources/js/sw.js"></script>
 	
 	<script>
 
@@ -37,7 +37,7 @@
 
 		messaging.usePublicVapidKey("BAiJYfYEXBiHRzsKJFqW5en4dEkOwKFr3KRPJIpNZ3kWk6QP0DHXOIMtoKdN6ca9Tk_JUo25btDxXFtheXjGRuE");
 		
- 		 navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registartion){
+ 		navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registartion){
 			 
 // 			 messaging.requestPermission().then(function(){
 // 					console.log('요청 허용');
@@ -56,7 +56,7 @@
 				
 				messaging.onMessage(function(payload) {
 					  console.log('Message received. ', payload);
-					  var sender = JSON.stringify(payload.data).substr(29,5);
+					  var sender = JSON.stringify(payload.notification.title);	
 					  var sessionid = $("#sessionid").text();
 						 setTimeout(function() {
 							  notify(sender);
@@ -74,14 +74,13 @@
             }
             else {
                 var notification = new Notification('승급 요청', {
-                    icon: '/resources/img/logo.png',
-                    body:  sender + '가 승급 요청을 하였습니다.' 
+                       icon: '/resources/img/logo.png',
+                   	   body:  sender
                 });
  
                 notification.onclick = function () {
-                    //window.open("https://localhost:8443","_self");
-                    
-                    window.location.replace('/mypage/1');
+                	alert("확인");
+                    window.open("https://www.google.com/","_self");
                 };
            }
 		} 
