@@ -47,6 +47,8 @@ public class mLoginController {
 		 if(arr.size() != 0) {
 			 	
 				if(arr.get(0).getPassword().equals(password)) {
+						json.put("id", id);
+						json.put("password", password);
 						json.put("signal", "ok");
 				}else {
 					json.put("signal", "passfail");

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MemberFileVO;
 import com.wda.sc.domain.MemberVO;
+import com.wda.sc.domain.TokenVO;
 import com.wda.sc.mapper.MemberAttachMapper;
 import com.wda.sc.mapper.MyPageMapper;
 
@@ -75,6 +76,23 @@ public class MyPageServiceImplement implements MyPageService {
 	public void mypagedelete(String user_id) {
 		// TODO Auto-generated method stub
 		 mymapper.mypagedelete(user_id);
+	}
+
+	@Override
+	public List<TokenVO> getToken(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.getToken(user_id);
+	}
+
+	@Override
+	public int saveToken(TokenVO tokenvo) {
+		// TODO Auto-generated method stub
+		return mapper.saveToken(tokenvo);
+	}
+
+	@Override
+	public int updateToken(Map<String, String> map) {
+		return mapper.updateToken(map);
 	}
 
 	

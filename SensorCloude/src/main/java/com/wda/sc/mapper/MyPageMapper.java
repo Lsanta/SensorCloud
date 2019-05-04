@@ -1,10 +1,12 @@
 package com.wda.sc.mapper;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MemberVO;
+import com.wda.sc.domain.TokenVO;
 
 public interface MyPageMapper {
 	public ArrayList<MemberVO> getInfo(String id);
@@ -19,5 +21,10 @@ public interface MyPageMapper {
 	
 	public ArrayList<CheckBoardVO> myListView(String board_no);
 	
+	public List<TokenVO> getToken(String user_id);
+	//토큰 DB에 저장
+	public int saveToken(TokenVO tokenvo);
+	
+	public int updateToken(Map<String, String> map);
 	
 }
