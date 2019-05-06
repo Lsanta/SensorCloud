@@ -1,54 +1,108 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" type="text/css"
-	href="/resources/css/mypage/levelup.css">
-
-<script src="https://code.jquery.com/jquery-3.3.1.js"
-	integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-	crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="/resources/css/mypage/levelup.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-messaging.js"></script>
 
 <script>
-	
-	$(document).ready(function() {
 
-		$("#ok").click(function() {
+	function send(){
+		var config = {
+				  apiKey: "AIzaSyCvPX3WEIFtsNbN3JGsQzIvVSDFAOKGoqI",
+				  authDomain: "sensorcloud-cb820.firebaseapp.com",
+				  databaseURL: "https://sensorcloud-cb820.firebaseio.com",
+				  projectId: "sensorcloud-cb820",
+				  storageBucket: "sensorcloud-cb820.appspot.com",
+				  messagingSenderId: "544037446198"
+			};
+			firebase.initializeApp(config);
+			
+			const messaging = firebase.messaging();
 
-			var select_level = $("#select_level option:selected").val();
-
-			var user_id = $("#user_id").text();
-
-			var query = {
-
-					user_id : user_id,
-					re_level : select_level
-			}
-
-			$.ajax({
-
-				type : "POST",
-				data : query,
-				url : "/manage/userlevelmanage.do",
-				success : function(data) {
-
-					if (data == "success") {
-						alert("승급요청이 완료 되었습니다.");
-						
-						window.close();
-
-					}
+			messaging.usePublicVapidKey("BAiJYfYEXBiHRzsKJFqW5en4dEkOwKFr3KRPJIpNZ3kWk6QP0DHXOIMtoKdN6ca9Tk_JUo25btDxXFtheXjGRuE");
+			
+			messaging.getToken().then(function(currentToken) {
+				  if (currentToken) {
+				    console.log(currentToken);
 					
-					else if(data=="false"){
-					 	alert("승급요청이 실패하였습니다");
-					}
+				    var select_level = $("#select_level option:selected").val();
+
+					var user_id = $("#user_id").text();
+					
+					
+				    var payload = {
+				    		token : currentToken,
+							message : user_id + "님의" + select_level + "등급 승급요청이 왔습니다."
+				    }
+					
+					$.ajax({
+						type : "POST",
+						url : "/send/message.do",
+						data : JSON.stringify(payload),
+						contentType : 'application/json',
+						success : function(data){
+							console.log("갔다옴");
+							console.log(data);
+						}
+					});
+						    
+				
+				  } else {
+				    // Show permission request.
+				    console.log('No Instance ID token available. Request permission to generate one.');
+			
+				  }
+				}).catch(function(err) {
+				 	
+				});
+	}
+
+	$(document).ready(function() {	
+		
+			$("#ok").click(function() {
+				send();
+				
+				var select_level = $("#select_level option:selected").val();
+
+				var user_id = $("#user_id").text();
+
+				var query = {
+
+						user_id : user_id,
+						re_level : select_level
 				}
 
-			});
+				$.ajax({
 
-		});
+					type : "POST",
+					data : query,
+					url : "/manage/userlevelmanage.do",
+					success : function(data) {
 
+						if (data == "success") {
+						
+							alert("승급요청이 완료 되었습니다.");											
+// 							window.close();
+
+						}
+						
+						else if(data=="false"){
+						 	alert("승급요청이 실패하였습니다");
+						}
+					}
+
+				});
+			}); //ajax 종료
+			
+			
+			
+			
 	});
+
 </script>
+
 
 </head>
 
@@ -63,8 +117,7 @@
 		<div id="content">
 			<div id="now-level" th:each="userInfo : ${userInfo}">
 				<center>
-					<p
-						th:text="|현재  ${userInfo.name} 님의 등급은 ${userInfo.m_level}등급 입니다.|"></p>
+					<p th:text="|현재  ${userInfo.name} 님의 등급은 ${userInfo.m_level}등급 입니다.|"></p>
 				</center>
 				<p th:text="${userInfo.user_id}" id="user_id" style="display: none"></p>
 				<!-- 승급요청시 사용자 관리에 id를 넘기기위함 -->

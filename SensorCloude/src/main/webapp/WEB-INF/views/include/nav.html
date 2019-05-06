@@ -2,7 +2,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <nav th:fragment="nav">
-
 	<header class="main-header" style="height : 80px">
 		<div class="left">
 		<h1><a href="/">str</a></h1>
@@ -13,10 +12,9 @@
 		   <ul class="test">
 			<li><a href="/sitelist/1">현장관리</a></li>
 			<li><a href="/check/1">점검이력</a></li>
-
 			<li><a href="/time/1">타임라인</a></li>
 			<li><a href="/mysensor/1">보유센서</a><li>
-			<li><a href="/manage/1">사용자관리</a></li>
+			<li id="manage"><a href="/manage/1">사용자관리</a></li>
 		</ul>
 	      </nav>
 	      <div th:if="${session.id != null}" >

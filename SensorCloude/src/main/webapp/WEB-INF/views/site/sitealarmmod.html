@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link href="/resources/css/mysensor/sensormodify.css" rel="stylesheet" type="text/css"/>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/resources/js/site/sitealarm.js"></script>
+<script>
+$(document).ready(function(){
+$("#tel2").val($(".1", opener.document).text());
+$("#company2").val($(".2", opener.document).text());
+$("#name2").val($(".3", opener.document).text());
+$("#alarmNum").val($(".4", opener.document).text());
+
+$("#tel2").removeAttr("disabled");
+$("#company2").removeAttr("disabled");
+$("#name2").removeAttr("disabled");
+
+function remove(){
+	$(".1" ,opener.document).removeClass();
+	$(".2" ,opener.document).removeClass();
+	$(".3" ,opener.document).removeClass();
+	$(".4" ,opener.document).removeClass();
+}
+
+$(window).bind("beforeunload", function(e){
+	remove();
+});
+
+});
+</script>
+</head>
+<body>
+<h1>멤버정보수정</h1>
+<div class="modifybox">
+		<div> 전화번호<input type="tel"  id="tel2" class="tel2" disabled="disabled"/></div>
+		<div> 회사<input type="text" id="company2"  class="company2" disabled="disabled"/></div>
+		<div> 이름<input type="text" id="name2" class="name2" disabled="disabled"/>
+		<input type="text" id="alarmNum" style="display : none">
+		<input type="button" value="수정" id="mod" /> 
+		<input type="button" value="삭제" id="drop" /> </div>
+</div>	
+</body> 
+</html>

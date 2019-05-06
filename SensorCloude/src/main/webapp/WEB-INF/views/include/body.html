@@ -9,12 +9,87 @@
 		<!-- 페이지 별 내용 들어갈 부분 -->
 		<th:block layout:fragment="contents" />
 	</div>
+	<div id="sessionid" th:text = "${session.id}" style="display : none"></div>
 	<!-- footer -->
 	<th:block th:include="include/footer" />
 	<!-- 공통으로 사용할 js들 -->
 	
 	<!-- 특정 페이지 전용 js들 -->
 	<th:block layout:fragment="page_js" />
+
+	<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-messaging.js"></script>
+	
+	<script>
+
+	var config = {
+			  apiKey: "AIzaSyCvPX3WEIFtsNbN3JGsQzIvVSDFAOKGoqI",
+			  authDomain: "sensorcloud-cb820.firebaseapp.com",
+			  databaseURL: "https://sensorcloud-cb820.firebaseio.com",
+			  projectId: "sensorcloud-cb820",
+			  storageBucket: "sensorcloud-cb820.appspot.com",
+			  messagingSenderId: "544037446198"
+		};
+		firebase.initializeApp(config);
+	  	
+	    const messaging = firebase.messaging();
+
+		messaging.usePublicVapidKey("BAiJYfYEXBiHRzsKJFqW5en4dEkOwKFr3KRPJIpNZ3kWk6QP0DHXOIMtoKdN6ca9Tk_JUo25btDxXFtheXjGRuE");
+		
+		
+		
+		
+ 		navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registartion){
+			 
+// 			 messaging.requestPermission().then(function(){
+// 					console.log('요청 허용');
+// 					return messaging.getToken();
+// 				})
+// 				.then(function(token){
+// 					console.log(token);
+// 				})
+// 				.catch(function(err){
+// 					console.log('요청 거절');
+// 				});
+
+			 
+			 
+			 var sessionid = $("#sessionid").text();
+								
+			 if(sessionid == "admin"){
+				
+				messaging.onMessage(function(payload) {
+					  console.log('Message received. ', payload);
+					  var sender = JSON.stringify(payload.notification.body);
+					  var link = JSON.stringify(payload.notification.icon);
+					  var sessionid = $("#sessionid").text();
+						 setTimeout(function() {
+							  notify(sender, link);
+						  }, 3000);
+					  
+					  console.log("메시지 출력");	 
+					  
+					
+				});
+				
+			 } // admin 체크 종료
+			 
+ }); // register 종료
+		
+ 
+		function notify(sender, link) {
+            if (Notification.permission !== 'granted') {
+                alert('notification is disabled');
+            }
+            else {
+                var notification = new Notification('승급 요청', {
+                       icon: '/resources/img/logo.png',
+                   	   body:  sender
+                });
+        		
+           }
+		} 
+	</script>
 	
 </body>
 </html>

@@ -2,11 +2,13 @@ package com.wda.sc;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +33,7 @@ public class LoginController {
 	public String home(Locale locale, Model model) {
 		return "login/login";
 	}
-	
+		
 	@RequestMapping(value = "", method = RequestMethod.POST) 
 	@ResponseBody
 	public String loginCheck(Model model,HttpSession session, @RequestParam String id, @RequestParam String password) {

@@ -17,6 +17,7 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="firebase-messaging-sw.js" location="/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
@@ -68,23 +69,23 @@
 		
 
 
-		<interceptors>
+<!-- 		<interceptors> -->
 
-		<!-- 권한없음 mypage 제외 아무데도 못들어감 -->
+<!-- 		 권한없음 mypage 제외 아무데도 못들어감  -->
 
-		<interceptor>
-			<!-- login url로 가는 path를 제외하고 모두  -->
-			<mapping path="/**" />
+<!-- 		<interceptor> -->
+<!-- 			 login url로 가는 path를 제외하고 모두  -->
+<!-- 			<mapping path="/**" /> -->
 			
-			<exclude-mapping path="/login/**" />
-			<exclude-mapping path="/resources/css/**" />
-			<exclude-mapping path="/resources/js/**" />
-			<exclude-mapping path="/resources/img/**" />
+<!-- 			<exclude-mapping path="/login/**" /> -->
+<!-- 			<exclude-mapping path="/resources/css/**" /> -->
+<!-- 			<exclude-mapping path="/resources/js/**" /> -->
+<!-- 			<exclude-mapping path="/resources/img/**" /> -->
 			
-			<beans:bean id="CommonInterceptor" class="com.wda.sc.interceptor.CommonInterceptor" />
-		</interceptor>
+<!-- 			<beans:bean id="CommonInterceptor" class="com.wda.sc.interceptor.CommonInterceptor" /> -->
+<!-- 		</interceptor> -->
 		
 		
-	</interceptors>
+<!-- 	</interceptors> -->
 
 </beans:beans>
