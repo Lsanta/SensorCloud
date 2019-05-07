@@ -1,40 +1,40 @@
 $(document).ready(function(){
 	$('textarea').keyup(function() {
-	    
-		  var characterCount = $(this).val().length,
-		      current = $('#current'),
-		      maximum = $('#maximum'),
-		      theCount = $('#the-count');
-		    
-		  current.text(characterCount);
-		      
-		});
 
-	
+		var characterCount = $(this).val().length,
+		current = $('#current'),
+		maximum = $('#maximum'),
+		theCount = $('#the-count');
+
+		current.text(characterCount);
+
+	});
+
+
 	/*글 등록*/
 	$("#submit").click(function(){
-				var textarea  = $("#textarea").val();
-				var query = {content:$("#textarea").val()};
-				
+		var textarea  = $("#textarea").val();
+		var query = {content:$("#textarea").val()};
 
-		
+
+
 		$.ajax({
-			  type : "POST",
-			  url : "/timeline/timeline.do",
-			  data : query,
-			  success : function(data){
-				  if( data == "success"){
-						  location.reload();
-				  } else{
-				  location.reload();
-					
-				  }
-			  }
-			  
+			type : "POST",
+			url : "/timeline/timeline.do",
+			data : query,
+			success : function(data){
+				if( data == "success"){
+					location.reload();
+				} else{
+					location.reload();
+
+				}
+			}
+
 		});
-		
+
 	}); 
-	
+
 	$(".delete").on('click', function() {
 
 		if (confirm("정말 삭제하시겠습니까?") == true) {
@@ -49,7 +49,7 @@ $(document).ready(function(){
 			var content3 = content2.text();
 
 			var query = {
-				content : content3
+					content : content3
 			}
 
 			$.ajax({
@@ -73,26 +73,26 @@ $(document).ready(function(){
 
 	$(".modify").on('click',function() {
 
-				var div = $(this).parent().attr('id');
-							
-				var content = $(this).parent();
-				var content2 = content.siblings().first();
-				var content3 = content2.text();
+		var div = $(this).parent().attr('id');
 
-				var query = {
-					content : content3
-				}
+		var content = $(this).parent();
+		var content2 = content.siblings().first();
+		var content3 = content2.text();
 
-				window.location.href = "timeline/timelinemodify?content="+ content3+"/"+div;
+		var query = {
+				content : content3
+		}
 
-			});
-	$('#textarea').keypress(function(event){
-	     if ( event.which == 13 ) {
-	         $('#submit').click();
-	     
-	     }
+		window.location.href = "timeline/timelinemodify?content="+ content3+"/"+div;
+
 	});
-	
+	$('#textarea').keypress(function(event){
+		if ( event.which == 13 ) {
+			$('#submit').click();
+
+		}
+	});
+
 	var num = 0;
 
 	var newURL =  window.location.pathname;
@@ -104,8 +104,9 @@ $(document).ready(function(){
 
 	$('.pagination-inner a').on('click', function() {
 		var a = $(".pagination-inner a").index(this);
-		num = a;
-		window.location.href = "/time/"+(num+1);
+		var b = $(".pagination-inner a:eq("+a+")").attr("id");
+		num = b;
+		window.location.href = "/time/"+num;
 	});
 
 	$('.pagination-newer').click(function(){
@@ -116,13 +117,10 @@ $(document).ready(function(){
 	});
 
 	$('.pagination-older').click(function(){
-		if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[2])+1 )
-			window.location.href = "/time/"+(parseInt(url[2]));
-		else
-			window.location.href = "/time/"+(parseInt(url[2])+1);
+		window.location.href = "/time/"+(parseInt(url[2])+1);
 	});
 
-	
-	
-	
-	});
+
+
+
+});

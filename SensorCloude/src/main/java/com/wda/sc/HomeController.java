@@ -88,12 +88,17 @@ public class HomeController {
 		}
 
 		Paging page = new Paging();
+		ArrayList<Integer> arr=null;
+		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
+		
 		int pageNum = 0;
-		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int mapNum=0;
+		int sendPageNum=0;
 		int realNum = Integer.parseInt(num);
 
 		page.setTotalNum(checkboardservice.getPageNum());
 		System.out.println(page.getTotalNum());
+		
 		if(page.getTotalNum() < page.getOnePageBoard()) {
 			pageNum = 1;
 		}else {
@@ -103,16 +108,41 @@ public class HomeController {
 			}
 		}
 
-		for(int i = 0; i < pageNum; i ++) {
-			arr.add(i+1);
+		if(pageNum%5 != 0) {
+			mapNum=pageNum/5+1;
+		}else {
+			mapNum=pageNum/5;
 		}
+
+		for(int i=0; i<mapNum; i++) {
+			arr = new ArrayList<Integer>();
+			for(int j=0; j<5; j++) {
+				
+				if((i*5)+j+1 > pageNum) {
+					break;
+				}
+				
+				arr.add((i*5)+j+1);
+			}
+			map.put(i,arr);
+		}
+
+		sendPageNum = (realNum-1)/5;
 
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
 
-		model.addAttribute("pageNum",arr);
+		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("checkboardlist",checkboardservice.getList(page));
 
+		System.out.println("realNum : " + realNum);
+		System.out.println("pageNum : " + pageNum);
+		
+		if(realNum > pageNum) {
+			System.out.println("pageNum : " + pageNum);
+			return "redirect:/check/"+pageNum;
+		}
+		
 		return "check/check";
 	}
 
@@ -135,9 +165,14 @@ public class HomeController {
 
 
 		Paging page = new Paging();
+		ArrayList<Integer> arr=null;
+		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
+		
 		int pageNum = 0;
-		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int mapNum=0;
+		int sendPageNum=0;
 		int realNum = Integer.parseInt(num);
+		
 		page.setTotalNum(siteservice.getPageNum());
 
 		if(page.getTotalNum() <= page.getOnePageBoard() ) {
@@ -149,19 +184,39 @@ public class HomeController {
 			}
 		}
 
-
-		for(int i = 0; i < pageNum; i ++) {
-			arr.add(i+1);
+		if(pageNum%5 != 0) {
+			mapNum=pageNum/5+1;
+		}else {
+			mapNum=pageNum/5;
 		}
 
+		for(int i=0; i<mapNum; i++) {
+			arr = new ArrayList<Integer>();
+			for(int j=0; j<5; j++) {
+				
+				if((i*5)+j+1 > pageNum) {
+					break;
+				}
+				
+				arr.add((i*5)+j+1);
+			}
+			map.put(i,arr);
+		}
+
+		sendPageNum = (realNum-1)/5;
 
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
 
 		model.addAttribute("content",siteservice.getContent(page));
-		model.addAttribute("pageNum",arr);
+		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("sitelist",siteservice.getList());
 
+		if(realNum > pageNum) {
+			System.out.println("pageNum : " + pageNum);
+			return "redirect:/sitelist/"+pageNum;
+		}
+		
 		return "site/sitelist";
 	}
 
@@ -204,9 +259,14 @@ public class HomeController {
 		}
 
 		Paging page = new Paging();
+		ArrayList<Integer> arr=null;
+		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
+		
 		int pageNum = 0;
-		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int mapNum=0;
+		int sendPageNum=0;
 		int realNum = Integer.parseInt(num);
+		
 		page.setTotalNum(usermanageservice.getPageNum());
 
 		if(page.getTotalNum() <= page.getOnePageBoard() ) {
@@ -218,10 +278,27 @@ public class HomeController {
 			}
 		}
 
-		for(int i = 0; i < pageNum; i ++) {
-			arr.add(i+1);
+		if(pageNum%5 != 0) {
+			mapNum=pageNum/5+1;
+		}else {
+			mapNum=pageNum/5;
 		}
 
+		for(int i=0; i<mapNum; i++) {
+			arr = new ArrayList<Integer>();
+			for(int j=0; j<5; j++) {
+				
+				if((i*5)+j+1 > pageNum) {
+					break;
+				}
+				
+				arr.add((i*5)+j+1);
+			}
+			map.put(i,arr);
+		}
+
+		sendPageNum = (realNum-1)/5;
+		
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
 
@@ -230,15 +307,19 @@ public class HomeController {
 
 		//
 
-		model.addAttribute("pageNum",arr);
+		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("userlist",usermanageservice.getList(page));
 
+		if(realNum > pageNum) {
+			System.out.println("pageNum : " + pageNum);
+			return "redirect:/manage/"+pageNum;
+		}
+		
 		return "manage/manage";
 	}
 
 	@RequestMapping(value = "/time"+"/{num}", method = RequestMethod.GET)
 	public String timeline(@PathVariable String num, Locale locale, Model model,HttpSession session , HttpServletResponse response) throws IOException {
-
 
 		int mlevel = (int) session.getAttribute("mlevel");
 
@@ -252,10 +333,13 @@ public class HomeController {
 
 		}
 
-
 		Paging page = new Paging();
+		ArrayList<Integer> arr=null;
+		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
+
 		int pageNum = 0;
-		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int mapNum=0;
+		int sendPageNum=0;
 		int realNum = Integer.parseInt(num);
 
 		page.setTotalNum(timelineservice.getPageNum());
@@ -271,17 +355,38 @@ public class HomeController {
 			}
 		}
 
-		for(int i = 0; i < pageNum; i ++) {
-			arr.add(i+1);
+		if(pageNum%5 != 0) {
+			mapNum=pageNum/5+1;
+		}else {
+			mapNum=pageNum/5;
 		}
+
+		for(int i=0; i<mapNum; i++) {
+			arr = new ArrayList<Integer>();
+			for(int j=0; j<5; j++) {
+
+				if((i*5)+j+1 > pageNum) {
+					break;
+				}
+
+				arr.add((i*5)+j+1);
+			}
+			map.put(i,arr);
+		}
+
+		sendPageNum = (realNum-1)/5;
 
 		page.setEndnum((realNum*5)+1);
 		page.setStartnum(page.getEndnum()-5);
 
-		model.addAttribute("pageNum",arr);
+		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("timelinelist",timelineservice.getList(page));
 		System.out.println(timelineservice.getList(page));
 
+		if(realNum > pageNum) {
+			System.out.println("pageNum : " + pageNum);
+			return "redirect:/time/"+pageNum;
+		}
 
 
 		return "timeline/timeline";
@@ -311,7 +416,6 @@ public class HomeController {
 	@RequestMapping(value = "/mysensor"+"/{num}", method = RequestMethod.GET)
 	public String mysensor(@PathVariable String num, Locale locale, Model model, HttpSession session,HttpServletResponse response) throws IOException {
 
-
 		int mlevel = (int) session.getAttribute("mlevel");
 		System.out.println("레벨" + mlevel);
 
@@ -327,10 +431,14 @@ public class HomeController {
 
 
 		Paging page = new Paging();
-		int pageNum = 0;
+		ArrayList<Integer> arr=null;
+		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
 
-		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int pageNum = 0;
+		int mapNum=0;
+		int sendPageNum=0;
 		int realNum = Integer.parseInt(num);
+
 		page.setTotalNum(mysensorservice.getPageNum());
 
 		if(page.getTotalNum() <= page.getOnePageBoard() ) {
@@ -342,16 +450,38 @@ public class HomeController {
 			}
 		}
 
-		for(int i = 0; i < pageNum; i ++) {
-			arr.add(i+1);
+		if(pageNum%5 != 0) {
+			mapNum=pageNum/5+1;
+		}else {
+			mapNum=pageNum/5;
 		}
+
+		for(int i=0; i<mapNum; i++) {
+			arr = new ArrayList<Integer>();
+			for(int j=0; j<5; j++) {
+
+				if((i*5)+j+1 > pageNum) {
+					break;
+				}
+
+				arr.add((i*5)+j+1);
+			}
+			map.put(i,arr);
+		}
+
+		sendPageNum = (realNum-1)/5;
 
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
 
 
-		model.addAttribute("pageNum",arr);
+		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("sensorlist",mysensorservice.getList(page));
+
+		if(realNum > pageNum) {
+			System.out.println("pageNum : " + pageNum);
+			return "redirect:/mysensor/"+pageNum;
+		}
 
 		return "mysensor/mysensor";
 	}
@@ -384,10 +514,6 @@ public class HomeController {
 			}
 		} 
 
-		//		for(int i = 0; i < pageNum; i ++) {
-		//			arr.add(i+1);
-		//		}
-
 		if(pageNum%5 != 0) {
 			mapNum=pageNum/5+1;
 		}else {
@@ -397,19 +523,18 @@ public class HomeController {
 		for(int i=0; i<mapNum; i++) {
 			arr = new ArrayList<Integer>();
 			for(int j=0; j<5; j++) {
-				
+
 				if((i*5)+j+1 > pageNum) {
 					break;
 				}
-				
+
 				arr.add((i*5)+j+1);
 			}
 			map.put(i,arr);
 		}
-		System.out.println("num : "+num );
-		System.out.println("realNum : "+realNum);
-		sendPageNum = realNum/5;
-		
+
+		sendPageNum = (realNum-1)/5;
+
 
 		page.setEndnum((realNum*5)+1);
 		page.setStartnum(page.getEndnum()-5);
@@ -417,13 +542,14 @@ public class HomeController {
 		parm.put("paging", page);
 		parm.put("user_id", id);
 
-		//model.addAttribute("pageNum",arr);
 		model.addAttribute("userInfo",mypageservice.getInfo(id.toString()));
 		model.addAttribute("mychecklist",mypageservice.myList(parm));
-		System.out.println(mypageservice.getInfo(id.toString()));
 		model.addAttribute("pageNum",map.get(sendPageNum));
-		System.out.println("sendpageNum : "+sendPageNum);
-		System.out.println(map.get(sendPageNum));
+
+		if(realNum > pageNum) {
+			System.out.println("pageNum : " + pageNum);
+			return "redirect:/mypage/"+pageNum;
+		}
 
 		return "mypage/mypage";
 	}
