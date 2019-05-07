@@ -87,14 +87,34 @@
             else {
                 var notification = new Notification('승급 요청', {
                        icon: '/resources/img/logo.png',
-                   	   body:  sender
+                   	   body:  sender,
+                   	   click_action: 'https://www.google.com'
                 });
                 
-                notification.onclick = function () {
-                	console.log("ㅁㅇㄹ");
-                    window.open("http://stackoverflow.com/a/13328397/1269037");      
-                };
+                $(notification).on('click', function(){
+                	console.log("aaa");
+                });
+                
+                notification.addEventListener('click', function(){
+                	alert("ttt");
+                });
+                
+                notification.onclick = function(event) {
+                	alert("qqq");
+                }
+                
+                self.addEventListener('notificationclick', function(event) {
+                	  event.notification.close();
+                	  event.waitUntil(self.clients.openWindow(YOUR_URL_HERE));
+                });
+                
+                self.addEventListener("notificationclick", (ev) => {
+                	  console.log("Notification clicked!");
+                	  //clients.openWindow("https://jameshfisher.com/");
+                });
+                
            }
+            
 		} 
 	</script>
 	

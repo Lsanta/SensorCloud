@@ -204,7 +204,7 @@ public class MessageController {
 	      Message message = Message.builder()
 	    		  .setWebpushConfig(WebpushConfig.builder()
 	    				  .setNotification(new WebpushNotification("승급",(String)paramInfo.get("message"),"https://www.google.com"))
-	    				  
+	    				   
 	    				  .build()
 	    		  )
 	    		  .setToken(registrationToken)
