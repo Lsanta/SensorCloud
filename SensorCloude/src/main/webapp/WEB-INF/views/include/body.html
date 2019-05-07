@@ -65,14 +65,17 @@
 					  var sessionid = $("#sessionid").text();
 						 setTimeout(function() {
 							  notify(sender, link);
-						  }, 3000);
-					  
+						 });
 					  console.log("메시지 출력");	 
-					  
-					
-				});
+				}); //onmessage 종료
 				
 			 } // admin 체크 종료
+		 
+			 
+		self.addEventListener('notificationonclick', function(event) {
+				 console.log("Asdad");
+		});
+			 
 			 
  }); // register 종료
 		
@@ -86,7 +89,11 @@
                        icon: '/resources/img/logo.png',
                    	   body:  sender
                 });
-        		
+                
+                notification.onclick = function () {
+                	console.log("ㅁㅇㄹ");
+                    window.open("http://stackoverflow.com/a/13328397/1269037");      
+                };
            }
 		} 
 	</script>
