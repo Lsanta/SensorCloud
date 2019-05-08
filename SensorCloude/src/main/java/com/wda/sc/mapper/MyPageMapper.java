@@ -11,6 +11,9 @@ public interface MyPageMapper {
 	
 	public ArrayList<CheckBoardVO> myList(Map<String, Object> parm);
 	
+	//앱용 점검이력
+	public ArrayList<CheckBoardVO> mcheck();
+	
 	public ArrayList<MemberVO> confirmpasswd(String confirmid);
 	
 	public void updateuserinfo(MemberVO vo);
