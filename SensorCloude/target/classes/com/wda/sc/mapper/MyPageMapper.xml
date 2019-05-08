@@ -65,5 +65,16 @@
 			select count(board_no) from check_board where user_id = #{user_id}
 	</select>
 	
+	<select id="getToken" resultType="com.wda.sc.domain.TokenVO">
+		select token_id from token where user_id = #{user_id}
+	</select>
 	
+	<insert id="saveToken" parameterType="com.wda.sc.domain.TokenVO">
+		insert into token(token_id,user_id,ex_date) values( #{token_id},#{user_id},sysdate)
+	</insert>	
+	
+	<update id="updateToken" parameterType="map">
+		update token set token_id=#{token}
+		where user_id=#{user_id} 
+	</update>
 </mapper>

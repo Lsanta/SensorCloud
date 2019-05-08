@@ -11,19 +11,23 @@ $(document).on("click", "#mypagechecklist tr", function() {
 
 $(document).ready(function() {
 
+ ////////////////////*pagination*//////////////////////////////////
+	
 	var num = 0;
 
 	var newURL =  window.location.pathname;
 
 	var url = newURL.split('/');
-	if(url[2] != null){
-		$("#"+url[2]+"").addClass('pagination-active');
-	}
 
+	if(url[2] != null){
+		$("#"+(url[2])+"").addClass('pagination-active');
+	}
+	
 	$('.pagination-inner a').on('click', function() {
 		var a = $(".pagination-inner a").index(this);
-		num = a;
-		window.location.href = "/mypage/"+(num+1);
+		var b = $(".pagination-inner a:eq("+a+")").attr("id");
+		num = b;
+		window.location.href = "/mypage/"+num;
 	});
 
 	$('.pagination-newer').click(function(){
@@ -34,13 +38,10 @@ $(document).ready(function() {
 	});
 
 	$('.pagination-older').click(function(){
-		if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[2])+1 )
-			window.location.href = "/mypage/"+(parseInt(url[2]));
-		else
 			window.location.href = "/mypage/"+(parseInt(url[2])+1);
 	});
 	
-	
+	////////////////////////////////////////////////////////////////////
 	
 	
 	
@@ -134,42 +135,5 @@ $(document).ready(function() {
 			login();
 		}
 	});
-
-	/* pagination */
-	var num = 0;
-
-	var newURL = window.location.pathname;
-
-	var url = newURL.split('/');
-	if (url[2] != null) {
-		$("#" + url[2] + "").addClass('pagination-active');
-	}
-
-	$('.pagination-inner a').on('click', function() {
-		var a = $(".pagination-inner a").index(this);
-		num = a;
-		window.location.href = "/mypage/" + (num + 1);
-	});
-
-	$('.pagination-newer').click(
-			function() {
-				if (1 > parseInt(url[2]) - 1)
-					window.location.href = "/mypage/"
-						+ (parseInt(url[2]));
-				else
-					window.location.href = "/mypage/"
-						+ (parseInt(url[2]) - 1);
-			});
-
-	$('.pagination-older').click(
-			function() {
-				if (parseInt($('.pagination-inner a:last')
-						.text()) < parseInt(url[2]) + 1)
-					window.location.href = "/mypage/"
-						+ (parseInt(url[2]));
-				else
-					window.location.href = "/mypage/"
-						+ (parseInt(url[2]) + 1);
-			});
 
 });

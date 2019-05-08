@@ -32,7 +32,7 @@
 			<ul>
 				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
 				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'" >수리내역</a></li>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage'">센서관리</a></li>
+				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage/1'">센서관리</a></li>
 				<li style="line-height: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트 다운로드</a></li>
 				<li><span id="num">연락망</span> 
 				<span id="down" style="display: inline"> 
@@ -69,7 +69,8 @@
 						<th scope="col">등록일</th> 
 					</tr>
 				</thead>
-				<tbody id="sensorlist">
+				
+				<tbody id="sensorlist" th:if="${sensormanage == null}">
 				 	<tr th:each="sensorlist : ${sensorlist}">
 						<td th:text="${sensorlist.sensor_sn}"></td>
 						<td th:text="${sensorlist.sensor_kind}"></td>
@@ -78,7 +79,17 @@
 						<td th:text="${sensorlist.manufacturer}"></td>
 						<td th:text="${sensorlist.create_day}"></td>
 					</tr> 
-
+				</tbody>
+				
+				<tbody id="sensorlist" th:if="${sensormanage != null}">
+				 	<tr th:each="sensormanage : ${sensormanage}">
+						<td th:text="${sensormanage.sensor_sn}"></td>
+						<td th:text="${sensormanage.sensor_kind}"></td>
+						<td th:text="${sensormanage.model_name}"></td>
+						<td th:text="${sensormanage.voltage}"></td>
+						<td th:text="${sensormanage.manufacturer}"></td>
+						<td th:text="${sensormanage.create_day}"></td>
+					</tr> 
 				</tbody>
 			</table>
 		</div>
@@ -99,16 +110,18 @@
 
 		<div class="search">
 			<div class="select">
-				<select>
-					<option>종류</option>
+				<select id="search-select">
+					<option value="sensor_kind">종류</option>
+					<option value="model_name">모델명</option>
+					<option value="manufacturer">제조사</option>
 				</select>
 			</div>
 			<section class="search-box">
 				<div class="search-content">
-					<input type="text" />
+					<input type="text" id="keyword"/>
 				</div>
 				<div class="search-button">
-					<button>Search</button>
+					<button id="search" >Search</button>
 				</div>
 			</section>
 		</div>

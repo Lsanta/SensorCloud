@@ -19,7 +19,6 @@
 
 	<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-messaging.js"></script>
-	<script src="/resources/js/sw.js"></script>
 	
 	<script>
 
@@ -37,6 +36,9 @@
 
 		messaging.usePublicVapidKey("BAiJYfYEXBiHRzsKJFqW5en4dEkOwKFr3KRPJIpNZ3kWk6QP0DHXOIMtoKdN6ca9Tk_JUo25btDxXFtheXjGRuE");
 		
+		
+		
+		
  		navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registartion){
 			 
 // 			 messaging.requestPermission().then(function(){
@@ -49,6 +51,8 @@
 // 				.catch(function(err){
 // 					console.log('요청 거절');
 // 				});
+
+			 
 			 
 			 var sessionid = $("#sessionid").text();
 								
@@ -56,33 +60,61 @@
 				
 				messaging.onMessage(function(payload) {
 					  console.log('Message received. ', payload);
-					  var sender = JSON.stringify(payload.notification.title);	
+					  var sender = JSON.stringify(payload.notification.body);
+					  var link = JSON.stringify(payload.notification.icon);
 					  var sessionid = $("#sessionid").text();
 						 setTimeout(function() {
-							  notify(sender);
-						  }, 3000);
+							  notify(sender, link);
+						 });
 					  console.log("메시지 출력");	 
-				});
+				}); //onmessage 종료
 				
 			 } // admin 체크 종료
+		 
+			 
+		self.addEventListener('notificationonclick', function(event) {
+				 console.log("Asdad");
+		});
+			 
 			 
  }); // register 종료
 		
-		function notify(sender) {
+ 
+		function notify(sender, link) {
             if (Notification.permission !== 'granted') {
                 alert('notification is disabled');
             }
             else {
                 var notification = new Notification('승급 요청', {
                        icon: '/resources/img/logo.png',
-                   	   body:  sender
+                   	   body:  sender,
+                   	   click_action: 'https://www.google.com'
                 });
- 
-                notification.onclick = function () {
-                	alert("확인");
-                    window.open("https://www.google.com/","_self");
-                };
+                
+                $(notification).on('click', function(){
+                	console.log("aaa");
+                });
+                
+                notification.addEventListener('click', function(){
+                	alert("ttt");
+                });
+                
+                notification.onclick = function(event) {
+                	alert("qqq");
+                }
+                
+                self.addEventListener('notificationclick', function(event) {
+                	  event.notification.close();
+                	  event.waitUntil(self.clients.openWindow(YOUR_URL_HERE));
+                });
+                
+                self.addEventListener("notificationclick", (ev) => {
+                	  console.log("Notification clicked!");
+                	  //clients.openWindow("https://jameshfisher.com/");
+                });
+                
            }
+            
 		} 
 	</script>
 	
