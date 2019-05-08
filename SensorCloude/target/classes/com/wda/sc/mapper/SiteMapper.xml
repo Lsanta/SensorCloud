@@ -206,6 +206,27 @@
 		where sensor_sn = #{sensor_sn}
 	</select>
 	
+	<!-- 센서관리 검색  -->
+	<select id="smSearch" resultType="com.wda.sc.domain.MysensorVO" >
+		select my_sensor.sensor_sn, my_sensor.model_name, my_sensor.sensor_kind, my_sensor.manufacturer, my_sensor.voltage, substr(my_sensor.create_day,0,14) as create_day, install_sensor.site_id
+		from my_sensor FULL OUTER JOIN install_sensor
+		on my_sensor.sensor_sn = install_sensor.sensor_sn
+		where site_id = ${site_id} and ${searchType} LIKE '%' || '${keyword}' || '%'
+	</select>
 
-
+	<!-- 센서관리 검색 + 페이징 -->
+	<select id="getSearchResultSM" resultType="com.wda.sc.domain.MysensorVO" parameterType="map">
+	<![CDATA[	
+	select x.rnum, x.* from
+    ( select rownum as rnum, p.* from
+    ( select c.sensor_sn, c.model_name, c.sensor_kind, c.manufacturer, c.voltage, c.create_day, c.site_id, s.site_name
+    from (select my_sensor.sensor_sn, my_sensor.model_name, my_sensor.sensor_kind, my_sensor.manufacturer, my_sensor.voltage, substr(my_sensor.create_day,0,14) as create_day, install_sensor.site_id
+    from my_sensor FULL OUTER JOIN install_sensor
+    on my_sensor.sensor_sn = install_sensor.sensor_sn where site_id = ${Search.site_id} and ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%') c  LEFT OUTER JOIN site s
+    on c.site_id = s.site_id 
+    order by create_day desc ) p where rownum < #{Paging.endnum}) x
+    where x.rnum >= #{Paging.startnum}
+    order by x.create_day desc
+    ]]>
+	</select>
 </mapper>

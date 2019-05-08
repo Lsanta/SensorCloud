@@ -86,7 +86,7 @@ public interface SiteMapper {
 
 	public ArrayList<MysensorVO> getSensor(String sensor_sn);
 
+	public ArrayList<MysensorVO> smSearch(Search s);
 
-
-
+	public ArrayList<MysensorVO> getSearchResultSM(Map<Object, Object> parm);
 }

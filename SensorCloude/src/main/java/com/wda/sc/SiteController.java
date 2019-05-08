@@ -2,6 +2,8 @@ package com.wda.sc;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -299,7 +301,7 @@ public class SiteController {
 		
 		if(realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
-			return "redirect:/"+site_id+"/sensormanage/"+pageNum;
+			return "redirect:/site/"+site_id+"/sensormanage/"+pageNum;
 		}
 
 		return "site/sensormanage";
@@ -674,10 +676,111 @@ public class SiteController {
 
 		if(realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
-			return "redirect:/"+site_id+"/search/"+pageNum+"/"+searchType+"/"+keyword;
+			
+			try {
+				keyword = URLEncoder.encode(keyword, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return "redirect:/site/"+site_id+"/search/"+pageNum+"/"+searchType+"/"+keyword;
 		}
 		
 		return "/site/siterepair";
 	}
 
+	
+		// 센서관리 검색
+		@RequestMapping(value = "/{site_id}" + "/search1" + "/{page}" + "/{searchType}"+"/{keyword}", method = RequestMethod.GET)
+		public String smSearch(@PathVariable int page, @PathVariable String searchType, @PathVariable String keyword,
+				@PathVariable String site_id, Model model) {
+
+			Paging p = new Paging();
+			Search s = new Search();
+			ArrayList<MysensorVO> searchArr = new ArrayList<MysensorVO>();
+			ArrayList<Integer> arr = new ArrayList<Integer>();
+			Map<Object, Object> parm = new HashMap<Object, Object>();
+			Map<Integer, ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
+
+			p.getOnePageBoard(); // 페이지 당 보여지는 데이터 수
+
+			s.setPage(page);
+			s.setKeyword(keyword);
+			s.setSearchType(searchType);
+			s.setSite_id(site_id);
+
+			System.out.println(page);
+			System.out.println(keyword);
+			System.out.println(searchType);
+			System.out.println(site_id);
+			searchArr = siteservice.smSearch(s);
+
+			System.out.println(searchArr);
+
+			int pageNum = 0;
+			int mapNum=0;
+			int sendPageNum=0;
+			int realNum = page;
+			p.setTotalNum(searchArr.size());
+
+			System.out.println("전체숫자" + p.getTotalNum());
+
+			if (p.getTotalNum() <= p.getOnePageBoard()) {
+				pageNum = 1;
+			} else {
+				pageNum = p.getTotalNum() / p.getOnePageBoard();
+				if (p.getTotalNum() % p.getOnePageBoard() > 0) {
+					pageNum = pageNum + 1;
+				}
+			}
+
+			if(pageNum%5 != 0) {
+				mapNum=pageNum/5+1;
+			}else {
+				mapNum=pageNum/5;
+			}
+
+			for(int i=0; i<mapNum; i++) {
+				arr = new ArrayList<Integer>();
+				for(int j=0; j<5; j++) {
+					
+					if((i*5)+j+1 > pageNum) {
+						break;
+					}
+					
+					arr.add((i*5)+j+1);
+				}
+				map.put(i,arr);
+			}
+
+			sendPageNum = (realNum-1)/5;
+
+			p.setEndnum((realNum * 10) + 1);
+			p.setStartnum(p.getEndnum() - 10);
+
+			parm.put("Paging", p);
+			parm.put("Search", s);
+
+			model.addAttribute("pageNum", map.get(sendPageNum));
+			System.out.println("pageNum" + arr);
+
+			model.addAttribute("sensormanage", siteservice.getSearchResultSM(parm));
+			model.addAttribute("siteInfo", siteservice.getSite(site_id.toString())); // 현장정보
+			model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id.toString())); // 연락망
+
+			if(realNum > pageNum) {
+				System.out.println("pageNum : " + pageNum);
+				System.out.println("keyword : " + keyword);
+				try {
+					keyword = URLEncoder.encode(keyword, "UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return "redirect:/site/"+site_id+"/search1/"+pageNum+"/"+searchType+"/"+keyword+"";
+			}
+			
+			return "/site/sensormanage";
+		}
 }

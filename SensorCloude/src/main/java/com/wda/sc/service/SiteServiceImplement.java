@@ -190,4 +190,16 @@ public class SiteServiceImplement implements SiteService {
 		return mapper.getSensor(sensor_sn);
 	}
 
+	@Override
+	public ArrayList<MysensorVO> smSearch(Search s) {
+		// TODO Auto-generated method stub
+		return mapper.smSearch(s);
+	}
+
+	@Override
+	public ArrayList<MysensorVO> getSearchResultSM(Map<Object, Object> parm) {
+		// TODO Auto-generated method stub
+		return mapper.getSearchResultSM(parm);
+	}
+
 }
