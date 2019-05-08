@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Hello World</title>
+    <style>
+    body { padding-top: 50px; padding-bottom: 50px; }
+    .btn { margin-bottom: 10px; }
+    </style>
+</head>
+ 
+<body>
+    <div class="container">
+        <button class="btn btn-primary btn-block" id="fcm-code">Get FCM Code</button>
+        <div class='alert alert-info'></div>
+    </div>
+        <button type="button" id="del" value="로그아웃"></button>
+    <!-- jQuery script 참조 -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <!-- Bootstrap 참조 -->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- cordova script 참조 -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript">
+    
+  
+    /** jQuery 초기화 */
+    $(function() {
+        // 버튼 이벤트 정의
+        $("#fcm-code").click(function() {
+            FCMPlugin.getToken(function(token){
+                // 이 토큰값은 Ajax등을 통해서 서버로 전송해야 하고,
+                // 서버에서는 이 값을 사용자 정보와 맵핑시켜야 한다.   
+                var to = token;
+
+                $.ajax({
+                    type : "POST",
+					url : "http://39.127.7.58:8080/send/Appmessage.do",
+					data : to,
+					contentType : 'application/json',
+					success : function(data){
+                        alert("전송 완료");
+					}
+                });
+
+                $(".alert-info").html(token);
+            });
+        });
+ 
+        // 장치 초기화가 완료된 직후 실행됨
+        $(document).on('deviceready', function() {
+            //Push 메시지가 수신된 경우 호출될 이벤트 등록
+            FCMPlugin.onNotification(function(data){
+                // 필요한 값만 추출한다.
+                var data2 = JSON.stringify(data);
+                alert(data2);
+                
+                if(data.wasTapped){
+                //Notification was received on device tray and tapped by the user.
+                    alert( "어디" + JSON.stringify(data) );
+                    //백그라운드로 왔으면
+                    location.href = "eee.html";
+                }else{
+                 //Notification was received in foreground. Maybe the user needs to be notified.
+                    alert( "여기" + JSON.stringify(data) );
+                }
+        
+            });
+
+            // // [Android] 화면 실행시 Intnet 객체를 수신한 경우 호출될 이벤트 정의
+            // window.plugins.intent.getCordovaIntent(function(intent) {
+            //     // Push로 전달된 값이 있는 경우
+            //     if (intent.extras !== undefined) {
+            //         // 필요한 값만 추출한다.
+            //         alert(JSON.stringify(intent));
+ 
+            //         // 기능 구현을 위한 함수로 전달한다.
+            //         onPushReceive(push_data);
+            //     }
+            // }, function () {
+            //     alert("에러가 발생했습니다.");
+            // });
+
+         }); // end deviceready  
+
+        $("#del").click(function(){
+            
+            window.localStorage.removeItem("key");
+            window.localStorage.removeItem("key2");
+            window.location.href="index.html";
+        });
+        
+
+
+    }); // end jquery
+    </script>
+</body>
+ 
+</html>
+        
+
+
+  

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="./css/mypage.css" />
+    <script src="./js/jquery.js"></script>
+    <script src="./js/jquery.mobile-1.4.5.js"></script>
+   <script>
+    $(document).ready(function() {
+      $.ajax({
+         type : "POST",
+         url : "http://39.127.7.74:8080/app/mypage",
+         contentType : "application/json; charset=UTF-8",
+         success : function(result){
+               console.log(result)
+               var str = "";
+               $.each(result,function(i,s){
+               str +='<tr>';
+               str +='<td>'+s.site_name+'</td>';      // 현장이름
+               str +='<td>'+s.title+'</td>';          // 제목
+               str +='<td>'+s.board_status+'</td>';   // 상태
+               str +='<td>'+s.reg_date+'</td>';       // 날짜
+               str +='</tr>';
+
+               $("#mypagechecklist").html(str);
+            });
+            
+         function pagination(){
+         var req_num_row=5;
+         var $tr=jQuery('tbody tr');
+         var total_num_row=$tr.length;
+         var num_pages=0;
+         if(total_num_row % req_num_row ==0){
+               num_pages=total_num_row / req_num_row;
+         }
+         if(total_num_row % req_num_row >=1){
+               num_pages=total_num_row / req_num_row;
+               num_pages++;
+               num_pages=Math.floor(num_pages++);
+         }
+   
+      jQuery('.pagination').append("<li><a class=\"prev\">Previous</a></li>");
+   
+         for(var i=1; i<=num_pages; i++){
+               jQuery('.pagination').append("<li><a>"+i+"</a></li>");
+         jQuery('.pagination li:nth-child(2)').addClass("active");
+         jQuery('.pagination a').addClass("pagination-link");
+         }
+   
+      jQuery('.pagination').append("<li><a class=\"next\">Next</a></li>");
+   
+         $tr.each(function(i){
+         jQuery(this).hide();
+         if(i+1 <= req_num_row){
+                  $tr.eq(i).show();
+               }
+         });
+   
+         jQuery('.pagination a').click('.pagination-link', function(e){
+               e.preventDefault();
+               $tr.hide();
+               var page=jQuery(this).text();
+               var temp=page-1;
+               var start=temp*req_num_row;
+         var current_link = temp;
+         
+         jQuery('.pagination li').removeClass("active");
+               jQuery(this).parent().addClass("active");
+      
+               for(var i=0; i< req_num_row; i++){
+                  $tr.eq(start+i).show();
+               }
+         
+         if(temp >= 1){
+         jQuery('.pagination li:first-child').removeClass("disabled");
+         }
+         else {
+         jQuery('.pagination li:first-child').addClass("disabled");
+         }
+               
+         });
+   
+      jQuery('.prev').click(function(e){
+         $("<li><a class=\"prev\">Previous</a></li>").bind('click', {newPage: page},function(event) {
+            if(num_pages == 0) return; 
+            num_pages = num_pages-1;
+            $tr.trigger('repaginate'); 
+
+         $($(".pageNum")[(num_pages-nowp)+2]).addClass('active').siblings().removeClass('active');
+         }).appendTo(pagination).addClass('clickable');
+      });
+   
+      jQuery('.next').click(function(e){
+         e.preventDefault();
+         jQuery('.pagination li:last-child').removeClass("active");
+      });
+   
+      }
+   
+   jQuery('document').ready(function(){
+      pagination();
+   
+   jQuery('.pagination li:first-child').addClass("disabled");
+   
+   });
+
+            } // success 함수 종료
+      }); // ajax함수
+
+      $('.update').on('click', function() {
+         $("#contents").load("modify.html");
+      });
+   
+
+    });
+   </script>
+</head>
+<body>
+   <header>
+      <div class="wrapper">
+
+      <div class="w1">
+
+         <div class="cell" >
+            <img src="./img/user.png" id="img">
+         </div>
+
+         <div class="name01">
+            <p class="n1">김개발</p>
+            <p class="n2">등급 5</p>
+         </div>
+
+         <div class="name02">
+            <input class="logout" type="button" value="로그아웃" />
+            <input class="update" type="button" value="정보수정" />
+         </div>
+      </div>
+      
+      <hr color="black">
+      </div>
+   </header>
+
+   <div id="contents">
+      <div class="title-header">
+         <h1>나의 점검이력</h1>
+
+      </div>
+
+      <div class="w2">
+         <table>
+            <thead>
+               <tr>
+                  <th scope="col">현장이름</th>
+                  <th scope="col">제목</th>
+                  <th scope="col">상태</th>
+                  <th scope="col">날짜</th>
+               </tr>
+            </thead>
+            <tbody id="mypagechecklist">
+               <!-- <tr>
+                  <td>XX휴게소</td>
+                  <td>센서 점검</td>
+                  <td>open</td>
+                  <td>19/04/29 20:21</td>
+               </tr> -->
+            </tbody>
+         </table>
+
+      </div>
+
+      <div class="w3">
+         <nav class="pagination-container">
+            <div class="pagination">
+            
+               
+            </div>
+         </nav>
+      </div>
+   </div>
+ 
+
+</body>
+</html>

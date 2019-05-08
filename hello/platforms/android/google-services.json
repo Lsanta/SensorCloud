@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "544037446198",
+    "firebase_url": "https://sensorcloud-cb820.firebaseio.com",
+    "project_id": "sensorcloud-cb820",
+    "storage_bucket": "sensorcloud-cb820.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544037446198:android:886df7df30a86d2d",
+        "android_client_info": {
+          "package_name": "kr.yju.wdb.sensor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544037446198-tnoiuv11oti02q99826d73acs3hii052.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuNXHd-4J3X0F_ZwvIegFY7c6h9xnZpvg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544037446198-tnoiuv11oti02q99826d73acs3hii052.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
