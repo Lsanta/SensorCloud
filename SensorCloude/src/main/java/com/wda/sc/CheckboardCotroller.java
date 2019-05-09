@@ -2,6 +2,8 @@ package com.wda.sc;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -398,6 +400,7 @@ public class CheckboardCotroller {
 		ArrayList<CheckBoardVO> searchArr = new ArrayList<CheckBoardVO>();
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		Map<Object, Object> parm = new HashMap<Object, Object>();
+		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
 
 		s.setPage(page);
 		s.setKeyword(keyword);
@@ -412,6 +415,8 @@ public class CheckboardCotroller {
 		System.out.println("체크 검색 :" + searchArr);
 
 		int pageNum = 0;
+		int mapNum=0;
+		int sendPageNum=0;
 		int realNum = page;
 		p.setTotalNum(searchArr.size());
 
@@ -426,9 +431,26 @@ public class CheckboardCotroller {
 			}
 		}
 
-		for (int i = 0; i < pageNum; i++) {
-			arr.add(i + 1);
+		if(pageNum%5 != 0) {
+			mapNum=pageNum/5+1;
+		}else {
+			mapNum=pageNum/5;
 		}
+
+		for(int i=0; i<mapNum; i++) {
+			arr = new ArrayList<Integer>();
+			for(int j=0; j<5; j++) {
+				
+				if((i*5)+j+1 > pageNum) {
+					break;
+				}
+				
+				arr.add((i*5)+j+1);
+			}
+			map.put(i,arr);
+		}
+
+		sendPageNum = (realNum-1)/5;
 
 		p.setEndnum((realNum * 10) + 1);
 		p.setStartnum(p.getEndnum() - 10);
@@ -436,9 +458,21 @@ public class CheckboardCotroller {
 		parm.put("Paging", p);
 		parm.put("Search", s);
 
-		model.addAttribute("pageNum", arr);
+		model.addAttribute("pageNum", map.get(sendPageNum));
 		model.addAttribute("check", Checkboardservice.getSearchResult(parm));
 		System.out.println("체크 검색 결과 :" + Checkboardservice.getSearchResult(parm));
+		
+		if(realNum > pageNum) {
+			System.out.println("pageNum : " + pageNum);
+			System.out.println("keyword : " + keyword);
+			try {
+				keyword = URLEncoder.encode(keyword, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "redirect:/checkboard/search/"+pageNum+"/"+searchType+"/"+keyword+"";
+		}
 		return "check/check";
 	}
 

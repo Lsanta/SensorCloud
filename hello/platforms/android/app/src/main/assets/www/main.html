@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+        <title>제이쿼리모바일</title>
+        <link rel="stylesheet" type="text/css" href="./css/jquery.mobile-1.4.5.css">
+        <script src="./js/jquery.js"></script>
+        <script src="./js/jquery.mobile-1.4.5.js"></script>
+       <script>
+       $(document).ready(function() {
+         $.ajax({
+            type : "POST",
+            url : "http://39.127.7.58:8080/app/mmain",
+            contentType : "application/json; charset=UTF-8",
+            success : function(result){
+               console.log(result);
+               var str="";
+               $.each(result,function(i,s){
+        
+                  str +='<tr>';
+                  str +='<td>'+s.type_no+'</td>';
+                  str +='<td>'+s.site_name+'</td>';
+                  str +='<td>'+s.address+'</td>';
+                  str +='<td>'+s.start_date+'</td>';
+                  str +='</tr>';
+
+                   $("#aaa").html(str);
+               });
+         function pagination(){
+        var req_num_row=5;
+        var $tr=jQuery('tbody tr');
+        var total_num_row=$tr.length;
+        var num_pages=0;
+        if(total_num_row % req_num_row ==0){
+            num_pages=total_num_row / req_num_row;
+        }
+        if(total_num_row % req_num_row >=1){
+            num_pages=total_num_row / req_num_row;
+            num_pages++;
+            num_pages=Math.floor(num_pages++);
+        }
+  
+    jQuery('.pagination').append("<li><a class=\"prev\">Previous</a></li>");
+  
+        for(var i=1; i<=num_pages; i++){
+            jQuery('.pagination').append("<li><a>"+i+"</a></li>");
+      jQuery('.pagination li:nth-child(2)').addClass("active");
+      jQuery('.pagination a').addClass("pagination-link");
+        }
+  
+    jQuery('.pagination').append("<li><a class=\"next\">Next</a></li>");
+  
+        $tr.each(function(i){
+      jQuery(this).hide();
+      if(i+1 <= req_num_row){
+                $tr.eq(i).show();
+            }
+        });
+  
+        jQuery('.pagination a').click('.pagination-link', function(e){
+            e.preventDefault();
+            $tr.hide();
+            var page=jQuery(this).text();
+            var temp=page-1;
+            var start=temp*req_num_row;
+      var current_link = temp;
+      
+      jQuery('.pagination li').removeClass("active");
+            jQuery(this).parent().addClass("active");
+    
+            for(var i=0; i< req_num_row; i++){
+                $tr.eq(start+i).show();
+            }
+      
+      if(temp >= 1){
+        jQuery('.pagination li:first-child').removeClass("disabled");
+      }
+      else {
+        jQuery('.pagination li:first-child').addClass("disabled");
+      }
+            
+        });
+  
+    jQuery('.prev').click(function(e){
+        e.preventDefault();
+        jQuery('.pagination li:first-child').removeClass("active");
+    });
+ 
+    jQuery('.next').click(function(e){
+        e.preventDefault();
+        jQuery('.pagination li:last-child').removeClass("active");
+    });
+ 
+    }
+ 
+jQuery('document').ready(function(){
+    pagination();
+  
+  jQuery('.pagination li:first-child').addClass("disabled");
+  
+});
+            } // success 함수 종료
+       
+      }); // ajax함수
+
+      $("#logout").click(function(){
+            
+            window.localStorage.removeItem("key");
+            window.localStorage.removeItem("key2");
+            window.location.href="index.html";
+        });
+
+
+});
+        </script>
+        
+         <style>
+         table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  text-align: center;
+}
+
+table th {
+  font-size: .60em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+table td{
+   font-size:.90em;
+}
+
+      .pagination li{
+      display:inline-block;
+      margin-right:5px;
+      cursor:pointer;
+      }
+      </style>
+    </head>
+    <body>
+ <div data-role="page" id="index">
+     <div data-role="header" data-position="fixed">
+         <img src="./img/str.png" width="30%" height="30%">
+         <button type="button" id="logout">로그아웃</button>
+     </div>
+     <div data-role="content">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+         <tr>
+         <th>현재상태</th>
+         <th>현장이름</th>
+         <th>주소</th>
+         <th>데이터갱신시간</th>
+         </tr>
+         <tbody id="aaa">
+            
+         </tbody>
+      </table>
+      <ul class="pagination">
+    
+     </ul>
+     </div>
+     </div>
+     <div data-role="footer"  data-position="fixed" data-id="footerid1">
+        <div data-role="navbar">
+           <ul>
+              <li><a href="main.html" rel="external" data-icon="home"></a></li>
+              <li><a href="search.html" rel="external" data-icon="search"></a></li>
+              <li><a href="#" rel="external" data-icon="comment"></a></li>
+              <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
+           </ul>
+        </div>
+     </div>
+ </div>
+
+    <script>
+        $("li a").click(function(){
+          var site_id = 760;
+          window.location.href = "timeline.html?sid="+ site_id
+        });
+    </script>
+    </body>
+</html>

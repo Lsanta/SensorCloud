@@ -7,6 +7,7 @@ import java.util.Map;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MemberFileVO;
 import com.wda.sc.domain.MemberVO;
+import com.wda.sc.domain.TokenVO;
 
 
 public interface MyPageService {
@@ -14,6 +15,9 @@ public interface MyPageService {
 	public ArrayList<MemberVO> getInfo(String id);
 	
 	public ArrayList<CheckBoardVO> myList(Map<String, Object> parm);
+	
+	//앱용 점검이력
+	public ArrayList<CheckBoardVO> mcheck();
 	
 	public ArrayList<MemberVO> confirmpasswd(String confirmid);
 	
@@ -28,5 +32,12 @@ public interface MyPageService {
 	public List<MemberFileVO> getAttachListmypage(String user_id);
 	
 	public void mypagedelete(String user_id);
+	
+	//전체 토큰 조회
+	public List<TokenVO> getToken(String user_id);
+	//토큰 DB에 저장
+	public int saveToken(TokenVO tokenvo);
+
+	public int updateToken(Map<String, String> map);
 
 }

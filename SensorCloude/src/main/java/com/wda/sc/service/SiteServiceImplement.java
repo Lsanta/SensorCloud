@@ -3,6 +3,7 @@ package com.wda.sc.service;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.wda.sc.domain.AlarmMemberVO;
@@ -188,6 +189,24 @@ public class SiteServiceImplement implements SiteService {
 	public ArrayList<MysensorVO> getSensor(String sensor_sn) {
 		// TODO Auto-generated method stub
 		return mapper.getSensor(sensor_sn);
+	}
+
+	@Override
+	public ArrayList<MysensorVO> smSearch(Search s) {
+		// TODO Auto-generated method stub
+		return mapper.smSearch(s);
+	}
+
+	@Override
+	public ArrayList<MysensorVO> getSearchResultSM(Map<Object, Object> parm) {
+		// TODO Auto-generated method stub
+		return mapper.getSearchResultSM(parm);
+	}
+
+	@Override
+	public ArrayList<SiteVO> getAppSearch(String word) {
+		System.out.println(word);
+		return mapper.getAppSearch(word);
 	}
 
 }

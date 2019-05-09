@@ -25,6 +25,18 @@
 		]]>
 	</select>
 	
+	<!-- 앱용 점검이력 -->
+	<select id="mcheck" resultType="com.wda.sc.domain.CheckBoardVO">
+		<![CDATA[
+		select m.name, before_tab.*
+        	from (select c.board_no,c.user_id, c.title, substr(c.reg_date,0,14) as reg_date,c.board_status,c.site_id, s.site_name
+            	from check_board c,site s
+                where c.site_id = s.site_id) before_tab, member m
+            where before_tab.user_id = m.user_id and m.user_id = 'admin'
+            order by before_tab.reg_date desc
+        ]]>
+	</select>
+	
 	
 	<select id="myListView" resultType="com.wda.sc.domain.CheckBoardVO">
 	select c.board_no,m.name, c.user_id, c.title, c.board_content, c.reg_date,c.board_status,c.site_name 
@@ -53,5 +65,16 @@
 			select count(board_no) from check_board where user_id = #{user_id}
 	</select>
 	
+	<select id="getToken" resultType="com.wda.sc.domain.TokenVO">
+		select token_id from web_token where user_id = #{user_id}
+	</select>
 	
+	<insert id="saveToken" parameterType="com.wda.sc.domain.TokenVO">
+		insert into web_token(token_id,user_id,ex_date) values( #{token_id},#{user_id},sysdate)
+	</insert>	
+	
+	<update id="updateToken" parameterType="map">
+		update web_token set token_id=#{token}
+		where user_id=#{user_id} 
+	</update>
 </mapper>

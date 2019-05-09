@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
@@ -86,5 +88,11 @@ public interface SiteService {
 	public int sensorPageNum(String site_id);
 	//센서정보 가져오기
 	public ArrayList<MysensorVO> getSensor(String sensor_sn);
+
+	public ArrayList<MysensorVO> smSearch(Search s);
+
+	public ArrayList<MysensorVO> getSearchResultSM(Map<Object, Object> parm);
+	//앱 검색
+	public ArrayList<SiteVO> getAppSearch(String word);
 
 }
