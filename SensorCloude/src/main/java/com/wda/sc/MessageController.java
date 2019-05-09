@@ -287,8 +287,10 @@ public class MessageController {
 	    		  .setAndroidConfig(config)
 	    		  .putData("data1", "20")
 	    		  .putData("data2", "30")
-	    		  .setToken("erbJH05Re_Q:APA91bFUFpJS4Iai98W_62rCuB2aKdVXBSJKPSsx5dWlewInUHzx8U_3Lb4Gw5cd4hd4jsI1g0oJUB0FVZ1Lqd8tQD2JhU6lv8f6Xn9ldjRHbs4w69y4y75MxpYzcrEvn78MCCfFQLMw")
+	    		  .setToken(registrationToken)
 	    		  .build();
+	      
+	      System.out.println("ㅁㅇㄻㄴㄹㅇ");
 		  
 	      try {
 		         String response=FirebaseMessaging.getInstance().send(message);

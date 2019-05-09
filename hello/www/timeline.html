@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<title>타임라인</title>
+	<link rel="stylesheet" type="text/css" href="./css/timeline.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+   crossorigin="anonymous"></script>
+   <script src="./js/timeline.js"></script>
+	<script src="./js/jquery.mobile-1.4.5.js"></script>
+	<script>
+			function getQueryStringObject() {
+    		var a = window.location.search.substr(1).split('&');
+   			 	if (a == "") return { };
+   		    var b = {};
+    			for (var i = 0; i < a.length; ++i) {
+       	 			 var p = a[i].split('=', 2);
+        			if (p.length == 1)
+           				 b[p[0]] = "";
+        			else
+            			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    			}
+    	return b;
+		}
+
+			var qs = getQueryStringObject();
+			var x = qs.x; 
+			alert(x);
+	</script>
+	<div data-role="page" id="second">
+	<div id="container">
+		<div id="header">
+			<h1 id="title">타임라인</h1>
+			<hr size="2" noshade>
+		</div>
+
+		<div id="content">
+			<div id="text">
+				<textarea name="textarea" id="textarea" maxlength="100" autofocus></textarea>
+				<input type="button" value="등록" id="submit" />
+				<div id="the_count">
+					<span id="current">0</span> <span id="maximum">/ 100</span>
+				</div>
+			</div>
+
+			<div id="writing">
+
+				<div class="timeline">
+					<!-- <div class="timeline-header">
+					 <h3></h3>이름
+						<h5></h5>
+
+
+						<button type="button" class="modify">수정</button>
+						<button type="button" class="delete">삭제</button>
+
+
+					 </div> 
+					<p>내용내용내용내용</p> -->
+
+                </div>
+			</div>
+		</div>
+	</div>
+
+	<div id="footer">
+						<ul class="pagination"></ul>
+</div>
+	</div>
+
+</div>
+
+</html>

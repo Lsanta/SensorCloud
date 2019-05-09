@@ -1,11 +1,13 @@
 package com.wda.sc;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONObject;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.wda.sc.domain.MemberVO;
+import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.LoginService;
+import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
 
@@ -26,6 +30,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/app")
 public class mLoginController {
 	private LoginService loginservice;
+	private SiteService siteservice;
 	
 	@CrossOrigin(maxAge = 3600)
 	@RequestMapping(value = "/mlog.do", method = RequestMethod.POST)
@@ -61,6 +66,17 @@ public class mLoginController {
 		 return json.toString();
 	}
 	
+	
+	  @CrossOrigin(origins = "*", maxAge = 3600)
+	   @RequestMapping(value ="/mmain", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	   @ResponseBody
+	   public ArrayList<SiteVO> mainlist(Locale locale, Model model) {
+	   
+	      
+	      ArrayList<SiteVO> result = siteservice.getList();
+
+	      return result;
+	   }
 	
 	
 }
