@@ -7,17 +7,16 @@
 }
 
 .title-header {
-    width: 96%;
     height: 40px;
     border-bottom: 1px solid #000000;
-    margin: 10% 0 0 2%;
+    margin-top: 10%;
   }
   
   .title-header h1 {
     float: left;
     margin: 0;
-    padding: 0 0 0 20px;
-    font-size: 1.8em;
+    padding: 0 0 0 10px;
+    font-size: 1.3em;
   }
 hr {
   width: 100%;
@@ -25,10 +24,6 @@ hr {
 
 p{
   width: 100px;
-}
-h3 {
-	margin-left: 16px;
-	font-size: 0.9em;
 }
 
 #buttons {
@@ -67,43 +62,30 @@ table th {
   text-transform: uppercase;
 }
 
+table td {
+  font-size: .75em;
+}
+
 .wrapper{
     width: 95%;
     overflow: hidden;
     margin:20px auto;  
 }
 
-.cell{
-    margin-top: 50px; 
+.cell {
     display: inline-flex;
     background-position:center;
     float: left; 
   }
 
   #img {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
   }
-
-.w1{
-  height: 100px;
-  margin-top: 10px;  
-}
-
-.w2{
-  margin:0 10px 100px 10px;
-}
-
-.w3{
-  margin-top:100px;
-  margin-bottom:100px;
-}
 
 .n1{
   font-size: 1.5em;
   text-align: left;
-  margin-bottom: 10px;
+  margin: 10px 0;
   display: block;
 }
 
@@ -126,7 +108,7 @@ table th {
 .name01 {
     width: 80px;
     display: inline-block;
-    margin: 40px 0 0 10px;
+    margin-left: 10px;
 }
 
 .name02{
@@ -155,7 +137,7 @@ table th {
 }
 
 .pagination-container {
-  margin: 100px auto;
+  margin-top: 30px;
   text-align: center;
 }
 .pagination {

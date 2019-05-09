@@ -6,10 +6,14 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
     <title>Hello World</title>
     <style>
     body { padding-top: 50px; padding-bottom: 50px; }
     .btn { margin-bottom: 10px; }
+    .swal2-popup {
+        font-size : 1.5em  ! important ; 
+    }   
     </style>
 </head>
  
@@ -25,11 +29,12 @@
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- cordova script 참조 -->
     <script type="text/javascript" src="cordova.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script type="text/javascript">
     
-  
     /** jQuery 초기화 */
     $(function() {
+        
         // 버튼 이벤트 정의
         $("#fcm-code").click(function() {
             FCMPlugin.getToken(function(token){
@@ -63,13 +68,38 @@
                 //Notification was received on device tray and tapped by the user.
                     alert( "어디" + JSON.stringify(data) );
                     //백그라운드로 왔으면
-                    location.href = "eee.html";
+                    location.href = "main.html";
                 }else{
                  //Notification was received in foreground. Maybe the user needs to be notified.
                     alert( "여기" + JSON.stringify(data) );
-                }
+
+                Swal.fire({
+                    title: '제목?',
+                    text: "내용!",
+                    type: 'warning',
+                    customClass: 'popup : swal2-popup',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '이동!'
+            }).then((result) => {
+                if (result.value) {
+                Swal.fire(
+                    '새페이지로!',
+                    '내용',
+                    'success'
+                )
+            }else {
+                Swal.fire(
+                    '메인화면으로!',
+                    '내용',
+                    'error'
+                )
+            }
+        }) //swal 끝
+                } // 포그라운드 끝
         
-            });
+            }); //onnotificaiton 끝
 
             // // [Android] 화면 실행시 Intnet 객체를 수신한 경우 호출될 이벤트 정의
             // window.plugins.intent.getCordovaIntent(function(intent) {

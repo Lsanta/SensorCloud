@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
     <title>마이페이지</title>
-    <link rel="stylesheet" href="./css/mypage.css" />
+    <link rel="stylesheet" type="text/css" href="./css/jquery.mobile-1.4.5.css" />
+    <link rel="stylesheet" type="text/css" href="./css/mypage.css" />
+    <link rel="stylesheet" type="text/css" href="./css/mpmodify.css" />
     <script src="./js/jquery.js"></script>
     <script src="./js/jquery.mobile-1.4.5.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
    <script>
     $(document).ready(function() {
       $.ajax({
          type : "POST",
-         url : "http://39.127.7.74:8080/app/mypage",
+         url : "http://39.127.7.60:8080/app/mypage",
          contentType : "application/json; charset=UTF-8",
          success : function(result){
                console.log(result)
@@ -41,7 +45,7 @@
                num_pages=Math.floor(num_pages++);
          }
    
-      jQuery('.pagination').append("<li><a class=\"prev\">Previous</a></li>");
+      jQuery('.pagination').append("<li><a class=\"prev\"><</a></li>");
    
          for(var i=1; i<=num_pages; i++){
                jQuery('.pagination').append("<li><a>"+i+"</a></li>");
@@ -49,7 +53,7 @@
          jQuery('.pagination a').addClass("pagination-link");
          }
    
-      jQuery('.pagination').append("<li><a class=\"next\">Next</a></li>");
+      jQuery('.pagination').append("<li><a class=\"next\">></a></li>");
    
          $tr.each(function(i){
          jQuery(this).hide();
@@ -106,7 +110,7 @@
    
    });
 
-            } // success 함수 종료
+            } // success 함수 종
       }); // ajax함수
 
       $('.update').on('click', function() {
@@ -118,67 +122,88 @@
    </script>
 </head>
 <body>
-   <header>
-      <div class="wrapper">
+   <div data-role="page">
+    <div data-role="header"  data-position="fixed">
+        <a data-iconpos="notext" data-role="button" data-icon="home" title="Home" style="display: none;">Home</a>
+        <img src="./img/str.png" width="30%" height="30%">
+        <a data-iconpos="notext" href="#panel" data-role="button" data-icon="bars" style="margin-top: 10px"></a>
+    </div>
 
-      <div class="w1">
-
-         <div class="cell" >
-            <img src="./img/user.png" id="img">
-         </div>
-
-         <div class="name01">
-            <p class="n1">김개발</p>
-            <p class="n2">등급 5</p>
-         </div>
-
-         <div class="name02">
-            <input class="logout" type="button" value="로그아웃" />
-            <input class="update" type="button" value="정보수정" />
-         </div>
-      </div>
-      
-      <hr color="black">
-      </div>
-   </header>
-
-   <div id="contents">
-      <div class="title-header">
-         <h1>나의 점검이력</h1>
-
-      </div>
-
-      <div class="w2">
-         <table>
-            <thead>
-               <tr>
-                  <th scope="col">현장이름</th>
-                  <th scope="col">제목</th>
-                  <th scope="col">상태</th>
-                  <th scope="col">날짜</th>
-               </tr>
-            </thead>
-            <tbody id="mypagechecklist">
-               <!-- <tr>
-                  <td>XX휴게소</td>
-                  <td>센서 점검</td>
-                  <td>open</td>
-                  <td>19/04/29 20:21</td>
-               </tr> -->
-            </tbody>
-         </table>
-
-      </div>
-
-      <div class="w3">
-         <nav class="pagination-container">
-            <div class="pagination">
-            
-               
+    <div data-role="content">
+        <div data-role="tabs">
+            <div class="cell" >
+                <img src="./img/user.png" id="img" width="80px" height="80px">
             </div>
-         </nav>
-      </div>
-   </div>
+
+            <div class="name01">
+                <p class="n1">김개발</p>
+                <p class="n2">등급 5</p>
+            </div>
+
+            <div data-role="navbar" >
+                    <ul>
+                        <li><a href="#tab1">로그아웃</a></li>
+                        <li><a href="#tab2">정보수정</a></li>
+                    </ul>               
+        </div>
+
+        <div id="tab1">
+            <div class="title-header">
+                <h1>나의 점검이력</h1>             
+            </div>
+           
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col" style="width:9%;">현장이름</th>
+                        <th scope="col" style="width:10%;">제목</th>
+                        <th scope="col" style="width:5%;">상태</th>
+                        <th scope="col" style="width:6%;">날짜</th>
+                    </tr>
+                </thead>
+                <tbody id="mypagechecklist">
+                    
+                </tbody>
+            </table>
+        
+            <nav class="pagination-container">
+                <div class="pagination">
+                      
+                </div>
+            </nav>
+            
+        </div>
+
+
+        <div id="tab2">
+            <div class="wrapperr">
+                <h2>개인정보 수정</h2>
+                <div class="usermodify-card">
+                    <h3>비밀번호</h3>
+                    <input type="password" name="pass" id="pass" placeholder="Password"> <br>		
+                    <input type="button" name="confirm" id="confirm-modify" class="mpmodify-submit" value="확인">
+                </div>
+      
+                  <input type="button" name="confirm" id="levelp" class="mpmodify-submit" value="승급요청" />
+            </div>
+        </div>
+
+        </div>
+
+    </div>
+ 
+    <div data-role="footer"  data-position="fixed" data-id="footerid1">
+        <div data-role="navbar">
+            <ul>
+              <li><a href="main.html" rel="external" data-icon="home"></a></li>
+              <li><a href="push.html" rel="external" data-icon="search"></a></li>
+              <li><a href="timeline.html" rel="external" data-icon="comment"></a></li>
+              <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
  
 
 </body>

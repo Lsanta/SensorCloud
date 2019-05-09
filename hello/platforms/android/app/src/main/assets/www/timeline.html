@@ -7,7 +7,26 @@
    crossorigin="anonymous"></script>
    <script src="./js/timeline.js"></script>
 	<script src="./js/jquery.mobile-1.4.5.js"></script>
-	
+	<script>
+			function getQueryStringObject() {
+    		var a = window.location.search.substr(1).split('&');
+   			 	if (a == "") return { };
+   		    var b = {};
+    			for (var i = 0; i < a.length; ++i) {
+       	 			 var p = a[i].split('=', 2);
+        			if (p.length == 1)
+           				 b[p[0]] = "";
+        			else
+            			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+    			}
+    	return b;
+		}
+
+			var qs = getQueryStringObject();
+			var x = qs.x; 
+			alert(x);
+	</script>
+	<div data-role="page" id="second">
 	<div id="container">
 		<div id="header">
 			<h1 id="title">타임라인</h1>
@@ -48,5 +67,6 @@
 </div>
 	</div>
 
+</div>
 
 </html>

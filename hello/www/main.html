@@ -158,7 +158,7 @@ table td{
       </style>
     </head>
     <body>
- <div data-role="page">
+ <div data-role="page" id="index">
      <div data-role="header" data-position="fixed">
          <img src="./img/str.png" width="30%" height="30%">
          <button type="button" id="logout">로그아웃</button>
@@ -184,9 +184,9 @@ table td{
      <div data-role="footer"  data-position="fixed" data-id="footerid1">
         <div data-role="navbar">
            <ul>
-              <li><a href="main.html" data-icon="home"></a></li>
+              <li><a href="main.html" rel="external" data-icon="home"></a></li>
               <li><a href="push.html" rel="external" data-icon="search"></a></li>
-              <li><a href="timeline.html" rel="external" data-icon="comment"></a></li>
+              <li><a href="timeline.html?x=1" rel="external" data-icon="comment"></a></li>
               <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
            </ul>
         </div>
