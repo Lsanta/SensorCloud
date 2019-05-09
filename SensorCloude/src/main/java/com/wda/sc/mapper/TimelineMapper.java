@@ -13,6 +13,7 @@ public interface TimelineMapper {
 	public int timelinedelete(String content);
 	public int timelinemodify(TimelineVO vo);
 	public int getPageNum();
+	public ArrayList<TimelineVO> getListm();
 
 	
 }

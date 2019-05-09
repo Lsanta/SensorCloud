@@ -16,14 +16,21 @@
     where c.rnum >= #{startnum}
     ]]>
 	</select>
-
+	
+	<select id="getListm" resultType="com.wda.sc.domain.TimelineVO">
+	  select timeline.timeline_n, timeline.content, substr(time,0,14) as time, member.name
+	  from timeline,member
+	  where timeline.user_id = member.user_id
+      order by timeline_n desc
+	</select>
+	
 	<select id="timedesc" resultType="com.wda.sc.domain.TimelineVO">
 		<![CDATA[
-			select timeline.timeline_n, timeline.content, substr(time,0,14) as time, member.name
-			from timeline,member
-			where timeline.user_id = member.user_id and 
-			rownum < 5
-    		order by timeline_n desc
+		select timeline.timeline_n, timeline.content, substr(time,0,14) as time, member.name
+		from timeline,member
+		where timeline.user_id = member.user_id and 
+		rownum < 5
+   		order by timeline_n desc
     	]]>
 	</select>
 	
