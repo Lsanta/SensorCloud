@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./css/search.css">
+    <link rel="stylesheet" type="text/css" href="./css/jquery.mobile-1.4.5.css">
+    <script src="./js/jquery.js"></script>
+    <script src="./js/jquery.mobile-1.4.5.js"></script>
+    
+    
+     <script>
+            $(document).on('pagebeforeshow', function() {
+                 $("#search-basic").textinput();      
+             });
+
+             $(document).keyup('#search-basic', function(){
+                var text = $("#search-basic").val();   
+                console.log(text);
+                var searchword = {
+                    word : text
+                }
+                var sendText = JSON.stringify(searchword);
+                console.log()
+                if( text != ''){
+                    $.ajax({
+                        type : 'POST',
+                        url : "http://39.127.7.58:8080/app/mSearch.do",
+                        data : sendText,
+                        contentType : "application/json; charset=UTF-8",
+                        success : function(result){
+
+                            // var io = JSON.parse(result);
+                            console.log(result);
+
+                            var str="";
+                            $.each(result,function(i,s){
+        
+                            str +='<tr>';
+                            str +='<td>'+s.type_no+'</td>';
+                            str +='<td>'+s.site_name+'</td>';
+                            str +='<td>'+s.address+'</td>';
+                            str +='<td>'+s.start_date+'</td>';
+                            str +='</tr>';
+
+                            $("#aaa").html(str);
+
+                            
+                    });
+                           
+                        } //success 함수 종료
+                    }); //ajax종료
+                } else {
+                                $("#aaa").empty(); 
+                }
+             });
+
+             $(document).on('click', '.ui-input-clear', function () {
+                //검색창 x버튼 클릭시
+                $("#aaa").empty(); 
+             });
+    </script>
+</head>
+<body>
+        <div data-role="page" id="index">
+                <div data-role="header" data-position="fixed">
+                    <img src="./img/str.png" width="30%" height="30%">
+                </div>
+                <div data-role="content">
+
+                    <div data-role="fieldcontain">            
+                        <input type="search" name="search" id="search-basic" value="" />
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>현재상태</th>
+                            <th>현장이름</th>
+                            <th>주소</th>
+                            <th>데이터갱신시간</th>
+                         </tr>
+                    <tbody id="aaa">
+                       
+                    </tbody>
+                 </table>
+                 <ul class="pagination">
+               
+                </ul>
+            </div>
+        </div>
+                <div data-role="footer"  data-position="fixed" data-id="footerid1">
+                   <div data-role="navbar">
+                      <ul>
+                         <li><a href="main.html" rel="external" data-icon="home"></a></li>
+                         <li><a href="push.html" rel="external" data-icon="search"></a></li>
+                         <li><a href="#" rel="external" data-icon="comment"></a></li>
+                         <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
+                      </ul>
+                   </div>
+                </div>
+            </div>
+</body>
+</html>

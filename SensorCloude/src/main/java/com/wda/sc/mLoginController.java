@@ -1,11 +1,13 @@
 package com.wda.sc;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.codehaus.stax2.ri.typed.ValueDecoderFactory.DecimalDecoder;
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -67,7 +69,7 @@ public class mLoginController {
 	}
 	
 	
-	  @CrossOrigin(origins = "*", maxAge = 3600)
+	   @CrossOrigin(origins = "*", maxAge = 3600)
 	   @RequestMapping(value ="/mmain", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	   @ResponseBody
 	   public ArrayList<SiteVO> mainlist(Locale locale, Model model) {
@@ -77,6 +79,30 @@ public class mLoginController {
 
 	      return result;
 	   }
+	   
+	   @CrossOrigin(origins = "*", maxAge = 3600)
+	   @RequestMapping(value ="/sitemain", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	   @ResponseBody
+	   public ArrayList<SiteVO> sitemainlist(@RequestBody String site_id,Locale locale, Model model) {
+	      System.out.println(site_id);
+	      
+	      ArrayList<SiteVO> result01 = siteservice.getSite(site_id);
+	      
+	      return result01;
+	   }
+	  
+	  
+	   	@CrossOrigin(maxAge = 3600)
+		@RequestMapping(value = "/mSearch.do", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+		
+		public @ResponseBody ArrayList<SiteVO> mSearch(@RequestBody Map<String, String> map) throws Exception {
+			
+			 String word = (String) map.get("word");
+			 ArrayList<SiteVO> arr = new ArrayList<SiteVO>();
+			 //현장 이름 검색
+			 arr = siteservice.getAppSearch(word);
+			 return arr;
+		}
 	
 	
 }
