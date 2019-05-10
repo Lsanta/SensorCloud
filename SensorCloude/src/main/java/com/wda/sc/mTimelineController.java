@@ -72,7 +72,8 @@ public class mTimelineController {
 		System.out.println(id); 
 		System.out.println(content); 
 	    
-	    vo.setUser_id(id);
+		vo.setUser_id(id);
+		vo.setContent(content);
 		int a = timelineservice.insert(vo);
 		System.out.println(vo);
 
