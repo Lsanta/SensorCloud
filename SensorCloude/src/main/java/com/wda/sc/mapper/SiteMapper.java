@@ -3,6 +3,8 @@ package com.wda.sc.mapper;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
@@ -92,4 +94,7 @@ public interface SiteMapper {
 	public ArrayList<MysensorVO> getSearchResultSM(Map<Object, Object> parm);
 	//그래프 그릴려고 그래프 그려오기
 	public ArrayList<SensorDataVO> getSensingDate(String site_id);
+	
+	//앱 검색
+	public ArrayList<SiteVO> getAppSearch(@Param("word") String word);
 }
