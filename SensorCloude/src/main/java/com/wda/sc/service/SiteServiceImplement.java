@@ -209,6 +209,16 @@ public class SiteServiceImplement implements SiteService {
 		// TODO Auto-generated method stub
 		return mapper.getSensingDate(site_id);
 	}
+	
+	public ArrayList<SensorDataVO> getDataName(String site_id) {
+		//센서데이터 표(이름)
+		return mapper.getDataName(site_id);
+	}
+	
+	public ArrayList<SensorDataVO> getData(String site_id) {
+		//센서데이터 표(데이터)
+		return mapper.getData(site_id);
+	}
 
 	@Override
 	public ArrayList<SiteVO> getAppSearch(String word) {

@@ -70,18 +70,18 @@
 			<div id="dataDiv">
 				<div id="main-content">
 					<table>
-						<thead th:if="${sensordata != null}">
+						<thead>
 							<tr>
 								<th scope="col" th:text="시간"></th> 
-								<th scope="col" th:each="sensordata:${sensordata[0]}">
-									<span th:text="${sensordata.sensor_name}"></span>
+								<th scope="col">
+									<span>이름</span>
 								</th>
 							</tr>
 						</thead>
 						<tbody id="sensing-data">
 							<tr>
-								<td th:text="${sensordata.current_date}"></td>
-								<td th:text="${sensordata.sensing_data}"></td>
+								<td th:text="시간시간"></td>
+								<td th:text="데이터"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -170,6 +170,16 @@ $(document).ready(function() {
 		url : "/site/graph/"+site_id+" .do",
 		success : function(data) {
 			alert("gd");
+		}
+	});
+	
+	$.ajax({
+		type : "POST",
+		dataType : "text",
+		data : query,
+		url : "/site/sdata/"+site_id+" .do",
+		success : function(data) {
+			alert("gg");
 		}
 	});
 	
