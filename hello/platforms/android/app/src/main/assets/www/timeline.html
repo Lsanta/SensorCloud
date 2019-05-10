@@ -2,10 +2,8 @@
 <html>
 	<title>타임라인</title>
 	<link rel="stylesheet" type="text/css" href="./css/timeline.css">
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-   crossorigin="anonymous"></script>
-   <script src="./js/timeline.js"></script>
+	<script src="./js/jquery.js"></script>
+    <script src="./js/timeline.js"></script>
 	<script src="./js/jquery.mobile-1.4.5.js"></script>
 	<script>
 			function getQueryStringObject() {
@@ -23,7 +21,7 @@
 		}
 
 			var qs = getQueryStringObject();
-			var x = qs.x; 
+			var x = qs.sid; 
 			alert(x);
 	</script>
 	<div data-role="page" id="second">
