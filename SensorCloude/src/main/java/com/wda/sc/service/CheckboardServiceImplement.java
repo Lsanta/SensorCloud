@@ -171,4 +171,9 @@ public class CheckboardServiceImplement implements CheckboardService {
 		return mapper.getTermList(parm);
 	}
 
+	@Override
+	   public ArrayList<CheckBoardVO> apprepairList(String site_id){
+	      return mapper.apprepairList(site_id);
+	}
+
 }

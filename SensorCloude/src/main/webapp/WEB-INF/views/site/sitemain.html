@@ -69,20 +69,12 @@
 
 			<div id="dataDiv">
 				<div id="main-content">
-					<table>
-						<thead>
-							<tr>
-								<th scope="col" th:text="시간"></th> 
-								<th scope="col">
-									<span>이름</span>
-								</th>
-							</tr>
+					<table id="sensordata">
+						<thead id="sensing-data-head">
+							
 						</thead>
 						<tbody id="sensing-data">
-							<tr>
-								<td th:text="시간시간"></td>
-								<td th:text="데이터"></td>
-							</tr>
+						
 						</tbody>
 					</table>
 				</div>
@@ -246,24 +238,89 @@ geocoder.addressSearch(site, function(result, status) {
 				chart.cursor = new am4charts.XYCursor(); //마우스 올렸을때 데이터 나오게 하는 함수
 				chart.legend = new am4charts.Legend();	//그래프 바로밑에 그래프 각각 나오게 해주고 누를때 이벤트 발생
 	
+
 				
 			}
 		});
-	
-		$.ajax({
-			type : "POST",
-			dataType : "text",
-			data : query,
-			url : "/site/sdata/"+site_id+" .do",
-			success : function(data) {
-				alert("gg");
-			}
+
+
+	$.ajax({
+		type : "POST",
+		data : query,
+		dataType : 'json',
+		url : "/site/sdata/"+site_id+" .do",
+		success : function(data) {
+			console.log(data);	
+		var str = ""; 
+		str +='<tr>';
+		str +='<td>시간</td>';
+         $.each(data.name ,function(i,s){
+        	str +='<td>'+s.sensor_name+'</td>';
+			$("#sensing-data-head").html(str);
 		});
+         str +='</tr>';
+         $("#sensing-data-head").html(str);	
+         
+         var str2 = "";
+         var headername = new Array();
+         for(var i=0; i < $("#sensing-data-head td").length; i++){
+        	 headername[i] = $("#sensing-data-head td").eq(i).text();
+         }
+         
+         for(var i=0; i < data.data.length; i++){
+        	 
+        	 str2 +='<tr>';
+        	 str2 +='<td>'+data.data[i].current_date+'</td>';
+        	 
+        	 for(var j=1; j < headername.length; j++){
+     		
+        		 if( data.data[i].sensor_name == headername[j] ) {
+        			
+        			str2 += '<td>'+data.data[i].sensing_data+'</td>'
+        			
+        		 }else{
+        			str2 += '<td>없음</td>'
+        		 }
+        	 }
+        	 
+        	 str2 +='</tr>';
+        	 $("#sensing-data").html(str2);	
+        	 
+         }
+         
+         
+//          $.each(data.data ,function(index) {
+        	 
+//         	 console.log(data.data[index].current_date);
+        	 
+//         	 str +='<tr>';
+//         	 str +='<td>'+s[i].current_date+'</td>';
+//         	 str +='<td>'+ s.sensing_data +'</td>';	
+//         	 str +='</tr>';
+        	 
+//         	 $("#sensing-data").html(str);	
+//          });
+			
+			
+//             $.each(data ,function(i,s){
+//                str +='<tr>';
+//                str +='<td>'+s.site_name+'</td>';      // 현장이름
+//                str +='<td>'+s.title+'</td>';          // 제목
+//                str +='<td>'+s.board_status+'</td>';   // 상태
+//                str +='<td>'+s.reg_date+'</td>';       // 날짜
+//                str +='</tr>';
+
+//                $("#mypagechecklist").html(str);
+			
+// 			});
+		}
+	});
+	$("#modify").click(function(){
+		var site_id = $("#modify").attr('class');
+		window.location.href = "/site/sitemodify/"+site_id;
+	});
+
 	
-		$("#modify").click(function(){
-			var site_id = $("#modify").attr('class');
-			window.location.href = "/site/sitemodify/"+site_id;
-		});
 	
 	
 /* 	$('#append_row').on("click", function () {

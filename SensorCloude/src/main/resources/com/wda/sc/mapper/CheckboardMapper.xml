@@ -150,4 +150,16 @@ and rownum < 7
       order by x.reg_date desc
       ]]>
    </select>
+   
+     <!-- 앱 현장클릭시  해당 현장에대한 점검이력 글 -->
+   <select id="apprepairList" resultType="com.wda.sc.domain.CheckBoardVO">
+   <![CDATA[
+   		 select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
+         from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+               from check_board,site
+               where check_board.site_id = site.site_id and check_board.site_id = #{site_id}) c,member m
+         where c.user_id = m.user_id
+         order by reg_date desc
+   ]]>    
+   </select>
 </mapper>

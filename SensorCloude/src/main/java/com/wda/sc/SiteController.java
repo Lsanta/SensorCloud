@@ -145,7 +145,6 @@ public class SiteController {
 		return json;
 	}
 	////////////////////////////////////////////////////////////////////
-
 	@RequestMapping(value = "/sdata/" + "{site_id}" + ".do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject sensordata(@PathVariable String site_id) {
@@ -154,9 +153,9 @@ public class SiteController {
 		System.out.println(dListname);
 		System.out.println(dList);
 		
-		JSONArray dJson = JSONArray.fromObject(dList);
 		JSONArray dListJson = JSONArray.fromObject(dListname);
-		
+		JSONArray dJson = JSONArray.fromObject(dList);
+	
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", dListJson);
 		map.put("data",dJson);

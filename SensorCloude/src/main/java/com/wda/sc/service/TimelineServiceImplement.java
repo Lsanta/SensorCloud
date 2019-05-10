@@ -19,7 +19,7 @@ public class TimelineServiceImplement implements TimelineService {
 
 	@Override
 	public int insert(TimelineVO vo) {
-
+		System.out.println(vo);
 		return mapper.insert(vo);
 	}
 
