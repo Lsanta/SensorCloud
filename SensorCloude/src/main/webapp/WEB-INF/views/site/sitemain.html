@@ -159,6 +159,23 @@ geocoder.addressSearch(site, function(result, status) {
 });    
 /*]]>*/
 $(document).ready(function() {
+	
+	var newURL =  window.location.pathname;
+	var url = newURL.split('/');
+	
+	var site_id = url[2];
+	var query = { site_id : url[2] };
+	
+	$.ajax({
+		type : "POST",
+		dataType : "text",
+		data : query,
+		url : "/site/graph/"+site_id+" .do",
+		success : function(data) {
+			alert("gd");
+		}
+	});
+	
 	$("#modify").click(function(){
 		var site_id = $("#modify").attr('class');
 		window.location.href = "/site/sitemodify/"+site_id;
@@ -173,7 +190,7 @@ $(document).ready(function() {
 			)
 		);
 	}); */
-});
+}); 
 	</script>
 	<script src="/resources/js/site/asidebar.js"></script>
 	<script src="/resources/js/site/sitemodify.js"></script>

@@ -8,6 +8,7 @@ import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
+import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
@@ -90,5 +91,7 @@ public interface SiteService {
 	public ArrayList<MysensorVO> smSearch(Search s);
 
 	public ArrayList<MysensorVO> getSearchResultSM(Map<Object, Object> parm);
+	//그래프 그릴려고 데이터 가져오기
+	public ArrayList<SensorDataVO> getSensingDate(String site_id);
 
 }

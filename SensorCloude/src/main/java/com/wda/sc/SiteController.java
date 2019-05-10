@@ -28,12 +28,15 @@ import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
+import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.MysensorService;
 import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 @AllArgsConstructor
@@ -101,14 +104,6 @@ public class SiteController {
 	@RequestMapping(value = "{site_id}", method = RequestMethod.GET)
 	public String siteclick(@PathVariable String site_id, Model model, HttpSession session,
 			HttpServletResponse response) throws IOException {
-		System.out.println("현장 iD =" + site_id);
-		model.addAttribute("siteInfo", siteservice.getSite(site_id));
-		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
-		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
-		System.out.println(siteservice.getStatus(site_id));// 현장클릭시 상태정보
-		model.addAttribute("sensordata", mysensorservice.getData(site_id)); //센서데이터 표
-		System.out.println(mysensorservice.getData(site_id));
-
 		int mlevel = (int) session.getAttribute("mlevel");
 
 
@@ -121,9 +116,31 @@ public class SiteController {
 			out.println("</script>");
 
 		}
-		return "site/sitemain";
+		
+		System.out.println("현장 iD =" + site_id);
+		model.addAttribute("siteInfo", siteservice.getSite(site_id));
+		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
+		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
+		model.addAttribute("sensordata", mysensorservice.getData(site_id)); //센서데이터 표
+		
 
+		return "site/sitemain";
 	}
+	
+	////////////////////////////////////////////////////////////////////
+	@RequestMapping(value = "/graph/"+"{site_id}"+".do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject areasido(@PathVariable String site_id) {
+	      ArrayList<SensorDataVO> dList = siteservice.getSensingDate(site_id);
+	      System.out.println(dList);
+	      JSONArray dJson = JSONArray.fromObject(dList);
+	      Map<String, Object> map = new HashMap<String, Object>();
+	     // map.put("aList", aJson);
+	      JSONObject json = JSONObject.fromObject(map);
+	      
+	      return json;
+	   }
+	////////////////////////////////////////////////////////////////////
 
 	@RequestMapping(value = "{site_id}" + "/sitealarm", method = RequestMethod.GET)
 	public String sitealarm(@PathVariable String site_id, Model model,HttpSession session,

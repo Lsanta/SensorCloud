@@ -229,4 +229,11 @@
     order by x.create_day desc
     ]]>
 	</select>
+	
+	<!-- 그래프 그리기 -->
+	<select id="getSensingDate" resultType="com.wda.sc.domain.SensorDataVO">
+		select * from sensor_date
+		where site_id = #{site_id}
+		order by sensor_data_num desc
+	</select>
 </mapper>
