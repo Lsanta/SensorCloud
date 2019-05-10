@@ -9,7 +9,7 @@ import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
-import com.wda.sc.domain.SensorInfoVO;
+import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.mapper.MysensorMapper;
 
 import lombok.AllArgsConstructor;
@@ -59,10 +59,6 @@ public class MysensorServiceImplement implements MysensorService {
 		return mapper.getSearchResult(parm);
 	}
 
-	public ArrayList<SensorInfoVO> getData(String site_id) {
-		//센서데이터 표
-		return mapper.getData(site_id);
-	}
 	
 	
 }

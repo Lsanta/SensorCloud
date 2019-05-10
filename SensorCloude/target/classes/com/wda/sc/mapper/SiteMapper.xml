@@ -230,9 +230,38 @@
     ]]>
 	</select>
 	
+	<!-- 센서데이터 표(이름) -->
+	<select id="getDataName" resultType="com.wda.sc.domain.SensorDataVO">
+	<![CDATA[
+		select DISTINCT sensor_name
+		from sensor_date
+		where site_id = #{site_id}
+		and sensor_name not like '%volt%'
+	]]>
+	</select>
+	
+	<!-- 센서데이터 표(데이터) -->
+	<select id="getData" resultType="com.wda.sc.domain.SensorDataVO">
+	<![CDATA[
+		select current_date, sensor_name, sensing_data
+		from sensor_date
+		where site_id = #{site_id}
+		and sensor_name not like '%volt%'
+		order by sensor_data_num desc
+	]]>
+	</select>
+	
+	<!-- 그래프 그리기 -->
+	<select id="getSensingDate" resultType="com.wda.sc.domain.SensorDataVO">
+		select * from sensor_date
+		where site_id = #{site_id}
+		order by sensor_data_num desc
+	</select>
+
 	<!--앱검색 -->
 	<select id="getAppSearch" resultType="com.wda.sc.domain.SiteVO">
 		select * from site
 		where site_name LIKE '%' || #{word} || '%'
 	</select>
+	
 </mapper>

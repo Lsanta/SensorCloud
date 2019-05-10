@@ -7,7 +7,7 @@ import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
-import com.wda.sc.domain.SensorInfoVO;
+import com.wda.sc.domain.SensorDataVO;
 
 public interface MysensorMapper {
 
@@ -26,7 +26,6 @@ public interface MysensorMapper {
 	//검색2
 	public ArrayList<MysensorVO> getSearchResult(Map<Object, Object> parm);
 	
-	//센서데이터 표
-	public ArrayList<SensorInfoVO> getData(String site_id);
+	
 
 }

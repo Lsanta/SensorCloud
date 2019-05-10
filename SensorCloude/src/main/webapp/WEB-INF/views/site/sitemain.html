@@ -69,22 +69,17 @@
 
 			<div id="dataDiv">
 				<div id="main-content">
-					<table>
+					<table id="sensordata">
 						<thead>
 							<tr>
-								<th>시간</th> 
-								<th th:each="sensordata : ${sensordata}">
-									<span scope="col" th:text="${sensordata.sensor_kind}"></span>
-									<span scope="col" th:text="|(${sensordata.sensor_name})|"></span>
-								</th>
+								<th scope="col" th:text="시간"></th> 
+								<th scope="col">이름</th>
 							</tr>
 						</thead>
 						<tbody id="sensing-data">
 							<tr>
-								<td> 19/04/23.10:20 </td>
-								<td th:each="sensordata : ${sensordata}">
-									<span th:text="1234"></span>
-								</td>
+								<td th:text="시간시간"></td>
+								<td th:text="데이터"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -159,6 +154,44 @@ geocoder.addressSearch(site, function(result, status) {
 });    
 /*]]>*/
 $(document).ready(function() {
+	
+	var newURL =  window.location.pathname;
+	var url = newURL.split('/');
+	
+	var site_id = url[2];
+	var query = { site_id : url[2] };
+	
+	$.ajax({
+		type : "POST",
+		dataType : "text",
+		data : query,
+		url : "/site/graph/"+site_id+" .do",
+		success : function(data) {
+			alert("gd");
+		}
+	});
+	
+	$.ajax({
+		type : "POST",
+		dataType : "text",
+		data : query,
+		url : "/site/sdata/"+site_id+" .do",
+		success : function(data) {
+			console.log(data)
+			var str = ""; 
+               $.each(data,function(i,s){
+               str +='<tr>';
+               str +='<td>'+s.site_name+'</td>';      // 현장이름
+               str +='<td>'+s.title+'</td>';          // 제목
+               str +='<td>'+s.board_status+'</td>';   // 상태
+               str +='<td>'+s.reg_date+'</td>';       // 날짜
+               str +='</tr>';
+
+               $("#mypagechecklist").html(str);
+			
+		}
+	});
+	
 	$("#modify").click(function(){
 		var site_id = $("#modify").attr('class');
 		window.location.href = "/site/sitemodify/"+site_id;
@@ -173,7 +206,7 @@ $(document).ready(function() {
 			)
 		);
 	}); */
-});
+}); 
 	</script>
 	<script src="/resources/js/site/asidebar.js"></script>
 	<script src="/resources/js/site/sitemodify.js"></script>
