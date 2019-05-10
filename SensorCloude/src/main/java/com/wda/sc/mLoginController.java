@@ -6,13 +6,17 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.HttpResponse;
 import org.codehaus.stax2.ri.typed.ValueDecoderFactory.DecimalDecoder;
 import org.json.JSONObject;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,16 +39,37 @@ public class mLoginController {
 	private SiteService siteservice;
 	
 	@CrossOrigin(origins = "*" ,maxAge = 3600)
-	@RequestMapping(value = "/mlog.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/mlog", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public String mlogin(@RequestBody Map<String, String> map) throws Exception {
-		 System.out.println("안와"); 
+	public String mlogin(@RequestBody String idt, String passwordt) throws Exception {
+//		response.setHeader("Access-Control-Allow-Origin", "*");
 		
-		 String id = (String)map.get("id");
-		 String password = (String) map.get("password");
+//		response.setHeader("Access-Control-Allow-Credentials", "true");
+//		response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+//		response.setHeader("Connection", "close");
+//		response.setContentType("application/json");
+//		response.setCharacterEncoding("UTF-8");
+
+//		response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
+//        response.setHeader("Access-Control-Max-Age", "3600");
+//        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, origin, content-type, accept");
+        
+		System.out.println("안와"); 
+		
+//		 String id = (String)map.get("id");
+//		 String password = (String) map.get("password");
 		 System.out.println("====================================");
-		 System.out.println(id);
-		 System.out.println(password);
+		 System.out.println(idt);
+		 System.out.println(passwordt);
+		 
+		 String[] array = idt.split("&");
+		 String[] id2 = array[0].split("=");
+		 String[] password2 = array[1].split("=");
+		 
+		 String id = id2[1];
+		 String password = password2[1];
+		 
 		 
 		 ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
 		 arr = loginservice.login(id);
@@ -67,7 +92,6 @@ public class mLoginController {
 		 System.out.println(json);
 		 return json.toString();
 	}
-	
 	
 	   @CrossOrigin(origins = "*", maxAge = 3600)
 	   @RequestMapping(value ="/mmain", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
