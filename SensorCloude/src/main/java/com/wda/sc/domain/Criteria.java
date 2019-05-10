@@ -5,7 +5,7 @@ public class Criteria {
 	   private int pagenum;   //현재 페이지 번호
 	   private int contentnum=10;   //한 페이지에 몇개를 표시하는가
 	   private int startPage=1;   //현재 페이지 블록의 시작 페이지
-	   private int endPage=10;   //현재 페이지 블록의 마지막 페이지
+	   private int endPage=5;   //현재 페이지 블록의 마지막 페이지
 	   private int startnum;   //현재 페이지의 컨텐츠 시작 번호
 	   private int endnum;   //현재 페이지의 컨텐츠 끝 번호
 	   private boolean prev=false;   //이전 페이지로 가는 화살표
@@ -89,7 +89,7 @@ public class Criteria {
 	      //10은 페이지 블록당 보여줄 페이지 수
 	      //페이지 블록 1 -> 1*10-9 -> 1페이지
 	      //페이지 블록 2 -> 2*10-9 -> 11페이지
-	      this.startPage = (currentblock*10)-9;
+	      this.startPage = (currentblock*5)-4;
 	   }
 	   
 	   //끝 페이지를 구하는 함수
@@ -102,7 +102,7 @@ public class Criteria {
 	         this.endPage = calcpage(getTotalcount(),getContentnum());
 	      }
 	      else {
-	         this.endPage = getStartPage()+9;
+	         this.endPage = getStartPage()+4;
 	      }
 	   }
 	   
@@ -130,8 +130,8 @@ public class Criteria {
 	      //페이지 번호를 통해 구한다.
 	      //현재 페이지 번호 1 -> 1/10 -> 0 페이지 블록 번호는 1이 된다. 
 	      //현재 페이지 번호 11 -> 11/10 -> 1 페이지 블록 번호는 2가 된다.
-	      this.currentblock = pagenum/10;
-	      if(pagenum%10>0) {
+	      this.currentblock = pagenum/5;
+	      if(pagenum%5>0) {
 	         this.currentblock++;
 	      }
 	   }
@@ -144,8 +144,8 @@ public class Criteria {
 	      //10 , 10 -> 10*10 -> 100
 	      //125/100
 	      //1
-	      this.lastblock = totalcount / (10*this.contentnum);
-	      if(totalcount %(10*this.contentnum)>0) {
+	      this.lastblock = totalcount / (5*this.contentnum);
+	      if(totalcount %(5*this.contentnum)>0) {
 	         this.lastblock++;
 	      }
 	   }

@@ -59,11 +59,14 @@
 	</select>
 	
  	<!-- 센서데이터 표 -->
-	<select id="getData" resultType="com.wda.sc.domain.SensorInfoVO">
-		select m.sensor_kind, s.sensor_name
-		from(select * from install_sensor where site_id = #{site_id})i, my_sensor m, sensor_info s
-		where i.sensor_sn = m.sensor_sn
-		and m.sensor_sn = s.sensor_sn
+	<select id="getData" resultType="com.wda.sc.domain.SensorDataVO">
+	<![CDATA[
+		select current_date, sensor_name, sensing_data
+		from sensor_date
+		where site_id = #{site_id}
+		and sensor_name not like '%volt%'
+		order by sensor_data_num desc
+	]]>
 	</select>
 
 </mapper>

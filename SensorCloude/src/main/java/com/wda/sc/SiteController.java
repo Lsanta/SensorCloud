@@ -6,11 +6,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -19,12 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.CheckBoardVO;
-import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
@@ -104,6 +100,16 @@ public class SiteController {
 	@RequestMapping(value = "{site_id}", method = RequestMethod.GET)
 	public String siteclick(@PathVariable String site_id, Model model, HttpSession session,
 			HttpServletResponse response) throws IOException {
+
+		System.out.println("현장 iD =" + site_id);
+		model.addAttribute("siteInfo", siteservice.getSite(site_id));
+		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
+		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
+		System.out.println(siteservice.getStatus(site_id));// 현장클릭시 상태정보
+		model.addAttribute("sdataheader", mysensorservice.getData(site_id)); //센서데이터 표(header)
+		model.addAttribute("sensordata", mysensorservice.getData(site_id)); //센서데이터 표
+		System.out.println(mysensorservice.getData(site_id));
+
 		int mlevel = (int) session.getAttribute("mlevel");
 
 

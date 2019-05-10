@@ -70,21 +70,18 @@
 			<div id="dataDiv">
 				<div id="main-content">
 					<table>
-						<thead>
+						<thead th:if="${sensordata != null}">
 							<tr>
-								<th>시간</th> 
-								<th th:each="sensordata : ${sensordata}">
-									<span scope="col" th:text="${sensordata.sensor_kind}"></span>
-									<span scope="col" th:text="|(${sensordata.sensor_name})|"></span>
+								<th scope="col" th:text="시간"></th> 
+								<th scope="col" th:each="sensordata:${sensordata[0]}">
+									<span th:text="${sensordata.sensor_name}"></span>
 								</th>
 							</tr>
 						</thead>
 						<tbody id="sensing-data">
 							<tr>
-								<td> 19/04/23.10:20 </td>
-								<td th:each="sensordata : ${sensordata}">
-									<span th:text="1234"></span>
-								</td>
+								<td th:text="${sensordata.current_date}"></td>
+								<td th:text="${sensordata.sensing_data}"></td>
 							</tr>
 						</tbody>
 					</table>
