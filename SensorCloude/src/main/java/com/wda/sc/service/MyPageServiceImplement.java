@@ -30,12 +30,7 @@ public class MyPageServiceImplement implements MyPageService {
 	public ArrayList<CheckBoardVO> myList(Map<String, Object> parm){
 		return mapper.myList(parm);
 	}
-	
-	public ArrayList<CheckBoardVO> mcheck(){
-		//앱용 점검이력
-		return mapper.mcheck();
-	}
-	
+
 	@Override
 	public ArrayList<MemberVO> confirmpasswd(String confirmid) {
 		// TODO Auto-generated method stub
