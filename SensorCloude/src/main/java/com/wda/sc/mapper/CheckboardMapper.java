@@ -54,5 +54,8 @@ public interface CheckboardMapper {
 	
 	//기간 검색 + 페이징
 	public ArrayList<CheckBoardVO> getTermList(Map<Object, Object> parm);
+	
+	// 앱 현장 클릭시 해당 현장에대한 점검이력 글
+	public ArrayList<CheckBoardVO> apprepairList(String site_id);
 }
 

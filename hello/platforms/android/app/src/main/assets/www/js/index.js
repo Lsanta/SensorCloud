@@ -52,21 +52,4 @@ $(document).ready(function(){
   });
 });
 
-// function loadTweets() {
-//   var request = new XMLHttpRequest();
-//   var id = $("#id").val();
-//   var password = $("#pass").val()
-//   request.open("GET", "http://39.127.7.58:8080/app/mlog2.do?"+id+"="+password+"", true);
-//   request.onreadystatechange = function() {//Call a function when the state changes.
-//       if (request.readyState == 4) {
-//           if (request.status == 200 || request.status == 0) {
-//               var tweets = JSON.parse(request.responseText);
-//               window.location.href="main.html";
-//           }
-//       }
-//   }
-//   console.log("asking for tweets");
-//   request.send();
-// }
-
 

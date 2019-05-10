@@ -237,6 +237,7 @@
 		from sensor_date
 		where site_id = #{site_id}
 		and sensor_name not like '%volt%'
+		order by CASE WHEN sensor_name IN ('PTemp') THEN 1 ELSE 0 END, sensor_name asc
 	]]>
 	</select>
 	

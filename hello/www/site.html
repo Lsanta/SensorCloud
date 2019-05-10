@@ -24,7 +24,45 @@
              height: 230px;
              margin-bottom: 15px;
             }
+ table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
 
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  text-align: center;
+}
+
+table th {
+  font-size: .60em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+table td{
+   font-size:.90em;
+}
+
+      .pagination li{
+      display:inline-block;
+      margin-right:5px;
+      cursor:pointer;
+      }
         </style>
 </head>
 <body>
@@ -38,7 +76,7 @@
         <a data-iconpos="notext" href="#mypanel" data-role="button" data-icon="bars" style="margin-top: 10px"></a>
     </div>
     <div data-role="panel" id="mypanel" data-position="right">
-    <a href="#page2" data-rel="close">Close panel</a>
+        <a href="#page2" data-rel="close">Close panel</a>
 
     </div>
 
@@ -77,6 +115,29 @@
                 <div id="map" style="width:100%;height:400px;">
                 </div>
             </div>
+
+            <div id="tab3">
+                <div style="border: 1px solid black; width: 100%; height: 340px; overflow-y:scroll ">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>제목</th>
+                    <th>상태</th>
+                    <th>글쓴이</th>
+                    <th>날짜</th>
+                </tr>
+                <tbody id="bbb">
+
+                </tbody>
+            </table>
+                </div>
+            <button>글쓰기</button>
+            </div>
+
+
+
+
+
+
         </div>
     </div>
 
@@ -91,6 +152,7 @@
         </div>
     </div>
 </div>
+
 <style>
 
         .iw_inner {padding:10px}
@@ -127,11 +189,41 @@ function getQueryStringObject() {
             } // success 함수 종료
       }); // ajax함수 종료
 var sa = a[0]['address'];
-var name = a[0]['site_name'];
+var sitemainname = a[0]['site_name'];
 
 var str="";
-str +='<p style="margin-top: -7px;">'+ name + '</p>';
+str +='<p style="margin-top: -7px;">'+ sitemainname + '</p>';
 $("#sn").html(str);
+
+
+$.ajax({
+            type : "POST",
+            url : "http://39.127.7.58:8080/app/siterepairlist",
+            data : site_id,
+            async:false,
+            contentType : "application/json; charset=UTF-8",
+            success : function(result02){
+           var str1="";
+               $.each(result02,function(i,q){
+
+
+                  str1 +='<tr>';
+                  str1 +='<td>'+q.title+'</td>';
+                  switch(q.board_status){
+                  case 0 : str1 +='<td>'+ 'open' +'</td>'; break;
+                  case 1 : str1 +='<td>'+ 'fixed' +'</td>'; break;
+                  case 2 : str1 +='<td>'+ 'closed' +'</td>'; break;
+                  default  : str1 +='<td>'+'null'+'</td>'; break;
+                  }
+                  str1 +='<td>'+q.name+'</td>';
+                  str1 +='<td>'+q.reg_date+'</td>';
+                str1 +='<td style="display : none">'+q.site_id+'</td>';
+                  str1 +='</tr>';
+
+                   $("#bbb").html(str1);
+});
+            } // success 함수 종료
+      }); // ajax함수 종료
 
     //function get_pointer (해당주소,대상지도 id,title) {
     function get_pointer (adress,getid,title) {
@@ -211,6 +303,8 @@ $("#sn").html(str);
     /* 마커중복 사용안됨 */
 
     get_pointer(sa,'map', sa);
+
+
         </script>
 
 <script src="js/core.js"></script>

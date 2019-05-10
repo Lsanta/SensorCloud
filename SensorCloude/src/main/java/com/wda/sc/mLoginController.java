@@ -1,6 +1,5 @@
 package com.wda.sc;
 
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
@@ -24,8 +23,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.SiteVO;
+import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.LoginService;
 import com.wda.sc.service.SiteService;
 
@@ -37,6 +38,7 @@ import lombok.AllArgsConstructor;
 public class mLoginController {
 	private LoginService loginservice;
 	private SiteService siteservice;
+	private CheckboardService checkboardservice;
 	
 	@CrossOrigin(origins = "*" ,maxAge = 3600)
 	@RequestMapping(value = "/mlog", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -127,6 +129,18 @@ public class mLoginController {
 			 arr = siteservice.getAppSearch(word);
 			 return arr;
 		}
+	   	
+	   	
+	   	@CrossOrigin(origins = "*", maxAge = 3600)
+	    @RequestMapping(value ="/siterepairlist", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	    @ResponseBody
+	    public ArrayList<CheckBoardVO> siterepairlist(@RequestBody String site_id,Locale locale, Model model) {
+	       
+	       
+	       ArrayList<CheckBoardVO> result02 = checkboardservice.apprepairList(site_id);
+	       
+	       return result02;
+	    }
 	
 	
 }

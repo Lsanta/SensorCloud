@@ -70,17 +70,11 @@
 			<div id="dataDiv">
 				<div id="main-content">
 					<table id="sensordata">
-						<thead>
-							<tr>
-								<th scope="col" th:text="시간"></th> 
-								<th scope="col">이름</th>
-							</tr>
+						<thead id="sensing-data-head">
+							
 						</thead>
 						<tbody id="sensing-data">
-							<tr>
-								<td th:text="시간시간"></td>
-								<td th:text="데이터"></td>
-							</tr>
+						
 						</tbody>
 					</table>
 				</div>
@@ -167,35 +161,86 @@ $(document).ready(function() {
 		data : query,
 		url : "/site/graph/"+site_id+" .do",
 		success : function(data) {
-			alert("gd");
+			
 		}
 	});
 	
 	$.ajax({
 		type : "POST",
-		dataType : "text",
 		data : query,
+		dataType : 'json',
 		url : "/site/sdata/"+site_id+" .do",
 		success : function(data) {
-			console.log(data)
-			var str = ""; 
-               $.each(data,function(i,s){
-               str +='<tr>';
-               str +='<td>'+s.site_name+'</td>';      // 현장이름
-               str +='<td>'+s.title+'</td>';          // 제목
-               str +='<td>'+s.board_status+'</td>';   // 상태
-               str +='<td>'+s.reg_date+'</td>';       // 날짜
-               str +='</tr>';
-
-               $("#mypagechecklist").html(str);
+			console.log(data);	
+		var str = ""; 
+		str +='<tr>';
+		str +='<td>시간</td>';
+         $.each(data.name ,function(i,s){
+        	str +='<td>'+s.sensor_name+'</td>';
+			$("#sensing-data-head").html(str);
+		});
+         str +='</tr>';
+         $("#sensing-data-head").html(str);	
+         
+         var str2 = "";
+         var headername = new Array();
+         for(var i=0; i < $("#sensing-data-head td").length; i++){
+        	 headername[i] = $("#sensing-data-head td").eq(i).text();
+         }
+         
+         for(var i=0; i < data.data.length; i++){
+        	 
+        	 str2 +='<tr>';
+        	 str2 +='<td>'+data.data[i].current_date+'</td>';
+        	 
+        	 for(var j=1; j < headername.length; j++){
+     		
+        		 if( data.data[i].sensor_name == headername[j] ) {
+        			
+        			str2 += '<td>'+data.data[i].sensing_data+'</td>'
+        			
+        		 }else{
+        			str2 += '<td>없음</td>'
+        		 }
+        	 }
+        	 
+        	 str2 +='</tr>';
+        	 $("#sensing-data").html(str2);	
+        	 
+         }
+         
+         
+//          $.each(data.data ,function(index) {
+        	 
+//         	 console.log(data.data[index].current_date);
+        	 
+//         	 str +='<tr>';
+//         	 str +='<td>'+s[i].current_date+'</td>';
+//         	 str +='<td>'+ s.sensing_data +'</td>';	
+//         	 str +='</tr>';
+        	 
+//         	 $("#sensing-data").html(str);	
+//          });
 			
+			
+//             $.each(data ,function(i,s){
+//                str +='<tr>';
+//                str +='<td>'+s.site_name+'</td>';      // 현장이름
+//                str +='<td>'+s.title+'</td>';          // 제목
+//                str +='<td>'+s.board_status+'</td>';   // 상태
+//                str +='<td>'+s.reg_date+'</td>';       // 날짜
+//                str +='</tr>';
+
+//                $("#mypagechecklist").html(str);
+			
+// 			});
 		}
 	});
-	
 	$("#modify").click(function(){
 		var site_id = $("#modify").attr('class');
 		window.location.href = "/site/sitemodify/"+site_id;
 	});
+	
 	
 	
 /* 	$('#append_row').on("click", function () {

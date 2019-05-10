@@ -37,16 +37,21 @@
                             var str="";
                             $.each(result,function(i,s){
         
-                            str +='<tr>';
-                            str +='<td>'+s.type_no+'</td>';
-                            str +='<td>'+s.site_name+'</td>';
-                            str +='<td>'+s.address+'</td>';
-                            str +='<td>'+s.start_date+'</td>';
-                            str +='</tr>';
+                  str +='<tr>';
+                  switch(s.type_no){
+                  case '0' : str +='<td>'+ "<img src='img/gray.svg'>" +'</td>'; break;
+                  case '1' : str +='<td>'+ "<img src='img/green.svg'>" +'</td>'; break;
+                  case '2' : str +='<td>'+ "<img src='img/red.svg'>" +'</td>'; break;
+                  default  : str +='<td>'+'null'+'</td>'; break;
+                  }
+                  str +='<td>'+s.site_name+'</td>';
+                  str +='<td>'+s.address+'</td>';
+                  str +='<td>'+s.start_date+'</td>';
+                  str +='<td style="display : none">'+s.site_id+'</td>';
+                  str +='</tr>';
+
 
                             $("#aaa").html(str);
-
-                            
                     });
                            
                         } //success 함수 종료
@@ -54,12 +59,21 @@
                 } else {
                       $("#aaa").empty(); 
                 }
+
+
              });
 
              $(document).on('click', '.ui-input-clear', function () {
                 //검색창 x버튼 클릭시
                 $("#aaa").empty(); 
              });
+
+              $(document).on("click", "#aaa tr" , function(){
+                var tr = $("#aaa tr").index(this);
+                var site_id = $("#aaa tr:eq("+tr+") td:eq(4)").text();
+                window.location.href = "site.html?sid=" + site_id;
+             });
+
     </script>
 </head>
 <body>
