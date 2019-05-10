@@ -235,10 +235,12 @@
 		select * from sensor_date
 		where site_id = #{site_id}
 		order by sensor_data_num desc
+	</select>
 
 	<!--앱검색 -->
 	<select id="getAppSearch" resultType="com.wda.sc.domain.SiteVO">
 		select * from site
 		where site_name LIKE '%' || #{word} || '%'
 	</select>
+	
 </mapper>
