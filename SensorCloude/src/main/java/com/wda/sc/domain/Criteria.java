@@ -14,11 +14,11 @@ public class Criteria {
 	   private int lastblock;   //마지막 페이지 블록
 	   
 	   public void prevnext(int pagenum) {
-	      if(getLastblock()==1&&pagenum<11) {
+	      if(getLastblock()==1&&pagenum<6) {
 	         setPrev(false);
 	         setNext(false);
 	      }
-	      else if(getLastblock()>1&&pagenum<11) {
+	      else if(getLastblock()>1&&pagenum<6) {
 	         setPrev(false);
 	         setNext(true);
 	      }

@@ -69,13 +69,11 @@
 
 			<div id="dataDiv">
 				<div id="main-content">
-					<table>
+					<table id="sensordata">
 						<thead>
 							<tr>
 								<th scope="col" th:text="시간"></th> 
-								<th scope="col">
-									<span>이름</span>
-								</th>
+								<th scope="col">이름</th>
 							</tr>
 						</thead>
 						<tbody id="sensing-data">
@@ -179,7 +177,18 @@ $(document).ready(function() {
 		data : query,
 		url : "/site/sdata/"+site_id+" .do",
 		success : function(data) {
-			alert("gg");
+			console.log(data)
+			var str = ""; 
+               $.each(data,function(i,s){
+               str +='<tr>';
+               str +='<td>'+s.site_name+'</td>';      // 현장이름
+               str +='<td>'+s.title+'</td>';          // 제목
+               str +='<td>'+s.board_status+'</td>';   // 상태
+               str +='<td>'+s.reg_date+'</td>';       // 날짜
+               str +='</tr>';
+
+               $("#mypagechecklist").html(str);
+			
 		}
 	});
 	
