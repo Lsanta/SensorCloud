@@ -34,10 +34,10 @@ public class mLoginController {
 	private LoginService loginservice;
 	private SiteService siteservice;
 	
-	@CrossOrigin(maxAge = 3600)
+	@CrossOrigin(origins = "*" ,maxAge = 3600)
 	@RequestMapping(value = "/mlog.do", method = RequestMethod.POST)
-	
-	public @ResponseBody String mlogin(@RequestBody Map<String, String> map) throws Exception {
+	@ResponseBody
+	public String mlogin(@RequestBody Map<String, String> map) throws Exception {
 		 System.out.println("안와"); 
 		
 		 String id = (String)map.get("id");
@@ -92,7 +92,7 @@ public class mLoginController {
 	   }
 	  
 	  
-	   	@CrossOrigin(maxAge = 3600)
+	   	@CrossOrigin(origins = "*", maxAge = 3600)
 		@RequestMapping(value = "/mSearch.do", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 		
 		public @ResponseBody ArrayList<SiteVO> mSearch(@RequestBody Map<String, String> map) throws Exception {

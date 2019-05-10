@@ -81,10 +81,10 @@
   },
   "installed_plugins": {
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "kr.yju.wdb.hello"
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
     },
     "cordova-plugin-fcm": {
-      "PACKAGE_NAME": "kr.yju.wdb.hello"
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
     },
     "com-darryncampbell-cordova-plugin-intent": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
