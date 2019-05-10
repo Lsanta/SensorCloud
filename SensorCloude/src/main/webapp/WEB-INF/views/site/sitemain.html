@@ -108,12 +108,12 @@
 	<script src="/resources/js/core.js"></script>
 	<script src="/resources/js/charts.js"></script>
 	<script src="/resources/js/animated.js"></script>
-	<script src="/resources/js/charttest.js"></script>
+	<!-- <script src="/resources/js/charttest.js"></script> -->
 
-	<script th:inline="javascript">
-	 /*<![CDATA[*/
-   	var arr = new Array();
-   	arr = [[${siteInfo}]];
+   <script th:inline="javascript">
+    /*<![CDATA[*/
+      var arr = new Array();
+      arr = [[${siteInfo}]];
     var site = arr[0].address;
     //var site = '대구 북구 복현로 35';
 
@@ -155,38 +155,115 @@ geocoder.addressSearch(site, function(result, status) {
 } 
 });    
 /*]]>*/
-$(document).ready(function() {
+   </script>
+   
+   <script>
+   $(document).ready(function(){
+   		var newURL =  window.location.pathname;
+		var url = newURL.split('/');
 	
-	var newURL =  window.location.pathname;
-	var url = newURL.split('/');
+		var site_id = url[2];
+		var query = { site_id : url[2] };
 	
-	var site_id = url[2];
-	var query = { site_id : url[2] };
+		$.ajax({
+			type : "POST",
+			data : query,
+			dataType : 'json',
+			async:false,
+			url : "/site/graph/"+site_id+" .do",
+			success : function(result) {
+				
+				console.log(result);
+				//////////////////////////////////////////////////////////////////////////////////
+				/* 									그래프 그리기 시작									*/
+				// Themes begin
+				am4core.useTheme(am4themes_animated);
+				// Themes end
+				
+				// Create chart
+				var chart = am4core.create("chartdiv", am4charts.XYChart);
+					
+				var data = [];
+				var price = new Array(result.name.length-1);  //초기값
+				for(var i = 0; i < price.length; i++){
+					price[i] = 0;
+				}
+				var quantity = 50000; //정밀도??
+				alert(result.graph.length);
+				///////////////////////////////////////////////////////////////
+				/*					데이터 불러올곳(db값 넣을곳)						*/
+				 for(var i = 0; i < result.graph.length; i++){
+								
+					for(var j = 0; j < result.graph.length; j++){
+						if(result.name[0].sensor_name == result.graph[j].sensor_name){
+							data.push({ date1 : result.graph[j].current_date, price1 : result.graph[j].sensing_data});
+						}	
+					}
+					console.log(data[i]);
+					
+				}
+				
+					//////////////////////////////////////////////////////////////
+					
+					chart.data = data; // 값들을 차트에 그리기 위해 data 배열에 json으로 넣는 부분
+					
+					///////////////////////////////////////////////////////////////
+					/*					           축 관련 설정들 	 						*/
+					var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+					dateAxis.renderer.grid.template.location = 100;  //x축 간격? 줄 생기는 밀집도 같은거
+					dateAxis.renderer.labels.template.fill = am4core.color("#000000");  //x축 글씨 색깔
+		
+					var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+					valueAxis.tooltip.disabled = true;
+					valueAxis.renderer.labels.template.fill = am4core.color("#000000");  //y축 글씩 색깔
+					valueAxis.renderer.minWidth = 40; // 표 크기같은데 숫자 키우면 표 작아짐
+			
+					/////////////////////////////////////////////////////////////
+					
+					///////////////////////////////////////////////////////////////
+					/*					그래프 그리는곳								*/
 	
-	$.ajax({
-		type : "POST",
-		dataType : "text",
-		data : query,
-		url : "/site/graph/"+site_id+" .do",
-		success : function(data) {
-			alert("gd");
-		}
-	});
+				var series = chart.series.push(new am4charts.LineSeries());
+				series.name = "tilt(1)";	//별의미없는듯 그냥 이름
+				series.dataFields.dateX = "date1";	//data배열안에 json 검색하는거인듯
+				series.dataFields.valueY = "price1"; 
+				series.name = result.name[0].sensor_name;	//센서 타입 그 각도기 이런거 적히는 곳
+				series.tooltipText = "{valueY.value}";	//뭔지 잘모르겠음
+				series.fill = am4core.color("#0101DF");
+				series.stroke = am4core.color("#0101DF");
+				//series.strokeWidth = 3;
+				
+				var range = valueAxis.createSeriesRange(series);
+				range.value = -1;		//하한값
+				range.endValue = 1;	//상한값
+				range.contents.stroke = am4core.color("#FF0000");	//정상범위일때 나오는 색깔
+				range.contents.fill = range.contents.stroke;
+				
+				var scrollbarX = new am4charts.XYChartScrollbar();
+				scrollbarX.series.push(series);
+				chart.scrollbarX = scrollbarX;
+				
+				chart.cursor = new am4charts.XYCursor(); //마우스 올렸을때 데이터 나오게 하는 함수
+				chart.legend = new am4charts.Legend();	//그래프 바로밑에 그래프 각각 나오게 해주고 누를때 이벤트 발생
 	
-	$.ajax({
-		type : "POST",
-		dataType : "text",
-		data : query,
-		url : "/site/sdata/"+site_id+" .do",
-		success : function(data) {
-			alert("gg");
-		}
-	});
+				
+			}
+		});
 	
-	$("#modify").click(function(){
-		var site_id = $("#modify").attr('class');
-		window.location.href = "/site/sitemodify/"+site_id;
-	});
+		$.ajax({
+			type : "POST",
+			dataType : "text",
+			data : query,
+			url : "/site/sdata/"+site_id+" .do",
+			success : function(data) {
+				alert("gg");
+			}
+		});
+	
+		$("#modify").click(function(){
+			var site_id = $("#modify").attr('class');
+			window.location.href = "/site/sitemodify/"+site_id;
+		});
 	
 	
 /* 	$('#append_row').on("click", function () {
@@ -197,9 +274,10 @@ $(document).ready(function() {
 			)
 		);
 	}); */
-}); 
-	</script>
-	<script src="/resources/js/site/asidebar.js"></script>
-	<script src="/resources/js/site/sitemodify.js"></script>
+   });
+   </script>
+   
+   <script src="/resources/js/site/asidebar.js"></script>
+   <script src="/resources/js/site/sitemodify.js"></script>
 </th:block>
 </html>

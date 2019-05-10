@@ -240,6 +240,16 @@
 	]]>
 	</select>
 	
+	<select id="getGraphName" resultType="com.wda.sc.domain.SensorDataVO">
+	<![CDATA[
+		select DISTINCT sensor_name
+		from sensor_date
+		where site_id = #{site_id}
+		and sensor_name not like '%volt%'
+		and sensor_name not like '%temp%'
+	]]>
+	</select>
+	
 	<!-- 센서데이터 표(데이터) -->
 	<select id="getData" resultType="com.wda.sc.domain.SensorDataVO">
 	<![CDATA[

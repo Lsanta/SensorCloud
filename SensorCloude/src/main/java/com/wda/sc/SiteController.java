@@ -27,7 +27,6 @@ import com.wda.sc.domain.Search;
 import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CheckboardService;
-import com.wda.sc.service.MysensorService;
 import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
@@ -128,13 +127,21 @@ public class SiteController {
 	@RequestMapping(value = "/graph/" + "{site_id}" + ".do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject drawG(@PathVariable String site_id) {
-		ArrayList<SensorDataVO> dList = siteservice.getSensingDate(site_id);
-		System.out.println(dList);
-		JSONArray dJson = JSONArray.fromObject(dList);
+		
+		ArrayList<SensorDataVO> getGraph = siteservice.getSensingDate(site_id);
+		ArrayList<SensorDataVO> getGraphName = siteservice.getGraphName(site_id);
+		
+		JSONArray name = JSONArray.fromObject(getGraphName);
+		JSONArray graph = JSONArray.fromObject(getGraph);
+		
+		System.out.println("이거 : "+name);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		// map.put("aList", aJson);
+		map.put("name", name);
+		map.put("graph", graph);
+		
 		JSONObject json = JSONObject.fromObject(map);
-
+		System.out.println(json);
 		return json;
 	}
 	////////////////////////////////////////////////////////////////////
