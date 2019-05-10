@@ -53,4 +53,10 @@ public class TimelineServiceImplement implements TimelineService {
 		return mapper.getPageNum();
 	}
 
+	@Override
+	public ArrayList<TimelineVO> getListm() {
+	
+		return mapper.getListm();
+	}
+
 }
