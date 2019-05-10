@@ -1,5 +1,5 @@
 if(window.localStorage.getItem("key") != null && window.localStorage.getItem("key2") != null) {
-  window.location.href="push.html";
+  window.location.href="main.html";
 }
 
 $(document).ready(function(){

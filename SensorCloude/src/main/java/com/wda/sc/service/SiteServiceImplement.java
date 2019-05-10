@@ -10,6 +10,7 @@ import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
+import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
@@ -201,6 +202,22 @@ public class SiteServiceImplement implements SiteService {
 	public ArrayList<MysensorVO> getSearchResultSM(Map<Object, Object> parm) {
 		// TODO Auto-generated method stub
 		return mapper.getSearchResultSM(parm);
+	}
+	
+	@Override
+	public ArrayList<SensorDataVO> getSensingDate(String site_id) {
+		// TODO Auto-generated method stub
+		return mapper.getSensingDate(site_id);
+	}
+	
+	public ArrayList<SensorDataVO> getDataName(String site_id) {
+		//센서데이터 표(이름)
+		return mapper.getDataName(site_id);
+	}
+	
+	public ArrayList<SensorDataVO> getData(String site_id) {
+		//센서데이터 표(데이터)
+		return mapper.getData(site_id);
 	}
 
 	@Override

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <title>제이쿼리모바일</title>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=48zvlwk8kg&submodules=geocoder"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.4.5.js"></script>
+    <!--   <script src="http://maps.google.com/maps/api/js?sensor=true&language=ko"></script> -->
+    <!--  <script src="jquery.ui.map.js"></script>
+    <script src="jquery.ui.map.microdata.js"></script>
+    <script src="jquery.ui.map.microformat.js"></script>
+    <script src="jquery.ui.map.overlays.js"></script>
+    <script src="jquery.ui.map.rdfa.js"></script>
+    <script src="jquery.ui.map.services.js"></script>
+  <script src="jquery.ui.map.extensions.js"></script>  -->
+
+    <style>
+          #chartdiv {
+             border: 1px solid black;
+             width: 100%;
+             height: 230px;
+             margin-bottom: 15px;
+            }
+
+        </style>
+</head>
+<body>
+<div data-role="page2" id="page2">
+    <div data-role="header"  data-position="fixed">
+        <!-- <img src="str.png" width="30%" height="30%">
+        <a href="#" style="display: none;">센서목록</a>
+         <a href="#">센서목록</a> -->
+        <a data-iconpos="notext" data-role="button" data-icon="home" title="Home" style="display: none;">Home</a>
+        <img src="img/str.png" width="30%" height="30%">
+        <a data-iconpos="notext" href="#mypanel" data-role="button" data-icon="bars" style="margin-top: 10px"></a>
+    </div>
+    <div data-role="panel" id="mypanel" data-position="right">
+    <a href="#page2" data-rel="close">Close panel</a>
+
+    </div>
+
+    <div data-role="content">
+        <div id="sn" style="width: 100%; height: 20px; margin-bottom: 15px;"></div>
+        <div data-role="tabs">
+            <div data-role="navbar" style="margin-bottom: 15px;">
+                <ul>
+                    <li><a href="#tab1">데이터</a></li>
+                    <li><a href="#tab2">위치보기</a></li>
+                    <li><a href="#tab3">점검이력</a></li>
+                </ul>
+            </div>
+
+            <div id="tab1">
+                <div id="chartdiv"></div>
+                <div style="border: 1px solid black; width: 100%; height: 195px; overflow-y:scroll ">
+                    <p>tttt</p>
+                    <p>tttt</p>
+                    <p>tttt</p>
+                    <p>tttt</p>
+                    <p>tttt</p>
+                    <p>tttt</p>
+                    <p>tttt</p>
+                    <p>tttt</p>
+                    <p>tttt</p>
+                    <p>tttt</p>
+                    <p>tttt</p>
+                    <p>tttt</p>
+                    <p>tttt</p>
+                </div>
+            </div>
+
+
+            <div id="tab2">
+                <div id="map" style="width:100%;height:400px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div data-role="footer"  data-position="fixed" data-id="footerid1">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="main.html" rel="external" data-icon="home"></a></li>
+                <li><a href="search.html" rel="external" data-icon="search"></a></li>
+                <li><a href="timeline.html" rel="external" data-icon="comment"></a></li>
+                <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
+        </div>
+    </div>
+</div>
+<style>
+
+        .iw_inner {padding:10px}
+        .iw_inner h3 {font-size: 18px; padding-bottom: 7px}
+        </style>
+<script id="code">
+var a;
+function getQueryStringObject() {
+          var a = window.location.search.substr(1).split('&');
+                if (a == "") return { };
+             var b = {};
+             for (var i = 0; i < a.length; ++i) {
+                     var p = a[i].split('=', 2);
+                 if (p.length == 1)
+                        b[p[0]] = "";
+                 else
+                     b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+             }
+       return b;
+      }
+
+         var qs = getQueryStringObject();
+         var site_id = qs.sid;
+
+
+      $.ajax({
+            type : "POST",
+            url : "http://39.127.7.58:8080/app/sitemain",
+            data : site_id,
+            async:false,
+            contentType : "application/json; charset=UTF-8",
+            success : function(result01){
+    a = result01;
+            } // success 함수 종료
+      }); // ajax함수 종료
+var sa = a[0]['address'];
+var name = a[0]['site_name'];
+
+var str="";
+str +='<p style="margin-top: -7px;">'+ name + '</p>';
+$("#sn").html(str);
+
+    //function get_pointer (해당주소,대상지도 id,title) {
+    function get_pointer (adress,getid,title) {
+      naver.maps.Service.geocode({
+            address: adress
+        }, function(status, response) {
+            if (status !== naver.maps.Service.Status.OK) {
+                //return alert('Something wrong!');
+                console.log('주소에러');
+
+            }
+            var result = response.result, // 검색 결과의 컨테이너
+
+                items = result.items; // 검색 결과의 배열
+
+              // do Something
+
+            var x = eval(items[0].point.x);
+
+            var y = eval(items[0].point.y);
+
+
+            var HOME_PATH = window.HOME_PATH || '.';
+
+
+            var cityhall = new naver.maps.LatLng(y, x),
+
+                map = new naver.maps.Map('map', {
+
+                    center: cityhall.destinationPoint(0, 500),
+
+                    zoom: 10
+
+                }),
+
+                marker = new naver.maps.Marker({
+
+                    map: map,
+
+                    position: cityhall
+
+                });
+
+
+            var contentString = [
+
+                '<div class="iw_inner">',
+
+                '   <h3>'+title+'</h3>',
+
+                '   <p>'+adress+'</p>',
+
+                '</div>'
+
+            ].join('');
+
+
+
+            var infowindow = new naver.maps.InfoWindow({
+
+                content: contentString
+
+            });
+              naver.maps.Event.addListener(marker, "click", function(e) {
+                if (infowindow.getMap()) {
+                    infowindow.close();
+                } else {
+                    infowindow.open(map, marker);
+                }
+            });
+
+              infowindow.open(map, marker);
+
+        });
+
+    }
+    /* 마커중복 사용안됨 */
+
+    get_pointer(sa,'map', sa);
+        </script>
+
+<script src="js/core.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/animated.js"></script>
+<script src="js/charttest.js"></script>
+
+
+<!--  <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=48zvlwk8kg"></script> -->
+<!-- <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=48zvlwk8kg&submodules=geocoder"></script> -->
+
+</body>
+</html>

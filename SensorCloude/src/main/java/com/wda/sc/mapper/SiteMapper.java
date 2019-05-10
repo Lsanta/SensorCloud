@@ -9,6 +9,7 @@ import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
+import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
@@ -91,6 +92,15 @@ public interface SiteMapper {
 	public ArrayList<MysensorVO> smSearch(Search s);
 
 	public ArrayList<MysensorVO> getSearchResultSM(Map<Object, Object> parm);
+	
+	//그래프 그릴려고 그래프 그려오기
+	public ArrayList<SensorDataVO> getSensingDate(String site_id);
+	
+	//센서데이터 표(이름)
+	public ArrayList<SensorDataVO> getDataName(String site_id);
+	
+	//센서데이터 표(데이터)
+	public ArrayList<SensorDataVO> getData(String site_id);
 	
 	//앱 검색
 	public ArrayList<SiteVO> getAppSearch(@Param("word") String word);
