@@ -96,6 +96,12 @@ public interface SiteService {
 
 	//그래프 그릴려고 데이터 가져오기
 	public ArrayList<SensorDataVO> getSensingDate(String site_id);
+	
+	//센서데이터 표(이름)
+	public ArrayList<SensorDataVO> getDataName(String site_id);
+	
+	//센서데이터 표(데이터)
+	public ArrayList<SensorDataVO> getData(String site_id);
 
 	//앱 검색
 	public ArrayList<SiteVO> getAppSearch(String word);

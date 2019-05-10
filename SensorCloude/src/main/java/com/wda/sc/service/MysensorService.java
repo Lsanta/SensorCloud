@@ -25,9 +25,7 @@ public interface MysensorService {
 
 	public ArrayList<MysensorVO> getSearchResult(Map<Object, Object> parm);
 	
-	//센서데이터 표
-	public ArrayList<SensorDataVO> getData(String site_id);
-
+	
 
 
 }

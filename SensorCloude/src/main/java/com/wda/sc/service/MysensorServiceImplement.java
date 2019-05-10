@@ -59,10 +59,6 @@ public class MysensorServiceImplement implements MysensorService {
 		return mapper.getSearchResult(parm);
 	}
 
-	public ArrayList<SensorDataVO> getData(String site_id) {
-		//센서데이터 표
-		return mapper.getData(site_id);
-	}
 	
 	
 }

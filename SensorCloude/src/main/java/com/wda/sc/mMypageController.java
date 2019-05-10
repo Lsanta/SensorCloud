@@ -39,11 +39,8 @@ public class mMypageController {
 			int pagenum = criteria.getPagenum();
 		       
 		     Paging page = new Paging();   //최대한 코드를 수정 안하기 위한 기존 페이징
-	         criteria.setTotalcount(checkboardservice.getPageNum());   //전체 게시글 개수를 지정
-	         criteria.setContentnum(5);
-	         criteria.setPagenum(pagenum);   //현재 페이지를 페이지 객체에 지정
-	         criteria.setStartnum(pagenum);   //컨텐츠 시작 번호 지정
-	         criteria.setEndnum(pagenum);   //컨텐츠 끝 번호 지정 
+	         criteria.setTotalcount(checkboardservice.getPageNum());   //전체 게시글 개수를 지정                                                                                                                                                                                                                                                                    
+	         criteria.setContentnum(5); 
 	         criteria.setCurrentblock(pagenum);   //현재 페이지 블록이 몇번인지 현재 페이지 번호 통해 지정
 	         criteria.setLastblock(criteria.getTotalcount());   //마지막 블록 번호를 전체 게시글 수를 통해 정함
 	         criteria.prevnext(pagenum);   //현재 페이지 번호로 화살표를 나타낼지 정함
