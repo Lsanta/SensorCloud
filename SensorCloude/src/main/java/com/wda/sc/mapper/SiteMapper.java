@@ -96,6 +96,9 @@ public interface SiteMapper {
 	//그래프 그릴려고 그래프 그려오기
 	public ArrayList<SensorDataVO> getSensingDate(String site_id);
 	
+	//그래프 밑에 이름들
+	public ArrayList<SensorDataVO> getGraphName(String site_id);
+	
 	//센서데이터 표(이름)
 	public ArrayList<SensorDataVO> getDataName(String site_id);
 	

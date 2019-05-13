@@ -5,9 +5,8 @@ if(window.localStorage.getItem("key") != null && window.localStorage.getItem("ke
 $(document).ready(function(){
 
   $("#login").click(function(e){
-      //e.preventDefault();
-      alert("클릭");
-
+      // e.preventDefault();
+      
       var query = {
           id : $("#id").val(),
           password : $("#pass").val()
@@ -18,16 +17,19 @@ $(document).ready(function(){
       
       $.ajax({
             type : "POST",
-            url : "http://39.127.7.58:8080/app/mlog.do", 
-            data : log,
+            url : "http://39.127.7.58:8080/app/mlog", 
+            data : query,
             contentType : "application/json; charset=UTF-8",
-            success : function(result){
-              var sig = JSON.parse(result);
-              console.log(sig)
-              if(sig.signal == "ok"){
+            success : function(result){ 
+              alert(result);
+              // var sig = JSON.parse(result);
+              // alert(sig);
+              // var aa = JSON.stringify(result);
+              // alert(aa);
+              if(result.signal == "ok"){
                   alert("로그인 성공");
-                  window.localStorage.setItem("key", sig.id);
-                  window.localStorage.setItem("key2", sig.password);
+                  window.localStorage.setItem("key", result.id);
+                  window.localStorage.setItem("key2", result.password);
                   window.location.href="main.html";
               } else if (sig.signal == "passfail"){ 
                   alert("비밀번호 틀림");
@@ -36,9 +38,13 @@ $(document).ready(function(){
               }
 
             }, // success 함수 종료
-            error : function(request){
-              alert(request);
-              alert("에러");
+            error : function(xhr, ajaxOptions, thrownError){
+              if( xhr.status == 0 ||  xhr.status == 200){
+                  alert(xhr.statusText);
+              }
+              alert(" 오류 : " + xhr.status + "\n" +
+                     "메시지 :" + xhr.statusText + "\n" +
+                     "응답 :" + xhr.responseText + "\n" + thrownError);
             }
 
       }); // ajax함수 종료
