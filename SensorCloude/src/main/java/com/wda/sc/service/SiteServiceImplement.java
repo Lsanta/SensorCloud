@@ -225,5 +225,11 @@ public class SiteServiceImplement implements SiteService {
 		System.out.println(word);
 		return mapper.getAppSearch(word);
 	}
+	
+	@Override
+	public ArrayList<SensorDataVO> getGraphName(String site_id) {
+		// TODO Auto-generated method stub
+		return mapper.getGraphName(site_id);
+	}
 
 }
