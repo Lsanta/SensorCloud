@@ -11,9 +11,6 @@ $(document).ready(function(){
           id : $("#id").val(),
           password : $("#pass").val()
       }
-
-      var log = JSON.stringify(query);
-      alert(log);
       
       $.ajax({
             type : "POST",
