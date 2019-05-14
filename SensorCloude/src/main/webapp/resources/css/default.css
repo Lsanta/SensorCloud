@@ -23,6 +23,14 @@ a{color:#000;text-decoration:none;}
 .skip:focus { top: 0;}
 
 header {
+	z-index: 4;
 	border-bottom: #2b99ff 2px solid;
 	padding-bottom: 33px;
+    position : fixed;
+    left : 0;
+    top : 0;
+    width: 100%;
+    background:white;
+ 
+        }
 }
