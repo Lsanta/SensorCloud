@@ -1,6 +1,9 @@
 package com.wda.sc;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Base64.Decoder;
 import java.util.Locale;
 import java.util.Map;
 
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -145,24 +149,66 @@ public class mLoginController {
 	   	@CrossOrigin(origins = "*" ,maxAge = 3600)
 		@RequestMapping(value = "/appidFind", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 		@ResponseBody
-		public String appidFind(@RequestBody String name, String tel ,Locale locale, Model model) {
+		public String appidFind(@RequestBody String query ,Locale locale, Model model) throws UnsupportedEncodingException {
 		     
-	   		 System.out.println(name);
-	   		System.out.println(tel);
-	   		 ArrayList<MemberVO> arr2 = new ArrayList<MemberVO>();	 
-			 arr2 = loginservice.idFind(name);
-			
+	   
+	   	String query2 = URLDecoder.decode(query, "UTF-8"); 
+	   	String[] array = query2.split("&");
+		String[] name2 = array[0].split("=");
+		String[] tel2 = array[1].split("=");
+		 
+		String name = name2[1];
+		String tel = tel2[1];
+	   		
+	   	ArrayList<MemberVO> arr2 = new ArrayList<MemberVO>();	 
+		arr2 = loginservice.idFind(name);
+		
+		JSONObject json = new JSONObject();
+		
 			 if(arr2.size() == 0)
-				  return "none"; 
+				 json.put("signal", "none");
+				  
 			 if(arr2.size() != 0) {
 				 if(arr2.get(0).getPhone().equals(tel)) {
-					 return arr2.get(0).getUser_id(); 
+					 json.put("signal", arr2.get(0).getUser_id()); 
 				 } else {
-					 return "isN"; 
+					 json.put("signal", "isN"); 
 				 }
 			 }
+			 System.out.println(json);
+			 return json.toString();
+	   }
+	   	
+		@CrossOrigin(origins = "*" ,maxAge = 3600)
+	   	@RequestMapping(value = "/signup_logincheck.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String signidCheck(Model model, @RequestParam String id) {
 			 
-			 return "none";
+			 ArrayList<MemberVO> arr = new ArrayList<MemberVO>();	 
+			 arr = loginservice.login(id);
+		
+			 if(arr.size() == 0) 
+				  return "ok"; 
+			 else
+				 return "no";
+			 
 		 }
+		@CrossOrigin(origins = "*" ,maxAge = 3600)
+		@RequestMapping(value ="/signup", method = RequestMethod.POST)
+		@ResponseBody
+		public String signup(MemberVO m) {
+				
+			System.out.println(m);
+			int checknum = loginservice.signup(m);
+			
+			if(checknum == 1) {
+				return "login.html";
+			}
+			else if(checknum == 0) {
+				return "sign.html";
+			}
+			
+			return "sign.html";
+		}
 	
 }

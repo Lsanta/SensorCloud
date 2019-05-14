@@ -13,20 +13,55 @@
     		$('#user').blur(function(){
     			var id  = $("#user").val();
     			
+    			var query = {
+    					id : id
+    			}
     			if(id.length < 5 || id.length > 12)
     				document.getElementById("userstr").innerHTML="5자리 이상 12자리 이하로 작성해주세요";
     			else{
     				$.ajax({
     				    type : "POST",
     				    dataType : 'text',
-    				    data : id,
-    				    url : "signup_logincheck.do",
+    				    data : query,
+    				    url : "/login/signup_logincheck.do",
     				    success : function(data) {
-    				    	//구현
-    				    }
-    				});
-    			}
+    				    	if( data == "ok") {
+    				    		$("#userstr").css("color","blue");
+    				    		document.getElementById("userstr").innerHTML="사용 가능한 아이디입니다.";
+    				    	} else{
+    				    		$("#userstr").css("color","red");
+    				    		document.getElementById("userstr").innerHTML="사용 불가능한 아이디입니다.";
+    				    	}
+    				    } // success 함수 종료
+    				}); // ajax 함수 종료
+    			
+    			} // else함수 종료
+    		}); //blur 종료
+    		
+    		$("#password").blur(function(){
+    			var passwd = $('#password').val();
+    			
+    			if(passwd.length < 8 || passwd.length > 16)
+    				document.getElementById("passwordstr").innerHTML="8자리 이상 16자리 이하로 작성해주세요";
+    			else
+    				document.getElementById("passwordstr").innerHTML="";
     		});
+    		
+
+    		$("#password2").blur(function(){
+    			var passwd = $('#password').val();
+    			var passwd2 = $('#password2').val();
+    			
+    			if(passwd != passwd2){
+    				$("#checkstr").css("color","red");
+    				document.getElementById("checkstr").innerHTML="비밀번호가 일치하지 않습니다.";
+    			} else if ( passwd == passwd2) {
+    				$("#checkstr").css("color","blue");
+    				document.getElementById("checkstr").innerHTML="비밀번호가 일치합니다.";
+    			}
+    			
+    		});
+    		
     	});
     </script>
 </head>
@@ -37,11 +72,13 @@
       <br>
       <form method="post" action="/login/signup">
         아이디<input type="text" name="user_id" id="user" placeholder="UserId">
-         <div class="errorstr" id="userstr"></div>
-        비밀번호<input type="password" name="password" placeholder="Password">
-        비밀번호 확인<input type="password" name="password2" placeholder="확인">
+         <div id="userstr"></div>
+        비밀번호<input type="password" name="password" placeholder="Password" id="password">
+         <div class="errorstr" id="passwordstr"></div>
+        비밀번호 확인<input type="password" name="password2" placeholder="확인" id="password2">
+          <div id="checkstr"></div>
         이름<input type="text" name="name" placeholder="이름">
-        이메일<input type="email" name="email" placeholder="yjc@ac.kr">
+        이메일<input type="email" name="email" placeholder="yjc@ac.kr" id="emailstr">
         휴대폰번호<input type="tel" id="phone" name="phone" placeholder="01012345678"> 
         <button type="button" class="ijn">인증번호 전송</button>
         <input type="password" class="end" placeholder="인증번호">

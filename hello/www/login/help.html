@@ -108,16 +108,16 @@
 			contentType : "application/json; charset=UTF-8",
         	success : function(data){
         		var s = "아이디 조회 결과 입력하신 정보는 아래와 같습니다.";
-        		
-        		if( data == "none"){
+        		alert(data);
+        		if( data.signal == "none"){
         			$("#innerfindid").css("visibility","visible");
         			document.getElementById("innerfindid").innerHTML="존재하지 않는 회원입니다.";
-        		} else if( data == "isN"){
+        		} else if( data.signal == "isN"){
         			$("#innerfindid").css("visibility","visible");
         			document.getElementById("innerfindid").innerHTML="등록된 전화번호가 아닙니다.";
         		} else {
         			$("#innerfindid").css("visibility","visible");
-        			document.getElementById("innerfindid").innerHTML="<br>"+s+"<br><p>"+data+"</p>";
+        			document.getElementById("innerfindid").innerHTML="<br>"+s+"<br><p>"+data.signal+"</p>";
         		}
         		
         		
@@ -126,6 +126,10 @@
         }); //ajax 종료
 
 		}); // id찾기 확인 버튼 클릭시
+
+		$('form').submit(function(){
+			
+		});
 
 	});
 </script>
