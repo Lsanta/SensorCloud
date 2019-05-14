@@ -1,4 +1,4 @@
-if(window.localStorage.getItem("key") != null && window.localStorage.getItem("key2") != null) {
+if(window.sessionStorage.getItem("id") != null && window.sessionStorage.getItem("password") != null) {
   window.location.href="main.html";
 }
 
@@ -11,7 +11,7 @@ $(document).ready(function(){
           id : $("#id").val(),
           password : $("#pass").val()
       }
-      
+
       $.ajax({
             type : "POST",
             url : "http://39.127.7.58:8080/app/mlog", 
@@ -25,8 +25,8 @@ $(document).ready(function(){
               // alert(aa);
               if(result.signal == "ok"){
                   alert("로그인 성공");
-                  window.localStorage.setItem("key", result.id);
-                  window.localStorage.setItem("key2", result.password);
+                  window.sessionStorage.setItem("id", result.id);
+                  window.sessionStorage.setItem("password", result.password);
                   window.location.href="main.html";
               } else if (sig.signal == "passfail"){ 
                   alert("비밀번호 틀림");
