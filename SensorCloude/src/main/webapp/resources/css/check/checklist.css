@@ -13,7 +13,7 @@ html {
     height: 750px;
     margin: 20px auto;
     padding: 20px;
-    border: 1px solid #bcbcbc;
+    margin-top:125px;  
     }
 
 .title-header {
@@ -40,6 +40,7 @@ html {
   @media ( max-width: 1001px ) {
     #container {
       width: auto;
+      
     }
     #main-content {
       float: none;
