@@ -108,4 +108,20 @@ public class LoginController {
 		 
 		 return "none";
 	 }
+	 
+	 
+	 @RequestMapping(value = "/signup_logincheck.do", method = RequestMethod.POST)
+	 @ResponseBody
+	 public String signidCheck(Model model, @RequestParam String id) {
+		 
+		 ArrayList<MemberVO> arr = new ArrayList<MemberVO>();	 
+		 arr = loginservice.login(id);
+	
+		 if(arr.size() == 0) 
+			  return "ok"; 
+		 else
+			 return "no";
+		 
+	 }
+	 
 }

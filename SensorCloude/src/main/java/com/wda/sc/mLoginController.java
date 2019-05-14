@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -177,5 +178,37 @@ public class mLoginController {
 			 System.out.println(json);
 			 return json.toString();
 	   }
+	   	
+		@CrossOrigin(origins = "*" ,maxAge = 3600)
+	   	@RequestMapping(value = "/signup_logincheck.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String signidCheck(Model model, @RequestParam String id) {
+			 
+			 ArrayList<MemberVO> arr = new ArrayList<MemberVO>();	 
+			 arr = loginservice.login(id);
+		
+			 if(arr.size() == 0) 
+				  return "ok"; 
+			 else
+				 return "no";
+			 
+		 }
+		@CrossOrigin(origins = "*" ,maxAge = 3600)
+		@RequestMapping(value ="/signup", method = RequestMethod.POST)
+		@ResponseBody
+		public String signup(MemberVO m) {
+				
+			System.out.println(m);
+			int checknum = loginservice.signup(m);
+			
+			if(checknum == 1) {
+				return "login.html";
+			}
+			else if(checknum == 0) {
+				return "sign.html";
+			}
+			
+			return "sign.html";
+		}
 	
 }
