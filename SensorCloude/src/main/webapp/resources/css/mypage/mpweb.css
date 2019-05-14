@@ -23,7 +23,7 @@ h3 {
 }
 
 #buttons {
-	margin-left: 4%;
+	margin-left: 5%;
 }
 
 table {
@@ -36,7 +36,7 @@ table {
 }
 
 table caption {
-  font-size: 1.5em;
+  /* font-size: 1.5em; */
   margin: .5em 0 .75em;
 }
 
@@ -54,17 +54,17 @@ table td {
 }
 
 table th {
-  font-size: .85em;
+  font-size: 1.2em;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
 
 .wrapper{
-    width: 70%;
+    width: 65%;
     height: 100%;
     overflow: hidden;
     margin:20px auto;
-    margin-top:150px;
+    margin-top:125px;
     
 }
 

@@ -62,7 +62,7 @@ aside {
 }
 
 #scroll {
-	width: 100%;
+	width: 90%;
 }
 
 h1 {
@@ -92,9 +92,8 @@ article {
 	width: calc(82% - 230px);
 	width: -moz-calc(82% - 230px);
 	width: -webkit-calc(82% - 230px);
-	padding: 35px 0;
     margin-top : 150px;
-    margin-bottom:120px;
+    margin-bottom: 50px;
     
 	
 }
