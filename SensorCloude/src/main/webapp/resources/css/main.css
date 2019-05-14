@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .none{
-	display : none;
+   display : none;
 }
 
 .status {
@@ -28,6 +28,7 @@
   height: 800px;
   margin: 0px auto;
   padding: 20px;
+  padding-top:0;
   border: 1px solid #bcbcbc;
   margin-top:150px;
 }
@@ -35,12 +36,14 @@
   width: 670px;
   height: 730px;
   padding: 10px;
+  padding-top: 0;
   margin-bottom: 20px;
   float: left;
 }
 #right-content {
   width: 400px;
   padding: 10px;
+  padding-top: 0;
   float: right;
 }
 #right-top {
@@ -62,7 +65,6 @@
   float: left;
   width: 150px;
   margin: 0;
-  padding: 0 0 0 20px;
 }
 
 .title-header a {
@@ -145,6 +147,7 @@ table tr {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
   padding: .35em;
+  height: 49px;
 }
 
 table th,
@@ -154,7 +157,7 @@ table td {
 }
 
 table th {
-  font-size: .85em;
+  font-size: 1em;
   letter-spacing: .1em;
   text-transform: uppercase;
 }

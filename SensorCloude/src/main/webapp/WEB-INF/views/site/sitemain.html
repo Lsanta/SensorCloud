@@ -287,34 +287,9 @@ geocoder.addressSearch(site, function(result, status) {
         	 $("#sensing-data").html(str2);	
         	 
          }
-         
-         
-//          $.each(data.data ,function(index) {
-        	 
-//         	 console.log(data.data[index].current_date);
-        	 
-//         	 str +='<tr>';
-//         	 str +='<td>'+s[i].current_date+'</td>';
-//         	 str +='<td>'+ s.sensing_data +'</td>';	
-//         	 str +='</tr>';
-        	 
-//         	 $("#sensing-data").html(str);	
-//          });
-			
-			
-//             $.each(data ,function(i,s){
-//                str +='<tr>';
-//                str +='<td>'+s.site_name+'</td>';      // 현장이름
-//                str +='<td>'+s.title+'</td>';          // 제목
-//                str +='<td>'+s.board_status+'</td>';   // 상태
-//                str +='<td>'+s.reg_date+'</td>';       // 날짜
-//                str +='</tr>';
-
-//                $("#mypagechecklist").html(str);
-			
-// 			});
 		}
 	});
+	
 	$("#modify").click(function(){
 		var site_id = $("#modify").attr('class');
 		window.location.href = "/site/sitemodify/"+site_id;
