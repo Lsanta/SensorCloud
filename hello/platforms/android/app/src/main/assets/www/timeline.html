@@ -1,40 +1,26 @@
 <!DOCTYPE html>
 <html>
+	<head>
 	<title>타임라인</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+	<link rel="stylesheet" type="text/css" href="./css/jquery.mobile-1.4.5.css" />
 	<link rel="stylesheet" type="text/css" href="./css/timeline.css">
+	<script src="./js/timeline.js"></script>
 	<script src="./js/jquery.js"></script>
-    <script src="./js/timeline.js"></script>
 	<script src="./js/jquery.mobile-1.4.5.js"></script>
-	<script>
-			function getQueryStringObject() {
-    		var a = window.location.search.substr(1).split('&');
-   			 	if (a == "") return { };
-   		    var b = {};
-    			for (var i = 0; i < a.length; ++i) {
-       	 			 var p = a[i].split('=', 2);
-        			if (p.length == 1)
-           				 b[p[0]] = "";
-        			else
-            			b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-    			}
-    	return b;
-		}
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header"  data-position="fixed">
+        <a data-iconpos="notext" data-role="button" data-icon="home" title="Home" style="display: none;">Home</a>
+        <img src="img/logo.png" width="30%" height="30%">
+        <a data-iconpos="notext" href="#panel" data-role="button" data-icon="bars" style="margin-top: 10px"></a>
+    </div>
 
-			var qs = getQueryStringObject();
-			var x = qs.sid; 
-			alert(x);
-	</script>
-	<div data-role="page" id="second">
-	<div id="container">
-		<div id="header">
-			<h1 id="title">타임라인</h1>
-			<hr size="2" noshade>
-		</div>
-
-		<div id="content">
-			<div id="text">
+    <div data-role="content">
+        <div id="text">
 				<textarea name="textarea" id="textarea" maxlength="100" autofocus></textarea>
-				<input type="button" value="등록" id="submit" />
+				<button type="button" value="등록" id="submit">등록</button>
 				<div id="the_count">
 					<span id="current">0</span> <span id="maximum">/ 100</span>
 				</div>
@@ -42,8 +28,7 @@
 
 			<div id="writing">
 
-				<div class="timeline">
-					<!-- <div class="timeline-header">
+					 <!-- <div class="timeline-header">
 					 <h3></h3>이름
 						<h5></h5>
 
@@ -53,18 +38,69 @@
 
 
 					 </div> 
-					<p>내용내용내용내용</p> -->
-
-                </div>
+					<p>내용내용내용내용</p>  -->
+  
 			</div>
 		</div>
-	</div>
+		<ul class="pagination"></ul>
+	
+	
+	
 
-	<div id="footer">
-						<ul class="pagination"></ul>
+    <div data-role="footer"  data-position="fixed" data-id="footerid1">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="main.html" rel="external" data-icon="home"></a></li>
+                <li><a href="search.html" rel="external" data-icon="search"></a></li>
+                <li><a href="timeline.html" rel="external" data-icon="comment"></a></li>
+                <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
+            </ul>
+        </div>
+    </div>
 </div>
-	</div>
+<script>
 
-</div>
-
+		$.ajax({
+			type : "POST",
+			url : "http://39.127.7.58:8080/app/mtimeline",
+			data : {pagenum : 1},
+			success : function(result){
+				console.log(result);
+				var page="";
+				var str="";
+				$.each(result.mtimelineList,function(i, s){
+				   console.log(s);
+				   str +='<div class=\"timeline\">';
+				   str +='<h3>'+s.name+'</h3>';
+				   str +='<h3 id="timeline_n">'+s.timeline_n+'</h3>';        
+				   str +='<h5>'+s.time+'</h5>';
+				   str +='<button class="modify">수정</button>';
+				   str +='<button class="delete">삭제</button>';
+				   str +='<p>'+s.content+'</p>';
+				   str +='</div>';
+			
+					$("#writing").html(str);
+				});
+				   
+				if (result.criteria.prev) {
+					page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.startPage - 1) + ');" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>'
+				}
+				for (var i = result.criteria.startPage; i <= result.criteria.endPage; i++) {
+					page += '<li class="page-item"><a class="page-link" href="javascript:page(' + i + ');">' + i + '</a></li>'
+				}
+				if (result.criteria.next) {
+					page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.endPage + 1) + ');" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>'
+				}
+				$(".pagination").empty();
+				$(".pagination").prepend(page);
+				$("html, body").animate({ scrollTop: 0 }, 1);
+	
+				
+	
+			} // success 함수 종료
+				   
+		}); // ajax함수
+		
+	</script>
+</body>
 </html>

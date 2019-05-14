@@ -30,6 +30,13 @@
             {
               "client_id": "544037446198-tnoiuv11oti02q99826d73acs3hii052.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "544037446198-lsu9luqcfgm3dpt5u2hkcpqcgbm9hkr6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kr.yju.wdb.sensor"
+              }
             }
           ]
         }

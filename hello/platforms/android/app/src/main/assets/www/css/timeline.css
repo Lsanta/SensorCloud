@@ -1,4 +1,8 @@
 @charset "UTF-8";
+  #timeline_n{
+    display:none;
+  } 
+
  .pagination-container {
   /* margin: 40px auto; */
   margin-right:13%;
@@ -326,13 +330,13 @@ margin-left: 6%;
        margin-left: -7.3%;
        width:109.5%;
   }
+  #submit {
+    margin-top:-60px;
+  }
+  
       }
 
 .btn.btn-facebook{background-color: #2479b6; border-color: #2479b6; -webkit-box-shadow: 0 3px 0 #1c6394; box-shadow: 0 3px 0 #1c6394;}
 .btn.btn-facebook:active{top: 3px; outline: none; -webkit-box-shadow: none; box-shadow: none;}
   
-.pagination li{
-  display:inline-block;
-  margin-right:5px;
-  cursor:pointer;
-  }
+  

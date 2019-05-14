@@ -5,16 +5,20 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.Criteria;
+import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.MyPageService;
@@ -27,6 +31,7 @@ import net.sf.json.JSONObject;
 @RequestMapping("/app")
 public class mMypageController {
 	private CheckboardService checkboardservice;
+	private MyPageService mypageservice;
 	
 	//마이페이지 메인
 	@CrossOrigin(origins = "*", maxAge = 3600)
@@ -66,24 +71,23 @@ public class mMypageController {
 	
 	   }
 	
+	//정보수정 전 비밀번호 확인
+	@RequestMapping("mypageconfirmpasswd.do")
+	@ResponseBody
+	public String MyPageConfirmPasswd(Model model, HttpSession session, @RequestParam("password") String password) {
 
-//	//정보수정 전 비밀번호 확인
-//	@RequestMapping("mypageconfirmpasswd.do")
-//	@ResponseBody
-//	public String MyPageConfirmPasswd(Model model, HttpSession session, @RequestParam("password") String password) {
-//
-//		String confirmid = (String) session.getAttribute("id");
-//
-//		ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
-//		arr = mypageservice.confirmpasswd(confirmid);
-//
-//		if (arr.size() != 0) {
-//			if (arr.get(0).getPassword().equals(password)) {
-//				return "success";
-//			}
-//		}
-//		return confirmid;
-//	}
+		String confirmid = (String) session.getAttribute("id");
+
+		ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
+		arr = mypageservice.confirmpasswd(confirmid);
+
+		if (arr.size() != 0) {
+			if (arr.get(0).getPassword().equals(password)) {
+				return "success";
+			}
+		}
+		return confirmid;
+	}
 //	
 //	//내 정보 수정
 //	@RequestMapping(value = "/mypage", method = RequestMethod.POST)
