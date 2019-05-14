@@ -68,7 +68,7 @@ public class mTimelineController {
 	public @ResponseBody String mtimeline(@RequestBody Map<String, String> map, TimelineVO vo) throws Exception {
 		System.out.println("등록");
 		String id = (String)map.get("user_id");
-		String content = (String)map.get("content");      
+		String content = (String)map.get("content");  
 		System.out.println(id); 
 		System.out.println(content); 
 	    
@@ -105,4 +105,12 @@ public class mTimelineController {
 
 		}
 	}
-}
+	}
+/*
+ * @RequestMapping(value = "mtimelinemodify.do") public @ResponseBody String
+ * mtimelinemodify(@RequestBody Map<String, String> map, TimelineVO vo) throws
+ * Exception { System.out.println("수정");
+ * 
+ * 
+ * }
+ */

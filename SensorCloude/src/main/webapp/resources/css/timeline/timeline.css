@@ -60,11 +60,13 @@
     margin: 10px auto;
     padding: 20px;
     border: 1px solid #bcbcbc;
+    margin-top:150px;
   }
   #content {
     width: 1000px;
     margin-bottom: 20px;
     float: left;
+    
 
   }
   #footer {

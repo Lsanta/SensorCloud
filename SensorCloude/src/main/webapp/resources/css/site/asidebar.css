@@ -93,6 +93,10 @@ article {
 	width: -moz-calc(82% - 230px);
 	width: -webkit-calc(82% - 230px);
 	padding: 35px 0;
+    margin-top : 150px;
+    margin-bottom:120px;
+    
+	
 }
 
 .phonenumber {
@@ -129,6 +133,8 @@ article {
 		padding-top: 10px;
 		padding-bottom: 10px;
 		top: 0px;
+		margin-top:16%;
+		z-index:auto;
 	}
 	header {
 		padding-bottom: 30px;
@@ -158,7 +164,7 @@ article {
 		width: 90%;
 		margin-left: 5%;
 		margin-right: 5%;
-		padding-top: 50px;
+		margin-top:3%;
 	}
 	html {
 		overflow: scroll;
