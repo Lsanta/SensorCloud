@@ -263,7 +263,7 @@ public class SiteController {
 
 		if (realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
-			return "redirect:/" + site_id + "/siterepair/" + pageNum;
+			return "redirect:/site/" + site_id + "/siterepair/" + pageNum;
 		}
 
 		return "site/siterepair";
