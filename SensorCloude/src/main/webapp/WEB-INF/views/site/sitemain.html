@@ -280,36 +280,55 @@ geocoder.addressSearch(site, function(result, status) {
         	
          }
          
-         var time = [];
+         var time = new Array();
          for(var i=0; i < data.data.length; i++){
-        	
-     	
-        	 
+        	 time[i] = data.data[i].cur_date;
          }
          
+         var single2 = time.filter( (item, idx, array) => {
+        		return array.indexOf( item ) === idx ;
+        	});
+        	 
+         
+         
+         
+         for(var i=0; i < single2.length; i++){
+        	 str2 +='<tr>';
+        	 str2 +='<td>'+single2[i]+'</td>';
+        	 
+        	 for(var j=0; j < data.data.length; j++) {
+        		 if ( single2[i] === data.data[j].cur_date){
+        			 str2 += '<td>'+data.data[j].sensing_data+'</td>'
+        		 }
+        	 }
+        	 
+        	 
+        	 
+        	 
+        	 
+        	 str2 +='</tr>';
+         	 $("#sensing-data").html(str2);	
+         }
+         
+         
 //          for(var i=0; i < data.data.length; i++){
-//          	time[i] = data.data[i].cur_date;
-         
-//          for(var j=0; j < data.data.length; i++){
-         		
-//          		if(data.data[i].cur_date == data.data[j].cur_date) {
-      			
-//          			 for(var k=1; k < headername.length; k++){
-//          				 if( data.data[j].sensor_name == headername[k]) {
-//          				 str2 += '<td>'+data.data[i].sensing_data+'</td>';
-         				
-//          			    } 
-//          			 }
-         		
-//          	    } else {
-//          	    	continue;
-//          	    }
-         
-//          	}
-//           str2 +='</tr>';
-//           $("#sensing-data").html(str2);	
-         
+         	
+//         	 for(var j=0; j < single2.length; j++) {
+//         		 str2 +='<td>'+single2[j]+'</td>';
+//         		if ( single2[j] === data.data[i].cur_date){
+//         			for(var k=0; k < headername.length; k++) {
+//         			  	if( data.data[i].sensor_name == headername[k]){
+//         			  		str2 += '<td>'+data.data[i].sensing_data+'</td>'
+//         			  	}
+//         			}		
+//         		} 	
+        			
+//         	 }
+//         	 str2 +='</tr>';
+//         	 $("#sensing-data").html(str2);	
+        	 
 //          }
+         
          
          
          /* for(var i=0; i < data.data.length; i++){

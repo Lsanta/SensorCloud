@@ -254,11 +254,11 @@
 	<!-- 센서데이터 표(데이터) -->
 	<select id="getData" resultType="com.wda.sc.domain.SensorDataVO">
 	<![CDATA[
-		select cur_date, sensor_name, sensing_data
-		from sensor_date
-		where site_id = #{site_id}
-		and sensor_name not like '%volt%'
-		order by cur_date desc
+	select cur_date, sensor_name, sensing_data
+	from sensor_date
+	where site_id = #{site_id}
+	and sensor_name not like '%volt%'
+	order by  cur_date desc, CASE WHEN sensor_name IN ('PTemp') THEN 1 ELSE 0 END, sensor_name asc
 	]]>
 	</select>
 	
