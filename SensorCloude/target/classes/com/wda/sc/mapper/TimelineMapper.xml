@@ -48,7 +48,7 @@
 
 	<!-- 글 삭제 -->
 	<delete id="timelinedelete">
-		delete from timeline where content = #{content}
+		delete from timeline where timeline_n = #{timeline_n}
 	</delete>
 
 	<!-- 글 수정 -->
