@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>아이디 비밀번호 찾기 초기창</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="../css/login/help.css">
+	<link rel="stylesheet" type="text/css" href="../css/login/idfind.css">
+	<link rel="stylesheet" type="text/css" href="../css/login/passwordfind.css">
+    <script src="../js/jquery.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+		<div id ="header">
+			<h2>아이디/비밀번호 찾기</h2>
+		</div>
+
+		<hr id="hr">
+
+		<div id="find_selcet">	
+			<button type="button" class="find_button" id="find_id">아이디 찾기</button>
+			<button type="button" class="find_button" id="find_password">비밀번호 찾기</button><br/>
+		</div>
+
+		
+		<div id="inner_content">
+
+				<div id="wrapper2">
+						<div id="content2">
+							Name<input type="text" id="name" name="name" placeholder="김개발"><br/>
+							PH<input type="tel" id="tel" name="tel" placeholder="010-XXXX-XXXX"><br/>
+				
+							<button type="button" id="confirmbt2">확인</button>
+							
+							<hr id="hr">
+							
+							<div id=innerfindid>
+								
+							<!-- 아이디 조회 결과 입력하신 정보와 일치하는 아이디는 아래와 같습니다 -->
+							<!-- adm** -->
+				
+							</div>
+							
+							<hr id="hr">
+						
+							<button type="button" id="loginbt">로그인</button>
+							
+						</div>
+				</div> <!-- wrapper2 종료-->
+
+				<div id="wrapper3">
+
+						<div id="content3">	
+							<p>이름</p>
+							<input type="text" name="name2" placeholder="이름">
+							<p>이메일</p>
+							<input type="email" name="email" placeholder="yjc@ac.kr">
+							
+							<button type="button" class="ijn">인증번호 전송</button>
+				
+							
+							<input type="password" class="end" placeholder="인증번호">
+							
+							<button type="button" id="confirmbt3">확인</button>
+							
+				
+						</div>
+				
+				</div> <!-- wrapper3 종료-->
+
+
+			</div> <!-- inner content 종료-->
+	</div>
+
+<script>
+	$(document).ready(function(){
+		$("#find_id").click(function(){
+			$("#wrapper2").css("display","block");
+			$("#wrapper3").css("display","none");
+		});
+
+		$("#find_password").click(function(){
+			$("#wrapper3").css("display","block");
+			$("#wrapper2").css("display","none");
+		});
+
+		$("#confirmbt2").click(function(){
+			var name = $("#name").val();
+    		var tel = $("#tel").val();
+		
+			alert(name + tel);
+
+    		if(name == ""){
+           	 	alert("아이디를 입력하세요.");
+           	 	$("#name").focus();
+            	return; 
+        	}
+        	if(tel == ""){
+            	alert("휴대폰번호를 입력하세요.");
+            	$("#tel").focus();
+            	return;
+        	}   
+			var query = { name : name, tel : tel };
+
+			$.ajax({
+        	type : "POST",
+        	data : query,
+			url : "http://39.127.7.58:8080/app/appidFind",
+			contentType : "application/json; charset=UTF-8",
+        	success : function(data){
+        		var s = "아이디 조회 결과 입력하신 정보는 아래와 같습니다.";
+        		alert(data);
+        		if( data.signal == "none"){
+        			$("#innerfindid").css("visibility","visible");
+        			document.getElementById("innerfindid").innerHTML="존재하지 않는 회원입니다.";
+        		} else if( data.signal == "isN"){
+        			$("#innerfindid").css("visibility","visible");
+        			document.getElementById("innerfindid").innerHTML="등록된 전화번호가 아닙니다.";
+        		} else {
+        			$("#innerfindid").css("visibility","visible");
+        			document.getElementById("innerfindid").innerHTML="<br>"+s+"<br><p>"+data.signal+"</p>";
+        		}
+        		
+        		
+        	}
+        	
+        }); //ajax 종료
+
+		}); // id찾기 확인 버튼 클릭시
+	});
+</script>
+</body>
+</html>

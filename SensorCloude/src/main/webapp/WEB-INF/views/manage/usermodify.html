@@ -91,17 +91,15 @@ $("#confirm-modify").on("click", function() {
 				<input type="text" name="name" id="modify_name" th:value="${userInfo.name}"><br>	
 			</div>
 			
-			<div id="images">
-			<div class="cell" th:if="${userInfo.filetype = 'false'}">
-         <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
-           <ul>
-           </ul>
+			<div>
+			<div class="cell" id="images" th:if="${userInfo.filetype = 'false'}">
+         	<div class="zzz"  id="images" th:text="${userInfo.user_id}" style="display:none;"></div>
+           <ul></ul>
          </div>
          
-         <div class="cell" th:if="${userInfo.filetype = 'true'}">
-         <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
-			<ul>
-			</ul>       
+         <div class="cell" id="images" th:if="${userInfo.filetype = 'true'}">
+         <div class="zzz" id="images" th:text="${userInfo.user_id}" style="display:none;"></div>
+			<ul></ul>       
          </div>
 			</div>
 			

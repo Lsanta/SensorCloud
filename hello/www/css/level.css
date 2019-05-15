@@ -1,0 +1,33 @@
+p {
+    width: 500px;
+    font-size: 18px;
+    margin: 0;
+}
+
+#levelcontent {
+    width: 95%;
+    margin: 5% auto;
+}
+
+#next-level{
+    margin-top: 5%;
+    margin-left: 18%;
+    width: 150px;
+}
+
+/* #next-level select{
+    position: relative;
+    margin-left: 8%;
+} */
+
+#next-level p{
+    position: relative;
+    top: -40px;
+    left: 110%;
+}
+
+#submit {
+    float: right;
+    margin-top: 3%;
+    margin-right: 20px;
+}

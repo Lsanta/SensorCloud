@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>회원가입</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/jquery.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/login/sign.css">
+</head>
+<body>
+
+	<div class="login-card">
+		<img src="../img/logo.png">            
+		<br>
+		<!-- <form method="post" action="http://39.127.7.58:8080/app/signup"></form> -->
+			
+			<label>아이디</label>
+			<input type="text" name="user_id" id="user" placeholder="UserId">
+			<div class="errorstr" id="userstr"></div>
+			
+			<label>비밀번호</label>
+			<input type="password" name="password" placeholder="Password" id="password">
+			<div class="errorstr" id="pwstr"></div>
+			
+			<label>비밀번호 확인</label>
+			<input type="password" name="password2" placeholder="확인" id="password2">
+			<div class="errorstr" id="pwconfirmstr"></div>
+
+			<label>이름</label>
+			<input type="text" name="name" id="name" placeholder="이름">
+			
+			<label>이메일</label>
+			<input type="email" name="email" id="email" placeholder="yjc@ac.kr">
+
+			<p>휴대폰번호</p>
+			<input type="tel" id="phone" name="phone" placeholder="01012345678"> 
+			<span class="errorstr" id="phonestr"></span>
+
+			<button type="button" class="ijn">인증번호 전송</button>
+			<input type="password" class="end" placeholder="인증번호">
+
+			<input type="submit" id="login" name="login" class="login login-submit" value="가입하기">
+	</div>
+
+<script>
+  $(document).ready(function() {
+    		$('#user').blur(function(){
+    			var id  = $("#user").val();
+    			
+    			var query = {
+    					id : id
+    			}
+    			if(id.length < 5 || id.length > 12)
+    				document.getElementById("userstr").innerHTML="5자리 이상 12자리 이하로 작성해주세요";
+    			else{
+    				$.ajax({
+    				    type : "POST",
+    				    dataType : 'text',
+    				    data : query,
+    				    url : "http://39.127.7.58:8080/app/signup_logincheck.do",
+    				    success : function(data) {
+    				    	if( data == "ok") {
+										$("#userstr").removeClass();
+										$("#userstr").addClass("successstr");
+    				    		document.getElementById("userstr").innerHTML="사용 가능한 아이디입니다.";
+    				    	} else{
+										$("#userstr").removeClass();
+										$("#userstr").addClass("errorstr");
+    				    		document.getElementById("userstr").innerHTML="존재하는 아이디입니다.";
+    				    	}
+    				    } // success 함수 종료
+    				}); // ajax 함수 종료
+    			
+    			} // else함수 종료
+    		}); //blur 종료
+    		
+    		$("#password").blur(function(){
+    			var passwd = $('#password').val();
+    			if(passwd.length < 8 || passwd.length > 16){
+						$("#pwstr").removeClass();
+						$("#pwstr").addClass("errorstr");
+						document.getElementById("pwstr").innerHTML="8자리 이상 16자리 이하로 작성해주세요";
+					}	else{
+						$("#pwstr").removeClass();
+						document.getElementById("pwstr").innerHTML="";
+					}
+    		});
+    		
+
+    		$("#password2").blur(function(){
+    			var passwd = $('#password').val();
+    			var passwd2 = $('#password2').val();
+    			
+    			if(passwd != passwd2){
+    				$("#pwconfirmstr").removeClass();
+						$("#pwconfirmstr").addClass("errorstr");
+    				document.getElementById("pwconfirmstr").innerHTML="비밀번호가 일치하지 않습니다.";
+    			} else if ( passwd == passwd2) {
+    				$("#pwconfirmstr").removeClass();
+						$("#pwconfirmstr").addClass("successstr");
+    				document.getElementById("pwconfirmstr").innerHTML="비밀번호가 일치합니다.";
+    			}
+    			
+    		});
+    		
+				$("#phone").blur(function(){
+					var phone = $("#phone").val();
+
+					if(phone.length == 10 || phone.length == 11){
+						$("#phonestr").removeClass();
+						$("#phonestr").addClass("successstr");
+						document.getElementById("phonestr").innerHTML="사용 가능 합니다.";
+					} else {
+						$("#phonestr").removeClass();
+						$("#phonestr").addClass("errorstr");
+						document.getElementById("phonestr").innerHTML="10자리, 11자리로 작성해주세요";
+					}
+				});
+
+				$("#login").click(function(){
+					if($('.login-card').children().is('.errorstr')){
+						alert("회원가입에 적절하지 않은 요소가 있습니다. 다시 확인해 주세요." );
+						return false;
+					}
+						var query = {
+								user_id : $("#user").val(),
+								password : $("#password2").val(),
+								name : $("#name").val(),
+								email : $("#email").val(),
+								phone : $("#phone").val()
+						}
+
+						$.ajax({
+							type : "POST",
+    				  dataType : 'text',
+    				  data : query,
+    				  url : "http://39.127.7.58:8080/app/signup",
+							success:function(result){
+									
+									if(result == "ok") {
+										alert("가입 성공");
+										window.location.href = "../index.html"
+									}
+									
+									else {
+										alert("회원가입에 실패했습니다.")
+										window.location.href = "../sign.html"
+									}
+							}
+
+						}); //ajax 종료
+
+				}); //클릭 이벤트 종료
+				
+    	});
+</script>
+</body>
+</html>

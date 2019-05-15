@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -92,8 +93,7 @@ public class LoginController {
 	 public String idCheck(Model model, HttpSession session, @RequestParam String name,@RequestParam String tel) {
 		 ArrayList<MemberVO> arr2 = new ArrayList<MemberVO>();	 
 		 arr2 = loginservice.idFind(name);
-		 
-		 System.out.println(arr2.get(0).getUser_id());
+		
 		 if(arr2.size() == 0)
 			  return "none"; 
 		 if(arr2.size() != 0) {
@@ -105,6 +105,23 @@ public class LoginController {
 				 return "isN"; 
 			 }
 		 }
+		 
 		 return "none";
 	 }
+	 
+	 
+	 @RequestMapping(value = "/signup_logincheck.do", method = RequestMethod.POST)
+	 @ResponseBody
+	 public String signidCheck(Model model, @RequestParam String id) {
+		 
+		 ArrayList<MemberVO> arr = new ArrayList<MemberVO>();	 
+		 arr = loginservice.login(id);
+	
+		 if(arr.size() == 0) 
+			  return "ok"; 
+		 else
+			 return "no";
+		 
+	 }
+	 
 }

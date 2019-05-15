@@ -47,7 +47,7 @@ $(document).ready(function(){
 			var content = $(this).parent();
 			var content2 = content.siblings().first();
 			var content3 = content2.text();
-
+			alert(content3);
 			var query = {
 					content : content3
 			}
