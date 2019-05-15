@@ -27,6 +27,19 @@ function getQueryStringObject() {
     a = result01;
             } // success 함수 종료
       }); // ajax함수 종료
+
+      $.ajax({
+        type : "POST",
+        url : "http://39.127.7.58:8080/app//sitemainsensor",
+        data : site_id,
+        async:false,
+        contentType : "application/json; charset=UTF-8",
+        success : function(result04){
+        console.log(04);
+        } // success 함수 종료
+  }); // ajax함수 종료
+
+
 var sa = a[0]['address'];
 var sitemainname = a[0]['site_name'];
 

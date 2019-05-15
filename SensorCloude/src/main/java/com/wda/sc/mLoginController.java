@@ -3,38 +3,33 @@ package com.wda.sc;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.Base64.Decoder;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.HttpResponse;
-import org.codehaus.stax2.ri.typed.ValueDecoderFactory.DecimalDecoder;
-import org.json.JSONObject;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MemberVO;
+import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.LoginService;
 import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+/*import org.json.JSONObject;*/
 
 @Controller
 @AllArgsConstructor
@@ -119,6 +114,28 @@ public class mLoginController {
 	      ArrayList<SiteVO> result01 = siteservice.getSite(site_id);
 	      
 	      return result01;
+	   }
+	   
+	   @CrossOrigin(origins = "*", maxAge = 3600)
+	   @RequestMapping(value ="/sitemainsensor", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	   @ResponseBody
+	   public JSONObject drawG(@RequestBody String site_id) {
+		   ArrayList<SensorDataVO> getGraph = siteservice.getSensingDate(site_id);
+			ArrayList<SensorDataVO> getGraphName = siteservice.getGraphName(site_id);
+		
+			JSONArray name = JSONArray.fromObject(getGraphName);
+			JSONArray graph = JSONArray.fromObject(getGraph);
+		
+			System.out.println("이거 : "+name);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("name", name);
+			map.put("graph", graph);
+		
+			
+			JSONObject json = JSONObject.fromObject(map);
+			System.out.println(json);
+			return json;
 	   }
 	  
 	  

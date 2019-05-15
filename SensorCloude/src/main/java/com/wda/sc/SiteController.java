@@ -130,29 +130,16 @@ public class SiteController {
 		
 		ArrayList<SensorDataVO> getGraph = siteservice.getSensingDate(site_id);
 		ArrayList<SensorDataVO> getGraphName = siteservice.getGraphName(site_id);
-		ArrayList<String> setTime = new ArrayList<>();
-		ArrayList<Double> setDate = new ArrayList<>();
-		
-		for(int i = 0; i < getGraph.size(); i++) {
-			setTime.add(getGraph.get(i).getCur_date());
-		}
-		
-		for(int i = 0; i < getGraph.size(); i++) {
-			if(getGraph.get(i).getSensor_name().equals("tilt(1)"))
-				setDate.add(getGraph.get(i).getSensing_data());
-		}
-		
+	
 		JSONArray name = JSONArray.fromObject(getGraphName);
 		JSONArray graph = JSONArray.fromObject(getGraph);
-		JSONArray time = JSONArray.fromObject(setTime);
-		JSONArray date = JSONArray.fromObject(setDate);
+	
 		System.out.println("이거 : "+name);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", name);
 		map.put("graph", graph);
-		map.put("Time",time);
-		map.put("date",date);
+	
 		
 		JSONObject json = JSONObject.fromObject(map);
 		System.out.println(json);
