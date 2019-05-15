@@ -261,6 +261,7 @@ geocoder.addressSearch(site, function(result, status) {
 		url : "/site/sdata/"+site_id+" .do",
 		success : function(data) {
 			console.log(data);	
+		//위에 첫 tr(데이터 이름)
 		var str = ""; 
 		str +='<tr>';
 		str +='<td>시간</td>';
@@ -271,22 +272,60 @@ geocoder.addressSearch(site, function(result, status) {
          str +='</tr>';
          $("#sensing-data-head").html(str);	
          
+         //데이터들
          var str2 = "";
          var headername = new Array();
          for(var i=0; i < $("#sensing-data-head td").length; i++){
         	 headername[i] = $("#sensing-data-head td").eq(i).text();
+        	
          }
          
+         var time = [];
          for(var i=0; i < data.data.length; i++){
+        	
+     	
         	 
-        	 str2 +='<tr>';
-        	 str2 +='<td>'+data.data[i].cur_date+'</td>';
+         }
+         
+//          for(var i=0; i < data.data.length; i++){
+//          	time[i] = data.data[i].cur_date;
+         
+//          for(var j=0; j < data.data.length; i++){
+         		
+//          		if(data.data[i].cur_date == data.data[j].cur_date) {
+      			
+//          			 for(var k=1; k < headername.length; k++){
+//          				 if( data.data[j].sensor_name == headername[k]) {
+//          				 str2 += '<td>'+data.data[i].sensing_data+'</td>';
+         				
+//          			    } 
+//          			 }
+         		
+//          	    } else {
+//          	    	continue;
+//          	    }
+         
+//          	}
+//           str2 +='</tr>';
+//           $("#sensing-data").html(str2);	
+         
+//          }
+         
+         
+         /* for(var i=0; i < data.data.length; i++){
+ 			str2 +='<tr>';
+        	time[i] = data.data[i].cur_date;
+      			
+        	 
+			 str2 +='<td>'+data.data[i].cur_date+'</td>';
         	 
         	 for(var j=1; j < headername.length; j++){
-     		
-        		 if( data.data[i].sensor_name == headername[j] ) {
+     			 
+        		 
+        		 if( data.data[i].sensor_name == headername[j]) {
         			
         			str2 += '<td>'+data.data[i].sensing_data+'</td>'
+        			
         			
         		 }else{
         			str2 += '<td>없음</td>'
@@ -296,8 +335,13 @@ geocoder.addressSearch(site, function(result, status) {
         	 str2 +='</tr>';
         	 $("#sensing-data").html(str2);	
         	 
-         }
-		}
+         } */
+         
+         
+         
+         
+         
+		} //success 함수 종료
 	});
 	
 	$("#modify").click(function(){

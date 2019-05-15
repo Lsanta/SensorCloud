@@ -258,7 +258,7 @@
 		from sensor_date
 		where site_id = #{site_id}
 		and sensor_name not like '%volt%'
-		order by sensor_data_num desc
+		order by cur_date desc
 	]]>
 	</select>
 	
