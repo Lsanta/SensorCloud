@@ -202,13 +202,13 @@ public class mLoginController {
 			int checknum = loginservice.signup(m);
 			
 			if(checknum == 1) {
-				return "login.html";
+				return "ok";
 			}
 			else if(checknum == 0) {
-				return "sign.html";
+				return "no";
 			}
 			
-			return "sign.html";
+			return "no";
 		}
 	
 }
