@@ -7,9 +7,47 @@
     <link href="/resources/css/login/sign.css" rel="stylesheet" type="text/css"/>
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="  crossorigin="anonymous"></script>
+</head>
 
+<body>
+    <div class="login-card">
+        <center> <b>회원가입</b> </center>             
+      <br>
+      <form onsubmit="return check()" method="post" action="/login/signup" >
+        아이디<input type="text" name="user_id" id="user" placeholder="UserId">
+         <div class="errorstr" id="userstr"></div>
+        비밀번호<input type="password" name="password" placeholder="Password" id="password">
+         <div class="errorstr" id="pwstr"></div>
+        비밀번호 확인<input type="password" name="password2" placeholder="확인" id="password2">
+          <div class="errorstr" id="pwconfirmstr"></div>
+        이름<input type="text" name="name" placeholder="이름">
+        이메일<input type="email" name="email" placeholder="yjc@ac.kr">
+        휴대폰번호<input type="tel" id="phone" name="phone" placeholder="01012345678"> 
+        <div class="errorstr" id="phonestr"></div>
+        
+        <button type="button" class="ijn">인증번호 전송</button>
+        <input type="password" class="end" placeholder="인증번호">
+
+        <input type="submit" name="login" class="login login-submit" value="가입하기">
+      </form>
+    </div>
+    
+    
     <script>
+    function check() {
+		alert("옴");
+		alert($('.login-card').children().is('.errorstr'));
+		if($('.login-card').children().is('.errorstr')){
+			alert("회원가입에 적절하지 않은 요소가 있습니다. 다시 확인해 주세요.");
+			return false;
+		} else {
+			alert("옴2");
+			return true;
+		}
+	}
+    
     	$(document).ready(function() {
+    		
     		$('#user').blur(function(){
     			var id  = $("#user").val();
     			
@@ -26,10 +64,12 @@
     				    url : "/login/signup_logincheck.do",
     				    success : function(data) {
     				    	if( data == "ok") {
-    				    		$("#userstr").css("color","blue");
+    				    		$("#userstr").removeClass();
+								$("#userstr").addClass("successstr");
     				    		document.getElementById("userstr").innerHTML="사용 가능한 아이디입니다.";
     				    	} else{
-    				    		$("#userstr").css("color","red");
+    				    		$("#userstr").removeClass();
+								$("#userstr").addClass("errorstr");
     				    		document.getElementById("userstr").innerHTML="사용 불가능한 아이디입니다.";
     				    	}
     				    } // success 함수 종료
@@ -41,10 +81,15 @@
     		$("#password").blur(function(){
     			var passwd = $('#password').val();
     			
-    			if(passwd.length < 8 || passwd.length > 16)
+    			if(passwd.length < 8 || passwd.length > 16){
+    				$("#pwstr").removeClass();
+					$("#pwstr").addClass("errorstr");
     				document.getElementById("passwordstr").innerHTML="8자리 이상 16자리 이하로 작성해주세요";
-    			else
+    			} else{
+    				$("#pwstr").removeClass();
     				document.getElementById("passwordstr").innerHTML="";
+    			}
+    				
     		});
     		
 
@@ -53,38 +98,32 @@
     			var passwd2 = $('#password2').val();
     			
     			if(passwd != passwd2){
-    				$("#checkstr").css("color","red");
-    				document.getElementById("checkstr").innerHTML="비밀번호가 일치하지 않습니다.";
+    				$("#pwconfirmstr").removeClass();
+					$("#pwconfirmstr").addClass("errorstr");
+    				document.getElementById("pwconfirmstr").innerHTML="비밀번호가 일치하지 않습니다.";
     			} else if ( passwd == passwd2) {
-    				$("#checkstr").css("color","blue");
-    				document.getElementById("checkstr").innerHTML="비밀번호가 일치합니다.";
+    				$("#pwconfirmstr").removeClass();
+					$("#pwconfirmstr").addClass("successstr");
+    				document.getElementById("pwconfirmstr").innerHTML="비밀번호가 일치합니다.";
     			}
     			
     		});
     		
+    		$("#phone").blur(function(){
+				var phone = $("#phone").val();
+
+				if(phone.length == 10 || phone.length == 11){
+					$("#phonestr").removeClass();
+					$("#phonestr").addClass("successstr");
+					document.getElementById("phonestr").innerHTML="사용 가능 합니다.";
+				} else {
+					$("#phonestr").removeClass();
+					$("#phonestr").addClass("errorstr");
+					document.getElementById("phonestr").innerHTML="10자리, 11자리로 작성해주세요";
+				}
+			});
+    		
     	});
     </script>
-</head>
-
-<body>
-    <div class="login-card">
-        <center> <b>회원가입</b> </center>             
-      <br>
-      <form method="post" action="/login/signup">
-        아이디<input type="text" name="user_id" id="user" placeholder="UserId">
-         <div id="userstr"></div>
-        비밀번호<input type="password" name="password" placeholder="Password" id="password">
-         <div class="errorstr" id="passwordstr"></div>
-        비밀번호 확인<input type="password" name="password2" placeholder="확인" id="password2">
-          <div id="checkstr"></div>
-        이름<input type="text" name="name" placeholder="이름">
-        이메일<input type="email" name="email" placeholder="yjc@ac.kr" id="emailstr">
-        휴대폰번호<input type="tel" id="phone" name="phone" placeholder="01012345678"> 
-        <button type="button" class="ijn">인증번호 전송</button>
-        <input type="password" class="end" placeholder="인증번호">
-
-        <input type="submit" name="login" class="login login-submit" value="가입하기">
-      </form>
-    </div>
 </body>
 </html>

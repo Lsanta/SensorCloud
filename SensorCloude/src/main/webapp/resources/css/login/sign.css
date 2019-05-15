@@ -8,6 +8,10 @@ body {
   background-size: cover;
   font-family: 'Roboto', sans-serif;
 }
+
+.successstr {
+	color : blue;
+}
 .errorstr{
    	color : red;
 }

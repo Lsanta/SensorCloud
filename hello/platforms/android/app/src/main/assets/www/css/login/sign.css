@@ -14,6 +14,9 @@ body {
    	color : red;
 }
 
+.successstr {
+  color : blue;
+}
 .end{
 	margin-top : 20px;
 }
@@ -123,6 +126,4 @@ b{
 
 img {
 	max-width: 100%; height: auto;
-
-
 }
