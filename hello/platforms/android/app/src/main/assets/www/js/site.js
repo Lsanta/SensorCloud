@@ -128,7 +128,8 @@ function getQueryStringObject() {
     data : site_id,
     async:false,
     contentType : "application/json; charset=UTF-8",
-    success : function(result01){
+
+    success : function(data){
 	//위에 첫 tr(데이터 이름)
     var str = ""; 
     str +='<tr>';
