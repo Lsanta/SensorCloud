@@ -137,6 +137,26 @@ public class mLoginController {
 			System.out.println(json);
 			return json;
 	   }
+	   
+	   @CrossOrigin(origins = "*", maxAge = 3600)
+	   @RequestMapping(value ="/sitedata", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	   @ResponseBody
+	   public JSONObject sensordata(@RequestBody String site_id) {
+		   ArrayList<SensorDataVO> dListname = siteservice.getDataName(site_id);
+			ArrayList<SensorDataVO> dList = siteservice.getData(site_id);
+			System.out.println(dListname);
+			System.out.println(dList);
+			
+			JSONArray dListJson = JSONArray.fromObject(dListname);
+			JSONArray dJson = JSONArray.fromObject(dList);
+		
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("name", dListJson);
+			map.put("data",dJson);
+			JSONObject json = JSONObject.fromObject(map);
+
+			return json;
+	   }
 	  
 	  
 	   	@CrossOrigin(origins = "*", maxAge = 3600)
