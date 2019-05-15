@@ -6,7 +6,8 @@
     <title>제이쿼리모바일</title>
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css">
     <link rel="stylesheet" type="text/css" href="css/site.css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 </head>
 <body>
 <div data-role="page2" id="page2">
@@ -93,6 +94,12 @@
     </div>
 </div>
 
+<div id="page-loading">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>   
+</div>
+
+
+
 
 <script src="js/jquery.js"></script>
 <script src="js/jquery.mobile-1.4.5.js"></script>
@@ -102,6 +109,13 @@
 <script src="js/animated.js"></script>
 <script src="js/charttest.js"></script>
 <script src="js/site.js"></script>
+
+<script>
+   
+    window.onload = function() { //실행될 코드 }
+    $("#page-loading").css("display", "none");
+    }
+</script>
 
 </body>
 </html>
