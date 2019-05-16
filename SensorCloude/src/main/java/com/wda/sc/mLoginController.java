@@ -162,7 +162,7 @@ public class mLoginController {
 			JSONArray name = JSONArray.fromObject(getGraphName);
 			JSONArray graph = JSONArray.fromObject(getGraph);
 		
-			System.out.println("이거 : "+name);
+	
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("name", name);
@@ -180,8 +180,7 @@ public class mLoginController {
 	   public JSONObject sensordata(@RequestBody String site_id) {
 		   ArrayList<SensorDataVO> dListname = siteservice.getDataName(site_id);
 			ArrayList<SensorDataVO> dList = siteservice.getData(site_id);
-			System.out.println(dListname);
-			System.out.println(dList);
+			
 			
 			JSONArray dListJson = JSONArray.fromObject(dListname);
 			JSONArray dJson = JSONArray.fromObject(dList);
