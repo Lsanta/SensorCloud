@@ -108,12 +108,22 @@ public class mTimelineController {
 		}
 	}
 
-/*
- * @RequestMapping(value = "mtimelinemodify.do") public @ResponseBody String
- * mtimelinemodify(@RequestBody Map<String, String> map, TimelineVO vo) throws
- * Exception { System.out.println("수정");
- * 
- * 
- * }
- */
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/mtimelinemodify.do",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public JSONObject mtimelinemodify(@RequestBody Map<String, String> map, TimelineVO vo) throws Exception {
+		System.out.println("수정");
+		String content = (String)map.get("content");
+		String timeline_n = (String)map.get("timeline_n");
+		
+		map.put("content", content);
+		map.put("timeline_n", timeline_n);
+		JSONObject json = JSONObject.fromObject(map);
+     
+        System.out.println(json);
+    
+     return json;
+  }
+	
+
 }
