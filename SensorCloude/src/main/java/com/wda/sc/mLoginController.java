@@ -175,27 +175,6 @@ public class mLoginController {
 		return "none";
 	}
 	
-	   @CrossOrigin(origins = "*", maxAge = 3600)
-	   @RequestMapping(value ="/mmain", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	   @ResponseBody
-	   public ArrayList<SiteVO> mainlist(Locale locale, Model model) {
-	   
-	      
-	      ArrayList<SiteVO> result = siteservice.getList();
-
-	      return result;
-	   }
-	   
-	   @CrossOrigin(origins = "*", maxAge = 3600)
-	   @RequestMapping(value ="/sitemain", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	   @ResponseBody
-	   public ArrayList<SiteVO> sitemainlist(@RequestBody String site_id,Locale locale, Model model) {
-	      System.out.println(site_id);
-	      
-	      ArrayList<SiteVO> result01 = siteservice.getSite(site_id);
-	      
-	      return result01;
-	   }
 	   
 	   @CrossOrigin(origins = "*", maxAge = 3600)
 	   @RequestMapping(value ="/sitemainsensor", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -252,17 +231,6 @@ public class mLoginController {
 			 return arr;
 		}
 	   	
-	   	
-	   	@CrossOrigin(origins = "*", maxAge = 3600)
-	    @RequestMapping(value ="/siterepairlist", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	    @ResponseBody
-	    public ArrayList<CheckBoardVO> siterepairlist(@RequestBody String site_id,Locale locale, Model model) {
-	       
-	       
-	       ArrayList<CheckBoardVO> result02 = checkboardservice.apprepairList(site_id);
-	       
-	       return result02;
-	    }
 	   	
 	   	@CrossOrigin(origins = "*" ,maxAge = 3600)
 		@RequestMapping(value = "/appidFind", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
