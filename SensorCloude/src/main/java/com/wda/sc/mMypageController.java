@@ -38,14 +38,14 @@ public class mMypageController {
 	
 	//마이페이지 메인
 	@CrossOrigin(origins = "*", maxAge = 3600)
-	@RequestMapping(value ="/mypage", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value ="/mypagemain", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	   public JSONObject mainlist(Locale locale, Model model, Criteria criteria) {
 			System.out.println("확인");
 		      
 	      int pagenum = criteria.getPagenum();
 	       
-	       Paging page = new Paging();   //최대한 코드를 수정 안하기 위한 기존 페이징
+	       	 Paging page = new Paging();   //최대한 코드를 수정 안하기 위한 기존 페이징
 	         criteria.setTotalcount(checkboardservice.getPageNum());   //전체 게시글 개수를 지정
 	         criteria.setContentnum(5);
 	         criteria.setPagenum(pagenum);   //현재 페이지를 페이지 객체에 지정
@@ -128,15 +128,12 @@ public class mMypageController {
 	@RequestMapping(value = "/levelup", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public String mlevelup(@RequestBody String param) throws Exception {
+	System.out.println(param);	
+//	List<Map<String,Object>> Map = new ArrayList<Map<String,Object>>();
+//	Map = JSONArray.fromObject(param);
 		
-	List<Map<String,Object>> Map = new ArrayList<Map<String,Object>>();
-	Map = JSONArray.fromObject(param);
-		
-	System.out.println(Map.get(0).get("id"));
-	System.out.println(Map.get(1).get("mlevel"));
-		
-		
-		
+//	System.out.println(map.get("id"));
+//	System.out.println(map.get("mlevel"));
 
 	return "";
 	}
