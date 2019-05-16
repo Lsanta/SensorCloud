@@ -2,6 +2,7 @@ package com.wda.sc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -20,11 +21,12 @@ import com.wda.sc.domain.TimelineVO;
 import com.wda.sc.service.TimelineService;
 
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/app")
+@RequestMapping("/app/timeline")
 public class mTimelineController {
 	private TimelineService timelineservice;
 
@@ -105,12 +107,23 @@ public class mTimelineController {
 
 		}
 	}
+
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/mtimelinemodify.do",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public JSONObject mtimelinemodify(@RequestBody Map<String, String> map, TimelineVO vo) throws Exception {
+		System.out.println("수정");
+		String content = (String)map.get("content");
+		String timeline_n = (String)map.get("timeline_n");
+		
+		map.put("content", content);
+		map.put("timeline_n", timeline_n);
+		JSONObject json = JSONObject.fromObject(map);
+     
+        System.out.println(json);
+    
+     return json;
+  }
+	
+
 }
-/*
- * @RequestMapping(value = "mtimelinemodify.do") public @ResponseBody String
- * mtimelinemodify(@RequestBody Map<String, String> map, TimelineVO vo) throws
- * Exception { System.out.println("수정");
- * 
- * 
- * }
- */

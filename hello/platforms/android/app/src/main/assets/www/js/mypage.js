@@ -1,3 +1,86 @@
+$(document).ready(function() {
+	//점검이력 불러오기
+	$.ajax({
+	   type : "POST",
+	   url : "http://39.127.7.58:8080/app/mypage/mypage",
+	   data : {pagenum : 1},
+	   success : function(result){
+			 console.log(result)
+			 var page="";
+			 var str = "";  
+			 $.each(result.mpcheckList,function(i,s){
+			 str +='<tr>';
+			 str +='<td>'+s.site_name+'</td>';      // 현장이름
+			 str +='<td>'+s.title+'</td>';          // 제목                       
+			 str +='<td>'+s.board_status+'</td>';   // 상태
+			 str +='<td>'+s.reg_date+'</td>';       // 날짜
+			 str +='</tr>';
+
+			 $("#mypagechecklist").html(str);
+				
+		  });
+			   if (result.criteria.prev) {
+				   page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.startPage - 1) + ');" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>'
+				}
+				for (var i = result.criteria.startPage; i <= result.criteria.endPage; i++) {
+				   page += '<li class="page-item"><a class="page-link" href="javascript:page(' + i + ');">' + i + '</a></li>'
+				}
+				if (result.criteria.next) {
+				   page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.endPage + 1) + ');" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>'
+				}
+				$(".pagination").empty();
+				$(".pagination").prepend(page);
+				$("html, body").animate({ scrollTop: 0 }, 1);
+		 
+		  
+		  } // success 함수 종
+	}); // ajax함수
+
+	$('.mpmodify-level').on('click', function() {
+	   $("#content").load("usermodify.html");
+	});
+
+
+  function page(index) {
+  $.ajax({
+	   type : "POST",
+	   url : "http://39.127.7.58:8080/app/mypage/mypage",
+	   data : {pagenum : index},
+	   success : function(result){
+			 console.log(result)
+			 var page="";
+			 var str = ""; 
+			 $.each(result.mpcheckList,function(i,s){
+			 str +='<tr>';
+			 str +='<td>'+s.site_name+'</td>';      // 현장이름
+			 str +='<td>'+s.title+'</td>';          // 제목
+			 str +='<td>'+s.board_status+'</td>';   // 상태
+			 str +='<td>'+s.reg_date+'</td>';       // 날짜
+			 str +='</tr>';
+
+			 $("#mypagechecklist").html(str);
+				
+		  });
+			   if (result.criteria.prev) {
+				   page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.startPage - 1) + ');" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>'
+				}
+				for (var i = result.criteria.startPage; i <= result.criteria.endPage; i++) {
+				   page += '<li class="page-item"><a class="page-link" href="javascript:page(' + i + ');">' + i + '</a></li>'
+				}
+				if (result.criteria.next) {
+				   page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.endPage + 1) + ');" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>'
+				}
+				$(".pagination").empty();
+				$(".pagination").prepend(page);
+				$("html, body").animate({ scrollTop: 0 }, 1);
+	 
+		  } // success 함수 종
+		}); // ajax함수
+ 	}
+});
+
+
+//점검이력 글 하나 클릭 시
 $(document).on("click", "#mypagechecklist tr", function() {
 
 	// 클릭한 행을 tr 변수로
@@ -9,165 +92,77 @@ $(document).on("click", "#mypagechecklist tr", function() {
 	window.location.href = "/checkboard/" + board_no;
 });
 
+
 $(document).ready(function() {
-
-	// var num = 0;
-
-	// var newURL =  window.location.pathname;
-
-	// var url = newURL.split('/');
-	// if(url[2] != null){
-	// 	$("#"+url[2]+"").addClass('pagination-active');
-	// }
-
-	// $('.pagination-inner a').on('click', function() {
-	// 	var a = $(".pagination-inner a").index(this);
-	// 	num = a;
-	// 	window.location.href = "/mypage/"+(num+1);
-	// });
-
-	// $('.pagination-newer').click(function(){
-	// 	if(1 > parseInt(url[2])-1 )
-	// 		window.location.href = "/mypage/"+(parseInt(url[2]));
-	// 	else
-	// 		window.location.href = "/mypage/"+(parseInt(url[2])-1);
-	// });
-
-	// $('.pagination-older').click(function(){
-	// 	if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[2])+1 )
-	// 		window.location.href = "/mypage/"+(parseInt(url[2]));
-	// 	else
-	// 		window.location.href = "/mypage/"+(parseInt(url[2])+1);
-	// });
-	
-	
-	// $('.update').click(function() {
-	// 	window.location.href = "/mypage/modifymypage";
-	// });
-
-	$('.up').click(function(){
-		window.open("/mypage/levelup", "pop",
-				"width=570,height=420,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+	//비밀번호 확인버튼 클릭 시
+	$(".mpmodify-submit").on('click', function() {
+		login();
 	});
 
 	function login() {
-
 		var passwd = $("#pass").val();
-
-		if (passwd = "") {
+		console.log(passwd);
+		
+		if (passwd == "") {
 			alert("사용자 정보 수정을위해 비밀번호를 입력해주세요");
-			$("#pass").focus();
-			return;
 		}
 
 		var query = {
+			id: window.localStorage.getItem("key"),
 			password : $("#pass").val()
 		};
+		alert(query);
 
 		$.ajax({
 			type : "POST",
-			dataType : "text",
+			url : "http://39.127.7.58:8080/app/mypage/mypageconfirmpasswd.do",
 			data : query,
-			url : "/mypage/mypageconfirmpasswd.do",
+			contentType : "application/json; charset=UTF-8",
 			success : function(data) {
+				alert(data);
 				if (data == "success") {
 					alert("비밀번호 일치");
-					// window.location.href = "/mypage/modifymyinfo";
+					window.location.href = "http://39.127.7.58:8080/app/mypage/usermodify";
 				} else {
 					alert("비밀번호가 틀렸습니다.");
 				}
 			}
 		});
 	}
-	
-	$(".mpmodify-submit").on('click', function() {
-		login();
-	});
 
-	$('.confirm-modify').click(function() {
-
-				var value = $('input[name=modify_name]').val();
-
-				var id = $("#id").val();
-				var password = $("#password").val();
-				var passwordconfirm = $("#passwordconfirm").val();
-				var modify_name = $("#modify_name").val();
-				var phonenumber = $("#phonenumber").val();
-
-				if (passwordconfirm != password) {
-					document.getElementById("inhere2").innerHTML = "비밀번호확인이 일치하지 않습니다";
-				} else if (passwordconfirm == password) {
-
-					var query = {
-							user_id : id,
-							name : modify_name,
-							password : password,
-							phone : phonenumber
-					}
-
-					$.ajax({
-						type : "POST",
-						data : query,
-						url : "/mypage/mypagemodifymyinfo",
-						success : function(data) {
-							if (data == "success") {
-								window.location.href = "/mypage";
-							}
-							if (data == "false") {
-								document
-								.getElementById("inhere1").innerHTML = "수정 정보를 모두 입력해 주세요";
-							}
-						}
-					});
-				}
-			});
-	
-
-
-	// 
-
-	// 패스워드에 커서를 두고 엔터키를 누르면 로그인 함
+	// 패스워드에 커서를 두고 엔터키(모바일용)를 누르면 로그인 함 **해야함!
 	$("#pass").keydown(function(key) {
 		if (key.keyCode == 13) {
 			login();
 		}
 	});
+	
+});
 
-	/* pagination */
-	var num = 0;
+$(document).ready(function() {
+	//승급요청 확인 클릭시
+	$("#ok").click(function(){
+		 alert("1");
+		 var id = sessionStorage.getItem('id');
+		 var select = $("#select_level option:selected").val();
+		
+		 var query = {
+			 id : id,
+			 mlevel : select
+		 }
 
-	var newURL = window.location.pathname;
+		 console.log(query);
 
-	var url = newURL.split('/');
-	if (url[2] != null) {
-		$("#" + url[2] + "").addClass('pagination-active');
-	}
+		 $.ajax({
+			type : "POST",
+			url : "http://39.127.7.58:8080/app/mypage/levelup",
+			data : query,
+			contentType : "application/json; charset=UTF-8",
+			success : function(data) {
+				console.log(data);
+				
+			}
+		});
 
-	$('.pagination-inner a').on('click', function() {
-		var a = $(".pagination-inner a").index(this);
-		num = a;
-		window.location.href = "/mypage/" + (num + 1);
 	});
-
-	$('.pagination-newer').click(
-			function() {
-				if (1 > parseInt(url[2]) - 1)
-					window.location.href = "/mypage/"
-						+ (parseInt(url[2]));
-				else
-					window.location.href = "/mypage/"
-						+ (parseInt(url[2]) - 1);
-			});
-
-	$('.pagination-older').click(
-			function() {
-				if (parseInt($('.pagination-inner a:last')
-						.text()) < parseInt(url[2]) + 1)
-					window.location.href = "/mypage/"
-						+ (parseInt(url[2]));
-				else
-					window.location.href = "/mypage/"
-						+ (parseInt(url[2]) + 1);
-			});
-
 });

@@ -2,6 +2,7 @@ package com.wda.sc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,11 +26,12 @@ import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.MyPageService;
 
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/app")
+@RequestMapping("/app/mypage")
 public class mMypageController {
 	private CheckboardService checkboardservice;
 	private MyPageService mypageservice;
@@ -36,7 +39,7 @@ public class mMypageController {
 	//마이페이지 메인
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value ="/mypage", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	   @ResponseBody
+	@ResponseBody
 	   public JSONObject mainlist(Locale locale, Model model, Criteria criteria) {
 			System.out.println("확인");
 		      
@@ -72,12 +75,11 @@ public class mMypageController {
 	   }
 	
 	//정보수정 전 비밀번호 확인
-	@RequestMapping("mypageconfirmpasswd.do")
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping("/mypageconfirmpasswd.do")
 	@ResponseBody
-	public String MyPageConfirmPasswd(Model model, HttpSession session, @RequestParam("password") String password) {
-
-		String confirmid = (String) session.getAttribute("id");
-
+	public String ConfirmPasswd(Model model, @RequestParam("password") String password, @RequestBody String confirmid) {
+		
 		ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
 		arr = mypageservice.confirmpasswd(confirmid);
 
@@ -88,11 +90,28 @@ public class mMypageController {
 		}
 		return confirmid;
 	}
-//	
-//	//내 정보 수정
-//	@RequestMapping(value = "/mypage", method = RequestMethod.POST)
+
+	//내 정보 수정
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/usermodify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public JSONObject modifymyinfo(@RequestBody String id, Locale locale, Model model) {
+		 System.out.println("내정보");
+		 
+		  ArrayList<MemberVO> result = mypageservice.getInfom(id);
+		  System.out.println(result);
+	      JSONObject json = new JSONObject();
+	      json.put("a",result);
+		
+	      System.out.println(json);
+		
+		return json;
+	}
+	
+//	@CrossOrigin(origins = "*", maxAge = 3600)
+//	@RequestMapping(value = "/usermodify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 //	@ResponseBody
-//	public String mypagemodifymyinfo(Locale locale, Model model, MemberVO vo) {
+//	public String updatemyinfo(Locale locale, Model model, MemberVO vo) {
 //
 //		if (vo.getPassword().equals("") || vo.getName().equals("") || vo.getUser_id().equals("") || vo.getPhone().equals("")) {
 //
@@ -103,6 +122,24 @@ public class mMypageController {
 //			return "success";
 //		}
 //	}
+	
+	
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/levelup", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public String mlevelup(@RequestBody String param) throws Exception {
+		
+	List<Map<String,Object>> Map = new ArrayList<Map<String,Object>>();
+	Map = JSONArray.fromObject(param);
+		
+	System.out.println(Map.get(0).get("id"));
+	System.out.println(Map.get(1).get("mlevel"));
+		
+		
+		
+
+	return "";
+	}
 	
 	
 }

@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-header .left { float: left; padding: 43px 0 0 380px; }
+header .left { float: left; padding: 43px 0 0 20%; }
 header h1 { float:left; padding: 0 108px 0 0; }
 header .logout { display: none; }
 header h1 a { display: block; width:132px; height:50px; background: url("/resources/img/str.png") no-repeat 0px 
