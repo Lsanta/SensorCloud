@@ -117,8 +117,7 @@ $(document).ready(function() {
 								window.location.href = "/mypage";
 							}
 							if (data == "false") {
-								document
-								.getElementById("inhere1").innerHTML = "수정 정보를 모두 입력해 주세요";
+								document.getElementById("inhere1").innerHTML = "수정 정보를 모두 입력해 주세요";
 							}
 						}
 					});

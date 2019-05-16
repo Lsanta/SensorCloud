@@ -91,7 +91,7 @@ public class mMypageController {
 		return confirmid;
 	}
 
-	//내 정보 수정
+	//내 정보 불러오기
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/usermodify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
@@ -108,22 +108,24 @@ public class mMypageController {
 		return json;
 	}
 	
-//	@CrossOrigin(origins = "*", maxAge = 3600)
-//	@RequestMapping(value = "/usermodify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//	@ResponseBody
-//	public String updatemyinfo(Locale locale, Model model, MemberVO vo) {
-//
-//		if (vo.getPassword().equals("") || vo.getName().equals("") || vo.getUser_id().equals("") || vo.getPhone().equals("")) {
-//
-//			return "false";
-//
-//		} else {
-//			mypageservice.updateuserinfo(vo);
-//			return "success";
-//		}
-//	}
+	//내정보 수정
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/updatemyinfo.do")
+	@ResponseBody
+	public String updatemyinfo(Locale locale, Model model, MemberVO vo) {
+		 System.out.println("여기~");
+
+		if (vo.getPassword().equals("") || vo.getName().equals("") || vo.getUser_id().equals("") || vo.getPhone().equals("")) {
+
+			return "false";
+
+		} else {
+			mypageservice.updateuserinfo(vo);
+			return "success";
+		}
+	}
 	
-	
+	//마이페이지 승급요청
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/levelup", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
@@ -134,10 +136,7 @@ public class mMypageController {
 		
 	System.out.println(Map.get(0).get("id"));
 	System.out.println(Map.get(1).get("mlevel"));
-		
-		
-		
-
+	
 	return "";
 	}
 	
