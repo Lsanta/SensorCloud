@@ -151,31 +151,7 @@ public class mLoginController {
 
 		return result02;
 	}
-
-	@CrossOrigin(origins = "*", maxAge = 3600)
-	@RequestMapping(value = "/appidFind", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public String appidFind(@RequestBody String name, String tel, Locale locale, Model model) {
-
-		System.out.println(name);
-		System.out.println(tel);
-		ArrayList<MemberVO> arr2 = new ArrayList<MemberVO>();
-		arr2 = loginservice.idFind(name);
-
-		if (arr2.size() == 0)
-			return "none";
-		if (arr2.size() != 0) {
-			if (arr2.get(0).getPhone().equals(tel)) {
-				return arr2.get(0).getUser_id();
-			} else {
-				return "isN";
-			}
-		}
-
-		return "none";
-	}
 	
-	   
 	   @CrossOrigin(origins = "*", maxAge = 3600)
 	   @RequestMapping(value ="/sitemainsensor", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	   @ResponseBody
@@ -217,21 +193,7 @@ public class mLoginController {
 
 			return json;
 	   }
-	  
-	  
-	   	@CrossOrigin(origins = "*", maxAge = 3600)
-		@RequestMapping(value = "/mSearch.do", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-		
-		public @ResponseBody ArrayList<SiteVO> mSearch(@RequestBody Map<String, String> map) throws Exception {
-			
-			 String word = (String) map.get("word");
-			 ArrayList<SiteVO> arr = new ArrayList<SiteVO>();
-			 //현장 이름 검색
-			 arr = siteservice.getAppSearch(word);
-			 return arr;
-		}
-	   	
-	   	
+
 	   	@CrossOrigin(origins = "*" ,maxAge = 3600)
 		@RequestMapping(value = "/appidFind", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 		@ResponseBody

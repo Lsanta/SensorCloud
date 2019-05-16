@@ -75,7 +75,7 @@ public class mMypageController {
 	
 	//정보수정 전 비밀번호 확인
 	@CrossOrigin(origins = "*", maxAge = 3600)
-	@RequestMapping("mypageconfirmpasswd.do")
+	@RequestMapping("/mypageconfirmpasswd.do")
 	@ResponseBody
 	public String ConfirmPasswd(Model model, @RequestParam("password") String password, @RequestBody String confirmid) {
 		

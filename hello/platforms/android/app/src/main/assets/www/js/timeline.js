@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $.ajax({
         type : "POST",
-        url : "http://39.127.7.58:8080/app/mtimeline",
+        url : "http://39.127.7.58:8080/app/timeline/mtimeline",
         data : {pagenum : 1},
         success : function(result){
             console.log(result);
@@ -55,7 +55,7 @@ $(document).ready(function(){
 
         $.ajax({
             type : "POST",
-            url : "http://39.127.7.58:8080/app/mtimeline.do",
+            url : "http://39.127.7.58:8080/app/timeline/mtimeline.do",
             data : log,
             dataType : 'text',
             contentType : "application/json; charset=UTF-8",
@@ -88,7 +88,7 @@ $(document).ready(function(){
             $.ajax({
                 async : true,
                 type : "POST",
-                url : "http://39.127.7.58:8080/app/mtimelinedelete.do",
+                url : "http://39.127.7.58:8080/app/timeline/mtimelinedelete.do",
                 data : sig, 
                 dataType : 'text',
                 contentType : "application/json; charset=UTF-8",
@@ -130,7 +130,7 @@ function page(index){
     alert(index);
     $.ajax({
         type : "POST",
-        url : "http://39.127.7.58:8080/app/mtimeline",
+        url : "http://39.127.7.58:8080/app/timeline/mtimeline",
         data : {pagenum : index},
         success : function(result){
             console.log(result);
