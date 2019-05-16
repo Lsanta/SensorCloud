@@ -18,7 +18,6 @@ $(document).ready(function(){
             data : query,
             contentType : "application/json; charset=UTF-8",
             success : function(result){ 
-              alert(result);
               // var sig = JSON.parse(result);
               // alert(sig);
               // var aa = JSON.stringify(result);
