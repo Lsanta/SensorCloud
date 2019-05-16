@@ -193,7 +193,7 @@ public class mLoginController {
 
 			return json;
 	   }
-
+	   
 	   	@CrossOrigin(origins = "*" ,maxAge = 3600)
 		@RequestMapping(value = "/appidFind", method = RequestMethod.POST ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 		@ResponseBody

@@ -2,6 +2,7 @@ package com.wda.sc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -123,7 +124,22 @@ public class mMypageController {
 //	}
 	
 	
-	
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/levelup", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public String mlevelup(@RequestBody String param) throws Exception {
+		
+	List<Map<String,Object>> Map = new ArrayList<Map<String,Object>>();
+	Map = JSONArray.fromObject(param);
+		
+	System.out.println(Map.get(0).get("id"));
+	System.out.println(Map.get(1).get("mlevel"));
+		
+		
+		
+
+	return "";
+	}
 	
 	
 }
