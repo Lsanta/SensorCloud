@@ -59,4 +59,10 @@ public class TimelineServiceImplement implements TimelineService {
 		return mapper.getListm();
 	}
 
+	@Override
+	public ArrayList<TimelineVO> getContent(String timeline_n) {
+	
+		return mapper.getContent(timeline_n);
+	}
+
 }
