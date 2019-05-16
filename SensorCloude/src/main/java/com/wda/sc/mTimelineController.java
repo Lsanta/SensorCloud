@@ -2,6 +2,7 @@ package com.wda.sc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -20,11 +21,12 @@ import com.wda.sc.domain.TimelineVO;
 import com.wda.sc.service.TimelineService;
 
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/app")
+@RequestMapping("/app/timeline")
 public class mTimelineController {
 	private TimelineService timelineservice;
 
@@ -105,6 +107,7 @@ public class mTimelineController {
 
 		}
 	}
+
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/mtimelinemodify.do",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
@@ -122,4 +125,5 @@ public class mTimelineController {
      return json;
   }
 	
+
 }
