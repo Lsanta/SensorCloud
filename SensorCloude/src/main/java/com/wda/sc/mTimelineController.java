@@ -24,7 +24,7 @@ import net.sf.json.JSONObject;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/app")
+@RequestMapping("/app/timeline")
 public class mTimelineController {
 	private TimelineService timelineservice;
 

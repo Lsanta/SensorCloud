@@ -28,7 +28,7 @@ import net.sf.json.JSONObject;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/app")
+@RequestMapping("/app/mypage")
 public class mMypageController {
 	private CheckboardService checkboardservice;
 	private MyPageService mypageservice;
@@ -36,7 +36,7 @@ public class mMypageController {
 	//마이페이지 메인
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value ="/mypage", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	   @ResponseBody
+	@ResponseBody
 	   public JSONObject mainlist(Locale locale, Model model, Criteria criteria) {
 			System.out.println("확인");
 		      
@@ -103,6 +103,9 @@ public class mMypageController {
 //			return "success";
 //		}
 //	}
+	
+	
+	
 	
 	
 }
