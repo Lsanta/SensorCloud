@@ -10,6 +10,8 @@ import com.wda.sc.domain.TokenVO;
 
 public interface MyPageMapper {
 	public ArrayList<MemberVO> getInfo(String id);
+	//앱 테스트
+	public ArrayList<MemberVO> getInfom(String id);
 	
 	public ArrayList<CheckBoardVO> myList(Map<String, Object> parm);
 	
