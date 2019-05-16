@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	<title>타임라인</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-	<link rel="stylesheet" type="text/css" href="./css/jquery.mobile-1.4.5.css" />
-	<link rel="stylesheet" type="text/css" href="./css/timeline.css">
-	<script src="./js/timeline.js"></script>
-	<script src="./js/jquery.js"></script>
-	<script src="./js/jquery.mobile-1.4.5.js"></script>
+   <head>
+   <title>타임라인</title>
+   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+   <link rel="stylesheet" type="text/css" href="./css/jquery.mobile-1.4.5.css" />
+   <link rel="stylesheet" type="text/css" href="./css/timeline.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div data-role="page">
@@ -19,33 +17,33 @@
 
     <div data-role="content">
         <div id="text">
-				<textarea name="textarea" id="textarea" maxlength="100" autofocus></textarea>
-				<button type="button" value="등록" id="submit">등록</button>
-				<div id="the_count">
-					<span id="current">0</span> <span id="maximum">/ 100</span>
-				</div>
-			</div>
+            <textarea name="textarea" id="textarea" maxlength="100" autofocus></textarea>
+            <button type="button" value="등록" id="submit">등록</button>
+            <div id="the_count">
+               <span id="current">0</span> <span id="maximum">/ 100</span>
+            </div>
+         </div>
 
-			<div id="writing">
+         <div id="writing">
 
-					 <!-- <div class="timeline-header">
-					 <h3></h3>이름
-						<h5></h5>
-
-
-						<button type="button" class="modify">수정</button>
-						<button type="button" class="delete">삭제</button>
+                <!-- <div class="timeline-header">
+                <h3></h3>이름
+                  <h5></h5>
 
 
-					 </div> 
-					<p>내용내용내용내용</p>  -->
+                  <button type="button" class="modify">수정</button>
+                  <button type="button" class="delete">삭제</button>
+
+
+                </div> 
+               <p>내용내용내용내용</p>  -->
   
-			</div>
-		</div>
-		<ul class="pagination"></ul>
-	
-	
-	
+         </div>
+      </div>
+      <ul class="pagination"></ul>
+   
+   
+   
 
     <div data-role="footer"  data-position="fixed" data-id="footerid1">
         <div data-role="navbar">
@@ -56,51 +54,21 @@
                 <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
             </ul>
         </div>
-    </div>
+   </div>
+   
 </div>
-<script>
+<div id="page-loading">
+      <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>   
+   </div>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+   <script src="./js/jquery.js"></script>
+   <script src="./js/timeline.js"></script>
+   <script src="./js/jquery.mobile-1.4.5.js"></script>
 
-		$.ajax({
-			type : "POST",
-			url : "http://39.127.7.58:8080/app/mtimeline",
-			data : {pagenum : 1},
-			success : function(result){
-				console.log(result);
-				var page="";
-				var str="";
-				$.each(result.mtimelineList,function(i, s){
-				   console.log(s);
-				   str +='<div class=\"timeline\">';
-				   str +='<h3>'+s.name+'</h3>';
-				   str +='<h3 id="timeline_n">'+s.timeline_n+'</h3>';        
-				   str +='<h5>'+s.time+'</h5>';
-				   str +='<button class="modify">수정</button>';
-				   str +='<button class="delete">삭제</button>';
-				   str +='<p>'+s.content+'</p>';
-				   str +='</div>';
-			
-					$("#writing").html(str);
-				});
-				   
-				if (result.criteria.prev) {
-					page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.startPage - 1) + ');" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>'
-				}
-				for (var i = result.criteria.startPage; i <= result.criteria.endPage; i++) {
-					page += '<li class="page-item"><a class="page-link" href="javascript:page(' + i + ');">' + i + '</a></li>'
-				}
-				if (result.criteria.next) {
-					page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.endPage + 1) + ');" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>'
-				}
-				$(".pagination").empty();
-				$(".pagination").prepend(page);
-				$("html, body").animate({ scrollTop: 0 }, 1);
-	
-				
-	
-			} // success 함수 종료
-				   
-		}); // ajax함수
-		
-	</script>
+   <script>
+         window.onload = function() { //실행될 코드 }
+         $("#page-loading").css("display", "none");
+         }
+      </script>
 </body>
 </html>

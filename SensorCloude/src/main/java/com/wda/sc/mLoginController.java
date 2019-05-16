@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,9 +43,9 @@ public class mLoginController {
 	private CheckboardService checkboardservice;
 
 	@CrossOrigin(origins = "*", maxAge = 3600)
-	@RequestMapping(value = "/mlog", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/login/mlog", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public String mlogin(@RequestBody String idt, String passwordt) throws Exception {
+	public String mlogin(@RequestBody String idt, String passwordt, HttpSession session) throws Exception {
 //		response.setHeader("Access-Control-Allow-Origin", "*");
 
 //		response.setHeader("Access-Control-Allow-Credentials", "true");
@@ -83,6 +85,7 @@ public class mLoginController {
 				json.put("id", id);
 				json.put("password", password);
 				json.put("signal", "ok");
+				session.setAttribute("id", id);
 			} else {
 				json.put("signal", "passfail");
 			}
