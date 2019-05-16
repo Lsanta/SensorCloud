@@ -165,6 +165,9 @@ geocoder.addressSearch(site, function(result, status) {
 			url : "/site/graph/"+site_id+" .do",
 			success : function(result) {
 				
+				//////////////////////////////////////////////////////////////////////////////////
+				/* 									그래프 그리기 시작									*/
+				// Themes begin
 				console.log(result);
 				//////////////////////////////////////////////////////////////////////////////////
 				/* 									그래프 그리기 시작									*/
@@ -176,27 +179,30 @@ geocoder.addressSearch(site, function(result, status) {
 				var chart = am4core.create("chartdiv", am4charts.XYChart);
 					
 				var data = [];
+				var color = ["#890E0E","#850C8E","#26BC9E","#ACFA58","#58FAD0","#81BEF7","#5858FA","#FA58F4","#2E2E2E"];
+				var colorNum = 0;
 				var price = new Array(result.name.length-1);  //초기값
-				for(var i = 0; i < price.length; i++){
+		/* 		for(var i = 0; i < price.length; i++){
 					price[i] = 0;
-				}
-				var quantity = 50000; //정밀도??
+				} */
+				var quantity = 1000; //정밀도??
 				alert(result.graph.length);
 				///////////////////////////////////////////////////////////////
 				/*					데이터 불러올곳(db값 넣을곳)						*/
-				 for(var i = 0; i < result.graph.length; i++){
+				
+				 for(var i = 0; i < result.name.length; i++){
 								
 					for(var j = 0; j < result.graph.length; j++){
-						if(result.name[0].sensor_name == result.graph[j].sensor_name){
-							data.push({ date1 : result.graph[j].current_date, price1 : result.graph[j].sensing_data});
+						if(result.name[i].sensor_name == result.graph[j].sensor_name){
+							data.push({ [result.name[i].sensor_name] : result.graph[j].cur_date, [result.name[i].sensor_name+"_data"] : result.graph[j].sensing_data});
 						}	
 					}
-					console.log(data[i]);
+					
 					
 				}
 				
 					//////////////////////////////////////////////////////////////
-					
+					console.log(data);
 					chart.data = data; // 값들을 차트에 그리기 위해 data 배열에 json으로 넣는 부분
 					
 					///////////////////////////////////////////////////////////////
@@ -214,29 +220,33 @@ geocoder.addressSearch(site, function(result, status) {
 					
 					///////////////////////////////////////////////////////////////
 					/*					그래프 그리는곳								*/
-	
-				var series = chart.series.push(new am4charts.LineSeries());
-				series.name = "tilt(1)";	//별의미없는듯 그냥 이름
-				series.dataFields.dateX = "date1";	//data배열안에 json 검색하는거인듯
-				series.dataFields.valueY = "price1"; 
-				series.name = result.name[0].sensor_name;	//센서 타입 그 각도기 이런거 적히는 곳
-				series.tooltipText = "{valueY.value}";	//뭔지 잘모르겠음
-				series.fill = am4core.color("#0101DF");
-				series.stroke = am4core.color("#0101DF");
-				//series.strokeWidth = 3;
+	 				for(var i = 0; i < result.name.length; i++){
+	 					
+						var series = chart.series.push(new am4charts.LineSeries());
+						series.name = result.name[i].sensor_name;	//별의미없는듯 그냥 이름
+						series.dataFields.dateX = result.name[i].sensor_name;	//data배열안에 json 검색하는거인듯
+						series.dataFields.valueY = result.name[i].sensor_name+"_data"; 
+						series.name = result.name[i].sensor_name;	//센서 타입 그 각도기 이런거 적히는 곳
+						series.tooltipText = result.name[i].sensor_name+" : {valueY.value}";	//뭔지 잘모르겠음
+						//series.fill = am4core.color("#FF0000");
+						if(colorNum > color.length){
+							colorNum = 0;
+						}
+						series.stroke = am4core.color(color[colorNum]);
+						series.strokeWidth = 1.3;
 				
-				var range = valueAxis.createSeriesRange(series);
-				range.value = -1;		//하한값
-				range.endValue = 1;	//상한값
-				range.contents.stroke = am4core.color("#FF0000");	//정상범위일때 나오는 색깔
-				range.contents.fill = range.contents.stroke;
+						var scrollbarX = new am4charts.XYChartScrollbar();
+						scrollbarX.series.push(series);
+						chart.scrollbarX = scrollbarX;
+						
+						colorNum++;
+	 				}
 				
-				var scrollbarX = new am4charts.XYChartScrollbar();
-				scrollbarX.series.push(series);
-				chart.scrollbarX = scrollbarX;
+				
 				
 				chart.cursor = new am4charts.XYCursor(); //마우스 올렸을때 데이터 나오게 하는 함수
 				chart.legend = new am4charts.Legend();	//그래프 바로밑에 그래프 각각 나오게 해주고 누를때 이벤트 발생
+	
 	
 
 				
@@ -251,6 +261,7 @@ geocoder.addressSearch(site, function(result, status) {
 		url : "/site/sdata/"+site_id+" .do",
 		success : function(data) {
 			console.log(data);	
+		//위에 첫 tr(데이터 이름)
 		var str = ""; 
 		str +='<tr>';
 		str +='<td>시간</td>';
@@ -261,22 +272,79 @@ geocoder.addressSearch(site, function(result, status) {
          str +='</tr>';
          $("#sensing-data-head").html(str);	
          
+         //데이터들
          var str2 = "";
          var headername = new Array();
          for(var i=0; i < $("#sensing-data-head td").length; i++){
         	 headername[i] = $("#sensing-data-head td").eq(i).text();
+        	
          }
          
+         var time = new Array();
          for(var i=0; i < data.data.length; i++){
+        	 time[i] = data.data[i].cur_date;
+         }
+         
+         var single2 = time.filter( (item, idx, array) => {
+        		return array.indexOf( item ) === idx ;
+        	});
         	 
+         
+         
+         
+         for(var i=0; i < single2.length; i++){
         	 str2 +='<tr>';
-        	 str2 +='<td>'+data.data[i].current_date+'</td>';
+        	 str2 +='<td>'+single2[i]+'</td>';
+        	 
+        	 for(var j=0; j < data.data.length; j++) {
+        		 if ( single2[i] === data.data[j].cur_date){
+        			 str2 += '<td>'+data.data[j].sensing_data+'</td>'
+        		 }
+        	 }
+        	 
+        	 
+        	 
+        	 
+        	 
+        	 str2 +='</tr>';
+         	 $("#sensing-data").html(str2);	
+         }
+         
+         
+//          for(var i=0; i < data.data.length; i++){
+         	
+//         	 for(var j=0; j < single2.length; j++) {
+//         		 str2 +='<td>'+single2[j]+'</td>';
+//         		if ( single2[j] === data.data[i].cur_date){
+//         			for(var k=0; k < headername.length; k++) {
+//         			  	if( data.data[i].sensor_name == headername[k]){
+//         			  		str2 += '<td>'+data.data[i].sensing_data+'</td>'
+//         			  	}
+//         			}		
+//         		} 	
+        			
+//         	 }
+//         	 str2 +='</tr>';
+//         	 $("#sensing-data").html(str2);	
+        	 
+//          }
+         
+         
+         
+         /* for(var i=0; i < data.data.length; i++){
+ 			str2 +='<tr>';
+        	time[i] = data.data[i].cur_date;
+      			
+        	 
+			 str2 +='<td>'+data.data[i].cur_date+'</td>';
         	 
         	 for(var j=1; j < headername.length; j++){
-     		
-        		 if( data.data[i].sensor_name == headername[j] ) {
+     			 
+        		 
+        		 if( data.data[i].sensor_name == headername[j]) {
         			
         			str2 += '<td>'+data.data[i].sensing_data+'</td>'
+        			
         			
         		 }else{
         			str2 += '<td>없음</td>'
@@ -286,8 +354,13 @@ geocoder.addressSearch(site, function(result, status) {
         	 str2 +='</tr>';
         	 $("#sensing-data").html(str2);	
         	 
-         }
-		}
+         } */
+         
+         
+         
+         
+         
+		} //success 함수 종료
 	});
 	
 	$("#modify").click(function(){

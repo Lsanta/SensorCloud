@@ -130,15 +130,16 @@ public class SiteController {
 		
 		ArrayList<SensorDataVO> getGraph = siteservice.getSensingDate(site_id);
 		ArrayList<SensorDataVO> getGraphName = siteservice.getGraphName(site_id);
-		
+	
 		JSONArray name = JSONArray.fromObject(getGraphName);
 		JSONArray graph = JSONArray.fromObject(getGraph);
-		
+	
 		System.out.println("이거 : "+name);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", name);
 		map.put("graph", graph);
+	
 		
 		JSONObject json = JSONObject.fromObject(map);
 		System.out.println(json);
@@ -262,7 +263,7 @@ public class SiteController {
 
 		if (realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
-			return "redirect:/" + site_id + "/siterepair/" + pageNum;
+			return "redirect:/site/" + site_id + "/siterepair/" + pageNum;
 		}
 
 		return "site/siterepair";

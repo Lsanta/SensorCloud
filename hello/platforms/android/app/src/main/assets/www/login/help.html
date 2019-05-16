@@ -6,11 +6,15 @@
 	<link rel="stylesheet" type="text/css" href="../css/login/help.css">
 	<link rel="stylesheet" type="text/css" href="../css/login/idfind.css">
 	<link rel="stylesheet" type="text/css" href="../css/login/passwordfind.css">
-    <script src="../js/jquery.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css">
+	<script src="../js/jquery.js"></script>
+	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 </head>
 <body>
 	<div id="wrapper">
+
 		<div id ="header">
+			<a href="javascript:history.go(-1)">뒤로 가기</a>
 			<h2>아이디/비밀번호 찾기</h2>
 		</div>
 
@@ -108,16 +112,16 @@
 			contentType : "application/json; charset=UTF-8",
         	success : function(data){
         		var s = "아이디 조회 결과 입력하신 정보는 아래와 같습니다.";
-        		
-        		if( data == "none"){
+        		alert(data);
+        		if( data.signal == "none"){
         			$("#innerfindid").css("visibility","visible");
         			document.getElementById("innerfindid").innerHTML="존재하지 않는 회원입니다.";
-        		} else if( data == "isN"){
+        		} else if( data.signal == "isN"){
         			$("#innerfindid").css("visibility","visible");
         			document.getElementById("innerfindid").innerHTML="등록된 전화번호가 아닙니다.";
         		} else {
         			$("#innerfindid").css("visibility","visible");
-        			document.getElementById("innerfindid").innerHTML="<br>"+s+"<br><p>"+data+"</p>";
+        			document.getElementById("innerfindid").innerHTML="<br>"+s+"<br><p>"+data.signal+"</p>";
         		}
         		
         		
@@ -126,7 +130,6 @@
         }); //ajax 종료
 
 		}); // id찾기 확인 버튼 클릭시
-
 	});
 </script>
 </body>
