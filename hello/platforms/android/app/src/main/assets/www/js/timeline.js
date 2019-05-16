@@ -39,8 +39,6 @@ $(document).ready(function(){
         } // success 함수 종료
                
     }); // ajax함수
-
-
    /*글 등록*/
    $("#submit").click(function(){
         window.sessionStorage.getItem("id");

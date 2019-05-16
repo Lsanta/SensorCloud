@@ -116,10 +116,10 @@
     <div data-role="footer"  data-position="fixed" data-id="footerid1">
         <div data-role="navbar">
             <ul>
-                <li><a href="#" data-icon="home"></a></li>
-                <li><a href="#" data-icon="search"></a></li>
-                <li><a href="#" data-icon="comment"></a></li>
-                <li><a href="#" data-icon="user"></a></li>
+                <li><a href="main.html" rel="external" data-icon="home"></a></li>
+                <li><a href="search.html" rel="external" data-icon="search"></a></li>
+                <li><a href="timeline.html" rel="external" data-icon="comment"></a></li>
+                <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
             </ul>
         </div>
     </div>
@@ -128,11 +128,11 @@
 <div id="page-loading">
     <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>   
 </div>
- 
 <script src="./js/jquery.js"></script>
-<script src="./js/jquery.mobile-1.4.5.js"></script>    
 <script src="./js/mypage.js"></script>
 <script src="./js/level.js"></script>
+<script src="./js/jquery.mobile-1.4.5.js"></script>    
+
 <script>   
     window.onload = function() { //실행될 코드 }
         $("#page-loading").css("display", "none");
