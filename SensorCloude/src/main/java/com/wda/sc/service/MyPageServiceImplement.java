@@ -26,7 +26,12 @@ public class MyPageServiceImplement implements MyPageService {
 		// TODO Auto-generated method stub
 		return mapper.getInfo(id);
 	}
+	public ArrayList<MemberVO> getInfom(String id) {
+		// 앱 테스트
+		return mapper.getInfom(id);
+	}
 	
+	@Override
 	public ArrayList<CheckBoardVO> myList(Map<String, Object> parm){
 		return mapper.myList(parm);
 	}

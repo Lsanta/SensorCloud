@@ -129,6 +129,7 @@ public class MyPageController {
 
 		return "redirect: /mypage/imagecomplete";
 	}
+	
 	@RequestMapping(value = "/imagecomplete", method = RequestMethod.GET)
 	public String imagecomplete(Locale locale, Model model) {
 		
