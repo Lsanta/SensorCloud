@@ -27,11 +27,19 @@
 				  if (currentToken) {
 				    console.log(currentToken);
 					
+				    $.ajax({
+						type : "POST",
+						url : "/app/send/WebTokenSave.do",
+						data : currentToken,
+						contentType : 'application/json',
+						success : function(data){
+						}
+					});
+				    
+				    
 				    var select_level = $("#select_level option:selected").val();
-
 					var user_id = $("#user_id").text();
-					
-					
+			
 				    var payload = {
 				    		token : currentToken,
 							message : user_id + "님의" + select_level + "등급 승급요청이 왔습니다."
@@ -39,7 +47,7 @@
 					
 					$.ajax({
 						type : "POST",
-						url : "/send/message.do",
+						url : "/app/send/message.do",
 						data : JSON.stringify(payload),
 						contentType : 'application/json',
 						success : function(data){

@@ -1,11 +1,43 @@
 $(document).ready(function() {
+//프로필
+var query = {
+    id: window.sessionStorage.getItem("id")
+};
+
+$.ajax({
+    type : "POST",
+    url : "http://39.127.7.58:8080/app/mypage/usermodify",
+    data : query,
+    dataType : 'json',
+    contentType : "application/json; charset=UTF-8",
+    success : function(result7){
+        console.log(result7);
+       var str3="";
+       $.each(result7,function(i,s){
+          str3 +='<p class="n1">'+s[0].name+'</p>';
+		  str3 +='<p class="n2">'+'등급'+s[0].m_level+'</p>';
+		  str3 +='<p class="n3">';
+		  switch(s[0].m_level) {
+			  case 1: str3 +='<span>'+'(권한없음)'+'</span>'; break;
+			  case 2: str3 +='<span>'+'(읽기권한)'+'</span>'; break;
+			  case 3: str3 +='<span>'+'(쓰기권한)'+'</span>'; break;
+			  case 4: str3 +='<span>'+'(수정권한)'+'</span>'; break;
+			  case 5: str3 +='<span>'+'(관리자)'+'</span>'; break;
+		  }
+		  str3 +='</p>';
+
+           $(".name01").html(str3);
+       });
+    }
+});
 	//점검이력 불러오기
 	$.ajax({
 	   type : "POST",
 	   url : "http://39.127.7.58:8080/app/mypage/mypagemain",
+	   async:false,
 	   data : {pagenum : 1},
 	   success : function(result){
-			 console.log(result);
+			 
 			 var page="";
 			 var str = "";  
 			 $.each(result.mpcheckList,function(i,s){
@@ -40,44 +72,45 @@ $(document).ready(function() {
 	   $("#content").load("usermodify.html");
 	});
 
-
-  function page(index) {
-  $.ajax({
-	   type : "POST",
-	   url : "http://39.127.7.58:8080/app/mypage/mypagemain",
-	   data : {pagenum : index},
-	   success : function(result){
-			 console.log(result)
-			 var page="";
-			 var str = ""; 
-			 $.each(result.mpcheckList,function(i,s){
-			 str +='<tr>';
-			 str +='<td>'+s.site_name+'</td>';      // 현장이름
-			 str +='<td>'+s.title+'</td>';          // 제목
-			 str +='<td>'+s.board_status+'</td>';   // 상태
-			 str +='<td>'+s.reg_date+'</td>';       // 날짜
-			 str +='</tr>';
-
-			 $("#mypagechecklist").html(str);
-				
-		  });
-			   if (result.criteria.prev) {
-				   page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.startPage - 1) + ');" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>'
-				}
-				for (var i = result.criteria.startPage; i <= result.criteria.endPage; i++) {
-				   page += '<li class="page-item"><a class="page-link" href="javascript:page(' + i + ');">' + i + '</a></li>'
-				}
-				if (result.criteria.next) {
-				   page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.endPage + 1) + ');" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>'
-				}
-				$(".pagination").empty();
-				$(".pagination").prepend(page);
-				$("html, body").animate({ scrollTop: 0 }, 1);
-	 
-		  } // success 함수 종
-		}); // ajax함수
- 	}
 });
+
+function page(index) {
+	$.ajax({
+		 type : "POST",
+		 url : "http://39.127.7.58:8080/app/mypage/mypagemain",
+		 async:false,
+		 data : {pagenum : index},
+		 success : function(result){
+			  
+			   var page="";
+			   var str = ""; 
+			   $.each(result.mpcheckList,function(i,s){
+			   str +='<tr>';
+			   str +='<td>'+s.site_name+'</td>';      // 현장이름
+			   str +='<td>'+s.title+'</td>';          // 제목
+			   str +='<td>'+s.board_status+'</td>';   // 상태
+			   str +='<td>'+s.reg_date+'</td>';       // 날짜
+			   str +='</tr>';
+  
+			   $("#mypagechecklist").html(str);
+				  
+			});
+				 if (result.criteria.prev) {
+					 page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.startPage - 1) + ');" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>'
+				  }
+				  for (var i = result.criteria.startPage; i <= result.criteria.endPage; i++) {
+					 page += '<li class="page-item"><a class="page-link" href="javascript:page(' + i + ');">' + i + '</a></li>'
+				  }
+				  if (result.criteria.next) {
+					 page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.endPage + 1) + ');" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>'
+				  }
+				  $(".pagination").empty();
+				  $(".pagination").prepend(page);
+				  $("html, body").animate({ scrollTop: 0 }, 1);
+	   
+			} // success 함수 종
+		  }); // ajax함수
+	   }
 
 
 //점검이력 글 하나 클릭 시
@@ -89,7 +122,7 @@ $(document).on("click", "#mypagechecklist tr", function() {
 	var board_no = $("#mypagechecklist tr:eq(" + tr + ") td:eq(4)").text();
 	// 내가클릭한 테이블의 행을 판별해야하기위해 board_no 정보를 넘긴다
 	
-	window.location.href = "/checkboard/" + board_no;
+	window.location.href = "/checkboard/" + board_no; //바꾸기~~
 });
 
 
@@ -108,7 +141,7 @@ $(document).ready(function() {
 		}
 
 		var query = {
-			id: window.sessionStorage.getItem("key"),
+			id: window.localStorage.getItem("key"),
 			password : $("#pass").val()
 		};
 		alert(query);
@@ -116,7 +149,9 @@ $(document).ready(function() {
 		$.ajax({
 			type : "POST",
 			url : "http://39.127.7.58:8080/app/mypage/mypageconfirmpasswd.do",
+			async: false,
 			data : query,
+			dataType : "text",
 			contentType : "application/json; charset=UTF-8",
 			success : function(data) {
 				alert(data);
@@ -139,30 +174,49 @@ $(document).ready(function() {
 	
 });
 
-// $(document).ready(function() {
-// 	//승급요청 확인 클릭시
-// 	$("#ok").click(function(){
-// 		 alert("1");
-// 		 var id = sessionStorage.getItem('id');
-// 		 var select = $("#select_level option:selected").val();
+$(document).ready(function() {
+	//승급요청 확인 클릭시
+	$("#ok").click(function(){
+		 var id = sessionStorage.getItem('id');
+		 var select = $("#select_level option:selected").val();
 		
-// 		 var query = {
-// 			 id : id,
-// 			 mlevel : select
-// 		 }
+		 var query = {
+			 id : id,
+			 mlevel : select
+		 }
 
-// 		 console.log(query);
+		 var payload = {
+			message : "앱에서" + id + "님의" + select + "등급 승급요청이 왔습니다."
+		 }	
 
-// 		 $.ajax({
-// 			type : "POST",
-// 			url : "http://39.127.7.58:8080/app/mypage/levelup",
-// 			data : query,
-// 			contentType : "application/json; charset=UTF-8",
-// 			success : function(data) {
-// 				alert(data);
+		 $.ajax({
+			type : "POST",
+			url : "http://39.127.7.58:8080/app/mypage/levelup",
+			data : JSON.stringify(query),
+			contentType : "application/json; charset=UTF-8",
+			dataType : 'text',
+			success : function(data) {
+				if(data == "success"){
+					alert("승급요청에 성공했습니다.");
+
+					//푸쉬 메시지 요청(웹으로)
+					$.ajax({
+							type : "POST",
+							url : "http://39.127.7.58:8080/app/send/message.do",
+							data : JSON.stringify(payload),
+							contentType : "application/json; charset=UTF-8",
+							success : function(data) {
+							}
+					}); //ajax 종료
+					$.mobile.changePage("#tab2",{ transition: "flip", changeHash: false });
+
+				} else if (data == "false"){
+					alert("승급요청에 실패했습니다. 다시 시도해 주세요.");
+					$.mobile.changePage("#tab2",{ transition: "flip", changeHash: false });
+				}
 				
-// 			}
-// 		});
+			}
+		}); //ajax 종료
 
-// 	});
-// });
+	}); // 클릭 이벤트 종료
+}); 

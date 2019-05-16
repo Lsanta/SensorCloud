@@ -19,7 +19,7 @@ function getQueryStringObject() {
 
       $.ajax({
             type : "POST",
-            url : "http://39.127.7.59:8080/app/sitemain",
+            url : "http://39.127.7.58:8080/app/sitemain",
             data : site_id,
             async:false,
             contentType : "application/json; charset=UTF-8",
@@ -30,7 +30,7 @@ function getQueryStringObject() {
 
       $.ajax({
         type : "POST",
-        url : "http://39.127.7.59:8080/app/sitemainsensor",
+        url : "http://39.127.7.58:8080/app/sitemainsensor",
         data : site_id,
         async:false,
         contentType : "application/json; charset=UTF-8",
@@ -136,7 +136,7 @@ function getQueryStringObject() {
 
   $.ajax({
     type : "POST",
-    url : "http://39.127.7.59:8080/app/sitedata",
+    url : "http://39.127.7.58:8080/app/sitedata",
     data : site_id,
     async:false,
     contentType : "application/json; charset=UTF-8",
@@ -210,7 +210,7 @@ $("#sn").html(str);
 
 $.ajax({
             type : "POST",
-            url : "http://39.127.7.59:8080/app/siterepairlist",
+            url : "http://39.127.7.58:8080/app/siterepairlist",
             data : site_id,
             async:false,
             contentType : "application/json; charset=UTF-8",
