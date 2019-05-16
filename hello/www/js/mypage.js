@@ -39,10 +39,11 @@ $(document).ready(function() {
 	$('.mpmodify-level').on('click', function() {
 	   $("#content").load("usermodify.html");
 	});
+});
 
-
-  function page(index) {
-  $.ajax({
+function page(index) {
+	alert(index);
+  	$.ajax({
 	   type : "POST",
 	   url : "http://39.127.7.58:8080/app/mypage/mypagemain",
 	   data : {pagenum : index},
@@ -76,10 +77,8 @@ $(document).ready(function() {
 	 
 		  } // success 함수 종
 		}); // ajax함수
- 	}
-});
-
-
+	 }
+	 
 //점검이력 글 하나 클릭 시
 $(document).on("click", "#mypagechecklist tr", function() {
 
@@ -139,30 +138,30 @@ $(document).ready(function() {
 	
 });
 
-// $(document).ready(function() {
-// 	//승급요청 확인 클릭시
-// 	$("#ok").click(function(){
-// 		 alert("1");
-// 		 var id = sessionStorage.getItem('id');
-// 		 var select = $("#select_level option:selected").val();
+$(document).ready(function() {
+	//승급요청 확인 클릭시
+	$("#ok").click(function(){
+		 alert("1");
+		 var id = sessionStorage.getItem('id');
+		 var select = $("#select_level option:selected").val();
 		
-// 		 var query = {
-// 			 id : id,
-// 			 mlevel : select
-// 		 }
+		 var query = {
+			 id : id,
+			 mlevel : select
+		 }
 
-// 		 console.log(query);
+		 console.log(query);
 
-// 		 $.ajax({
-// 			type : "POST",
-// 			url : "http://39.127.7.58:8080/app/mypage/levelup",
-// 			data : query,
-// 			contentType : "application/json; charset=UTF-8",
-// 			success : function(data) {
-// 				alert(data);
+		 $.ajax({
+			type : "POST",
+			url : "http://39.127.7.58:8080/app/mypage/levelup",
+			data : JSON.stringify(query),
+			contentType : "application/json; charset=UTF-8",
+			success : function(data) {
+				alert(data);
 				
-// 			}
-// 		});
+			}
+		});
 
-// 	});
-// });
+	});
+});
