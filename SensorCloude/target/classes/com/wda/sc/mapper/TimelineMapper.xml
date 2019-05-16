@@ -50,7 +50,12 @@
 	<delete id="timelinedelete">
 		delete from timeline where timeline_n = #{timeline_n}
 	</delete>
-
+	
+	<!-- 글 선택 -->
+	<select id="getContent" resultType="com.wda.sc.domain.TimelineVO">
+		select content from timeline where timeline_n = #{timeline_n}
+	</select>
+	
 	<!-- 글 수정 -->
 	<update id="timelinemodify" parameterType="com.wda.sc.domain.TimelineVO">
 		update timeline set content = #{content} where timeline_n = #{timeline_n}

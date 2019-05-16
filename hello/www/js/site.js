@@ -19,7 +19,7 @@ function getQueryStringObject() {
 
       $.ajax({
             type : "POST",
-            url : "http://39.127.7.58:8080/app/sitemain",
+            url : "http://39.127.7.59:8080/app/sitemain",
             data : site_id,
             async:false,
             contentType : "application/json; charset=UTF-8",
@@ -30,12 +30,19 @@ function getQueryStringObject() {
 
       $.ajax({
         type : "POST",
-        url : "http://39.127.7.58:8080/app//sitemainsensor",
+        url : "http://39.127.7.59:8080/app/sitemainsensor",
         data : site_id,
         async:false,
         contentType : "application/json; charset=UTF-8",
         success : function(result){
-        //////////////////////////////////////////////////////////////////////////////////
+           
+          
+           if(result.name == ''){
+                    var str12="";
+                    str12 +='<p>'+ '데이터없음' + '</p>';
+                    $("#chartdiv").html(str12);
+           }else{
+       //////////////////////////////////////////////////////////////////////////////////
 				/* 									그래프 그리기 시작									*/
 				// Themes begin
 				
@@ -116,6 +123,11 @@ function getQueryStringObject() {
 				chart.legend = new am4charts.Legend();	//그래프 바로밑에 그래프 각각 나오게 해주고 누를때 이벤트 발생
 	
 	
+           }
+
+
+               
+       
 
 				
 			
@@ -124,56 +136,64 @@ function getQueryStringObject() {
 
   $.ajax({
     type : "POST",
-    url : "http://39.127.7.58:8080/app/sitedata",
+    url : "http://39.127.7.59:8080/app/sitedata",
     data : site_id,
     async:false,
     contentType : "application/json; charset=UTF-8",
     success : function(data){
-	//위에 첫 tr(데이터 이름)
-    var str = ""; 
-    str +='<tr>';
-    str +='<td>시간</td>';
-     $.each(data.name ,function(i,s){
-        str +='<td>'+s.sensor_name+'</td>';
-        $("#sensing-data-head").html(str);
+   
+        if(data.data == ''){
+            var str13="";
+            str13 +='<p>'+ '데이터없음' + '</p>';
+            $("#sensing-data").html(str13);
+   }else{
+//위에 첫 tr(데이터 이름)
+var str = ""; 
+str +='<tr>';
+str +='<td>시간</td>';
+ $.each(data.name ,function(i,s){
+    str +='<td>'+s.sensor_name+'</td>';
+    $("#sensing-data-head").html(str);
+});
+ str +='</tr>';
+ $("#sensing-data-head").html(str);	
+ 
+ //데이터들
+ var str2 = "";
+ var headername = new Array();
+ for(var i=0; i < $("#sensing-data-head td").length; i++){
+     headername[i] = $("#sensing-data-head td").eq(i).text();
+    
+ }
+ 
+ var time = new Array();
+ for(var i=0; i < data.data.length; i++){
+     time[i] = data.data[i].cur_date;
+ }
+ 
+ var single2 = time.filter( (item, idx, array) => {
+        return array.indexOf( item ) === idx ;
     });
-     str +='</tr>';
-     $("#sensing-data-head").html(str);	
      
-     //데이터들
-     var str2 = "";
-     var headername = new Array();
-     for(var i=0; i < $("#sensing-data-head td").length; i++){
-         headername[i] = $("#sensing-data-head td").eq(i).text();
-        
-     }
+ 
+ 
+ 
+ for(var i=0; i < single2.length; i++){
+     str2 +='<tr>';
+     str2 +='<td>'+single2[i]+'</td>';
      
-     var time = new Array();
-     for(var i=0; i < data.data.length; i++){
-         time[i] = data.data[i].cur_date;
-     }
-     
-     var single2 = time.filter( (item, idx, array) => {
-            return array.indexOf( item ) === idx ;
-        });
-         
-     
-     
-     
-     for(var i=0; i < single2.length; i++){
-         str2 +='<tr>';
-         str2 +='<td>'+single2[i]+'</td>';
-         
-         for(var j=0; j < data.data.length; j++) {
-             if ( single2[i] === data.data[j].cur_date){
-                 str2 += '<td>'+data.data[j].sensing_data+'</td>'
-             }
+     for(var j=0; j < data.data.length; j++) {
+         if ( single2[i] === data.data[j].cur_date){
+             str2 += '<td>'+data.data[j].sensing_data+'</td>'
          }
-
-         str2 +='</tr>';
-          $("#sensing-data").html(str2);	
      }
 
+     str2 +='</tr>';
+      $("#sensing-data").html(str2);	
+ }
+
+   }
+	
 
     } // success 함수 종료
 }); // ajax함수 종료
@@ -190,7 +210,7 @@ $("#sn").html(str);
 
 $.ajax({
             type : "POST",
-            url : "http://39.127.7.58:8080/app/siterepairlist",
+            url : "http://39.127.7.59:8080/app/siterepairlist",
             data : site_id,
             async:false,
             contentType : "application/json; charset=UTF-8",

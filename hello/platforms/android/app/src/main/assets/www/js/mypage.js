@@ -2,10 +2,10 @@ $(document).ready(function() {
 	//점검이력 불러오기
 	$.ajax({
 	   type : "POST",
-	   url : "http://39.127.7.58:8080/app/mypage/mypage",
+	   url : "http://39.127.7.58:8080/app/mypage/mypagemain",
 	   data : {pagenum : 1},
 	   success : function(result){
-			 console.log(result)
+			 console.log(result);
 			 var page="";
 			 var str = "";  
 			 $.each(result.mpcheckList,function(i,s){
@@ -44,7 +44,7 @@ $(document).ready(function() {
   function page(index) {
   $.ajax({
 	   type : "POST",
-	   url : "http://39.127.7.58:8080/app/mypage/mypage",
+	   url : "http://39.127.7.58:8080/app/mypage/mypagemain",
 	   data : {pagenum : index},
 	   success : function(result){
 			 console.log(result)
@@ -108,7 +108,7 @@ $(document).ready(function() {
 		}
 
 		var query = {
-			id: window.localStorage.getItem("key"),
+			id: window.sessionStorage.getItem("key"),
 			password : $("#pass").val()
 		};
 		alert(query);
@@ -139,30 +139,30 @@ $(document).ready(function() {
 	
 });
 
-$(document).ready(function() {
-	//승급요청 확인 클릭시
-	$("#ok").click(function(){
-		 alert("1");
-		 var id = sessionStorage.getItem('id');
-		 var select = $("#select_level option:selected").val();
+// $(document).ready(function() {
+// 	//승급요청 확인 클릭시
+// 	$("#ok").click(function(){
+// 		 alert("1");
+// 		 var id = sessionStorage.getItem('id');
+// 		 var select = $("#select_level option:selected").val();
 		
-		 var query = {
-			 id : id,
-			 mlevel : select
-		 }
+// 		 var query = {
+// 			 id : id,
+// 			 mlevel : select
+// 		 }
 
-		 console.log(query);
+// 		 console.log(query);
 
-		 $.ajax({
-			type : "POST",
-			url : "http://39.127.7.58:8080/app/mypage/levelup",
-			data : query,
-			contentType : "application/json; charset=UTF-8",
-			success : function(data) {
-				console.log(data);
+// 		 $.ajax({
+// 			type : "POST",
+// 			url : "http://39.127.7.58:8080/app/mypage/levelup",
+// 			data : query,
+// 			contentType : "application/json; charset=UTF-8",
+// 			success : function(data) {
+// 				alert(data);
 				
-			}
-		});
+// 			}
+// 		});
 
-	});
-});
+// 	});
+// });
