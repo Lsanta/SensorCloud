@@ -65,6 +65,7 @@ public class mLoginController {
 //		 String password = (String) map.get("password");
 		System.out.println("====================================");
 		System.out.println(idt);
+		System.out.println(passwordt);
 
 		String[] array = idt.split("&");
 		String[] id2 = array[0].split("=");
@@ -108,22 +109,25 @@ public class mLoginController {
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/sitemain", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public JSONObject sitemainlist(@RequestBody String site_id, Locale locale, Model model) {
+	public ArrayList<SiteVO> sitemainlist(@RequestBody String site_id, Locale locale, Model model) {
 		System.out.println(site_id);
 
-		ArrayList<SiteVO> result01 = siteservice.getSite(site_id);	
-		ArrayList<SensorDataVO> dListname = siteservice.getDataName(site_id);
-		
-		JSONArray sitelist = JSONArray.fromObject(result01);
-		JSONArray sensorlist = JSONArray.fromObject(dListname);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("site", sitelist);
-		map.put("sensor", sensorlist);
-		JSONObject json = JSONObject.fromObject(map);
+		ArrayList<SiteVO> result01 = siteservice.getSite(site_id);
 
-		return json;
+		return result01;
 	}
+	
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/installsensor", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ArrayList<SensorDataVO> installsensor(@RequestBody String site_id, Locale locale, Model model) {
+		System.out.println(site_id);
+
+		ArrayList<SensorDataVO> result02 = siteservice.getDataName(site_id);
+
+		return result02;
+	}
+
 
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/mSearch.do", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
