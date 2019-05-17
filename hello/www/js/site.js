@@ -2,7 +2,7 @@
 $(document).ready(function() {
     $.ajax({
        type : "POST",
-       url : "http://39.127.7.59:8080/app/sitemain",
+       url : "http://39.127.7.58:8080/app/sitemain",
        contentType : "application/json; charset=UTF-8",
        success : function(result){
           var str="";
