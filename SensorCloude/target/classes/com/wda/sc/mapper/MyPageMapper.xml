@@ -96,6 +96,6 @@
 	
 	<update id="updateappToken" parameterType="map">
 		update app_token set token_id=#{token}
-		where user_id=#{id} 
+		where user_id=#{user_id} 
 	</update>	
 </mapper>

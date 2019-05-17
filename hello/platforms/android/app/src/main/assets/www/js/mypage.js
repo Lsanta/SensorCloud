@@ -44,7 +44,13 @@ $.ajax({
 			 str +='<tr>';
 			 str +='<td>'+s.site_name+'</td>';      // 현장이름
 			 str +='<td>'+s.title+'</td>';          // 제목                       
-			 str +='<td>'+s.board_status+'</td>';   // 상태
+			//  str +='<td>'+s.board_status+'</td>';   // 상태
+				switch(s.board_status){
+				case 0 : str +='<td>'+ 'open' +'</td>'; break;
+				case 1 : str +='<td>'+ 'fixed' +'</td>'; break;
+				case 2 : str +='<td>'+ 'closed' +'</td>'; break;
+				default  : str +='<td>'+'null'+'</td>'; break;
+				}
 			 str +='<td>'+s.reg_date+'</td>';       // 날짜
 			 str +='</tr>';
 
@@ -88,7 +94,13 @@ function page(index) {
 			   str +='<tr>';
 			   str +='<td>'+s.site_name+'</td>';      // 현장이름
 			   str +='<td>'+s.title+'</td>';          // 제목
-			   str +='<td>'+s.board_status+'</td>';   // 상태
+			//    str +='<td>'+s.board_status+'</td>';   // 상태
+				switch(s.board_status){
+				case 0 : str +='<td>'+ 'open' +'</td>'; break;
+				case 1 : str +='<td>'+ 'fixed' +'</td>'; break;
+				case 2 : str +='<td>'+ 'closed' +'</td>'; break;
+				default  : str +='<td>'+'null'+'</td>'; break;
+				}
 			   str +='<td>'+s.reg_date+'</td>';       // 날짜
 			   str +='</tr>';
   
