@@ -27,7 +27,7 @@ $(document).ready(function(){
 
       $.ajax({
             type : "POST",
-            url : "http://39.127.7.59:8080/app/login/mlog", 
+            url : "http://39.127.7.58:8080/app/login/mlog", 
             data : query,
             contentType : "application/json; charset=UTF-8",
             success : function(result){ 

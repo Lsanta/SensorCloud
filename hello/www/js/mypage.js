@@ -34,7 +34,7 @@ var user_id = window.sessionStorage.getItem("id");
 
 	  $.ajax({
 		type : "POST",
-		url : "http://39.127.7.58:8080/app/mypage/mgetAttachListmypage",
+		url : "http://39.127.7.59:8080/app/mypage/mgetAttachListmypage",
 		data : user_id,
 		async : false,
 		contentType : "application/json; charset=UTF-8",

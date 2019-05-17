@@ -6,7 +6,7 @@ var query = {
 
 $.ajax({
     type : "POST",
-    url : "http://39.127.7.59:8080/app/mypage/usermodify",
+    url : "http://39.127.7.58:8080/app/mypage/usermodify",
     data : query,
     dataType : 'json',
     contentType : "application/json; charset=UTF-8",
@@ -68,7 +68,7 @@ var user_id = window.sessionStorage.getItem("id");
 	//점검이력 불러오기
 	$.ajax({
 	   type : "POST",
-	   url : "http://39.127.7.59:8080/app/mypage/mypagemain",
+	   url : "http://39.127.7.58:8080/app/mypage/mypagemain",
 	   async:false,
 	   data : {pagenum : 1},
 	   success : function(result){
@@ -118,7 +118,7 @@ var user_id = window.sessionStorage.getItem("id");
 function page(index) {
 	$.ajax({
 		 type : "POST",
-		 url : "http://39.127.7.59:8080/app/mypage/mypagemain",
+		 url : "http://39.127.7.58:8080/app/mypage/mypagemain",
 		 async:false,
 		 data : {pagenum : index},
 		 success : function(result){
@@ -195,7 +195,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type : "POST",
-			url : "http://39.127.7.59:8080/app/mypage/mypageconfirmpasswd.do",
+			url : "http://39.127.7.58:8080/app/mypage/mypageconfirmpasswd.do",
 			async: false,
 			data : query,
 			dataType : "text",
@@ -238,7 +238,7 @@ $(document).ready(function() {
 
 		 $.ajax({
 			type : "POST",
-			url : "http://39.127.7.59:8080/app/mypage/levelup",
+			url : "http://39.127.7.58:8080/app/mypage/levelup",
 			data : JSON.stringify(query),
 			contentType : "application/json; charset=UTF-8",
 			dataType : 'text',
