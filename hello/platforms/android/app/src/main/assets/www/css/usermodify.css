@@ -16,11 +16,6 @@ h2 {
 	font-size: 1.3em;
 }
 
-h3 {
-	margin-left: 10px;
-	font-size: 1em;
-}
-
 .usermodify-card {
 	padding: 20px 40px;
 	width: 65%;
@@ -31,13 +26,8 @@ h3 {
 	overflow: hidden;
 }
 
-.usermodify-card h1 {
-	font-weight: 80;
-	font-size: 1.7em;
-}
-
 .usermodify-card input[type=button] {
-	width: 30%;
+	width: 100%;
 	display: block;
 	margin-bottom: 10px;
 	float: right;
@@ -45,14 +35,6 @@ h3 {
 
 .usermodify-card input[type=password] {
 	font-size: 16px;
-	width: 100%;
-	-webkit-appearance: none;
-	background: #fff;
-	border: 1px solid #d9d9d9;
-	border-top: 1px solid #c0c0c0;
-	padding: 0 8px;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
 }
 
 .usermodify-card input[type=password]:hover {

@@ -85,4 +85,17 @@
 		update web_token set token_id=#{token}
 		where user_id=#{user_id} 
 	</update>
+	
+	<select id="getappToken" resultType="com.wda.sc.domain.AppTokenVO">
+		select token_id from app_token where user_id = #{user_id}
+	</select>
+	
+	<insert id="saveappToken" parameterType="com.wda.sc.domain.AppTokenVO">
+		insert into app_token(token_id,user_id,ex_date) values( #{token_id},#{user_id},sysdate)
+	</insert>
+	
+	<update id="updateappToken" parameterType="map">
+		update app_token set token_id=#{token}
+		where user_id=#{id} 
+	</update>	
 </mapper>

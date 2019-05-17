@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.wda.sc.domain.AppTokenVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MemberFileVO;
 import com.wda.sc.domain.MemberVO;
@@ -38,5 +39,14 @@ public interface MyPageService {
 	public int saveToken(TokenVO tokenvo);
 
 	public int updateToken(Map<String, String> map);
+	
+	//앱 토큰
+	public List<AppTokenVO> getappToken(String id);
+	
+	public int saveappToken(AppTokenVO tokenvo);
+	
+	public int updateappToken(Map<String, String> map2);
+	
+	
 
 }

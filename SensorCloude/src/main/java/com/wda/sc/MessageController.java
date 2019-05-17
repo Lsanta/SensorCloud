@@ -44,6 +44,7 @@ import com.google.firebase.messaging.Notification;
 import com.google.firebase.messaging.WebpushConfig;
 import com.google.firebase.messaging.WebpushNotification;
 import com.google.firebase.messaging.internal.MessagingServiceErrorResponse;
+import com.wda.sc.domain.AppTokenVO;
 import com.wda.sc.domain.TokenVO;
 import com.wda.sc.service.AndroidPushNotificationService;
 import com.wda.sc.service.MyPageService;
@@ -54,86 +55,10 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/send")
+@RequestMapping("/app/send")
 public class MessageController {
 	private MyPageService mypageservice;
-	//특정 푸시메시지 요청이 들어오면 수행되는 부분
-	//메시지 데이터에 대해 설정을 하고 알림(notification) 구조를 JSON으로 만들어 post 요청에 전달
-	//토큰값들은 DB에 저장을 하고 있는 값들을 불러오면 된다.
-		
-//	@Autowired
-//	AndroidPushNotificationService androidPushNotificationservice;
-//	
-//	  @RequestMapping(value="/message.do", method= RequestMethod.POST, produces = {"application/json"})
-//	  public @ResponseBody ResponseEntity<String> send(@RequestBody Map<String, Object> paramInfo, HttpSession session) throws JSONException {
-//		Map<String, Object> retVal = new HashMap<String, Object>();
-//		
-//		System.out.println("token" + paramInfo.get("token"));
-//		System.out.println("message" + paramInfo.get("message"));
-//		
-//		
-//		//FCM 메시지 전송//
-//	    JSONObject body = new JSONObject();
-//	    
-////	    //db에 저장된 여러개의 토큰(수신자)를 가져와서 설정할 수 있따.
-////	    List<String> tokenlist = new ArrayList<String>();
-////	    //DB과정 생략 (직접 대입) //
-////	    tokenlist.add("token value 1");
-////
-////	    
-////	    JSONArray array = new JSONArray();
-////	    
-////	    for(int i=0; i<tokenlist.size(); i++) {
-////	    	array.put(tokenlist.get(i));
-////	    }
-//	    body.put("to", paramInfo.get("token")); // 여러개의 메시지일경우 registration_ids 단일 to
-//	 
-//	    JSONObject notification = new JSONObject();
-//	    notification.put("title", "승급 요청 알림");
-//	    notification.put("body", paramInfo.get("message"));
-//	    notification.put("click_action", "https://localhost:8443/");
-//	    notification.put("user_id",session.getAttribute("id"));
-//	    notification.put("icon","/resources/img/logo.png");
-//
-//	    body.put("notification", notification);
-//	    
-//	    
-//	    JSONObject data = new JSONObject();
-//	    data.put("Room", "push alarm!!");
-//	    body.put("data", data);
-//	    
-//	    JSONObject fcm_option = new JSONObject();
-//	    fcm_option.put("link","https://localhost:8443/mypage/1");
-//	    body.put("fcm_option", fcm_option);
-//	    
-//	    System.out.println(body.toString());
-//	    
-//	    HttpHeaders headers = new HttpHeaders();
-//	    headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-//	   
-//	    HttpEntity<String> request = new HttpEntity<>(body.toString(), headers);
-//
-//	    
-//	    CompletableFuture<String> pushNotification = androidPushNotificationservice.send(request);
-//	    System.out.println(body.toString());
-//	    CompletableFuture.allOf(pushNotification).join();
-//	   
-//	    try {
-//	      
-//	      String firebaseResponse = pushNotification.get();
-//	      
-//	      return new ResponseEntity<>(firebaseResponse, HttpStatus.OK);
-//	    } catch (InterruptedException e) {
-//	      e.printStackTrace();
-//	    } catch (ExecutionException e) {
-//	      e.printStackTrace();
-//	    }
-//	 
-//	    return new ResponseEntity<>("Push Notification ERROR!", HttpStatus.BAD_REQUEST);
-//	  }
-	
-	
-	
+	   @CrossOrigin(maxAge = 3600)
 	   @SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
 	   @RequestMapping(value="/message.do", method= RequestMethod.POST, produces = {"application/json"})
@@ -164,42 +89,17 @@ public class MessageController {
 	         defaultApp = FirebaseApp.initializeApp(options);
 	      }
 	      
-
+	      System.out.println("메시지 전송 들어옴.");
 	      String registrationToken = "";
-	      String user_id = (String) session.getAttribute("id");
+//	      String user_id = (String) session.getAttribute("id");
+	      String user_id = "admin";
 	      List<TokenVO> tokenlist = new ArrayList<TokenVO>();
 	      
 	      //token값 select 하기
 	      tokenlist = mypageservice.getToken(user_id);
-	      TokenVO tokenvo = new TokenVO();
-	      if(tokenlist.size() == 0) {
-	    	  	//토큰 저장
-	    	  	tokenvo.setToken_id((String) paramInfo.get("token"));
-	    	  	tokenvo.setUser_id(user_id);
-	    	  	mypageservice.saveToken(tokenvo);
-	    	  	
-	    	  	registrationToken = tokenvo.getToken_id();
-	    	  	System.out.println("db에 값이 없을때" + registrationToken); 
-	      } else {
-	    	  
-	    	  String DBToken = tokenlist.get(0).getToken_id();
-	    	  String CurToken = (String) paramInfo.get("token");
-	    	  
-	    	  if( DBToken.equals(CurToken) ) {
-	    		  registrationToken = DBToken;
-	    		  System.out.println("db에 값이 있고 비교했더니 같은값일때" + registrationToken); 
-	    	  } else {
-	    		  //새로운 토큰 저장
-	    		  Map<String, String> map = new HashMap<String, String>();
-	    		  map.put("token", CurToken);
-	    		  map.put("user_id", user_id);
-	    		  
-	    		  mypageservice.updateToken(map);
-	    		  registrationToken = CurToken;
-	    		  System.out.println("db에 값이 있고 비교했더니 다른값일때" + registrationToken); 
-		    	   
-	    	  }
-	      }
+	      registrationToken = tokenlist.get(0).getToken_id();
+	      System.out.println("현재 토큰 :" + registrationToken);
+	      
 	       
 	      Message message = Message.builder()
 	    		  .setWebpushConfig(WebpushConfig.builder()
@@ -301,5 +201,91 @@ public class MessageController {
 		      }
 		      return "ok";
 	   }
+	   
+	   @SuppressWarnings({ "null", "unused" })
+	   @ResponseBody
+	   @RequestMapping(value="/WebTokenSave.do", method= RequestMethod.POST, produces = {"application/json"})
+	   public String webtokenSave(@RequestBody String Token, HttpSession session) {
+		 
+		   System.out.println("웹토큰 저장 들어옴.");
+		   String webToken = Token;
+		   
+		   String user_id = (String) session.getAttribute("id");
+		   List<TokenVO> tokenlist = new ArrayList<TokenVO>();
+		     
+		   //token값 select 하기
+		   tokenlist = mypageservice.getToken(user_id);
+		      TokenVO tokenvo = new TokenVO();
+		      if(tokenlist.size() == 0) {
+		    	  	//토큰 저장
+		    	 tokenvo.setToken_id(webToken);
+		    	 tokenvo.setUser_id(user_id);
+		    	 mypageservice.saveToken(tokenvo);
+		    	 System.out.println("db에 값이 없을때" ); 
+		      } else {
+		    	  String DBToken = tokenlist.get(0).getToken_id();
+		    	  String CurToken = (String) webToken;
+		    	  
+		    	  if( DBToken.equals(CurToken) ) {
+		    		  System.out.println("db에 값이 있고 비교했더니 같은값일때"); 
+		    	  } else {
+		    		  //새로운 토큰 저장
+		    		  Map<String, String> map = new HashMap<String, String>();
+		    		  map.put("token", CurToken);
+		    		  map.put("user_id", user_id);
+		    		  
+		    		  mypageservice.updateToken(map);
+		    		  System.out.println("db에 값이 있고 비교했더니 다른값일때"); 
+		    	  }
+		      }		   
+		   return "";
+	   }
+	   
+	   
+	   @CrossOrigin(maxAge = 3600)
+	   @SuppressWarnings({ "null", "unused" })
+	   @ResponseBody
+	   @RequestMapping(value="/AppTokenSave.do", method= RequestMethod.POST, produces = {"application/json"})
+	   public String apptokenSave(@RequestBody  Map<String, String> map) {
+		   String id = map.get("id");
+		   String appToken = map.get("token");
+		   
+		   System.out.println(id + appToken);
+		   
+		   List<AppTokenVO> tokenlist = new ArrayList<AppTokenVO>();
+		     
+		   //token값 select 하기
+		   tokenlist = mypageservice.getappToken(id);
+		   AppTokenVO tokenvo = new AppTokenVO();
+		   if(tokenlist.size() == 0) {
+		    	//토큰 저장
+		    	 tokenvo.setToken_id(appToken);
+		    	 tokenvo.setUser_id(id);
+		    	 mypageservice.saveappToken(tokenvo);
+		    	 System.out.println("db에 값이 없을때"); 
+		      } else {
+		    	  
+		    	  String DBToken = tokenlist.get(0).getToken_id();
+		    	  String CurToken = (String) appToken;
+		    	  
+		    	  if( DBToken.equals(CurToken) ) {
+		    		  System.out.println("db에 값이 있고 비교했더니 같은값일때"); 
+		    	  } else {
+		    		  //새로운 토큰 저장
+		    		  Map<String, String> map2 = new HashMap<String, String>();
+		    		  map2.put("token", appToken);
+		    		  map2.put("user_id", id);
+		    		  
+		    		  mypageservice.updateappToken(map2);
+		    		  System.out.println("db에 값이 있고 비교했더니 다른값일때"); 
+			    	   
+		    	  }
+		      }
+		   
+				   
+		   return "";
+	   }
+	   
+	   
 	   
 }

@@ -38,7 +38,7 @@ public class mTimelineController {
 
 		Paging page = new Paging();	//최대한 코드를 수정 안하기 위한 기존 페이징
 		criteria.setTotalcount(timelineservice.getPageNum());   //전체 게시글 개수를 지정
-		criteria.setContentnum(5);
+		criteria.setContentnum(4);
 		criteria.setPagenum(pagenum);   //현재 페이지를 페이지 객체에 지정
 		criteria.setStartnum(pagenum);   //컨텐츠 시작 번호 지정
 		criteria.setEndnum(pagenum);   //컨텐츠 끈 번호 지정 
@@ -112,7 +112,7 @@ public class mTimelineController {
 	@RequestMapping(value = "/mtimelinemodify.do",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public JSONObject mtimelinemodify(@RequestBody Map<String, String> map, TimelineVO vo) throws Exception {
-		System.out.println("수정");
+		System.out.println("수정클릭");
 		String content = (String)map.get("content");
 		String timeline_n = (String)map.get("timeline_n");
 		
@@ -124,6 +124,30 @@ public class mTimelineController {
     
      return json;
   }
+	
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/mtimelinemodifyy.do",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public String mtimelinemodifyy(@RequestBody Map<String, String> map, TimelineVO vo) throws Exception {
+		System.out.println("수정");
+		String content = (String)map.get("content");
+		String timeline_n = (String)map.get("timeline_n");
+		
+		vo.setContent(content);
+		vo.setTimeline_n(timeline_n);
+		
+		int a = timelineservice.timelinemodify(vo);
+		System.out.println(a);
+		
+		if (a != 0) {
+			return "success";
+
+		} else {
+			return "false";
+
+		}
+	}
+
 	
 
 }

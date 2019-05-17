@@ -104,7 +104,7 @@ public class TimelineController {
 
 	@RequestMapping(value = "timelinemodify.do")
 	@ResponseBody
-	public String timelinemodify(TimelineVO vo, HttpSession session) {
+	public String timelinemodify(TimelineVO vo, HttpSession session, String timeline_n) {
 
 		int a = timelineservice.timelinemodify(vo);
 		System.out.println(a);

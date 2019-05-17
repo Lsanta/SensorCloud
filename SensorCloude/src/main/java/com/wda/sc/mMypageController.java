@@ -24,6 +24,7 @@ import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.MyPageService;
+import com.wda.sc.service.UsermanageService;
 
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
@@ -35,6 +36,7 @@ import net.sf.json.JSONObject;
 public class mMypageController {
 	private CheckboardService checkboardservice;
 	private MyPageService mypageservice;
+	private UsermanageService usermanageservice;
 	
 	//마이페이지 메인
 	@CrossOrigin(origins = "*", maxAge = 3600)
@@ -91,7 +93,7 @@ public class mMypageController {
 		return confirmid;
 	}
 
-	//내 정보 수정
+	//내 정보 불러오기
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/usermodify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
@@ -108,38 +110,45 @@ public class mMypageController {
 		return json;
 	}
 	
-//	@CrossOrigin(origins = "*", maxAge = 3600)
-//	@RequestMapping(value = "/usermodify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//	@ResponseBody
-//	public String updatemyinfo(Locale locale, Model model, MemberVO vo) {
-//
-//		if (vo.getPassword().equals("") || vo.getName().equals("") || vo.getUser_id().equals("") || vo.getPhone().equals("")) {
-//
-//			return "false";
-//
-//		} else {
-//			mypageservice.updateuserinfo(vo);
-//			return "success";
-//		}
-//	}
+	//내정보 수정
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/updatemyinfo.do")
+	@ResponseBody
+	public String updatemyinfo(Locale locale, Model model, MemberVO vo) {
+		 System.out.println("여기~");
+
+		if (vo.getPassword().equals("") || vo.getName().equals("") || vo.getUser_id().equals("") || vo.getPhone().equals("")) {
+
+			return "false";
+
+		} else {
+			mypageservice.updateuserinfo(vo);
+			return "success";
+		}
+	}
 	
-	
+	//마이페이지 승급요청
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/levelup", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public String mlevelup(@RequestBody String param) throws Exception {
-		
-	List<Map<String,Object>> Map = new ArrayList<Map<String,Object>>();
-	Map = JSONArray.fromObject(param);
-		
-	System.out.println(Map.get(0).get("id"));
-	System.out.println(Map.get(1).get("mlevel"));
-		
-		
+	public String mlevelup(@RequestBody  Map<String, String> map) throws Exception {
+	System.out.println(map);	
+//	String id = map.get("id");
+//	String mlevel2 = map.get("mlevel");
+	
+	int i = usermanageservice.mrequestlevel(map);
+	System.out.println("결과값" + i);
+	
+	if( i == 1 ) {
+		System.out.println("성공");
+		return "success";
 		
 
-	return "";
+	} else {
+		System.out.println("실패");
+		return "false";
+	
 	}
-	
-	
+
+	}
 }
