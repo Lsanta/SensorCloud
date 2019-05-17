@@ -1,12 +1,12 @@
 $(document).ready(function() {
 //프로필
 var query = {
-    id: window.sessionStorage.getItem("id")
+	id: window.sessionStorage.getItem("id")
 };
 
 $.ajax({
     type : "POST",
-    url : "http://39.127.7.58:8080/app/mypage/usermodify",
+    url : "http://39.127.7.59:8080/app/mypage/usermodify",
     data : query,
     dataType : 'json',
     contentType : "application/json; charset=UTF-8",
@@ -30,10 +30,45 @@ $.ajax({
        });
     }
 });
+var user_id = window.sessionStorage.getItem("id");
+
+	  $.ajax({
+		type : "POST",
+		url : "http://39.127.7.59:8080/app/mypage/mgetAttachListmypage",
+		data : user_id,
+		async : false,
+		contentType : "application/json; charset=UTF-8",
+		success : function(arr){
+			console.log(arr);
+			var str = "";
+		   
+			$(arr).each(function(i, attach){
+				//image type
+				if(attach.filetype){
+					var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
+				    alert(attach.file_name);
+					str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";
+					str += "<img class='delete1' src='http://39.127.7.59:8080/display?fileName="+fileCallPath+"'>";
+					str += "</div>";
+					str += "</li>";
+				
+				} else {
+					str += "<img src='./img/user.png'>";
+					
+				}
+				 
+			 });
+			 
+			 $(".cell ul").html(str);
+
+		} // success 함수 종료
+  }); // ajax함수 종료
+	 
+
 	//점검이력 불러오기
 	$.ajax({
 	   type : "POST",
-	   url : "http://39.127.7.58:8080/app/mypage/mypagemain",
+	   url : "http://39.127.7.59:8080/app/mypage/mypagemain",
 	   async:false,
 	   data : {pagenum : 1},
 	   success : function(result){
@@ -77,7 +112,7 @@ $.ajax({
 function page(index) {
 	$.ajax({
 		 type : "POST",
-		 url : "http://39.127.7.58:8080/app/mypage/mypagemain",
+		 url : "http://39.127.7.59:8080/app/mypage/mypagemain",
 		 async:false,
 		 data : {pagenum : index},
 		 success : function(result){
@@ -148,7 +183,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type : "POST",
-			url : "http://39.127.7.58:8080/app/mypage/mypageconfirmpasswd.do",
+			url : "http://39.127.7.59:8080/app/mypage/mypageconfirmpasswd.do",
 			async: false,
 			data : query,
 			dataType : "text",
@@ -191,7 +226,7 @@ $(document).ready(function() {
 
 		 $.ajax({
 			type : "POST",
-			url : "http://39.127.7.58:8080/app/mypage/levelup",
+			url : "http://39.127.7.59:8080/app/mypage/levelup",
 			data : JSON.stringify(query),
 			contentType : "application/json; charset=UTF-8",
 			dataType : 'text',
