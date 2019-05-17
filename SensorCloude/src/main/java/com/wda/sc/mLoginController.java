@@ -65,7 +65,6 @@ public class mLoginController {
 //		 String password = (String) map.get("password");
 		System.out.println("====================================");
 		System.out.println(idt);
-		System.out.println(passwordt);
 
 		String[] array = idt.split("&");
 		String[] id2 = array[0].split("=");

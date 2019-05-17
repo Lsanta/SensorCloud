@@ -22,6 +22,7 @@ import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.MyPageService;
+import com.wda.sc.service.UsermanageService;
 
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
@@ -33,6 +34,7 @@ import net.sf.json.JSONObject;
 public class mMypageController {
 	private CheckboardService checkboardservice;
 	private MyPageService mypageservice;
+	private UsermanageService usermanageservice;
 	
 	//마이페이지 메인
 	@CrossOrigin(origins = "*", maxAge = 3600)
@@ -127,22 +129,24 @@ public class mMypageController {
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/levelup", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public String mlevelup(@RequestBody String param) throws Exception {
-	System.out.println(param);	
-//	List<Map<String,Object>> Map = new ArrayList<Map<String,Object>>();
-//	Map = JSONArray.fromObject(param);
+	public String mlevelup(@RequestBody  Map<String, String> map) throws Exception {
+	System.out.println(map);	
+//	String id = map.get("id");
+//	String mlevel2 = map.get("mlevel");
+	
+	int i = usermanageservice.mrequestlevel(map);
+	System.out.println("결과값" + i);
+	
+	if( i == 1 ) {
+		System.out.println("성공");
+		return "success";
 		
-	List<Map<String,Object>> Map = new ArrayList<Map<String,Object>>();
-	Map = JSONArray.fromObject(param);
-		
-	System.out.println(Map.get(0).get("id"));
-	System.out.println(Map.get(1).get("mlevel"));
 
-//	System.out.println(map.get("id"));
-//	System.out.println(map.get("mlevel"));
-
-	return "";
+	} else {
+		System.out.println("실패");
+		return "false";
+	
 	}
-	
-	
+
+	}
 }
