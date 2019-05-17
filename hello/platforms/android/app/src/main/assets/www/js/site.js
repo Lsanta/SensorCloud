@@ -1,26 +1,24 @@
-//센서 패널
-$(document).ready(function() {
+//센서패널
+$(document).on("click", "#spanel" , function(){
     $.ajax({
-       type : "POST",
-       url : "http://52.79.242.145:8080/app/sitemain",
-       contentType : "application/json; charset=UTF-8",
-       success : function(result){
-          var str="";
-          $.each(result,function(i,s){
-            
-              $("#mypanel").html(str);
-          });
-       } // success 함수 종료
+    type : "POST",
+    url : "http://52.79.242.145:8080/app/installsensor",
+    data: site_id,
+    contentType : "application/json; charset=UTF-8",
+    success : function(data){
+        console.log(data);
+        var str = ""; 
+        $.each(data,function(i,s){
+            str +='<p>'+s.sensor_name+'</p>';
 
- }); // ajax함수
+            $("#sensorlist ul").html(str);
+        });
 
-$(document).on("click", "#aaa tr" , function(){
+    } // success 함수 종료
 
-  var tr = $("#aaa tr").index(this);
-  var site_id = $("#aaa tr:eq("+tr+") td:eq(4)").text();
-  window.location.href = "site.html?sid=" + site_id;
-  });
-});
+}); // ajax함수
+}); // click
+
 
 
 var a;
@@ -50,10 +48,11 @@ function getQueryStringObject() {
             async:false,
             contentType : "application/json; charset=UTF-8",
             success : function(result01){
+              
                 a = result01;
-    
-var sa = a[0]['address'];
-var sitemainname = a[0]['site_name'];
+
+var sa = a.site[0]['address'];
+var sitemainname = a.site[0]['site_name'];
 
 var str="";
 str +='<p style="margin-top: -7px;">'+ sitemainname + '</p>';
@@ -74,9 +73,6 @@ $("#sn").html(str);
                     str12 +='<p>'+ '데이터없음' + '</p>';
                     $("#chartdiv").html(str12);
            }else{
-            //////////////////////////////////////////////////////////////////////////////////
-            /* 									그래프 그리기 시작									*/
-            // Themes begin
             
             //////////////////////////////////////////////////////////////////////////////////
             /* 									그래프 그리기 시작									*/

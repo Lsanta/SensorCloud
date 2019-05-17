@@ -48,10 +48,11 @@ function getQueryStringObject() {
             async:false,
             contentType : "application/json; charset=UTF-8",
             success : function(result01){
+              
                 a = result01;
-    
-var sa = a[0]['address'];
-var sitemainname = a[0]['site_name'];
+
+var sa = a.site[0]['address'];
+var sitemainname = a.site[0]['site_name'];
 
 var str="";
 str +='<p style="margin-top: -7px;">'+ sitemainname + '</p>';
@@ -72,9 +73,6 @@ $("#sn").html(str);
                     str12 +='<p>'+ '데이터없음' + '</p>';
                     $("#chartdiv").html(str12);
            }else{
-            //////////////////////////////////////////////////////////////////////////////////
-            /* 									그래프 그리기 시작									*/
-            // Themes begin
             
             //////////////////////////////////////////////////////////////////////////////////
             /* 									그래프 그리기 시작									*/
