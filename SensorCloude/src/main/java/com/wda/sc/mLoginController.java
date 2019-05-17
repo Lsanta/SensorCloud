@@ -133,27 +133,11 @@ public class mLoginController {
 	@RequestMapping(value = "/mSearch.do", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 
 	public @ResponseBody ArrayList<SiteVO> mSearch(@RequestBody Map<String, String> map, Criteria criteria) throws Exception {
-		//페이징 하는중~~~
-		int pagenum = criteria.getPagenum();
-
-		Paging page = new Paging(); // 최대한 코드를 수정 안하기 위한 기존 페이징
-		criteria.setTotalcount(checkboardservice.getPageNum()); // 전체 게시글 개수를 지정
-		criteria.setContentnum(5);
-		criteria.setPagenum(pagenum); // 현재 페이지를 페이지 객체에 지정
-		criteria.setStartnum(pagenum); // 컨텐츠 시작 번호 지정
-		criteria.setEndnum(pagenum); // 컨텐츠 끈 번호 지정
-		criteria.setCurrentblock(pagenum); // 현재 페이지 블록이 몇번인지 현재 페이지 번호 통해 지정
-		criteria.setLastblock(criteria.getTotalcount()); // 마지막 블록 번호를 전체 게시글 수를 통해 정함
-		criteria.prevnext(pagenum); // 현재 페이지 번호로 화살표를 나타낼지 정함
-		criteria.setStartPage(criteria.getCurrentblock()); // 시작 페이지를 페이지 블록번호로 정함
-		criteria.setEndPage(criteria.getLastblock(), criteria.getCurrentblock()); // 마지막 페이지를 마지막 페이지 블록과 현재 페이지 블록으로 정함
-		page.setEndnum(criteria.getEndnum() + 1); // 기존 코드를 유지하기 위해 +1함 (기존은 endnum이 5면 4까지 나온다 )
-		page.setStartnum(criteria.getStartnum());
-
 		String word = (String) map.get("word");
 		ArrayList<SiteVO> arr = new ArrayList<SiteVO>();
 		// 현장 이름 검색
 		arr = siteservice.getAppSearch(word);
+		
 		return arr;
 	}
 
