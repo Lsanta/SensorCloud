@@ -96,7 +96,7 @@ $.ajax({
             window.sessionStorage.setItem("id", result.id);
             window.sessionStorage.setItem("password", result.password);
             window.location.href="main.html";
-        } else if (sig.signal == "passfail"){ 
+        } else if (result.signal == "passfail"){ 
             alert("비밀번호 틀림");
         } else {
           alert("아이디 틀림");
