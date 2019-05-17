@@ -6,7 +6,7 @@ var query = {
 
 $.ajax({
     type : "POST",
-    url : "http://39.127.7.58:8080/app/mypage/usermodify",
+    url : "http://52.79.242.145:8080/app/mypage/usermodify",
     data : query,
     dataType : 'json',
     contentType : "application/json; charset=UTF-8",
@@ -63,7 +63,7 @@ $(document).on("click",".confirm-modify",function() {
             type : "POST",
             data : query,
             dataType : "text",
-            url : "http://39.127.7.58:8080/app/mypage/updatemyinfo.do",
+            url : "http://52.79.242.145:8080/app/mypage/updatemyinfo.do",
             success : function(data) {
                 if (data == "success") {
                     alert("수정 성공");

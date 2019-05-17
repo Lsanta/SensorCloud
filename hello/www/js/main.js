@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $.ajax({
        type : "POST",
-       url : "http://39.127.7.58:8080/app/mmain",
+       url : "http://52.79.242.145:8080/app/mmain",
        contentType : "application/json; charset=UTF-8",
        success : function(result){
           var str="";
@@ -48,7 +48,7 @@ $(document).on('deviceready', function() {
 
    $.ajax({
        type : "POST",
-       url : "http://39.127.7.58:8080/app/send/AppTokenSave.do",
+       url : "http://52.79.242.145:8080/app/send/AppTokenSave.do",
        data : JSON.stringify(query),
        contentType : 'application/json',
        success : function(){
