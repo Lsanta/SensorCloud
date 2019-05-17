@@ -209,7 +209,6 @@ str +='<td>시간</td>';
     } // success 함수 종료
 }); // ajax함수 종료
 
-
 $.ajax({
             type : "POST",
             url : "http://39.127.7.58:8080/app/siterepairlist",

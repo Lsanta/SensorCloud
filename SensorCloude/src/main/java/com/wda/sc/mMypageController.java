@@ -6,12 +6,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.Criteria;
+import com.wda.sc.domain.MemberFileVO;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.service.CheckboardService;
@@ -150,5 +155,33 @@ public class mMypageController {
 	
 	}
 
+	}
+	
+	
+	/*
+	 * @CrossOrigin(origins = "*" ,maxAge = 3600)
+	 * 
+	 * @GetMapping(value = "/mgetAttachListmypage", produces =
+	 * MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 * 
+	 * @ResponseBody public ResponseEntity<List<MemberFileVO>>
+	 * getAttachListmypage(String user_id) {
+	 * System.out.println("getAttachListmypage" + user_id);
+	 * 
+	 * return new ResponseEntity<>(mypageservice.getAttachListmypage(user_id),
+	 * HttpStatus.OK); }
+	 */
+
+	
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/mgetAttachListmypage", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ArrayList<MemberFileVO> getAttachListmypage(@RequestBody String user_id, Locale locale, Model model) {
+		System.out.println("오나");
+		System.out.println("getAttachListmypage" + user_id);
+		
+		ArrayList<MemberFileVO> arr = (ArrayList<MemberFileVO>) mypageservice.getAttachListmypage(user_id);
+
+		return arr;
 	}
 }
