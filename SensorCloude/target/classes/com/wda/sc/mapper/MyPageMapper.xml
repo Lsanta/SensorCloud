@@ -29,7 +29,7 @@
                   where before_tab.user_id = m.user_id and m.user_id = #{user_id}
                     order by before_tab.reg_date desc) before_ord
                      where rownum < #{paging.endnum}) x
-      	where x.rnum`>= #{paging.startnum}
+      	where x.rnum>= #{paging.startnum}
 		]]>
 	</select>
 	
@@ -96,6 +96,6 @@
 	
 	<update id="updateappToken" parameterType="map">
 		update app_token set token_id=#{token}
-		where user_id=#{id} 
+		where user_id=#{user_id} 
 	</update>	
 </mapper>

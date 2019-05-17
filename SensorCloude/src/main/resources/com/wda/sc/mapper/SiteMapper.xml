@@ -273,6 +273,7 @@
 	<select id="getAppSearch" resultType="com.wda.sc.domain.SiteVO">
 		select * from site
 		where site_name LIKE '%' || #{word} || '%'
+		order by site_status desc, start_date desc
 	</select>
 	
 </mapper>
