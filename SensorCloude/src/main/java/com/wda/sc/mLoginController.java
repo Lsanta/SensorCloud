@@ -109,12 +109,21 @@ public class mLoginController {
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/sitemain", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ArrayList<SiteVO> sitemainlist(@RequestBody String site_id, Locale locale, Model model) {
+	public JSONObject sitemainlist(@RequestBody String site_id, Locale locale, Model model) {
 		System.out.println(site_id);
 
-		ArrayList<SiteVO> result01 = siteservice.getSite(site_id);
+		ArrayList<SiteVO> result01 = siteservice.getSite(site_id);	
+		ArrayList<SensorDataVO> dListname = siteservice.getDataName(site_id);
+		
+		JSONArray sitelist = JSONArray.fromObject(result01);
+		JSONArray sensorlist = JSONArray.fromObject(dListname);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("site", sitelist);
+		map.put("sensor", sensorlist);
+		JSONObject json = JSONObject.fromObject(map);
 
-		return result01;
+		return json;
 	}
 
 	@CrossOrigin(origins = "*", maxAge = 3600)
