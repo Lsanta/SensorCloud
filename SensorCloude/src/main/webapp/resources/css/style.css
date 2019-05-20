@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-header .left { float: left; padding: 43px 0 0 20%; }
+header .left { float: left; padding: 1% 0 0 18%; }
 header h1 { float:left; padding: 0 108px 0 0; }
 header .logout { display: none; }
 header h1 a { display: block; width:132px; height:50px; background: url("/resources/img/str.png") no-repeat 0px 
@@ -15,7 +15,7 @@ header nav a:before { content: ""; position: absolute; left:0; bottom:4px;  widt
 header nav a:hover:before { width:100%; }
 header .left > div { float: left; }
 header .left > div nav li { float : left; padding:0 30px 0 0; }
-header > ul {float: right; padding: 51px 250px 0 0;}
+header > ul {float: right; padding: 1.5	% 50px 0 0;}
 header > ul li { float:left; }
 header > ul li a { display: block; width: 96px; height: 38px; line-height:38px; text-align: center; font-size: 12px; 
 border:1px solid black; border-radius: 3px;}

@@ -188,17 +188,15 @@ $(document).ready(function() {
 		}
 
 		var query = {
-			id: window.localStorage.getItem("key"),
+			user_id: window.sessionStorage.getItem("id"),
 			password : $("#pass").val()
 		};
-		alert(query);
-
+		console.log(query);
 		$.ajax({
 			type : "POST",
 			url : "http://52.79.242.145:8080/app/mypage/mypageconfirmpasswd.do",
 			async: false,
-			data : query,
-			dataType : "text",
+			data: query,
 			contentType : "application/json; charset=UTF-8",
 			success : function(data) {
 				alert(data);

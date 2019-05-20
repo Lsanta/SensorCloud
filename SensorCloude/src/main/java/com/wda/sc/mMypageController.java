@@ -83,19 +83,20 @@ public class mMypageController {
 	
 	//정보수정 전 비밀번호 확인
 	@CrossOrigin(origins = "*", maxAge = 3600)
-	@RequestMapping("/mypageconfirmpasswd.do")
+	@RequestMapping(value = "/mypageconfirmpasswd.do", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public String ConfirmPasswd(Model model, @RequestParam("password") String password, @RequestBody String confirmid) {
+	public String ConfirmPasswd(@RequestBody String user_id, String password) {
+		 System.out.println("ID"+user_id);
 		
 		ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
-		arr = mypageservice.confirmpasswd(confirmid);
+		arr = mypageservice.confirmpasswd(user_id);
 
 		if (arr.size() != 0) {
 			if (arr.get(0).getPassword().equals(password)) {
 				return "success";
 			}
 		}
-		return confirmid;
+		return user_id;
 	}
 
 	//내 정보 불러오기
@@ -105,7 +106,7 @@ public class mMypageController {
 	public JSONObject modifymyinfo(@RequestBody String id, Locale locale, Model model) {
 		 System.out.println("내정보");
 		 
-		  ArrayList<MemberVO> result = mypageservice.getInfom(id);
+		  ArrayList<MemberVO> result = mypageservice.getInfo(id);
 		  System.out.println(result);
 	      JSONObject json = new JSONObject();
 	      json.put("a",result);
