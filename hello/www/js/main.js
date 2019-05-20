@@ -4,6 +4,7 @@ $(document).ready(function() {
        url : "http://52.79.242.145:8080/app/mmain",
        contentType : "application/json; charset=UTF-8",
        success : function(result){
+          alert(JSON.stringify(result));
           var str="";
           $.each(result,function(i,s){
              str +='<tr>';

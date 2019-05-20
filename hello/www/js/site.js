@@ -6,7 +6,6 @@ $(document).on("click", "#spanel" , function(){
     data: site_id,
     contentType : "application/json; charset=UTF-8",
     success : function(data){
-        console.log(data);
         var str = ""; 
         $.each(data,function(i,s){
             str +='<p>'+s.sensor_name+'</p>';
