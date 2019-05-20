@@ -24,7 +24,7 @@
 }
 
 #main-container {
-  width: 1130px;
+  width: 1280px;
   height: 800px;
   margin: 0px auto;
   padding: 20px;
@@ -32,7 +32,7 @@
   margin-top:125px;
 }
 #left-content {
-  width: 670px;
+  width: 720px;
   height: 730px;
   padding: 10px;
   padding-top: 0;
@@ -40,7 +40,7 @@
   float: left;
 }
 #right-content {
-  width: 400px;
+  width: 450px;
   padding: 10px;
   padding-top: 0;
   float: right;

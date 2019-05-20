@@ -8,7 +8,7 @@
 	<![CDATA[
 		select site_id,type_no,site_name,address,site_status,substr(start_date,0,14) as start_date 
 		from (select * from site order by site_status desc)
-		where rownum < 15 
+		where rownum < 16
 	]]>
 	</select>
 
@@ -273,6 +273,7 @@
 	<select id="getAppSearch" resultType="com.wda.sc.domain.SiteVO">
 		select * from site
 		where site_name LIKE '%' || #{word} || '%'
+		order by site_status desc, start_date desc
 	</select>
 	
 </mapper>

@@ -247,20 +247,20 @@ public class MessageController {
 	   @ResponseBody
 	   @RequestMapping(value="/AppTokenSave.do", method= RequestMethod.POST, produces = {"application/json"})
 	   public String apptokenSave(@RequestBody  Map<String, String> map) {
-		   String id = map.get("id");
+		   String user_id = map.get("id");
 		   String appToken = map.get("token");
 		   
-		   System.out.println(id + appToken);
+		   System.out.println(user_id + appToken);
 		   
 		   List<AppTokenVO> tokenlist = new ArrayList<AppTokenVO>();
 		     
 		   //token값 select 하기
-		   tokenlist = mypageservice.getappToken(id);
+		   tokenlist = mypageservice.getappToken(user_id);
 		   AppTokenVO tokenvo = new AppTokenVO();
 		   if(tokenlist.size() == 0) {
 		    	//토큰 저장
 		    	 tokenvo.setToken_id(appToken);
-		    	 tokenvo.setUser_id(id);
+		    	 tokenvo.setUser_id(user_id);
 		    	 mypageservice.saveappToken(tokenvo);
 		    	 System.out.println("db에 값이 없을때"); 
 		      } else {
@@ -274,9 +274,10 @@ public class MessageController {
 		    		  //새로운 토큰 저장
 		    		  Map<String, String> map2 = new HashMap<String, String>();
 		    		  map2.put("token", appToken);
-		    		  map2.put("user_id", id);
+		    		  map2.put("user_id", user_id);
 		    		  
 		    		  mypageservice.updateappToken(map2);
+		    		  
 		    		  System.out.println("db에 값이 있고 비교했더니 다른값일때"); 
 			    	   
 		    	  }

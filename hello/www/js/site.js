@@ -1,3 +1,24 @@
+
+//센서패널
+$(document).on("click", "#spanel" , function(){
+    $.ajax({
+    type : "POST",
+    url : "http://52.79.242.145:8080/app/installsensor",
+    data: site_id,
+    contentType : "application/json; charset=UTF-8",
+    success : function(data){
+        var str = ""; 
+        $.each(data,function(i,s){
+            str +='<p>'+s.sensor_name+'</p>';
+
+            $("#sensorlist ul").html(str);
+        });
+
+    } // success 함수 종료
+
+}); // ajax함수
+}); // click
+
 var a;
 var x;
 var y;
@@ -21,15 +42,13 @@ function getQueryStringObject() {
 
       $.ajax({
             type : "POST",
-            url : "http://39.127.7.59:8080/app/sitemain",
+            url : "http://52.79.242.145:8080/app/sitemain",
             data : site_id,
             async:false,
             contentType : "application/json; charset=UTF-8",
-            success : function(result09){
-                console.log(result09);
-    a = result09;
-    console.log(a.site);
-    
+            success : function(result01){
+              
+                a = result01;
 var sa = a.site[0]['address'];
 var sitemainname = a.site[0]['site_name'];
 
@@ -42,7 +61,7 @@ $("#sn").html(str);
 
       $.ajax({
         type : "POST",
-        url : "http://39.127.7.59:8080/app/sitemainsensor",
+        url : "http://52.79.242.145:8080/app/sitemainsensor",
         data : site_id,
         async:false,
         contentType : "application/json; charset=UTF-8",
@@ -139,16 +158,16 @@ $("#sn").html(str);
 
 
                
-       
 
 				
 			
         } // success 함수 종료
   }); // ajax함수 종료
 
+
   $.ajax({
     type : "POST",
-    url : "http://39.127.7.59:8080/app/sitedata",
+    url : "http://52.79.242.145:8080/app/sitedata",
     data : site_id,
     async:false,
     contentType : "application/json; charset=UTF-8",
@@ -204,6 +223,7 @@ str +='<td>시간</td>';
       $("#sensing-data").html(str2);	
  }
 
+
    }
 	
 
@@ -217,7 +237,7 @@ str +='<td>시간</td>';
 
 $.ajax({
             type : "POST",
-            url : "http://39.127.7.59:8080/app/siterepairlist",
+            url : "http://52.79.242.145:8080/app/siterepairlist",
             data : site_id,
             async : false,
             contentType : "application/json; charset=UTF-8",
