@@ -4,7 +4,7 @@ $(document).ready(function() {
        url : "http://39.127.7.59:8080/app/mmain",
        contentType : "application/json; charset=UTF-8",
        success : function(result){
-
+         alert(result);
           var str="";
           $.each(result,function(i,s){
 

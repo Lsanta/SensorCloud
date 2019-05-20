@@ -75,7 +75,7 @@
 	
 	<!--현장 추가 -->
 	<insert id="siteadd" parameterType="com.wda.sc.domain.SiteVO">
-		insert into site(site_id,type_no,site_name,address,start_date,site_status) values(site_seq.nextval,#{type_no}, #{site_name},#{address},sysdate,'1')
+		insert into site(site_id,type_no,site_name,address,start_date,site_status,x,y) values(site_seq.nextval,#{type_no}, #{site_name},#{address},sysdate,'1',#{x},#{y})
 	</insert>
 	
 	<insert id="networkadd" parameterType="com.wda.sc.domain.SiteVO">
