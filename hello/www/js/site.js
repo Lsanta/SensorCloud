@@ -1,24 +1,3 @@
-
-//센서패널
-$(document).on("click", "#spanel" , function(){
-    $.ajax({
-    type : "POST",
-    url : "http://52.79.242.145:8080/app/installsensor",
-    data: site_id,
-    contentType : "application/json; charset=UTF-8",
-    success : function(data){
-        var str = ""; 
-        $.each(data,function(i,s){
-            str +='<p>'+s.sensor_name+'</p>';
-
-            $("#sensorlist ul").html(str);
-        });
-
-    } // success 함수 종료
-
-}); // ajax함수
-}); // click
-
 var a;
 var x;
 var y;
@@ -325,3 +304,23 @@ naver.maps.Event.addListener(marker, "click", function(e) {
 infowindow.open(map, marker);
 }
 
+//센서패널
+$(document).on("click", "#spanel" , function(){
+    $.ajax({
+    type : "POST",
+    url : "http://52.79.242.145:8080/app/installsensor",
+    data: site_id,
+    contentType : "application/json; charset=UTF-8",
+    success : function(data){
+        console.log(data);
+        var str = ""; 
+        $.each(data,function(i,s){
+            str +='<p>'+s.sensor_name+'</p>';
+
+           
+        });
+        $("#sensorlist ul").html(str);
+    } // success 함수 종료
+
+}); // ajax함수
+}); // click
