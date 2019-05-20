@@ -3,7 +3,6 @@ $(document).ready(function() {
 	var query = {
 		 id: window.sessionStorage.getItem("id")
 	};
-	
 	$.ajax({
 			type : "POST",
 			url : "http://52.79.242.145:8080/app/mypage/usermodify",
