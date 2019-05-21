@@ -13,6 +13,7 @@ public class SiteVO {
 	private int site_status;
 	private double x;
 	private double y;
+	private double z;
 	
 	//network table
 	private int sig_id;
