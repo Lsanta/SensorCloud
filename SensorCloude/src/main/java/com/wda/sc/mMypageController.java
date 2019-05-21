@@ -6,12 +6,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,10 +24,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.Criteria;
+import com.wda.sc.domain.MemberFileVO;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.MyPageService;
+import com.wda.sc.service.UsermanageService;
 
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
@@ -35,6 +41,7 @@ import net.sf.json.JSONObject;
 public class mMypageController {
 	private CheckboardService checkboardservice;
 	private MyPageService mypageservice;
+	private UsermanageService usermanageservice;
 	
 	//마이페이지 메인
 	@CrossOrigin(origins = "*", maxAge = 3600)
@@ -76,29 +83,30 @@ public class mMypageController {
 	
 	//정보수정 전 비밀번호 확인
 	@CrossOrigin(origins = "*", maxAge = 3600)
-	@RequestMapping("/mypageconfirmpasswd.do")
+	@RequestMapping(value = "/mypageconfirmpasswd.do", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public String ConfirmPasswd(Model model, @RequestParam("password") String password, @RequestBody String confirmid) {
+	public String ConfirmPasswd(@RequestBody String user_id, String password) {
+		 System.out.println("ID"+user_id);
 		
 		ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
-		arr = mypageservice.confirmpasswd(confirmid);
+		arr = mypageservice.confirmpasswd(user_id);
 
 		if (arr.size() != 0) {
 			if (arr.get(0).getPassword().equals(password)) {
 				return "success";
 			}
 		}
-		return confirmid;
+		return user_id;
 	}
 
-	//내 정보 수정
+	//내 정보 불러오기
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/usermodify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public JSONObject modifymyinfo(@RequestBody String id, Locale locale, Model model) {
 		 System.out.println("내정보");
 		 
-		  ArrayList<MemberVO> result = mypageservice.getInfom(id);
+		  ArrayList<MemberVO> result = mypageservice.getInfo(id);
 		  System.out.println(result);
 	      JSONObject json = new JSONObject();
 	      json.put("a",result);
@@ -108,35 +116,73 @@ public class mMypageController {
 		return json;
 	}
 	
-//	@CrossOrigin(origins = "*", maxAge = 3600)
-//	@RequestMapping(value = "/usermodify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//	@ResponseBody
-//	public String updatemyinfo(Locale locale, Model model, MemberVO vo) {
-//
-//		if (vo.getPassword().equals("") || vo.getName().equals("") || vo.getUser_id().equals("") || vo.getPhone().equals("")) {
-//
-//			return "false";
-//
-//		} else {
-//			mypageservice.updateuserinfo(vo);
-//			return "success";
-//		}
-//	}
+	//내정보 수정
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/updatemyinfo.do")
+	@ResponseBody
+	public String updatemyinfo(Locale locale, Model model, MemberVO vo) {
+		 System.out.println("여기~");
+
+		if (vo.getPassword().equals("") || vo.getName().equals("") || vo.getUser_id().equals("") || vo.getPhone().equals("")) {
+
+			return "false";
+
+		} else {
+			mypageservice.updateuserinfo(vo);
+			return "success";
+		}
+	}
 	
-	
+	//마이페이지 승급요청
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/levelup", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public String mlevelup(@RequestBody String param) throws Exception {
-	System.out.println(param);	
-//	List<Map<String,Object>> Map = new ArrayList<Map<String,Object>>();
-//	Map = JSONArray.fromObject(param);
+	public String mlevelup(@RequestBody  Map<String, String> map) throws Exception {
+	System.out.println(map);	
+//	String id = map.get("id");
+//	String mlevel2 = map.get("mlevel");
+	
+	int i = usermanageservice.mrequestlevel(map);
+	System.out.println("결과값" + i);
+	
+	if( i == 1 ) {
+		System.out.println("성공");
+		return "success";
 		
-//	System.out.println(map.get("id"));
-//	System.out.println(map.get("mlevel"));
 
-	return "";
+	} else {
+		System.out.println("실패");
+		return "false";
+	
+	}
+
 	}
 	
 	
+	/*
+	 * @CrossOrigin(origins = "*" ,maxAge = 3600)
+	 * 
+	 * @GetMapping(value = "/mgetAttachListmypage", produces =
+	 * MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 * 
+	 * @ResponseBody public ResponseEntity<List<MemberFileVO>>
+	 * getAttachListmypage(String user_id) {
+	 * System.out.println("getAttachListmypage" + user_id);
+	 * 
+	 * return new ResponseEntity<>(mypageservice.getAttachListmypage(user_id),
+	 * HttpStatus.OK); }
+	 */
+
+	
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/mgetAttachListmypage", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ArrayList<MemberFileVO> getAttachListmypage(@RequestBody String user_id, Locale locale, Model model) {
+		System.out.println("오나");
+		System.out.println("getAttachListmypage" + user_id);
+		
+		ArrayList<MemberFileVO> arr = (ArrayList<MemberFileVO>) mypageservice.getAttachListmypage(user_id);
+
+		return arr;
+	}
 }

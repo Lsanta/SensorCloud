@@ -57,4 +57,10 @@ public class UsermanageServiceImplement implements UsermanageService{
 		return mapper.getSearchResult(parm);
 	}
 
+	@Override
+	public int mrequestlevel(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return mapper.mrequestlevel(map);
+	}
+
 }
