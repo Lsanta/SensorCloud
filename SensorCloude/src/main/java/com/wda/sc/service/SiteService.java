@@ -108,4 +108,7 @@ public interface SiteService {
 
 	//앱 검색
 	public ArrayList<SiteVO> getAppSearch(String word);
+	
+	//앱 메인화면
+	public ArrayList<SiteVO> appmain(Map<String,Double> map);
 }
