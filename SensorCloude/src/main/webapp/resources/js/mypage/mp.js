@@ -114,11 +114,10 @@ $(document).ready(function() {
 						url : "/mypage/mypagemodifymyinfo",
 						success : function(data) {
 							if (data == "success") {
-								window.location.href = "/mypage";
+								window.location.href = "/mypage/1";
 							}
 							if (data == "false") {
-								document
-								.getElementById("inhere1").innerHTML = "수정 정보를 모두 입력해 주세요";
+								document.getElementById("inhere1").innerHTML = "수정 정보를 모두 입력해 주세요";
 							}
 						}
 					});

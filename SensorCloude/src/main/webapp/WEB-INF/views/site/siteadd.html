@@ -26,7 +26,9 @@
    <div id="addcontent_right">
       <!-- <input type="text" id="sample6_postcode" class="addcontent_right_input" placeholder="우편번호" > -->
       <p id="p">주소:</p>
-	  <input type="text" id="sample6_address" placeholder="주소" class="addcontent_right_input"><br>
+	  <input type="text" id="sample6_address" placeholder="주소" class="addcontent_right_input" disabled><br>
+	  <input type="hidden" id="x" ><br>
+	  <input type="hidden" id="y" ><br>
 	  <input type="button" id="addressBtn" onclick="DaumPostcode()" value="조회" class="addcontent_right_button" ><br>
 	  <p id="p">현장이름:</p>
 	  <input type="text" id="sample6_detailAddress" placeholder="현장이름" class="addcontent_right_input">
@@ -97,6 +99,8 @@
 
 <th:block layout:fragment="page_js">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d&libraries=services"></script>
 <script>
     function DaumPostcode() {
         new daum.Postcode({
@@ -142,22 +146,47 @@
                 document.getElementById("sample6_address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("sample6_detailAddress").focus();
+                
+
+             // 주소-좌표 변환 객체를 생성합니다
+             var geocoder = new daum.maps.services.Geocoder();
+
+             // 주소로 좌표를 검색합니다
+             geocoder.addressSearch(addr, function(result, status) {
+
+                 // 정상적으로 검색이 완료됐으면 
+                  if (status === daum.maps.services.Status.OK) {
+
+                     var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+                     document.getElementById("x").value = result[0].x;
+                     document.getElementById("y").value = result[0].y;
+                   
+                 } 
+             });    
+                
+                
+                
             }
         }).open();
+        
     } 
 </script>
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
 	
+
 	$("#plus").click(function(){
+	
+	
+	 	
 		var query = { 
 						//현장 데이터
 						type_no : $('input[name="chk_scene"]:checked').val(),
 						address : $("#sample6_address").val(),
 						site_name : $("#sample6_detailAddress").val(),
-						
+						x : Number($("#x").val()),
+						y : Number($("#y").val()),
+	
 						//네트워크 데이터
 						sig_protocol : $('input[name="chk_net_raido"]:checked').val(),
 						host_ip : $("#host_ip").val(),
@@ -167,7 +196,7 @@ $(document).ready(function(){
 		
 		console.log(query);
 		
-		$.ajax({
+		 $.ajax({
 			  type : "POST",
 			  url : "/site/siteadd.do",
 			  data : query,
@@ -180,7 +209,7 @@ $(document).ready(function(){
 				  }
 			  }
 			  
-		}); // ajax 종료
+		}); // ajax 종료 
 		
 	}); // #plus 종료
 	

@@ -1,4 +1,6 @@
 var a;
+var x;
+var y;
 function getQueryStringObject() {
           var a = window.location.search.substr(1).split('&');
                 if (a == "") return { };
@@ -15,27 +17,42 @@ function getQueryStringObject() {
 
          var qs = getQueryStringObject();
          var site_id = qs.sid;
-
+       
 
       $.ajax({
             type : "POST",
-            url : "http://39.127.7.58:8080/app/sitemain",
+            url : "http://52.79.242.145:8080/app/sitemain",
             data : site_id,
             async:false,
             contentType : "application/json; charset=UTF-8",
             success : function(result01){
-    a = result01;
+              
+                a = result01;
+var sa = a.site[0]['address'];
+var sitemainname = a.site[0]['site_name'];
+
+var str="";
+str +='<p style="margin-top: -7px;">'+ sitemainname + '</p>';
+$("#sn").html(str);
+    getData(sa);
             } // success 함수 종료
       }); // ajax함수 종료
 
       $.ajax({
         type : "POST",
-        url : "http://39.127.7.58:8080/app//sitemainsensor",
+        url : "http://52.79.242.145:8080/app/sitemainsensor",
         data : site_id,
         async:false,
         contentType : "application/json; charset=UTF-8",
         success : function(result){
-        //////////////////////////////////////////////////////////////////////////////////
+           
+          
+           if(result.name == ''){
+                    var str12="";
+                    str12 +='<p>'+ '데이터없음' + '</p>';
+                    $("#chartdiv").html(str12);
+           }else{
+       //////////////////////////////////////////////////////////////////////////////////
 				/* 									그래프 그리기 시작									*/
 				// Themes begin
 				
@@ -116,83 +133,92 @@ function getQueryStringObject() {
 				chart.legend = new am4charts.Legend();	//그래프 바로밑에 그래프 각각 나오게 해주고 누를때 이벤트 발생
 	
 	
+           }
+
+
+               
 
 				
 			
         } // success 함수 종료
   }); // ajax함수 종료
 
+
   $.ajax({
     type : "POST",
-    url : "http://39.127.7.58:8080/app/sitedata",
+    url : "http://52.79.242.145:8080/app/sitedata",
     data : site_id,
     async:false,
     contentType : "application/json; charset=UTF-8",
     success : function(data){
-	//위에 첫 tr(데이터 이름)
-    var str = ""; 
-    str +='<tr>';
-    str +='<td>시간</td>';
-     $.each(data.name ,function(i,s){
-        str +='<td>'+s.sensor_name+'</td>';
-        $("#sensing-data-head").html(str);
+   
+        if(data.data == ''){
+            var str13="";
+            str13 +='<p>'+ '데이터없음' + '</p>';
+            $("#sensing-data").html(str13);
+   }else{
+//위에 첫 tr(데이터 이름)
+var str = ""; 
+str +='<tr>';
+str +='<td>시간</td>';
+ $.each(data.name ,function(i,s){
+    str +='<td>'+s.sensor_name+'</td>';
+    $("#sensing-data-head").html(str);
+});
+ str +='</tr>';
+ $("#sensing-data-head").html(str);	
+ 
+ //데이터들
+ var str2 = "";
+ var headername = new Array();
+ for(var i=0; i < $("#sensing-data-head td").length; i++){
+     headername[i] = $("#sensing-data-head td").eq(i).text();
+    
+ }
+ 
+ var time = new Array();
+ for(var i=0; i < data.data.length; i++){
+     time[i] = data.data[i].cur_date;
+ }
+ 
+ var single2 = time.filter( (item, idx, array) => {
+        return array.indexOf( item ) === idx ;
     });
-     str +='</tr>';
-     $("#sensing-data-head").html(str);	
      
-     //데이터들
-     var str2 = "";
-     var headername = new Array();
-     for(var i=0; i < $("#sensing-data-head td").length; i++){
-         headername[i] = $("#sensing-data-head td").eq(i).text();
-        
-     }
+ 
+ 
+ 
+ for(var i=0; i < single2.length; i++){
+     str2 +='<tr>';
+     str2 +='<td>'+single2[i]+'</td>';
      
-     var time = new Array();
-     for(var i=0; i < data.data.length; i++){
-         time[i] = data.data[i].cur_date;
-     }
-     
-     var single2 = time.filter( (item, idx, array) => {
-            return array.indexOf( item ) === idx ;
-        });
-         
-     
-     
-     
-     for(var i=0; i < single2.length; i++){
-         str2 +='<tr>';
-         str2 +='<td>'+single2[i]+'</td>';
-         
-         for(var j=0; j < data.data.length; j++) {
-             if ( single2[i] === data.data[j].cur_date){
-                 str2 += '<td>'+data.data[j].sensing_data+'</td>'
-             }
+     for(var j=0; j < data.data.length; j++) {
+         if ( single2[i] === data.data[j].cur_date){
+             str2 += '<td>'+data.data[j].sensing_data+'</td>'
          }
-
-         str2 +='</tr>';
-          $("#sensing-data").html(str2);	
      }
 
+     str2 +='</tr>';
+      $("#sensing-data").html(str2);	
+ }
+
+
+   }
+	
 
     } // success 함수 종료
 }); // ajax함수 종료
 
 
 
-var sa = a[0]['address'];
-var sitemainname = a[0]['site_name'];
 
-var str="";
-str +='<p style="margin-top: -7px;">'+ sitemainname + '</p>';
-$("#sn").html(str);
 
 
 $.ajax({
             type : "POST",
-            url : "http://39.127.7.58:8080/app/siterepairlist",
+            url : "http://52.79.242.145:8080/app/siterepairlist",
             data : site_id,
-            async:false,
+            async : false,
             contentType : "application/json; charset=UTF-8",
             success : function(result02){
            var str1="";
@@ -217,81 +243,84 @@ $.ajax({
             } // success 함수 종료
       }); // ajax함수 종료
 
-    //function get_pointer (해당주소,대상지도 id,title) {
-    function get_pointer (adress,getid,title) {
-      naver.maps.Service.geocode({
-            address: adress
-        }, function(status, response) {
+      
+
+function getData(sa){
+        result =  naver.maps.Service.geocode({
+            query: sa
+        },  function(status, response) {
             if (status !== naver.maps.Service.Status.OK) {
-                //return alert('Something wrong!');
-                console.log('주소에러');
-
+                return alert('Something wrong!');
             }
-            var result = response.result, // 검색 결과의 컨테이너
+            
+            var resultmap = response.v2, // 검색 결과의 컨테이너
+                items = resultmap.addresses; // 검색 결과의 배열
+                x = eval(items[0].x);
+                y = eval(items[0].y);
+                var point = new naver.maps.Point(x,y);     
+                
 
-                items = result.items; // 검색 결과의 배열
-
-              // do Something
-
-            var x = eval(items[0].point.x);
-
-            var y = eval(items[0].point.y);
-
-
-            var HOME_PATH = window.HOME_PATH || '.';
-
-
-            var cityhall = new naver.maps.LatLng(y, x),
-
-                map = new naver.maps.Map('map', {
-
-                    center: cityhall.destinationPoint(0, 500),
-
-                    zoom: 10
-
-                }),
-
-                marker = new naver.maps.Marker({
-
-                    map: map,
-
-                    position: cityhall
-
-                });
-
-
-            var contentString = [
-
-                '<div class="iw_inner">',
-
-                '   <h6>'+title+'</h6>',
-
-                '   <p style="display:none;">'+adress+'</p>',
-
-                '</div>'
-
-            ].join('');
-
-
-
-            var infowindow = new naver.maps.InfoWindow({
-
-                content: contentString
-
+                 drawMap(x,y,sa);
             });
-              naver.maps.Event.addListener(marker, "click", function(e) {
-                if (infowindow.getMap()) {
-                    infowindow.close();
-                } else {
-                    infowindow.open(map, marker);
-                }
-            });
+            
+}
+       
+function drawMap(x,y,sa){
+        
+       // do Something
+     
+        var HOME_PATH = window.HOME_PATH || '.';
+        var cityhall = new naver.maps.LatLng(y,x),
 
-              infowindow.open(map, marker);
+ map = new naver.maps.Map('map', {
+    center: new naver.maps.LatLng(y,x),
+    zoom: 10
+}),
 
-        });
+marker = new naver.maps.Marker({
+    map: map,
+    position: cityhall
+});
 
+var contentString = [
+    '<div class="iw_inner">',
+    '   <h3>'+sa+'</h3>',
+    '</div>'
+].join('');
+
+var infowindow = new naver.maps.InfoWindow({
+    content: contentString,
+    anchorSkew: true
+});
+
+naver.maps.Event.addListener(marker, "click", function(e) {
+    if (infowindow.getMap()) {
+        infowindow.close();
+    } else {
+        infowindow.open(map, marker);
     }
-    /* 마커중복 사용안됨 */
+});
 
-    get_pointer(sa,'map',sa);
+infowindow.open(map, marker);
+}
+
+//센서패널
+$(document).on("click", "#spanel" , function(){
+    $.ajax({
+    type : "POST",
+    url : "http://52.79.242.145:8080/app/installsensor",
+    data: site_id,
+    contentType : "application/json; charset=UTF-8",
+    success : function(data){
+        console.log(data);
+        var str = ""; 
+        $.each(data,function(i,s){
+            str +='<p>'+s.sensor_name+'</p>';
+
+           
+        });
+        $("#sensorlist ul").html(str);
+    } // success 함수 종료
+
+}); // ajax함수
+}); // click

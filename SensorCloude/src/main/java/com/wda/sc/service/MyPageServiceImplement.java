@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.wda.sc.domain.AppTokenVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MemberFileVO;
 import com.wda.sc.domain.MemberVO;
@@ -25,10 +26,6 @@ public class MyPageServiceImplement implements MyPageService {
 	public ArrayList<MemberVO> getInfo(String id) {
 		// TODO Auto-generated method stub
 		return mapper.getInfo(id);
-	}
-	public ArrayList<MemberVO> getInfom(String id) {
-		// 앱 테스트
-		return mapper.getInfom(id);
 	}
 	
 	@Override
@@ -98,6 +95,21 @@ public class MyPageServiceImplement implements MyPageService {
 	@Override
 	public int updateToken(Map<String, String> map) {
 		return mapper.updateToken(map);
+	}
+	@Override
+	public List<AppTokenVO> getappToken(String id) {
+		// TODO Auto-generated method stub
+		return mapper.getappToken(id);
+	}
+	@Override
+	public int saveappToken(AppTokenVO tokenvo) {
+		// TODO Auto-generated method stub
+		return mapper.saveappToken(tokenvo);
+	}
+	@Override
+	public int updateappToken(Map<String, String> map2) {
+		// TODO Auto-generated method stub
+		return mapper.updateappToken(map2);
 	}
 
 	

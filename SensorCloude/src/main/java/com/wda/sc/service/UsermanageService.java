@@ -23,5 +23,7 @@ public interface UsermanageService {
 	public ArrayList<MemberVO> manageSearch(Search s);
 	//검색2
 	public ArrayList<MemberVO> getSearchResult(Map<Object, Object> parm);
+
+	public int mrequestlevel(Map<String, String> map);
 		
 }
