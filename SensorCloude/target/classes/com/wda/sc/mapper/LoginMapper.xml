@@ -16,4 +16,8 @@
 		select * from MEMBER where name = #{name}
 	</select>
 	
+	<update id="pwUpdate" parameterType="com.wda.sc.domain.MemberVO">
+		update member set password = #{password} where user_id = #{user_id}
+	</update>
+	
 </mapper>
