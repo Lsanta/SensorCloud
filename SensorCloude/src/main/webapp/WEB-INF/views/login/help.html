@@ -63,9 +63,13 @@ $(document).ready(function () {
     		type : "POST",
          	dataType : "text",
          	data : email,
-         	url : "mailPost",
+         	url :  "/login/pwFind.do",
+         	success : function(data){
+         		alert("성공")
+         	}
     	 });
     });
+    
  }); 
 </script>  
 </head>

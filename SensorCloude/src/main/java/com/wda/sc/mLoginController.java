@@ -105,6 +105,29 @@ public class mLoginController {
 
 		return result;
 	}
+	
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/appmain", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ArrayList<SiteVO> appmain(@RequestBody Map<String, String> quer) {
+		String a = (String) quer.get("xlatitude");
+		String b = (String) quer.get("xlongitude");
+
+	
+		double latitude = Double.valueOf(a);
+		double longitude = Double.valueOf(b);
+		
+		Map<String,Double> map = new HashMap<String, Double>();
+		map.put("latitude",latitude);
+		map.put("longitude",longitude);
+		
+		System.out.println(latitude);
+		System.out.println(longitude);
+		
+		ArrayList<SiteVO> list = siteservice.appmain(map);
+		
+		return list;
+	}
 
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/sitemain", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

@@ -231,5 +231,11 @@ public class SiteServiceImplement implements SiteService {
 		// TODO Auto-generated method stub
 		return mapper.getGraphName(site_id);
 	}
+	
+	@Override
+	public ArrayList<SiteVO> appmain(Map<String,Double> map) {
+		//앱 메인화면
+		return mapper.appmain(map);
+	}
 
 }

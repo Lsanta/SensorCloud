@@ -29,4 +29,6 @@ public class LoginServiceImplement implements LoginService {
 		// TODO Auto-generated method stub
 		return mapper.idFind(name);
 	}
+	
+	
 }
