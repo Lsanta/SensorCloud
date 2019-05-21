@@ -39,9 +39,9 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 		
-		<servlet-name>appServlet</servlet-name>
-		<servlet-class>com.wda.sc.TestService</servlet-class>
-		<load-on-startup>2</load-on-startup>
+<!-- 		<SERVLET-NAME>APPSERVLET</SERVLET-NAME> -->
+<!-- 		<SERVLET-CLASS>COM.WDA.SC.TESTSERVICE</SERVLET-CLASS> -->
+<!-- 		<LOAD-ON-STARTUP>2</LOAD-ON-STARTUP> -->
 		
 		<multipart-config>
 			<location>C:\\upload\\temp</location>
