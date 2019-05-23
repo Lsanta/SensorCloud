@@ -17,7 +17,12 @@ function getQueryStringObject() {
 
          var qs = getQueryStringObject();
          var site_id = qs.sid;
-       
+
+         $("#confirm").click(function(){
+
+            window.location.href="writecheck.html?sid="+site_id;
+        
+        });
 
       $.ajax({
             type : "POST",

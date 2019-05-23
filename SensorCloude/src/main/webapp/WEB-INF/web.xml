@@ -39,10 +39,6 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 		
-<!-- 		<SERVLET-NAME>APPSERVLET</SERVLET-NAME> -->
-<!-- 		<SERVLET-CLASS>COM.WDA.SC.TESTSERVICE</SERVLET-CLASS> -->
-<!-- 		<LOAD-ON-STARTUP>2</LOAD-ON-STARTUP> -->
-		
 		<multipart-config>
 			<location>C:\\upload\\temp</location>
 			<max-file-size>20971520</max-file-size>
