@@ -2,41 +2,8 @@ $(document).ready(function() {
    function getLocation() {
       if (navigator.geolocation) { // GPS를 지원하면
         navigator.geolocation.getCurrentPosition(function(position) {
-          console.log(position.coords.latitude);
-          console.log(position.coords.longitude);
-          var query = {
-            xlatitude : position.coords.latitude,
-            xlongitude : position.coords.longitude
-            }
-            var quer = JSON.stringify(query);
-
-          $.ajax({
-            type : "POST",
-            url : "http://52.79.242.145:8080/app/appmain",
-            data : quer,
-            contentType : "application/json; charset=UTF-8",
-            success : function(list){
-               var str="";
-               $.each(list,function(i,s){
-                  str +='<tr>';
-                  switch(s.site_status){
-                  case 0 : str +='<td>'+ "<img src='img/gray.svg'>" +'</td>'; break;
-                  case 1 : str +='<td>'+ "<img src='img/green.svg'>" +'</td>'; break;
-                  case 2 : str +='<td>'+ "<img src='img/red.svg'>" +'</td>'; break;
-                  default  : str +='<td>'+'null'+'</td>'; break;
-                  }
-                  str +='<td>'+s.site_name+'</td>';
-                  str +='<td>'+s.address+'</td>';
-                  str +='<td>'+s.start_date+'</td>';
-                  str +='<td style="display : none">'+s.site_id+'</td>';
-                  str +='</tr>';
-     
-                   $("#aaa").html(str);
-               });
-            
-            } // success 함수 종료
-     
-      }); // ajax함수
+          alert(position.coords.latitude + ' ' + position.coords.longitude);
+          console.log(position);
         }, function(error) {
           console.error(error);
         }, {
@@ -46,11 +13,36 @@ $(document).ready(function() {
         });
       } else {
         alert('GPS를 지원하지 않습니다');
-        
       }
     }
     getLocation();
 
+    $.ajax({
+       type : "POST",
+       url : "http://52.79.242.145:8080/app/mmain",
+       contentType : "application/json; charset=UTF-8",
+       success : function(result){
+       
+          var str="";
+          $.each(result,function(i,s){
+             str +='<tr>';
+             switch(s.site_status){
+             case 0 : str +='<td>'+ "<img src='img/gray.svg'>" +'</td>'; break;
+             case 1 : str +='<td>'+ "<img src='img/green.svg'>" +'</td>'; break;
+             case 2 : str +='<td>'+ "<img src='img/red.svg'>" +'</td>'; break;
+             default  : str +='<td>'+'null'+'</td>'; break;
+             }
+             str +='<td>'+s.site_name+'</td>';
+             str +='<td>'+s.address+'</td>';
+             str +='<td>'+s.start_date+'</td>';
+             str +='<td style="display : none">'+s.site_id+'</td>';
+             str +='</tr>';
+
+              $("#aaa").html(str);
+          });
+       } // success 함수 종료
+
+ }); // ajax함수
 
 
  

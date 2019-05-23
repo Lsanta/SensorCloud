@@ -8,6 +8,13 @@
         <param name="android-package" value="com.gae.scaffolder.plugin.FCMPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="IntentShim">
+        <param name="android-package" value="com.darryncampbell.cordova.plugin.intent.IntentShim" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="IntentPlugin">
+        <param name="android-package" value="com.napolitano.cordova.plugin.intent.IntentPlugin" />
+    </feature>
     <feature name="Notification">
         <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
     </feature>
@@ -17,9 +24,6 @@
     <feature name="DeviceFeedback">
         <param name="android-package" value="cz.Velda.cordova.plugin.devicefeedback.DeviceFeedback" />
         <param name="onload" value="true" />
-    </feature>
-    <feature name="Geolocation">
-        <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
     </feature>
     <name>Sensor Cloud</name>
     <description>
