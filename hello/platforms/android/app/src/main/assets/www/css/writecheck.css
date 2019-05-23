@@ -20,7 +20,7 @@
 #writecontent { 
     width: 100%;
     border: 1px solid black;
-    height: 520px;
+    height: 480px;
     margin: 0 auto;
 
 }
@@ -33,13 +33,8 @@
 
 #writecontent2 {
     width: 100%;
-    height: 36%;
+    height: 38%;
     resize: none;
-}
-
-.pictureuri {
-    width: 100%;
-    height: 8%;
 }
 
 
@@ -101,15 +96,15 @@
 
 #imagespot {
     width: 100%;
-    height: 32.5%;
-    margin-top: 2px;
+    height: 39%;
+    margin-top: 5px;
 }
 
 .repairpicturespot{
 
-    display: inline-block;
-    width: 100%;
-    height: 100%;
+    display:inline-block;
+    width: 31.8%;
+    height: 47%;
 
 }
 
