@@ -1,10 +1,11 @@
 #mypagechecklist tr:hover {
-	background-color: #D8D8D8;
+	background-color: #eaecf4;
 }
 
 .title-header {
     height: 40px;
-    border-bottom: 1px solid #000000;
+   	border-bottom: 2px solid #5fc5ee;
+    color: #000;
     margin: 12% 0 0 -0.2%;
   }
   
@@ -26,7 +27,7 @@ h3 {
 
 #buttons {
 	margin-left: 4%;
-} 
+}
 
 table {
   border: 1px solid #ccc;
@@ -43,7 +44,7 @@ table caption {
 }
 
 table tr {
-  background-color: #f8f8f8;
+  background-color: #f6f8fd;
   border: 1px solid #ddd;
   padding: .35em;
 }
@@ -98,16 +99,18 @@ img {
 }
 
 .n1{
-  font-size: 1.8em;
+  font-size: 2em;
   text-align: left;
   margin: 50% 0 -1% 1%;
   display: block;
 }
+
 .n2{
   display: block;
   font-size: 1.4em;
   text-align: left;
   margin: 0 0 0 1.6%;
+  color: #2b90d9;
   
 }
 .n3{

@@ -18,8 +18,9 @@ html {
 
 .title-header {
     height: 50px;
-    border-bottom: 1px solid #000000;
-  }
+    border-bottom: 2px solid #5fc5ee;
+	color: #000;
+ }
   
   .title-header h1 {
     float: left;
@@ -34,7 +35,7 @@ html {
   }
 
  #user tr:hover {
-	background-color: #D8D8D8;
+	background-color: #eaecf4;
 }
 
   @media ( max-width: 1001px ) {
@@ -101,7 +102,7 @@ table {
   }
   
   table tr {
-    background-color: #f8f8f8;
+    background-color: #f6f8fd;
     border: 1px solid #ddd;
     padding: .35em;
   }
