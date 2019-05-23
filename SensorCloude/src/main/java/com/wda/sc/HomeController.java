@@ -45,7 +45,7 @@ public class HomeController {
 	@Autowired private ServletContext servletContext;
 
 	@RequestMapping(value ="/", method = RequestMethod.GET)
-	public String main(Locale locale, Model model) {
+	public String main(Locale locale, Model model, HttpSession session) {
 
 		System.out.println(servletContext.getRealPath("/"));
 		//메인화면 점검이력 제목 substring
@@ -62,6 +62,8 @@ public class HomeController {
 		model.addAttribute("sitelist",siteservice.getList());
 		model.addAttribute("timelinelist",timelineservice.timedesc());
 		model.addAttribute("mainchecklist",arr);
+		String id = (String)session.getAttribute("id");
+		model.addAttribute("userInfo",mypageservice.getInfo(id));
 		return "main";
 	}
 

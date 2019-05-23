@@ -18,7 +18,7 @@ html {
 
 .title-header {
     height: 50px;
-    border-bottom: 1px solid #000000;
+    border-bottom: 2px solid #5fc5ee;
   }
   
   .title-header h1 {
@@ -26,10 +26,11 @@ html {
     width: 300px;
     margin: 0;
     padding: 0 0 0 20px;
+    color:#000;
   }
   
  #site tr:hover {
-	background-color: #D8D8D8;
+	background-color: #eaecf4;
 }
 
   @media ( max-width: 1001px ) {
@@ -92,7 +93,7 @@ table {
   }
   
   table tr {
-    background-color: #f8f8f8;
+    background-color: #f6f8fd;
     border: 1px solid #ddd;
     padding: .35em;
   }
@@ -112,8 +113,17 @@ table {
 
   .title-header button { 
     float: right;
-    width: 200px;
-    height: 50px;
+    width: 150px;
+    height: 50px; 
+    font-size: 1.3em;
+    cursor:pointer;
+  	 border: none;
+     border-bottom: 2px solid #3796ca; 
+     background-color: #5fc5ee;
+     color: #fff;
+     padding: 5px 8px;
+     position: relative;
+     bottom: 10px;
   }
   
   @media screen and (max-width: 700px) {

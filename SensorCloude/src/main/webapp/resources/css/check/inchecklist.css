@@ -1,25 +1,27 @@
+body {
+	background-color: #f8f9fc;
+}
 .a {
 	width: 65%;
-	height: 100%;
-	overflow: hidden;
 	margin: 20px auto;
-	margin-top: 150px;
-	border: 1px solid #ddd;
-	background-color: #F2F2F2;
+	padding: 20px;
+	border: none;
+	background-color: #fff;
+	margin-top: 120px;
 }
 
 .index {
-	width: 97%;
 	height: 50px;
 	margin: 20px 20px 20px 20px;
-	font-size: 2.4em;
+	font-size: 1.6em;
 	color: #6E6E6E;
+	position: relative;
 }
 
 .title1 {
 	width: 97%;
 	height: 50px;
-	border: 3px solid white;
+	border-bottom: 1px solid #000;
 	margin: 20px 20px 20px 20px;
 }
 
@@ -28,44 +30,33 @@
 	height: 100%;
 }
 
-.th01 {
-	width: 10%;
-	background-color: #D8D8D8;
-}
-
-.th02 {
-	width: 90%;
-	background-color: #F2F2F2;
-}
-
 .title00 {
-	width: 99.9%;
+	width: 98%;
 	height: 70%;
 	margin-top: 3px;
+	margin-left: 1%;
+	position: relative;
+	font-size: 2em;
 }
 
 .site1 {
-	width: 97%;
-	height: 50px;
 	border: 3px solid white;
-	margin: 20px 20px 20px 20px;
 }
 
 .th03 {
 	width: 30%;
-	background-color: #F2F2F2;
 	text-align: left;
 }
 
 .se {
-	width: 95%;
-	height: 60%;
-	text-align: center;
+	float: right;
+	font-size: 1.1em;
+	margin-right: 2%;
 }
 
 .status {
 	width: 10%;
-	background-color: #D8D8D8;
+	background-color: #dddfe6;
 }
 
 .stse {
@@ -77,22 +68,25 @@
 	text-align: center;
 }
 
-#sse {
-	width: 55%;
+.sse {
 	height: 60%;
+	position: relative;
+	font-size: 1.2em;
+	color: #f8ca00;
 }
 
 .content {
 	width: 97%;
-	height: 700px;
+	height: 100%;
 	border: 3px solid white;
 	margin: 20px 20px 20px 20px;
 }
 
 #boardcontent {
-	width: 99.6%;
+	width: 91%;
 	height: 50%;
 	font-size: 1.4em;
+	padding: 30px;
 }
 
 .picturespot {
@@ -103,7 +97,7 @@
 
 .th05 {
 	width: 5%;
-	background-color: #D8D8D8;
+	background-color: #dddfe6;
 }
 
 .f0 {
@@ -116,17 +110,24 @@
 .but {
 	width: 97%;
 	height: 50px;
-	margin: 20px;
 }
 
 .but0 {
-	margin: 20px 0;
+	margin-top: 20px;
 	text-align: center;
 }
 
 button {
-	width: 50px;
-	height: 40px;
+	border: 1px solid #dddfe6;
+	background-color: #FFF;
+	width: 100px;
+	height: 35px;
+	cursor:pointer
+}
+
+button:hover {
+	border: 1px solid #4e73df;
+	cursor:pointer
 }
 
 #span {
@@ -134,8 +135,6 @@ button {
 }
 
 #writername {
-	width: 97%;
-	height: 25px;
 	margin: 20px 20px 20px 20px;
 	font-size: 1.3em;
 	color: #6E6E6E;
@@ -143,7 +142,6 @@ button {
 
 .uploadResult {
 	width: 100%;
-	background-color: #F2F2F2;
 }
 
 .uploadResult ul {
@@ -232,7 +230,6 @@ button {
 	}
 	.site1 {
 		width: 93%;
-		margin: 10px 10px 10px 10px;
 	}
 	.status {
 		width: 15%;
