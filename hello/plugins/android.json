@@ -21,6 +21,12 @@
     },
     "cordova-plugin-velda-devicefeedback": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
+    },
+    "cordova-plugin-imagepicker": {
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
     }
   },
   "dependent_plugins": {}

@@ -269,6 +269,7 @@ dependencies {
     implementation(project(path: ":CordovaLib"))
     implementation "com.google.firebase:firebase-core:16.0.8"
     implementation "com.google.firebase:firebase-messaging:17.5.0"
+    implementation "com.android.support:support-v4:24.1.1+"
     // SUB-PROJECT DEPENDENCIES END
 }
 

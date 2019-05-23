@@ -27,6 +27,14 @@
             {
               "xml": "<feature name=\"DeviceFeedback\"><param name=\"android-package\" value=\"cz.Velda.cordova.plugin.devicefeedback.DeviceFeedback\" /><param name=\"onload\" value=\"true\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"ImagePicker\"><param name=\"android-package\" value=\"com.synconset.ImagePicker\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -45,10 +53,31 @@
             {
               "xml": "<service android:name=\"com.gae.scaffolder.plugin.MyFirebaseInstanceIDService\"><intent-filter><action android:name=\"com.google.firebase.INSTANCE_ID_EVENT\" /></intent-filter></service>",
               "count": 1
+            },
+            {
+              "xml": "<activity android:label=\"@string/multi_app_name\" android:name=\"com.synconset.MultiImageChooserActivity\" android:theme=\"@android:style/Theme.Holo.Light\"></activity>",
+              "count": 1
             }
           ],
           "/manifest/application/activity": [],
-          "/manifest": []
+          "/manifest": [
+            {
+              "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+              "count": 1
+            }
+          ],
+          "/*": [
+            {
+              "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+              "count": 1
+            }
+          ],
+          "application": [
+            {
+              "xml": "<provider android:authorities=\"${applicationId}.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"org.apache.cordova.camera.FileProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/camera_provider_paths\" /></provider>",
+              "count": 1
+            }
+          ]
         }
       },
       "app/src/main/AndroidManifest.xml": {
@@ -86,6 +115,12 @@
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
     },
     "cordova-plugin-velda-devicefeedback": {
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
+    },
+    "cordova-plugin-imagepicker": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
     }
   },
@@ -131,6 +166,46 @@
       "clobbers": [
         "window.plugins.deviceFeedback"
       ]
+    },
+    {
+      "id": "cordova-plugin-camera.Camera",
+      "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "Camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverOptions",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverOptions"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.camera",
+      "file": "plugins/cordova-plugin-camera/www/Camera.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "navigator.camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverHandle",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverHandle.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverHandle"
+      ]
+    },
+    {
+      "id": "cordova-plugin-imagepicker.ImagePicker",
+      "file": "plugins/cordova-plugin-imagepicker/www/imagepicker.js",
+      "pluginId": "cordova-plugin-imagepicker",
+      "clobbers": [
+        "plugins.imagePicker"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -138,6 +213,8 @@
     "cordova-plugin-fcm": "2.1.2",
     "cordova-plugin-dialogs": "2.0.1",
     "cordova-plugin-inappbrowser": "3.0.0",
-    "cordova-plugin-velda-devicefeedback": "0.0.2"
+    "cordova-plugin-velda-devicefeedback": "0.0.2",
+    "cordova-plugin-camera": "4.0.3",
+    "cordova-plugin-imagepicker": "1.1.0"
   }
 }

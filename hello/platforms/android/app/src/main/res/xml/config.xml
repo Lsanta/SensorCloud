@@ -18,6 +18,12 @@
         <param name="android-package" value="cz.Velda.cordova.plugin.devicefeedback.DeviceFeedback" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
+    <feature name="ImagePicker">
+        <param name="android-package" value="com.synconset.ImagePicker" />
+    </feature>
     <name>Sensor Cloud</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
