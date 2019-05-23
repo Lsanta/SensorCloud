@@ -17,14 +17,6 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"IntentShim\"><param name=\"android-package\" value=\"com.darryncampbell.cordova.plugin.intent.IntentShim\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<feature name=\"IntentPlugin\"><param name=\"android-package\" value=\"com.napolitano.cordova.plugin.intent.IntentPlugin\" /></feature>",
-              "count": 1
-            },
-            {
               "xml": "<feature name=\"Notification\"><param name=\"android-package\" value=\"org.apache.cordova.dialogs.Notification\" /></feature>",
               "count": 1
             },
@@ -34,6 +26,14 @@
             },
             {
               "xml": "<feature name=\"DeviceFeedback\"><param name=\"android-package\" value=\"cz.Velda.cordova.plugin.devicefeedback.DeviceFeedback\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"ImagePicker\"><param name=\"android-package\" value=\"com.synconset.ImagePicker\" /></feature>",
               "count": 1
             }
           ]
@@ -55,23 +55,26 @@
               "count": 1
             },
             {
-              "xml": "<provider android:authorities=\"${applicationId}.darryncampbell.cordova.plugin.intent.fileprovider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"com.darryncampbell.cordova.plugin.intent.CordovaPluginIntentFileProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/provider_paths\" /></provider>",
+              "xml": "<activity android:label=\"@string/multi_app_name\" android:name=\"com.synconset.MultiImageChooserActivity\" android:theme=\"@android:style/Theme.Holo.Light\"></activity>",
               "count": 1
             }
           ],
-          "/manifest/application/activity": [
-            {
-              "xml": "<intent-filter><action android:name=\"com.darryncampbell.cordova.plugin.intent.ACTION\" /><category android:name=\"android.intent.category.DEFAULT\" /></intent-filter>",
-              "count": 1
-            }
-          ],
+          "/manifest/application/activity": [],
           "/manifest": [
             {
-              "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
+              "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
               "count": 1
-            },
+            }
+          ],
+          "/*": [
             {
-              "xml": "<uses-permission android:name=\"android.permission.REQUEST_INSTALL_PACKAGES\" />",
+              "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+              "count": 1
+            }
+          ],
+          "application": [
+            {
+              "xml": "<provider android:authorities=\"${applicationId}.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"org.apache.cordova.camera.FileProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/camera_provider_paths\" /></provider>",
               "count": 1
             }
           ]
@@ -105,12 +108,6 @@
     "cordova-plugin-fcm": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
     },
-    "com-darryncampbell-cordova-plugin-intent": {
-      "PACKAGE_NAME": "kr.yju.wdb.sensor"
-    },
-    "com.napolitano.cordova.plugin.intent": {
-      "PACKAGE_NAME": "kr.yju.wdb.sensor"
-    },
     "cordova-plugin-dialogs": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
     },
@@ -118,6 +115,12 @@
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
     },
     "cordova-plugin-velda-devicefeedback": {
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
+    },
+    "cordova-plugin-imagepicker": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
     }
   },
@@ -129,22 +132,6 @@
       "pluginId": "cordova-plugin-fcm",
       "clobbers": [
         "FCMPlugin"
-      ]
-    },
-    {
-      "id": "com-darryncampbell-cordova-plugin-intent.IntentShim",
-      "file": "plugins/com-darryncampbell-cordova-plugin-intent/www/IntentShim.js",
-      "pluginId": "com-darryncampbell-cordova-plugin-intent",
-      "clobbers": [
-        "intentShim"
-      ]
-    },
-    {
-      "id": "com.napolitano.cordova.plugin.intent.IntentPlugin",
-      "file": "plugins/com.napolitano.cordova.plugin.intent/www/android/IntentPlugin.js",
-      "pluginId": "com.napolitano.cordova.plugin.intent",
-      "clobbers": [
-        "IntentPlugin"
       ]
     },
     {
@@ -179,15 +166,55 @@
       "clobbers": [
         "window.plugins.deviceFeedback"
       ]
+    },
+    {
+      "id": "cordova-plugin-camera.Camera",
+      "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "Camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverOptions",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverOptions"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.camera",
+      "file": "plugins/cordova-plugin-camera/www/Camera.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "navigator.camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverHandle",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverHandle.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverHandle"
+      ]
+    },
+    {
+      "id": "cordova-plugin-imagepicker.ImagePicker",
+      "file": "plugins/cordova-plugin-imagepicker/www/imagepicker.js",
+      "pluginId": "cordova-plugin-imagepicker",
+      "clobbers": [
+        "plugins.imagePicker"
+      ]
     }
   ],
   "plugin_metadata": {
     "cordova-plugin-whitelist": "1.3.3",
     "cordova-plugin-fcm": "2.1.2",
-    "com-darryncampbell-cordova-plugin-intent": "1.1.7",
-    "com.napolitano.cordova.plugin.intent": "0.1.2",
     "cordova-plugin-dialogs": "2.0.1",
     "cordova-plugin-inappbrowser": "3.0.0",
-    "cordova-plugin-velda-devicefeedback": "0.0.2"
+    "cordova-plugin-velda-devicefeedback": "0.0.2",
+    "cordova-plugin-camera": "4.0.3",
+    "cordova-plugin-imagepicker": "1.1.0"
   }
 }

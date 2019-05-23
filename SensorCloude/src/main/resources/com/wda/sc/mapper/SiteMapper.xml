@@ -75,7 +75,7 @@
 	
 	<!--현장 추가 -->
 	<insert id="siteadd" parameterType="com.wda.sc.domain.SiteVO">
-		insert into site(site_id,type_no,site_name,address,start_date,site_status) values(site_seq.nextval,#{type_no}, #{site_name},#{address},sysdate,'1')
+		insert into site(site_id,type_no,site_name,address,start_date,site_status,x,y) values(site_seq.nextval,#{type_no}, #{site_name},#{address},sysdate,'1',#{x},#{y})
 	</insert>
 	
 	<insert id="networkadd" parameterType="com.wda.sc.domain.SiteVO">
@@ -274,6 +274,31 @@
 		select * from site
 		where site_name LIKE '%' || #{word} || '%'
 		order by site_status desc, start_date desc
+	</select>
+	
+	
+	<!-- 앱 메인 가까운 현장순 -->
+	<select id="appmain" resultType="com.wda.sc.domain.SiteVO" parameterType="map">
+	<![CDATA[
+	SELECT a.x, a.y 
+     , SQRT( POWER(( #{latitude} - y) * 110979.309, 2)
+           + POWER(( #{longitude} - x) *  88907.949, 2)
+           ) z , a.site_id, a.type_no, a.site_name, a.address, a.start_date, a.site_status
+  FROM site a,
+     (SELECT #{latitude} v_x    
+             ,#{longitude} v_y  
+             ,110979.309     r_x   
+             ,88907.949     r_y   
+             ,1000000.000     v_z   
+          FROM dual
+        )
+ WHERE SQRT( POWER((v_x - a.y) * r_x, 2)
+           + POWER((v_y - a.x) * r_y, 2)
+           ) <= v_z
+   AND a.y BETWEEN v_x - v_z / r_x AND v_x + v_z / r_x
+   AND a.x BETWEEN v_y - v_z / r_y AND v_y + v_z / r_y
+ ORDER BY z
+	]]>
 	</select>
 	
 </mapper>

@@ -11,6 +11,9 @@ public class SiteVO {
 	private String address;
 	private String start_date;
 	private int site_status;
+	private double x;
+	private double y;
+	private double z;
 	
 	//network table
 	private int sig_id;
