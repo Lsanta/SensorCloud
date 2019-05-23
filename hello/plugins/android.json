@@ -19,23 +19,22 @@
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
     },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
+    },
     "cordova-plugin-velda-devicefeedback": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
     },
-
-    "cordova-plugin-geolocation": {
+    "cordova-plugin-imagepicker": {
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
+    },
+    "cordova-plugin-file": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
     },
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
     },
     "cordova-plugin-file-transfer": {
-      "PACKAGE_NAME": "kr.yju.wdb.sensor"
-    },
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "kr.yju.wdb.sensor"
-    },
-    "cordova-plugin-imagepicker": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
     }
   },
