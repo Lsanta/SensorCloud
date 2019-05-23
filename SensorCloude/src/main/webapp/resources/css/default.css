@@ -1,10 +1,14 @@
 @charset "utf-8";
+@font-face {
+  font-family: A신그래픽L;
+  src: url('/resources/font/A신그래픽L.TTF');
+}
 
 /* Reset */
  * {outline:0 !important;}
 html,body,h1,h2,h3,h4,h5,h6,div,p,blockquote,pre,code,address,ul,ol,li,menu,nav,section,article,aside,
 dl,dt,dd,table,thead,tbody,tfoot,label,caption,th,td,form,fieldset,legend,hr,input,button,textarea,object,figure,figcaption {margin:0;padding:0;}
-html, body{width:100%;}
+html, body{width:100%; font-family: 'A신그래픽L';}
 html{-webkit-touch-callout:none; -webkit-user-select:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0);}
 body{width:100%; background:#fff; min-width:320px; -webkit-text-size-adjust:none;word-wrap:break-word;word-break:break-all;}
 body {/*border:none;*/ font-size:14px; color:#727272;}
@@ -24,14 +28,12 @@ a{color:#000;text-decoration:none;}
 
 header {
 	z-index: 4;
-	border-bottom: #2b99ff 2px solid;
-	padding-bottom: 33px;
+	border-bottom: #DCDCDC 2px solid;
+	padding-bottom: 48px;
     position : fixed;
     left : 0;
     top : 0;
     width: 100%;
     background:white;
- 
-        }
 }
-33
+

@@ -14,6 +14,8 @@ public interface TimelineMapper {
 	public int timelinemodify(TimelineVO vo);
 	public int getPageNum();
 	public ArrayList<TimelineVO> getListm();
+	public int timelineselect(String timeline_n);
+	public ArrayList<TimelineVO> getContent(String timeline_n);
 
 	
 }

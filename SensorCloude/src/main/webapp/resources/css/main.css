@@ -20,19 +20,19 @@
 }
 
 #site tr:hover {
-   background-color: #D8D8D8;
+   background-color: #eaecf4;
 }
 
 #main-container {
-  width: 1130px;
+  width: 1280px;
   height: 800px;
   margin: 0px auto;
   padding: 20px;
   padding-top:0;
-  margin-top:125px;
+  margin-top:120px;
 }
 #left-content {
-  width: 670px;
+  width: 720px;
   height: 730px;
   padding: 10px;
   padding-top: 0;
@@ -40,7 +40,7 @@
   float: left;
 }
 #right-content {
-  width: 400px;
+  width: 450px;
   padding: 10px;
   padding-top: 0;
   float: right;
@@ -57,7 +57,7 @@
 
 .title-header {
   height: 50px;
-  border-bottom: 1px solid #000000;
+  border-bottom: 2px solid #5fc5ee;
 }
 
 .title-header h2 {
@@ -91,7 +91,8 @@
   height: 45px;
   padding: 10px;
   margin: 7px;
-  border: 1px solid #bcbcbc;
+  background-color: #f6f8fd;
+  border: 1px solid #ddd;
 }
 
 @media ( max-width: 1000px ) {
@@ -143,10 +144,10 @@ table caption {
 }
 
 table tr {
-  background-color: #f8f8f8;
+  background-color: #f6f8fd;
   border: 1px solid #ddd;
   padding: .35em;
-  height: 45px;
+  height: 44px;
 }
 
 table th,
@@ -229,6 +230,7 @@ table th {
   justify-content: center;
   align-items: center;
   padding: 13px;
+  cursor:pointer;
 } 
 
 .images h5 {
@@ -243,8 +245,9 @@ table th {
 
 #chstatus {
   color: #524f4f;
-  margin: 0 0 5% 2%;
+  margin: 0 0 5% 10%;
   font-size: 0.8em;
+  
 }
 
 

@@ -19,7 +19,7 @@ $(document).ready(function() {
 	////////////////////*pagination*//////////////////////////////////
 
 	$("#add").click(function(){
-		window.location.href = "/site/"+ url[2] +"/sensoradd/" + a;
+		window.location.href = "/site/"+ url[2] +"/sensoradd/1";
 	});
 	
 

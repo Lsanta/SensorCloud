@@ -2,8 +2,9 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <nav th:fragment="nav">
-	<header class="main-header" style="height : 80px">
-		<div class="left">
+	<header class="main-header" style="height : 50px">
+
+<div class="left">
 		<h1><a href="/">str</a></h1>
 		<a href="#a" class="all">all Menu</a>
 		<div class="nav">
@@ -18,8 +19,9 @@
 		</ul>
 	      </nav>
 	      <div th:if="${session.id != null}" >
-	      	<a href="/mypage/1">마이페이지</a>
+	      	<p th:text="${session.name} + 님"></p> 	
 	      	<a href="/logout">로그아웃</a>
+	      	<a href="/mypage/1">마이페이지</a>
 	      </div>
 	      <div th:if="${session.id == null}" >
 	      	<a href="/login">로그인</a>
@@ -28,9 +30,10 @@
 	</div>
 </div>
 	    <ul class="a2" th:if="${session.id != null}" >
-	    	<li><a href="/mypage/1">마이페이지</a></li>
+	    <p th:text="${session.name} + 님"></p> 	
 	    	<li class="hide"><a href="/logout">로그아웃</a></li>
 	    	<a href="#a" class="manclose">close</a>
+	    	<li><a href="/mypage/1">마이페이지</a></li>
 	    	<!-- <li class="logout"><a href="#a">man</a></li> -->
 	    </ul>
 	     <ul class="a2" th:if="${session.id == null}" >
@@ -41,8 +44,9 @@
 	    <div class="man">
 	    	<div class="manmenu">
 	    	<ul th:if="${session.id != null}">
-	    		<li><a href="/mypage">마이페이지</a></li>
+	    	<p th:text="${session.name} + 님"></p> 
 	    	    <li><a href="/logout">로그아웃</a></li>
+	    	    <li><a href="/mypage">마이페이지</a></li>
 	    	</ul>
 	    	<ul th:if="${session.id == null}">
 	    	    <li><a href="/login">로그인</a></li>

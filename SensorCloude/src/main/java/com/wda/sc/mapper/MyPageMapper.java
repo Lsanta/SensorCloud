@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.wda.sc.domain.AppTokenVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.TokenVO;
 
 public interface MyPageMapper {
 	public ArrayList<MemberVO> getInfo(String id);
-	//앱 테스트
-	public ArrayList<MemberVO> getInfom(String id);
 	
 	public ArrayList<CheckBoardVO> myList(Map<String, Object> parm);
 	
@@ -28,5 +27,11 @@ public interface MyPageMapper {
 	public int saveToken(TokenVO tokenvo);
 	
 	public int updateToken(Map<String, String> map);
+	//앱 토큰
+	public List<AppTokenVO> getappToken(String id);
+	
+	public int saveappToken(AppTokenVO tokenvo);
+	
+	public int updateappToken(Map<String, String> map2);
 	
 }

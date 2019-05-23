@@ -37,8 +37,8 @@ table th {
 table td{
   font-size:.90em;
 }
-.iw_inner {padding:10px}
-.iw_inner h3 {font-size: 18px; padding-bottom: 7px}
+/* .iw_inner {padding:10px}
+.iw_inner h3 {font-size: 18px; padding-bottom: 7px} */
 
 /* page-loading */
 #page-loading {
@@ -59,3 +59,5 @@ table td{
   display: table-cell;
   font-size: 60px;
 }
+
+

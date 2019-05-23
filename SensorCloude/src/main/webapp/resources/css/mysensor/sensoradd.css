@@ -77,10 +77,3 @@ h1{
 .sensoradd a:hover {
   opacity: 1;
 }
-
-
-@media (max-width:700px) {
-  .sensoradd {
-    margin-top:10%;
-  }
- }

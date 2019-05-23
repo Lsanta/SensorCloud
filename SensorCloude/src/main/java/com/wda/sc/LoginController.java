@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.service.CheckboardService;
@@ -27,7 +30,7 @@ import lombok.AllArgsConstructor;
 @SessionAttributes("id")
 @RequestMapping("/login")
 public class LoginController {
-	
+
 	private LoginService loginservice;
 	private CheckboardService checkboardservice;
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -48,7 +51,7 @@ public class LoginController {
 			if(arr.get(0).getPassword().equals(password)) {
 				model.addAttribute("id",arr.get(0).getUser_id());
 				session.setAttribute("id", arr.get(0).getUser_id());
-				
+				session.setAttribute("name", arr.get(0).getName());
 				//권한별 페이지 interceptor 실행을 위해 m_level을 session에 저장//로그인 쿼리에 m_level추가
 				session.setAttribute("mlevel" , arr.get(0).getM_level());
 				System.out.println(session.getAttribute("mlevel"));
@@ -110,6 +113,7 @@ public class LoginController {
 	 }
 	 
 	 
+	 
 	 @RequestMapping(value = "/signup_logincheck.do", method = RequestMethod.POST)
 	 @ResponseBody
 	 public String signidCheck(Model model, @RequestParam String id) {
@@ -123,5 +127,6 @@ public class LoginController {
 			 return "no";
 		 
 	 }
-	 
-}
+	
+	    }
+

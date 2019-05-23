@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, 
+        maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/writecheck.css">
+
+    <title>6-1 점검이력 글쓰기 + 갤러리 </title>
+</head>
+
+<body>
+    <div class="header">
+
+
+        <h1>점검이력 글쓰기</h1>
+    </div>
+    <div id="writecontent">
+
+        <div id="writecontent1">
+
+            <input type="text" id="checktitle" name="checktitle" placeholder="title">
+
+
+            <select id='status'>
+                <option value='open' selected>open</option>
+                <option value='fixed'>fixed</option>
+            </select>
+
+        </div>
+
+
+        <div id="writecontent2">
+            <textarea name="checkcontent" id="checkcontent"></textarea>
+        </div>
+
+
+        <div id="selectcamrea">
+
+            <button id="cameraTakePicture">Camera</button>
+            <button id="cameraGetPicture">Library</button>
+
+
+        </div>
+
+
+
+        <div class="pictureuri">
+
+        </div>
+
+        <div id="imagespot">
+
+            <div class="repairpicturespot">
+                <img id="repairpicture2"></img>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="bottom">
+
+        <button id="confirmbutton">확인</button>
+
+    </div>
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript">
+
+        // 사용자가 선택한 사진의 경로
+        var file_path = null;
+
+        /** 카메라 혹은 갤러리 호출 */
+        function takePicture(source) {
+            // 표시영역을 비운다.
+
+            $(".imagespot").empty();
+            file_path = null;
+
+            navigator.camera.cleanup();
+
+            navigator.camera.getPicture(
+                // 사진 가져오기에 성공한 경우 호출될 함수
+                function (choice) {
+                    // 사진파일의 경로를 전역변수에 보관한다.
+                    file_path = choice;
+
+                    // Cordova의 WebView가 이미지를 캐시하는 것을 방지하기 위하여
+                    // 파일 경로 뒤에 timestamp를 덧붙인다.
+                    if (file_path.lastIndexOf('?') < 0) {//문자열에서
+                        // 탐색하는 문자열이 마지막으로 등장하는 위치에 대한 index를 반환
+                        file_path += "?" + new Date().getTime();
+                    }
+
+                    // 이미지 화면 표시
+                    var info = $(".pictureuri").html(file_path);
+                    var img = $("#repairpicture2").attr('src', file_path);
+                    // 외부 저장소(SD카드)의 최상위 경로 /storage/emulated/0
+                    // $("#result").append(info).append(img);
+                },
+                // 사진 가져오기에 실패한 경우 호출될 함수
+                function (message) {
+                    alert('Failed because: ' + message);
+                },
+                // 카메라,갤러리 호출 옵션
+                {
+                    destinationType: Camera.DestinationType.FILE_URI,   // 리턴타입 형식(파일경로)
+                    encodingType: Camera.EncodingType.JPEG, // 이미지 형식
+                    quality: 100,            // 퀄리티 (0~100)
+                    sourceType: source,      // 카메라 or 갤러리 설정
+                    allowEdit: true,        // 가져오기 완료 후 편집 여부
+                    correctOrientation: true, // 카메라를 세로로 촬영한 경우 이미지 방향을 회전시킴
+                    saveToPhotoAlbum: true,
+                    popoverOptions: CameraPopoverOptions,
+                    allowEdit: true
+                }
+            );
+        }
+
+
+        /** jQuery 초기화 */
+        $(function () {
+            // 카메라 버튼 이벤트 정의
+            $("#cameraTakePicture").click(function () {
+                takePicture(Camera.PictureSourceType.CAMERA);
+            });
+
+            // 갤러리 버튼 이벤트 정의
+            $("#cameraGetPicture").click(function () {
+                takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
+            });
+
+            // 업로드 버튼 이벤트 정의  //172.26.2.117
+            $("#confirmbutton").click(function () {
+                
+            //site_id 가져오기 
+            var site_id = location.href.split("=");
+            var siteid =site_id[1];
+            
+                /////입력 값
+                var checktitle = $("#checktitle").val();
+
+                var status = $("#status option:selected").val();
+                
+                if(status=="open"){
+                    var status = 0;
+                }
+
+                else if(status=="fixed"){
+                    var status =1;
+                }
+                
+                var content = $("#checkcontent").val();
+                // 로그인 아이디값 
+
+                var user_id =window.sessionStorage.getItem("id");
+                console.log(user_id);
+
+                alert(content);
+                alert(checktitle);
+              
+                alert(status);
+            
+                var checkcontent = { //유저가 입력한 정보를 js오브젝트로
+                        title : checktitle, 
+                        board_content :content,
+                        board_status : status,
+                        site_id : siteid,
+                        user_id : user_id
+                     };
+                     console.log(checkcontent);
+                     console.log(JSON.stringify(checkcontent));
+                    
+                    
+                $.ajax({
+                    type: "POST",
+                    url: "http:///52.79.242.145:8080/app/checklist/writecheck",
+                    contentType :"application/json; charset=utf-8",//전송할데이터타입
+                    data: JSON.stringify(checkcontent),
+                    dataType :"text",
+                     
+                    success: function (success) {
+                        alert("success");
+
+                        window.location.href="site.html?sid="+siteid;
+                       
+                    }
+
+                    });  
+
+            });
+        }); // end jquery
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

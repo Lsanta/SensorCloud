@@ -8,117 +8,28 @@
     <link rel="stylesheet" type="text/css" href="./css/mypage.css" />
     <link rel="stylesheet" type="text/css" href="./css/mpmodify.css" />
     <link rel="stylesheet" type="text/css" href="./css/level.css" />
-    <script src="./js/jquery.js"></script>
-    <script src="./js/jquery.mobile-1.4.5.js"></script>    
-    <script src="./js/mypage.js"></script>
-    <script src="./js/level.js"></script>
-
-   <script>
-    $(document).ready(function() {
-      $.ajax({
-         type : "POST",
-         url : "http://39.127.7.58:8080/app/mypage",
-         data : {pagenum : 1},
-         success : function(result){
-               console.log(result)
-               var page="";
-               var str = "";  
-               $.each(result.mpcheckList,function(i,s){
-               str +='<tr>';
-               str +='<td>'+s.site_name+'</td>';      // 현장이름
-               str +='<td>'+s.title+'</td>';          // 제목
-               str +='<td>'+s.board_status+'</td>';   // 상태
-               str +='<td>'+s.reg_date+'</td>';       // 날짜
-               str +='</tr>';
-
-               $("#mypagechecklist").html(str);
-                  
-            });
-                 if (result.criteria.prev) {
-                     page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.startPage - 1) + ');" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>'
-                  }
-                  for (var i = result.criteria.startPage; i <= result.criteria.endPage; i++) {
-                     page += '<li class="page-item"><a class="page-link" href="javascript:page(' + i + ');">' + i + '</a></li>'
-                  }
-                  if (result.criteria.next) {
-                     page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.endPage + 1) + ');" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>'
-                  }
-                  $(".pagination").empty();
-                  $(".pagination").prepend(page);
-                  $("html, body").animate({ scrollTop: 0 }, 1);
-           
-            
-            } // success 함수 종
-      }); // ajax함수
-
-      $('.mpmodify-level').on('click', function() {
-         $("#content").load("usermodify.html");
-      });
-
-    });
-
-    function page(index) {
-    $.ajax({
-         type : "POST",
-         url : "http://39.127.7.58:8080/app/mypage",
-         data : {pagenum : index},
-         success : function(result){
-               console.log(result)
-               var page="";
-               var str = ""; 
-               $.each(result.mpcheckList,function(i,s){
-               str +='<tr>';
-               str +='<td>'+s.site_name+'</td>';      // 현장이름
-               str +='<td>'+s.title+'</td>';          // 제목
-               str +='<td>'+s.board_status+'</td>';   // 상태
-               str +='<td>'+s.reg_date+'</td>';       // 날짜
-               str +='</tr>';
-
-               $("#mypagechecklist").html(str);
-                  
-            });
-                 if (result.criteria.prev) {
-                     page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.startPage - 1) + ');" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>'
-                  }
-                  for (var i = result.criteria.startPage; i <= result.criteria.endPage; i++) {
-                     page += '<li class="page-item"><a class="page-link" href="javascript:page(' + i + ');">' + i + '</a></li>'
-                  }
-                  if (result.criteria.next) {
-                     page += '<li class="page-item"><a class="page-link" href="javascript:page(' + (result.criteria.endPage + 1) + ');" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>'
-                  }
-                  $(".pagination").empty();
-                  $(".pagination").prepend(page);
-                  $("html, body").animate({ scrollTop: 0 }, 1);
-            
-            
-            } // success 함수 종
-      }); // ajax함수
-   }
-   </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
    <div data-role="page">
     <div data-role="header"  data-position="fixed">
         <a data-iconpos="notext" data-role="button" data-icon="home" title="Home" style="display: none;">Home</a>
         <img src="./img/str.png" width="30%" height="30%">
-        <a data-iconpos="notext" href="#panel" data-role="button" data-icon="bars" style="margin-top: 10px"></a>
     </div>
 
     <div data-role="content">
-        <div data-role="tabs">
             <div class="cell" >
-                <img src="./img/user.png" id="img" width="80px" height="80px">
-            </div>
-
-            <div class="name01">
-                <p class="n1">김개발</p>
-                <p class="n2">등급 5</p>
-            </div>
-
+                    <ul></ul>
+                 </div>
+     
+                 <div class="name01">
+                 </div>
+        <div data-role="tabs">
             <div data-role="navbar" >
                <ul>
                   <li><a href="#tab1">메인</a></li>
-                  <li><a href="#">로그아웃</a></li>
+                  <li><a href="#tab1" onclick="logout();">로그아웃</a></li>
                   <li><a href="#tab2">정보수정</a></li>
                </ul>               
             </div>
@@ -201,16 +112,37 @@
     <div data-role="footer"  data-position="fixed" data-id="footerid1">
         <div data-role="navbar">
             <ul>
-                    <li><a href="main.html" rel="external" data-icon="home"></a></li>
-                    <li><a href="search.html" rel="external" data-icon="search"></a></li>
-                    <li><a href="push.html" rel="external" data-icon="comment"></a></li>
-                    <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
+                <li><a href="main.html" rel="external" data-icon="home"></a></li>
+                <li><a href="search.html" rel="external" data-icon="search"></a></li>
+                <li><a href="timeline.html" rel="external" data-icon="comment"></a></li>
+                <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
             </ul>
         </div>
     </div>
+</div>
 
+<div id="page-loading">
+    <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>   
 </div>
  
+<script src="./js/jquery.js"></script>
+<script src="./js/mypage.js"></script>
+<script src="./js/level.js"></script>
+<script src="./js/jquery.mobile-1.4.5.js"></script>    
+<script>   
+    window.onload = function() { //실행될 코드 }
+        $("#page-loading").css("display", "none");
+    }
 
+    function logout(){
+        if(confirm("로그아웃 하시겠습니까?")){
+        sessionStorage.removeItem("id");
+        sessionStorage.removeItem("password");
+        window.location.href="index.html";
+    } else {
+        window.location.href="#tab1";
+    }
+    }
+</script>
 </body>
 </html>
