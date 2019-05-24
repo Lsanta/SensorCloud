@@ -19,7 +19,8 @@
     "cordova-plugin-fcm": "^2.1.2",
     "cordova-plugin-imagepicker": "^1.3.0",
     "cordova-plugin-inappbrowser": "^3.0.0",
-    "cordova-plugin-velda-devicefeedback": "0.0.2"
+    "cordova-plugin-velda-devicefeedback": "0.0.2",
+    "org.apache.cordova.geolocation": "^0.3.6"
   },
   "devDependencies": {
     "cordova-plugin-whitelist": "^1.3.3"
@@ -32,7 +33,8 @@
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-velda-devicefeedback": {},
       "cordova-plugin-camera": {},
-      "cordova-plugin-imagepicker": {}
+      "cordova-plugin-imagepicker": {},
+      "org.apache.cordova.geolocation": {}
     },
     "platforms": [
       "android"
