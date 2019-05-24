@@ -27,6 +27,9 @@
     },
     "cordova-plugin-imagepicker": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
+    },
+    "org.apache.cordova.geolocation": {
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
     }
   },
   "dependent_plugins": {}
