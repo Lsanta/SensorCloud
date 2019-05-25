@@ -1,6 +1,15 @@
-#scroll{
+/* #scroll{
 	margin-top: 2em;
+} */
+@font-face {
+  font-family: A신그래픽L;
+  src: url('/resources/font/A신그래픽L.TTF');
 }
+
+body {
+	font-family: 'A신그래픽L';
+}
+
 #sensor {
 	padding: 5px;
 	margin-left: 10px;
@@ -92,7 +101,7 @@ table caption {
 }
 
 table tr {
-	background-color: #f8f8f8;
+	background-color: #f6f8fd;
 	border: 1px solid #ddd;
 	padding: .35em;
 }
@@ -112,8 +121,17 @@ table th {
  #scroll button {
     float: right;
     margin-top: -30px;
-    width: 20%;
+    width: 13%;
 	height: 50px;
+	 font-size: 1.3em;
+    cursor:pointer;
+  	 border: none;
+     border-bottom: 2px solid #3796ca; 
+     background-color: #5fc5ee;
+     color: #fff;
+     padding: 5px 8px;
+     position: relative;
+     bottom: 10px;
    } 
 
 

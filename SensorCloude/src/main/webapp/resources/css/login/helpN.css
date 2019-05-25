@@ -1,5 +1,11 @@
+@font-face {
+  font-family: A신그래픽L;
+  src: url('/resources/font/A신그래픽L.TTF');
+}
+
 body {
 	background-color: purple;
+	 font-family: A신그래픽L;
 }
 
 .login-card {

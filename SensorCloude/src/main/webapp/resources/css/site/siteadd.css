@@ -45,6 +45,7 @@ p {
 body {
 	font-size: 0.9em;
 	background-color: #f8f9fc;
+	
 }
 
 #addcontent {
@@ -73,7 +74,7 @@ body {
 #addnetwork {
 	margin: 0 auto;
 	width: 95%;
-	margin-bottom: 30px;
+	margin-bottom: 50px;
 	/* border: 2px solid #7f9eb2; */
 	background-color: #fff;
 }

@@ -33,7 +33,9 @@
 				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
 				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'" >수리내역</a></li>
 				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage/1'">센서관리</a></li>
-				<li style="line-height: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트 다운로드</a></li>
+				<li style="line-height: 40px; margin-top: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트</a></li>
+				<li style="line-height: 40px; margin-bottom: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">다운로드</a></li>
+				
 				<li><span id="num">연락망</span> 
 				<span id="down" style="display: inline"> 
 						<img src="/resources/img/down-arrow.svg">
@@ -92,10 +94,12 @@
 				
 				<div id="sidebar">
 					<textarea name="textarea" id="textarea" maxlength="80" placeholder="문자내용" autofocus></textarea>
-					<button id="submit">전송</button>
+					
 					<div id="the_count">
-					<span id="current">0</span> <span id="maximum">/ 80</span>
-				</div>
+						<span id="current">0</span> <span id="maximum">/ 80</span>
+						<button id="submit">전송</button>
+					</div>
+					
 					<div class="scroll-table2">
 						<div>
 							<table>
