@@ -37,6 +37,7 @@
 
 				<div class="timeline" th:each="timelinelist : ${timelinelist}">
 					<div class="timeline-header" th:id="${timelinelist.timeline_n}">
+						<p style="display:none" th:text="${timelinelist.timeline_n}"></p>
 						<h3 th:text="${timelinelist.name}"></h3>
 						<h5 th:text="${timelinelist.time}"></h5>
 
@@ -54,7 +55,7 @@
 		</div>
 	</div>
 	
-	<div id="footer">
+	<div id="footer"> 
 	<div class="pagination-container">
 			<nav class="pagination-content">
 				<div class="pagination">

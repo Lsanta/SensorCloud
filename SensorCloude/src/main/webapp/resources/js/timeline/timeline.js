@@ -44,12 +44,10 @@ $(document).ready(function(){
 		}
 
 		if (true) {
-			var content = $(this).parent();
-			var content2 = content.siblings().first();
-			var content3 = content2.text();
-			alert(content3);
+			var timeline_n = $(this).siblings().eq(0).text();
+			alert(timeline_n);
 			var query = {
-					content : content3
+					timeline_n : timeline_n
 			}
 
 			$.ajax({

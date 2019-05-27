@@ -1,6 +1,8 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.mapper.LoginMapper;
@@ -30,5 +32,10 @@ public class LoginServiceImplement implements LoginService {
 		return mapper.idFind(name);
 	}
 	
+	@Override
+	public int keyUpdate(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return mapper.keyUpdate(map);
+	}
 	
 }
