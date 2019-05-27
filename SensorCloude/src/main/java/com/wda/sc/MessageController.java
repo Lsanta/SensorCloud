@@ -202,6 +202,87 @@ public class MessageController {
 		      return "ok";
 	   }
 	   
+	   @CrossOrigin(maxAge = 3600)
+	   @SuppressWarnings({ "null", "unused" })
+	   @ResponseBody
+	   @RequestMapping(value="/Timelinemessage.do", method= RequestMethod.POST, produces = {"application/json"})
+	   public String pushTest3(HttpSession session) {
+	      FirebaseApp defaultApp = null;
+	      List<FirebaseApp> apps=FirebaseApp.getApps();
+	      FileInputStream serviceAccount;
+	      FirebaseOptions options=null;
+	      //파이어베이스 옵션 설정
+	      try {
+	         serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	         options = new FirebaseOptions.Builder()
+	               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+//	               .setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+	               .build();
+	      } catch (FileNotFoundException e1) {
+	         e1.printStackTrace();
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+	      //이미 관리자 defaultApp이 있는지 검사
+	      if(apps!=null && !apps.isEmpty()) {
+	         for(FirebaseApp app:apps) {
+	            if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
+	               defaultApp = app;
+	         }
+	      }else {
+	         defaultApp = FirebaseApp.initializeApp(options);
+	      }
+	      
+	      List<AppTokenVO> tokenlist = new ArrayList<AppTokenVO>();
+		     
+		  //token값 select 하기
+		  tokenlist = mypageservice.allappToken();
+		  System.out.println(tokenlist);
+		  
+//		  List<String> registrationTokens = new ArrayList<String>();
+//		  
+//		  for(int i = 0; i < tokenlist.size(); i++) {
+//			  registrationTokens.add(tokenlist.get(i).getToken_id());
+//		  }
+//		
+//		  System.out.println(registrationTokens);
+		  
+
+	      AndroidConfig config = AndroidConfig.builder()
+	    		  .setTtl(3600 * 1000) // 1 hour in milliseconds
+	              .setPriority(AndroidConfig.Priority.HIGH)
+	              .setRestrictedPackageName("kr.yju.wdb.sensor")
+	              .setNotification(AndroidNotification.builder()
+	                  .setTitle("타임라인 갱신되었습니다")
+	                  .setBody("타임라인 갱신되었습니다")
+	                  .setIcon("/src/main/webapp/resources/img/str.png")
+	                  .setColor("#f45342")
+	                  .setClickAction("FCM_PLUGIN_ACTIVITY")
+	               
+	                  .build())
+	              .build();
+	      
+	      for(int i = 0; i < tokenlist.size(); i++) {
+			  
+	      Message message = Message.builder()
+	    		  .setAndroidConfig(config)
+	    		  .putData("data1", "20")
+	    		  .putData("data2", "30")
+	    		  .setToken(tokenlist.get(i).getToken_id())
+	    		  .build();
+		  
+	      try {
+		         String response=FirebaseMessaging.getInstance().send(message);
+		         System.out.println("Success : " + response);
+		      } catch (FirebaseMessagingException e) {
+		         System.out.println("Failed and the reason is behind");
+		         e.printStackTrace();
+		      }
+	      } //for문 종료
+	      
+		      return "ok";
+	   }
+	   
 	   @SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
 	   @RequestMapping(value="/WebTokenSave.do", method= RequestMethod.POST, produces = {"application/json"})

@@ -1,7 +1,8 @@
 $(document).ready(function(){
     $.ajax({
         type : "POST",
-        url : "http://52.79.242.145:8080/app/timeline/mtimeline",
+        // url : "http://52.79.242.145:8080/app/timeline/mtimeline",
+        url : "http://39.127.7.58:8080/app/timeline/mtimeline",
         data : {pagenum : 1},
         success : function(result){
             console.log(result);
@@ -55,14 +56,24 @@ $(document).ready(function(){
 
          $.ajax({
              type : "POST",
-             url : "http://52.79.242.145:8080/app/timeline/mtimeline.do",
+            //  url : "http://52.79.242.145:8080/app/timeline/mtimeline.do",
+             url : "http://39.127.7.58:8080/app/timeline/mtimeline.do",
              data : log,
              dataType : 'text',
              contentType : "application/json; charset=UTF-8",
              success : function(data){
                  if( data == "success"){
-                    alert("등록 성공");
+                     alert("등록 성공");
                      location.reload();
+
+                     $.ajax({
+                        type : "POST",
+                       // url : "http://52.79.242.145:8080/app/send/message.do",
+                        url : "http://39.127.7.58:8080/app/send/Timelinemessage.do",
+                        success : function(data) {
+                        }
+                 }); //ajax 종료
+
                  } else{
                      alert("ㄴㄴ");
                      location.reload();
@@ -88,7 +99,8 @@ $(document).ready(function(){
             $.ajax({
                 async : true,
                 type : "POST",
-                url : "http://52.79.242.145:8080/app/timeline/mtimelinedelete.do",
+                // url : "http://52.79.242.145:8080/app/timeline/mtimelinedelete.do",
+                url : "http://39.127.7.58:8080/app/timeline/mtimelinedelete.do",
                 data : sig, 
                 dataType : 'text',
                 contentType : "application/json; charset=UTF-8",
@@ -122,7 +134,8 @@ $(document).ready(function(){
         $.ajax({
             async : true,
             type : "POST",
-            url :  "http://52.79.242.145:8080/app/timeline/mtimelinemodify.do",
+            // url :  "http://52.79.242.145:8080/app/timeline/mtimelinemodify.do",
+            url :  "http://39.127.7.58:8080/app/timeline/mtimelinemodify.do",
             data : sig, 
             dataType : 'json',
             contentType : "application/json; charset=UTF-8",
@@ -164,7 +177,8 @@ $(document).ready(function(){
     $.ajax({
         async : true,
         type : "POST",
-        url :  "http://52.79.242.145:8080/app/timeline/mtimelinemodifyy.do",
+        // url :  "http://52.79.242.145:8080/app/timeline/mtimelinemodifyy.do",
+        url :  "http://39.127.7.58:8080/app/timeline/mtimelinemodifyy.do",
         data : sig, 
         dataType : 'text',
         contentType : "application/json; charset=UTF-8",
@@ -191,7 +205,8 @@ function page(index){
     alert(index);
     $.ajax({
         type : "POST",
-        url : "http://52.79.242.145:8080/app/timeline/mtimeline",
+        // url : "http://52.79.242.145:8080/app/timeline/mtimeline",
+        url : "http://39.127.7.58:8080/app/timeline/mtimeline",
         data : {pagenum : index},
         success : function(result){
             console.log(result);
