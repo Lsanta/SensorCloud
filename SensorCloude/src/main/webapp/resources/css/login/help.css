@@ -136,7 +136,16 @@ body {
 	text-align: center;
 }
 
+#hidden2 {
+	height: 150px;
+	text-align: center;
+}
+
 #hidden p {
+	font-weight: bold;
+}
+
+#hidden2 p {
 	font-weight: bold;
 }
 

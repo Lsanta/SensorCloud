@@ -5,7 +5,7 @@
 <mapper namespace="com.wda.sc.mapper.LoginMapper">
 
 	<select id="login" resultType="com.wda.sc.domain.MemberVO">
-		select user_id,password,m_level,name from MEMBER where user_id = #{user_id}
+		select user_id,password,m_level,name,key,email from MEMBER where user_id = #{user_id}
 	</select>
 	
 	<insert id="signup" parameterType="com.wda.sc.domain.MemberVO">
@@ -20,4 +20,7 @@
 		update member set password = #{password} where user_id = #{user_id}
 	</update>
 	
+	<update id="keyUpdate" parameterType="map">
+		update member set key = #{key} where user_id = #{name}
+	</update>
 </mapper>
