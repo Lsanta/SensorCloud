@@ -113,7 +113,6 @@ public class LoginController {
 	 }
 	 
 	 
-	 
 	 @RequestMapping(value = "/signup_logincheck.do", method = RequestMethod.POST)
 	 @ResponseBody
 	 public String signidCheck(Model model, @RequestParam String id) {
