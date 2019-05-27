@@ -4,8 +4,11 @@
 }
 
 body {
-	background-color: aqua;
 	 font-family: A신그래픽L;
+}
+
+h2 {
+	font-size: 25px;
 }
 
 .login-card {
@@ -17,7 +20,8 @@ body {
 	font-size: 13px;
 	bottom: 0px;
 	float: right;
-	margin-right: 11%;
+	margin-right: 3%;
+	width: 80px;
 }
 
 #hr {
@@ -25,50 +29,46 @@ body {
 }
 
 #tel {
-	width: 50%;
-	margin-left: 4.5%;
+	width: 60%;
+	margin-left: 5%;
 }
 
 #name {
-	width: 50%;
+	width: 60%;
 	margin-left: 25%;
 }
 
 #name2 {
-	width: 50%;
+	width: 60%;
 	margin-left: 10%;
 }
 
 #email {
-	width: 65%;
-	margin-left: 3%;
+	width: 60%;
+	margin-left: 10%;
 }
 
 #btn2 {
 	padding: 10px;
+	font-size: 13px;
+	bottom: 0px;
 	float: right;
-	margin-right: 110px;
-	width: 60px;
-	font-size: 15px;
-	position: relative;
-	top: -20px;
+	margin-right: 13%;
 }
 
 .ijn {
 	padding: 5px;
-	float: right;
-	position: relative;
-	top: -30px;
-	margin-right: 26px;
+    position: relative;
+    top: -25px;
+    left: 65px;
+    width: 60%;
+    margin-bottom: 8%;
 }
 
 #ijn2 {
-	width: 50%;
-	margin-left: 23.5%;
+	width: 60%;
+	margin-left: 28%;
 	position: relative;
 	top: -40px;
 }
 
-b {
-	font-size: 30px;
-}
