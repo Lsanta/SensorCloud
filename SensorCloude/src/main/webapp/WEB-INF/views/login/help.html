@@ -59,13 +59,50 @@ $(document).ready(function () {
     
     $('.ijn').click(function() {
     	var email = $("#email").val();
+    	var user_id = $("#name2").val();
+    	var query = {user_id:user_id, email:email};
     	 $.ajax({
     		type : "POST",
          	dataType : "text",
-         	data : email,
+         	data : query,
+         	url :  "/login/sendMsg.do",
+         	success : function(data){
+         		if(data=="0"){
+         			alert("메일발송에 실패했습니다.");
+         		}else if(data == "2"){
+         			alert("입력하신 이메일과 일치하지 않습니다.");
+         		}else if(data == "3"){
+         			alert("존재하지 않는 아이디 입니다.");
+         		}else{
+         			$("#ijn2").attr("disabled",false);
+             		alert("메일발송에 성공하였습니다.");	
+         		}
+         		
+         	}
+    	 });
+    });
+    
+    $('#btn2').click(function() {
+    	var key = $("#ijn2").val();
+    	var user_id = $("#name2").val();
+    	var query = {user_id:user_id, key:key};
+    	 $.ajax({
+    		type : "POST",
+         	dataType : "text",
+         	data : query,
          	url :  "/login/pwFind.do",
          	success : function(data){
-         		alert("성공")
+         		var s = user_id +" 님의 비밀번호 조회 결과는 아래와 같습니다.";
+        		if( data == "0"){
+        			$("#hidden2").css("visibility","visible");
+        			document.getElementById("hidden").innerHTML="인증번호가 다릅니다.";
+        		} else if( data == "2"){
+        			$("#hidden2").css("visibility","visible");
+        			document.getElementById("hidden").innerHTML="아이디가 다릅니다.";
+        		} else {
+        			$("#hidden2").css("visibility","visible");
+        			document.getElementById("hidden2").innerHTML="<br>"+s+"<br><p>"+data+"</p>";
+        		}
          	}
     	 });
     });
@@ -74,8 +111,13 @@ $(document).ready(function () {
 </script>  
 </head>
 <body>
+<div class="left">
+		<a href="/login"><img src="/resources/img/logo.png" width="160" height="100" ></a>
+	    <a href="/login">로그인</a>
+</div>
+
 	<div class="login-card">
-		<b style="font-size: 30px">아이디찾기</b> <br>
+		<h2 style="font-size: 30px">아이디찾기</h2> <br>
 		<div id="box1">
 			<form>
 				이름<input type="text" id="name" name="name" placeholder="UserId"><br />
@@ -85,13 +127,14 @@ $(document).ready(function () {
 			</form>
 		</div>
 		<div id="hidden" style="visibility : hidden"></div>
-		<b>비밀번호 찾기</b> <br>
+		
+		<h2>비밀번호 찾기</h2> <br>
 		<div id="box2">
 			<form>
-				이름<input type="password" id="name2" name="name2" placeholder="Password"><br /> 
+				아이디<input type="text" id="name2" name="name2" placeholder="아이디"><br /> 
 				이메일<input type="email" id="email" name="email" placeholder="yjc@ac.kr">
 				<button type="button" class="ijn">인증번호 받기</button>
-				<input type="text" name="ijn2" id="ijn2" disabled /><br />
+				<input type="text" name="ijn2" id="ijn2" disabled="disabled"/><br />
 				<button type="button" id="btn2">확인</button>
 				<br> <br> <br>
 				<hr>

@@ -42,8 +42,8 @@
 						<h5 th:text="${timelinelist.time}"></h5>
 
 
-						<button type="button" class="modify" th:if="${timelinelist.user_id}==${session.id}">수정</button>
-						<button type="button" class="delete" th:if="${timelinelist.user_id}==${session.id}">삭제</button>
+						<a type="button" class="delete" th:if="${timelinelist.user_id}==${session.id}">삭제</a>
+						<a type="button" class="modify" th:if="${timelinelist.user_id}==${session.id}">수정</a>
 
 
 					</div>

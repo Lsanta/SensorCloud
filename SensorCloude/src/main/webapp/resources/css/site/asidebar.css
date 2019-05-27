@@ -1,15 +1,19 @@
 @charset "UTF-8";
+@font-face {
+  font-family: A신그래픽L;
+  src: url('/resources/font/A신그래픽L.TTF');
+}
 
 #num, #down, #up{
 	
 }
-
 
 * {
 	margin: 0;
 	padding: 0;
 	text-decoration: none;
 	list-style: none;
+	font-family: 'A신그래픽L';	
 }
 
 /* html {
@@ -25,10 +29,10 @@
 	display: none;
 }
 
-header {
+/* header {
 	border-bottom: #2b99ff 2px solid;
 	padding-bottom: 60px;
-}
+} */
 
 body {
 	-webkit-font-smoothing: antialiased;
@@ -41,24 +45,24 @@ aside {
 	width: 205px;
 	padding-top: 30px;
 	padding-left: 0px;
-	top: 140px;
+	top: 100px;
 	bottom: 0;
 	background-color: #474958;
 	z-index: 50;
 	text-align: center;
 }
 
-#nav ul li {
+#nav ul li{
 	line-height: 100px;
 }
 
 #nav ul li a, #num {
 	color: #e3e2e2;
-	font-size: 40px;
+	font-size: 2em;
 }
 
 #nav ul li a:hover, #num:hover {
-	color: #2b99ff;
+	color: #5fc5ee;
 }
 
 #scroll {
@@ -70,6 +74,11 @@ h1 {
 	color: white;
 	margin-bottom: 50px;
 	font-size: 1.5em;
+	cursor:pointer;
+}
+
+h1:hover {
+	color: #5fc5ee;
 }
 
 h2 {
@@ -92,7 +101,7 @@ article {
 	width: calc(82% - 230px);
 	width: -moz-calc(82% - 230px);
 	width: -webkit-calc(82% - 230px);
-    margin-top : 150px;
+    margin-top : 130px;
     margin-bottom: 50px;
     
 	

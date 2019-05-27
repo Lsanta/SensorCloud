@@ -9,22 +9,6 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "com-darryncampbell-cordova-plugin-intent.IntentShim",
-      "file": "plugins/com-darryncampbell-cordova-plugin-intent/www/IntentShim.js",
-      "pluginId": "com-darryncampbell-cordova-plugin-intent",
-      "clobbers": [
-        "intentShim"
-      ]
-    },
-    {
-      "id": "com.napolitano.cordova.plugin.intent.IntentPlugin",
-      "file": "plugins/com.napolitano.cordova.plugin.intent/www/android/IntentPlugin.js",
-      "pluginId": "com.napolitano.cordova.plugin.intent",
-      "clobbers": [
-        "IntentPlugin"
-      ]
-    },
-    {
       "id": "cordova-plugin-dialogs.notification",
       "file": "plugins/cordova-plugin-dialogs/www/notification.js",
       "pluginId": "cordova-plugin-dialogs",
@@ -56,15 +40,88 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "window.plugins.deviceFeedback"
       ]
+    },
+    {
+      "id": "cordova-plugin-camera.Camera",
+      "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "Camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverOptions",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverOptions.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverOptions"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.camera",
+      "file": "plugins/cordova-plugin-camera/www/Camera.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "navigator.camera"
+      ]
+    },
+    {
+      "id": "cordova-plugin-camera.CameraPopoverHandle",
+      "file": "plugins/cordova-plugin-camera/www/CameraPopoverHandle.js",
+      "pluginId": "cordova-plugin-camera",
+      "clobbers": [
+        "CameraPopoverHandle"
+      ]
+    },
+    {
+      "id": "cordova-plugin-imagepicker.ImagePicker",
+      "file": "plugins/cordova-plugin-imagepicker/www/imagepicker.js",
+      "pluginId": "cordova-plugin-imagepicker",
+      "clobbers": [
+        "plugins.imagePicker"
+      ]
+    },
+    {
+      "id": "org.apache.cordova.geolocation.Coordinates",
+      "file": "plugins/org.apache.cordova.geolocation/www/Coordinates.js",
+      "pluginId": "org.apache.cordova.geolocation",
+      "clobbers": [
+        "Coordinates"
+      ]
+    },
+    {
+      "id": "org.apache.cordova.geolocation.PositionError",
+      "file": "plugins/org.apache.cordova.geolocation/www/PositionError.js",
+      "pluginId": "org.apache.cordova.geolocation",
+      "clobbers": [
+        "PositionError"
+      ]
+    },
+    {
+      "id": "org.apache.cordova.geolocation.Position",
+      "file": "plugins/org.apache.cordova.geolocation/www/Position.js",
+      "pluginId": "org.apache.cordova.geolocation",
+      "clobbers": [
+        "Position"
+      ]
+    },
+    {
+      "id": "org.apache.cordova.geolocation.geolocation",
+      "file": "plugins/org.apache.cordova.geolocation/www/geolocation.js",
+      "pluginId": "org.apache.cordova.geolocation",
+      "clobbers": [
+        "navigator.geolocation"
+      ]
     }
   ];
   module.exports.metadata = {
     "cordova-plugin-whitelist": "1.3.3",
     "cordova-plugin-fcm": "2.1.2",
-    "com-darryncampbell-cordova-plugin-intent": "1.1.7",
-    "com.napolitano.cordova.plugin.intent": "0.1.2",
     "cordova-plugin-dialogs": "2.0.1",
     "cordova-plugin-inappbrowser": "3.0.0",
-    "cordova-plugin-velda-devicefeedback": "0.0.2"
+    "cordova-plugin-velda-devicefeedback": "0.0.2",
+    "cordova-plugin-camera": "4.0.3",
+    "cordova-plugin-imagepicker": "1.1.0",
+    "org.apache.cordova.geolocation": "0.3.6"
   };
 });

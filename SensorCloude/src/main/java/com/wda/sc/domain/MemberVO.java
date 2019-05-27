@@ -13,6 +13,7 @@ public class MemberVO {
 	private String email;
 	private int m_level;
 	private int re_level;
+	private String key;
 	
 	
 	private String uuid;
