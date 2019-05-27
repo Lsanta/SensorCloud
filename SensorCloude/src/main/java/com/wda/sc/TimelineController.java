@@ -84,11 +84,11 @@ public class TimelineController {
 	@RequestMapping(value = "timelinedelete.do")
 	@ResponseBody
 	public String timelinedelete(TimelineVO vo) {
-		String content = vo.getContent();
+		String timeline_n = vo.getTimeline_n();
 
-		System.out.println(content);
+		System.out.println(timeline_n);
 
-		int a = timelineservice.timelinedelete(content);
+		int a = timelineservice.timelinedelete(timeline_n);
 
 		System.out.println(a);
 

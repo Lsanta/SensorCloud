@@ -195,7 +195,7 @@ public class LoginController {
 	public String pwFind(Model model, MemberVO member) {
 
 		ArrayList<MemberVO> arr = loginservice.login(member.getUser_id());	 
-		
+
 		if(arr.size() > 0) {
 			if(arr.get(0).getKey().equals(member.getKey())) 
 				return arr.get(0).getPassword(); // 키값 맞음
@@ -219,8 +219,6 @@ public class LoginController {
 			return "no";
 
 	}
-
-
-
 }
+
 

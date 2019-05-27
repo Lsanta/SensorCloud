@@ -33,7 +33,7 @@ html {
     margin-top: 2%;
   }
 
-#checklist tr:hover {
+#repairchecklist tr:hover {
 	background-color:  #eaecf4;
 }
 
