@@ -92,15 +92,15 @@ $(document).ready(function () {
          	data : query,
          	url :  "/login/pwFind.do",
          	success : function(data){
-         		var s = user_id +" 님의 비밀번호 조회 결과는 아래와 같습니다.";
         		if( data == "0"){
         			$("#hidden2").css("visibility","visible");
-        			document.getElementById("hidden").innerHTML="인증번호가 다릅니다.";
+        			document.getElementById("hidden2").innerHTML="인증번호가 다릅니다.";
         		} else if( data == "2"){
         			$("#hidden2").css("visibility","visible");
-        			document.getElementById("hidden").innerHTML="아이디가 다릅니다.";
+        			document.getElementById("hidden2").innerHTML="아이디가 다릅니다.";
         		} else {
         			$("#hidden2").css("visibility","visible");
+        			var s = user_id +" 님의 비밀번호 조회 결과는 아래와 같습니다.";
         			document.getElementById("hidden2").innerHTML="<br>"+s+"<br><p>"+data+"</p>";
         		}
          	}
