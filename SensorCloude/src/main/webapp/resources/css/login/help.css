@@ -92,13 +92,18 @@ body {
 
 #ijn2 {
 	width: 60%;
-	margin-left: 18%;
+	margin-left: 19%;
 	background-color: #f6f8fd;
 }
 
-#name, #name2 {
+#name{
 	width: 60%;
 	margin-left: 15%;
+}
+
+#name2 {
+	width: 60%;
+	margin-left: 13%;
 }
 
 #tel {
@@ -128,7 +133,7 @@ body {
 #btn2 {
 	padding: 10px;
 	float: right;
-	margin-right: 175px;
+	margin-right: 160px;
 	width: 80px;
 	font-size: 15px;
 	  border: none;
@@ -150,7 +155,7 @@ body {
 }
 
 #hidden2 {
-	height: 150px;
+	height: 80px;
 	text-align: center;
 }
 
