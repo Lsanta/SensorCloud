@@ -37,7 +37,6 @@ $(document).ready(function(){
               // var aa = JSON.stringify(result);
               // alert(aa);
               if(result.signal == "ok"){
-                  alert("로그인 성공");
                   window.sessionStorage.setItem("id", result.id);
                   window.sessionStorage.setItem("password", result.password);
                   window.location.href="main.html";

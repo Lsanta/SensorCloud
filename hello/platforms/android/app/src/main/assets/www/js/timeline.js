@@ -48,7 +48,7 @@ $(document).ready(function(){
         
         var query = {
              content:$("#textarea").val(),
-             user_id:("admin")
+             user_id: window.sessionStorage.getItem("id")
          };
         
          var log = JSON.stringify(query);
@@ -70,6 +70,8 @@ $(document).ready(function(){
                         type : "POST",
                        // url : "http://52.79.242.145:8080/app/send/message.do",
                         url : "http://39.127.7.58:8080/app/send/Timelinemessage.do",
+                        data : log,
+                        contentType : "application/json; charset=UTF-8",
                         success : function(data) {
                         }
                  }); //ajax 종료

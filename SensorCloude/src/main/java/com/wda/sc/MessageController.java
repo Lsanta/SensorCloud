@@ -206,7 +206,7 @@ public class MessageController {
 	   @SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
 	   @RequestMapping(value="/Timelinemessage.do", method= RequestMethod.POST, produces = {"application/json"})
-	   public String pushTest3(HttpSession session) {
+	   public String pushTest3(HttpSession session, @RequestBody Map<String, String> map) {
 	      FirebaseApp defaultApp = null;
 	      List<FirebaseApp> apps=FirebaseApp.getApps();
 	      FileInputStream serviceAccount;
@@ -239,6 +239,9 @@ public class MessageController {
 		  tokenlist = mypageservice.allappToken();
 		  System.out.println(tokenlist);
 		  
+		  String id = (String)map.get("user_id");
+		  String content = (String)map.get("content");  
+			
 //		  List<String> registrationTokens = new ArrayList<String>();
 //		  
 //		  for(int i = 0; i < tokenlist.size(); i++) {
@@ -253,8 +256,8 @@ public class MessageController {
 	              .setPriority(AndroidConfig.Priority.HIGH)
 	              .setRestrictedPackageName("kr.yju.wdb.sensor")
 	              .setNotification(AndroidNotification.builder()
-	                  .setTitle("타임라인 갱신되었습니다")
-	                  .setBody("타임라인 갱신되었습니다")
+	                  .setTitle(id +"님이 타임라인을 작성했습니다.")
+	                  .setBody(content)
 	                  .setIcon("/src/main/webapp/resources/img/str.png")
 	                  .setColor("#f45342")
 	                  .setClickAction("FCM_PLUGIN_ACTIVITY")
@@ -266,7 +269,7 @@ public class MessageController {
 			  
 	      Message message = Message.builder()
 	    		  .setAndroidConfig(config)
-	    		  .putData("data1", "20")
+	    		  .putData("data1", "20") //넘어가는값
 	    		  .putData("data2", "30")
 	    		  .setToken(tokenlist.get(i).getToken_id())
 	    		  .build();
@@ -349,10 +352,12 @@ public class MessageController {
 		    	  String DBToken = tokenlist.get(0).getToken_id();
 		    	  String CurToken = (String) appToken;
 		    	  
+		    	  //동일한 휴대폰으로 다른 아이디로 들어갔을때 토큰값이 같아 PK가 겹치는 DB에러 발생 
 		    	  if( DBToken.equals(CurToken) ) {
 		    		  System.out.println("db에 값이 있고 비교했더니 같은값일때"); 
 		    	  } else {
 		    		  //새로운 토큰 저장
+		    		  System.out.println("ㅎㅎㅎ");
 		    		  Map<String, String> map2 = new HashMap<String, String>();
 		    		  map2.put("token", appToken);
 		    		  map2.put("user_id", user_id);
