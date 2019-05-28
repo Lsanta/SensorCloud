@@ -86,12 +86,18 @@
 		insert into app_token(token_id,user_id,ex_date) values( #{token_id},#{user_id},sysdate)
 	</insert>
 	
-	<update id="updateappToken" parameterType="map">
-		update app_token set token_id=#{token}
-		where user_id=#{user_id} 
-	</update>	
+<!-- 	<update id="updateappToken" parameterType="map"> -->
+<!-- 		update app_token set token_id=#{token} -->
+<!-- 		where user_id=#{user_id}  -->
+<!-- 	</update>	 -->
 	
 	<select id="allappToken" resultType="com.wda.sc.domain.AppTokenVO">
 		select token_id from app_token
 	</select>
+	
+	<delete id="deleteappToken">
+		delete from app_token where user_id = #{user_id}
+	</delete>
+	
+	
 </mapper>

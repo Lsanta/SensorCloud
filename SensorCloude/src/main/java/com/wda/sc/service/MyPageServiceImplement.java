@@ -106,16 +106,22 @@ public class MyPageServiceImplement implements MyPageService {
 		// TODO Auto-generated method stub
 		return mapper.saveappToken(tokenvo);
 	}
-	@Override
-	public int updateappToken(Map<String, String> map2) {
-		// TODO Auto-generated method stub
-		return mapper.updateappToken(map2);
-	}
+//	@Override
+//	public int updateappToken(Map<String, String> map2) {
+//		// TODO Auto-generated method stub
+//		return mapper.updateappToken(map2);
+//	}
 
 	@Override
 	public List<AppTokenVO> allappToken() {
 		// TODO Auto-generated method stub
 		return mapper.allappToken();
+	}
+
+	@Override
+	public int deleteappToken(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.deleteappToken(user_id);
 	}
 
 	
