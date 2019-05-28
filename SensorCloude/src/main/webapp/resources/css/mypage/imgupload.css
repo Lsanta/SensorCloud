@@ -3,6 +3,22 @@
 	margin-top: 10%;
 }
 
+button{
+	border: 1px solid #dddfe6;
+    background-color: #FFF;
+    width: 50px;
+    height: 35px;
+    cursor: pointer;
+}
+button:hover {
+	border: 1px solid #4e73df;
+	cursor:pointer
+}
+
+#ok {
+	margin-left: 35%;
+}
+
 #btn {
 	border-top: 1px solid #ccc;
 	margin-top: 20%;

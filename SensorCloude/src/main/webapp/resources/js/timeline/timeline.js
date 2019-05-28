@@ -24,6 +24,7 @@ $(document).ready(function(){
 			data : query,
 			success : function(data){
 				if( data == "success"){
+					alert("등록되었습니다.");
 					location.reload();
 				} else{
 					location.reload();
@@ -56,10 +57,10 @@ $(document).ready(function(){
 				data : query,
 				success : function(data) {
 					if (data == "success") {
-						alert("삭제되었습니다");
+						alert("삭제되었습니다.");
 						location.reload();
 					} else {
-						alert("삭제에 실패했습니다");
+						alert("삭제에 실패했습니다.");
 					}
 				}
 
@@ -81,7 +82,7 @@ $(document).ready(function(){
 				content : content3
 		}
 
-		window.location.href = "timeline/timelinemodify?content="+ content3+"/"+div;
+		window.location.href = "/timeline/timelinemodify?content="+ content3+"/"+div;
 
 	});
 	$('#textarea').keypress(function(event){

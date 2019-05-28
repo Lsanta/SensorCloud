@@ -49,7 +49,7 @@ public class TimelineController {
 		return "timeline/timeline";
 	}
 
-	@RequestMapping(value = "/timelinemodify", method = RequestMethod.GET)
+	@RequestMapping(value = "/timelinemodify", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public String timelinemodify(Locale locale, Model model,HttpSession session, HttpServletResponse response) throws IOException {
 
 		int mlevel = (int) session.getAttribute("mlevel");

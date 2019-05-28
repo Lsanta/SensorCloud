@@ -197,6 +197,8 @@ $(document).ready(function(){
 	     
 	     formObj.append(str).submit();
 	     
+	     alert("수정되었습니다.");
+	     
 	   });
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 	var maxSize = 5242880;
@@ -333,7 +335,7 @@ $(document).ready(function(){
 					            str +=" data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' ><div>";
 					            str += "<span> "+ attach.file_name+"</span>";
 					            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' "
-					            str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+					            str += "class='btn btn-warning btn-circle' id='golist'><i class='fa fa-times'></i></button><br>";
 					            str += "<img src='/display?fileName="+fileCallPath+"'>";
 					            str += "</div>";
 					            str +"</li>";
@@ -343,7 +345,7 @@ $(document).ready(function(){
 				            str += "data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' ><div>";
 				            str += "<span> "+ attach.file_name+"</span><br/>";
 				            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' "
-				            str += " class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+				            str += " class='btn btn-warning btn-circle' id='golist'><i class='fa fa-times'></i></button><br>";
 				            str += "<img src='/resources/img/attach.png'></a>";
 				            str += "</div>";
 				            str +"</li>";
