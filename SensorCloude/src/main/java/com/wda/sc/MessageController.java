@@ -353,6 +353,7 @@ public class MessageController {
 		    	  String CurToken = (String) appToken;
 		    	  
 		    	  //동일한 휴대폰으로 다른 아이디로 들어갔을때 토큰값이 같아 PK가 겹치는 DB에러 발생 
+		    	  //update대신에 delete 와 insert로 수정해야함.
 		    	  if( DBToken.equals(CurToken) ) {
 		    		  System.out.println("db에 값이 있고 비교했더니 같은값일때"); 
 		    	  } else {

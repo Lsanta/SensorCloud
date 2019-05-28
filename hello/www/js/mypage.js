@@ -202,12 +202,14 @@ $(document).ready(function() {
 					 async: false,
 					 data: query,
 					 contentType : "application/json; charset=UTF-8",
+					 dataType : 'text',
 					 success : function(data) {
 							alert(data);
 							if (data == "success") {
 								 alert("비밀번호 일치");
 								//  window.location.href = "http://52.79.242.145:8080/app/mypage/usermodify";
-								window.location.href = "http://39.127.7.58:8080/app/mypage/usermodify";
+								// window.location.href = "http://39.127.7.58:8080/app/mypage/usermodify";
+								window.location.href = "usermodify.html";
 							} else {
 								 alert("비밀번호가 틀렸습니다.");
 							}
