@@ -28,14 +28,14 @@
     }).then((result) => {
         if (result.value) {
         Swal.fire(
-            '새페이지로!',
+            '타임라인페이지로 이동합니다!',
             '내용',
             'success'
         )
         location.href = "timeline.html";
     }else {
         Swal.fire(
-            '메인화면으로!',
+            '메인화면으로 이동합니다!',
             '내용',
             'error'
         )
