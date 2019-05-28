@@ -4,8 +4,11 @@
 }
 
 body {
-	background-color: purple;
 	 font-family: A신그래픽L;
+}
+
+h2 {
+	font-size: 30px;
 }
 
 .login-card {
@@ -22,9 +25,14 @@ body {
 	margin-left: 4.5%;
 }
 
-#name, #name2 {
+#name{
 	width: 50%;
 	margin-left: 14%;
+}
+
+#name2 {
+	width: 50%;
+	margin-left: 11%;
 }
 
 #email {
@@ -34,17 +42,14 @@ body {
 
 #ijn2 {
 	width: 50%;
-	margin-left: 20.7%;
+	margin-left: 19.7%;
 }
 
 #btn2 {
 	padding: 10px;
 	float: right;
-	margin-right: 148px;
+	margin-right: 152px;
 	width: 60px;
 	font-size: 15px;
 }
 
-b {
-	font-size: 30px;
-}

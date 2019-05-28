@@ -5,7 +5,8 @@ $(document).ready(function() {
 	};
 	$.ajax({
 			type : "POST",
-			url : "http://52.79.242.145:8080/app/mypage/usermodify",
+			// url : "http://52.79.242.145:8080/app/mypage/usermodify",
+			url : "http://39.127.7.58:8080/app/mypage/usermodify",
 			data : query,
 			dataType : 'json',
 			contentType : "application/json; charset=UTF-8",
@@ -33,7 +34,8 @@ $(document).ready(function() {
 	
 			 $.ajax({
 				type : "POST",
-				url : "http://52.79.242.145:8080/app/mypage/mgetAttachListmypage",
+				// url : "http://52.79.242.145:8080/app/mypage/mgetAttachListmypage",
+				url : "http://39.127.7.58:8080/app/mypage/mgetAttachListmypage",
 				data : user_id,
 				async : false,
 				contentType : "application/json; charset=UTF-8",
@@ -67,7 +69,8 @@ $(document).ready(function() {
 		 //점검이력 불러오기
 		 $.ajax({
 				type : "POST",
-				url : "http://52.79.242.145:8080/app/mypage/mypagemain",
+				// url : "http://52.79.242.145:8080/app/mypage/mypagemain",
+				url : "http://39.127.7.58:8080/app/mypage/mypagemain",
 				async:false,
 				data : {pagenum : 1},
 				success : function(result){
@@ -117,7 +120,8 @@ $(document).ready(function() {
 	function page(index) {
 		 $.ajax({
 				 type : "POST",
-				 url : "http://52.79.242.145:8080/app/mypage/mypagemain",
+				//  url : "http://52.79.242.145:8080/app/mypage/mypagemain",
+				url : "http://39.127.7.58:8080/app/mypage/mypagemain",
 				 async:false,
 				 data : {pagenum : index},
 				 success : function(result){
@@ -193,15 +197,19 @@ $(document).ready(function() {
 				console.log(query);
 				$.ajax({
 					 type : "POST",
-					 url : "http://52.79.242.145:8080/app/mypage/mypageconfirmpasswd.do",
+					//  url : "http://52.79.242.145:8080/app/mypage/mypageconfirmpasswd.do",
+					 url : "http://39.127.7.58:8080/app/mypage/mypageconfirmpasswd.do",
 					 async: false,
 					 data: query,
 					 contentType : "application/json; charset=UTF-8",
+					 dataType : 'text',
 					 success : function(data) {
 							alert(data);
 							if (data == "success") {
 								 alert("비밀번호 일치");
-								 window.location.href = "http://52.79.242.145:8080/app/mypage/usermodify";
+								//  window.location.href = "http://52.79.242.145:8080/app/mypage/usermodify";
+								// window.location.href = "http://39.127.7.58:8080/app/mypage/usermodify";
+								window.location.href = "usermodify.html";
 							} else {
 								 alert("비밀번호가 틀렸습니다.");
 							}
@@ -235,7 +243,8 @@ $(document).ready(function() {
 	
 				 $.ajax({
 					 type : "POST",
-					 url : "http://52.79.242.145:8080/app/mypage/levelup",
+					//  url : "http://52.79.242.145:8080/app/mypage/levelup",
+					 url : "http://39.127.7.58:8080/app/mypage/levelup",
 					 data : JSON.stringify(query),
 					 contentType : "application/json; charset=UTF-8",
 					 dataType : 'text',
@@ -246,7 +255,8 @@ $(document).ready(function() {
 								 //푸쉬 메시지 요청(웹으로)
 								 $.ajax({
 											 type : "POST",
-											 url : "http://52.79.242.145:8080/app/send/message.do",
+											// url : "http://52.79.242.145:8080/app/send/message.do",
+											 url : "http://39.127.7.58:8080/app/send/message.do",
 											 data : JSON.stringify(payload),
 											 contentType : "application/json; charset=UTF-8",
 											 success : function(data) {

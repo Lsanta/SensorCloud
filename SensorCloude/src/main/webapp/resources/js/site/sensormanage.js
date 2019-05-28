@@ -23,6 +23,8 @@ $(document).ready(function() {
 	});
 	
 
+	
+	
 	var num = 0;
 	if(url[3] != 'search1'){
 
@@ -46,6 +48,15 @@ $(document).ready(function() {
 
 		$('.pagination-older').click(function(){
 			window.location.href = "/site/"+url[2]+"/sensormanage/"+(parseInt(url[4])+1);
+		});
+		
+		$(".firstpage").click(function(){
+			window.location.href = "/site/"+url[2]+"/sensormanage/"+(parseInt(url[4]));
+		});
+		
+		$(".lastpage").click(function(){
+			alert($("#lastNum").text());
+			window.location.href = "/site/"+url[2]+"/sensormanage/"+$("#lastNum").text();
 		});
 
 	} else {
@@ -71,6 +82,14 @@ $(document).ready(function() {
 		$('.pagination-older').click(function(){
 			
 			window.location.href = "/site/"+url[2]+"/search1/"+(parseInt(url[4])+1)+"/"+url[5]+"/"+url[6];
+		});
+		
+		$(".firstpage").click(function(){
+			window.location.href = "/site/"+url[2]+"/search1/"+(parseInt(url[4]))+"/"+url[5]+"/"+url[6];
+		});
+		
+		$(".lastpage").click(function(){
+			alert("gd");
 		});
 
 	} // else 종료

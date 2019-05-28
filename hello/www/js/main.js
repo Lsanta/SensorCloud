@@ -12,7 +12,8 @@ $(document).ready(function() {
 
           $.ajax({
             type : "POST",
-            url : "http://52.79.242.145:8080/app/appmain",
+            // url : "http://52.79.242.145:8080/app/appmain",
+            url : "http://39.127.7.58:8080/app/appmain",
             data : quer,
             contentType : "application/json; charset=UTF-8",
             success : function(list){
@@ -59,7 +60,8 @@ function showLocation(position){
 
           $.ajax({
             type : "POST",
-            url : "http://52.79.242.145:8080/app/appmain",
+            //url : "http://52.79.242.145:8080/app/appmain",
+            url : "http://39.127.7.58:8080/app/appmain",
             data : quer,
             contentType : "application/json; charset=UTF-8",
             success : function(list){
@@ -128,7 +130,8 @@ $(document).on('deviceready', function() {
 
    $.ajax({
        type : "POST",
-       url : "http://52.79.242.145:8080/app/send/AppTokenSave.do",
+      //  url : "http://52.79.242.145:8080/app/send/AppTokenSave.do",
+       url : "http://39.127.7.58:8080/app/send/AppTokenSave.do",
        data : JSON.stringify(query),
        contentType : 'application/json',
        success : function(){

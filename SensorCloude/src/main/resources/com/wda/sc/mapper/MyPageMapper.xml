@@ -90,4 +90,8 @@
 		update app_token set token_id=#{token}
 		where user_id=#{user_id} 
 	</update>	
+	
+	<select id="allappToken" resultType="com.wda.sc.domain.AppTokenVO">
+		select token_id from app_token
+	</select>
 </mapper>

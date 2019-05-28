@@ -51,11 +51,12 @@
 <script>
 function GetURLParameter(sParam) {
     var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
-
+    var sURLVariables = sPageURL.split('?');
+	
     for (var i = 0; i < sURLVariables.length; i++){
         var sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] == sParam) { 
+        
+        if (sParameterName[0] == sParam) {
             return sParameterName[1];
         }
     }
@@ -65,8 +66,10 @@ var num = getContent.split('/');
 
 
 var div = $(".text").attr('id',num[1]);
+
 var a = div.attr('id');
-$('#textarea').val(num[0]);
+
+$('#textarea').val(decodeURI(num[0]));
 
 
 </script>
@@ -86,11 +89,10 @@ $('#textarea').val(num[0]);
 			  data : query,
 			  success : function(data){
 				  if( data == "success"){
-					  alert("ㅇㅇ");
-					window.location.href = "/timeline";
-					 
+					alert("수정에 성공하였습니다.");
+					window.location.href = "/time/1";
 				  } else{
-					alert("ㄴㄴ");
+					alert("수정이 실패하였습니다.");
 				
 				  }
 			  }

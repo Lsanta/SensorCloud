@@ -112,5 +112,11 @@ public class MyPageServiceImplement implements MyPageService {
 		return mapper.updateappToken(map2);
 	}
 
+	@Override
+	public List<AppTokenVO> allappToken() {
+		// TODO Auto-generated method stub
+		return mapper.allappToken();
+	}
+
 	
 }

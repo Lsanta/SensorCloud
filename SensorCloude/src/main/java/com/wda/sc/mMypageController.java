@@ -85,12 +85,23 @@ public class mMypageController {
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/mypageconfirmpasswd.do", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public String ConfirmPasswd(@RequestBody String user_id, String password) {
-		 System.out.println("ID"+user_id);
+	public String ConfirmPasswd(@RequestBody String id1, String password1) {
+		System.out.println("ID"+id1);
+		
+		String[] array = id1.split("&");
+		String[] idt = array[0].split("=");
+		String[] passwordt = array[1].split("=");
+
+		String user_id = idt[1];
+		String password = passwordt[1];
+		
+		System.out.println(user_id);
+		System.out.println(password);
 		
 		ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
 		arr = mypageservice.confirmpasswd(user_id);
 
+		System.out.println(arr);
 		if (arr.size() != 0) {
 			if (arr.get(0).getPassword().equals(password)) {
 				return "success";
@@ -103,9 +114,17 @@ public class mMypageController {
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/usermodify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public JSONObject modifymyinfo(@RequestBody String id, Locale locale, Model model) {
-		 System.out.println("내정보");
-		 
+	public JSONObject modifymyinfo(@RequestBody String id1, Locale locale, Model model) {
+		  System.out.println("내정보");
+		  System.out.println(id1);
+		  
+		  String[] array = id1.split("&");
+		  String[] idt = array[0].split("=");
+		  
+		  String id = idt[1];
+		  
+		  System.out.println(id);
+		  
 		  ArrayList<MemberVO> result = mypageservice.getInfo(id);
 		  System.out.println(result);
 	      JSONObject json = new JSONObject();
