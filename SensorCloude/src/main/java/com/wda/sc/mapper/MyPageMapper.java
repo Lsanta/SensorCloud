@@ -34,4 +34,7 @@ public interface MyPageMapper {
 	
 	public int updateappToken(Map<String, String> map2);
 	
+	// 앱 토큰 전부 가져오기
+	public List<AppTokenVO> allappToken();
+	
 }
