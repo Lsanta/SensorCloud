@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 	function goPopup(id) {
 		var pop = window.open("/manage/usermodify/"+ id, "pop",
-				"width=570,height=600,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+				"width=500,height=630,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 
 	}
 
