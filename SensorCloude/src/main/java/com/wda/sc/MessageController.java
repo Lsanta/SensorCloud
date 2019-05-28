@@ -3,6 +3,8 @@ package com.wda.sc;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -258,7 +260,8 @@ public class MessageController {
 	              .setNotification(AndroidNotification.builder()
 	                  .setTitle(id +"님이 타임라인을 작성했습니다.")
 	                  .setBody(content)
-	                  .setIcon("/src/main/webapp/resources/img/str.png")
+//	                  .setIcon("stock_ticker_update")
+	                  .setIcon("C:\\Users\\bon300-27\\git\\SensorCloud\\hello\\www\\img\\str.png")
 	                  .setColor("#f45342")
 	                  .setClickAction("FCM_PLUGIN_ACTIVITY")
 	               
@@ -285,6 +288,98 @@ public class MessageController {
 	      
 		      return "ok";
 	   }
+	   
+	   @SuppressWarnings({ "null", "unused" })
+	   @ResponseBody
+	   @RequestMapping(value="/WebTimelinemessage.do", method= RequestMethod.POST,  consumes="application/json", produces = {"application/json"})
+	   public String pushTest4(HttpSession session, @RequestBody String content) {
+	      FirebaseApp defaultApp = null;
+	      List<FirebaseApp> apps=FirebaseApp.getApps();
+	      FileInputStream serviceAccount;
+	      FirebaseOptions options=null;
+	      //파이어베이스 옵션 설정
+	      try {
+	         serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	         options = new FirebaseOptions.Builder()
+	               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+//	               .setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+	               .build();
+	      } catch (FileNotFoundException e1) {
+	         e1.printStackTrace();
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+	      //이미 관리자 defaultApp이 있는지 검사
+	      if(apps!=null && !apps.isEmpty()) {
+	         for(FirebaseApp app:apps) {
+	            if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
+	               defaultApp = app;
+	         }
+	      }else {
+	         defaultApp = FirebaseApp.initializeApp(options);
+	      }
+	      
+	      List<AppTokenVO> tokenlist = new ArrayList<AppTokenVO>();
+		     
+		  //token값 select 하기
+		  tokenlist = mypageservice.allappToken();
+		  System.out.println(tokenlist);
+		  
+		  String id = (String) session.getAttribute("id");
+			
+//		  List<String> registrationTokens = new ArrayList<String>();
+//		  
+//		  for(int i = 0; i < tokenlist.size(); i++) {
+//			  registrationTokens.add(tokenlist.get(i).getToken_id());
+//		  }
+//		
+//		  System.out.println(registrationTokens);
+		 String rContent = null;
+		  try {
+			  rContent = URLDecoder.decode(content, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		  
+	      AndroidConfig config = AndroidConfig.builder()
+	    		  .setTtl(3600 * 1000) // 1 hour in milliseconds
+	              .setPriority(AndroidConfig.Priority.HIGH)
+	              .setRestrictedPackageName("kr.yju.wdb.sensor")
+	              .setNotification(AndroidNotification.builder()
+	                  .setTitle(id +"님이 타임라인을 작성했습니다.")
+	                  .setBody(rContent)
+//	                  .setIcon("stock_ticker_update")
+	                  .setIcon("C:\\Users\\bon300-27\\git\\SensorCloud\\hello\\www\\img\\str.png")
+	                  .setColor("#f45342")
+	                  .setClickAction("FCM_PLUGIN_ACTIVITY")
+	               
+	                  .build())
+	              .build();
+	      
+	      for(int i = 0; i < tokenlist.size(); i++) {
+			  
+	      Message message = Message.builder()
+	    		  .setAndroidConfig(config)
+	    		  .putData("data1", "20") //넘어가는값
+	    		  .putData("data2", "30")
+	    		  .setToken(tokenlist.get(i).getToken_id())
+	    		  .build();
+		  
+	      try {
+		         String response=FirebaseMessaging.getInstance().send(message);
+		         System.out.println("Success : " + response);
+		      } catch (FirebaseMessagingException e) {
+		         System.out.println("Failed and the reason is behind");
+		         e.printStackTrace();
+		      }
+	      } //for문 종료
+	      
+		      return "ok";
+	   }
+	   
+	   
+	   
 	   
 	   @SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
