@@ -13,7 +13,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function () {
-    $('#btn1').click(function() {
+   function loginId() {
        	
     	var name = $("#name").val();
     	var tel = $("#tel").val();
@@ -55,7 +55,7 @@ $(document).ready(function () {
         	
         }); //ajax 종료
         
-    }); // 클릭 이벤트 종료
+    }
     
     $('.ijn').click(function() {
     	var email = $("#email").val();
@@ -82,7 +82,7 @@ $(document).ready(function () {
     	 });
     });
     
-    $('#btn2').click(function() {
+    function loginPw() {
     	var key = $("#ijn2").val();
     	var user_id = $("#name2").val();
     	var query = {user_id:user_id, key:key};
@@ -105,7 +105,36 @@ $(document).ready(function () {
         		}
          	}
     	 });
+    }
+    
+  $('#btn1').click(function() {
+     	loginId();
+  });  
+    
+  $('#btn2').click(function() {
+     	loginPw();
+  });
+    
+  //폰 번호에 커서를 두고 엔터키를 누르면 회원정보 확인
+    $("#tel").keydown(function(key) {
+       if (key.keyCode == 13) {
+          loginId();
+       }
     });
+  //이메일에 커서를 두고 엔터키를 누르면 회원정보 확인
+    $("#email").keydown(function(key) {
+       if (key.keyCode == 13) {
+          loginPw();
+       }
+    });
+   
+  //인증번호에 커서를 두고 엔터키를 누르면 비번 알려줌
+    $("#ijn2").keydown(function(key) {
+       if (key.keyCode == 13) {
+          loginPw();
+       }
+    });
+    
     
  }); 
 </script>  
@@ -117,7 +146,7 @@ $(document).ready(function () {
 </div>
 
 	<div class="login-card">
-		<h2 style="font-size: 30px">아이디찾기</h2> <br>
+		<h2>아이디찾기</h2> <br>
 		<div id="box1">
 			<form>
 				이름<input type="text" id="name" name="name" placeholder="UserId"><br />
@@ -126,7 +155,8 @@ $(document).ready(function () {
 				<hr id="hr">
 			</form>
 		</div>
-		<div id="hidden" style="visibility : hidden"></div>
+		<div id="hidden" style="visibility : hidden">
+		</div>
 		
 		<h2>비밀번호 찾기</h2> <br>
 		<div id="box2">

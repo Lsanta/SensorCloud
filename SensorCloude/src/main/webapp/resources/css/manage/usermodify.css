@@ -26,7 +26,7 @@ body {
   }
 
   .usermodify-card input[type=submit] {
-    width: 30%;
+    width: 20%;
     display: block;
     margin: 10px 0;
     position: relative;
@@ -110,7 +110,7 @@ body {
   .confirm-modify {
      float:right;
      width:8%;
-     height:56px;
+     height:40px;
      margin-top:5%;
      margin-right:10%;
      border: none;
@@ -139,7 +139,6 @@ body {
   #images {
   	width: 150px;
   	height: 150px;
-  	 border: 1px solid #d9d9d9;
   	 float: right;
   	 margin-top: -155px;
   }

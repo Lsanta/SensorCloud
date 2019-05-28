@@ -26,7 +26,8 @@ function getQueryStringObject() {
 
       $.ajax({
             type : "POST",
-            url : "http://52.79.242.145:8080/app/sitemain",
+            // url : "http://52.79.242.145:8080/app/sitemain",
+            url : "http://39.127.7.58:8080/app/sitemain",
             data : site_id,
             async:false,
             contentType : "application/json; charset=UTF-8",
@@ -46,7 +47,8 @@ $("#sn").html(str);
 
       $.ajax({
         type : "POST",
-        url : "http://52.79.242.145:8080/app/sitemainsensor",
+        // url : "http://52.79.242.145:8080/app/sitemainsensor",
+        url : "http://39.127.7.58:8080/app/sitemainsensor",
         data : site_id,
         async:false,
         contentType : "application/json; charset=UTF-8",
@@ -152,7 +154,8 @@ $("#sn").html(str);
 
   $.ajax({
     type : "POST",
-    url : "http://52.79.242.145:8080/app/sitedata",
+    // url : "http://52.79.242.145:8080/app/sitedata",
+    url : "http://39.127.7.58:8080/app/sitedata",
     data : site_id,
     async:false,
     contentType : "application/json; charset=UTF-8",
@@ -222,7 +225,8 @@ str +='<td>시간</td>';
 
 $.ajax({
             type : "POST",
-            url : "http://52.79.242.145:8080/app/siterepairlist",
+            // url : "http://52.79.242.145:8080/app/siterepairlist",
+            url : "http://39.127.7.58:8080/app/siterepairlist",
             data : site_id,
             async : false,
             contentType : "application/json; charset=UTF-8",
@@ -314,7 +318,8 @@ infowindow.open(map, marker);
 $(document).on("click", "#spanel" , function(){
     $.ajax({
     type : "POST",
-    url : "http://52.79.242.145:8080/app/installsensor",
+    // url : "http://52.79.242.145:8080/app/installsensor",
+    url : "http://39.127.7.58:8080/app/installsensor",
     data: site_id,
     contentType : "application/json; charset=UTF-8",
     success : function(data){

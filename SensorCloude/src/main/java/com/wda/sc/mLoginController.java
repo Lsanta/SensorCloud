@@ -121,8 +121,8 @@ public class mLoginController {
 		map.put("latitude",latitude);
 		map.put("longitude",longitude);
 		
-		System.out.println(latitude);
-		System.out.println(longitude);
+//		System.out.println(latitude);
+//		System.out.println(longitude);
 		
 		ArrayList<SiteVO> list = siteservice.appmain(map);
 		
@@ -187,7 +187,7 @@ public class mLoginController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", name);
-	map.put("graph", graph);
+		map.put("graph", graph);
 	
 		
 		JSONObject json = JSONObject.fromObject(map);
