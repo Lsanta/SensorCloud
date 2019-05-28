@@ -274,3 +274,26 @@ $(document).ready(function() {
 	
 		 }); // 클릭 이벤트 종료
 	}); 
+	$(document).ready(function() {
+		$("#logout").click(function(){ 
+			if(confirm("로그아웃 하시겠습니까?")){
+				var id = sessionStorage.getItem("id");
+				$.ajax({
+					type : "POST",
+					url : "http://39.127.7.58:8080/app/mypage/deleteappToken",
+					data : id,
+					contentType : "text/plain; charset=UTF-8",
+					dataType : 'text',
+					success : function(data) {
+						sessionStorage.removeItem("id");
+						sessionStorage.removeItem("password");    
+						window.location.href="index.html";
+					}
+				});
+		
+		} else {
+			window.location.href="#tab1";
+		}
+		});
+	});
+	

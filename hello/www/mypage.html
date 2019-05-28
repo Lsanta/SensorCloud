@@ -29,7 +29,7 @@
             <div data-role="navbar" >
                <ul>
                   <li><a href="#tab1">메인</a></li>
-                  <li><a href="#tab1" onclick="logout();">로그아웃</a></li>
+                  <li><a href="#tab1" id="logout">로그아웃</a></li>
                   <li><a href="#tab2">정보수정</a></li>
                </ul>               
             </div>
@@ -132,16 +132,6 @@
 <script>   
     window.onload = function() { //실행될 코드 }
         $("#page-loading").css("display", "none");
-    }
-
-    function logout(){
-        if(confirm("로그아웃 하시겠습니까?")){
-        sessionStorage.removeItem("id");
-        sessionStorage.removeItem("password");
-        window.location.href="index.html";
-    } else {
-        window.location.href="#tab1";
-    }
     }
 </script>
 </body>

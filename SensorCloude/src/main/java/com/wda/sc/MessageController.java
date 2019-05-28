@@ -447,20 +447,32 @@ public class MessageController {
 		    	  String DBToken = tokenlist.get(0).getToken_id();
 		    	  String CurToken = (String) appToken;
 		    	  
-		    	  //동일한 휴대폰으로 다른 아이디로 들어갔을때 토큰값이 같아 PK가 겹치는 DB에러 발생 
-		    	  //update대신에 delete 와 insert로 수정해야함.
 		    	  if( DBToken.equals(CurToken) ) {
 		    		  System.out.println("db에 값이 있고 비교했더니 같은값일때"); 
 		    	  } else {
-		    		  //새로운 토큰 저장
-		    		  System.out.println("ㅎㅎㅎ");
-		    		  Map<String, String> map2 = new HashMap<String, String>();
-		    		  map2.put("token", appToken);
-		    		  map2.put("user_id", user_id);
+		    		  //동일한 휴대폰으로 다른 아이디로 들어갔을때 토큰값이 같아 PK가 겹치는 DB에러 발생 
+			    	  //update대신에 delete 와 insert로 수정해야함.
 		    		  
-		    		  mypageservice.updateappToken(map2);
+//		    		  Map<String, String> map2 = new HashMap<String, String>();
+//		    		  map2.put("token", appToken);
+//		    		  map2.put("user_id", user_id);
+//		    		  
+//		    		  mypageservice.updateappToken(map2);
+		    		  System.out.println("ㅎㅎㅎ111");
+		    		  int result = mypageservice.deleteappToken(user_id);
 		    		  
-		    		  System.out.println("db에 값이 있고 비교했더니 다른값일때"); 
+		    		  if( result == 1 ) {
+		    			  System.out.println("ㅎㅎㅎ222");
+		    			  //삭제가 성공했으면 insert 
+		    			  tokenvo.setToken_id(appToken);
+		 		    	  tokenvo.setUser_id(user_id);
+		 		    	  mypageservice.saveappToken(tokenvo);
+		 		    	 System.out.println("db에 값이 있고 비교했더니 다른값일때 딜리트 후 인설트 성공"); 
+		    		  } else {
+		    			  System.out.println("토큰 삭제 실패"); 
+		    		  }
+		    		  
+		    		 
 			    	   
 		    	  }
 		      }
