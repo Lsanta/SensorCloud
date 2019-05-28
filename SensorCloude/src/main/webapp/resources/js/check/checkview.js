@@ -37,13 +37,10 @@ $(document).ready(function(){
 	 
 	 $("#db").click(function(){
 			//삭제 버튼을 클릭하면 board_no를 통해 게시글 삭제 + 첨부파일도 삭제해야한다.
-			
 			window.location.href = "/checkboard/checkdel2/"+board_no;
-			
+	
 		});
 	 
-	 
-	
 	
 	
 });
