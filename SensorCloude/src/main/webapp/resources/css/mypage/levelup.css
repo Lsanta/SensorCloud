@@ -6,6 +6,7 @@
 @media screen and (max-width: 570px) {
     #content {
         border:1px solid rgb(207, 200, 200); 
+        background-color: #fff;
     }
     #now-level {
         margin-top: 10%;
@@ -15,18 +16,34 @@
     }
     #next-level select{
         position: relative;
-        margin-left: 22%;
+        margin-left: 9%;
         height: 23px;
     }
     #next-level p{
         position: relative;
         top: -38px;
-        left: 220px;
+        left: 130px;
     }
     #submit {
-        float: right;
-        margin-top: 3%;
+        /* float: right; */
+        margin: 3% 0;
     }
+    
+    input[type="button"] {
+	   border: 1px solid #dddfe6;
+	    background-color: #FFF;
+	    width: 50px;
+	    height: 35px;
+	    cursor: pointer;
+    }
+    input[type="button"]:hover {
+		border: 1px solid #4e73df;
+		cursor:pointer
+	}
+
+	#ok {
+		margin-left: 35%;
+	}
 }
 
 @media screen and (max-width: 360px) {
