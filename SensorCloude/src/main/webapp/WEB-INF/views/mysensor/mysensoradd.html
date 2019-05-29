@@ -5,99 +5,68 @@
 <title>팝업창</title>
 <link href="/resources/css/mysensor/sensoradd.css" rel="stylesheet" type="text/css"/>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-messaging.js"></script>
 <script>
-$(document).ready(function(){
-
-		var config = {
-				  apiKey: "AIzaSyCvPX3WEIFtsNbN3JGsQzIvVSDFAOKGoqI",
-				  authDomain: "sensorcloud-cb820.firebaseapp.com",
-				  databaseURL: "https://sensorcloud-cb820.firebaseio.com",
-				  projectId: "sensorcloud-cb820",
-				  storageBucket: "sensorcloud-cb820.appspot.com",
-				  messagingSenderId: "544037446198"
-			};
-			firebase.initializeApp(config);
-			
-			const messaging = firebase.messaging();
-
-			messaging.usePublicVapidKey("BAiJYfYEXBiHRzsKJFqW5en4dEkOwKFr3KRPJIpNZ3kWk6QP0DHXOIMtoKdN6ca9Tk_JUo25btDxXFtheXjGRuE");
-			
-			messaging.getToken().then(function(currentToken) {
-				  if (currentToken) {
-				    console.log(currentToken);
-					
-				    var payload = {
-				    		token : currentToken,
-							message : 'test'
-				    }
-
-					$.ajax({
-						type : "POST",
-						url : "/send/message.do",
-						data : JSON.stringify(payload),
-						contentType : 'application/json',
-						success : function(data){
-							console.log("갔따옴");
-							console.log(data);
-						}
-					});
-						    
+	 $(document).ready(function(){
+		 $("#plus").click(function(){
+			 	if($("#sensor_sn").val() == "" || $("#sensor_kind").val() == "" || $("#model_name").val() == ""
+			 			|| $("#voltage option:selected").val() == "" || $("#manufacturer option:selected").val() == "" ) {
+			 		alert("빈 값이 있어 등록되지 않습니다.");
+			 		return false;
+			 	}
+			 
+				var query = { 
+								sensor_sn : $("#sensor_sn").val(),
+								sensor_kind : $("#sensor_kind").val(),
+								model_name : $("#model_name").val(),
+// 								voltage : $("#voltage").val(),
+// 								manufacturer : $("#manufacturer").val()
+								voltage : $("#voltage option:selected").val(),
+								manufacturer : $("#manufacturer option:selected").val()
+							}
 				
-				  } else {
-				    // Show permission request.
-				    console.log('No Instance ID token available. Request permission to generate one.');
-			
-				  }
-				}).catch(function(err) {
-				 	
-				});
-			
-	
-	
-	
-	
-	
-		$("#plus").click(function(){
-			var query = { 
-							sensor_sn : $("#sensor_sn").val(),
-							sensor_kind : $("#sensor_kind").val(),
-							model_name : $("#model_name").val(),
-							voltage : $("#voltage").val(),
-							manufacturer : $("#manufacturer").val()
-						}
-			
-			console.log(query);
-			$.ajax({
-				  type : "POST",
-				  url : "/mysensor/mysensoradd.do",
-				  data : query,
-				  success : function(data){
-					  if( data == "success"){
-						  alert("추가되었습니다");
-						  window.opener.location.reload();
-						  window.close();
-					  } else{
-						  alert("추가에 실패했습니다");
+				console.log(query);
+				$.ajax({
+					  type : "POST",
+					  url : "/mysensor/mysensoradd.do",
+					  data : query,
+					  success : function(data){
+						  if( data == "success"){
+							  alert("추가되었습니다");
+							  window.opener.location.reload();
+							  window.close();
+						  } else{
+							  alert("추가에 실패했습니다");
+						  }
 					  }
-				  }
-				  
-			}); // ajax 종료
-			
-		}); // #plus 종료
-		
-	});
+					  
+				}); // ajax 종료
+				
+			}); // #plus 종료
+	 });		
 </script>
 </head>
 <body>
-<h1>센서 추가</h1>
+<h2>센서 추가</h2>
  <div class="sensoradd">
 	시리얼넘버<input type="text" id="sensor_sn" name="sensor_sn" /><br/>
 	종류<input type="text" id="sensor_kind" name="sensor_kind" /><br/>
 	모델명<input type="text" id="model_name" name="model_name" /><br/>
-	전압<input type="text" id="voltage" name="voltage" /><br/>
-	제조사<input type="text" id="manufacturer" name="manufacturer" /><br/>
+<!-- 	전압<input type="text" id="voltage" name="voltage" /><br/> -->
+<!-- 	제조사<input type="text" id="manufacturer" name="manufacturer" /><br/> -->
+	전압<select id="voltage">
+			<option>전압</option>
+			<option>300mv</option>
+			<option>500mv</option>
+			<option>1000mv</option>
+		</select><br/>
+	제조사<select id="manufacturer">
+			<option>제조사</option>
+			<option>Campbell Soup Company</option>
+			<option>SICK</option>
+			<option>프리콘</option>
+			<option>(주)로텍인스투르먼트</option>
+			<option>(주)엠텍</option>
+		</select><br/>
 	<input type="button"  value="추가" id="plus" />
 	</div>
 </body> 

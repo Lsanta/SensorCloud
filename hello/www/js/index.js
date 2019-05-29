@@ -3,6 +3,24 @@ if(window.sessionStorage.getItem("id") != null && window.sessionStorage.getItem(
 }
 
 $(document).ready(function(){
+  
+  $(document).on('deviceready', function() {
+    var Permission = window.plugins.Permission;
+  
+    // verify grant for a permission
+    var permission = ['android.permission.ACCESS_COARSE_LOCATION','android.permission.ACCESS_FINE_LOCATION'];
+    Permission.has(permission, function(results) {
+      if(!results[permission]) {
+        Permission.request(permission,function(results) {
+          if (results['android.permission.ACCESS_COARSE_LOCATION','android.permission.ACCESS_FINE_LOCATION']) {
+            // permission is granted
+           
+          }
+        },alert)
+      }
+    }, alert)
+  });
+
 
   $("#login").click(function(e){
       // e.preventDefault();
@@ -40,7 +58,7 @@ $(document).ready(function(){
                   window.sessionStorage.setItem("id", result.id);
                   window.sessionStorage.setItem("password", result.password);
                   window.location.href="main.html";
-              } else if (sig.signal == "passfail"){ 
+              } else if (result.signal == "passfail"){ 
                   alert("비밀번호 틀림");
               } else {
                 alert("아이디 틀림");
@@ -93,7 +111,6 @@ $.ajax({
         // var aa = JSON.stringify(result);
         // alert(aa);
         if(result.signal == "ok"){
-            alert("로그인 성공");
             window.sessionStorage.setItem("id", result.id);
             window.sessionStorage.setItem("password", result.password);
             window.location.href="main.html";

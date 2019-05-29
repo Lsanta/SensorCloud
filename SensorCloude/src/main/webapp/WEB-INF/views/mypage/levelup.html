@@ -105,6 +105,10 @@ var config = {
 
 	$(document).ready(function() {	
 		
+		$("#no").click(function() {
+			close();
+		});
+		
 			$("#ok").click(function() {
 				send();
 				
@@ -182,6 +186,7 @@ var config = {
 
 		<div id="submit">
 			<input type="button" id="ok" value="확인" />
+			<input type="button" id="no" value="취소" />
 		</div>
 	</div>
 </body>

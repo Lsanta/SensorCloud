@@ -13,6 +13,7 @@
         <img src="img/str.png" id="aa" width="30%" height="30%">
     </div>
     <div data-role="content">
+        <div id="mylocation"></div>
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
                 <tr>
@@ -20,6 +21,7 @@
                     <th>현장이름</th>
                     <th>주소</th>
                     <th>데이터갱신시간</th>
+                    <th>남은거리</th>
                 </tr>
                 <tbody id="aaa">
 
@@ -41,6 +43,10 @@
     <script src="js/jquery.js"></script>
     <script src="js/jquery.mobile-1.4.5.js"></script>
     <script src="js/main.js"></script>
-    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=48zvlwk8kg&submodules=geocoder"></script>
+   
+    <script src="./js/onmessage.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </body>
 </html>

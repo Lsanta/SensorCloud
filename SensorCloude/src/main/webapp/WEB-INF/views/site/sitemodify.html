@@ -155,8 +155,6 @@ $(document).ready(function(){
 		var sig_port_num = $("#sig_port_num").val();
 		var port_num = $("#port_num").val();
 		
-		console.log(query);
-		
 		var query = { 
 						site_id : site_id,
 						type_no : type_no,
@@ -169,6 +167,7 @@ $(document).ready(function(){
 						port_num : port_num
 						
 					}
+		console.log(query);
 		
 		$.ajax({
 			  type : "POST",
