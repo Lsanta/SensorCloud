@@ -104,8 +104,13 @@ $(document).ready(function() {
      FCMPlugin.getToken(function(token){
     
      var to = token;
-     var id = sessionStorage.getItem("id");
-  
+     var id;
+     if(localStorage.getItem("auto") == "true") {
+        id = localStorage.getItem("id");
+     } else if( localStorage.getItem("auto") == "false"){
+        id = sessionStorage.getItem("id");
+     }
+
      var query = {
         token : to,
         id : id

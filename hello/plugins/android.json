@@ -36,6 +36,10 @@
     },
     "cordova-plugin-file-transfer": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
+    },
+    "cordova.plugins.diagnostic": {
+      "ANDROID_SUPPORT_VERSION": "28.+",
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
     }
   },
   "dependent_plugins": {

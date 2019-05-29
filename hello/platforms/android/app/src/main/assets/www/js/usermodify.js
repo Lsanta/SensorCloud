@@ -1,7 +1,14 @@
 $(document).ready(function() {
 //내정보 불러오기
+var id;
+	if(localStorage.getItem("auto") == "true") {
+		id = localStorage.getItem("id");
+	} else if( localStorage.getItem("auto") == "false"){
+		id = sessionStorage.getItem("id");
+	}
+
 var query = {
-    id: window.sessionStorage.getItem("id")
+    id: id
 };
 
 $.ajax({

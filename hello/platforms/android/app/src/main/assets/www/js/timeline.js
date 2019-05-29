@@ -44,11 +44,16 @@ $(document).ready(function(){
 
 	 //글 등록
      $(document).on('click','#submit',function(){
-         window.sessionStorage.getItem("id");
+        var user_id;
+        if(localStorage.getItem("auto") == "true") {
+           user_id = localStorage.getItem("id");
+        } else if( localStorage.getItem("auto") == "false"){
+           user_id = sessionStorage.getItem("id");
+        }
         
         var query = {
              content:$("#textarea").val(),
-             user_id: window.sessionStorage.getItem("id")
+             user_id: user_id
          };
         
          var log = JSON.stringify(query);
