@@ -41,16 +41,16 @@
 		
  		navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registartion){
 			 
-// 			 messaging.requestPermission().then(function(){
-// 					console.log('요청 허용');
-// 					return messaging.getToken();
-// 				})
-// 				.then(function(token){
-// 					console.log(token);
-// 				})
-// 				.catch(function(err){
-// 					console.log('요청 거절');
-// 				});
+			 messaging.requestPermission().then(function(){
+					console.log('요청 허용');
+					return messaging.getToken();
+				})
+				.then(function(token){
+					console.log(token);
+				})
+				.catch(function(err){
+					console.log('요청 거절');
+				});
 
 // 			 messaging.onTokenRefresh(function() {
 //   messaging.getToken().then(function(refreshedToken) {

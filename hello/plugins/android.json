@@ -33,7 +33,14 @@
     },
     "cordova-plugin-permission": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
+    }
+  }
 }

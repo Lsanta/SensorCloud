@@ -279,6 +279,19 @@ public class mLoginController {
 		
 		return "no";
 	}
+	
+	   @CrossOrigin(origins = "*", maxAge = 3600)
+	   @RequestMapping(value = "/siterepairview", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	   @ResponseBody
+	   public ArrayList<CheckBoardVO> siterepairview(@RequestBody String board_no, Locale locale, Model model) {
+	      
+	      System.out.println(board_no);
+	      ArrayList<CheckBoardVO> result = checkboardservice.viewgetList(board_no);
+	      System.out.println(result);
+	      
+	      return result;
+
+	   }
 
 
 }

@@ -30,4 +30,14 @@ public class mChecklistController {
       return "success";
 
    }
+   
+   // file_transfer 데이터 받기
+   @CrossOrigin(origins = "*", maxAge = 3600)
+   @RequestMapping(value = "/insertfile", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+   @ResponseBody
+   public void insertfile(@RequestBody String file_path ) {
+
+      System.out.println(file_path);
+
+   }
 }
