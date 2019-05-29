@@ -84,6 +84,7 @@ public class mLoginController {
 			if (arr.get(0).getPassword().equals(password)) {
 				json.put("id", id);
 				json.put("password", password);
+				json.put("level", arr.get(0).getM_level());
 				json.put("signal", "ok");
 				session.setAttribute("id", id);
 			} else {

@@ -71,7 +71,8 @@ public class MessageController {
 	      FirebaseOptions options=null;
 	      //파이어베이스 옵션 설정
 	      try {
-	         serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+//	         serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	    	 serviceAccount = new FileInputStream("/home/ec2-user/sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
 	         options = new FirebaseOptions.Builder()
 	               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
 //	               .setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
@@ -145,7 +146,8 @@ public class MessageController {
 	      FirebaseOptions options=null;
 	      //파이어베이스 옵션 설정
 	      try {
-	         serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	         //serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	         serviceAccount = new FileInputStream("/home/ec2-user/sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
 	         options = new FirebaseOptions.Builder()
 	               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
 //	               .setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
@@ -215,8 +217,9 @@ public class MessageController {
 	      FirebaseOptions options=null;
 	      //파이어베이스 옵션 설정
 	      try {
-	         serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
-	         options = new FirebaseOptions.Builder()
+	         //serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	    	 serviceAccount = new FileInputStream("/home/ec2-user/sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	    	 options = new FirebaseOptions.Builder()
 	               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
 //	               .setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
 	               .build();
@@ -299,7 +302,8 @@ public class MessageController {
 	      FirebaseOptions options=null;
 	      //파이어베이스 옵션 설정
 	      try {
-	         serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	    	  serviceAccount = new FileInputStream("/home/ec2-user/sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	    	 //serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
 	         options = new FirebaseOptions.Builder()
 	               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
 //	               .setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")

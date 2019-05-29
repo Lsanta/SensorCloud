@@ -23,6 +23,7 @@
     "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-permission": "^0.1.0",
     "cordova-plugin-velda-devicefeedback": "0.0.2",
+    "cordova.plugins.diagnostic": "^4.0.12",
     "org.apache.cordova.geolocation": "^0.3.6"
   },
   "devDependencies": {
@@ -39,7 +40,10 @@
       "cordova-plugin-imagepicker": {},
       "org.apache.cordova.geolocation": {},
       "cordova-plugin-permission": {},
-      "cordova-plugin-file-transfer": {}
+      "cordova-plugin-file-transfer": {},
+      "cordova.plugins.diagnostic": {
+        "ANDROID_SUPPORT_VERSION": "28.+"
+      }
     },
     "platforms": [
       "android"

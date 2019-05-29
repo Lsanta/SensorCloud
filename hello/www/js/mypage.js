@@ -1,7 +1,13 @@
 $(document).ready(function() {
 	//프로필
+	var id;
+	if(localStorage.getItem("auto") == "true") {
+	   id = localStorage.getItem("id");
+	} else if( localStorage.getItem("auto") == "false"){
+	   id = sessionStorage.getItem("id");
+	}
 	var query = {
-		 id: window.sessionStorage.getItem("id")
+		 id: id
 	};
 	$.ajax({
 			type : "POST",
@@ -30,7 +36,12 @@ $(document).ready(function() {
 				 });
 			}
 	});
-	var user_id = window.sessionStorage.getItem("id");
+	var user_id;
+	if(localStorage.getItem("auto") == "true") {
+			user_id = localStorage.getItem("id");
+	} else if( localStorage.getItem("auto") == "false"){
+			user_id = sessionStorage.getItem("id");
+	}
 	
 			 $.ajax({
 				type : "POST",
@@ -190,8 +201,15 @@ $(document).ready(function() {
 					 alert("사용자 정보 수정을위해 비밀번호를 입력해주세요");
 				}
 	
+				var user_id;
+				if(localStorage.getItem("auto") == "true") {
+				   user_id = localStorage.getItem("id");
+				} else if( localStorage.getItem("auto") == "false"){
+				   user_id = sessionStorage.getItem("id");
+				}
+
 				var query = {
-					 user_id: window.sessionStorage.getItem("id"),
+					 user_id: user_id,
 					 password : $("#pass").val()
 				};
 				console.log(query);
@@ -229,7 +247,12 @@ $(document).ready(function() {
 	$(document).ready(function() {
 		 //승급요청 확인 클릭시
 		 $("#ok").click(function(){
-				 var id = sessionStorage.getItem('id');
+			var id;
+			if(localStorage.getItem("auto") == "true") {
+			   id = localStorage.getItem("id");
+			} else if( localStorage.getItem("auto") == "false"){
+			  id = sessionStorage.getItem("id");
+			}
 				 var select = $("#select_level option:selected").val();
 				
 				 var query = {
@@ -277,7 +300,13 @@ $(document).ready(function() {
 	$(document).ready(function() {
 		$("#logout").click(function(){ 
 			if(confirm("로그아웃 하시겠습니까?")){
-				var id = sessionStorage.getItem("id");
+				var id;
+				if(localStorage.getItem("auto") == "true") {
+					id = localStorage.getItem("id");
+				} else if( localStorage.getItem("auto") == "false"){
+					id = sessionStorage.getItem("id");
+				}
+			
 				$.ajax({
 					type : "POST",
 					url : "http://39.127.7.58:8080/app/mypage/deleteappToken",
@@ -285,8 +314,16 @@ $(document).ready(function() {
 					contentType : "text/plain; charset=UTF-8",
 					dataType : 'text',
 					success : function(data) {
+					if(localStorage.getItem("auto") == "true") {	
+						localStorage.removeItem("id")
+						localStorage.removeItem("password");
+						localStorage.removeItem("level");
+					} else if( localStorage.getItem("auto") == "false"){ 
 						sessionStorage.removeItem("id");
-						sessionStorage.removeItem("password");    
+						sessionStorage.removeItem("password"); 
+						sessionStorage.removeItem("level");
+					}
+						localStorage.removeItem("auto");
 						window.location.href="index.html";
 					}
 				});
