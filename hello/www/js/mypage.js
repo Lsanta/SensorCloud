@@ -54,7 +54,7 @@ $(document).ready(function() {
 								 str += "</li>";
 							
 							} else {
-								 str += "<img src='./img/user.png'>";
+								 str += "<img src='./img/user.png' id='img'>";
 								 
 							}
 							 

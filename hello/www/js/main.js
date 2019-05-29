@@ -20,15 +20,15 @@ $(document).ready(function() {
                var str="";
                $.each(list,function(i,s){
                   str +='<tr>';
-                  switch(s.site_status){
-                  case 0 : str +='<td>'+ "<img src='img/gray.svg'>" +'</td>'; break;
-                  case 1 : str +='<td>'+ "<img src='img/green.svg'>" +'</td>'; break;
-                  case 2 : str +='<td>'+ "<img src='img/red.svg'>" +'</td>'; break;
-                  default  : str +='<td>'+'null'+'</td>'; break;
-                  }
+                  // switch(s.site_status){
+                  // case 0 : str +='<td>'+ "<img src='img/gray.svg'>" +'</td>'; break;
+                  // case 1 : str +='<td>'+ "<img src='img/green.svg'>" +'</td>'; break;
+                  // case 2 : str +='<td>'+ "<img src='img/red.svg'>" +'</td>'; break;
+                  // default  : str +='<td>'+'null'+'</td>'; break;
+                  // }
                   str +='<td>'+s.site_name+'</td>';
                   str +='<td>'+s.address+'</td>';
-                  str +='<td>'+s.start_date+'</td>';
+                  // str +='<td>'+s.start_date+'</td>';
                   str +='<td style="display : none">'+s.site_id+'</td>';
                   str +='</tr>';
      
@@ -68,15 +68,15 @@ function showLocation(position){
                var str="";
                $.each(list,function(i,s){
                   str +='<tr>';
-                  switch(s.site_status){
-                  case 0 : str +='<td>'+ "<img src='img/gray.svg'>" +'</td>'; break;
-                  case 1 : str +='<td>'+ "<img src='img/green.svg'>" +'</td>'; break;
-                  case 2 : str +='<td>'+ "<img src='img/red.svg'>" +'</td>'; break;
-                  default  : str +='<td>'+'null'+'</td>'; break;
-                  }
+                  // switch(s.site_status){
+                  // case 0 : str +='<td>'+ "<img src='img/gray.svg'>" +'</td>'; break;
+                  // case 1 : str +='<td>'+ "<img src='img/green.svg'>" +'</td>'; break;
+                  // case 2 : str +='<td>'+ "<img src='img/red.svg'>" +'</td>'; break;
+                  // default  : str +='<td>'+'null'+'</td>'; break;
+                  // }
                   str +='<td>'+s.site_name+'</td>';
                   str +='<td>'+s.address+'</td>';
-                  str +='<td>'+s.start_date+'</td>';
+                  // str +='<td>'+s.start_date+'</td>';
                   str +='<td style="display : none">'+s.site_id+'</td>';
                   str +='</tr>';
      
