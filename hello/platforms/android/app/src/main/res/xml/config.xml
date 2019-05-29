@@ -27,6 +27,9 @@
     <feature name="Geolocation">
         <param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" />
     </feature>
+    <feature name="Permission">
+        <param name="android-package" value="com.adrianodigiovanni.permission.CDVPermission" />
+    </feature>
     <name>Sensor Cloud</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

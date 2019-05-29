@@ -297,7 +297,7 @@
            ) <= v_z
    AND a.y BETWEEN v_x - v_z / r_x AND v_x + v_z / r_x
    AND a.x BETWEEN v_y - v_z / r_y AND v_y + v_z / r_y
- ORDER BY z
+ ORDER BY a.site_status desc, z
 	]]>
 	</select>
 	

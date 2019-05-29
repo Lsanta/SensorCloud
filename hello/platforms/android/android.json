@@ -39,6 +39,10 @@
             {
               "xml": "<feature name=\"Geolocation\"><param name=\"android-package\" value=\"org.apache.cordova.geolocation.GeoBroker\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"Permission\"><param name=\"android-package\" value=\"com.adrianodigiovanni.permission.CDVPermission\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -136,6 +140,9 @@
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
     },
     "org.apache.cordova.geolocation": {
+      "PACKAGE_NAME": "kr.yju.wdb.sensor"
+    },
+    "cordova-plugin-permission": {
       "PACKAGE_NAME": "kr.yju.wdb.sensor"
     }
   },
@@ -253,6 +260,19 @@
       "clobbers": [
         "navigator.geolocation"
       ]
+    },
+    {
+      "id": "cordova-plugin-permission.Permission",
+      "file": "plugins/cordova-plugin-permission/www/index.js",
+      "pluginId": "cordova-plugin-permission",
+      "clobbers": [
+        "window.plugins.Permission"
+      ]
+    },
+    {
+      "id": "cordova-plugin-permission.tests",
+      "file": "plugins/cordova-plugin-permission/tests/index.spec.js",
+      "pluginId": "cordova-plugin-permission"
     }
   ],
   "plugin_metadata": {
@@ -263,6 +283,7 @@
     "cordova-plugin-velda-devicefeedback": "0.0.2",
     "cordova-plugin-camera": "4.0.3",
     "cordova-plugin-imagepicker": "1.1.0",
-    "org.apache.cordova.geolocation": "0.3.6"
+    "org.apache.cordova.geolocation": "0.3.6",
+    "cordova-plugin-permission": "0.1.0"
   }
 }
