@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  
+
+function errorHandler(){
 
   function showLocation(position){
         var latitude = position.coords.latitude;
@@ -69,6 +70,7 @@ $(document).ready(function() {
   }
   
   function errorHandler(){
+
   alert('GPS를 지원하지 않습니다');
   }
   
