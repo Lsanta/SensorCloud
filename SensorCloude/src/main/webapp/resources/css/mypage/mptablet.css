@@ -107,15 +107,15 @@ table th {
   
 }
 .n1{
-     font-size: 2.1em;
+ 	font-size: 1.8em;
     text-align: left;
-    margin: 25% 0 3% 1%;
+    margin: 35% 0 3% 1%;
     display: block;
 }
 
 .n2{
   display: block;
-  font-size: 1.8em;
+  font-size: 1.5em;
   text-align: left;
   margin: 0 0 0 1.5%;
   color: #2b90d9;
@@ -123,11 +123,11 @@ table th {
 }
 .n3{
   display: block;
-  font-size: 1.4em;
+  font-size: 1.3em;
   text-align: left;
   position: relative;
-  left: 75px;
-  top: -28px;
+  left: 60px;
+  top: -23px;
 }
 
 .up{
