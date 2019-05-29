@@ -112,6 +112,19 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "navigator.geolocation"
       ]
+    },
+    {
+      "id": "cordova-plugin-permission.Permission",
+      "file": "plugins/cordova-plugin-permission/www/index.js",
+      "pluginId": "cordova-plugin-permission",
+      "clobbers": [
+        "window.plugins.Permission"
+      ]
+    },
+    {
+      "id": "cordova-plugin-permission.tests",
+      "file": "plugins/cordova-plugin-permission/tests/index.spec.js",
+      "pluginId": "cordova-plugin-permission"
     }
   ];
   module.exports.metadata = {
@@ -122,6 +135,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-velda-devicefeedback": "0.0.2",
     "cordova-plugin-camera": "4.0.3",
     "cordova-plugin-imagepicker": "1.1.0",
-    "org.apache.cordova.geolocation": "0.3.6"
+    "org.apache.cordova.geolocation": "0.3.6",
+    "cordova-plugin-permission": "0.1.0"
   };
 });

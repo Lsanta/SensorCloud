@@ -3,6 +3,24 @@ if(window.sessionStorage.getItem("id") != null && window.sessionStorage.getItem(
 }
 
 $(document).ready(function(){
+  
+  $(document).on('deviceready', function() {
+    var Permission = window.plugins.Permission;
+  
+    // verify grant for a permission
+    var permission = ['android.permission.ACCESS_COARSE_LOCATION','android.permission.ACCESS_FINE_LOCATION'];
+    Permission.has(permission, function(results) {
+      if(!results[permission]) {
+        Permission.request(permission,function(results) {
+          if (results['android.permission.ACCESS_COARSE_LOCATION','android.permission.ACCESS_FINE_LOCATION']) {
+            // permission is granted
+           
+          }
+        },alert)
+      }
+    }, alert)
+  });
+
 
   $("#login").click(function(e){
       // e.preventDefault();
