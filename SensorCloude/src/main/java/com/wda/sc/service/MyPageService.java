@@ -43,10 +43,12 @@ public interface MyPageService {
 	
 	public int saveappToken(AppTokenVO tokenvo);
 	
-	public int updateappToken(Map<String, String> map2);
+//	public int updateappToken(Map<String, String> map2);
 	
 	// 앱 토큰 전부 가져오기
 	public List<AppTokenVO> allappToken();
+
+	public int deleteappToken(String user_id);
 	
 	
 

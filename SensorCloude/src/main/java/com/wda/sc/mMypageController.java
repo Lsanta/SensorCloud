@@ -204,4 +204,24 @@ public class mMypageController {
 
 		return arr;
 	}
+	
+	@CrossOrigin(origins = "*", maxAge = 3600)
+	@RequestMapping(value = "/deleteappToken", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public String deleteToken(@RequestBody String user_id, Locale locale, Model model) {
+		
+		
+		 int result = mypageservice.deleteappToken(user_id);
+		 
+		 if ( result == 1) {
+			 return "success";
+		 } else {
+			 return "fail";
+		 }
+		
+	}
+	
+	
+	
+	
 }

@@ -3,6 +3,8 @@ package com.wda.sc;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -258,7 +260,8 @@ public class MessageController {
 	              .setNotification(AndroidNotification.builder()
 	                  .setTitle(id +"님이 타임라인을 작성했습니다.")
 	                  .setBody(content)
-	                  .setIcon("/src/main/webapp/resources/img/str.png")
+//	                  .setIcon("stock_ticker_update")
+	                  .setIcon("C:\\Users\\bon300-27\\git\\SensorCloud\\hello\\www\\img\\str.png")
 	                  .setColor("#f45342")
 	                  .setClickAction("FCM_PLUGIN_ACTIVITY")
 	               
@@ -285,6 +288,98 @@ public class MessageController {
 	      
 		      return "ok";
 	   }
+	   
+	   @SuppressWarnings({ "null", "unused" })
+	   @ResponseBody
+	   @RequestMapping(value="/WebTimelinemessage.do", method= RequestMethod.POST,  consumes="application/json", produces = {"application/json"})
+	   public String pushTest4(HttpSession session, @RequestBody String content) {
+	      FirebaseApp defaultApp = null;
+	      List<FirebaseApp> apps=FirebaseApp.getApps();
+	      FileInputStream serviceAccount;
+	      FirebaseOptions options=null;
+	      //파이어베이스 옵션 설정
+	      try {
+	         serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	         options = new FirebaseOptions.Builder()
+	               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+//	               .setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+	               .build();
+	      } catch (FileNotFoundException e1) {
+	         e1.printStackTrace();
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+	      //이미 관리자 defaultApp이 있는지 검사
+	      if(apps!=null && !apps.isEmpty()) {
+	         for(FirebaseApp app:apps) {
+	            if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
+	               defaultApp = app;
+	         }
+	      }else {
+	         defaultApp = FirebaseApp.initializeApp(options);
+	      }
+	      
+	      List<AppTokenVO> tokenlist = new ArrayList<AppTokenVO>();
+		     
+		  //token값 select 하기
+		  tokenlist = mypageservice.allappToken();
+		  System.out.println(tokenlist);
+		  
+		  String id = (String) session.getAttribute("id");
+			
+//		  List<String> registrationTokens = new ArrayList<String>();
+//		  
+//		  for(int i = 0; i < tokenlist.size(); i++) {
+//			  registrationTokens.add(tokenlist.get(i).getToken_id());
+//		  }
+//		
+//		  System.out.println(registrationTokens);
+		 String rContent = null;
+		  try {
+			  rContent = URLDecoder.decode(content, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		  
+	      AndroidConfig config = AndroidConfig.builder()
+	    		  .setTtl(3600 * 1000) // 1 hour in milliseconds
+	              .setPriority(AndroidConfig.Priority.HIGH)
+	              .setRestrictedPackageName("kr.yju.wdb.sensor")
+	              .setNotification(AndroidNotification.builder()
+	                  .setTitle(id +"님이 타임라인을 작성했습니다.")
+	                  .setBody(rContent)
+//	                  .setIcon("stock_ticker_update")
+	                  .setIcon("C:\\Users\\bon300-27\\git\\SensorCloud\\hello\\www\\img\\str.png")
+	                  .setColor("#f45342")
+	                  .setClickAction("FCM_PLUGIN_ACTIVITY")
+	               
+	                  .build())
+	              .build();
+	      
+	      for(int i = 0; i < tokenlist.size(); i++) {
+			  
+	      Message message = Message.builder()
+	    		  .setAndroidConfig(config)
+	    		  .putData("data1", "20") //넘어가는값
+	    		  .putData("data2", "30")
+	    		  .setToken(tokenlist.get(i).getToken_id())
+	    		  .build();
+		  
+	      try {
+		         String response=FirebaseMessaging.getInstance().send(message);
+		         System.out.println("Success : " + response);
+		      } catch (FirebaseMessagingException e) {
+		         System.out.println("Failed and the reason is behind");
+		         e.printStackTrace();
+		      }
+	      } //for문 종료
+	      
+		      return "ok";
+	   }
+	   
+	   
+	   
 	   
 	   @SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
@@ -352,20 +447,32 @@ public class MessageController {
 		    	  String DBToken = tokenlist.get(0).getToken_id();
 		    	  String CurToken = (String) appToken;
 		    	  
-		    	  //동일한 휴대폰으로 다른 아이디로 들어갔을때 토큰값이 같아 PK가 겹치는 DB에러 발생 
-		    	  //update대신에 delete 와 insert로 수정해야함.
 		    	  if( DBToken.equals(CurToken) ) {
 		    		  System.out.println("db에 값이 있고 비교했더니 같은값일때"); 
 		    	  } else {
-		    		  //새로운 토큰 저장
-		    		  System.out.println("ㅎㅎㅎ");
-		    		  Map<String, String> map2 = new HashMap<String, String>();
-		    		  map2.put("token", appToken);
-		    		  map2.put("user_id", user_id);
+		    		  //동일한 휴대폰으로 다른 아이디로 들어갔을때 토큰값이 같아 PK가 겹치는 DB에러 발생 
+			    	  //update대신에 delete 와 insert로 수정해야함.
 		    		  
-		    		  mypageservice.updateappToken(map2);
+//		    		  Map<String, String> map2 = new HashMap<String, String>();
+//		    		  map2.put("token", appToken);
+//		    		  map2.put("user_id", user_id);
+//		    		  
+//		    		  mypageservice.updateappToken(map2);
+		    		  System.out.println("ㅎㅎㅎ111");
+		    		  int result = mypageservice.deleteappToken(user_id);
 		    		  
-		    		  System.out.println("db에 값이 있고 비교했더니 다른값일때"); 
+		    		  if( result == 1 ) {
+		    			  System.out.println("ㅎㅎㅎ222");
+		    			  //삭제가 성공했으면 insert 
+		    			  tokenvo.setToken_id(appToken);
+		 		    	  tokenvo.setUser_id(user_id);
+		 		    	  mypageservice.saveappToken(tokenvo);
+		 		    	 System.out.println("db에 값이 있고 비교했더니 다른값일때 딜리트 후 인설트 성공"); 
+		    		  } else {
+		    			  System.out.println("토큰 삭제 실패"); 
+		    		  }
+		    		  
+		    		 
 			    	   
 		    	  }
 		      }

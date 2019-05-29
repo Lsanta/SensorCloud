@@ -29,7 +29,7 @@
             <div data-role="navbar" >
                <ul>
                   <li><a href="#tab1">메인</a></li>
-                  <li><a href="#tab1" onclick="logout();">로그아웃</a></li>
+                  <li><a href="#tab1" id="logout">로그아웃</a></li>
                   <li><a href="#tab2">정보수정</a></li>
                </ul>               
             </div>
@@ -129,19 +129,13 @@
 <script src="./js/mypage.js"></script>
 <script src="./js/level.js"></script>
 <script src="./js/jquery.mobile-1.4.5.js"></script>    
+
+<script src="./js/onmessage.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script>   
     window.onload = function() { //실행될 코드 }
         $("#page-loading").css("display", "none");
-    }
-
-    function logout(){
-        if(confirm("로그아웃 하시겠습니까?")){
-        sessionStorage.removeItem("id");
-        sessionStorage.removeItem("password");
-        window.location.href="index.html";
-    } else {
-        window.location.href="#tab1";
-    }
     }
 </script>
 </body>

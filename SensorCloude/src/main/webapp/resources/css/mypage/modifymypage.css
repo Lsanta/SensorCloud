@@ -30,10 +30,11 @@ body {
 }
 
 .usermodify-card input[type=button] {
-	width: 30%;
-	display: block;
-	margin-bottom: 10px;
-	float: right;
+    width: 25%;
+    height: 35px;
+    display: block;
+    margin-top: 3%;
+    float: right;
 }
 
 .usermodify-card input[type=password] {

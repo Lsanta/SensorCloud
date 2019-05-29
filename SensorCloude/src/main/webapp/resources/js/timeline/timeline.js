@@ -26,6 +26,15 @@ $(document).ready(function(){
 				if( data == "success"){
 					alert("등록되었습니다.");
 					location.reload();
+					
+					$.ajax({
+                        type : "POST",
+                        url : "/app/send/WebTimelinemessage.do",
+                        data : query,
+                        contentType : "application/json; charset=UTF-8",
+                        success : function(data) {
+                        }
+                 }); //ajax 종료
 				} else{
 					location.reload();
 

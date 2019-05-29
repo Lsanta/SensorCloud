@@ -39,6 +39,11 @@
   </div>
 </div>
 
+	<!-- 세션로그인 값 -->
+	<div id ="id" th:text="${session.id}" style="display: none"></div>
+	<!-- 작성자 -->
+	<div id="writerid"  th:each="check : ${cklist}"  th:text="${check.user_id}" style="display : none"></div>
+
 <div class="a">
 	<div class="title1">
 		<span class="title00" id="checktitle" th:each="check : ${cklist}" th:text="${check.title}"></span>
@@ -85,7 +90,7 @@
 <div class="but">
 	<div class="but0">
 		<button type="button" id="mb">수정</button>
-       <button type="button" id="db">삭제</button>
+        <button type="button" id="db">삭제</button>
    	</div>
 </div>
 

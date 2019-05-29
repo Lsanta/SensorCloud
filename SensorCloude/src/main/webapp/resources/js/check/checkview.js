@@ -1,6 +1,4 @@
 $(document).ready(function(){
-	
-	//
 
 	 var writer_id = $("#writerid").text();//글쓴이		
 	 var site_id = $("#site_id").text();
@@ -11,7 +9,7 @@ $(document).ready(function(){
 	 console.log(board_no);
 	 ///board_status : checkstatus,
 	 
-	 var user_id =  $("#user_id").text(); //세션아이디
+	 var user_id =  $("#id").text(); //세션아이디
 	 console.log(user_id);
 	 
 	 
