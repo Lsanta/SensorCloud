@@ -195,6 +195,10 @@ $(document).on('deviceready', function() {
                     $(".pagination").html(temp);
                     $("#writing").html(num);
                     
+                    var characterCount = $("#textarea").val().length,
+		            current = $('#current')
+		            current.text(characterCount);
+
                 }
             }); // ajax 종료
                 /*}*/

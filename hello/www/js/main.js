@@ -58,7 +58,7 @@ $(document).ready(function() {
        
                      $("#aaa").html(str);
                  });
-              
+                 
               } // success 함수 종료
        
         }); // ajax함수
