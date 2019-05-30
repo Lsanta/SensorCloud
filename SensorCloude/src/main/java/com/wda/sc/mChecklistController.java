@@ -1,10 +1,18 @@
 package com.wda.sc;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
+
+import org.imgscalr.Scalr;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +34,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("/app/checklist")
 public class mChecklistController {
+   private static final Logger logger = LoggerFactory.getLogger(mChecklistController.class);
    private CheckboardService checkboardservice;
 
    // 점검이력
@@ -47,7 +56,7 @@ public class mChecklistController {
    @ResponseBody
    public void insertfile(@RequestParam Map<String,String> allRequestParams, MultipartFile file, Model model) throws Exception {
        
-      
+      String uploadPath = "C:\\upload";
      
       
       Iterator<String> keys = allRequestParams.keySet().iterator();
@@ -60,26 +69,123 @@ public class mChecklistController {
        System.out.println("size:"+ file.getSize());
        System.out.println("contentType:"+ file.getContentType());
        
-       String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
+       String savedName = uploadFile(uploadPath,file.getOriginalFilename(), file.getBytes());
        
        model.addAttribute("savedName" , savedName);
        
        
    }
    
-   private String uploadFile(String orginalName , byte[] fileData ) throws Exception {
+   
+   public  String uploadFile(String uploadPath, String originalName, byte[] fileData) //별도의 데이터가 보관될 필요가없기에 static
+         throws Exception {
       
-      String uploadPath = "C:\\upload";
       
-      UUID uid = UUID.randomUUID();//randomUUID() 메소드를 사용해서 유일한 식별자를 생성합니다.
-     // 반한되는 객체가 UUID 객체이므로 문자열 표현을 얻기 위해 toString() 메소드로 출력
-
-      String savedName = uid.toString()+"_"+orginalName;
+      UUID uid = UUID.randomUUID();
+      String savedName = uid.toString()+"_"+originalName;
       
-      File target = new File(uploadPath,savedName);
+      String savedPath = calcPath(uploadPath);
       
-      FileCopyUtils.copy(fileData , target);//파일 데이터를 파일로 처리하거나 복사  filedata의 byte를  특정한 target으로 전송
+      File target = new File(uploadPath + savedPath , savedName);
       
-      return savedName;
+      FileCopyUtils.copy(fileData, target);
+      
+      String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
+      
+      String uploadedFileName = null;
+      
+      if(MediaUtils.getMediaType(formatName) != null) {
+         uploadedFileName = makeThumbnail(uploadPath , savedPath , savedName);
+      }
+      else {
+         uploadedFileName = makeIcon(uploadPath , savedPath , savedName);
+      }
+      return uploadedFileName;
+      
    }
+   
+   private static String makeIcon(String uploadPath ,String path , String fileName)throws Exception{
+      
+      String iconName = uploadPath+path+File.separator+fileName;
+      
+      return iconName.substring(
+               uploadPath.length()).replace(File.separatorChar, '/');
+   }
+   
+   private static String calcPath(String uploadPath) {
+         
+      Calendar cal = Calendar.getInstance();
+      
+      String yearPath = File.separator+cal.get(Calendar.YEAR);
+      
+      String monthPath = yearPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.MONTH)+1);
+      
+      String datePath = monthPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.DATE));
+      
+      makeDir(uploadPath , yearPath, monthPath , datePath);
+      
+      logger.info(datePath);
+      
+      return datePath;
+      
+      
+   }
+   
+   //날짜정보와 기본경로와함께 전달되어 폴더가 생성
+   private static void makeDir(String uploadPath , String ...paths) {
+      
+      if(new File(uploadPath + paths[paths.length -1]).exists())
+         return;
+      
+   
+   for (String path : paths) {
+      
+      File dirPath = new File(uploadPath +path);
+      
+      if(! dirPath.exists()) {
+         dirPath.mkdir();
+      }
+   }
+   }
+   
+   //썸네일 이미지 생성
+   
+   private static String makeThumbnail (String uploadPath, 
+         String path, String fileName) throws Exception {
+      
+      
+      BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path , fileName));
+      BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT,100);
+      
+      String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;
+      
+      File newFile = new File(thumbnailName);
+      String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+      
+      ImageIO.write(destImg, formatName.toUpperCase(), newFile);
+      
+      return thumbnailName.substring(
+            uploadPath.length()).replace(File.separatorChar , '/');
+            
+   }
+   
+   
+   
+   
+   
+//   private String uploadFile(String orginalName , byte[] fileData ) throws Exception {
+//      
+//      String uploadPath = "C:\\upload";
+//      
+//      UUID uid = UUID.randomUUID();//randomUUID() 메소드를 사용해서 유일한 식별자를 생성합니다.
+//     // 반한되는 객체가 UUID 객체이므로 문자열 표현을 얻기 위해 toString() 메소드로 출력
+//
+//      String savedName = uid.toString()+"_"+orginalName;
+//      
+//      File target = new File(uploadPath,savedName);
+//      
+//      FileCopyUtils.copy(fileData , target);//파일 데이터를 파일로 처리하거나 복사  filedata의 byte를  특정한 target으로 전송
+//      
+//      return savedName;
+//   }
 }

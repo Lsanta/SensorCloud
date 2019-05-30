@@ -33,7 +33,7 @@ $(document).ready(function() {
 			var a = $(".pagination-inner a").index(this);
 			var b = $(".pagination-inner a:eq("+a+")").attr("id");
 			num = b;
-			window.location.href = "/site/1/siterepair/"+num;
+			window.location.href = "/site/"+url[2]+"/siterepair/"+num;
 		});
 
 		$('.pagination-newer').click(function(){
@@ -56,7 +56,7 @@ $(document).ready(function() {
 			var a = $(".pagination-inner a").index(this);
 			var b = $(".pagination-inner a:eq("+a+")").attr("id");
 			num = b;
-			window.location.href = "/site/1/search/"+num+"/"+url[5]+"/"+url[6];
+			window.location.href = "/site/"+url[2]+"/search/"+num+"/"+url[5]+"/"+url[6];
 		});
 
 		$('.pagination-newer').click(function(){
