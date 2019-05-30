@@ -156,7 +156,7 @@ $(document).ready(function() {
 	});
 
 	/*화면 줄어들 때 리스트 자르기 */
-	var tr = $("#checklist tr:gt(3)");
+	var tr = $("#checklist tr:gt(4)");
 
 	if($(window).width() <= 700){
 		tr.addClass("none");

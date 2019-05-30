@@ -95,6 +95,24 @@
   border: 1px solid #ddd;
 }
 
+.images h5 {
+    margin: 0 0 0 10%;
+    font-size: 0.88em;
+}
+
+#chdate {
+    margin-left: 10%;
+    font-size: 0.85em;
+}
+
+#chstatus {
+    color: #524f4f;
+    margin: 0 0 5% 10%;
+    font-size: 0.9em;
+    color: #000;
+    font-weight: 500px;
+}
+
 @media ( max-width: 1000px ) {
   #main-container {
     width: auto;
@@ -106,6 +124,7 @@
   #right-content {
     float: none;
     width: auto;
+    margin-top: 15%;
   }
   #right-top {
     float: none;
@@ -114,6 +133,7 @@
   #right-bottom {
     float: none;
     width: auto;
+   	margin-top: 5%;
   }
   .title-header {
     float: none;
@@ -163,7 +183,7 @@ table th {
 }
 
 @media screen and (max-width: 700px) {
-  table {
+/*   table {
     border: 0;
   }
 
@@ -193,7 +213,7 @@ table th {
     display: block;
     font-size: .8em;
     text-align: right;
-  }
+  } */
   .images h5 {
   margin: 0 0 0 10%;
   font-size: 1.5em;
@@ -235,24 +255,23 @@ table th {
 } 
 
 .images h5 {
-  margin: 0 0 0 10%;
-  font-size: 0.88em;
+    margin: 0 0 0 25%;
+    font-size: 1em;
 }
 
 
 #chdate {
-   margin-left: 10%;
-   font-size: 0.85em;
+    margin-left: 25%;
+    font-size: 1em;
 }
 
 #chstatus {
-  color: #524f4f;
-  margin: 0 0 5% 10%;
-  font-size: 0.9em;
-  color: #000;
-  font-weight: 500px;
+    color: #524f4f;
+    margin: 0 0 5% 25%;
+    font-size: 1em;
+    color: #000;
+    font-weight: 500px;
 }
-
 
 @media screen and (min-width: 700px) {
   .grid {
@@ -271,4 +290,25 @@ table th {
     width: calc(100% / 3);
   }
 
+}
+
+@media screen and (max-width: 360px) {
+  #right-content {
+    margin-top: 45%;
+  }
+#left-content {
+    height: 200px;
+}	
+
+table th {
+    font-size: 0.8em;
+}
+table td img{
+  width: 10px;
+  height: 10px;
+}
+table td {
+	font-size: 0.9em;
+}
+	
 }

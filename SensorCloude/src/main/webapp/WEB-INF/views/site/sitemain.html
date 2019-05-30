@@ -62,7 +62,7 @@
 			
 			<span class="addr" th:text="${siteInfo.site_name}"></span> 
 			
-			<span th:text="${siteInfo.address}"></span><br>
+			<span th:text="${siteInfo.address}" id="addr"></span><br>
 			<button id="modify" th:class ="${siteInfo.site_id}">현장수정</button>
 			<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
 

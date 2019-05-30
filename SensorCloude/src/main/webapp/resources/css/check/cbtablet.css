@@ -3,9 +3,9 @@
     height: 100%;
     overflow: hidden;
     margin:20px auto;
-    border: 1px solid #ddd;
-    background-color: #F2F2F2;
-    
+    background-color: #f8f9fc;
+    margin-top: 120px;
+	padding-right: 20px;   
 }
 .index{
 	width:97%;
@@ -26,15 +26,13 @@
 }
 .th01{
 	width: 10%;
-	background-color: #D8D8D8;
 }
 .th02{
 	width: 90%;
-	background-color: #F2F2F2;
 }
 
 .title00{
-	width:99.9%;
+	width:96%;
 	height: 70%;
 	margin-top: 3px;
 }
@@ -45,8 +43,7 @@
 	margin :20px 20px 20px 20px;
 }
 .th03{
-	width: 10%;
-	background-color: #F2F2F2;
+	width: 35%;
 	text-align: left;
 }
 .se{
@@ -56,7 +53,6 @@
 }
 .status{
 	width: 10%;
-	background-color: #D8D8D8;
 }
 .stse{
 	width:15%;
@@ -66,7 +62,7 @@
 	text-align: center;
 }
 #sse{
-	width:55%;
+	width:90%;
 	height: 60%;
 }
 .content{
