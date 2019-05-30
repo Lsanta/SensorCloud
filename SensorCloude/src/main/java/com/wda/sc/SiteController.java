@@ -628,7 +628,7 @@ public class SiteController {
 
 		if (realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
-			return "redirect:/search/" + pageNum + "/" + searchType + "/" + keyword;
+			return "redirect:/site/search/" + pageNum + "/" + searchType + "/" + keyword;
 		}
 
 		return "/site/sitelist";

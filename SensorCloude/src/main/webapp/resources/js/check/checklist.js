@@ -127,10 +127,12 @@ $(document).ready(function() {
 			$("#"+url[3]+"").addClass('pagination-active');
 		}
 
+	
 		$('.pagination-inner a').on('click', function() {
 			var a = $(".pagination-inner a").index(this);
-			num = a;
-			window.location.href = "/checkboard/dataSearch/"+(num+1)+"/"+url[4];
+			var b = $(".pagination-inner a:eq("+a+")").attr("id");
+			num = b;
+			window.location.href = "/checkboard/dataSearch/"+num+"/"+url[4];
 		});
 
 		$('.pagination-newer').click(function(){
@@ -140,11 +142,14 @@ $(document).ready(function() {
 				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])-1)+"/"+url[4];
 		});
 
+//		$('.pagination-older').click(function(){
+//			if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[3])+1)
+//				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+"/"+url[4]);
+//			else
+//				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+1)+"/"+url[4];
+//		});
 		$('.pagination-older').click(function(){
-			if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[3])+1)
-				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+"/"+url[4]);
-			else
-				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+1)+"/"+url[4];
+			window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+1)+"/"+url[4];
 		});
 	}
 	
