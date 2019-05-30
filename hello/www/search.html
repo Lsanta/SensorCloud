@@ -12,7 +12,15 @@
     <script src="./js/onmessage.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    
+    <script>
+    $(document).on('deviceready', function() {
+    if(window.localStorage.getItem("level") == 1) {
+      alert("2등급부터 볼 수 있는 페이지입니다. 승급요청을 해주세요." )
+      history.go(-1);
+      return false;
+    }
+    });
+    </script>
      <script>
             $(document).on('pagebeforeshow', function() {
                  $("#search-basic").textinput();      

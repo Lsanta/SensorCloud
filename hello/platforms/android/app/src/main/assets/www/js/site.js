@@ -18,7 +18,10 @@ function getQueryStringObject() {
          var qs = getQueryStringObject();
          var site_id = qs.sid;
          $("#confirm").click(function(){
-
+            if(window.localStorage.getItem("level") < 3) {
+                alert("3등급부터 작성 할 수 있습니다. 승급요청을 해주세요." )
+                return false;
+             }
             window.location.href="writecheck.html?sid="+site_id;
         
         });

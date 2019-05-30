@@ -1,7 +1,5 @@
 $(document).ready(function() {
-
-function errorHandler(){
-
+   
   function showLocation(position){
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
@@ -96,6 +94,12 @@ function errorHandler(){
   
   $(document).on("click", "#aaa tr" , function(){
   
+   if(window.localStorage.getItem("level") == 1) {
+      alert("2등급부터 볼 수 있는 페이지입니다. 승급요청을 해주세요." )
+      location.reload();
+      return false;
+   }
+
     var tr = $("#aaa tr").index(this);
     var site_id = $("#aaa tr:eq("+tr+") td:eq(4)").text();
     window.location.href = "site.html?sid=" + site_id;

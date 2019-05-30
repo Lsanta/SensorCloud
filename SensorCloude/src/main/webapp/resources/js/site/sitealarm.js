@@ -92,42 +92,53 @@ $(document).ready(function(){
 	}); // 클릭 햇을시 종료
 	
 
+//	$("#submit").click(function(){
+//		//주소창 잘라서 site_id 뽑았는데 내가봐도 구림
+//		var newURL =  window.location.pathname;
+//		var sid = newURL.split("/");
+//		sid2 = sid[2].split("/");
+//		
+//		var site_id = sid2[0];
+//		var alarm_content = $("#textarea").val();
+//		
+//		if( alarm_content == ""){
+//			alert("문자내용을 적어주세요");
+//			 $("#textarea").focus();
+//			 return;
+//		}
+//		var query = { 
+//				alarm_content : alarm_content, site_id : site_id
+//			}
+//		
+//		
+//		$.ajax({
+//			  type : "POST",
+//			  url : "/site/alarmadd.do",
+//			  data : query,
+//			  success : function(data){
+//				  if( data == "success"){
+//					  alert("추가되었습니다");
+//					  $("#example").remove();
+//					  location.reload();
+//				  } else{
+//					  alert("추가에 실패했습니다");
+//				  }
+//			  }
+//			  
+//		}); // ajax 종료
+//		
+//	}); // 전송했을시 종료
 	$("#submit").click(function(){
-		//주소창 잘라서 site_id 뽑았는데 내가봐도 구림
-		var newURL =  window.location.pathname;
-		var sid = newURL.split("/");
-		sid2 = sid[2].split("/");
-		
-		var site_id = sid2[0];
-		var alarm_content = $("#textarea").val();
-		
-		if( alarm_content == ""){
-			alert("문자내용을 적어주세요");
-			 $("#textarea").focus();
-			 return;
-		}
-		var query = { 
-				alarm_content : alarm_content, site_id : site_id
-			}
-		
-		
+		alert("클릭");
 		$.ajax({
-			  type : "POST",
-			  url : "/site/alarmadd.do",
-			  data : query,
-			  success : function(data){
-				  if( data == "success"){
-					  alert("추가되었습니다");
-					  $("#example").remove();
-					  location.reload();
-				  } else{
-					  alert("추가에 실패했습니다");
-				  }
-			  }
-			  
-		}); // ajax 종료
-		
-	}); // 전송했을시 종료
+		  type : "POST",
+		  url : "/SMS/SMSTest",
+		  success : function(data){
+			 
+		  }
+		  
+	}); // ajax 종료
+	});
 	
 	//수정 버튼 클릭시 연락망 내 사람 정보 변경
 	$("#mod").click(function(){
