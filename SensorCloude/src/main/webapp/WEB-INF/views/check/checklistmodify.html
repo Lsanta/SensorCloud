@@ -193,13 +193,26 @@ $(document).ready(function(){
 	       
 	     });
 	     
-	     console.log(str);
+	     if(confirm('수정하시겠습니까?') == true){
+	    	 formObj.append(str).submit();
+            }else{
+             return false;
+            }
 	     
-	     formObj.append(str).submit();
-	     
-	     alert("수정되었습니다.");
+	    
 	     
 	   });
+	   
+	   $(".back").click(function(){
+		   
+			   if(confirm('글쓰기를 취소 하시겠습니까?') == true){
+					history.go(-2);
+	              }else{
+	               return false;
+	            }
+		   		
+		}); 		
+	   
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 	var maxSize = 5242880;
 	

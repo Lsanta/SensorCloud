@@ -118,7 +118,11 @@ $(document).ready(function(){
 
 
 		$(".back").click(function(){
-			window.location.href="/check/1";
+			if(confirm('글쓰기를 취소 하시겠습니까?') == true){
+				window.location.href="/check/1";
+               }else{
+                return false;
+               }
 		});  
 	
 	   var formObj = $("form[role='form']");
@@ -159,9 +163,14 @@ $(document).ready(function(){
 	       str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
 	       
 	     });
+	   
+	     if(confirm('글을 등록 하시겠습니까?') == true){
+	    	 formObj.append(str).submit();
+            }else{
+             return false;
+            }
 	     
-	     
-	     formObj.append(str).submit();
+	
 		    
 	   });
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");

@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/SMS")
+
 public class SMSController {
 	
 	@SuppressWarnings("restriction")
@@ -29,8 +30,8 @@ public class SMSController {
 		//String api_url = "https://www.ppurio.com/api/send_euckr_text.php";    // EUC-KR 인코딩과 TEXT 응답용 호출 페이지
 		// String api_url = "https://www.ppurio.com/api/send_euckr_json.php"; // EUC-KR 인코딩과 JSON 응답용 호출 페이지
 		// String api_url = "https://www.ppurio.com/api/send_euckr_xml.php";  // EUC-KR 인코딩과 XML 응답용 호출 페이지
-		// String api_url = "https://www.ppurio.com/api/send_utf8_text.php";  // UTF-8 인코딩과 TEXT 응답용 호출 페이지
-		 String api_url = "https://www.ppurio.com/api/send_utf8_json.php";  // UTF-8 인코딩과 JSON 응답용 호출 페이지
+		 String api_url = "https://www.ppurio.com/api/send_utf8_text.php";  // UTF-8 인코딩과 TEXT 응답용 호출 페이지
+		// String api_url = "https://www.ppurio.com/api/send_utf8_json.php";  // UTF-8 인코딩과 JSON 응답용 호출 페이지
 		// String api_url = "https://www.ppurio.com/api/send_utf8_xml.php";   // UTF-8 인코딩과 XML 응답용 호출 페이지
 
 
@@ -38,7 +39,7 @@ public class SMSController {
 		 * 요청값
 		 */
 		String userid = "gkgkrk123";           // [필수] 뿌리오 아이디
-		String callback = "01012345678";    // [필수] 발신번호 - 숫자만
+		String callback = "01053514438";    // [필수] 발신번호 - 숫자만
 		String phone = "01046037101";       // [필수] 수신번호 - 여러명일 경우 |로 구분 "010********|010********|010********"
 		String msg = "테스트 발송입니다";   // [필수] 문자내용 - 이름(names)값이 있다면 [*이름*]가 치환되서 발송됨
 		String names = "홍길동";            // [선택] 이름 - 여러명일 경우 |로 구분 "홍길동|이순신|김철수"
