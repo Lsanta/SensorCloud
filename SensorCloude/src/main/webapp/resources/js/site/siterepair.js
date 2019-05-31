@@ -14,7 +14,6 @@ $(document).ready(function() {
 	});
 
 	$("#write").click(function(){
-		alert("글쓰기 클릭");
 		var newURL =  window.location.pathname;
 		var url = newURL.split('/');
 		window.location.href = "/checkboard/checkadd/"+url[2];
