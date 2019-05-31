@@ -1,9 +1,9 @@
 @font-face {
-  font-family: a이끌림M;
-  src: url('/font/a이끌림M.TTF');
+  font-family: a신그래픽L;
+  src: url('/font/a신그래픽L.TTF');
 }
 
-html, body{font-family: 'a이끌림M';}
+html, body{font-family: 'a신그래픽L';}
 
 table {
     border: 1px solid ;
@@ -48,10 +48,57 @@ table {
     margin-top:4%;
   }
 
+  #aaa td{
+    height:35px;
+  }
+
+  #status {
+    width:25px;
+  }
+
   img {
-    width:12px;
+    width:15px;
+    margin:3px 3px 3px 5px;
+
   }
 
   #header {
-    background:#F6F8FD; 
+    background:white; 
   }
+
+  .sitelist {
+    width: 310px;
+    height: 60px;
+    padding: 10px;
+    margin: 20px;
+    margin-left:-0%;
+    border: 1px solid #bcbcbc;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.03) inset;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.03) inset;
+         box-shadow:0 1px 4px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.03) inset;
+    background-color:white;
+    
+  }
+
+  .sitelist h3 {
+    margin: 0;
+
+    float:left;
+  }
+  
+  .sitelist p {
+   
+  }
+  .sitelist h5 {
+    float: right;
+    color: #524f4f;
+    margin-top: -30px;
+  }
+
+  #mylocation{
+    float:right;
+    margin-right:22%;
+    margin-top:-8.5%;
+  }
+
+  

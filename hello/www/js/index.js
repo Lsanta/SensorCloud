@@ -81,10 +81,7 @@ $(document).ready(function(){
             data : query,
             contentType : "application/json; charset=UTF-8",
             success : function(result){ 
-              // var sig = JSON.parse(result);
-              // alert(sig);
-              // var aa = JSON.stringify(result);
-              // alert(aa);
+              
               if(result.signal == "ok"){
                 if( $("input:checkbox[name='auto']").is(":checked") ) {
                   window.localStorage.setItem("id", result.id);
@@ -101,9 +98,9 @@ $(document).ready(function(){
                 window.location.href="main.html";
 
               } else if (result.signal == "passfail"){ 
-                  alert("비밀번호 틀림");
+                  alert("비밀번호가 일치하지 않습니다.");
               } else {
-                alert("아이디 틀림");
+                alert("아이디가 일치하지 않습니다.");
               }
 
             }, // success 함수 종료
