@@ -35,7 +35,7 @@ $(document).ready(function(){
 		var n = $(".images:eq("+title+") span:eq(0)").text();
 
 			
-			alert(n);
+		
 		 window.location.href = "/checkboard/" + n  ;
 		 
 	 });

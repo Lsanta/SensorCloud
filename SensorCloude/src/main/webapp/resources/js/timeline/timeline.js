@@ -55,7 +55,7 @@ $(document).ready(function(){
 
 		if (true) {
 			var timeline_n = $(this).siblings().eq(0).text();
-			alert(timeline_n);
+			
 			var query = {
 					timeline_n : timeline_n
 			}

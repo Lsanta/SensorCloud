@@ -12,7 +12,7 @@ $(document).ready(function() {
 		var sensor_kind = $("#sensorlist tr:eq(" + tr + ") td:eq(1)").text();
 
 		window.location.href = "/site/"+ url[2] +"/sensormodify/" + sensor_sn;
-		alert(sensor_sn);
+
 
 	});
 
