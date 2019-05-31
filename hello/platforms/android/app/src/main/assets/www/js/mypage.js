@@ -1,11 +1,13 @@
+var id;
+
+if(localStorage.getItem("auto") == "true") {
+   id = localStorage.getItem("id");
+} else if( localStorage.getItem("auto") == "false"){
+   id = sessionStorage.getItem("id");
+}
+
 $(document).ready(function() {
 	//프로필
-	var id;
-	if(localStorage.getItem("auto") == "true") {
-	   id = localStorage.getItem("id");
-	} else if( localStorage.getItem("auto") == "false"){
-	   id = sessionStorage.getItem("id");
-	}
 	var query = {
 		 id: id
 	};
@@ -36,18 +38,12 @@ $(document).ready(function() {
 				 });
 			}
 	});
-	var user_id;
-	if(localStorage.getItem("auto") == "true") {
-			user_id = localStorage.getItem("id");
-	} else if( localStorage.getItem("auto") == "false"){
-			user_id = sessionStorage.getItem("id");
-	}
-	
+
 			 $.ajax({
 				type : "POST",
 				// url : "http://52.79.242.145:8080/app/mypage/mgetAttachListmypage",
 				url : "http://39.127.7.58:8080/app/mypage/mgetAttachListmypage",
-				data : user_id,
+				data : id,
 				async : false,
 				contentType : "application/json; charset=UTF-8",
 				success : function(arr){
@@ -65,7 +61,7 @@ $(document).ready(function() {
 								 str += "</li>";
 							
 							} else {
-								 str += "<img src='./img/user.png'>";
+								 str += "<img src='./img/user.png' id='img'>";
 								 
 							}
 							 
@@ -247,12 +243,7 @@ $(document).ready(function() {
 	$(document).ready(function() {
 		 //승급요청 확인 클릭시
 		 $("#ok").click(function(){
-			var id;
-			if(localStorage.getItem("auto") == "true") {
-			   id = localStorage.getItem("id");
-			} else if( localStorage.getItem("auto") == "false"){
-			  id = sessionStorage.getItem("id");
-			}
+		
 				 var select = $("#select_level option:selected").val();
 				
 				 var query = {
@@ -300,12 +291,6 @@ $(document).ready(function() {
 	$(document).ready(function() {
 		$("#logout").click(function(){ 
 			if(confirm("로그아웃 하시겠습니까?")){
-				var id;
-				if(localStorage.getItem("auto") == "true") {
-					id = localStorage.getItem("id");
-				} else if( localStorage.getItem("auto") == "false"){
-					id = sessionStorage.getItem("id");
-				}
 			
 				$.ajax({
 					type : "POST",

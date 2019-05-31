@@ -68,10 +68,8 @@ html {
   width: 120px; /* 원하는 너비설정 */
   padding: .6em .5em; /* 여백으로 높이 설정 */ 
   font-family: inherit; /* 폰트 상속 */ 
-  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
   border: 1px solid #999; 
   border-radius: 20; /* iOS 둥근모서리 제거 */ 
-  -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
   -moz-appearance: none; appearance: none;
   margin-left: 200px;
 }
@@ -126,40 +124,6 @@ table {
      bottom: 10px;
   }
   
-  @media screen and (max-width: 700px) {
-    table {
-      border: 0;
-    }
-  
-    table caption {
-      font-size: 1.3em;
-    }
-    
-    table thead {
-      border: none;
-      clip: rect(0 0 0 0);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
-    }
-    
-    table tr {
-      border-bottom: 3px solid #ddd;
-      display: block;
-      margin-bottom: .625em;
-    }
-    
-    table td {
-      border-bottom: 1px solid #ddd;
-      display: block;
-      font-size: .8em;
-      text-align: right;
-    }
-  }
-
   .select {
     float: left;
     width: 100px;
@@ -264,6 +228,7 @@ table {
   .search {
     float: none;
     width: auto;
+    margin-left: 2%;
   }
   .select {
     clear: both;
@@ -280,22 +245,28 @@ table {
   width: 120px; /* 원하는 너비설정 */
   padding: .6em .5em; /* 여백으로 높이 설정 */ 
   font-family: inherit; /* 폰트 상속 */ 
-  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%; /* 네이티브 화살표 대체 */ 
   border: 1px solid #999; 
   border-radius: 20; /* iOS 둥근모서리 제거 */ 
-  -webkit-appearance: none; /* 네이티브 외형 감추기 */ 
   -moz-appearance: none; appearance: none;
   margin-left: 50px;
 }
 }
 
 @media screen and (max-width: 360px) {
+	#container {
+    height: 550px;
+    }
   .title-header h1{
   	width: 120px;
+  	font-size: 1.8em;
+  }
+  .title-header {
+  	height: 40px;
   }
   .search {
     float: none;
     width: auto;
+    padding-top: 10px;
   }
   .select {
     clear: both;
@@ -310,14 +281,15 @@ table {
   .title-header button { 
     float: right;
     width: 40%;
-    height: 50px;
+    height: 40px;
+    font-size: 1.2em;
   }
   select { 
   width: 95px;
   margin:0;
   }
  .pagination-container {
-  margin: 100px auto;
+  margin: 20px auto;
   text-align: center;
 }
 .pagination {
@@ -366,6 +338,16 @@ table {
 }
 .pagination-older {
   margin-left: 2px;
+}
+table th {
+    font-size: 0.8em;
+}
+table td img{
+  width: 10px;
+  height: 10px;
+}
+table td {
+	font-size: 0.9em;
 }
 
 }

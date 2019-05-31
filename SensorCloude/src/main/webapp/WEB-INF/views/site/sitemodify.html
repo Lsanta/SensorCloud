@@ -9,7 +9,7 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/site/siteadd.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/sitemodify.css">
 </th:block>
 
 <th:block layout:fragment="contents">
@@ -26,7 +26,7 @@
    <div id="addcontent_right" th:each="joinSite : ${joinSite}">
       <!-- <input type="text" id="sample6_postcode" class="addcontent_right_input" placeholder="우편번호" > -->
       <p id="p">주소:</p>
-	  <input type="text" id="sample6_address" th:value="${joinSite.address}" placeholder="주소" class="addcontent_right_input"><br>
+	  <input type="text" id="sample6_address" th:value="${joinSite.address}" placeholder="주소" class="addcontent_right_input" disabled><br>
 	  <input type="button" id="addressBtn" onclick="DaumPostcode()" value="조회" class="addcontent_right_button" ><br>
 	  <p id="p">현장이름:</p>
 	  <input type="text" id="sample6_detailAddress" th:value="${joinSite.site_name}" placeholder="현장이름" class="addcontent_right_input">

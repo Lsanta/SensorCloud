@@ -98,13 +98,8 @@ table th {
  
 }
 .w2{
-  margin-bottom:100px;
+  margin-bottom:40px;
  
-}
-.w3{
-  margin-top:100px;
-  margin-bottom:100px;
-  
 }
 .n1{
  	font-size: 1.8em;
@@ -149,7 +144,7 @@ table th {
 
 /*�럹�씠吏뺣�遺�*/
 .pagination-container {
-  margin: 100px auto;
+  margin: 20px auto;
   text-align: center;
 }
 .pagination {

@@ -17,6 +17,39 @@
 	<link rel="stylesheet" media="(min-width: 0px) and (max-width: 700px)"
 		href="/resources/css/mypage/mpmobile.css" />
 	<script src="/resources/js/mypage/mp.js"></script>
+	<script>
+		$(document).ready(function(){
+	
+			var user_id = $(".zzz").text();
+			
+			
+			   $.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr){
+				
+				   
+				   var str = "";
+					 
+					 $(arr).each(function(i, attach){
+						//image type
+						if(attach.filetype){
+							var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
+							
+							str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";
+							str += "<img class='delete1' src='/display?fileName="+fileCallPath+"'>";
+							str += "</div>";
+							str += "</li>";
+						
+						} else {
+							str += "<img src='/resources/img/manager.svg'>";
+							
+						}
+						 
+					 });
+					 
+					 $(".cell ul").html(str);
+					
+				 }); //end getjson
+		});
+		</script> 
 </th:block>
 
 <th:block layout:fragment="contents">
@@ -24,13 +57,18 @@
 
 	<div class="wrapper">
 
-		<div class="w1" th:each="userInfo : ${userInfo} ">
-			<div class="cell" th:if="${userInfo.file_path = 'null'}">
-				<img src="/resources/img/manager.svg" />
-			</div>
-			<div class="cell" th:if="${userInfo.file_path != 'null'}">
-				<img src="${userInfo.file_path}" />
-			</div>
+		 <div class="w1" th:each="userInfo : ${userInfo} ">
+        <div class="cell" th:if="${userInfo.filetype = 'false'}">
+         <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
+           <ul>
+           </ul>
+         </div>
+         
+         <div class="cell" th:if="${userInfo.filetype = 'true'}">
+         <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
+			<ul>
+			</ul>       
+         </div>
 			
 			<div class="name01" th:each="userInfo : ${userInfo}">
 				<p class="n1" th:text="${userInfo.name}"></p>

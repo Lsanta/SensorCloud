@@ -75,6 +75,10 @@ $('#textarea').val(decodeURI(num[0]));
 </script>
 	<script src="/resources/js/timeline/timeline.js"></script>
 <script>
+	var con = $("#textarea").val().length;
+	$("#current").text(con);
+	
+
 	$(".modifycheck").on('click',function(){
 		var textarea  = $("#textarea").val();
 

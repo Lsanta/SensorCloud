@@ -11,7 +11,7 @@ $(document).ready(function(){
 		 
 	 });
 	    
-	 var tr = $("#site tr:gt(3)");
+	 var tr = $("#site tr:gt(4)");
 	 var div = $(".grid .images:gt(2)");
 	 
 	 if($(window).width() <= 700){

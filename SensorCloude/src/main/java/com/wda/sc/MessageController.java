@@ -179,7 +179,7 @@ public class MessageController {
 	              .setNotification(AndroidNotification.builder()
 	                  .setTitle("Cordova Test")
 	                  .setBody("아아아나나마마마")
-	                  .setIcon("/src/main/webapp/resources/img/str.png")
+	                  .setIcon("res/icon/android/ldpi.png")
 	                  .setColor("#f45342")
 	                  .setClickAction("FCM_PLUGIN_ACTIVITY")
 	                  
@@ -264,7 +264,7 @@ public class MessageController {
 	                  .setTitle(id +"님이 타임라인을 작성했습니다.")
 	                  .setBody(content)
 //	                  .setIcon("stock_ticker_update")
-	                  .setIcon("C:\\Users\\bon300-27\\git\\SensorCloud\\hello\\www\\img\\str.png")
+	                  .setIcon("res/icon/android/ldpi.png")
 	                  .setColor("#f45342")
 	                  .setClickAction("FCM_PLUGIN_ACTIVITY")
 	               
@@ -365,7 +365,7 @@ public class MessageController {
 			  
 	      Message message = Message.builder()
 	    		  .setAndroidConfig(config)
-	    		  .putData("data1", "20") //넘어가는값
+	    		  .putData("data1", "test + 테스트") //넘어가는값
 	    		  .putData("data2", "30")
 	    		  .setToken(tokenlist.get(i).getToken_id())
 	    		  .build();
