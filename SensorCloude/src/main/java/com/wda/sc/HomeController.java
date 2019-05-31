@@ -133,7 +133,8 @@ public class HomeController {
 
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
-
+		
+		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("checkboardlist",checkboardservice.getList(page));
 
@@ -209,7 +210,8 @@ public class HomeController {
 
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
-
+		
+		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("content",siteservice.getContent(page));
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("sitelist",siteservice.getList());
@@ -308,7 +310,7 @@ public class HomeController {
 
 
 		//
-
+		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("userlist",usermanageservice.getList(page));
 
@@ -381,6 +383,7 @@ public class HomeController {
 		page.setEndnum((realNum*5)+1);
 		page.setStartnum(page.getEndnum()-5);
 
+		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("timelinelist",timelineservice.getList(page));
 		System.out.println(timelineservice.getList(page));
@@ -476,7 +479,7 @@ public class HomeController {
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
 
-
+		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("sensorlist",mysensorservice.getList(page));
 
@@ -543,7 +546,8 @@ public class HomeController {
 
 		parm.put("paging", page);
 		parm.put("user_id", id);
-
+		
+		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("userInfo",mypageservice.getInfo(id.toString()));
 		model.addAttribute("mychecklist",mypageservice.myList(parm));
 		model.addAttribute("pageNum",map.get(sendPageNum));

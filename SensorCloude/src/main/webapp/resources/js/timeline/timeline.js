@@ -127,6 +127,14 @@ $(document).ready(function(){
 	$('.pagination-older').click(function(){
 		window.location.href = "/time/"+(parseInt(url[2])+1);
 	});
+	
+	$(".firstpage").click(function(){
+		window.location.href = "/time/1";
+	});
+	
+	$(".lastpage").click(function(){
+		window.location.href = "/time/"+$("#lastNum").text();
+	});
 
 
 

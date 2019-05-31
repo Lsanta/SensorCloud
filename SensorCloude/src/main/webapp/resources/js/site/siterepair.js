@@ -46,6 +46,14 @@ $(document).ready(function() {
 		$('.pagination-older').click(function(){
 			window.location.href = "/site/"+url[2]+"/siterepair/"+(parseInt(url[4])+1);
 		});
+		
+		$(".firstpage").click(function(){
+			window.location.href = "/site/"+url[2]+"/siterepair/1";
+		});
+		
+		$(".lastpage").click(function(){
+			window.location.href = "/site/"+url[2]+"/siterepair/"+$("#lastNum").text();
+		});
 
 	} else {
 		if(url[4] != null){

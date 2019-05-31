@@ -255,7 +255,8 @@ public class SiteController {
 
 		parm.put("paging", page);
 		parm.put("site_id", site_id);
-
+		
+		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		model.addAttribute("siteInfo", siteservice.getSite(site_id.toString())); // 현장정보
 		model.addAttribute("checkboardlist", siteservice.repairList(parm));// 수리내역
@@ -708,7 +709,8 @@ public class SiteController {
 
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		System.out.println("pageNum" + arr);
-
+		
+		
 		model.addAttribute("repair", siteservice.getSearchResultRepair(parm));
 		model.addAttribute("siteInfo", siteservice.getSite(site_id.toString())); // 현장정보
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id.toString())); // 연락망
