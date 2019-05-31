@@ -4,8 +4,8 @@
   src: url('/resources/font/A이끌림M.TTF');
 }
 
-.main-header { background: url("/resources/img/333.png") no-repeat 0px 0px; opacity: 0.7; }
-header .left { float: left; padding: 1% 0 0 3%; height: 80px;}
+/* .main-header { background: url("/resources/img/333.png") no-repeat 0px 0px; opacity: 0.7; } */
+header .left { float: left; padding: 1% 0 0 17%; height: 80px;}
 header .headername { width:100%;  text-align: center; margin-top:5%; margin-right: 5%;}
 header h1 { float:left; padding: 0 108px 0 0; }
 header .logout { display: none; }

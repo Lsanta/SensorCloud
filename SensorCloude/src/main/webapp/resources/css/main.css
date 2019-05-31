@@ -254,12 +254,26 @@ table th {
     cursor: pointer;
 } 
 
-.images h5 {
+
+@media screen and (min-width: 700px) {
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .images {
+    width: 50%;
+  }
+
+
+}
+
+@media screen and (max-width: 768px) {
+
+  .images h5 {
     margin: 0 0 0 25%;
     font-size: 1em;
 }
-
-
 #chdate {
     margin-left: 25%;
     font-size: 1em;
@@ -273,15 +287,6 @@ table th {
     font-weight: 500px;
 }
 
-@media screen and (min-width: 700px) {
-  .grid {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
-  .images {
-    width: 50%;
-  }
 
 }
 
