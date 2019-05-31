@@ -53,6 +53,14 @@ $(document).ready(function() {
 			$('.pagination-older').click(function(){
 				window.location.href = "/mysensor/"+(parseInt(url[2])+1);
 			});
+			
+			$(".firstpage").click(function(){
+				window.location.href = "/mysensor/1";
+			});
+			
+			$(".lastpage").click(function(){
+				window.location.href = "/mysensor/"+$("#lastNum").text();
+			});
 		} else {
 			
 			if(url[3] != null){

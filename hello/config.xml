@@ -23,11 +23,21 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+
+    
+    <preference name="target-device" value="universal" />
+
     <platform name="android"> 
         <preference  name = " AndroidLaunchMode "  value = " singleTask " /> 
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
             <application android:usesCleartextTraffic="true" />
         </edit-config>
     </platform >
-    <preference name="target-device" value="universal" />
+
+    <platform name="android"> 
+        <icon src="res/icon/android/ldpi.png" density="ldpi" />
+        <icon src="res/icon/android/mdpi.png" density="mdpi" />
+        <icon src="res/icon/android/hdpi.png" density="hdpi" />
+        <icon src="res/icon/android/xhdpi.png" density="xhdpi" />
+    </platform>
 </widget>

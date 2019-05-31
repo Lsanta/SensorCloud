@@ -71,6 +71,9 @@ public class mChecklistController {
        
        String savedName = uploadFile(uploadPath,file.getOriginalFilename(), file.getBytes());
        
+       
+       System.out.println("savedName"+ savedName);
+       
        model.addAttribute("savedName" , savedName);
        
        
