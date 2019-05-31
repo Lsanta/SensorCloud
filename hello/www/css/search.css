@@ -1,9 +1,9 @@
 @font-face {
-  font-family: a이끌림M;
-  src: url('/font/a이끌림M.TTF');
+  font-family: a신그래픽L;
+  src: url('/font/a신그래픽L.TTF');
 }
 
-html, body{font-family: 'a이끌림M';}
+html, body{font-family: 'a신그래픽L';}
 
 table {
     border: 1px solid #ccc;
@@ -34,6 +34,7 @@ table {
     font-size: .60em;
     letter-spacing: .1em;
     text-transform: uppercase;
+    height:20px;
   }
   table td{
      font-size:.90em;
