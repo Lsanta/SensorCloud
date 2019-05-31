@@ -37,7 +37,7 @@
 	
 	
 	<div class="site1">
-		<span id="writername"  th:each="check : ${cklist}"  th:text="'작성자 : ' + ${check.name} "></span>		
+		<span id="writername"  th:each="check : ${sitecheckview}"  th:text="'작성자 : ' + ${check.name} "></span>		
 		<span class="se" maxlength="50" name="reg_date" th:each="check : ${sitecheckview}" th:text="${check.reg_date}"></span>
 	</div>
 	
