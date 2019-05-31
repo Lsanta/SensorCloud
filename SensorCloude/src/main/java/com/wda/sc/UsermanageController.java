@@ -152,7 +152,7 @@ private UsermanageService usermanageservice;
 				}
 				map.put(i,arr);
 			}
-		  
+		  model.addAttribute("lastNum", pageNum);
 		  p.setEndnum((realNum*10)+1);
 		  p.setStartnum(p.getEndnum()-10);
 		  

@@ -457,7 +457,8 @@ public class CheckboardCotroller {
 
 		parm.put("Paging", p);
 		parm.put("Search", s);
-
+		
+		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		model.addAttribute("check", Checkboardservice.getSearchResult(parm));
 		System.out.println("체크 검색 결과 :" + Checkboardservice.getSearchResult(parm));
@@ -534,7 +535,8 @@ public class CheckboardCotroller {
 
 			parm.put("paging", p);
 			parm.put("data", data);
-
+			
+			model.addAttribute("lastNum", pageNum);
 			model.addAttribute("pageNum", map.get(sendPageNum)); //arr
 			model.addAttribute("checkboardlist", Checkboardservice.getTermList(parm));
 

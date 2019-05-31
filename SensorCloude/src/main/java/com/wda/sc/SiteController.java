@@ -621,6 +621,7 @@ public class SiteController {
 		parm.put("Paging", p);
 		parm.put("Search", s);
 
+		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		System.out.println("pageNum" + arr);
 
@@ -706,7 +707,8 @@ public class SiteController {
 
 		parm.put("Paging", p);
 		parm.put("Search", s);
-
+		
+		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		System.out.println("pageNum" + arr);
 		
@@ -803,6 +805,7 @@ public class SiteController {
 		parm.put("Paging", p);
 		parm.put("Search", s);
 
+		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		System.out.println("pageNum" + arr);
 
