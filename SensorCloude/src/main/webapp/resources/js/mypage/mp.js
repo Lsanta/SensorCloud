@@ -10,6 +10,7 @@ $(document).on("click", "#mypagechecklist tr", function() {
 });
 
 $(document).ready(function() {
+	
 
  ////////////////////*pagination*//////////////////////////////////
 	
