@@ -4,76 +4,54 @@
 	data-layout-decorate="~{include/layout}">
 
 <th:block layout:fragment="page_head">
-	<title>수리내역에서 게시글을 눌렀을때 나오는 페이지</title>
+	<title>수리내역에서 게시글을 눌렀을때</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css"
-		href="/resources/css/check/inchecklist.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/check/inchecklist.css">
 </th:block>
 
 <th:block layout:fragment="contents">
+<div class='bigPictureWrapper'>
+  <div class='bigPicture'>
+  </div>
+</div>
 
-<div class="a">
-	<!-- 현장이름 -->
-	<div id="titletext" name="site_name" class="index" th:each="check : ${sitecheckview}" th:text="${check.site_name}">
-	
-	</div>
-	
 	<!-- 세션로그인 값 -->
 	<div id ="id" th:text="${session.id}" style="display: none"></div>
 	<!-- 작성자 -->
 	<div id="writername"  th:each="check : ${sitecheckview}"  th:text="${check.user_id}" style="display : none"></div>
 	
-	
+<div class="a">
 	<div id="memberlevel"  th:each="checkauthority : ${checkauthority}"  th:text="${checkauthority}"  style="display: none" >
 		
-	</div>
-	
-	
-	
-	
+	</div>	
 	
 	<div class="title1">
-		<table class="table0">
-	<th class="th01">&nbsp;&nbsp;제 목&nbsp;&nbsp;</th>
-		<!-- 제목 -->
-		<th class="th02"><h2 class="title00" id="checktitle" name="title"
-		  th:each="check : ${sitecheckview}" th:text="${check.title}"></h2> 
+		<span class="title00" id="checktitle" name="title" th:each="check : ${sitecheckview}" th:text="${check.title}"></span>
+		<span id="titletext" name="site_name" class="index" th:each="check : ${sitecheckview}" th:text="'|  ' + ${check.site_name}"></span>
 		
-		</th>
-		</table>
+		<span class="sse" th:each="check : ${sitecheckview}" th:if="${check.board_status ==0}" th:text ="open" name="board_status"></span>	
+		<span class="sse" th:each="check : ${sitecheckview}" th:if="${check.board_status ==1}" th:text ="fixed" name="board_status"></span> 	
 	</div>
 	
 	
 	<div class="site1">
-		<table class="table0">
-		<!-- 작성일 -->
-		<th class="th01">&nbsp;글쓴 날짜&nbsp;</th>
-	<th class="th03"><h3 class="se" maxlength="50" name="reg_date"
-		  th:each="check : ${sitecheckview}" th:text="${check.reg_date}"></h3></th>
+		<span id="writername"  th:each="check : ${cklist}"  th:text="'작성자 : ' + ${check.name} "></span>		
+		<span class="se" maxlength="50" name="reg_date" th:each="check : ${sitecheckview}" th:text="${check.reg_date}"></span>
+	</div>
 	
-	<th class="status">게시글 상태</th>
-	
-	<th class="stse">
-	<h3 class="sse"
-	th:each="check : ${sitecheckview}" th:if="${check.board_status ==0}" th:text ="open" name="board_status"></h3>
-	
-	<h3 class="sse" 
-	th:each="check : ${sitecheckview}" th:if="${check.board_status ==1}" th:text ="fixed" name="board_status"></h3>
-	
-	
-	
-	
-	</th>
-	</table>
+		
+	<div id="board_no"  th:each="board_no : ${board_no}"  th:text="${board_no}" style="display: none" >	
+	</div>
+
+	<div id="site_id" th:each="siteid : ${siteid}"  th:text="${siteid}" style="display: none" >
 	</div>
 	
 	
 	<div class="content">
 		<p name="board_content" id="boardcontent" 
 		th:each="check : ${sitecheckview}" th:text="${check.board_content}" style="resize:none;" >
-			
 		</p>
 		
 		<!-- 사진 들어갈 부분 -->
@@ -87,15 +65,14 @@
 		
 	</div>
 	
+</div>
 
-	
 	<div class="but">
 		<div class="but0">
 		<button type="button" id="mod">수정</button>
         <button type="button" id="del">삭제</button>
     	</div>
 	</div>
-</div>
 </th:block>
 
 <th:block layout:fragment="page_js">
