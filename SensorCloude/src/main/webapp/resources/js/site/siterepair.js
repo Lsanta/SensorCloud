@@ -77,6 +77,14 @@ $(document).ready(function() {
 		$('.pagination-older').click(function(){
 			window.location.href = "/site/"+url[2]+"/search/"+(parseInt(url[4])+1)+"/"+url[5]+"/"+url[6];
 		});
+		
+		$(".firstpage").click(function(){
+			window.location.href = "/site/"+url[2]+"/search/1/"+url[5]+"/"+url[6];
+		});
+		
+		$(".lastpage").click(function(){
+			window.location.href = "/site/"+url[2]+"/search/"+$("#lastNum").text()+"/"+url[5]+"/"+url[6];
+		});
 
 	} // else 종료
 

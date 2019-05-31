@@ -84,6 +84,14 @@ $(document).ready(function() {
 			$('.pagination-older').click(function(){
 					window.location.href = "/mysensor/search/"+(parseInt(url[3])+1)+"/"+url[4]+"/"+url[5];
 			});
+			
+			$(".firstpage").click(function(){
+				window.location.href = "/mysensor/search/1/"+url[4]+"/"+url[5];
+			});
+			
+			$(".lastpage").click(function(){
+				window.location.href = "/mysensor/search/"+$("#lastNum").text()+"/"+url[4]+"/"+url[5];
+			});
 		}
 	
 		$("#search").click(function(){

@@ -70,6 +70,14 @@ $(document).ready(function() {
 		$('.pagination-older').click(function(){
 			window.location.href = "/checkboard/search/"+(parseInt(url[3])+1)+"/"+url[4]+"/"+url[5];
 		});
+		
+		$(".firstpage").click(function(){
+			window.location.href = "/checkboard/search/1/"+url[4]+"/"+url[5];
+		});
+		
+		$(".lastpage").click(function(){
+			window.location.href = "/checkboard/search/"+$("#lastNum").text()+"/"+url[4]+"/"+url[5];
+		});
 	} // else 종료
 
 	$("#search").click(function(){	
@@ -157,6 +165,14 @@ $(document).ready(function() {
 //		});
 		$('.pagination-older').click(function(){
 			window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+1)+"/"+url[4];
+		});
+		
+		$(".firstpage").click(function(){
+			window.location.href = "/checkboard/dataSearch/1/"+url[4];
+		});
+		
+		$(".lastpage").click(function(){
+			window.location.href = "/checkboard/dataSearch/"+$("#lastNum").text()+"/"+url[4];
 		});
 	}
 	

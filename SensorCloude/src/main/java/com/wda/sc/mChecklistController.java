@@ -72,7 +72,25 @@ public class mChecklistController {
        String savedName = uploadFile(uploadPath,file.getOriginalFilename(), file.getBytes());
        
        
-       System.out.println("savedName"+ savedName);
+       System.out.println(savedName);
+       
+       
+       String[] array = savedName.split("/");
+       
+       String year = array[1];
+       String month = array[2];
+       String day = array[3];
+       
+       System.out.println("경로" +year+"/"+month+"/"+day);
+       
+       
+       String[] array2 = savedName.split("_");
+       
+       String uuid = array2[1];
+       String realname = array2[2];
+       
+       System.out.println("uuid"+uuid);
+       System.out.println("realname"+realname);
        
        model.addAttribute("savedName" , savedName);
        

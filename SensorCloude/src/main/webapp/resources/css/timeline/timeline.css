@@ -5,16 +5,8 @@ h1{
 }
 
 .timeline a {
-	float: right;
+
 	cursor: pointer;
-}
-
-.timeline .modify, .delete {
-	border-bottom: 1px solid #2c3e50;
-}
-
-.timeline .delete {
-	margin-left: 1%;
 }
 
  .pagination-container {
