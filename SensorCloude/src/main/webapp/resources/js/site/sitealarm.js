@@ -139,6 +139,7 @@ $(document).ready(function(){
 		}); // ajax 종료
 		
 	}); // 전송했을시 종료
+	
 //	$("#submit").click(function(){
 //		alert("클릭");
 //		$.ajax({

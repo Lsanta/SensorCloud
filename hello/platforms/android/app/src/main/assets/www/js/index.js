@@ -4,53 +4,53 @@ if(window.sessionStorage.getItem("id") != null || window.localStorage.getItem("i
 
 $(document).ready(function(){
   
-//  $(document).on('deviceready', function() {
+ $(document).on('deviceready', function() {
     
-//     var Permission = window.plugins.Permission;
+    var Permission = window.plugins.Permission;
   
-//     // verify grant for a permission
-//     var permission = ['android.permission.ACCESS_COARSE_LOCATION','android.permission.ACCESS_FINE_LOCATION'];
-//     Permission.has(permission, function(results) {
-//       if(!results[permission]) {
-//         Permission.request(permission,function(results) {
-//           if (results['android.permission.ACCESS_COARSE_LOCATION','android.permission.ACCESS_FINE_LOCATION']) {
-//             // permission is granted
-//             cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
-//               if(enabled) {
-//                    //true이기 때문에 그냥 실행?
-//               } else {
-//                    if(confirm('GPS가 꺼져 있습니다 설정창으로 이동하시겠습니까?') == true){
-//                     cordova.plugins.diagnostic.switchToLocationSettings();
-//                    }else{
-//                     return false;
-//                    }
+    // verify grant for a permission
+    var permission = ['android.permission.ACCESS_COARSE_LOCATION','android.permission.ACCESS_FINE_LOCATION'];
+    Permission.has(permission, function(results) {
+      if(!results[permission]) {
+        Permission.request(permission,function(results) {
+          if (results['android.permission.ACCESS_COARSE_LOCATION','android.permission.ACCESS_FINE_LOCATION']) {
+            // permission is granted
+            cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
+              if(enabled) {
+                   //true이기 때문에 그냥 실행?
+              } else {
+                   if(confirm('GPS가 꺼져 있습니다 설정창으로 이동하시겠습니까?') == true){
+                    cordova.plugins.diagnostic.switchToLocationSettings();
+                   }else{
+                    return false;
+                   }
                  
-//               }
-//               //cordova.plugins.diagnostic.switchToLocationSettings();
-//            }, function(error){
-//               alert("The following error occurred: "+error);
-//            }); 
-//           } else {cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
-//             if(enabled) {
-//                  //true이기 때문에 그냥 실행?
-//             } else {
-//                  if(confirm('GPS가 꺼져 있습니다 설정창으로 이동하시겠습니까?') == true){
-//                   cordova.plugins.diagnostic.switchToLocationSettings();
-//                  }else{
-//                   return false;
-//                  }
+              }
+              //cordova.plugins.diagnostic.switchToLocationSettings();
+           }, function(error){
+              alert("The following error occurred: "+error);
+           }); 
+          } else {cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
+            if(enabled) {
+                 //true이기 때문에 그냥 실행?
+            } else {
+                 if(confirm('GPS가 꺼져 있습니다 설정창으로 이동하시겠습니까?') == true){
+                  cordova.plugins.diagnostic.switchToLocationSettings();
+                 }else{
+                  return false;
+                 }
                
-//             }
-//             //cordova.plugins.diagnostic.switchToLocationSettings();
-//          }, function(error){
-//             alert("The following error occurred: "+error);
-//          }); 
-//         }},alert)
-//       }
-//     }, alert)
+            }
+            //cordova.plugins.diagnostic.switchToLocationSettings();
+         }, function(error){
+            alert("The following error occurred: "+error);
+         }); 
+        }},alert)
+      }
+    }, alert)
 
     
-//   });
+  });
 
 
   $("#login").click(function(e){

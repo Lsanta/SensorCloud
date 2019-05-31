@@ -130,11 +130,11 @@ public class mLoginController {
 		ArrayList<SiteVO> list = siteservice.appmain(map);
 		
 
-		      for(int i = 0; i < list.size(); i++) {
-		         if(list.get(i).getAddress().length() > 6) {
-		            list.get(i).setAddress(list.get(i).getAddress().substring(0,6)+"...");
-		         }
-		      }
+//		      for(int i = 0; i < list.size(); i++) {
+//		         if(list.get(i).getAddress().length() > 6) {
+//		            list.get(i).setAddress(list.get(i).getAddress().substring(0,6)+"...");
+//		         }
+//		      }
 		
 		return list;
 	}
