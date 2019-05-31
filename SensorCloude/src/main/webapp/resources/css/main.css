@@ -251,6 +251,7 @@ table th {
     justify-content: center;
     align-items: center;
     padding: 13px;
+    padding-top: 5px;
     cursor: pointer;
 } 
 

@@ -35,12 +35,18 @@ $(document).ready(function() {
 			window.location.href = "/sitelist/"+(parseInt(url[2])-1);
 	});
 
-	$('.pagination-older').click(function(){
-		if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[2])+1 )
-			window.location.href = "/sitelist/"+(parseInt(url[2]));
-		else
-			window.location.href = "/sitelist/"+(parseInt(url[2])+1);
+	$('.pagination-older').click(function(){	
+		window.location.href = "/sitelist/"+(parseInt(url[2])+1);
 	});
+	
+	$(".firstpage").click(function(){
+		window.location.href = "/sitelist/1";
+	});
+	
+	$(".lastpage").click(function(){
+		window.location.href = "/sitelist/"+$("#lastNum").text();
+	});
+	
 } else {
 	if(url[3] != null){
 		$("#"+url[3]+"").addClass('pagination-active');

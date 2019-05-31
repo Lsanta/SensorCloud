@@ -51,11 +51,10 @@ $(document).ready(function() {
 		});
 		
 		$(".firstpage").click(function(){
-			window.location.href = "/site/"+url[2]+"/sensormanage/"+(parseInt(url[4]));
+			window.location.href = "/site/"+url[2]+"/sensormanage/1";
 		});
 		
 		$(".lastpage").click(function(){
-			alert($("#lastNum").text());
 			window.location.href = "/site/"+url[2]+"/sensormanage/"+$("#lastNum").text();
 		});
 

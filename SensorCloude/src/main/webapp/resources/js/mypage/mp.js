@@ -10,6 +10,7 @@ $(document).on("click", "#mypagechecklist tr", function() {
 });
 
 $(document).ready(function() {
+	
 
  ////////////////////*pagination*//////////////////////////////////
 	
@@ -39,6 +40,14 @@ $(document).ready(function() {
 
 	$('.pagination-older').click(function(){
 			window.location.href = "/mypage/"+(parseInt(url[2])+1);
+	});
+	
+	$(".firstpage").click(function(){
+		window.location.href = "/mypage/1";
+	});
+	
+	$(".lastpage").click(function(){
+		window.location.href = "/mypage/"+$("#lastNum").text();
 	});
 	
 	////////////////////////////////////////////////////////////////////

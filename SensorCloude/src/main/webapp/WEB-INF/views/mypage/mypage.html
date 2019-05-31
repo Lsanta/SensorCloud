@@ -101,16 +101,17 @@
       </div>
       <div class="w3">
          <nav class="pagination-container">
-            <div class="pagination">
-            
-               <a class="pagination-newer">PREV</a> 
+            <div class="pagination">     
+               <a class="firstpage"> << </a>
+			   <a class="pagination-newer"> < </a> 
                
                <span class="pagination-inner" th:each="pageNum : ${pageNum}">
                   <a th:id="${pageNum}" th:text="${pageNum}"></a>
                </span> 
                
-               <a class="pagination-older">NEXT</a>
-               
+                <a class="pagination-older"> > </a>
+				<a class="lastpage"> >> </a>
+				<span id="lastNum" th:text="${lastNum}" style=display:none></span>          
             </div>
          </nav>
       </div>
