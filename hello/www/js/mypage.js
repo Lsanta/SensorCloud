@@ -54,7 +54,7 @@ $(document).ready(function() {
 							//image type
 							if(attach.filetype){
 								 var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
-									alert(attach.file_name);
+								
 								 str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";
 								 str += "<img class='delete1' src='http://52.79.242.145:8080/display?fileName="+fileCallPath+"'>";
 								 str += "</div>";
@@ -218,7 +218,7 @@ $(document).ready(function() {
 					 contentType : "application/json; charset=UTF-8",
 					 dataType : 'text',
 					 success : function(data) {
-							alert(data);
+							
 							if (data == "success") {
 								 alert("비밀번호 일치");
 								//  window.location.href = "http://52.79.242.145:8080/app/mypage/usermodify";

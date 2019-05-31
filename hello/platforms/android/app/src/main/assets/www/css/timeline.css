@@ -86,7 +86,7 @@
   }
   #submit, #modify {
       /* font-weight:bold; */
-      font-size:17px;
+      font-size:13px;
     color:white;
     float:right;
     width:65px;
@@ -125,7 +125,7 @@
 }
 
 .timeline {
-  width: 340x;
+  width: 340px;
   height: 60px;
   padding: 10px;
   margin: 20px;
@@ -203,8 +203,8 @@
     #submit, #modify { 
          top:5.2%;
         float:right;
-        width:14%;
-        height:55px;
+        width:55px;
+        height:45px;
        margin-right:0;
         margin-left:0; 
     }
@@ -249,8 +249,8 @@
     #submit, #modify { 
         top:5.2%;
         float:right;
-        width:16%;
-        height:55px;
+        width:55px;
+        height:45px;
        margin-right:3%;
         margin-left:4%; 
     }  
@@ -333,7 +333,7 @@ margin-left: 6%;
        width:109.5%;
   }
   #submit, #modify {
-    margin-top:-60px;
+    margin-top:-50px;
   }
   
       }

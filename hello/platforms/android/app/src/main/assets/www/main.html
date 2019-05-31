@@ -8,26 +8,21 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" style="background:#F4F6FD;">
     <div data-role="header"  data-position="fixed" id="header">
-        <img src="img/logo.png" id="aa">
+        <!-- <img src="img/logo.png" id="aa"> -->
+        <h1 style="font-size: 30px">SENSOR CLOUD</h1>
     </div>
 
     <div data-role="content">
-        <div id="mylocation"></div>
+            <img src="img/status.png" id="status">
+        <div id="mylocation">
+            
+        </div>
         <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <tr>
-                    <!-- <th>현재상태</th> -->
-                    <th>현장이름</th>
-                    <th>주소</th>
-                    <th>데이터갱신시간</th>
-                    <th>남은거리</th>
-                </tr>
-                <tbody id="aaa">
+                <div id="site">
 
-                </tbody>
-            </table>
+                </div>
         </div>
     </div>
     <div data-role="footer"  data-position="fixed" data-id="footerid1">

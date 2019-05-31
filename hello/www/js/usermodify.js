@@ -45,7 +45,7 @@ $.ajax({
 
 //내정보 수정 버튼 클릭시
 $(document).on("click",".confirm-modify",function() {
-    alert("dd");
+    
     var value = $('input[name=modify_name]').val();
 
     var id = $("#id").val();

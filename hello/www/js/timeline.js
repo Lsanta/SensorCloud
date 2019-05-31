@@ -91,7 +91,6 @@ $(document).on('deviceready', function() {
              };
             
              var log = JSON.stringify(query);
-             alert(log);
     
              $.ajax({
                  type : "POST",
@@ -116,7 +115,6 @@ $(document).on('deviceready', function() {
                      }); //ajax 종료
     
                      } else{
-                         alert("ㄴㄴ");
                          location.reload();
                      }
                  }
@@ -136,7 +134,6 @@ $(document).on('deviceready', function() {
                     timeline_n : timeline_n
                 }
                 var sig = JSON.stringify(query);
-                alert(sig);
                 $.ajax({
                     async : true,
                     type : "POST",
@@ -160,7 +157,7 @@ $(document).on('deviceready', function() {
     
         //글 수정버튼 클릭
         $(document).on('click','.modify',function(){
-            alert("수정");
+
             var content = $(this).next().next().text();//글내용
             var timeline_n = $(this).siblings().eq(1).text();//글번호
         
@@ -170,8 +167,7 @@ $(document).on('deviceready', function() {
                 
             }
             var sig = JSON.stringify(query);
-            alert(sig);
-    
+
             $.ajax({
                 async : true,
                 type : "POST",
@@ -207,19 +203,18 @@ $(document).on('deviceready', function() {
     
         //글 수정
         $(document).on('click','#modify',function(){
-        alert("수정");
+        
      
         var content = $("#textarea").val();//글내용
-         var timeline_n = $("#textarea1").val();//글번호
-            alert(content);
+        var timeline_n = $("#textarea1").val();//글번호
+            
         var query = {
             content : content,
             timeline_n : timeline_n
             
         }
         var sig = JSON.stringify(query);
-        alert(sig);
-    
+        
         $.ajax({
             async : true,
             type : "POST",
