@@ -30,8 +30,8 @@ $(document).ready(function() {
                   }
                })
                console.log(str3);
-               $("#mylocation").html("현재 위치 : "+str3);
-            // do Something
+               $("#mylocation").html(str3);
+            //do Something
   
             $.ajax({
               type : "POST",
@@ -42,21 +42,27 @@ $(document).ready(function() {
                 console.log(list);
                  var str="";
                  $.each(list,function(i,s){
-                    str +='<tr>';
-                    switch(s.site_status){
-                    case 0 : str +='<td>'+ "<img src='img/gray.svg'>" +'</td>'; break;
-                    case 1 : str +='<td>'+ "<img src='img/green.svg'>" +'</td>'; break;
-                    case 2 : str +='<td>'+ "<img src='img/red.svg'>" +'</td>'; break;
-                    default  : str +='<td>'+'null'+'</td>'; break;
-                    }
-                    str +='<td>'+s.site_name+'</td>';
-                    str +='<td>'+s.address+'</td>';
-                    str +='<td>'+s.start_date+'</td>';
-                    str +='<td style="display : none">'+s.site_id+'</td>';
-                    str +='<td>'+Math.round(s.z/1000)+'km'+'</td>';
-                    str +='</tr>';
+                  str +='<div class="sitelist">';
+                  str +='<h3>'+s.site_name+'</h3>';
+                  switch(s.site_status){
+                     case 0 : str +='<td>'+ "<img class='status' src='img/gray.png'>" +'</td>'; break;
+                     case 1 : str +='<td>'+ "<img class='status' src='img/green.png'>" +'</td>'; break;
+                     case 2 : str +='<td>'+ "<img class='status' src='img/red.svg'>" +'</td>'; break;
+                     default  : str +='<td>'+'null'+'</td>'; break;
+                     }
+                  str +='<p>'+s.address+'</p>';
+                  str +='<h5>'+Math.round(s.z/1000)+'km'+'</h5>';
+                  str +='</div>';
+                     str +='<tr>';
+                    
+                  //   str +='<td>'+s.site_name+'</td>';
+                  //   //str +='<td>'+s.address+'</td>';
+                  //   // str +='<td>'+s.start_date+'</td>';
+                  //   str +='<td style="display : none">'+s.site_id+'</td>';
+                  //   str +='<td>'+Math.round(s.z/1000)+'km'+'</td>';
+                  //   str +='</tr>';
        
-                     $("#aaa").html(str);
+                     $("#site").html(str);
                  });
                  
               } // success 함수 종료
