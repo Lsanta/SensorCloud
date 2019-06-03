@@ -10,17 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
 @RequestMapping("/SMS")
-
 public class SMSController {
 	
 	@SuppressWarnings("restriction")
-	@RequestMapping(value = "/SMSTest", method = RequestMethod.POST)
+	@RequestMapping(value = "/SMSTest", method = RequestMethod.GET)
 	public String SMSMS(Locale locale, Model model) {
 		System.out.println("문자 전송 컨트롤러");
 		
@@ -39,31 +39,33 @@ public class SMSController {
 		 * 요청값
 		 */
 		String userid = "gkgkrk123";           // [필수] 뿌리오 아이디
-		String callback = "01053514438";    // [필수] 발신번호 - 숫자만
-		String phone = "01046037101";       // [필수] 수신번호 - 여러명일 경우 |로 구분 "010********|010********|010********"
+		String callback = "01046037101";    // [필수] 발신번호 - 숫자만
+		String phone = "01051331449";       // [필수] 수신번호 - 여러명일 경우 |로 구분 "010********|010********|010********"
 		String msg = "테스트 발송입니다";   // [필수] 문자내용 - 이름(names)값이 있다면 [*이름*]가 치환되서 발송됨
 		String names = "홍길동";            // [선택] 이름 - 여러명일 경우 |로 구분 "홍길동|이순신|김철수"
-		// String appdate = "20190502093000";  // [선택] 예약발송 (현재시간 기준 10분이후 예약가능)
+		String appdate = "";  // [선택] 예약발송 (현재시간 기준 10분이후 예약가능)
 		String subject = "테스트";          // [선택] 제목 (30byte)
 
 
 		try {
 
-		    String str = "userid="+userid+"&callback="+callback+"&phone="+phone+"&msg="+msg+"&names="+names+"&subject="+subject;
+			String str = "userid="+userid+"&callback="+callback+"&phone="+phone+"&msg="+msg+"&names="+names+"&appdate="+appdate+"&subject="+subject;
 		    System.out.println(str);
 		    URL url = new URL(api_url);
 		    System.out.println(api_url);
 		    Security.addProvider(
 		      new com.sun.net.ssl.internal.ssl.Provider());
-
+		    System.out.println("여기는 오나?00");
 		    SSLSocketFactory factory = 
 		      (SSLSocketFactory)SSLSocketFactory.getDefault();
+		    System.out.println("여기는 오나?0.52");
 		    SSLSocket socket = 
-		      (SSLSocket)factory.createSocket(url.getHost(),443);
-
+		      (SSLSocket)factory.createSocket(url.getHost(), 8080);
+		    System.out.println("여기는 오나?11");
 		    PrintWriter out = new PrintWriter(
 		        new OutputStreamWriter(
 		            socket.getOutputStream()));
+		    System.out.println("여기는 오나?22");
 		    out.println("POST "+ api_url +" HTTP/1.1");
 		    out.println("Content-type: application/x-www-form-urlencoded");
 		    out.println("Content-length: "+ str.getBytes().length +"\r\n");
