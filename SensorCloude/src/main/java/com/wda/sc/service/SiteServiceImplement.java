@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.ProcessPidVO;
 import com.wda.sc.domain.Search;
 import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.CheckBoardVO;
@@ -236,6 +237,23 @@ public class SiteServiceImplement implements SiteService {
 	public ArrayList<SiteVO> appmain(Map<String,Double> map) {
 		//앱 메인화면
 		return mapper.appmain(map);
+	}
+	
+	@Override
+	public int getSiteNum() {
+		return mapper.getSiteNum();
+	}
+	
+	@Override
+	public ArrayList<ProcessPidVO> getProcessPid() {
+		// TODO Auto-generated method stub
+		return mapper.getProcessPid();
+	}
+	
+	@Override
+	public int setProcessPid(ProcessPidVO processpid) {
+		// TODO Auto-generated method stub
+		return mapper.setProcessPid(processpid);
 	}
 
 }
