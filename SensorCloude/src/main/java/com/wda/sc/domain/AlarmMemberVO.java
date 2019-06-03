@@ -9,4 +9,6 @@ public class AlarmMemberVO {
 	private String tel;
 	private String name;
 	private String company;
+	
+	private String user_id;
 }

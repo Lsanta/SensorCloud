@@ -121,4 +121,7 @@ public interface SiteService {
 	
 	//프로그램 pid 저장
 	public int setProcessPid(ProcessPidVO processpid);
+	
+	//임계값 넘었을 시 가져올 연락망
+	public List<AlarmMemberVO> getLimitAlarm_member(String site_id);
 }

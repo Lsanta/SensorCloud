@@ -1,6 +1,7 @@
 package com.wda.sc.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -254,6 +255,12 @@ public class SiteServiceImplement implements SiteService {
 	public int setProcessPid(ProcessPidVO processpid) {
 		// TODO Auto-generated method stub
 		return mapper.setProcessPid(processpid);
+	}
+
+	@Override
+	public List<AlarmMemberVO> getLimitAlarm_member(String site_id) {
+		
+		return mapper.getLimitAlarm_member(site_id);
 	}
 
 }
