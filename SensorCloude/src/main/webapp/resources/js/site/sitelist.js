@@ -71,6 +71,19 @@ $(document).ready(function() {
 		else
 			window.location.href = "/site/search/"+(parseInt(url[3])+1)+"/"+url[4]+"/"+url[5];
 	});
+	
+	// 한글이 깨짐;	
+//	$('.pagination-older').click(function(){	
+//		window.location.href = "/site/search/"+(parseInt(url[3])+1)+"/"+url[4]+"/"+url[5];
+//	});
+	
+	$(".firstpage").click(function(){
+		window.location.href = "/site/search/1/"+url[4]+"/"+url[5];
+	});
+	
+	$(".lastpage").click(function(){
+		window.location.href = "/site/search/"+$("#lastNum").text()+"/"+url[4]+"/"+url[5];
+	});
 } // else 종료
 	
 	/*검색 기능 */

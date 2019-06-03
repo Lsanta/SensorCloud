@@ -37,7 +37,7 @@
 	
 	
 	<div class="site1">
-		<span id="writername"  th:each="check : ${cklist}"  th:text="'작성자 : ' + ${check.name} "></span>		
+		<span id="writername"  th:each="check : ${sitecheckview}"  th:text="'작성자 : ' + ${check.name} "></span>		
 		<span class="se" maxlength="50" name="reg_date" th:each="check : ${sitecheckview}" th:text="${check.reg_date}"></span>
 	</div>
 	
@@ -95,7 +95,7 @@
 					 $(arr).each(function(i, attach){
 						//image type
 						if(attach.fileType){
-							var fileCallPath = encodeURIComponent( attach.file_Path+ "/s_"+attach.uuid + "_"+attach.file_name);
+							var fileCallPath = encodeURIComponent( attach.file_Path+ "/"+attach.uuid + "_"+attach.file_name);
 						
 							str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' ><div>";
 							str += "<img src='/display?fileName="+fileCallPath+"'>";

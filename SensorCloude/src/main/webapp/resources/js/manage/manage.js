@@ -80,6 +80,14 @@ $(document).ready(function() {
 		$('.pagination-older').click(function(){
 			window.location.href = "/manage/search/"+(parseInt(url[3])+1)+"/"+url[4]+"/"+url[5];
 		});
+		
+		$(".firstpage").click(function(){
+			window.location.href = "/manage/search/1/"+url[4]+"/"+url[5];
+		});
+		
+		$(".lastpage").click(function(){
+			window.location.href = "/manage/search/"+$("#lastNum").text()+"/"+url[4]+"/"+url[5];
+		});
 	} //else 종료
 
 	$("#search").click(function(){	

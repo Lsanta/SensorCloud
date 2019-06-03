@@ -8,7 +8,7 @@
 	<![CDATA[
 	  select c.*
     from(select b.*
-        from(select rownum as rnum, a.timeline_n, a.user_id, a.content, substr(a.time,0,14),a.name
+        from(select rownum as rnum, a.timeline_n, a.user_id, a.content, substr(a.time,0,14)as time,a.name
             from(select t.*, m.name from timeline t, member m 
                   where t.user_id = m.user_id
                 order by time desc)a)b

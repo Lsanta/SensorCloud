@@ -91,8 +91,6 @@
 			var name = $("#name").val();
     		var tel = $("#tel").val();
 		
-			alert(name + tel);
-
     		if(name == ""){
            	 	alert("아이디를 입력하세요.");
            	 	$("#name").focus();
@@ -113,7 +111,7 @@
 			contentType : "application/json; charset=UTF-8",
         	success : function(data){
         		var s = "아이디 조회 결과 입력하신 정보는 아래와 같습니다.";
-        		alert(data);
+        		
         		if( data.signal == "none"){
         			$("#innerfindid").css("visibility","visible");
         			document.getElementById("innerfindid").innerHTML="존재하지 않는 회원입니다.";

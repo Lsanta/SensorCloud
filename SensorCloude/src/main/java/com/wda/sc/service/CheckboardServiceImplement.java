@@ -176,4 +176,11 @@ public class CheckboardServiceImplement implements CheckboardService {
 	      return mapper.apprepairList(site_id);
 	}
 
+	@Override
+	public void mfileinsert(CheckBoardFileVO checkboardfilevo) {
+		// TODO Auto-generated method stub
+		attachMapper.mfileinsert(checkboardfilevo);
+	}
+
+
 }
