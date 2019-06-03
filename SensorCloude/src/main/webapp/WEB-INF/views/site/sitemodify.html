@@ -39,7 +39,7 @@
    
    <div id="addnetwork">
 
-      <div id="addnetwork_left">
+ <!--      <div id="addnetwork_left">
 
          <input type="radio" name="chk_net_raido" value="chk_net_radio">
          	<label>TCP 클라이언트</label><br><br>
@@ -56,21 +56,21 @@
          	<label>UDP</label>
 
          
-      </div>   
+      </div> -->   
 
       <div id="addnetwork_right">
       
       	<div id="addnetwork_right1">
-         <p>호스트아이디 주소:</p>  
-         <p>호스트포트 번호:</p>     
-         <p>유선포트 번호:</p>
+         <p>수신 주기:</p>  
+         <p>포트 번호:</p>     
+         <p>가상시리얼 포트 번호:</p>
        </div>
       
       <div id ="addnetwork_right2" th:each="joinSite : ${joinSite}">
       
-      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="host_ip" th:value="${joinSite.host_ip}"><br>
+      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="rperiod" th:value="${joinSite.rperiod}"><br>
       	<input type="text" name="hostaddress" class="addnetwork_right_input" id="sig_port_num" th:value="${joinSite.sig_port_num}"><br>
-      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="port_num" th:value="${joinSite.port_num}"><br>
+      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="virtualport" th:value="${joinSite.virtual_port}"><br>
       
       </div>
      </div>
@@ -150,10 +150,9 @@ $(document).ready(function(){
 		var site_name = $("#sample6_detailAddress").val();
 		
 		//네트워크 데이터
-		var sig_protocol = $('input[name="chk_net_raido"]:checked').val();
-		var host_ip = $("#host_ip").val();
+		var rperiod = $("#rperiod").val();
 		var sig_port_num = $("#sig_port_num").val();
-		var port_num = $("#port_num").val();
+		var virtual_port = $("#virtualport").val();
 		
 		var query = { 
 						site_id : site_id,
@@ -161,11 +160,9 @@ $(document).ready(function(){
 						address : address,
 						site_name : site_name,
 						
-						sig_protocol : sig_protocol,
-						host_ip : host_ip,
+						rperiod : rperiod,
 						sig_port_num : sig_port_num,
-						port_num : port_num
-						
+						virtual_port : virtual_port						
 					}
 		console.log(query);
 		

@@ -94,11 +94,9 @@ table {
     color: #524f4f;
     margin-top: -30px;
   }
-
-  #mylocation{
-    float:right;
-    margin-right:22%;
-    margin-top:-8.5%;
+  #mylocation,.line-b{
+    display: inline-block;
+    vertical-align: middle;
   }
 
   

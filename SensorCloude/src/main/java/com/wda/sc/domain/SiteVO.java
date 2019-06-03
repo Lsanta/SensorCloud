@@ -18,7 +18,7 @@ public class SiteVO {
 	//network table
 	private int sig_id;
 	private String sig_protocol;
-	private String host_ip;
+	private String rperiod;
 	private String sig_port_num;
-	private String port_num;
+	private String virtual_port;
 }

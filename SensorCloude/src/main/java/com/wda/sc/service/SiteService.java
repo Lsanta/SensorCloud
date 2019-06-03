@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.ProcessPidVO;
 import com.wda.sc.domain.Search;
 import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.CheckBoardVO;
@@ -111,4 +112,13 @@ public interface SiteService {
 	
 	//앱 메인화면
 	public ArrayList<SiteVO> appmain(Map<String,Double> map);
+	
+	//프로그램에 넘겨줄 현재 현장아이디 구하기
+	public int getSiteNum();
+	
+	//프로그램 pid 얻어오기
+	public ArrayList<ProcessPidVO> getProcessPid();
+	
+	//프로그램 pid 저장
+	public int setProcessPid(ProcessPidVO processpid);
 }
