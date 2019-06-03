@@ -49,6 +49,14 @@ $(document).ready(function() {
 		$('.pagination-older').click(function(){
 			window.location.href = "/manage/"+(parseInt(url[2])+1);
 		});
+		
+		$(".firstpage").click(function(){
+			window.location.href = "/manage/1";
+		});
+		
+		$(".lastpage").click(function(){
+			window.location.href = "/manage/"+$("#lastNum").text();
+		});
 
 	} else {
 		if(url[3] != null){
@@ -71,6 +79,14 @@ $(document).ready(function() {
 
 		$('.pagination-older').click(function(){
 			window.location.href = "/manage/search/"+(parseInt(url[3])+1)+"/"+url[4]+"/"+url[5];
+		});
+		
+		$(".firstpage").click(function(){
+			window.location.href = "/manage/search/1/"+url[4]+"/"+url[5];
+		});
+		
+		$(".lastpage").click(function(){
+			window.location.href = "/manage/search/"+$("#lastNum").text()+"/"+url[4]+"/"+url[5];
 		});
 	} //else 종료
 
@@ -110,4 +126,19 @@ $(document).ready(function() {
 
 		}
 	});
+	
+	/*화면 줄어들 때 리스트 자르기 */
+	var tr = $("#user tr:gt(4)");
+	
+	if($(window).width() <= 700){
+			tr.addClass("none");
+		} 
+	 
+	 $( window ).resize(function(){
+		 if($(window).width() <= 700){
+				tr.addClass("none");	
+			} else{
+				tr.removeClass("none");
+			} 
+	 });
 });

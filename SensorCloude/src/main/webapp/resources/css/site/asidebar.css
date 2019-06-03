@@ -45,7 +45,7 @@ aside {
 	width: 205px;
 	padding-top: 30px;
 	padding-left: 0px;
-	top: 100px;
+	top: 110px;
 	bottom: 0;
 	background-color: #474958;
 	z-index: 50;
@@ -79,6 +79,7 @@ h1 {
 
 h1:hover {
 	color: #5fc5ee;
+	
 }
 
 h2 {
@@ -125,7 +126,7 @@ article {
 }
 
 #num {
-	margin-left: 0;
+	margin-left: 5%;
 }
 
 @media ( max-width : 1000px) {
@@ -141,7 +142,7 @@ article {
 		padding-top: 10px;
 		padding-bottom: 10px;
 		top: 0px;
-		margin-top:16%;
+		/* margin-top:16%; */
 		z-index:auto;
 	}
 	header {
@@ -180,6 +181,7 @@ article {
 	#scroll {
 		overflow: hidden;
 		height: 100%;
+		margin: 0 auto;
 	}
 	#nav {
 		display: none;

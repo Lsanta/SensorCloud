@@ -40,6 +40,13 @@ $(document).ready(function() {
 		$('.pagination-older').click(function(){
 			window.location.href = "/check/"+(parseInt(url[2])+1);
 		});
+		$(".firstpage").click(function(){
+			window.location.href = "/check/1";
+		});
+		
+		$(".lastpage").click(function(){
+			window.location.href = "/check/"+$("#lastNum").text();
+		});
 
 	} else{
 		if(url[3] != null){
@@ -62,6 +69,14 @@ $(document).ready(function() {
 
 		$('.pagination-older').click(function(){
 			window.location.href = "/checkboard/search/"+(parseInt(url[3])+1)+"/"+url[4]+"/"+url[5];
+		});
+		
+		$(".firstpage").click(function(){
+			window.location.href = "/checkboard/search/1/"+url[4]+"/"+url[5];
+		});
+		
+		$(".lastpage").click(function(){
+			window.location.href = "/checkboard/search/"+$("#lastNum").text()+"/"+url[4]+"/"+url[5];
 		});
 	} // else 종료
 
@@ -127,10 +142,12 @@ $(document).ready(function() {
 			$("#"+url[3]+"").addClass('pagination-active');
 		}
 
+	
 		$('.pagination-inner a').on('click', function() {
 			var a = $(".pagination-inner a").index(this);
-			num = a;
-			window.location.href = "/checkboard/dataSearch/"+(num+1)+"/"+url[4];
+			var b = $(".pagination-inner a:eq("+a+")").attr("id");
+			num = b;
+			window.location.href = "/checkboard/dataSearch/"+num+"/"+url[4];
 		});
 
 		$('.pagination-newer').click(function(){
@@ -140,11 +157,22 @@ $(document).ready(function() {
 				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])-1)+"/"+url[4];
 		});
 
+//		$('.pagination-older').click(function(){
+//			if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[3])+1)
+//				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+"/"+url[4]);
+//			else
+//				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+1)+"/"+url[4];
+//		});
 		$('.pagination-older').click(function(){
-			if(parseInt($('.pagination-inner a:last').text()) < parseInt(url[3])+1)
-				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+"/"+url[4]);
-			else
-				window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+1)+"/"+url[4];
+			window.location.href = "/checkboard/dataSearch/"+(parseInt(url[3])+1)+"/"+url[4];
+		});
+		
+		$(".firstpage").click(function(){
+			window.location.href = "/checkboard/dataSearch/1/"+url[4];
+		});
+		
+		$(".lastpage").click(function(){
+			window.location.href = "/checkboard/dataSearch/"+$("#lastNum").text()+"/"+url[4];
 		});
 	}
 	
@@ -156,7 +184,7 @@ $(document).ready(function() {
 	});
 
 	/*화면 줄어들 때 리스트 자르기 */
-	var tr = $("#checklist tr:gt(3)");
+	var tr = $("#checklist tr:gt(4)");
 
 	if($(window).width() <= 700){
 		tr.addClass("none");

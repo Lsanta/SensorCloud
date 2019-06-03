@@ -1,7 +1,15 @@
+var id;
+
+if(localStorage.getItem("auto") == "true") {
+   id = localStorage.getItem("id");
+} else if( localStorage.getItem("auto") == "false"){
+   id = sessionStorage.getItem("id");
+}
+
 $(document).ready(function() {
 	//프로필
 	var query = {
-		 id: window.sessionStorage.getItem("id")
+		 id: id
 	};
 	$.ajax({
 			type : "POST",
@@ -30,13 +38,12 @@ $(document).ready(function() {
 				 });
 			}
 	});
-	var user_id = window.sessionStorage.getItem("id");
-	
+
 			 $.ajax({
 				type : "POST",
 				// url : "http://52.79.242.145:8080/app/mypage/mgetAttachListmypage",
 				url : "http://39.127.7.58:8080/app/mypage/mgetAttachListmypage",
-				data : user_id,
+				data : id,
 				async : false,
 				contentType : "application/json; charset=UTF-8",
 				success : function(arr){
@@ -47,14 +54,14 @@ $(document).ready(function() {
 							//image type
 							if(attach.filetype){
 								 var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
-									alert(attach.file_name);
+								
 								 str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";
 								 str += "<img class='delete1' src='http://52.79.242.145:8080/display?fileName="+fileCallPath+"'>";
 								 str += "</div>";
 								 str += "</li>";
 							
 							} else {
-								 str += "<img src='./img/user.png'>";
+								 str += "<img src='./img/user.png' id='img'>";
 								 
 							}
 							 
@@ -190,8 +197,15 @@ $(document).ready(function() {
 					 alert("사용자 정보 수정을위해 비밀번호를 입력해주세요");
 				}
 	
+				var user_id;
+				if(localStorage.getItem("auto") == "true") {
+				   user_id = localStorage.getItem("id");
+				} else if( localStorage.getItem("auto") == "false"){
+				   user_id = sessionStorage.getItem("id");
+				}
+
 				var query = {
-					 user_id: window.sessionStorage.getItem("id"),
+					 user_id: user_id,
 					 password : $("#pass").val()
 				};
 				console.log(query);
@@ -204,7 +218,7 @@ $(document).ready(function() {
 					 contentType : "application/json; charset=UTF-8",
 					 dataType : 'text',
 					 success : function(data) {
-							alert(data);
+							
 							if (data == "success") {
 								 alert("비밀번호 일치");
 								//  window.location.href = "http://52.79.242.145:8080/app/mypage/usermodify";
@@ -229,7 +243,7 @@ $(document).ready(function() {
 	$(document).ready(function() {
 		 //승급요청 확인 클릭시
 		 $("#ok").click(function(){
-				 var id = sessionStorage.getItem('id');
+		
 				 var select = $("#select_level option:selected").val();
 				
 				 var query = {
@@ -277,7 +291,7 @@ $(document).ready(function() {
 	$(document).ready(function() {
 		$("#logout").click(function(){ 
 			if(confirm("로그아웃 하시겠습니까?")){
-				var id = sessionStorage.getItem("id");
+			
 				$.ajax({
 					type : "POST",
 					url : "http://39.127.7.58:8080/app/mypage/deleteappToken",
@@ -285,8 +299,16 @@ $(document).ready(function() {
 					contentType : "text/plain; charset=UTF-8",
 					dataType : 'text',
 					success : function(data) {
+					if(localStorage.getItem("auto") == "true") {	
+						localStorage.removeItem("id")
+						localStorage.removeItem("password");
+						localStorage.removeItem("level");
+					} else if( localStorage.getItem("auto") == "false"){ 
 						sessionStorage.removeItem("id");
-						sessionStorage.removeItem("password");    
+						sessionStorage.removeItem("password"); 
+						sessionStorage.removeItem("level");
+					}
+						localStorage.removeItem("auto");
 						window.location.href="index.html";
 					}
 				});

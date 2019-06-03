@@ -1,7 +1,13 @@
+@font-face {
+  font-family: a신그래픽L;
+  src: url('/font/a신그래픽L.TTF');
+}
+
+html, body{font-family: 'a신그래픽L';}
+
 table {
-    border: 1px solid #ccc;
+    border: 1px solid ;
     border-collapse: collapse;
-    margin: 0;
     padding: 0;
     width: 100%;
     table-layout: fixed;
@@ -13,7 +19,7 @@ table {
   }
   
   table tr {
-    background-color: #f8f8f8;
+    background-color: white;
     border: 1px solid #ddd;
     padding: .35em;
   }
@@ -31,3 +37,68 @@ table {
   table td{
      font-size:.90em;
   }
+  #content {
+    background:#F6F8FD; 
+  }
+
+  #aa {
+    width:100px;
+    height:50px;
+    margin-left:37%;
+    margin-top:4%;
+  }
+
+  #aaa td{
+    height:35px;
+  }
+
+  #status {
+    width:25px;
+  }
+
+  img {
+    width:15px;
+    margin:3px 3px 3px 5px;
+
+  }
+
+  #header {
+    background:white; 
+  }
+
+  .sitelist {
+    width: 310px;
+    height: 60px;
+    padding: 10px;
+    margin: 20px;
+    margin-left:-0%;
+    border: 1px solid #bcbcbc;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.03) inset;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.03) inset;
+         box-shadow:0 1px 4px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.03) inset;
+    background-color:white;
+    
+  }
+
+  .sitelist h3 {
+    margin: 0;
+
+    float:left;
+  }
+  
+  .sitelist p {
+   
+  }
+  .sitelist h5 {
+    float: right;
+    color: #524f4f;
+    margin-top: -30px;
+  }
+
+  #mylocation{
+    float:right;
+    margin-right:22%;
+    margin-top:-8.5%;
+  }
+
+  

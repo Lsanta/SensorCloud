@@ -36,9 +36,6 @@
 
 		messaging.usePublicVapidKey("BAiJYfYEXBiHRzsKJFqW5en4dEkOwKFr3KRPJIpNZ3kWk6QP0DHXOIMtoKdN6ca9Tk_JUo25btDxXFtheXjGRuE");
 		
-		
-		
-		
  		navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registartion){
 			 
 			 messaging.requestPermission().then(function(){
@@ -51,6 +48,8 @@
 				.catch(function(err){
 					console.log('요청 거절');
 				});
+			 
+			   
 
 // 			 messaging.onTokenRefresh(function() {
 //   messaging.getToken().then(function(refreshedToken) {

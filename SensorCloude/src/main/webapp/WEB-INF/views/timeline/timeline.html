@@ -41,11 +41,9 @@
 						<h3 th:text="${timelinelist.name}"></h3>
 						<h5 th:text="${timelinelist.time}"></h5>
 
-
-						<a type="button" class="delete" th:if="${timelinelist.user_id}==${session.id}">삭제</a>
 						<a type="button" class="modify" th:if="${timelinelist.user_id}==${session.id}">수정</a>
-
-
+						<a type="button" class="delete" th:if="${timelinelist.user_id}==${session.id}">| 삭제</a>
+	
 					</div>
 					<p th:text="${timelinelist.content}">content</p>
 
@@ -59,13 +57,16 @@
 	<div class="pagination-container">
 			<nav class="pagination-content">
 				<div class="pagination">
-					<a class="pagination-newer">PREV</a> 
+					<a class="firstpage"> << </a>
+					<a class="pagination-newer"> < </a> 
 					
 					<span class="pagination-inner" th:each="pageNum : ${pageNum}">
 						 <a th:id="${pageNum}" th:text="${pageNum}"></a>
 					</span> 
 					
-					<a class="pagination-older">NEXT</a>
+					<a class="pagination-older"> > </a>
+					<a class="lastpage"> >> </a>
+					<span id="lastNum" th:text="${lastNum}" style=display:none></span>
 				</div>
 			</nav>
 		</div>
