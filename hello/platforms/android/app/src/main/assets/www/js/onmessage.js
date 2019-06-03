@@ -4,17 +4,17 @@
     FCMPlugin.onNotification(function(data){
         // 필요한 값만 추출한다.
         var data2 = JSON.stringify(data);
-        alert(data2);
+        // alert(data2);
         
         if(data.wasTapped){
         //Notification was received on device tray and tapped by the user.
-            alert( "어디" + JSON.stringify(data) );
+            // alert( "어디" + JSON.stringify(data) );
             //백그라운드로 왔으면
             location.href = "timeline.html";
         }else{
          //Notification was received in foreground. Maybe the user needs to be notified.
          //포그라운드  
-         alert( "여기" + JSON.stringify(data) );
+        //  alert( "여기" + JSON.stringify(data) );
         
         Swal.fire({
             title: '제목?',
