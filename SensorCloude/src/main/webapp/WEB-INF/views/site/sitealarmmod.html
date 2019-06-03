@@ -32,14 +32,27 @@ $(window).bind("beforeunload", function(e){
 </script>
 </head>
 <body>
-<h1>멤버정보수정</h1>
-<div class="modifybox">
-		<div> 전화번호<input type="tel"  id="tel2" class="tel2" disabled="disabled"/></div>
-		<div> 회사<input type="text" id="company2"  class="company2" disabled="disabled"/></div>
-		<div> 이름<input type="text" id="name2" class="name2" disabled="disabled"/>
+<div id="main">
+	<div id="title">
+		<center><h2>멤버정보수정</h2></center>
+	</div>
+	
+	<div class="modifybox">
+		<div id="content">
+			<label>전화번호</label><br>
+			<input type="tel"  id="tel2" class="tel2" disabled="disabled"/>
+			<label>회사</label><br>
+			<input type="text" id="company2"  class="company2" disabled="disabled"/>
+			<label>이름</label><br>
+			<input type="text" id="name2" class="name2" disabled="disabled"/>
+		</div>
+	
 		<input type="text" id="alarmNum" style="display : none">
-		<input type="button" value="수정" id="mod" /> 
-		<input type="button" value="삭제" id="drop" /> </div>
+		
+		<input type="button" value="삭제" id="drop" />
+		<input type="button" value="수정" id="mod" /> 		
+	</div>
 </div>	
+
 </body> 
 </html>
