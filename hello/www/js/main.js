@@ -30,6 +30,7 @@ $(document).ready(function() {
                   }
                })
                console.log(str3);
+               $(".line-b").show();
                $("#mylocation").html(str3);
             //do Something
   
@@ -62,10 +63,10 @@ $(document).ready(function() {
                   //   str +='<td style="display : none">'+s.site_id+'</td>';
                   //   str +='<td>'+Math.round(s.z/1000)+'km'+'</td>';
                   //   str +='</tr>';
-       
+                     
                      $("#site").html(str);
                  });
-                 
+              
               } // success 함수 종료
        
         }); // ajax함수
