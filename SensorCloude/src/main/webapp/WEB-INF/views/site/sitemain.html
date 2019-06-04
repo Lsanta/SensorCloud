@@ -167,7 +167,7 @@ geocoder.addressSearch(site, function(result, status) {
 			success : function(result) {
 				 if(result.name == ''){
 	                    var str12="";
-	                    str12 +='<p>'+ '데이터없음' + '</p>';
+	                    str12 +='<p id="nodata">'+ '데이터 없음' + '</p>';
 	                    $("#chartdiv").html(str12);
 	           }else{
 	        	   
@@ -270,7 +270,7 @@ geocoder.addressSearch(site, function(result, status) {
 		success : function(data) {
 			 if(data.name == ''){
                  var str12="";
-                 str12 +='<p>'+ '데이터없음' + '</p>';
+                 str12 +='<p id="nodata">'+ '데이터 없음' + '</p>';
                  $("#dataDiv").html(str12);
         }else{
 		
