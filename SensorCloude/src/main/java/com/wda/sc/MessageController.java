@@ -392,7 +392,7 @@ public class MessageController {
 	   //웹->앱 현장에 임계값 들어옴
 	   @SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
-	   @RequestMapping(value="/WebTimelinemessage.do", method= RequestMethod.GET,  consumes="application/json", produces = {"application/json"})
+	   @RequestMapping(value="/WebLimit.do", method= RequestMethod.GET,  consumes="application/json", produces = {"application/json"})
 	   public String pushTest5(HttpSession session, @RequestBody String content) {
 	      FirebaseApp defaultApp = null;
 	      List<FirebaseApp> apps=FirebaseApp.getApps();
