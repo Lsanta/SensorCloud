@@ -46,10 +46,12 @@ import com.google.firebase.messaging.Notification;
 import com.google.firebase.messaging.WebpushConfig;
 import com.google.firebase.messaging.WebpushNotification;
 import com.google.firebase.messaging.internal.MessagingServiceErrorResponse;
+import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AppTokenVO;
 import com.wda.sc.domain.TokenVO;
 import com.wda.sc.service.AndroidPushNotificationService;
 import com.wda.sc.service.MyPageService;
+import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
 
@@ -60,6 +62,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/app/send")
 public class MessageController {
 	private MyPageService mypageservice;
+	private SiteService siteservice;
 	   @CrossOrigin(maxAge = 3600)
 	   @SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
@@ -194,7 +197,6 @@ public class MessageController {
 	    		  .setToken(registrationToken)
 	    		  .build();
 	      
-	      System.out.println("ㅁㅇㄻㄴㄹㅇ");
 		  
 	      try {
 		         String response=FirebaseMessaging.getInstance().send(message);
@@ -206,6 +208,7 @@ public class MessageController {
 		      return "ok";
 	   }
 	   
+	   //앱->앱
 	   @CrossOrigin(maxAge = 3600)
 	   @SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
@@ -275,8 +278,7 @@ public class MessageController {
 			  
 	      Message message = Message.builder()
 	    		  .setAndroidConfig(config)
-	    		  .putData("data1", "20") //넘어가는값
-	    		  .putData("data2", "30")
+	    		  .putData("type", "Timeline") //넘어가는값
 	    		  .setToken(tokenlist.get(i).getToken_id())
 	    		  .build();
 		  
@@ -292,6 +294,7 @@ public class MessageController {
 		      return "ok";
 	   }
 	   
+	   //웹->앱
 	   @SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
 	   @RequestMapping(value="/WebTimelinemessage.do", method= RequestMethod.POST,  consumes="application/json", produces = {"application/json"})
@@ -339,8 +342,12 @@ public class MessageController {
 //		
 //		  System.out.println(registrationTokens);
 		 String rContent = null;
+		 String reContent = null;
 		  try {
 			  rContent = URLDecoder.decode(content, "UTF-8");
+			  String[] array = rContent.split("=");
+			  reContent = array[1];
+			  
 		} catch (UnsupportedEncodingException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -352,9 +359,9 @@ public class MessageController {
 	              .setRestrictedPackageName("kr.yju.wdb.sensor")
 	              .setNotification(AndroidNotification.builder()
 	                  .setTitle(id +"님이 타임라인을 작성했습니다.")
-	                  .setBody(rContent)
+	                  .setBody(reContent)
 //	                  .setIcon("stock_ticker_update")
-	                  .setIcon("C:\\Users\\bon300-27\\git\\SensorCloud\\hello\\www\\img\\str.png")
+	                  .setIcon("res/icon/android/hdpi.png")
 	                  .setColor("#f45342")
 	                  .setClickAction("FCM_PLUGIN_ACTIVITY")
 	               
@@ -365,8 +372,7 @@ public class MessageController {
 			  
 	      Message message = Message.builder()
 	    		  .setAndroidConfig(config)
-	    		  .putData("data1", "test + 테스트") //넘어가는값
-	    		  .putData("data2", "30")
+	    		  .putData("type", "Timeline") //넘어가는값
 	    		  .setToken(tokenlist.get(i).getToken_id())
 	    		  .build();
 		  
@@ -381,6 +387,121 @@ public class MessageController {
 	      
 		      return "ok";
 	   }
+	   
+	   
+	   //웹->앱 현장에 임계값 들어옴
+	   @SuppressWarnings({ "null", "unused" })
+	   @ResponseBody
+	   @RequestMapping(value="/WebTimelinemessage.do", method= RequestMethod.GET,  consumes="application/json", produces = {"application/json"})
+	   public String pushTest5(HttpSession session, @RequestBody String content) {
+	      FirebaseApp defaultApp = null;
+	      List<FirebaseApp> apps=FirebaseApp.getApps();
+	      FileInputStream serviceAccount;
+	      FirebaseOptions options=null;
+	      //파이어베이스 옵션 설정
+	      try {
+	    	  //serviceAccount = new FileInputStream("/home/ec2-user/sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	    	 serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	         options = new FirebaseOptions.Builder()
+	               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+//	               .setDatabaseUrl("https://fir-test-f3fea.firebaseio.com/")
+	               .build();
+	      } catch (FileNotFoundException e1) {
+	         e1.printStackTrace();
+	      } catch (IOException e) {
+	         e.printStackTrace();
+	      }
+	      //이미 관리자 defaultApp이 있는지 검사
+	      if(apps!=null && !apps.isEmpty()) {
+	         for(FirebaseApp app:apps) {
+	            if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME))
+	               defaultApp = app;
+	         }
+	      }else {
+	         defaultApp = FirebaseApp.initializeApp(options);
+	      }
+	      
+	      List<AppTokenVO> tokenlist = new ArrayList<AppTokenVO>();
+	      
+	      // 1. 임계값이 벗어난 현장을 관리하는 관리자들을 가지고 옴.
+	      List<AlarmMemberVO> member = new ArrayList<AlarmMemberVO>();
+	      //site_id를 받아온다면 대입
+	      member = siteservice.getLimitAlarm_member("1");
+	      
+	      // 2. 관리자들 중에서 APP_Token이 존재하면 앱 푸쉬, 존재하지 않으면 SMS알림
+	      for(int i=0; i < member.size(); i++) {
+	    	  //가져온 id값이 있다면 (회원 여부체크)
+	    	  if( member.get(i).getUser_id() != null ) {
+	    		  //id를 통해 토큰을 가져오고 토큰값이 없다면 sms 있으면 tokenlist에 저장
+	    		  
+	    		  //if문 한번더 
+	    		  
+	    	  } else {
+	    		  //id조차 없기때문에 sms만보냄
+	    	  }
+	    	  
+	      }
+	      
+		  //token값 select 하기
+		  tokenlist = mypageservice.allappToken();
+		  System.out.println(tokenlist);
+		  
+		  String id = (String) session.getAttribute("id");
+			
+//		  List<String> registrationTokens = new ArrayList<String>();
+//		  
+//		  for(int i = 0; i < tokenlist.size(); i++) {
+//			  registrationTokens.add(tokenlist.get(i).getToken_id());
+//		  }
+//		
+//		  System.out.println(registrationTokens);
+		 String rContent = null;
+		 String reContent = null;
+		  try {
+			  rContent = URLDecoder.decode(content, "UTF-8");
+			  String[] array = rContent.split("=");
+			  reContent = array[1];
+			  
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		  
+	      AndroidConfig config = AndroidConfig.builder()
+	    		  .setTtl(3600 * 1000) // 1 hour in milliseconds
+	              .setPriority(AndroidConfig.Priority.HIGH)
+	              .setRestrictedPackageName("kr.yju.wdb.sensor")
+	              .setNotification(AndroidNotification.builder()
+	                  .setTitle(id +"님이 타임라인을 작성했습니다.")
+	                  .setBody(reContent)
+//	                  .setIcon("stock_ticker_update")
+	                  .setIcon("res/icon/android/hdpi.png")
+	                  .setColor("#f45342")
+	                  .setClickAction("FCM_PLUGIN_ACTIVITY")
+	               
+	                  .build())
+	              .build();
+	      
+	      for(int i = 0; i < tokenlist.size(); i++) {
+			  
+	      Message message = Message.builder()
+	    		  .setAndroidConfig(config)
+	    		  .putData("type", "Timeline") //넘어가는값
+	    		  .setToken(tokenlist.get(i).getToken_id())
+	    		  .build();
+		  
+	      try {
+		         String response=FirebaseMessaging.getInstance().send(message);
+		         System.out.println("Success : " + response);
+		      } catch (FirebaseMessagingException e) {
+		         System.out.println("Failed and the reason is behind");
+		         e.printStackTrace();
+		      }
+	      } //for문 종료
+	      
+		      return "ok";
+	   }
+	   
 	   
 	   
 	   
