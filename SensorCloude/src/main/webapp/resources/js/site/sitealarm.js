@@ -80,7 +80,7 @@ $(document).ready(function(){
 	$(document).on("click","#amember>.select",function(){
 		
 		var openWin = window.open("/site/sitealarmmod", "pop",
-				 "width=570,height=650,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+				 "width=400,height=420,top="+(screen.availHeight/2-330)+",left="+(screen.availWidth/2-500)+"resizable=yes");
 		
 		$(".modifybox").css("display","block");
 		

@@ -10,6 +10,12 @@ body {
 	font-family: 'A신그래픽L';
 }
 
+p{
+	text-align: center;
+	font-size: 1.5em;
+	color: #000;
+}
+
 #sensor {
 	padding: 5px;
 	margin-left: 10px;
