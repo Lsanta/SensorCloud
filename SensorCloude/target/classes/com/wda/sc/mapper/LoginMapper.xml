@@ -23,4 +23,8 @@
 	<update id="keyUpdate" parameterType="map">
 		update member set key = #{key} where user_id = #{name}
 	</update>
+	
+	<select id="nameFind" resultType="String">
+		select name from MEMBER where user_id = #{user_id}
+	</select>
 </mapper>
