@@ -12,7 +12,7 @@ $(document).ready(function() {
 		var sensor_kind = $("#sensorlist tr:eq(" + tr + ") td:eq(1)").text();
 
 		window.location.href = "/site/"+ url[2] +"/sensormodify/" + sensor_sn;
-		alert(sensor_sn);
+
 
 	});
 
@@ -51,11 +51,10 @@ $(document).ready(function() {
 		});
 		
 		$(".firstpage").click(function(){
-			window.location.href = "/site/"+url[2]+"/sensormanage/"+(parseInt(url[4]));
+			window.location.href = "/site/"+url[2]+"/sensormanage/1";
 		});
 		
 		$(".lastpage").click(function(){
-			alert($("#lastNum").text());
 			window.location.href = "/site/"+url[2]+"/sensormanage/"+$("#lastNum").text();
 		});
 
@@ -83,13 +82,13 @@ $(document).ready(function() {
 			
 			window.location.href = "/site/"+url[2]+"/search1/"+(parseInt(url[4])+1)+"/"+url[5]+"/"+url[6];
 		});
-		
+				
 		$(".firstpage").click(function(){
-			window.location.href = "/site/"+url[2]+"/search1/"+(parseInt(url[4]))+"/"+url[5]+"/"+url[6];
+			window.location.href = "/site/"+url[2]+"/search1/1/"+url[5]+"/"+url[6];
 		});
 		
 		$(".lastpage").click(function(){
-			alert("gd");
+			window.location.href = "/site/"+url[2]+"/search1/"+$("#lastNum").text()+"/"+url[5]+"/"+url[6];
 		});
 
 	} // else 종료

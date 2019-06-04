@@ -16,11 +16,11 @@ $(document).ready(function(){
 		
 	$(document).on("click","#plus-btn",function(){
 		
-		 var row ="<tr id='example'>"
-			 row += '<td><input type="tel" class="line" name="tel" id="tel"></td>';
-		 	 row += '<td><input type="text" class="line" name="company" id="company"></td>';
-			 row += '<td><input type="text" class="line" name="name" id="name"></td>';
-		 	 row += '<td><input type="button" value="추가" id="add">';
+		 var row ="<tr class='example'>"
+			 row += '<td class="line"><input type="tel" name="tel" id="tel"></td>';
+		 	 row += '<td class="line"><input type="text" name="company" id="company"></td>';
+			 row += '<td class="line"><input type="text" name="name" id="name"></td>';
+		 	 row += '<td class="line"><input type="button" value="추가" id="add">';
 		 	 row += '<input type="button" value="취소" id="remove"></td>';
 		 	 row += "</tr>";	
 		 	 
@@ -30,17 +30,28 @@ $(document).ready(function(){
 	
 	$(document).on("click","#add",function(){
 		//주소창 잘라서 site_id 뽑았는데 내가봐도 구림
+		
+		
 		var newURL =  window.location.pathname;
 		var sid = newURL.split("/");
 		sid2 = sid[2].split("/");
 		
 		var site_id = sid2[0];
+	
 		
-		var name = $("#name").val();
-		var tel = $("#tel").val();
-		var company = $("#company").val();
+		var a = $(this);
+		var tel = a.parent().siblings().eq(0).children().val();
+		var company = a.parent().siblings().eq(1).children().val();
+		var name = a.parent().siblings().eq(2).children().val();
+		
+		if(tel == "" || company == "" || name == ""){
+			alert("빈칸을 입력하세요.");
+			return false;
+		}
+		
 		
 		var query = { name : name, tel : tel, company : company, site_id : site_id}
+		
 		
 		$.ajax({
 			  type : "POST",
@@ -61,15 +72,15 @@ $(document).ready(function(){
 	}); // 추가 버튼 클릭 종료
 	
 	$(document).on("click","#remove",function(){
-		$("#example").remove();
+		$(".example").remove();
 	}); // 삭제 버튼 클릭 종료
 	
 	
 	
-	$(document).on("click","#member>tbody>tr",function(){
+	$(document).on("click","#amember>.select",function(){
 		
 		var openWin = window.open("/site/sitealarmmod", "pop",
-				 "width=570,height=650,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+				 "width=400,height=420,top="+(screen.availHeight/2-330)+",left="+(screen.availWidth/2-500)+"resizable=yes");
 		
 		$(".modifybox").css("display","block");
 		
@@ -79,10 +90,10 @@ $(document).ready(function(){
 		var name2 = tr.children().eq(2).addClass("3");
 		var alarmNum = tr.children().eq(3).addClass("4");
 		
-		$("#tel2").val(location.eq(0).text());
-		$("#company2").val(location.eq(1).text());
-		$("#name2").val(location.eq(2).text());
-		$("#alarmNum").val(location.eq(3).text());
+//		$("#tel2").val(location.eq(0).text());
+//		$("#company2").val(location.eq(1).text());
+//		$("#name2").val(location.eq(2).text());
+//		$("#alarmNum").val(location.eq(3).text());
 		
 		$("#tel2").removeAttr("disabled");
 		$("#company2").removeAttr("disabled");
@@ -92,42 +103,55 @@ $(document).ready(function(){
 	}); // 클릭 햇을시 종료
 	
 
+//	$("#submit").click(function(){
+//		//주소창 잘라서 site_id 뽑았는데 내가봐도 구림
+//		var newURL =  window.location.pathname;
+//		var sid = newURL.split("/");
+//		sid2 = sid[2].split("/");
+//		
+//		var site_id = sid2[0];
+//		var alarm_content = $("#textarea").val();
+//		
+//		if( alarm_content == ""){
+//			alert("문자내용을 적어주세요");
+//			 $("#textarea").focus();
+//			 return;
+//		}
+//		var query = { 
+//				alarm_content : alarm_content, site_id : site_id
+//			}
+//		
+//		
+//		$.ajax({
+//			  type : "POST",
+//			  url : "/site/alarmadd.do",
+//			  data : query,
+//			  success : function(data){
+//				  if( data == "success"){
+//					  alert("추가되었습니다");
+//					  $("#example").remove();
+//					  location.reload();
+//				  } else{
+//					  alert("추가에 실패했습니다");
+//				  }
+//			  }
+//			  
+//		}); // ajax 종료
+//		
+//	}); // 전송했을시 종료
+	
 	$("#submit").click(function(){
-		//주소창 잘라서 site_id 뽑았는데 내가봐도 구림
-		var newURL =  window.location.pathname;
-		var sid = newURL.split("/");
-		sid2 = sid[2].split("/");
-		
-		var site_id = sid2[0];
-		var alarm_content = $("#textarea").val();
-		
-		if( alarm_content == ""){
-			alert("문자내용을 적어주세요");
-			 $("#textarea").focus();
-			 return;
-		}
-		var query = { 
-				alarm_content : alarm_content, site_id : site_id
-			}
-		
-		
+		alert("클릭");
 		$.ajax({
-			  type : "POST",
-			  url : "/site/alarmadd.do",
-			  data : query,
-			  success : function(data){
-				  if( data == "success"){
-					  alert("추가되었습니다");
-					  $("#example").remove();
-					  location.reload();
-				  } else{
-					  alert("추가에 실패했습니다");
-				  }
-			  }
-			  
-		}); // ajax 종료
-		
-	}); // 전송했을시 종료
+		  type : "GET",
+		  url : "/SMS/SMSTest",
+		  contentType : "text/html; charset=euc-kr",
+		  success : function(data){
+			 
+		  }
+		  
+	}); // ajax 종료
+	});
 	
 	//수정 버튼 클릭시 연락망 내 사람 정보 변경
 	$("#mod").click(function(){
@@ -148,9 +172,8 @@ $(document).ready(function(){
 			  success : function(data){
 				  if( data == "success"){
 					  alert("업데이트 성공");
-					  $("#example").remove();
+					  $(".example").remove();
 					  window.opener.location.reload();
-					  remove();
 					  window.close();
 				  } else{
 					  alert("수정에 실패했습니다");
@@ -174,9 +197,8 @@ $(document).ready(function(){
 				  success : function(data){
 					  if( data == "success"){
 						  alert("삭제 성공");
-						  $("#example").remove();
+						  $(".example").remove();
 						  window.opener.location.reload();
-						  remove();
 						  window.close();
 					  } else{
 						  alert("삭제에 실패했습니다");

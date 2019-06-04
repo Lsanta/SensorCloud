@@ -102,4 +102,9 @@ body {
   .login-card {
     margin-top:15%;
   } */
+
+  #autobox {
+    float : right;
+    margin-bottom: 20px;
+}
  

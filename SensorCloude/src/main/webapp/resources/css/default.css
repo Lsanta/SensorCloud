@@ -27,13 +27,23 @@ a{color:#000;text-decoration:none;}
 .skip:focus { top: 0;}
 
 header {
-	z-index: 4;
+	z-index: 1;
 	border-bottom: #DCDCDC 2px solid;
-	padding-bottom: 48px;
+	padding-bottom: 40px;
     position : fixed;
     left : 0;
     top : 0;
     width: 100%;
     background:white;
+    margin-top: 20px;
+}
+
+
+.footer {
+	z-index: 1;
+    position : fixed;
+    left : 0;
+    top : 0;
+    width: 100%;
 }
 

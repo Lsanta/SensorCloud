@@ -72,7 +72,6 @@
 	<div class="content">
 		<p name="board_content" id="boardcontent" 
 		th:each="check : ${cklist}" th:text="${check.board_content}" style="resize:none;" >
-			
 		</p>
 		
 		<!-- 사진 들어갈 부분 -->
@@ -147,7 +146,7 @@
 					 $(arr).each(function(i, attach){
 						//image type
 						if(attach.fileType){
-							var fileCallPath = encodeURIComponent( attach.file_Path+ "/s_"+attach.uuid + "_"+attach.file_name);
+							var fileCallPath = encodeURIComponent( attach.file_Path+ "/"+attach.uuid + "_"+attach.file_name);
 						
 							str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' ><div>";
 							str += "<img src='/display?fileName="+fileCallPath+"'>";

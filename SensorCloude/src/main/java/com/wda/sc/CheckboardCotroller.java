@@ -457,7 +457,8 @@ public class CheckboardCotroller {
 
 		parm.put("Paging", p);
 		parm.put("Search", s);
-
+		
+		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		model.addAttribute("check", Checkboardservice.getSearchResult(parm));
 		System.out.println("체크 검색 결과 :" + Checkboardservice.getSearchResult(parm));
@@ -478,17 +479,21 @@ public class CheckboardCotroller {
 
 	@RequestMapping(value = "/dataSearch" + "/{page}" + "/{data}", method = RequestMethod.GET)
 	public String dataSearch(@PathVariable int page, @PathVariable int data, Model model) {
-
+		
+		
 		Paging p = new Paging();
 		ArrayList<CheckBoardVO> term = new ArrayList<CheckBoardVO>();
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		Map<Object, Object> parm = new HashMap<Object, Object>();
-
+		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
+		
 		if (data != 0) {
 			System.out.println("데이터가 0이아님");
 			term = Checkboardservice.dateChange(data);
 
 			int pageNum = 0;
+			int mapNum=0;
+			int sendPageNum=0;
 			int realNum = page;
 			p.setTotalNum(term.size());
 
@@ -501,20 +506,47 @@ public class CheckboardCotroller {
 				}
 			}
 
-			for (int i = 0; i < pageNum; i++) {
-				arr.add(i + 1);
+			if(pageNum%5 != 0) {
+				mapNum=pageNum/5+1;
+			}else {
+				mapNum=pageNum/5;
 			}
+			
+			for(int i=0; i<mapNum; i++) {
+				arr = new ArrayList<Integer>();
+				for(int j=0; j<5; j++) {
+					
+					if((i*5)+j+1 > pageNum) {
+						break;
+					}
+					
+					arr.add((i*5)+j+1);
+				}
+				map.put(i,arr);
+			}
+
+			sendPageNum = (realNum-1)/5;
+//			for (int i = 0; i < pageNum; i++) {
+//				arr.add(i + 1);
+//			}
 
 			p.setEndnum((realNum * 10) + 1);
 			p.setStartnum(p.getEndnum() - 10);
 
 			parm.put("paging", p);
 			parm.put("data", data);
-
-			model.addAttribute("pageNum", arr);
+			
+			model.addAttribute("lastNum", pageNum);
+			model.addAttribute("pageNum", map.get(sendPageNum)); //arr
 			model.addAttribute("checkboardlist", Checkboardservice.getTermList(parm));
 
 			System.out.println("검색완료 점검이력으로");
+			
+			if (realNum > pageNum) {
+				System.out.println("pageNum : " + pageNum);
+				return "redirect:/checkboard/dataSearch/" + pageNum  + "/" + data;
+			}	
+			
 			return "check/check";
 		} else {
 

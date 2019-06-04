@@ -11,7 +11,7 @@ $(document).ready(function(){
 		 
 	 });
 	    
-	 var tr = $("#site tr:gt(3)");
+	 var tr = $("#site tr:gt(4)");
 	 var div = $(".grid .images:gt(2)");
 	 
 	 if($(window).width() <= 700){
@@ -35,7 +35,7 @@ $(document).ready(function(){
 		var n = $(".images:eq("+title+") span:eq(0)").text();
 
 			
-			alert(n);
+		
 		 window.location.href = "/checkboard/" + n  ;
 		 
 	 });

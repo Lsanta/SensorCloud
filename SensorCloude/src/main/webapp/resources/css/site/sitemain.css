@@ -35,7 +35,7 @@ body {
 	width:70%;
 	height:400px;
 	margin: 0 auto;
-	/* border-                                                                 top: 1px solid black;
+	/* border-top: 1px solid black;
 	border-left: 1px solid black;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 	border-right: 1px solid black;
 	border-radius: 5px; */
@@ -143,6 +143,16 @@ table th {
       float: none;
       width: auto;
     }
+    #scroll button {
+		width: 15%;
+	}
+	#map {
+		width: 75%;
+		margin-left: 20%;
+	}
+	#m-detail {
+   margin-left: 22%;
+}
 
 @media screen and (max-width: 700px) {
 	table {
@@ -173,28 +183,59 @@ table th {
 		text-align: right;
 	}
 	
+	
+	
 }
 
 @media screen and (max-width: 360px) {
+
+.addr {
+    font-size: 1.5em;
+}
+
+#addr {
+	margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'A신그래픽L';
+	top:50px;
+}
+
 h2 {
 	position: relative;
 	margin: 0;
 }
 
+h3 {
+    font-size: 1.3em;
+}
+
 #start_date {
 	float: left;
-	font-size: 1.1em;
+	font-size: 1em;
 }
-
+#chartdiv{
+	margin-top: 20%;
+	height: 400px;
+}
 #map{
-	width:50%;
-	height:200px;
-	margin: 0 auto;
-	/* border-top: 1px solid black;
-	border-left: 1px solid black;
-	border-right: 1px solid black;
-	border-radius: 5px; */
+   width: 100%;
+   height: 300px;
+   top: 40px;
+   right: 60px;
 }
 
+#scroll button {
+    width: 35%;
+    height: 40px;
+    font-size: 1.2em;
+    top: 60px;
+}
+
+#m-detail {
+    margin-left: 2%;
+    margin-top: 10%;
+}
  
 }

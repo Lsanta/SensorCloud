@@ -97,7 +97,7 @@
                     }
 
                     // 이미지 화면 표시
-                    var info = $(".pictureuri").html(file_path);
+                    
                     var img = $("#repairpicture2").attr('src', file_path);
                     // 외부 저장소(SD카드)의 최상위 경로 /storage/emulated/0
                     // $("#result").append(info).append(img);
@@ -137,6 +137,89 @@
             // 업로드 버튼 이벤트 정의  //172.26.2.117
             $("#confirmbutton").click(function () {
                 
+            /** 파일경로로부터 이름만 추출한다. */
+                //string.substring( start, end ) start필수 end 없으면 끝까지
+
+               alert(file_path);
+                var name = file_path.substring(file_path.lastIndexOf('/') + 1);
+                alert(name);
+                // 안드로이드는 파일이름 뒤에 ?123234234 형식의 내용이 붙어 오는 경우가 있으므로,
+                // 이 경우 ? 이하 내용을 잘라버린다.
+                var p = name.toLowerCase().lastIndexOf('?');
+                if (p > -1) {
+                    name = name.substring(0, p);
+                }
+ 
+                // 안드로이드는 확장자가 없는 경우가 있으므로, 이 경우 확장자를 강제로 추가한다.
+                if (name.toLowerCase().lastIndexOf('.') < 0) {
+                    name += '.jpg';
+                }
+ 
+                /** 업로드 옵션 */
+                var options = new FileUploadOptions();
+                // <input type='file' name='photo' > 과 같은 원리
+                options.fileKey = "file";
+                // 서버에 인식시킬 파일의 이름
+                options.fileName = name;
+                // 서버에 인식시킬 파일의 종류
+                options.mimeType = 'image/jpeg';
+                // 파일의 원본 데이터를 비교하지 않는다.
+                //post형식
+                options.httpMethod = 'POST';
+                options.trustAllHosts = true;
+                options.chunkedMode = false;
+                // 전송후 통신 종료 예약
+                options.headers = { Connection: "close" };
+                 
+               
+                var params = {};
+                params.value1 = file_path;
+                params.value2 = "param";
+
+                options.params = params;
+
+                /** 파일 전송 객체 생성 */
+                var ft = new FileTransfer();    
+                
+                /** 업로드를 수행한다.(전송할 파일 경로, 서버 주소, 성공콜백, 실패콜백, 옵션) */
+                ft.upload(file_path, "http://39.127.7.58:8080/app/checklist/insertfile", 
+                    
+                    function(r) {//성공콜백시 fileuploadresult객체와 함께 호출
+                        // HTTP 결과코드 받기
+                       
+                        // alert("Code = " + r.responseCode);//200
+                        // alert("Response = " + r.response);//x
+                        // alert("Sent = " + r.bytesSent);//
+
+
+
+                       // if (response.responseCode !== 200) {//기본적으로 http 통신시 서버에서 
+                            //성공응답을 보낼때 200코드를 전송해줌
+                           // alert('업로드에 실패했습니다.' + response.response);
+                           // return false;
+                       // }
+ 
+                        // 서버에서 출력하는 내용을 JSON으로 변환한다.
+                        //JSON.parse() 메소드는 JSON.stringify() 메소드와는 반대로 
+                        //인수로 전달받은 string 객체를 json 객체로 변환시켜줍니다.
+
+                        // var json = JSON.parse(response.response);
+                        
+                        alert(r.responseCode+"upload is complete");
+                    },
+                    function(error) {
+                        if (error.code == FileTransferError.FILE_NOT_FOUND_ERR) {
+                            alert("file " + error.source + " not found");
+                        } else if (error.code == FileTransferError.INVALID_URL_ERR) {
+                            alert("url " + error.target + " invalid");
+                        } else if (error.code == FileTransferError.CONNECTION_ERR) {
+                            alert("connection error");
+                        } else {
+                            alert("unknown error");
+                        }
+                    },
+                    options);
+
             //site_id 가져오기 
             var site_id = location.href.split("=");
             var siteid =site_id[1];
@@ -157,8 +240,12 @@
                 var content = $("#checkcontent").val();
                 // 로그인 아이디값 
 
-                var user_id =window.sessionStorage.getItem("id");
-                console.log(user_id);
+                var user_id;
+                if(localStorage.getItem("auto") == "true") {
+                    user_id = localStorage.getItem("id");
+                } else if( localStorage.getItem("auto") == "false"){
+                    user_id = sessionStorage.getItem("id");
+                }
 
                 alert(content);
                 alert(checktitle);

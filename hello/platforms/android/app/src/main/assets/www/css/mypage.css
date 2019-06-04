@@ -1,3 +1,10 @@
+@font-face {
+  font-family: a신그래픽L;
+  src: url('/font/a신그래픽L.TTF');
+}
+
+html, body{font-family: 'a신그래픽L';}
+
 #mypagechecklist tr:hover {
 	background-color: #D8D8D8;
 }
@@ -78,15 +85,12 @@ table td {
     float: left; 
   }
 
-  #img {
-      margin-bottom: 10px;
-  }
-
 .n1{
   font-size: 1.5em;
   text-align: left;
   margin: 10px 0;
   display: block;
+  font-weight: bolder;
 }
 
 .n2{
@@ -95,6 +99,8 @@ table td {
   text-align: left;
   margin-top: 0;
   position: relative;
+  color:gray;
+  font-weight:900;
 }
 
 .n3 {
@@ -214,4 +220,20 @@ table td {
   text-align: center;
   display: table-cell;
   font-size: 60px;
+}
+
+ #aa {
+  width:100px;
+  height:50px;
+} 
+
+#img {
+  margin-bottom: 10px;
+  margin-left: -50%;
+  width: 50px;
+  height: 50px;
+}
+
+.bt {
+  background:white;
 }

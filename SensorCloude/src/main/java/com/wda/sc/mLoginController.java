@@ -84,6 +84,7 @@ public class mLoginController {
 			if (arr.get(0).getPassword().equals(password)) {
 				json.put("id", id);
 				json.put("password", password);
+				json.put("level", arr.get(0).getM_level());
 				json.put("signal", "ok");
 				session.setAttribute("id", id);
 			} else {
@@ -102,7 +103,7 @@ public class mLoginController {
 	public ArrayList<SiteVO> mainlist(Locale locale, Model model) {
 
 		ArrayList<SiteVO> result = siteservice.getList();
-
+		
 		return result;
 	}
 	
@@ -121,10 +122,25 @@ public class mLoginController {
 		map.put("latitude",latitude);
 		map.put("longitude",longitude);
 		
+		
+		
 //		System.out.println(latitude);
 //		System.out.println(longitude);
 		
 		ArrayList<SiteVO> list = siteservice.appmain(map);
+
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getAddress().length() > 6) {
+				list.get(i).setAddress(list.get(i).getAddress().substring(0,6)+"...");
+			}
+		}
+		
+
+//		      for(int i = 0; i < list.size(); i++) {
+//		         if(list.get(i).getAddress().length() > 6) {
+//		            list.get(i).setAddress(list.get(i).getAddress().substring(0,6)+"...");
+//		         }
+//		      }
 		
 		return list;
 	}
@@ -279,6 +295,19 @@ public class mLoginController {
 		
 		return "no";
 	}
+	
+	   @CrossOrigin(origins = "*", maxAge = 3600)
+	   @RequestMapping(value = "/siterepairview", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	   @ResponseBody
+	   public ArrayList<CheckBoardVO> siterepairview(@RequestBody String board_no, Locale locale, Model model) {
+	      
+	      System.out.println(board_no);
+	      ArrayList<CheckBoardVO> result = checkboardservice.viewgetList(board_no);
+	      System.out.println(result);
+	      
+	      return result;
+
+	   }
 
 
 }

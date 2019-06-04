@@ -33,13 +33,16 @@
 		<th class="th01">&nbsp;현장선택&nbsp;</th>
 	<th class="th03">
 	
-		<select name="site_id" class="se">
+		<select name="site_id" class="se" disabled>
    	      <option value="">현장선택</option>
   		  <option th:each="checksitelist : ${checksitelist}" th:value="${checksitelist.site_id}" th:text="${checksitelist.site_name}"></option>
 		</select>
 		
 		<!-- 수리내역에서 넘긴 site_id -->
 	    <div id="repairid" name="site_id" th:if="${site_id != null}" th:text="${site_id}" style="display:none"></div>
+	    
+	   
+	    
 	</th>
 	<th class="status">게시글 상태</th>
 		
@@ -210,7 +213,6 @@ $(document).ready(function() {
 		      formObj.attr("action", "/site/"+back+"/siterepair/1").attr("method","get");
 	    	 
 	    }else if(operation === 'modify'){
-   			 alert("submit clicked");
 	        
 	        var str = "";
 	        
@@ -226,10 +228,11 @@ $(document).ready(function() {
 	          str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
 	          
 	        });
+	        $('.se').attr('disabled', false);
 	        formObj.append(str).submit();
 	    }
- 
-	    formObj.submit();
+//  		alert("Dd");
+// 	    formObj.submit();
 	  });
 
 });
@@ -256,7 +259,7 @@ function showImage(fileCallPath){
 $(document).ready(function(){
 	
 	   //select들 중의 site_id 값 과 숨겨놓은 site_id가 일치하면 selected 속성 부여 
-	 /*  var opt_vals = [];
+	   var opt_vals = [];
 	   $(".se > option").each(function(){
 		  opt_vals.push($(this).val()); 
 	   });
@@ -270,7 +273,7 @@ $(document).ready(function(){
 		      if(optV == Number(repairid))
 				 $(".se > option").eq(i).prop("selected", true);
 		 
-	   } */
+	   } 
 	   
 	   
 	   //select들 중의 value 값 과 숨겨놓은 board_status가 일치하면 selected 속성 부여 
@@ -293,9 +296,30 @@ $(document).ready(function(){
 		   }
 	   }
 
+	   
+	   
 	   var title = document.check.title;
 	   var board_content = document.check.board_content;
 	   var formObj = $("form[role='form']");
+	   var newURL =  window.location.pathname;
+		 var url = newURL.split('/');
+		 
+	   $(".back").click(function(){
+		   
+		   if(url[2] == 'checkmod'){
+			   if(confirm('글쓰기를 취소 하시겠습니까?') == true){
+					history.go(-2);
+	              }else{
+	               return false;
+	            }
+		   } else if ( url[2] == 'checkadd') {
+			   if(confirm('글쓰기를 취소 하시겠습니까?') == true){
+					history.back();
+	              }else{
+	               return false;
+	            }
+		   } 			
+		});  
 
 	   
 	   $("button[type='submit']").on("click", function(e){
@@ -333,9 +357,15 @@ $(document).ready(function(){
 	       
 	     });
 	     
-	     console.log(str);
 	     
-	     formObj.append(str).submit();
+	     if(confirm('글을 등록 하시겠습니까?') == true){
+	    	 $('.se').attr('disabled', false);
+	    	 formObj.append(str).submit();
+            }else{
+             return false;
+            }
+	     
+
 	     
 	   });
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");

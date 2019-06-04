@@ -197,20 +197,29 @@ button:hover {
 	width: 600px;
 }
 
+@media screen and (max-width: 768px) {
+	.a{
+		width: 85%;
+	}
+	
+}
+
+
 @media screen and (max-width: 360px) {
 	.a {
-		width: 95%;
+		width: 80%;
 	}
 	.index {
 		margin: 20px 10px 10px 10px;
 		display: inline-block;
-		width: 50%;
+		font-size: 1.2em;
 	}
 	#writername {
-		width: 40%;
-		margin: 0px;
-		font-size: 1.2em;
-		display: inline-block;
+	    width: 45%;
+	    margin: 0px;
+	    margin-left: 3%;
+	    font-size: 1.2em;
+	    display: inline-block;
 	}
 	.title1 {
 		width: 93%;
@@ -246,4 +255,14 @@ button:hover {
 	.but {
 		margin: 0 auto;
 	}
+	.title00 {
+   		font-size: 1.5em;
+	}
+	.sse {
+	    font-size: 1.1em;
+	}
+	#boardcontent {
+    	padding: 25px;
+	}
+
 }

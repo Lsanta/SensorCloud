@@ -1,7 +1,7 @@
 @charset "utf-8";
 
-header h1 { float: none; position: absolute; left:15%; top:35px; transform: translateX(50%) scale(0.7); padding:0; }
-header .left { padding : 43px 0 0 48px;}
+header h1 { float: none; position: absolute; left: 13%; top: 28px; transform: translateX(50%) scale(0.7); padding:0; }
+header .left { padding : 43px 0 0 35px;}
 header .all { display: block; position:relative; width: 32px; height:14px; border-top:2px solid #000000; border-bottom: 2px solid #000000;
 color:transparent; }
 header .all:before { content: ""; position:absolute; left:0; top:50%; width: 100%; height:2px; background: #000000; margin-top: -1px; }
@@ -25,12 +25,13 @@ header .nav { position: absolute; left:-120%; top:0; z-index:101; transition: le
 height:100%; background: #A9D0F5 ; box-sizing : border-box;}
 header .nav.on {left:0; }
 header .nav.on nav { padding : 0 0 24px;border-top:1px solid #0091d0; display : block;}
-header .nav.on nav a { height: 40px; line-height:40px; color:#111; font-size: 15px; }
+header .nav.on nav a { height: 40px; line-height:40px; color:#111; font-size: 18px; }
 header .nav.on nav a:before{ display: none; }
 header .nav.on nav li {float:none; border-bottom: 1px solid #eee;  }
-header .nav.on div { display: flex;  border:1px solid #eee;}
+header .nav.on div { display: flex; }
 header .nav.on div a:first-child { border: none;}
-header .nav.on div a {flex:1; text-align:center; height:38px; border-left:1px solid #eee;line-height: 38px; color:#666; font-size: 13px; font-weight: bold; }
+header .nav.on p {font-size: 18px; margin-top:5%;}
+header .nav.on div a {flex:1; text-align:center; height:38px; line-height: 38px; color:#fff; font-size: 14px; font-weight: bold; }
 header .nav.on .close { position: absolute; right:24px; top: 24px; width: 12px; height: 12px; color:transparent;}
 header .nav.on .close:before { content:""; position:absolute; left:46%; top:0; width:1px; height:100%; background: #5a5a5a; transform: rotate(45deg); }
 header .nav.on .close:after { content:""; position:absolute; right:45%; top:0; width:1px; height:100%; background: #5a5a5a; transform: rotate(-45deg); }
@@ -81,3 +82,17 @@ header .a2.open .manclose { position: absolute; left:24px; top: 24px; width: 12p
 header .a2.open .manclose:before { content:""; position:absolute; left:46%; top:0; width:1px; height:100%; background: #5a5a5a; transform: rotate(45deg); }
 header .a2.open .manclose:after { content:""; position:absolute; right:45%; top:0; width:1px; height:100%; background: #5a5a5a; transform: rotate(-45deg); }
 /*.dim {display:none; position: fixed; left:0; top:0; z-index:9; width:100%; height:100%; background: rgba(0,0,0,0.5); }*/
+
+header .a2.open p {
+	font-size: 25px;
+	margin-bottom: 20%;
+}
+
+header .a2.open li a {
+	 border: none;
+	 color: #fff;
+    width: 100px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 20px;
+}

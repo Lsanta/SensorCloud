@@ -50,6 +50,7 @@ public class MyPageController {
 	@RequestMapping(value = "modifymypage", method = RequestMethod.GET)
 	public String modifymypage(Locale locale, Model model, HttpSession session) {
 		String id = (String) session.getAttribute("id");
+	
 		model.addAttribute("userInfo", mypageservice.getInfo(id));
 		return "mypage/modifymypage";
 	}

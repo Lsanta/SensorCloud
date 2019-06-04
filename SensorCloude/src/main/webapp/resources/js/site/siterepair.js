@@ -14,7 +14,6 @@ $(document).ready(function() {
 	});
 
 	$("#write").click(function(){
-		alert("글쓰기 클릭");
 		var newURL =  window.location.pathname;
 		var url = newURL.split('/');
 		window.location.href = "/checkboard/checkadd/"+url[2];
@@ -33,7 +32,7 @@ $(document).ready(function() {
 			var a = $(".pagination-inner a").index(this);
 			var b = $(".pagination-inner a:eq("+a+")").attr("id");
 			num = b;
-			window.location.href = "/site/1/siterepair/"+num;
+			window.location.href = "/site/"+url[2]+"/siterepair/"+num;
 		});
 
 		$('.pagination-newer').click(function(){
@@ -46,6 +45,14 @@ $(document).ready(function() {
 		$('.pagination-older').click(function(){
 			window.location.href = "/site/"+url[2]+"/siterepair/"+(parseInt(url[4])+1);
 		});
+		
+		$(".firstpage").click(function(){
+			window.location.href = "/site/"+url[2]+"/siterepair/1";
+		});
+		
+		$(".lastpage").click(function(){
+			window.location.href = "/site/"+url[2]+"/siterepair/"+$("#lastNum").text();
+		});
 
 	} else {
 		if(url[4] != null){
@@ -56,7 +63,7 @@ $(document).ready(function() {
 			var a = $(".pagination-inner a").index(this);
 			var b = $(".pagination-inner a:eq("+a+")").attr("id");
 			num = b;
-			window.location.href = "/site/1/search/"+num+"/"+url[5]+"/"+url[6];
+			window.location.href = "/site/"+url[2]+"/search/"+num+"/"+url[5]+"/"+url[6];
 		});
 
 		$('.pagination-newer').click(function(){
@@ -68,6 +75,14 @@ $(document).ready(function() {
 
 		$('.pagination-older').click(function(){
 			window.location.href = "/site/"+url[2]+"/search/"+(parseInt(url[4])+1)+"/"+url[5]+"/"+url[6];
+		});
+		
+		$(".firstpage").click(function(){
+			window.location.href = "/site/"+url[2]+"/search/1/"+url[5]+"/"+url[6];
+		});
+		
+		$(".lastpage").click(function(){
+			window.location.href = "/site/"+url[2]+"/search/"+$("#lastNum").text()+"/"+url[5]+"/"+url[6];
 		});
 
 	} // else 종료

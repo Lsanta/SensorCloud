@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  
 
   function showLocation(position){
         var latitude = position.coords.latitude;
@@ -31,8 +30,9 @@ $(document).ready(function() {
                   }
                })
                console.log(str3);
-               $("#mylocation").html("현재 위치 : "+str3);
-            // do Something
+               $(".line-b").show();
+               $("#mylocation").html(str3);
+            //do Something
   
             $.ajax({
               type : "POST",
@@ -43,21 +43,28 @@ $(document).ready(function() {
                 console.log(list);
                  var str="";
                  $.each(list,function(i,s){
-                    str +='<tr>';
-                    switch(s.site_status){
-                    case 0 : str +='<td>'+ "<img src='img/gray.svg'>" +'</td>'; break;
-                    case 1 : str +='<td>'+ "<img src='img/green.svg'>" +'</td>'; break;
-                    case 2 : str +='<td>'+ "<img src='img/red.svg'>" +'</td>'; break;
-                    default  : str +='<td>'+'null'+'</td>'; break;
-                    }
-                    str +='<td>'+s.site_name+'</td>';
-                    str +='<td>'+s.address+'</td>';
-                    str +='<td>'+s.start_date+'</td>';
-                    str +='<td style="display : none">'+s.site_id+'</td>';
-                    str +='<td>'+Math.round(s.z/1000)+'km'+'</td>';
-                    str +='</tr>';
-       
-                     $("#aaa").html(str);
+                  str +='<div class="sitelist">';
+                  str +='<h3>'+s.site_name+'</h3>';
+                  switch(s.site_status){
+                     case 0 : str +='<td>'+ "<img class='status' src='img/gray.png'>" +'</td>'; break;
+                     case 1 : str +='<td>'+ "<img class='status' src='img/green.png'>" +'</td>'; break;
+                     case 2 : str +='<td>'+ "<img class='status' src='img/red.svg'>" +'</td>'; break;
+                     default  : str +='<td>'+'null'+'</td>'; break;
+                     }
+                  str +='<p style="display : none">'+s.site_id+'</p>';
+                  str +='<p>'+s.address+'</p>';
+                  str +='<h5>'+Math.round(s.z/1000)+'km'+'</h5>';
+                  str +='</div>';
+                     str +='<tr>';
+                    
+                  //   str +='<td>'+s.site_name+'</td>';
+                  //   //str +='<td>'+s.address+'</td>';
+                  //   // str +='<td>'+s.start_date+'</td>';
+                  //   str +='<td style="display : none">'+s.site_id+'</td>';
+                  //   str +='<td>'+Math.round(s.z/1000)+'km'+'</td>';
+                  //   str +='</tr>';
+                     
+                     $("#site").html(str);
                  });
               
               } // success 함수 종료
@@ -67,7 +74,6 @@ $(document).ready(function() {
   
        
   }
-  
   function errorHandler(){
   alert('GPS를 지원하지 않습니다');
   }
@@ -92,11 +98,20 @@ $(document).ready(function() {
   
     
   
-  $(document).on("click", "#aaa tr" , function(){
+  $(document).on("click", ".sitelist" , function(){
   
-    var tr = $("#aaa tr").index(this);
-    var site_id = $("#aaa tr:eq("+tr+") td:eq(4)").text();
-    window.location.href = "site.html?sid=" + site_id;
+   if(window.localStorage.getItem("level") == 1) {
+      alert("2등급부터 볼 수 있는 페이지입니다. 승급요청을 해주세요." )
+      location.reload();
+      return false;
+   }
+
+   //  var tr = $(".sitelist").index(this);
+    var site_id =  $(this).children().eq(2).text();
+
+   //  var site_id = $(".sitelist:eq("+tr+") td:eq(0)").text();
+   //  alert(site_id);
+     window.location.href = "site.html?sid=" + site_id;
     });
   });
   
@@ -104,8 +119,13 @@ $(document).ready(function() {
      FCMPlugin.getToken(function(token){
     
      var to = token;
-     var id = sessionStorage.getItem("id");
-  
+     var id;
+     if(localStorage.getItem("auto") == "true") {
+        id = localStorage.getItem("id");
+     } else if( localStorage.getItem("auto") == "false"){
+        id = sessionStorage.getItem("id");
+     }
+
      var query = {
         token : to,
         id : id

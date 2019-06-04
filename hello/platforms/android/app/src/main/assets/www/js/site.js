@@ -18,7 +18,10 @@ function getQueryStringObject() {
          var qs = getQueryStringObject();
          var site_id = qs.sid;
          $("#confirm").click(function(){
-
+            if(window.localStorage.getItem("level") < 3) {
+                alert("3등급부터 작성 할 수 있습니다. 승급요청을 해주세요." )
+                return false;
+             }
             window.location.href="writecheck.html?sid="+site_id;
         
         });
@@ -245,7 +248,8 @@ $.ajax({
                   }
                   str1 +='<td>'+q.name+'</td>';
                   str1 +='<td>'+q.reg_date+'</td>';
-                str1 +='<td style="display : none">'+q.site_id+'</td>';
+                  str1 +='<td style="display : none">'+q.site_id+'</td>';
+                  str1 +='<td style="display : none">'+q.board_no+'</td>';
                   str1 +='</tr>';
 
                    $("#bbb").html(str1);
@@ -253,7 +257,18 @@ $.ajax({
             } // success 함수 종료
       }); // ajax함수 종료
 
-      
+      $("#bbb tr").click(function() {
+        
+        var tr = $("#bbb tr").index(this);
+        var boardno =$("#bbb tr:eq("+tr+") td:eq(5)").text();
+
+      //내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
+       
+        window.location.href="checkview.html?board_no="+boardno;
+        
+
+      });
+
 
 function getData(sa){
         result =  naver.maps.Service.geocode({
