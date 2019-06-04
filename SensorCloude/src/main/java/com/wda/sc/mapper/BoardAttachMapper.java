@@ -13,5 +13,7 @@ public interface BoardAttachMapper {
 	public void deleteAll(int board_no);
 	
 	public List<CheckBoardFileVO> findByBnomain(int board_no);
+	
+	public void mfileinsert(CheckBoardFileVO checkboardfilevo);
 
 }

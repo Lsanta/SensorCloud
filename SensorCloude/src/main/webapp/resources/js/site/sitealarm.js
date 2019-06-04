@@ -77,14 +77,14 @@ $(document).ready(function(){
 	
 	
 	
-	$(document).on("click","#amember>.select",function(){
+	$(document).on("click","#amember>.select td:not(:last-child)",function(){
 		
 		var openWin = window.open("/site/sitealarmmod", "pop",
-				 "width=570,height=650,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+				 "width=400,height=420,top="+(screen.availHeight/2-330)+",left="+(screen.availWidth/2-500)+"resizable=yes");
 		
 		$(".modifybox").css("display","block");
 		
-		var tr = $(this);
+		var tr = $(this).parent();
 		var tel2 = tr.children().eq(0).addClass("1");
 		var company2 = tr.children().eq(1).addClass("2");
 		var name2 = tr.children().eq(2).addClass("3");
@@ -99,10 +99,16 @@ $(document).ready(function(){
 		$("#company2").removeAttr("disabled");
 		$("#name2").removeAttr("disabled");
 		
-		
-	}); // 클릭 햇을시 종료
-	
+		 $('input:checkbox[name="selected"]').each(function() {
 
+		      if(this.checked){//checked 처리된 항목의 값
+		    	   console.log(this);
+		   }
+		 });
+	
+	}); // 클릭 햇을시 종료
+
+	
 	$("#submit").click(function(){
 		//주소창 잘라서 site_id 뽑았는데 내가봐도 구림
 		var newURL =  window.location.pathname;
@@ -111,6 +117,7 @@ $(document).ready(function(){
 		
 		var site_id = sid2[0];
 		var alarm_content = $("#textarea").val();
+		
 		
 		if( alarm_content == ""){
 			alert("문자내용을 적어주세요");
@@ -124,7 +131,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			  type : "POST",
-			  url : "/site/alarmadd.do",
+			  url : "/SMS/alarmadd.do",
 			  data : query,
 			  success : function(data){
 				  if( data == "success"){
@@ -139,19 +146,7 @@ $(document).ready(function(){
 		}); // ajax 종료
 		
 	}); // 전송했을시 종료
-	
-//	$("#submit").click(function(){
-//		alert("클릭");
-//		$.ajax({
-//		  type : "POST",
-//		  url : "/SMS/SMSTest",
-//		  success : function(data){
-//			 
-//		  }
-//		  
-//	}); // ajax 종료
-//	});
-	
+		
 	//수정 버튼 클릭시 연락망 내 사람 정보 변경
 	$("#mod").click(function(){
 		

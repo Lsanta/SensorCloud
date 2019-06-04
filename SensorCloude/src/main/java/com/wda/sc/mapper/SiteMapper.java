@@ -1,6 +1,7 @@
 package com.wda.sc.mapper;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -120,4 +121,7 @@ public interface SiteMapper {
 	
 	//프로그램 pid 저장
 	public int setProcessPid(ProcessPidVO processpid);
+	
+	//임계값 넘었을 시 가져올 연락망
+	public List<AlarmMemberVO> getLimitAlarm_member(String site_id);
 }

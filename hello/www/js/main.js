@@ -30,6 +30,7 @@ $(document).ready(function() {
                   }
                })
                console.log(str3);
+               $(".line-b").show();
                $("#mylocation").html(str3);
             //do Something
   
@@ -50,6 +51,7 @@ $(document).ready(function() {
                      case 2 : str +='<td>'+ "<img class='status' src='img/red.svg'>" +'</td>'; break;
                      default  : str +='<td>'+'null'+'</td>'; break;
                      }
+                  str +='<p style="display : none">'+s.site_id+'</p>';
                   str +='<p>'+s.address+'</p>';
                   str +='<h5>'+Math.round(s.z/1000)+'km'+'</h5>';
                   str +='</div>';
@@ -61,10 +63,10 @@ $(document).ready(function() {
                   //   str +='<td style="display : none">'+s.site_id+'</td>';
                   //   str +='<td>'+Math.round(s.z/1000)+'km'+'</td>';
                   //   str +='</tr>';
-       
+                     
                      $("#site").html(str);
                  });
-                 
+              
               } // success 함수 종료
        
         }); // ajax함수
@@ -96,7 +98,7 @@ $(document).ready(function() {
   
     
   
-  $(document).on("click", "#aaa tr" , function(){
+  $(document).on("click", ".sitelist" , function(){
   
    if(window.localStorage.getItem("level") == 1) {
       alert("2등급부터 볼 수 있는 페이지입니다. 승급요청을 해주세요." )
@@ -104,9 +106,12 @@ $(document).ready(function() {
       return false;
    }
 
-    var tr = $("#aaa tr").index(this);
-    var site_id = $("#aaa tr:eq("+tr+") td:eq(4)").text();
-    window.location.href = "site.html?sid=" + site_id;
+   //  var tr = $(".sitelist").index(this);
+    var site_id =  $(this).children().eq(2).text();
+
+   //  var site_id = $(".sitelist:eq("+tr+") td:eq(0)").text();
+   //  alert(site_id);
+     window.location.href = "site.html?sid=" + site_id;
     });
   });
   

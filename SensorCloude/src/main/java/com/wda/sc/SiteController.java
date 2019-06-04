@@ -37,6 +37,8 @@ import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+
+
 @Controller
 @AllArgsConstructor
 @RequestMapping("/site")
@@ -442,7 +444,7 @@ public class SiteController {
 			int site_id = siteservice.getSiteNum();
 			
 			
-			String command = "C:\\Users\\user\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
+			String command = "C:\\Users\\bon300-27\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
 			ArrayList<String> rawPid = new Cmd().exeCmd(command);
 			System.out.println(rawPid);
 			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
@@ -536,23 +538,6 @@ public class SiteController {
 		return "site/sitealarmmod";
 	}
 
-	@RequestMapping(value = "alarmadd.do")
-	@ResponseBody
-	public String alarmadd(AlarmVO vo, HttpSession session) {
-		// 연락망 추가 폼을 이용한 추가
-		String user = (String) session.getAttribute("id");
-		vo.setSend_user(user);
-
-		int a = siteservice.insertAlarm(vo);
-
-		if (a == 0) {
-			return "false";
-		} else if (a == 1) {
-			return "success";
-		}
-
-		return "false";
-	}
 
 	@RequestMapping(value = "alarmmod.do")
 	@ResponseBody
