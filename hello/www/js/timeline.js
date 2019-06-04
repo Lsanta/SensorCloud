@@ -21,7 +21,7 @@ $(document).on('deviceready', function() {
     } else {
         $.ajax({
             type : "POST",
-            url : "https://www.sensorcloud.site:8443/app/timeline/mtimeline",
+            url : "http://52.79.242.145:8080/app/timeline/mtimeline",
             //url : "http://39.127.7.58:8080/app/timeline/mtimeline",
             data : {pagenum : 1},
             success : function(result){
@@ -94,7 +94,7 @@ $(document).on('deviceready', function() {
     
              $.ajax({
                  type : "POST",
-                 url : "https://www.sensorcloud.site:8443/app/timeline/mtimeline.do",
+                 url : "http://52.79.242.145:8080/app/timeline/mtimeline.do",
                  //url : "http://39.127.7.58:8080/app/timeline/mtimeline.do",
                  data : log,
                  dataType : 'text',
@@ -106,7 +106,7 @@ $(document).on('deviceready', function() {
     
                          $.ajax({
                             type : "POST",
-                            url : "https://www.sensorcloud.site:8443/app/send/message.do",
+                            url : "http://52.79.242.145:8080/app/send/Timelinemessage.do",
                             //url : "http://39.127.7.58:8080/app/send/Timelinemessage.do",
                             data : log,
                             contentType : "application/json; charset=UTF-8",
@@ -137,7 +137,7 @@ $(document).on('deviceready', function() {
                 $.ajax({
                     async : true,
                     type : "POST",
-                    url : "https://www.sensorcloud.site:8443/app/timeline/mtimelinedelete.do",
+                    url : "http://52.79.242.145:8080/app/timeline/mtimelinedelete.do",
                     //url : "http://39.127.7.58:8080/app/timeline/mtimelinedelete.do",
                     data : sig, 
                     dataType : 'text',
@@ -171,7 +171,7 @@ $(document).on('deviceready', function() {
             $.ajax({
                 async : true,
                 type : "POST",
-                 url :  "https://www.sensorcloud.site:8443/app/timeline/mtimelinemodify.do",
+                 url :  "http://52.79.242.145:8080/app/timeline/mtimelinemodify.do",
                 //url :  "http://39.127.7.58:8080/app/timeline/mtimelinemodify.do",
                 data : sig, 
                 dataType : 'json',
@@ -218,7 +218,7 @@ $(document).on('deviceready', function() {
         $.ajax({
             async : true,
             type : "POST",
-             url :  "https://www.sensorcloud.site:8443/app/timeline/mtimelinemodifyy.do",
+             url :  "http://52.79.242.145:8080/app/timeline/mtimelinemodifyy.do",
             // url :  "http://39.127.7.58:8080/app/timeline/mtimelinemodifyy.do",
             data : sig, 
             dataType : 'text',
