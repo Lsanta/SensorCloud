@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -18,11 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.ProcessPidVO;
 import com.wda.sc.domain.Search;
 import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.SiteVO;
@@ -32,6 +36,8 @@ import com.wda.sc.service.SiteService;
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+
+
 
 @Controller
 @AllArgsConstructor
@@ -417,6 +423,9 @@ public class SiteController {
 	@RequestMapping(value = "siteadd.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String insertSite(SiteVO site) {
+		
+		ProcessPidVO setPid = new ProcessPidVO();
+		
 		switch (site.getType_no()) {
 		case "building":
 			site.setType_no("1");
@@ -428,13 +437,60 @@ public class SiteController {
 
 		int a = siteservice.siteadd(site);
 		int b = siteservice.networkadd(site);
-		if (a == 0 && b == 0) {
+		
+		if (a == 0 && b == 0) {	
 			return "false";
 		} else {
+			int site_id = siteservice.getSiteNum();
+			
+			
+			String command = "C:\\Users\\bon300-27\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
+			ArrayList<String> rawPid = new Cmd().exeCmd(command);
+			System.out.println(rawPid);
+			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
+			ArrayList<String> temp = new ArrayList<String>();
+			
+			/* String형 list를 Int형으로 변환 */
+			ArrayList<Integer> rawPid_int = new ArrayList<Integer>();
+			ArrayList<Integer> dbPid_int = new ArrayList<Integer>();
+			ArrayList<String> dbPid = new ArrayList<String>();
+			
+			System.out.println("1");
+			for(int i = 0; i < dbPid_object.size(); i++) {
+				dbPid.add(dbPid_object.get(i).getPid());
+			}
+			
+			for(int i = 0; i < rawPid.size(); i++) {
+				rawPid_int.add(Integer.parseInt(rawPid.get(i)));
+			}
+			
+			for(int i = 0; i < dbPid.size(); i++) {
+				dbPid_int.add(Integer.parseInt(dbPid.get(i)));
+			}
+			System.out.println("2");
+			/* 배열 정렬 */
+			
+			Ascending ascending = new Ascending();
+			
+			Collections.sort(rawPid_int, ascending);
+			Collections.sort(dbPid_int, ascending);
+			
+			System.out.println("3");
+			/* db에 들어있지 않는 pid를 얻어와서 배열에 저장*/
+			for(int i = 0; i < rawPid_int.size(); i++) {
+				if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
+					setPid.setPid(rawPid_int.get(i).toString());
+				}
+			}
+			System.out.println("4");
+			setPid.setSite_id(site.getSite_id());
+			System.out.println("5");
+			siteservice.setProcessPid(setPid);
+			System.out.println("6");
 			return "success";
 		}
 	}
-
+	
 	// 현장수정
 	@RequestMapping(value = "sitemodify.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -482,23 +538,6 @@ public class SiteController {
 		return "site/sitealarmmod";
 	}
 
-	@RequestMapping(value = "alarmadd.do")
-	@ResponseBody
-	public String alarmadd(AlarmVO vo, HttpSession session) {
-		// 연락망 추가 폼을 이용한 추가
-		String user = (String) session.getAttribute("id");
-		vo.setSend_user(user);
-
-		int a = siteservice.insertAlarm(vo);
-
-		if (a == 0) {
-			return "false";
-		} else if (a == 1) {
-			return "success";
-		}
-
-		return "false";
-	}
 
 	@RequestMapping(value = "alarmmod.do")
 	@ResponseBody
@@ -827,4 +866,11 @@ public class SiteController {
 
 		return "/site/sensormanage";
 	}
+}
+
+class Ascending implements Comparator<Integer> { 
+    @Override
+    public int compare(Integer o1, Integer o2) {
+        return o1.compareTo(o2);
+    }
 }

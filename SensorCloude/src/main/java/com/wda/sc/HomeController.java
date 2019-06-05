@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,6 +60,8 @@ public class HomeController {
 				arr.get(i).setReg_date(arr.get(i).getReg_date().substring(0,16));
 			}
 		}
+		
+		
 		model.addAttribute("sitelist",siteservice.getList());
 		model.addAttribute("timelinelist",timelineservice.timedesc());
 		model.addAttribute("mainchecklist",arr);

@@ -7,7 +7,7 @@ body {
   -o-background-size: cover;
   background-size: cover;
   font-family: 'Roboto', sans-serif;
-   background: url("/resources/img/666.png");
+   background: url("/resources/img/777.png");
  
 }
 
@@ -33,7 +33,7 @@ body {
 .login-card input[type=button] {
   width: 100%;
   display: block;
-  margin-bottom: 10px;
+  margin: 10px 0;
   position: relative;
 }
 
@@ -43,17 +43,19 @@ body {
   width: 100%;
   margin-bottom: 10px;
   -webkit-appearance: none;
-  background: #fff;
-  border: 1px solid #d9d9d9;
-  border-top: 1px solid #c0c0c0;
+  background: rgb(250, 251, 255);
+  border: none;
+  border-bottom: 1px solid #d9d9d9;
   padding: 0 8px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
 
 .login-card input[type=text]:hover, input[type=password]:hover {
-  border: 1px solid #b9b9b9;
-  border-top: 1px solid #a0a0a0;
+  /* border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0; */
+   border: none;
+  border-bottom: 1px solid #a0a0a0;
   -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
   -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);

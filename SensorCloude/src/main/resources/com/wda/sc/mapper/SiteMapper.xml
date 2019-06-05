@@ -79,7 +79,7 @@
 	</insert>
 	
 	<insert id="networkadd" parameterType="com.wda.sc.domain.SiteVO">
-		insert into network(sig_id,site_id,sig_protocol,host_ip,sig_port_num,port_num) values(network_seq.nextval,site_seq.currval,'tcp',#{host_ip},#{sig_port_num},#{port_num})
+		insert into network(sig_id,site_id,rperiod,sig_port_num,virtual_port) values(network_seq.nextval,site_seq.currval,#{rperiod},#{sig_port_num},#{virtual_port})
 	</insert>	
 	
 	<!--현장 수정 -->
@@ -94,7 +94,7 @@
 	
 	<update id="updatenetwork" parameterType="com.wda.sc.domain.SiteVO">
 		<![CDATA[
-		update network set sig_protocol = 'tcp', host_ip = #{host_ip}, sig_port_num = #{sig_port_num}, port_num = #{port_num}
+		update network set rperiod = #{rperiod}, sig_port_num = #{sig_port_num}, virtual_port = #{virtual_port}
     	where site_id = #{site_id}
     	]]>
 	</update>
@@ -301,4 +301,23 @@
 	]]>
 	</select>
 	
+	<select id="getSiteNum" resultType="int">
+		select site_id 
+			   from (select * from site order by site_id desc) 
+		where rownum = 1
+	</select>
+	
+	<select id="getProcessPid" resultType="com.wda.sc.domain.ProcessPidVO">
+		select pid from processpid order by pid
+	</select>
+	
+	<insert id="setProcessPid" parameterType="com.wda.sc.domain.ProcessPidVO">
+		insert into processpid values(processpid_seq.nextval,site_seq.currval,${pid})
+	</insert>
+	
+	<select id="getLimitAlarm_member" resultType="com.wda.sc.domain.AlarmMemberVO">
+		select a.user_id, b.name
+		from member a, ( select * from alarm_member where site_id = #{site_id}) b
+		where a.name(+) = b.name
+	</select>
 </mapper>

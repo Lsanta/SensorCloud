@@ -11,4 +11,6 @@ public interface LoginService {
 	public int signup(MemberVO member);
 	public ArrayList<MemberVO> idFind(String name);
 	public int keyUpdate(Map<String, String> map);
+	//id 넣어서 이름찾기
+	public String nameFind(String user_id);
 }

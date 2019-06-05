@@ -43,7 +43,7 @@
    
    <div id="addnetwork">
 
-      <div id="addnetwork_left">
+<!--       <div id="addnetwork_left">
 
 
 
@@ -62,16 +62,16 @@
          	<label>UDP</label>
 
          
-      </div>   
+      </div>  -->  
 
       <div id="addnetwork_right">
       
       	<div id="addnetwork_right1">
-         <p>호스트아이디 주소:</p>
+         <p>수신 주기:</p>
         
-        <p>호스트포트 번호:</p>
+        <p>통신 속도:</p>
        
-         <p>유선포트 번호:</p>
+         <p>가상시리얼 포트 번호:</p>
        
 
          <!--<input type="submit" name="확인" style="float:right;" > -->
@@ -80,9 +80,9 @@
       
       <div id ="addnetwork_right2">
       
-      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="host_ip"><br>
-      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="sig_port_num"><br>
-      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="port_num"><br>
+      	<input type="text" name="hostaddress" placeholder = "초 단위로 적어주세요" class="addnetwork_right_input" id="rperiod"><br>
+      	<input type="text" name="hostaddress" placeholder = "Baudrate를 적어주세요"class="addnetwork_right_input" id="sig_port_num"><br>
+      	<input type="text" name="hostaddress" placeholder = "미리 설정 후 적어주세요" class="addnetwork_right_input" id="virtualport"><br>
       
       </div>
         
@@ -188,10 +188,9 @@ $(document).ready(function(){
 						y : Number($("#y").val()),
 	
 						//네트워크 데이터
-						sig_protocol : $('input[name="chk_net_raido"]:checked').val(),
-						host_ip : $("#host_ip").val(),
+						rperiod : $("#rperiod").val(),
 						sig_port_num : $("#sig_port_num").val(),
-						port_num : $("#port_num").val()
+						virtual_port : $("#virtualport").val()
 					}
 		
 		console.log(query);
