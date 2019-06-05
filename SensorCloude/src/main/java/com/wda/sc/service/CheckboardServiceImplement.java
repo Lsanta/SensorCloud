@@ -34,10 +34,12 @@ public class CheckboardServiceImplement implements CheckboardService {
 
 		mapper.insertSelectKey(board);
 		
+		System.out.println("VO값"+board);
+		
 		if (board.getAttachList() == null || board.getAttachList().size() <= 0) {
 			return;
 		}
-
+		
 		board.getAttachList().forEach(attach -> {
 
 			attach.setBoard_no(board.getBoard_no());
@@ -179,8 +181,7 @@ public class CheckboardServiceImplement implements CheckboardService {
 	@Override
 	public void mfileinsert(CheckBoardFileVO checkboardfilevo) {
 		// TODO Auto-generated method stub
-		attachMapper.mfileinsert(checkboardfilevo);
+	  attachMapper.mfileinsert(checkboardfilevo);
 	}
-
 
 }

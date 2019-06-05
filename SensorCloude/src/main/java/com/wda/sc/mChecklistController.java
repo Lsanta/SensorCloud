@@ -39,31 +39,34 @@ public class mChecklistController {
    private static final Logger logger = LoggerFactory.getLogger(mChecklistController.class);
    private CheckboardService Checkboardservice;
 
+
    // 점검이력
    @CrossOrigin(origins = "*", maxAge = 3600)
    @RequestMapping(value = "/writecheck", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    @ResponseBody
-   public String insertchecklist(@RequestBody CheckBoardVO vo) {
-      
-      Checkboardservice.register(vo);
-      
-
-      return "success";
+   public int insertchecklist(@RequestBody CheckBoardVO vo) {
+	  
+	 //글쓰기 컨텐트 db 저장 
+	      Checkboardservice.register(vo);
+	      //insert 직후 해당 열의 primary키를 뽑아내 vo에 저장후  찍어봄 
+	      //CheckBoardVO vo1 = new CheckBoardVO();
+	      int board_no  = vo.getBoard_no();
+	      System.out.println("보드넘버" + board_no);
+	      	      
+      return board_no;
 
    }
    
    // file_transfer 데이터 받기
    
    @SuppressWarnings("null")
-@CrossOrigin(origins = "*", maxAge = 3600)
+   @CrossOrigin(origins = "*", maxAge = 3600)
    @RequestMapping(value = "/insertfile", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    @ResponseBody
    public void insertfile(@RequestParam Map<String,String> allRequestParams, MultipartFile file, Model model) throws Exception {
        
-     
+
       String uploadPath = "C:\\upload";
-     
-     
       
       Iterator<String> keys = allRequestParams.keySet().iterator();
        while( keys.hasNext() ){
@@ -106,12 +109,14 @@ public class mChecklistController {
             String uuid = array2[1];
             String realname = array2[2];
             
-            AttachFileVO attachfilevo = null;
+            
+            AttachFileVO attachfilevo = new  AttachFileVO();
             attachfilevo.setUploadPath(uploadPath2);
             attachfilevo.setUuid(uuid);
             attachfilevo.setFileName(realname);
             attachfilevo.setImage(true);
             
+            System.out.println("파일이름" + attachfilevo.getFileName());
            
        
        model.addAttribute("savedName" , savedName);

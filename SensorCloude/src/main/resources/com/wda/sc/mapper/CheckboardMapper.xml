@@ -63,6 +63,7 @@ and rownum < 7
    values(#{board_no}, #{user_id}, sysdate,#{title},#{board_content},#{board_status},#{site_id})
    </insert>
    
+
    <!-- 점검이력 수정 권한체크 -->
    
    <select id="checkauthority" resultType="int">
