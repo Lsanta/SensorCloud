@@ -581,11 +581,9 @@ public class MessageController {
 //		    		  map2.put("user_id", user_id);
 //		    		  
 //		    		  mypageservice.updateappToken(map2);
-		    		  System.out.println("ㅎㅎㅎ111");
 		    		  int result = mypageservice.deleteappToken(user_id);
 		    		  
 		    		  if( result == 1 ) {
-		    			  System.out.println("ㅎㅎㅎ222");
 		    			  //삭제가 성공했으면 insert 
 		    			  tokenvo.setToken_id(appToken);
 		 		    	  tokenvo.setUser_id(user_id);

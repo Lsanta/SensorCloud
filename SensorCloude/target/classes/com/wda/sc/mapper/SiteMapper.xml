@@ -318,6 +318,6 @@
 	<select id="getLimitAlarm_member" resultType="com.wda.sc.domain.AlarmMemberVO">
 		select a.user_id, b.name
 		from member a, ( select * from alarm_member where site_id = #{site_id}) b
-		where a.name(+) = b.name;
+		where a.name(+) = b.name
 	</select>
 </mapper>
