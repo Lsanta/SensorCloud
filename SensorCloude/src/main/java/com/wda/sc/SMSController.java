@@ -85,6 +85,7 @@ public class SMSController {
 		 }
 		 
 		 System.out.println(phoneNumber);
+		 System.out.println(vo.getAlarm_content().length());
 		
 		if (a == 0) {
 			return "false";
@@ -99,7 +100,10 @@ public class SMSController {
 		    HashMap<String, String> params = new HashMap<String, String>();
 		    params.put("to", phoneNumber);
 		    params.put("from", "01046037101");
+		    if(vo.getAlarm_content().length() <= 45)
 		    params.put("type", "SMS");
+		    else
+		    params.put("type", "LMS");	
 		    params.put("text", vo.getAlarm_content());
 		    params.put("app_version", "test app 1.2"); // application name and version
 

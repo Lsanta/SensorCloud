@@ -411,7 +411,7 @@ public class MessageController {
 	      FirebaseOptions options=null;
 	      //파이어베이스 옵션 설정
 	      try {
-	    	  //serviceAccount = new FileInputStream("/home/ec2-user/sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	    	 //serviceAccount = new FileInputStream("/home/ec2-user/sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
 	    	 serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
 	         options = new FirebaseOptions.Builder()
 	               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -581,11 +581,9 @@ public class MessageController {
 //		    		  map2.put("user_id", user_id);
 //		    		  
 //		    		  mypageservice.updateappToken(map2);
-		    		  System.out.println("ㅎㅎㅎ111");
 		    		  int result = mypageservice.deleteappToken(user_id);
 		    		  
 		    		  if( result == 1 ) {
-		    			  System.out.println("ㅎㅎㅎ222");
 		    			  //삭제가 성공했으면 insert 
 		    			  tokenvo.setToken_id(appToken);
 		 		    	  tokenvo.setUser_id(user_id);
