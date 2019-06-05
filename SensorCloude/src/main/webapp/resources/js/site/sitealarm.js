@@ -98,16 +98,8 @@ $(document).ready(function(){
 		$("#tel2").removeAttr("disabled");
 		$("#company2").removeAttr("disabled");
 		$("#name2").removeAttr("disabled");
-		
-		 $('input:checkbox[name="selected"]').each(function() {
-
-		      if(this.checked){//checked 처리된 항목의 값
-		    	   console.log(this);
-		   }
-		 });
-	
-	}); // 클릭 햇을시 종료
-
+			
+	}); // 클릭 햇을시 종료	
 	
 	$("#submit").click(function(){
 		//주소창 잘라서 site_id 뽑았는데 내가봐도 구림
@@ -124,15 +116,34 @@ $(document).ready(function(){
 			 $("#textarea").focus();
 			 return;
 		}
+	
+		var array = {};
+		
+		for(var i=0; i < $('input:checkbox[name="selected"]').length; i++ ) {
+			 
+			
+			if( $('input:checkbox[name="selected"]').eq(i).is(":checked") ) {
+				
+				array[i] = $('input:checkbox[name="selected"]').parent().eq(i).siblings().eq(0).text();
+				
+			}
+		}
+					
 		var query = { 
-				alarm_content : alarm_content, site_id : site_id
+				alarm_content : alarm_content, 
+				site_id : site_id, 
+				send : array
 			}
 		
+		console.log(query);
+		
+		var data = JSON.stringify(query);
 		
 		$.ajax({
 			  type : "POST",
 			  url : "/SMS/alarmadd.do",
-			  data : query,
+			  data : data,
+			  contentType: 'application/json; charset=utf-8',
 			  success : function(data){
 				  if( data == "success"){
 					  alert("추가되었습니다");

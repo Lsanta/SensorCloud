@@ -37,5 +37,11 @@ public class LoginServiceImplement implements LoginService {
 		// TODO Auto-generated method stub
 		return mapper.keyUpdate(map);
 	}
+
+	@Override
+	public String nameFind(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.nameFind(user_id);
+	}
 	
 }
