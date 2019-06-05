@@ -77,14 +77,14 @@ $(document).ready(function(){
 	
 	
 	
-	$(document).on("click","#amember>.select",function(){
+	$(document).on("click","#amember>.select td:not(:last-child)",function(){
 		
 		var openWin = window.open("/site/sitealarmmod", "pop",
 				 "width=400,height=420,top="+(screen.availHeight/2-330)+",left="+(screen.availWidth/2-500)+"resizable=yes");
 		
 		$(".modifybox").css("display","block");
 		
-		var tr = $(this);
+		var tr = $(this).parent();
 		var tel2 = tr.children().eq(0).addClass("1");
 		var company2 = tr.children().eq(1).addClass("2");
 		var name2 = tr.children().eq(2).addClass("3");
@@ -98,61 +98,66 @@ $(document).ready(function(){
 		$("#tel2").removeAttr("disabled");
 		$("#company2").removeAttr("disabled");
 		$("#name2").removeAttr("disabled");
-		
-		
-	}); // 클릭 햇을시 종료
-	
-
-//	$("#submit").click(function(){
-//		//주소창 잘라서 site_id 뽑았는데 내가봐도 구림
-//		var newURL =  window.location.pathname;
-//		var sid = newURL.split("/");
-//		sid2 = sid[2].split("/");
-//		
-//		var site_id = sid2[0];
-//		var alarm_content = $("#textarea").val();
-//		
-//		if( alarm_content == ""){
-//			alert("문자내용을 적어주세요");
-//			 $("#textarea").focus();
-//			 return;
-//		}
-//		var query = { 
-//				alarm_content : alarm_content, site_id : site_id
-//			}
-//		
-//		
-//		$.ajax({
-//			  type : "POST",
-//			  url : "/site/alarmadd.do",
-//			  data : query,
-//			  success : function(data){
-//				  if( data == "success"){
-//					  alert("추가되었습니다");
-//					  $("#example").remove();
-//					  location.reload();
-//				  } else{
-//					  alert("추가에 실패했습니다");
-//				  }
-//			  }
-//			  
-//		}); // ajax 종료
-//		
-//	}); // 전송했을시 종료
+			
+	}); // 클릭 햇을시 종료	
 	
 	$("#submit").click(function(){
-		alert("클릭");
-		$.ajax({
-		  type : "GET",
-		  url : "/SMS/SMSTest",
-		  contentType : "text/html; charset=euc-kr",
-		  success : function(data){
-			 
-		  }
-		  
-	}); // ajax 종료
-	});
+		//주소창 잘라서 site_id 뽑았는데 내가봐도 구림
+		var newURL =  window.location.pathname;
+		var sid = newURL.split("/");
+		sid2 = sid[2].split("/");
+		
+		var site_id = sid2[0];
+		var alarm_content = $("#textarea").val();
+		
+		
+		if( alarm_content == ""){
+			alert("문자내용을 적어주세요");
+			 $("#textarea").focus();
+			 return;
+		}
 	
+		var array = {};
+		
+		for(var i=0; i < $('input:checkbox[name="selected"]').length; i++ ) {
+			 
+			
+			if( $('input:checkbox[name="selected"]').eq(i).is(":checked") ) {
+				
+				array[i] = $('input:checkbox[name="selected"]').parent().eq(i).siblings().eq(0).text();
+				
+			}
+		}
+					
+		var query = { 
+				alarm_content : alarm_content, 
+				site_id : site_id, 
+				send : array
+			}
+		
+		console.log(query);
+		
+		var data = JSON.stringify(query);
+		
+		$.ajax({
+			  type : "POST",
+			  url : "/SMS/alarmadd.do",
+			  data : data,
+			  contentType: 'application/json; charset=utf-8',
+			  success : function(data){
+				  if( data == "success"){
+					  alert("추가되었습니다");
+					  $("#example").remove();
+					  location.reload();
+				  } else{
+					  alert("추가에 실패했습니다");
+				  }
+			  }
+			  
+		}); // ajax 종료
+		
+	}); // 전송했을시 종료
+		
 	//수정 버튼 클릭시 연락망 내 사람 정보 변경
 	$("#mod").click(function(){
 		
@@ -219,6 +224,17 @@ $(document).ready(function(){
 			  current.text(characterCount);
 			      
 			});
+		
+		$('#test').click(function(){
+			$.ajax({
+				type: 'post',
+				url : '/app/send/WebLimit.do',
+				data : '내용',
+				successs : function() {
+					
+				}
+			});
+		});
 	
 });
 

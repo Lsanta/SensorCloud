@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.wda.sc.domain.AttachFileVO;
 import com.wda.sc.domain.CheckBoardFileVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.service.CheckboardService;
@@ -36,31 +37,36 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/app/checklist")
 public class mChecklistController {
    private static final Logger logger = LoggerFactory.getLogger(mChecklistController.class);
-   private CheckboardService checkboardservice;
+   private CheckboardService Checkboardservice;
+
 
    // 점검이력
    @CrossOrigin(origins = "*", maxAge = 3600)
    @RequestMapping(value = "/writecheck", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    @ResponseBody
-   public String insertchecklist(@RequestBody CheckBoardVO vo) {
-
-      checkboardservice.insertcheckboard(vo);
-      System.out.println(checkboardservice.insertcheckboard(vo));
-
-      return "success";
+   public int insertchecklist(@RequestBody CheckBoardVO vo) {
+	  
+	 //글쓰기 컨텐트 db 저장 
+	      Checkboardservice.register(vo);
+	      //insert 직후 해당 열의 primary키를 뽑아내 vo에 저장후  찍어봄 
+	      //CheckBoardVO vo1 = new CheckBoardVO();
+	      int board_no  = vo.getBoard_no();
+	      System.out.println("보드넘버" + board_no);
+	      	      
+      return board_no;
 
    }
    
    // file_transfer 데이터 받기
+   
    @SuppressWarnings("null")
    @CrossOrigin(origins = "*", maxAge = 3600)
    @RequestMapping(value = "/insertfile", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    @ResponseBody
    public void insertfile(@RequestParam Map<String,String> allRequestParams, MultipartFile file, Model model) throws Exception {
        
+
       String uploadPath = "C:\\upload";
-     
-     
       
       Iterator<String> keys = allRequestParams.keySet().iterator();
        while( keys.hasNext() ){
@@ -83,12 +89,12 @@ public class mChecklistController {
        
              //2019/05/31/s_71728aa0-9d4d-4b2c-a50a-22039e4b8827_.Pic.jpg
        
-       CheckBoardVO checkboardvo = null;
-       CheckBoardFileVO checkboardfilevo = null;
+//       CheckBoardVO checkboardvo = null;
+//       CheckBoardFileVO checkboardfilevo = null;
+       		
        
-       
-			int board_no = checkboardvo.getBoard_no();
-             System.out.println(board_no);
+//         int board_no = checkboardvo.getBoard_no();
+//             System.out.println(board_no);
              String[] array = savedName.split("/");
            
             String year = array[1];
@@ -104,13 +110,14 @@ public class mChecklistController {
             String realname = array2[2];
             
             
-            checkboardfilevo.setFile_Path(uploadPath2);
-            checkboardfilevo.setBoard_no(board_no);
-            checkboardfilevo.setUuid(uuid);
-            checkboardfilevo.setFile_Path(realname);
-            checkboardfilevo.setFileType(true);
+            AttachFileVO attachfilevo = new  AttachFileVO();
+            attachfilevo.setUploadPath(uploadPath2);
+            attachfilevo.setUuid(uuid);
+            attachfilevo.setFileName(realname);
+            attachfilevo.setImage(true);
             
-            checkboardservice.mfileinsert(checkboardfilevo);
+            System.out.println("파일이름" + attachfilevo.getFileName());
+           
        
        model.addAttribute("savedName" , savedName);
        

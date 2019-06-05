@@ -37,6 +37,8 @@ import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+
+
 @Controller
 @AllArgsConstructor
 @RequestMapping("/site")
@@ -536,23 +538,6 @@ public class SiteController {
 		return "site/sitealarmmod";
 	}
 
-	@RequestMapping(value = "alarmadd.do")
-	@ResponseBody
-	public String alarmadd(AlarmVO vo, HttpSession session) {
-		// 연락망 추가 폼을 이용한 추가
-		String user = (String) session.getAttribute("id");
-		vo.setSend_user(user);
-
-		int a = siteservice.insertAlarm(vo);
-
-		if (a == 0) {
-			return "false";
-		} else if (a == 1) {
-			return "success";
-		}
-
-		return "false";
-	}
 
 	@RequestMapping(value = "alarmmod.do")
 	@ResponseBody

@@ -36,7 +36,8 @@ $(document).ready(function() {
   
             $.ajax({
               type : "POST",
-              url : "http://39.127.7.58:8080/app/appmain",
+              url : "https://www.sensorcloud.site:8443/app/appmain", 
+              //url : "http://39.127.7.58:8080/app/appmain",
               data : quer,
               contentType : "application/json; charset=UTF-8",
               success : function(list){
@@ -133,7 +134,8 @@ $(document).ready(function() {
   
      $.ajax({
          type : "POST",
-         url : "http://39.127.7.58:8080/app/send/AppTokenSave.do",
+         url : "https://www.sensorcloud.site:8443/app/send/AppTokenSave.do",
+         //url : "http://39.127.7.58:8080/app/send/AppTokenSave.do",
          data : JSON.stringify(query),
          contentType : 'application/json',
          success : function(){
