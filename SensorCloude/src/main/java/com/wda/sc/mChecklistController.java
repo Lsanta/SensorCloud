@@ -110,18 +110,20 @@ public class mChecklistController {
             String realname = array2[2];
             
             
-            AttachFileVO attachfilevo = new  AttachFileVO();
-            attachfilevo.setUploadPath(uploadPath2);
-            attachfilevo.setUuid(uuid);
-            attachfilevo.setFileName(realname);
-            attachfilevo.setImage(true);
+            int boardno = Integer.parseInt(allRequestParams.get("value2"));
+            System.out.println("넘어온 키값"+boardno);
             
-            System.out.println("파일이름" + attachfilevo.getFileName());
-           
-       
-       model.addAttribute("savedName" , savedName);
-       
-       
+            
+            CheckBoardFileVO checkboardfilevo = new CheckBoardFileVO();
+            
+            checkboardfilevo.setBoard_no(boardno);
+            checkboardfilevo.setUuid(uuid);
+            checkboardfilevo.setFile_name(realname);
+            checkboardfilevo.setFile_Path(uploadPath2);
+            checkboardfilevo.setFileType(true);
+            
+            Checkboardservice.mfileinsert(checkboardfilevo);
+              
    }
    
    

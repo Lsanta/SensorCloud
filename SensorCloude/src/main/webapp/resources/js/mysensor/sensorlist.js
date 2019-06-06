@@ -18,6 +18,7 @@ $(document).ready(function() {
 		var model_name = tr.children().eq(2).addClass("3");
 		var voltage = tr.children().eq(3).addClass("4");
 		var manufacturer = tr.children().eq(4).addClass("5");
+		var vertical = tr.children().eq(7).addClass("6");
 			
 	 });
 	
