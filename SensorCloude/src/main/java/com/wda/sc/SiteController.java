@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wda.sc.domain.AlarmMemberVO;
@@ -848,7 +850,7 @@ public class SiteController {
 
 		Paging p = new Paging();
 		Search s = new Search();
-		ArrayList<MysensorVO> searchArr = new ArrayList<MysensorVO>();
+		ArrayList<InstallSensorVO> searchArr = new ArrayList<InstallSensorVO>();
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		Map<Object, Object> parm = new HashMap<Object, Object>();
 		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
@@ -934,8 +936,109 @@ public class SiteController {
 
 		return "/site/sensormanage";
 	}
-}
+	
+	@RequestMapping(value = "/installsensoradd/" + "{site_id}", method = RequestMethod.GET)
+	public String installsensor(Locale locale, Model model, HttpSession session, HttpServletResponse response, @PathVariable String site_id)
+			throws IOException {
 
+		int mlevel = (int) session.getAttribute("mlevel");
+
+		if (mlevel < 4) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n4등급(수정권한)이상이 열람가능합니다'); window.opener.location.reload(); window.close();");
+			out.println("</script>");
+			
+			
+		}
+		model.addAttribute("install", mysensorservice.getMysensor());
+		
+		return "site/sensormanageadd";
+	}
+
+	@RequestMapping(value = "/installsensormod/" + "{site_id}", method = RequestMethod.GET)
+	public String installsensorm(Locale locale, Model model, HttpSession session , HttpServletResponse response, @PathVariable String site_id) throws IOException {
+
+		int mlevel = (int) session.getAttribute("mlevel");
+
+		if (mlevel < 4) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n4등급(수정권한)이상이 열람가능합니다'); window.opener.location.reload(); window.close(); ");
+			out.println("</script>");
+			
+		}
+		
+		model.addAttribute("installmod", mysensorservice.getMysensor());
+		
+		return "site/sensormanagemod";
+	}
+		// 설치 센서 Insert
+		@RequestMapping(value = "/installsensoradd.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String installsensoradd(InstallSensorVO vo, @RequestBody Map<String,Object> map) {
+
+			vo.setSensor_sn((String) map.get("sensor_sn"));
+			String cl = (String) map.get("site_id");
+			int site_id = Integer.parseInt(cl);
+			vo.setSite_id(site_id);
+			
+			JSONArray examArr = JSONArray.fromObject(map.get("sensorData"));
+			
+			for(int i=0; i < examArr.size(); i++) { 
+				
+				JSONObject jobj = examArr.getJSONObject(i);
+				
+				Iterator Iter = jobj.keys();
+				 while(Iter.hasNext())
+				    {
+					 	String var = Iter.next().toString();
+					 	vo.setProgram_var(var);
+					 	
+					 	String[] spl = ((String) jobj.get(var)).split(",");
+					 	vo.setUpper_limit(spl[0]);
+					 	vo.setLower_limit(spl[1]);
+					 	
+					 	int a = mysensorservice.insertInstallsensor(vo);
+					 	
+					 	return "success";
+				    }
+			}
+			
+			return "false";
+		}
+
+		// 설치센서 수정
+		@RequestMapping(value = "/installsensormod.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String installsensormod(InstallSensorVO vo) {
+		
+			int a = mysensorservice.modInstallsensor(vo);
+
+			if (a == 1) {
+				return "success";
+			}
+			return "false";
+		}	
+	   
+		// 설치센서 삭제
+		@RequestMapping(value = "/installsensorDel.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String installsensordel(@RequestParam int sensor_id) {
+				System.out.println(sensor_id);
+			
+				int a = mysensorservice.delInstallsensor(sensor_id);
+				
+				if (a == 1) {
+					return "success";
+				}
+				return "false";
+		}	
+}
 class Ascending implements Comparator<Integer> { 
     @Override
     public int compare(Integer o1, Integer o2) {
