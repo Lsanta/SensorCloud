@@ -93,6 +93,7 @@
    
     <h2 class="sensor_option">센서 설정</h2>
     <input type="button" class="plus_select" value="행 추가" />
+    <input type="button" class="delete_select" value="행 삭제" />
 	<div class="sensor_box">
 		<div id="addSensor0">
 			<select class="my_sensor">
@@ -187,6 +188,17 @@ $(document).ready(function(){
 	
 	var count = 0;
 	
+	$('.delete_select').click(function(){
+		 if(count == 0)
+			 return false;
+		 $("#addSensor" + count).remove();
+		
+// 		for(var i=1; i < count+1; i++){
+// 		 $("#addSensor" + i).remove();
+// 		}
+		 count--;
+	});
+	
 	$('.plus_select').click(function(){
 		count++;		
 		
@@ -253,7 +265,7 @@ $(document).ready(function(){
 			
 			var aa = $('#addSensor'+i);
 			var bb = aa.find('.my_sensor option:selected').text();
-			console.log(bb);
+			var bbSplit = bb.split('[');
 			
 			//jobj 생성
 			for( var j=0; j < aa.find('input').length/3; j++) {
@@ -271,7 +283,7 @@ $(document).ready(function(){
 				jarray.push(jobj);
 				
 			}
-			totalInfo[bb]= jarray ;
+			totalInfo[bbSplit[0]]= jarray ;
 // 			console.log(aa.find('input').eq(0).val());
 
 			console.log("이값은 전체 sneser의 추가 갯수입니다 " +check);
