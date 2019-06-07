@@ -9,7 +9,7 @@
     select x.rnum, x.* from
     ( select rownum as rnum, p.* from
     ( select c.sensor_sn, c.model_name, c.sensor_kind, c.manufacturer, c.voltage, c.create_day, c.vertical, c.site_id, s.site_name
-    from (select my_sensor.sensor_sn, my_sensor.model_name, my_sensor.sensor_kind, my_sensor.manufacturer, my_sensor.voltage, substr(my_sensor.create_day,0,14) as create_day,my_sensor.vertical,install_sensor.site_id
+    from (select DISTINCT my_sensor.sensor_sn, my_sensor.model_name, my_sensor.sensor_kind, my_sensor.manufacturer, my_sensor.voltage, substr(my_sensor.create_day,0,14) as create_day,my_sensor.vertical,install_sensor.site_id
     from my_sensor FULL OUTER JOIN install_sensor
     on my_sensor.sensor_sn = install_sensor.sensor_sn) c  LEFT OUTER JOIN site s
     on c.site_id = s.site_id 
@@ -60,10 +60,28 @@
 	
 	<!-- 현장 추가에 넘길 보유센서 이름과 시리얼넘버 -->
 	<select id="getMysensor" resultType="com.wda.sc.domain.MysensorVO">
-		select *
-		from my_sensor
-		order by sensor_sn
+		select  a.sensor_sn, a.sensor_kind, a.vertical
+		from my_sensor a
+		minus
+		select b.sensor_sn, a.sensor_kind, a.vertical
+		from my_sensor a ,install_sensor b
+		where a.sensor_sn = b.sensor_sn
 	</select>
 
+	<!-- 현장에 설치된 센서 추가 -->
+	<insert id="insertInstallsensor" parameterType="com.wda.sc.domain.InstallSensorVO">
+		insert into install_sensor (sensor_id, sensor_sn, site_id, program_var, upper_limit, lower_limit) values(sensor_seq.nextval, #{sensor_sn}, #{site_id}, #{program_var},#{upper_limit},#{lower_limit})
+	</insert>
+	
+	<!-- 현장에 설치된 센서 수정 -->
+	<update id="modInstallsensor" parameterType="com.wda.sc.domain.InstallSensorVO">
+		update install_sensor set program_var=#{program_var}, 
+		upper_limit=#{upper_limit}, lower_limit=#{lower_limit} 
+		where sensor_id=#{sensor_id} 
+	</update>
+	
+	<delete id="delInstallsensor">
+		delete from install_sensor where sensor_id = #{sensor_id}
+	</delete>
 
 </mapper>

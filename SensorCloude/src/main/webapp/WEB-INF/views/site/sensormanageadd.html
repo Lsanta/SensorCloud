@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>팝업창</title>
+<link href="/resources/css/mysensor/sensoradd.css" rel="stylesheet" type="text/css"/>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	 $(document).ready(function(){
+		 $('.my_sensor').on("change", function(){
+			
+			var asdf = $('.sensoradd').children().siblings();
+			asdf.not('select').remove();
+			 
+			var aa = $(this);
+			var input_size = aa.val();
+			
+			for(var i=0; i < input_size; i++ ) {
+					
+					$(".sensoradd").append( 
+							$('<input class="vert'+i+'" placeholder = "데이터 로거의 변수값과 똑같은 값을 적어주십시오" >', 
+									{ type: 'text'}
+							),
+							$('<input class="up'+i+'" placeholder = "상한값" >', 
+									{ type: 'text'},
+							),
+							$('<input class="down'+i+'" placeholder = "하한값" >', 
+									{ type: 'text'}
+							)
+						)
+				} // for문 종료
+			
+				
+		 });
+		 
+		 $("#plus").click(function(){
+			 	if($("#sensor_sn").val() == "" || $("#program_var").val() == "" || $("#upper_limit").val() == ""
+			 			|| $("#lower_limit").val() == "") {
+			 		alert("빈 값이 있어 등록되지 않습니다.");
+			 		return false;
+			 	}
+			 
+			 	var check = $('.sensoradd').children().length;
+				console.log("check 의 수 " + check);
+				
+				var totalInfo = new Object();
+				var jarray = new Array();
+				var aa = $('.sensoradd');
+				//jobj 생성
+				for( var j=0; j < (check-1)/3 ; j++) {
+					var jobj = new Object();
+					
+					var cc = aa.find('input.vert'+j).val(); //tilt 같은 이름
+					var dd = aa.find('input.up'+j).val(); //상한값
+					var ee = aa.find('input.down'+j).val(); //하한값
+					
+					console.log(cc);
+					console.log(dd);
+					console.log(ee);
+					
+					jobj[cc] = dd + "," + ee; 
+					jarray.push(jobj);			
+				}
+				console.log(jarray);
+				
+			 	
+			 	var newURL =  window.location.pathname;
+				var url = newURL.split('/');
+				
+				var query = { 
+								sensor_sn : $('.my_sensor option:selected').text(),
+								sensorData : jarray,
+								site_id : url[3]
+							}
+				
+				console.log(query);
+				$.ajax({
+					  type : "POST",
+					  url : "/site/installsensoradd.do",
+					  data : JSON.stringify(query),
+					  contentType: 'application/json;',
+					  success : function(data){
+						  if( data == "success"){
+							  alert("추가되었습니다");
+							  window.opener.location.reload();
+							  window.close();
+						  } else{
+							  alert("추가에 실패했습니다");
+						  }
+					  }
+					  
+				}); // ajax 종료
+				
+			}); // #plus 종료
+	 });		
+</script>
+</head>
+<body>
+<h2>센서 추가</h2>
+ <div class="sensoradd">
+	시리얼넘버<select class="my_sensor">
+				<option>선택</option>
+             	<option th:each="ss : ${install}" th:text="${ss.sensor_sn}" th:value="${ss.vertical}">
+            	</option>
+    </select>
+	</div>
+	<input type="button"  value="추가" id="plus" />
+</body> 
+</html>

@@ -47,7 +47,7 @@ public class mChecklistController {
    @ResponseBody
    public ResponseEntity<List<CheckBoardFileVO>> mgetAttachList(int board_no) {
       System.out.println("getAttachList" + board_no);
-
+      System.out.println(Checkboardservice.mgetAttachList(board_no));
       return new ResponseEntity<>(Checkboardservice.mgetAttachList(board_no), HttpStatus.OK);
    }
 
