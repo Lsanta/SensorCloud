@@ -5,6 +5,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -13,11 +14,14 @@ import javax.imageio.ImageIO;
 import org.imgscalr.Scalr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +43,13 @@ public class mChecklistController {
    private static final Logger logger = LoggerFactory.getLogger(mChecklistController.class);
    private CheckboardService Checkboardservice;
 
+   @GetMapping(value = "/mgetAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+   @ResponseBody
+   public ResponseEntity<List<CheckBoardFileVO>> mgetAttachList(int board_no) {
+      System.out.println("getAttachList" + board_no);
+
+      return new ResponseEntity<>(Checkboardservice.mgetAttachList(board_no), HttpStatus.OK);
+   }
 
    // 점검이력
    @CrossOrigin(origins = "*", maxAge = 3600)

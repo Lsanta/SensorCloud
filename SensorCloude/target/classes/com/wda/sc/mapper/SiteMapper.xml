@@ -322,6 +322,6 @@
 	</select>
 	
 	<insert id="addInstallSensor" parameterType="com.wda.sc.domain.InstallSensorVO">
-		insert into install_sensor values(sensor_id_seq.nextval,#{sensor_sn},#{site_id},#{program_var},#{upper_limit},#{lower_limit})
+		insert into install_sensor values(sensor_seq.nextval,#{sensor_sn},#{site_id},#{program_var},#{upper_limit},#{lower_limit})
 	</insert>
 </mapper>

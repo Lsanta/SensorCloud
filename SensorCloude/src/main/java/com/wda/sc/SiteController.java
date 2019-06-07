@@ -433,7 +433,18 @@ public class SiteController {
 	@RequestMapping(value = "siteadd.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String insertSite(SiteVO site, @RequestBody Map<String,Object> map) {
-		System.out.println("현장 추가");		
+		System.out.println("현장 추가");
+		System.out.println(map);
+		
+		site.setType_no((String) map.get("type_no"));
+		site.setAddress((String) map.get("address"));
+		site.setSite_name((String)map.get("site_name"));
+
+	    site.setRperiod((String) map.get("rperiod"));
+	    site.setSig_port_num((String) map.get("sig_port_num"));
+	    site.setVirtual_port((String) map.get("virtual_port"));
+		
+	    System.out.println("사이트" +site);
 		ProcessPidVO setPid = new ProcessPidVO();
 		
 		switch (site.getType_no()) {
@@ -493,7 +504,10 @@ public class SiteController {
 				}
 			}
 		
-			setPid.setSite_id(site.getSite_id());	//site_id 불러오기
+//			setPid.setSite_id(site.getSite_id());	//site_id 불러오기
+			setPid.setSite_id(site_id);	//site_id 불러오기
+			System.out.println("사이트아이디" + site_id);
+			System.out.println("setPid" + setPid);
 			siteservice.setProcessPid(setPid);
 
 			//
@@ -528,7 +542,7 @@ public class SiteController {
 				        	String[] spl = ((String) na3.get(c)).split(",");
 				        	test.setUpper_limit(spl[0]);
 				        	test.setLower_limit(spl[1]);
-				        	test.setSite_id(site.getSite_id());
+				        	test.setSite_id(site_id);
 				        	
 				        	// insert DB 
 				        	int resultNum = siteservice.addInstallSensor(test);
