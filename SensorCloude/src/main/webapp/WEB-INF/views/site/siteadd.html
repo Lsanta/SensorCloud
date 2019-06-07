@@ -204,7 +204,8 @@ $(document).ready(function(){
 		
 		var html = $('#addSensor0').clone(true);
 		html.attr("id","addSensor" + count);
-		$(".sensor_box").append(html);	
+		$(".sensor_box").append(html);
+		$('#addSensor' + count).children().siblings().remove('input');
 	});
 	
 	//select 의 값이 바뀌면 ? 
