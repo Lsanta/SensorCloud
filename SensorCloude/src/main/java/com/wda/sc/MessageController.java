@@ -50,6 +50,7 @@ import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AppTokenVO;
 import com.wda.sc.domain.TokenVO;
 import com.wda.sc.service.AndroidPushNotificationService;
+import com.wda.sc.service.LoginService;
 import com.wda.sc.service.MyPageService;
 import com.wda.sc.service.SiteService;
 
@@ -63,6 +64,7 @@ import lombok.AllArgsConstructor;
 public class MessageController {
 	private MyPageService mypageservice;
 	private SiteService siteservice;
+	private LoginService loginservice;
 	   @CrossOrigin(maxAge = 3600)
 	   @SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
@@ -247,8 +249,10 @@ public class MessageController {
 		  tokenlist = mypageservice.allappToken();
 		  System.out.println(tokenlist);
 		  
-		  String id = (String)map.get("user_id");
-		  String content = (String)map.get("content");  
+		  String user_id = (String)map.get("user_id");
+		  String content = (String)map.get("content");
+		  String name = loginservice.nameFind(user_id);
+		  
 			
 //		  List<String> registrationTokens = new ArrayList<String>();
 //		  
@@ -264,7 +268,7 @@ public class MessageController {
 	              .setPriority(AndroidConfig.Priority.HIGH)
 	              .setRestrictedPackageName("kr.yju.wdb.sensor")
 	              .setNotification(AndroidNotification.builder()
-	                  .setTitle(id +"님이 타임라인을 작성했습니다.")
+	                  .setTitle(name +"님이 타임라인을 작성했습니다.")
 	                  .setBody(content)
 //	                  .setIcon("stock_ticker_update")
 	                  .setIcon("res/icon/android/hdpi.png")
@@ -295,6 +299,7 @@ public class MessageController {
 	   }
 	   
 	   //웹->앱
+	   @CrossOrigin(maxAge = 3600)
 	   @SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
 	   @RequestMapping(value="/WebTimelinemessage.do", method= RequestMethod.POST,  consumes="application/json", produces = {"application/json"})
@@ -332,8 +337,9 @@ public class MessageController {
 		  tokenlist = mypageservice.allappToken();
 		  System.out.println(tokenlist);
 		  
-		  String id = (String) session.getAttribute("id");
-			
+		  String user_id = (String) session.getAttribute("id");
+		  String name = loginservice.nameFind(user_id);
+		  
 //		  List<String> registrationTokens = new ArrayList<String>();
 //		  
 //		  for(int i = 0; i < tokenlist.size(); i++) {
@@ -358,7 +364,7 @@ public class MessageController {
 	              .setPriority(AndroidConfig.Priority.HIGH)
 	              .setRestrictedPackageName("kr.yju.wdb.sensor")
 	              .setNotification(AndroidNotification.builder()
-	                  .setTitle(id +"님이 타임라인을 작성했습니다.")
+	                  .setTitle(name +"님이 타임라인을 작성했습니다.")
 	                  .setBody(reContent)
 //	                  .setIcon("stock_ticker_update")
 	                  .setIcon("res/icon/android/hdpi.png")
@@ -392,15 +398,20 @@ public class MessageController {
 	   //웹->앱 현장에 임계값 들어옴
 	   @SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
-	   @RequestMapping(value="/WebLimit.do", method= RequestMethod.GET,  consumes="application/json", produces = {"application/json"})
-	   public String pushTest5(HttpSession session, @RequestBody String content) {
-	      FirebaseApp defaultApp = null;
+	   @RequestMapping(value="/WebLimit.do", method= RequestMethod.POST, consumes = {"application/x-www-form-urlencoded"}, produces = {"application/json"})
+	   @CrossOrigin(maxAge = 3600)
+	   public String pushTest5(@RequestBody String content) {
+	      
+		  System.out.println("몰라요..");
+		  System.out.println(content); 
+		  
+		  FirebaseApp defaultApp = null;
 	      List<FirebaseApp> apps=FirebaseApp.getApps();
 	      FileInputStream serviceAccount;
 	      FirebaseOptions options=null;
 	      //파이어베이스 옵션 설정
 	      try {
-	    	  //serviceAccount = new FileInputStream("/home/ec2-user/sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	    	 //serviceAccount = new FileInputStream("/home/ec2-user/sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
 	    	 serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
 	         options = new FirebaseOptions.Builder()
 	               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -433,47 +444,28 @@ public class MessageController {
 	    	  //가져온 id값이 있다면 (회원 여부체크)
 	    	  if( member.get(i).getUser_id() != null ) {
 	    		  //id를 통해 토큰을 가져오고 토큰값이 없다면 sms 있으면 tokenlist에 저장
-	    		  
+	    		  tokenlist = mypageservice.getappToken(member.get(i).getUser_id());
 	    		  //if문 한번더 
+	    		  if(tokenlist == null) {
+	    			  //sms 푸쉬보내기
+	    			  SMS();
+	    		  }
 	    		  
 	    	  } else {
-	    		  //id조차 없기때문에 sms만보냄
+	    		  SMS();
 	    	  }
 	    	  
 	      }
 	      
-		  //token값 select 하기
-		  tokenlist = mypageservice.allappToken();
-		  System.out.println(tokenlist);
-		  
-		  String id = (String) session.getAttribute("id");
-			
-//		  List<String> registrationTokens = new ArrayList<String>();
-//		  
-//		  for(int i = 0; i < tokenlist.size(); i++) {
-//			  registrationTokens.add(tokenlist.get(i).getToken_id());
-//		  }
-//		
-//		  System.out.println(registrationTokens);
-		 String rContent = null;
-		 String reContent = null;
-		  try {
-			  rContent = URLDecoder.decode(content, "UTF-8");
-			  String[] array = rContent.split("=");
-			  reContent = array[1];
-			  
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		  
+		 String Content = null;
+		 		  
 	      AndroidConfig config = AndroidConfig.builder()
 	    		  .setTtl(3600 * 1000) // 1 hour in milliseconds
 	              .setPriority(AndroidConfig.Priority.HIGH)
 	              .setRestrictedPackageName("kr.yju.wdb.sensor")
 	              .setNotification(AndroidNotification.builder()
-	                  .setTitle(id +"님이 타임라인을 작성했습니다.")
-	                  .setBody(reContent)
+	                  .setTitle("임계값 초과시 푸쉬 제목")
+	                  .setBody("임계값 초과시 푸쉬 내용")
 //	                  .setIcon("stock_ticker_update")
 	                  .setIcon("res/icon/android/hdpi.png")
 	                  .setColor("#f45342")
@@ -486,7 +478,7 @@ public class MessageController {
 			  
 	      Message message = Message.builder()
 	    		  .setAndroidConfig(config)
-	    		  .putData("type", "Timeline") //넘어가는값
+	    		  .putData("type", "limit") //넘어가는값
 	    		  .setToken(tokenlist.get(i).getToken_id())
 	    		  .build();
 		  
@@ -506,7 +498,13 @@ public class MessageController {
 	   
 	   
 	   
-	   @SuppressWarnings({ "null", "unused" })
+	private void SMS() {
+		// TODO Auto-generated method stub
+		System.out.println("문자 보낼거임");
+	}
+
+
+	@SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
 	   @RequestMapping(value="/WebTokenSave.do", method= RequestMethod.POST, produces = {"application/json"})
 	   public String webtokenSave(@RequestBody String Token, HttpSession session) {
@@ -583,11 +581,9 @@ public class MessageController {
 //		    		  map2.put("user_id", user_id);
 //		    		  
 //		    		  mypageservice.updateappToken(map2);
-		    		  System.out.println("ㅎㅎㅎ111");
 		    		  int result = mypageservice.deleteappToken(user_id);
 		    		  
 		    		  if( result == 1 ) {
-		    			  System.out.println("ㅎㅎㅎ222");
 		    			  //삭제가 성공했으면 insert 
 		    			  tokenvo.setToken_id(appToken);
 		 		    	  tokenvo.setUser_id(user_id);

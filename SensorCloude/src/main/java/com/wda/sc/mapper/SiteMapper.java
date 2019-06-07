@@ -124,4 +124,7 @@ public interface SiteMapper {
 	
 	//임계값 넘었을 시 가져올 연락망
 	public List<AlarmMemberVO> getLimitAlarm_member(String site_id);
+	
+	//설치 센서에 센서 정보 추가
+	public int addInstallSensor(InstallSensorVO test);
 }

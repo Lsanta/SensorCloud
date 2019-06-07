@@ -285,7 +285,7 @@
            + POWER(( #{longitude} - x) *  88907.949, 2)
            ) z , a.site_id, a.type_no, a.site_name, a.address, a.start_date, a.site_status
   FROM site a,
-     (SELECT #{latitude} v_x    
+     (SELEC T #{latitude} v_x    
              ,#{longitude} v_y  
              ,110979.309     r_x   
              ,88907.949     r_y   
@@ -318,6 +318,10 @@
 	<select id="getLimitAlarm_member" resultType="com.wda.sc.domain.AlarmMemberVO">
 		select a.user_id, b.name
 		from member a, ( select * from alarm_member where site_id = #{site_id}) b
-		where a.name(+) = b.name;
+		where a.name(+) = b.name
 	</select>
+	
+	<insert id="addInstallSensor" parameterType="com.wda.sc.domain.InstallSensorVO">
+		insert into install_sensor values(sensor_seq.nextval,#{sensor_sn},#{site_id},#{program_var},#{upper_limit},#{lower_limit})
+	</insert>
 </mapper>

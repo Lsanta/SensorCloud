@@ -11,6 +11,8 @@ public class MysensorVO {
 	private String voltage;
 	private String site_name;
 	private String create_day;
+	private String vertical;
+	
 	//임시
 	private int count;
 }

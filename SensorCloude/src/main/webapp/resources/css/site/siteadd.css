@@ -4,6 +4,20 @@ html {
 /* 	width: 65%; */
 	margin: 0 auto;
 }
+
+#addSensor {
+	margin: 0 auto;
+	width: 95%;
+	margin-bottom: 20px;
+	/* border: 2px solid #7f9eb2; */
+	background-color: #fff;
+}
+	
+.sensor_option{
+	display : inline-block;
+}
+
+
 #container {
     width: 65%;
     height: 740px;
@@ -316,7 +330,7 @@ input.addnetwork_right_input {
 		margin-bottom: 0;
 		height: 290px;
 		position: relative;
-	}
+		}
 	
 	button {
 	font-size: 20px;
@@ -327,5 +341,6 @@ input.addnetwork_right_input {
     height: 50px;
     cursor:pointer;
 	}	
+	
 	
 }
