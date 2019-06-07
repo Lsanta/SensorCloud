@@ -183,5 +183,11 @@ public class CheckboardServiceImplement implements CheckboardService {
 		// TODO Auto-generated method stub
 	  attachMapper.mfileinsert(checkboardfilevo);
 	}
+	
+	@Override
+	public List<CheckBoardFileVO> mgetAttachList(int board_no) {
+	      // TODO Auto-generated method stub
+	      return attachMapper.findByBno(board_no);
+	 }
 
 }

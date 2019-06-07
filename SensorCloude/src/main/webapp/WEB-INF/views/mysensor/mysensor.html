@@ -29,9 +29,6 @@
 						<th scope="col">제조사</th>
 						<th scope="col">현장이름</th>
 						<th scope="col">등록일</th>
-						<th scope="col">변수1</th>
-						<th scope="col">변수2</th>
-						<th scope="col">변수3</th>  
 					</tr>
 				</thead>
 				<tbody id="list" th:if="${sensor == null}">
@@ -43,9 +40,7 @@
 						<td th:text="${sensorlist.manufacturer}"></td>
 						<td th:text="${sensorlist.site_name}"></td>
 						<td th:text="${sensorlist.create_day}"></td>
-						<td th:text="1"></td>
-						<td th:text="2"></td>
-						<td th:text="3"></td>
+						<td style="display : none" th:text="${sensorlist.vertical}"></td>
 					</tr> 
 				</tbody>
 				
@@ -58,9 +53,7 @@
 						<td th:text="${sensor.manufacturer}"></td>
 						<td th:text="${sensor.site_name}"></td>
 						<td th:text="${sensor.create_day}"></td>
-						<td th:text="1"></td>
-						<td th:text="2"></td>
-						<td th:text="3"></td>
+						<td style="display : none" th:text="${sensor.vertical}"></td>
 					</tr> 
 				</tbody>
 			</table>

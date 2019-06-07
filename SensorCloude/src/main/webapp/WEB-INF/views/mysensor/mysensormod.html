@@ -7,92 +7,101 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 $(document).ready(function(){
-   
-   $("#sensor_sn").val($(".1", opener.document).text());
-   $("#sensor_kind").val($(".2", opener.document).text());
-   $("#model_name").val($(".3", opener.document).text());
-   $("#voltage").val($(".4", opener.document).text());
-   $("#manufacturer").val($(".5", opener.document).text());
-   
-   function remove(){
-      $(".1" ,opener.document).removeClass();
-      $(".2" ,opener.document).removeClass();
-      $(".3" ,opener.document).removeClass();
-      $(".4" ,opener.document).removeClass();
-      $(".5" ,opener.document).removeClass();
-   }
-   
-   
-   
-   $("#mod").click(function(){
-      
-      if($("#sensor_sn").val() == "" || $("#sensor_kind").val() == "" || $("#model_name").val() == ""
-          || $("#voltage option:selected").val() == "" || $("#manufacturer option:selected").val() == "" ) {
-       alert("빈 값이 있어 등록되지 않습니다.");
-       return false;
-       }
-      
-      var query = { 
-                  sensor_sn : $("#sensor_sn").val(),
-                  sensor_kind : $("#sensor_kind").val(),
-                  model_name : $("#model_name").val(),
-//                   voltage : $("#voltage").val(),
-//                   manufacturer : $("#manufacturer").val()
-                  voltage : $("#voltage option:selected").val(),
-                  manufacturer : $("#manufacturer option:selected").val()
-         }
-      
-      console.log(query);
-      
-      $.ajax({
-           type : "POST",
-           url : "/mysensor/mysensormod.do",
-           data : query,
-           success : function(data){
-              if( data == "success"){
-                 alert("수정되었습니다");
-                 window.opener.location.reload();
-                 remove();
-                 window.close();
-              } else{
-                 alert("수정에 실패했습니다");
-              }
-           }
-           
-      }); // ajax 종료
-   }); // mod 클릭 종료
-   
-   
-   $(window).bind("beforeunload", function(e){
-         remove();
-   });
-   
+	
+	$("#sensor_sn").val($(".1", opener.document).text());
+	$("#sensor_kind").val($(".2", opener.document).text());
+	$("#model_name").val($(".3", opener.document).text());
+	$("#voltage").val($(".4", opener.document).text());
+	$("#manufacturer").val($(".5", opener.document).text());
+	$("#vertical").val($(".6", opener.document).text());
+	
+	function remove(){
+		$(".1" ,opener.document).removeClass();
+		$(".2" ,opener.document).removeClass();
+		$(".3" ,opener.document).removeClass();
+		$(".4" ,opener.document).removeClass();
+		$(".5" ,opener.document).removeClass();
+		$(".6" ,opener.document).removeClass();
+	}
+	
+	
+	
+	$("#mod").click(function(){
+		
+		if($("#sensor_sn").val() == "" || $("#sensor_kind").val() == "" || $("#model_name").val() == ""
+ 			|| $("#voltage option:selected").val() == "" || $("#manufacturer option:selected").val() == "" ) {
+ 		alert("빈 값이 있어 등록되지 않습니다.");
+ 		return false;
+ 		}
+		
+		var query = { 
+						sensor_sn : $("#sensor_sn").val(),
+						sensor_kind : $("#sensor_kind").val(),
+						model_name : $("#model_name").val(),
+// 						voltage : $("#voltage").val(),
+// 						manufacturer : $("#manufacturer").val()
+						voltage : $("#voltage option:selected").val(),
+						manufacturer : $("#manufacturer option:selected").val(),
+						vertical : $("#vertical option:selected").val()
+			}
+		
+		console.log(query);
+		
+		$.ajax({
+			  type : "POST",
+			  url : "/mysensor/mysensormod.do",
+			  data : query,
+			  success : function(data){
+				  if( data == "success"){
+					  alert("수정되었습니다");
+					  window.opener.location.reload();
+					  remove();
+					  window.close();
+				  } else{
+					  alert("수정에 실패했습니다");
+				  }
+			  }
+			  
+		}); // ajax 종료
+	}); // mod 클릭 종료
+	
+	
+	$(window).bind("beforeunload", function(e){
+			remove();
+	});
+	
 });
 </script>
 </head>
 <body>
 <center><h2>센서정보수정</h2></center>
 <div class="sensormodify">
-   시리얼넘버<input type="text" id="sensor_sn" name="sensor_sn" disabled="disabled"/><br/>
-   종류<input type="text" id="sensor_kind" name="sensor_kind" /><br/>
-   모델명<input type="text" id="model_name" name="model_name" /><br/>
-<!--    전압<input type="text" id="voltage" name="voltage" /><br/> -->
-<!--    제조사<input type="text" id="manufacturer" name="manufacturer" /><br/> -->
-   전압<select id="voltage">
-         <option></option>
-         <option>300mv</option>
-         <option>500mv</option>
-         <option>1000mv</option>
-      </select><br/>
-   제조사<select id="manufacturer">
-         <option></option>
-         <option>Campbell Soup Company</option>
-         <option>SICK</option>
-         <option>프리콘</option>
-         <option>(주)로텍인스투르먼트</option>
-         <option>(주)엠텍</option>
-      </select><br/>
-   <input type="button"  value="수정" id="mod" />
-   </div>
+	시리얼넘버<input type="text" id="sensor_sn" name="sensor_sn" disabled="disabled"/><br/>
+	종류<input type="text" id="sensor_kind" name="sensor_kind" /><br/>
+	모델명<input type="text" id="model_name" name="model_name" /><br/>
+<!-- 	전압<input type="text" id="voltage" name="voltage" /><br/> -->
+<!-- 	제조사<input type="text" id="manufacturer" name="manufacturer" /><br/> -->
+	전압<select id="voltage">
+			<option></option>
+			<option>300mv</option>
+			<option>500mv</option>
+			<option>1000mv</option>
+		</select><br/>
+	제조사<select id="manufacturer">
+			<option></option>
+			<option>Campbell Soup Company</option>
+			<option>SICK</option>
+			<option>프리콘</option>
+			<option>(주)로텍인스투르먼트</option>
+			<option>(주)엠텍</option>
+		</select><br/>
+		축 개수<select id="vertical">
+		<option></option>
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
+		</select><br/>
+	<input type="button"  value="수정" id="mod" />
+	</div>
 </body> 
 </html>

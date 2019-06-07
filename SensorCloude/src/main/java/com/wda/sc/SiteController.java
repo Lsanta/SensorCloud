@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.ProcessPidVO;
@@ -31,6 +34,7 @@ import com.wda.sc.domain.Search;
 import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CheckboardService;
+import com.wda.sc.service.MysensorService;
 import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
@@ -46,6 +50,7 @@ public class SiteController {
 
 	private SiteService siteservice;
 	private CheckboardService checkboardservice;
+	private MysensorService mysensorservice;
 
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
 	public String address(Locale locale, Model model) {
@@ -71,6 +76,11 @@ public class SiteController {
 			// response.sendRedirect("/sitelist/1");
 		}
 
+		//보유 센서 넘기기
+		ArrayList<MysensorVO> arr2 = mysensorservice.getMysensor();
+		System.out.println(arr2);
+		
+		model.addAttribute("siteSensor", arr2);
 		return "site/siteadd";
 
 	}
@@ -422,8 +432,19 @@ public class SiteController {
 	// 현장추가
 	@RequestMapping(value = "siteadd.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String insertSite(SiteVO site) {
+	public String insertSite(SiteVO site, @RequestBody Map<String,Object> map) {
+		System.out.println("현장 추가");
+		System.out.println(map);
 		
+		site.setType_no((String) map.get("type_no"));
+		site.setAddress((String) map.get("address"));
+		site.setSite_name((String)map.get("site_name"));
+
+	    site.setRperiod((String) map.get("rperiod"));
+	    site.setSig_port_num((String) map.get("sig_port_num"));
+	    site.setVirtual_port((String) map.get("virtual_port"));
+		
+	    System.out.println("사이트" +site);
 		ProcessPidVO setPid = new ProcessPidVO();
 		
 		switch (site.getType_no()) {
@@ -482,11 +503,58 @@ public class SiteController {
 					setPid.setPid(rawPid_int.get(i).toString());
 				}
 			}
-			System.out.println("4");
-			setPid.setSite_id(site.getSite_id());
-			System.out.println("5");
+		
+//			setPid.setSite_id(site.getSite_id());	//site_id 불러오기
+			setPid.setSite_id(site_id);	//site_id 불러오기
+			System.out.println("사이트아이디" + site_id);
+			System.out.println("setPid" + setPid);
 			siteservice.setProcessPid(setPid);
-			System.out.println("6");
+
+			//
+			JSONArray naArr = JSONArray.fromObject(map.get("sensorData"));
+			JSONObject na = JSONObject.fromObject(map.get("sensorData"));
+			
+			System.out.println(na);
+			
+			
+			Iterator Iter = na.keys();
+			InstallSensorVO test = new InstallSensorVO();
+			System.out.println(naArr);
+			  while(Iter.hasNext())
+			    {
+			        String b1 = Iter.next().toString();
+			        test.setSensor_sn(b1);
+			        
+			        JSONArray na2 = JSONArray.fromObject(na.get(b1));
+			        
+			        for(int i = 0; i <na2.size(); i++) {
+			        	JSONObject na3 = JSONObject.fromObject(na2.get(i));
+			        	Iterator Iter2 = na3.keys();
+			        	
+			        	System.out.println(i+" : "+na2.get(i));
+			        			        	
+			        	for(int j = 0; j < 1; j++) {
+			        		String c = Iter2.next().toString();
+			        		test.setProgram_var(c);
+			        		
+				        	System.out.println(na3.get(c));
+				        	
+				        	String[] spl = ((String) na3.get(c)).split(",");
+				        	test.setUpper_limit(spl[0]);
+				        	test.setLower_limit(spl[1]);
+				        	test.setSite_id(site_id);
+				        	
+				        	// insert DB 
+				        	int resultNum = siteservice.addInstallSensor(test);
+				        	
+			        	}
+			        }		        
+
+			    }
+			
+			
+			
+			
 			return "success";
 		}
 	}

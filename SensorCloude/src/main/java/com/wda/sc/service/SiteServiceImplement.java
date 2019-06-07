@@ -263,4 +263,10 @@ public class SiteServiceImplement implements SiteService {
 		return mapper.getLimitAlarm_member(site_id);
 	}
 
+	@Override
+	public int addInstallSensor(InstallSensorVO test) {
+		// TODO Auto-generated method stub
+		return mapper.addInstallSensor(test);
+	}
+
 }
