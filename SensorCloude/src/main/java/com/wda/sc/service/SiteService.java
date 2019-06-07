@@ -87,6 +87,9 @@ public interface SiteService {
 	// 설치센서조회
 	public ArrayList<InstallSensorVO> installSensorList(Map<String, Object> parm);
 	
+	//install_sensor 받아오기
+	public ArrayList<InstallSensorVO> getInstallSensor(int site_id);
+	
 	public int sensorPageNum(String site_id);
 	//센서정보 가져오기
 	public ArrayList<MysensorVO> getSensor(String sensor_sn);

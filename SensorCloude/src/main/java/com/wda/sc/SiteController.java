@@ -433,131 +433,140 @@ public class SiteController {
 	@RequestMapping(value = "siteadd.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String insertSite(SiteVO site, @RequestBody Map<String,Object> map) {
-		System.out.println("현장 추가");
-		System.out.println(map);
-		
-		site.setType_no((String) map.get("type_no"));
-		site.setAddress((String) map.get("address"));
-		site.setSite_name((String)map.get("site_name"));
-
-	    site.setRperiod((String) map.get("rperiod"));
-	    site.setSig_port_num((String) map.get("sig_port_num"));
-	    site.setVirtual_port((String) map.get("virtual_port"));
-		
-	    System.out.println("사이트" +site);
-		ProcessPidVO setPid = new ProcessPidVO();
-		
-		switch (site.getType_no()) {
-		case "building":
-			site.setType_no("1");
-			break;
-		case "mountain":
-			site.setType_no("0");
-			break;
-		}
-
-		int a = siteservice.siteadd(site);
-		int b = siteservice.networkadd(site);
-		
-		if (a == 0 && b == 0) {	
-			return "false";
-		} else {
+//		System.out.println("현장 추가");
+//		System.out.println(map);
+//		
+//		site.setType_no((String) map.get("type_no"));
+//		site.setAddress((String) map.get("address"));
+//		site.setSite_name((String)map.get("site_name"));
+//
+//	    site.setRperiod((String) map.get("rperiod"));
+//	    site.setSig_port_num((String) map.get("sig_port_num"));
+//	    site.setVirtual_port((String) map.get("virtual_port"));
+//		
+//	    System.out.println("사이트" +site);
+//		ProcessPidVO setPid = new ProcessPidVO();
+//		
+//		switch (site.getType_no()) {
+//		case "building":
+//			site.setType_no("1");
+//			break;
+//		case "mountain":
+//			site.setType_no("0");
+//			break;
+//		}
+//
+//		int a = siteservice.siteadd(site);
+//		int b = siteservice.networkadd(site);
+//		
+//		if (a == 0 && b == 0) {	
+//			return "false";
+//		} else {
 			int site_id = siteservice.getSiteNum();
+//						
+//			JSONArray naArr = JSONArray.fromObject(map.get("sensorData"));
+//			JSONObject na = JSONObject.fromObject(map.get("sensorData"));
+//			
+//			System.out.println(na);
+//			
+//			Iterator Iter = na.keys();
+//			InstallSensorVO test = new InstallSensorVO();
+//			System.out.println(naArr);
+//			  while(Iter.hasNext())
+//			    {
+//			        String b1 = Iter.next().toString();
+//			        test.setSensor_sn(b1);
+//			        
+//			        JSONArray na2 = JSONArray.fromObject(na.get(b1));
+//			        
+//			        for(int i = 0; i <na2.size(); i++) {
+//			        	JSONObject na3 = JSONObject.fromObject(na2.get(i));
+//			        	Iterator Iter2 = na3.keys();
+//			        	
+//			        	System.out.println(i+" : "+na2.get(i));
+//			        			        	
+//			        	for(int j = 0; j < 1; j++) {
+//			        		String c = Iter2.next().toString();
+//			        		test.setProgram_var(c);
+//			        		
+//				        	System.out.println(na3.get(c));
+//				        	
+//				        	String[] spl = ((String) na3.get(c)).split(",");
+//				        	test.setUpper_limit(spl[0]);
+//				        	test.setLower_limit(spl[1]);
+//				        	test.setSite_id(site_id);
+//				        	
+//				        	// insert DB 
+//				        	int resultNum = siteservice.addInstallSensor(test);
+//				        	
+//			        	}
+//			        }		        
+//
+//			    }
+//			
+//			String command = "C:\\Users\\user\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
+//			
+			ArrayList<InstallSensorVO> arr = siteservice.getInstallSensor(1);
 			
-			
-			String command = "C:\\Users\\bon300-27\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
-			ArrayList<String> rawPid = new Cmd().exeCmd(command);
-			System.out.println(rawPid);
-			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
-			ArrayList<String> temp = new ArrayList<String>();
-			
-			/* String형 list를 Int형으로 변환 */
-			ArrayList<Integer> rawPid_int = new ArrayList<Integer>();
-			ArrayList<Integer> dbPid_int = new ArrayList<Integer>();
-			ArrayList<String> dbPid = new ArrayList<String>();
-			
-			System.out.println("1");
-			for(int i = 0; i < dbPid_object.size(); i++) {
-				dbPid.add(dbPid_object.get(i).getPid());
+			for(int i=0; i < arr.size(); i++) {
+				System.out.println(arr.get(i).getProgram_var()+" "+arr.get(i).getUpper_limit()+" "+arr.get(i).getLower_limit());
 			}
 			
-			for(int i = 0; i < rawPid.size(); i++) {
-				rawPid_int.add(Integer.parseInt(rawPid.get(i)));
-			}
-			
-			for(int i = 0; i < dbPid.size(); i++) {
-				dbPid_int.add(Integer.parseInt(dbPid.get(i)));
-			}
-			System.out.println("2");
-			/* 배열 정렬 */
-			
-			Ascending ascending = new Ascending();
-			
-			Collections.sort(rawPid_int, ascending);
-			Collections.sort(dbPid_int, ascending);
-			
-			System.out.println("3");
-			/* db에 들어있지 않는 pid를 얻어와서 배열에 저장*/
-			for(int i = 0; i < rawPid_int.size(); i++) {
-				if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
-					setPid.setPid(rawPid_int.get(i).toString());
-				}
-			}
-		
-//			setPid.setSite_id(site.getSite_id());	//site_id 불러오기
-			setPid.setSite_id(site_id);	//site_id 불러오기
-			System.out.println("사이트아이디" + site_id);
-			System.out.println("setPid" + setPid);
-			siteservice.setProcessPid(setPid);
+			//for(int i=0; i < ; i++)
+//			
+//			ArrayList<String> rawPid = new Cmd().exeCmd(command);
+//			System.out.println(rawPid);
+//			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
+//			ArrayList<String> temp = new ArrayList<String>();
+//			
+//			/* String형 list를 Int형으로 변환 */
+//			ArrayList<Integer> rawPid_int = new ArrayList<Integer>();
+//			ArrayList<Integer> dbPid_int = new ArrayList<Integer>();
+//			ArrayList<String> dbPid = new ArrayList<String>();
+//			
+//			System.out.println("1");
+//			for(int i = 0; i < dbPid_object.size(); i++) {
+//				dbPid.add(dbPid_object.get(i).getPid());
+//			}
+//			
+//			for(int i = 0; i < rawPid.size(); i++) {
+//				rawPid_int.add(Integer.parseInt(rawPid.get(i)));
+//			}
+//			
+//			for(int i = 0; i < dbPid.size(); i++) {
+//				dbPid_int.add(Integer.parseInt(dbPid.get(i)));
+//			}
+//			System.out.println("2");
+//			/* 배열 정렬 */
+//			
+//			Ascending ascending = new Ascending();
+//			
+//			Collections.sort(rawPid_int, ascending);
+//			Collections.sort(dbPid_int, ascending);
+//			
+//			System.out.println("3");
+//			/* db에 들어있지 않는 pid를 얻어와서 배열에 저장*/
+//			for(int i = 0; i < rawPid_int.size(); i++) {
+//				if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
+//					setPid.setPid(rawPid_int.get(i).toString());
+//				}
+//			}
+//		
+////			setPid.setSite_id(site.getSite_id());	//site_id 불러오기
+//			setPid.setSite_id(site_id);	//site_id 불러오기
+//			System.out.println("사이트아이디" + site_id);
+//			System.out.println("setPid" + setPid);
+//			siteservice.setProcessPid(setPid);
 
 			//
-			JSONArray naArr = JSONArray.fromObject(map.get("sensorData"));
-			JSONObject na = JSONObject.fromObject(map.get("sensorData"));
 			
-			System.out.println(na);
-			
-			
-			Iterator Iter = na.keys();
-			InstallSensorVO test = new InstallSensorVO();
-			System.out.println(naArr);
-			  while(Iter.hasNext())
-			    {
-			        String b1 = Iter.next().toString();
-			        test.setSensor_sn(b1);
-			        
-			        JSONArray na2 = JSONArray.fromObject(na.get(b1));
-			        
-			        for(int i = 0; i <na2.size(); i++) {
-			        	JSONObject na3 = JSONObject.fromObject(na2.get(i));
-			        	Iterator Iter2 = na3.keys();
-			        	
-			        	System.out.println(i+" : "+na2.get(i));
-			        			        	
-			        	for(int j = 0; j < 1; j++) {
-			        		String c = Iter2.next().toString();
-			        		test.setProgram_var(c);
-			        		
-				        	System.out.println(na3.get(c));
-				        	
-				        	String[] spl = ((String) na3.get(c)).split(",");
-				        	test.setUpper_limit(spl[0]);
-				        	test.setLower_limit(spl[1]);
-				        	test.setSite_id(site_id);
-				        	
-				        	// insert DB 
-				        	int resultNum = siteservice.addInstallSensor(test);
-				        	
-			        	}
-			        }		        
-
-			    }
 			
 			
 			
 			
 			return "success";
 		}
-	}
+	//}
 	
 	// 현장수정
 	@RequestMapping(value = "sitemodify.do", method = RequestMethod.POST)

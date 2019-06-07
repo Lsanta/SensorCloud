@@ -324,4 +324,8 @@
 	<insert id="addInstallSensor" parameterType="com.wda.sc.domain.InstallSensorVO">
 		insert into install_sensor values(sensor_seq.nextval,#{sensor_sn},#{site_id},#{program_var},#{upper_limit},#{lower_limit})
 	</insert>
+	
+	<select id="getInstallSensor" resultType="com.wda.sc.domain.InstallSensorVO">
+		select * from install_sensor where site_id=#{site_id}
+	</select>
 </mapper>

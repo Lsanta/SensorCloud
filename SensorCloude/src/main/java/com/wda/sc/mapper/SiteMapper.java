@@ -127,4 +127,7 @@ public interface SiteMapper {
 	
 	//설치 센서에 센서 정보 추가
 	public int addInstallSensor(InstallSensorVO test);
+	
+	//install_sensor 받아오기
+	public ArrayList<InstallSensorVO> getInstallSensor(int site_id);
 }
