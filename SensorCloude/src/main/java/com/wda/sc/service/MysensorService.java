@@ -27,8 +27,15 @@ public interface MysensorService {
 
 	//현장 추가에 넘길 보유센서 목록
 	public ArrayList<MysensorVO> getMysensor();
-	
-	
+
+	//현장 설치되어있는 센서 추가
+	public int insertInstallsensor(InstallSensorVO vo);
+
+	//현장 설치되어 있는 센서 수정
+	public int modInstallsensor(InstallSensorVO vo);
+
+	//현장 설치되어 있는 센서 삭제
+	public int delInstallsensor(int sensor_id);
 
 
 }

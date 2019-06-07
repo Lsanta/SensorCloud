@@ -91,9 +91,9 @@ public interface SiteMapper {
 
 	public ArrayList<MysensorVO> getSensor(String sensor_sn);
 
-	public ArrayList<MysensorVO> smSearch(Search s);
+	public ArrayList<InstallSensorVO> smSearch(Search s);
 
-	public ArrayList<MysensorVO> getSearchResultSM(Map<Object, Object> parm);
+	public ArrayList<InstallSensorVO> getSearchResultSM(Map<Object, Object> parm);
 	
 	//그래프 그릴려고 그래프 그려오기
 	public ArrayList<SensorDataVO> getSensingDate(String site_id);
