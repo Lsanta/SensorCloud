@@ -14,9 +14,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +34,7 @@ import com.wda.sc.domain.Search;
 import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CheckboardService;
+import com.wda.sc.service.MysensorService;
 import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
@@ -46,6 +50,7 @@ public class SiteController {
 
 	private SiteService siteservice;
 	private CheckboardService checkboardservice;
+	private MysensorService mysensorservice;
 
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
 	public String address(Locale locale, Model model) {
@@ -71,6 +76,11 @@ public class SiteController {
 			// response.sendRedirect("/sitelist/1");
 		}
 
+		//보유 센서 넘기기
+		ArrayList<MysensorVO> arr2 = mysensorservice.getMysensor();
+		System.out.println(arr2);
+		
+		model.addAttribute("siteSensor", arr2);
 		return "site/siteadd";
 
 	}
@@ -422,73 +432,87 @@ public class SiteController {
 	// 현장추가
 	@RequestMapping(value = "siteadd.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String insertSite(SiteVO site) {
-		
-		ProcessPidVO setPid = new ProcessPidVO();
-		
-		switch (site.getType_no()) {
-		case "building":
-			site.setType_no("1");
-			break;
-		case "mountain":
-			site.setType_no("0");
-			break;
-		}
+	public String insertSite(SiteVO site, @RequestBody Map<String,Object> map) throws ParseException {
+		System.out.println("현장 추가");
 
-		int a = siteservice.siteadd(site);
-		int b = siteservice.networkadd(site);
+		System.out.println(map);
+		System.out.println(map.get("sensorData"));
+		String jsonStr = (String) map.get("sensorData");
 		
-		if (a == 0 && b == 0) {	
-			return "false";
-		} else {
-			int site_id = siteservice.getSiteNum();
-			
-			
-			String command = "C:\\Users\\bon300-27\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
-			ArrayList<String> rawPid = new Cmd().exeCmd(command);
-			System.out.println(rawPid);
-			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
-			ArrayList<String> temp = new ArrayList<String>();
-			
-			/* String형 list를 Int형으로 변환 */
-			ArrayList<Integer> rawPid_int = new ArrayList<Integer>();
-			ArrayList<Integer> dbPid_int = new ArrayList<Integer>();
-			ArrayList<String> dbPid = new ArrayList<String>();
-			
-			System.out.println("1");
-			for(int i = 0; i < dbPid_object.size(); i++) {
-				dbPid.add(dbPid_object.get(i).getPid());
-			}
-			
-			for(int i = 0; i < rawPid.size(); i++) {
-				rawPid_int.add(Integer.parseInt(rawPid.get(i)));
-			}
-			
-			for(int i = 0; i < dbPid.size(); i++) {
-				dbPid_int.add(Integer.parseInt(dbPid.get(i)));
-			}
-			System.out.println("2");
-			/* 배열 정렬 */
-			
-			Ascending ascending = new Ascending();
-			
-			Collections.sort(rawPid_int, ascending);
-			Collections.sort(dbPid_int, ascending);
-			
-			System.out.println("3");
-			/* db에 들어있지 않는 pid를 얻어와서 배열에 저장*/
-			for(int i = 0; i < rawPid_int.size(); i++) {
-				if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
-					setPid.setPid(rawPid_int.get(i).toString());
-				}
-			}
-			System.out.println("4");
-			setPid.setSite_id(site.getSite_id());
-			System.out.println("5");
-			siteservice.setProcessPid(setPid);
-			System.out.println("6");
-			return "success";
-		}
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(jsonStr);
+		JSONObject jsonObj = (JSONObject) obj;
+
+		String name = (String) jsonObj.get("aaa[망했네]");
+		System.out.println(name);
+		
+		
+		return "ff";
+//		ProcessPidVO setPid = new ProcessPidVO();
+//		
+//		switch (site.getType_no()) {
+//		case "building":
+//			site.setType_no("1");
+//			break;
+//		case "mountain":
+//			site.setType_no("0");
+//			break;
+//		}
+//
+//		int a = siteservice.siteadd(site);
+//		int b = siteservice.networkadd(site);
+//		
+//		if (a == 0 && b == 0) {	
+//			return "false";
+//		} else {
+//			int site_id = siteservice.getSiteNum();
+//			
+//			
+//			String command = "C:\\Users\\bon300-27\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
+//			ArrayList<String> rawPid = new Cmd().exeCmd(command);
+//			System.out.println(rawPid);
+//			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
+//			ArrayList<String> temp = new ArrayList<String>();
+//			
+//			/* String형 list를 Int형으로 변환 */
+//			ArrayList<Integer> rawPid_int = new ArrayList<Integer>();
+//			ArrayList<Integer> dbPid_int = new ArrayList<Integer>();
+//			ArrayList<String> dbPid = new ArrayList<String>();
+//			
+//			System.out.println("1");
+//			for(int i = 0; i < dbPid_object.size(); i++) {
+//				dbPid.add(dbPid_object.get(i).getPid());
+//			}
+//			
+//			for(int i = 0; i < rawPid.size(); i++) {
+//				rawPid_int.add(Integer.parseInt(rawPid.get(i)));
+//			}
+//			
+//			for(int i = 0; i < dbPid.size(); i++) {
+//				dbPid_int.add(Integer.parseInt(dbPid.get(i)));
+//			}
+//			System.out.println("2");
+//			/* 배열 정렬 */
+//			
+//			Ascending ascending = new Ascending();
+//			
+//			Collections.sort(rawPid_int, ascending);
+//			Collections.sort(dbPid_int, ascending);
+//			
+//			System.out.println("3");
+//			/* db에 들어있지 않는 pid를 얻어와서 배열에 저장*/
+//			for(int i = 0; i < rawPid_int.size(); i++) {
+//				if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
+//					setPid.setPid(rawPid_int.get(i).toString());
+//				}
+//			}
+//			System.out.println("4");
+//			setPid.setSite_id(site.getSite_id());
+//			System.out.println("5");
+//			siteservice.setProcessPid(setPid);
+//			System.out.println("6");
+//			return "success";
+//		}
 	}
 	
 	// 현장수정

@@ -218,11 +218,8 @@ geocoder.addressSearch(site, function(result, status) {
 					var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
 					//dateAxis.renderer.grid.template.location = 100;  //x축 간격? 줄 생기는 밀집도 같은거
 					
+							
 					//dateAxis.dateFormats.setKey("day", "MMM-dd");
-					dateAxis.baseInterval = {
- 						 "timeUnit": "second",
-  						  "count": 1
- 					}
 					//dateAxis.periodChangeDateFormats.setKey("second", "mm-dd mm:ss"); 
 					//dateAxis.renderer.labels.template.fill = am4core.color("#000000");  //x축 글씨 색깔
 		

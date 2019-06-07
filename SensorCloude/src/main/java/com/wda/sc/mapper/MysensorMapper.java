@@ -26,6 +26,8 @@ public interface MysensorMapper {
 	//검색2
 	public ArrayList<MysensorVO> getSearchResult(Map<Object, Object> parm);
 	
+	//현장 추가에 넘길 보유센서 목록
+	public ArrayList<MysensorVO> getMysensor();
 	
 
 }

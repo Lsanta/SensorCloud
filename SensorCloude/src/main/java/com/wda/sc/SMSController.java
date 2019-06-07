@@ -37,7 +37,7 @@ public class SMSController {
 	private SiteService siteservice;
 	
 	//알람 전송을 누르면 
-	@RequestMapping(value = "/alarmadd.do")
+	@RequestMapping(value = "/alarmadd.do" ,method = RequestMethod.POST)
 	@ResponseBody
 	public String alarmadd(AlarmVO vo, @RequestBody Map<String,Object> map, HttpSession session) {
 		System.out.println("문자전송 컨트롤러");
