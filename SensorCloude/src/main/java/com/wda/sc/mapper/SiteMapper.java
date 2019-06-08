@@ -130,4 +130,7 @@ public interface SiteMapper {
 	
 	//install_sensor 받아오기
 	public ArrayList<InstallSensorVO> getInstallSensor(int site_id);
+	
+	//현장 수정눌렀을때 가져올 센서들에대한 정보 
+	public List<InstallSensorVO> getsiteModSensor(int site_id);
 }

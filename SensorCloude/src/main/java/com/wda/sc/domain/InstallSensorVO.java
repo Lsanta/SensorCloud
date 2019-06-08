@@ -10,4 +10,7 @@ public class InstallSensorVO {
 	private String program_var;
 	private String upper_limit;
 	private String lower_limit;
+	
+	private String sensor_kind;
+	private int vertical;
 }

@@ -324,4 +324,11 @@
 	<select id="getInstallSensor" resultType="com.wda.sc.domain.InstallSensorVO">
 		select * from install_sensor where site_id=#{site_id}
 	</select>
+	<!-- 현장 수정눌렀을때 가져오는 센서들에 대한 정보  -->
+	<select id="getsiteModSensor" resultType="com.wda.sc.domain.InstallSensorVO">
+		select m.sensor_sn, m.sensor_kind, m.vertical, i.sensor_id, i.site_id, i.program_var, i.upper_limit, i.lower_limit
+		from my_sensor m, install_sensor i
+		where m.sensor_sn = i.sensor_sn and i.site_id= #{site_id}
+	</select>
+	
 </mapper>

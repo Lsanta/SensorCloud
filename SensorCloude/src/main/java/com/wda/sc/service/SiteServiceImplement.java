@@ -275,4 +275,10 @@ public class SiteServiceImplement implements SiteService {
 		return mapper.getInstallSensor(site_id);
 	}
 
+	@Override
+	public List<InstallSensorVO> getsiteModSensor(int site_id) {
+		//현장 수정눌렀을때 가져올 센서들에대한 정보 
+		return mapper.getsiteModSensor(site_id);
+	}
+
 }
