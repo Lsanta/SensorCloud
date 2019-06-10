@@ -47,9 +47,14 @@ public class mMypageController {
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value ="/mypagemain", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	   public JSONObject mainlist(@RequestBody String id,Locale locale, Model model, Criteria criteria) {
+	   public JSONObject mainlist(@RequestBody String idt,Locale locale, Model model, Criteria criteria) {
 			System.out.println("확인");
+			System.out.println(idt);
+			String[] array = idt.split("&");
+			String[] page2 = array[0].split("=");
+			String[] id2 = array[1].split("=");
 			
+			String id = id2[1];
 	      int pagenum = criteria.getPagenum();
 	       
 	       	 Paging page = new Paging();   //최대한 코드를 수정 안하기 위한 기존 페이징

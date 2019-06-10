@@ -79,7 +79,7 @@ $(document).ready(function() {
 				url : "http://52.79.242.145:8080/app/mypage/mypagemain",
 				//url : "http://39.127.7.58:8080/app/mypage/mypagemain",
 				async:false,
-				data : {pagenum : 1},
+				data : {pagenum : 1, id : id},
 				success : function(result){
 						
 						var page="";
