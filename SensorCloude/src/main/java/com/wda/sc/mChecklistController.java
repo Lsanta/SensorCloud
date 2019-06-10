@@ -2,6 +2,8 @@ package com.wda.sc;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -14,6 +16,7 @@ import javax.imageio.ImageIO;
 import org.imgscalr.Scalr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +54,28 @@ public class mChecklistController {
       int board_no = Integer.parseInt(no);
       System.out.println(Checkboardservice.mgetAttachList(board_no));
       return new ResponseEntity<>(Checkboardservice.mgetAttachList(board_no), HttpStatus.OK);
+   }
+   
+   
+	
+   @ResponseBody
+   @RequestMapping(value="/mdisplay", method = RequestMethod.GET)
+   public ResponseEntity<byte[]> mdisplay(String fileName){
+      
+      System.out.println("/display경로로 들어오나");
+      File file = new File("c:\\upload\\" + fileName);
+      System.out.println("fileCallPath"+"c:\\upload\\" + fileName );
+      ResponseEntity<byte[]> result = null;
+      
+      try {
+         HttpHeaders header = new HttpHeaders();
+         
+         header.add("Content-Type", Files.probeContentType(file.toPath()));
+         result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),header,HttpStatus.OK);
+      }catch(IOException e) {
+         e.printStackTrace();
+      }
+      return result;
    }
 
    // 점검이력

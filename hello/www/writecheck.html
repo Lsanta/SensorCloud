@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-        <title>점검이력글쓰기</title>
-        <link rel="stylesheet" type="text/css" href="./css/jquery.mobile-1.4.5.css" />
-        <link rel="stylesheet" type="text/css" href="css/writecheck.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, 
+        maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/writecheck.css">
+
+    <title>6-1 점검이력 글쓰기 + 갤러리 </title>
+</head>
 
 <body>
-        <div data-role="page" style="background:#F4F6FD;">
-    <div data-role="header"  data-position="fixed" id="header">
-        <!-- <img src="img/logo.png" id="aa"> -->
-        <h1 style="font-size: 30px">SENSOR CLOUD</h1>
+    <div class="header">
+
+
+        <h1>점검이력 글쓰기</h1>
     </div>
     <div id="writecontent">
+
         <div id="writecontent1">
-            
+
             <input type="text" id="checktitle" name="checktitle" placeholder="title">
-            
-            <button id="cameraTakePicture"><img src="img/camera.png" style="width:25px; height:25px;"></button>
-            <button id="cameraGetPicture"><img src="img/library.png" style="width:25px; height:25px;"></button>
+
 
             <select id='status'>
                 <option value='open' selected>open</option>
@@ -38,6 +39,8 @@
 
         <div id="selectcamrea">
 
+            <button id="cameraTakePicture">Camera</button>
+            <button id="cameraGetPicture">Library</button>
 
 
         </div>
@@ -61,32 +64,11 @@
 
     <div id="bottom">
 
-        <button id="confirmbutton" style="background:#2F2F38;">확인</button>
+        <button id="confirmbutton">확인</button>
 
     </div>
-    <div data-role="footer"  data-position="fixed" data-id="footerid1">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="main.html" rel="external" data-icon="home"></a></li>
-                    <li><a href="search.html" rel="external" data-icon="search"></a></li>
-                    <li><a href="timeline.html" rel="external" data-icon="comment"></a></li>
-                    <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-    
-    <!-- <div id="page-loading">
-        <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>   
-    </div> -->
-
-    <script src="./js/jquery.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
-    <script src="./js/jquery.mobile-1.4.5.js"></script>
-    <script type="text/javascript" src="cordova.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script type="text/javascript">
 
         // 사용자가 선택한 사진의 경로
@@ -155,88 +137,8 @@
             // 업로드 버튼 이벤트 정의  //172.26.2.117
             $("#confirmbutton").click(function () {
                 
-            /** 파일경로로부터 이름만 추출한다. */
-                //string.substring( start, end ) start필수 end 없으면 끝까지
-
-               alert(file_path);
-                var name = file_path.substring(file_path.lastIndexOf('/') + 1);
-                alert(name);
-                // 안드로이드는 파일이름 뒤에 ?123234234 형식의 내용이 붙어 오는 경우가 있으므로,
-                // 이 경우 ? 이하 내용을 잘라버린다.
-                var p = name.toLowerCase().lastIndexOf('?');
-                if (p > -1) {
-                    name = name.substring(0, p);
-                }
- 
-                // 안드로이드는 확장자가 없는 경우가 있으므로, 이 경우 확장자를 강제로 추가한다.
-                if (name.toLowerCase().lastIndexOf('.') < 0) {
-                    name += '.jpg';
-                }
- 
-                /** 업로드 옵션 */
-                var options = new FileUploadOptions();
-                // <input type='file' name='photo' > 과 같은 원리
-                options.fileKey = "file";
-                // 서버에 인식시킬 파일의 이름
-                options.fileName = name;
-                // 서버에 인식시킬 파일의 종류
-                options.mimeType = 'image/jpeg';
-                // 파일의 원본 데이터를 비교하지 않는다.
-                //post형식
-                options.httpMethod = 'POST';
-                options.trustAllHosts = true;
-                options.chunkedMode = false;
-                // 전송후 통신 종료 예약
-                options.headers = { Connection: "close" };
-                 
-               
-                var params = {};
-                params.value1 = file_path;
-                params.value2 = "param";
-
-                options.params = params;
-
-                /** 파일 전송 객체 생성 */
-                var ft = new FileTransfer();    
-                
-                /** 업로드를 수행한다.(전송할 파일 경로, 서버 주소, 성공콜백, 실패콜백, 옵션) */
-                // ft.upload(file_path, "http://39.127.7.58:8080/app/checklist/insertfile", 
-                ft.upload(file_path, "http://52.79.242.145:8080/app/checklist/insertfile", 
-                    function(r) {//성공콜백시 fileuploadresult객체와 함께 호출
-                        // HTTP 결과코드 받기
-                       
-                        // alert("Code = " + r.responseCode);//200
-                        // alert("Response = " + r.response);//x
-                        // alert("Sent = " + r.bytesSent);//
-
-
-
-                       // if (response.responseCode !== 200) {//기본적으로 http 통신시 서버에서 
-                            //성공응답을 보낼때 200코드를 전송해줌
-                           // alert('업로드에 실패했습니다.' + response.response);
-                           // return false;
-                       // }
- 
-                        // 서버에서 출력하는 내용을 JSON으로 변환한다.
-                        //JSON.parse() 메소드는 JSON.stringify() 메소드와는 반대로 
-                        //인수로 전달받은 string 객체를 json 객체로 변환시켜줍니다.
-
-                        // var json = JSON.parse(response.response);
-                        
-                        alert(r.responseCode+"upload is complete");
-                    },
-                    function(error) {
-                        if (error.code == FileTransferError.FILE_NOT_FOUND_ERR) {
-                            alert("file " + error.source + " not found");
-                        } else if (error.code == FileTransferError.INVALID_URL_ERR) {
-                            alert("url " + error.target + " invalid");
-                        } else if (error.code == FileTransferError.CONNECTION_ERR) {
-                            alert("connection error");
-                        } else {
-                            alert("unknown error");
-                        }
-                    },
-                    options);
+            //글쓰기 ajax 성공후 받아온 board_no를 전역변수로 저장 
+            var getboard_no;
 
             //site_id 가져오기 
             var site_id = location.href.split("=");
@@ -277,26 +179,120 @@
                         site_id : siteid,
                         user_id : user_id
                      };
-                     console.log(checkcontent);
-                     console.log(JSON.stringify(checkcontent));
-                    
-                    
+
+
                 $.ajax({
                     type: "POST",
-                    url: "http://52.79.242.145:8080/app/checklist/writecheck",
-                    //url: "http:///39.127.7.58:8080/app/checklist/writecheck",
+                     url: "http:///52.79.242.145:8080/app/checklist/writecheck",
+                    //url: "http://39.127.7.58:8080/app/checklist/writecheck",
+                    async:false,
                     contentType :"application/json; charset=utf-8",//전송할데이터타입
                     data: JSON.stringify(checkcontent),
                     dataType :"text",
                      
-                    success: function (success) {
-                        alert("success");
+                    success: function (boardno) {
+                        
+                        alert(boardno);
+                         getboard_no = boardno;
 
                         window.location.href="site.html?sid="+siteid;
                        
                     }
 
-                    });  
+                    });     
+
+
+
+
+
+
+
+            /** 파일경로로부터 이름만 추출한다. */
+                //string.substring( start, end ) start필수 end 없으면 끝까지
+
+               alert(file_path);
+                var name = file_path.substring(file_path.lastIndexOf('/') + 1);
+                alert(name);
+                // 안드로이드는 파일이름 뒤에 ?123234234 형식의 내용이 붙어 오는 경우가 있으므로,
+                // 이 경우 ? 이하 내용을 잘라버린다.
+               
+               
+                var p = name.toLowerCase().lastIndexOf('?');
+                if (p > -1) {
+                    name = name.substring(0, p);
+                }
+ 
+                // 안드로이드는 확장자가 없는 경우가 있으므로, 이 경우 확장자를 강제로 추가한다.
+                if (name.toLowerCase().lastIndexOf('.') < 0) {
+                    name += '.jpg';
+                }
+ 
+                /** 업로드 옵션 */
+                var options = new FileUploadOptions();
+                // <input type='file' name='photo' > 과 같은 원리
+                options.fileKey = "file";
+                // 서버에 인식시킬 파일의 이름
+                options.fileName = name;
+                // 서버에 인식시킬 파일의 종류
+                options.mimeType = 'image/jpeg';
+                // 파일의 원본 데이터를 비교하지 않는다.
+                //post형식
+                options.httpMethod = 'POST';
+                options.trustAllHosts = true;
+                options.chunkedMode = false;
+                // 전송후 통신 종료 예약
+                options.headers = { Connection: "close" };
+                 
+               
+                var params = {};
+                params.value1 = file_path;
+                params.value2 = getboard_no;
+
+                options.params = params;
+
+                /** 파일 전송 객체 생성 */
+                var ft = new FileTransfer();    
+                 
+                /** 업로드를 수행한다.(전송할 파일 경로, 서버 주소, 성공콜백, 실패콜백, 옵션) *///"http://39.127.7.58:8080/app/checklist/insertfile"
+                ft.upload(file_path,  "http:///52.79.242.145:8080/app/checklist/insertfile", 
+               
+                    function(r) {//성공콜백시 fileuploadresult객체와 함께 호출
+                        // HTTP 결과코드 받기
+                       
+                        // alert("Code = " + r.responseCode);//200
+                        // alert("Response = " + r.response);//x
+                        // alert("Sent = " + r.bytesSent);//
+  
+
+                       // if (response.responseCode !== 200) {//기본적으로 http 통신시 서버에서 
+                            //성공응답을 보낼때 200코드를 전송해줌
+                           // alert('업로드에 실패했습니다.' + response.response);
+                           // return false;
+                       // }
+ 
+                        // 서버에서 출력하는 내용을 JSON으로 변환한다.
+                        //JSON.parse() 메소드는 JSON.stringify() 메소드와는 반대로 
+                        //인수로 전달받은 string 객체를 json 객체로 변환시켜줍니다.
+
+                        // var json = JSON.parse(response.response);
+
+
+                        
+                        alert(r.responseCode+"upload is complete");
+                    },
+                    function(error) {
+                        if (error.code == FileTransferError.FILE_NOT_FOUND_ERR) {
+                            alert("file " + error.source + " not found");
+                        } else if (error.code == FileTransferError.INVALID_URL_ERR) {
+                            alert("url " + error.target + " invalid");
+                        } else if (error.code == FileTransferError.CONNECTION_ERR) {
+                            alert("connection error");
+                        } else {
+                            alert("unknown error");
+                        }
+                    },
+                    options);
+ 
 
             });
         }); // end jquery
