@@ -5,13 +5,15 @@ $(document).ready(function() {
 
 	$(document).on("click", "#sensorlist tr", function() {
 
-		// 클릭한 행을 tr 변수로
-		var tr = $("#sensorlist tr").index(this);
-
-		var sensor_sn = $("#sensorlist tr:eq(" + tr + ") td:eq(0)").text();
-		var sensor_kind = $("#sensorlist tr:eq(" + tr + ") td:eq(1)").text();
-
-		window.location.href = "/site/"+ url[2] +"/sensormodify/" + sensor_sn;
+		var openWin = window.open("/site/installsensormod/"+url[2], "pop",
+				 "width=500,height=510,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+		
+		var tr = $(this);
+		var sensor_sn = tr.children().eq(0).addClass("1");
+		var program_var = tr.children().eq(1).addClass("2");
+		var upper_limit = tr.children().eq(2).addClass("3");
+		var lower_limit = tr.children().eq(3).addClass("4");
+		var sensor_id = tr.children().eq(4).addClass("5");
 
 
 	});
@@ -19,11 +21,9 @@ $(document).ready(function() {
 	////////////////////*pagination*//////////////////////////////////
 
 	$("#add").click(function(){
-		window.location.href = "/site/"+ url[2] +"/sensoradd/1";
+		window.open("/site/installsensoradd/"+url[2], "pop",
+		"width=500,height=510,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 	});
-	
-
-	
 	
 	var num = 0;
 	if(url[3] != 'search1'){

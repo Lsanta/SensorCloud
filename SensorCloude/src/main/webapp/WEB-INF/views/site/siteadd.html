@@ -91,20 +91,29 @@
 
    </div>
    
-    <h2 class="sensor_option">센서 설정</h2>
-    <input type="button" class="plus_select" value="행 추가" />
+   <h2 class="sensor_option">센서 설정</h2>
+   <div class="sensorset">
+	   <div id="setbtn">
+	   		<input type="button" class="plus_select" value="행 추가" />
+	   		<input type="button" class="delete_select" value="행 삭제" />
+	   </div>     
+   
 	<div class="sensor_box">
-		<div id="addSensor0">
+		<div id="addSensor0" style="margin-bottom:3px">
 			<select class="my_sensor">
 				<option>선택</option>
              	<option th:each="ss : ${siteSensor}" th:text=" ${ss.sensor_sn} + '[' + ${ss.sensor_kind} + ']'" th:value="${ss.vertical}">
-            </option>
+            	</option>
 			</select>
+			
 		</div>
-	</div>
+	</div>  
+   </div>
+   
    <div id="btn">
       <button type="button" id="plus">확인</button>
    </div>
+
    </div>
 </th:block>
 
@@ -187,12 +196,24 @@ $(document).ready(function(){
 	
 	var count = 0;
 	
+	$('.delete_select').click(function(){
+		 if(count == 0)
+			 return false;
+		 $("#addSensor" + count).remove();
+		
+// 		for(var i=1; i < count+1; i++){
+// 		 $("#addSensor" + i).remove();
+// 		}
+		 count--;
+	});
+	
 	$('.plus_select').click(function(){
 		count++;		
 		
 		var html = $('#addSensor0').clone(true);
 		html.attr("id","addSensor" + count);
-		$(".sensor_box").append(html);	
+		$(".sensor_box").append(html);
+		$('#addSensor' + count).children().siblings().remove('input');
 	});
 	
 	//select 의 값이 바뀌면 ? 
@@ -216,15 +237,15 @@ $(document).ready(function(){
 		for(var i=0; i < input_size; i++ ) {
 			
 			$("#addSensor" + count).append( 
-					$('<input class="vert'+i+'" placeholder = "데이터 로거의 변수값과 똑같은 값을 적어주십시오" >', 
+					$('<br><input type="text" class="vert'+i+'" placeholder = "데이터 로거의 변수값과 똑같은 값을 적어주십시오." >', 
 // 							{ type: 'text', val: $('#div1').text() }
 							{ type: 'text'}
 					),
-					$('<input class="up'+i+'" placeholder = "상한값" >', 
+					$('<input type="text" class="up'+i+'" placeholder = "상한값" style="width:20%">', 
 // 							{ type: 'text', val: $('#div1').text() }
 							{ type: 'text'}
 					),
-					$('<input class="down'+i+'" placeholder = "하한값" >', 
+					$('<input type="text" class="down'+i+'" placeholder = "하한값" style="width:20%">', 
 // 							{ type: 'text', val: $('#div1').text() }
 							{ type: 'text'}
 					)
@@ -236,10 +257,6 @@ $(document).ready(function(){
 	});
 	
 
-	
-	
-	
-	
 
 	$("#plus").click(function(){
 	
@@ -253,7 +270,7 @@ $(document).ready(function(){
 			
 			var aa = $('#addSensor'+i);
 			var bb = aa.find('.my_sensor option:selected').text();
-			console.log(bb);
+			var bbSplit = bb.split('[');
 			
 			//jobj 생성
 			for( var j=0; j < aa.find('input').length/3; j++) {
@@ -271,7 +288,7 @@ $(document).ready(function(){
 				jarray.push(jobj);
 				
 			}
-			totalInfo[bb]= jarray ;
+			totalInfo[bbSplit[0]]= jarray ;
 // 			console.log(aa.find('input').eq(0).val());
 
 			console.log("이값은 전체 sneser의 추가 갯수입니다 " +check);

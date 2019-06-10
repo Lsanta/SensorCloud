@@ -1,0 +1,118 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100);
+@font-face {
+  font-family: A신그래픽L;
+  src: url('/resources/font/A신그래픽L.TTF');
+}
+
+body {
+  background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'A신그래픽L';
+}
+
+h2{
+	text-align: center;
+}
+.sensoradd {
+ padding: 40px;
+  width: 274px;
+  background-color: rgb(250, 251, 255);
+  margin: 0 auto;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.sensoradd input[type=button] {
+	height:40px;
+  width: 100%;
+  display: block;
+  margin: 10px 0;
+  position: relative;
+  font-size: 1.5em;
+}
+
+input[type=text]{
+ height: 44px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+input[type=text]:hover{
+ border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.sensoradd select {
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.sensoradd select:hover {
+  border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+#plus {
+    float:right;
+    width:15%;
+    height:30px;
+    margin-top:5%;
+    margin-right: 15%;
+    border: none;
+	 background-color: #2c3e50; /**/
+	 color: #FFF;
+	 cursor:pointer;
+	 font-size: 1em;
+}
+
+/* #plus:hover {
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #357ae8;
+} */
+
+.sensoradd a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 400;
+  text-align: center;
+  display: inline-block;
+  opacity: 0.6;
+  transition: opacity ease 0.5s;
+}
+
+.sensoradd a:hover {
+  opacity: 1;
+}
+
+.sensoradd input[type=text] {
+	width: 100%;
+	height: 30px;	
+	margin: 1%;
+	margin-left:0;
+}

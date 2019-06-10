@@ -195,13 +195,13 @@ public class SiteServiceImplement implements SiteService {
 	}
 
 	@Override
-	public ArrayList<MysensorVO> smSearch(Search s) {
+	public ArrayList<InstallSensorVO> smSearch(Search s) {
 		// TODO Auto-generated method stub
 		return mapper.smSearch(s);
 	}
 
 	@Override
-	public ArrayList<MysensorVO> getSearchResultSM(Map<Object, Object> parm) {
+	public ArrayList<InstallSensorVO> getSearchResultSM(Map<Object, Object> parm) {
 		// TODO Auto-generated method stub
 		return mapper.getSearchResultSM(parm);
 	}
@@ -261,6 +261,24 @@ public class SiteServiceImplement implements SiteService {
 	public List<AlarmMemberVO> getLimitAlarm_member(String site_id) {
 		
 		return mapper.getLimitAlarm_member(site_id);
+	}
+
+	@Override
+	public int addInstallSensor(InstallSensorVO test) {
+		// TODO Auto-generated method stub
+		return mapper.addInstallSensor(test);
+	}
+	
+	@Override
+	public ArrayList<InstallSensorVO> getInstallSensor(int site_id) {
+		// TODO Auto-generated method stub
+		return mapper.getInstallSensor(site_id);
+	}
+
+	@Override
+	public List<InstallSensorVO> getsiteModSensor(int site_id) {
+		//현장 수정눌렀을때 가져올 센서들에대한 정보 
+		return mapper.getsiteModSensor(site_id);
 	}
 
 }

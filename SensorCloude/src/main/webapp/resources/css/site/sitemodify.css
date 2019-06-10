@@ -11,6 +11,14 @@ html {
     margin-top: 125px;
     }
     
+    .sensorset {
+	width: 95%;
+	margin: 0 auto;
+	margin-bottom: 30px;
+	background-color: #fff;
+	padding: 20px;
+}   
+
 h1 {
 	text-align: center;
 	padding: 25px 0;
@@ -127,6 +135,10 @@ input.addnetwork_right_input {
 	position: relative;
 }
 
+.sensor_box {
+	margin-left: 5%;
+}
+
 #addcontent_right input[type=button] {
 	position: relative;
 	left: 82%;
@@ -161,6 +173,18 @@ button {
     cursor:pointer;
 }
 
+.my_sensor {
+	height: 30px;
+	background: #d8e9ef;
+	border:none;
+}
+
+.sensor_box input[type=text] {
+	width: 40%;
+	height: 30px;	
+	margin: 1%;
+	margin-left:0;
+}
 
 @media screen and (max-width: 768px) {
 #container {

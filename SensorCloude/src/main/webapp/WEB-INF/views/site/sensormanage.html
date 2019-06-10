@@ -57,40 +57,36 @@
 		<div id="main-content">
 			<div class="title-header">
 				<h1>보유센서</h1>
-				<button id="add" value="add">보유센서 추가</button>
+				<button id="add" value="add">설치센서 추가</button>
 			</div>
 
 			<table id="mysensor">
 				<thead>
 					<tr>
 						<th scope="col">시리얼넘버</th>
-						<th scope="col">종류</th>
-						<th scope="col">모델명</th>
-						<th scope="col">전압</th>
-						<th scope="col">제조사</th>
-						<th scope="col">등록일</th> 
+						<th scope="col">변수이름</th>
+						<th scope="col">상한값</th>
+						<th scope="col">하한값</th>
 					</tr>
 				</thead>
 				
 				<tbody id="sensorlist" th:if="${sensormanage == null}">
 				 	<tr th:each="sensorlist : ${sensorlist}">
 						<td th:text="${sensorlist.sensor_sn}"></td>
-						<td th:text="${sensorlist.sensor_kind}"></td>
-						<td th:text="${sensorlist.model_name}"></td>
-						<td th:text="${sensorlist.voltage}"></td>
-						<td th:text="${sensorlist.manufacturer}"></td>
-						<td th:text="${sensorlist.create_day}"></td>
+						<td th:text="${sensorlist.program_var}"></td>
+						<td th:text="${sensorlist.upper_limit}"></td>
+						<td th:text="${sensorlist.lower_limit}"></td>
+						<td style="display : none" th:text="${sensorlist.sensor_id}"></td>
 					</tr> 
 				</tbody>
 				
 				<tbody id="sensorlist" th:if="${sensormanage != null}">
 				 	<tr th:each="sensormanage : ${sensormanage}">
 						<td th:text="${sensormanage.sensor_sn}"></td>
-						<td th:text="${sensormanage.sensor_kind}"></td>
-						<td th:text="${sensormanage.model_name}"></td>
-						<td th:text="${sensormanage.voltage}"></td>
-						<td th:text="${sensormanage.manufacturer}"></td>
-						<td th:text="${sensormanage.create_day}"></td>
+						<td th:text="${sensormanage.program_var}"></td>
+						<td th:text="${sensormanage.upper_limit}"></td>
+						<td th:text="${sensormanage.lower_limit}"></td>
+						<td style="display : none" th:text="${sensormanage.sensor_id}"></td>
 					</tr> 
 				</tbody>
 			</table>
@@ -116,9 +112,8 @@
 		<div class="search">
 			<div class="select">
 				<select id="search-select">
-					<option value="sensor_kind">종류</option>
-					<option value="model_name">모델명</option>
-					<option value="manufacturer">제조사</option>
+					<option value="sensor_sn">시리얼넘버</option>
+					<option value="program_var">변수이름</option>
 				</select>
 			</div>
 			<section class="search-box">

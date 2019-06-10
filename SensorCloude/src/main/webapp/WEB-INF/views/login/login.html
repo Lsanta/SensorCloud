@@ -1,85 +1,169 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" type="text/css" href="/resources/css/login/login.css">
- 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    
-    <title>login</title>
-  <script>
-   $(document).ready(function () {
-	   function login(){
-		    var id  = $("#id").val();
-	         var password = $("#pass").val();
-	         
-	          if(id == ""){
-	                   alert("아이디를 입력하세요.");
-	                   $("#id").focus();
-	                   return; 
-	               }
-	               if(password == ""){
-	                   alert("비밀번호를 입력하세요.");
-	                   $("#pass").focus();
-	                   return;
-	               }   
-	               
-	          var query = {id:$("#id").val(), password:$("#pass").val()};
-	          
-	          $.ajax({
-	             type : "POST",
-	             dataType : 'text',
-	             data : query,
-	             url : "/login",
-	             success : function(data) {
-	              if(data == "success")
-	                 window.location.href = "/";
-	              else
-	            	  document.getElementById("loginfail").innerHTML="아이디 또는 비밀번호가 틀렸습니다.";
-
-	             }
-	         });
-	   }
-	   
-      $('#login').click(function() {
-         	login();
-      }); // 로그인 클릭 이벤트 종료
-
-      //패스워드에 커서를 두고 엔터키를 누르면 로그인 함
-      $("#pass").keydown(function(key) {
-         if (key.keyCode == 13) {
-            login();
-         }
-      });
-      
-      //아이디에 커서를 두고 엔터키를 누르면 로그인 함
-      $("#id").keydown(function(key) {
-         if (key.keyCode == 13) {
-            login();
-         }
-      });
-
-      
-   });
-</script>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/resources/css/login/util.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/login/main.css">
+<!--===============================================================================================-->
 </head>
-<body>
-   <div class="login-card">
-            <div class="logo-image">
-                    <center><img src="/resources/img/logo.png" width="160" height="100" ></center>
-                    </div>
-        <h3></h3><br>
-      
-        <input type="text" name="id" id="id" placeholder="Username">
-        <input type="password" name="pass" id="pass" placeholder="Password">
-        <div id="loginfail"></div>
-        <input type="button" name="login" id="login" class="login login-submit" value="login">
+<body style="background-color: #666666;">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-43">
+						Login
+					</span>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input id="id" class="input100" type="text" name="email" placeholder="ID">
+						<span class="focus-input100"></span>
+						<!-- <span class="label-input100">ID</span> -->
+					</div>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input id="pass" class="input100" type="password" name="pass" placeholder="Password">
+						<span class="focus-input100"></span>
+						<!-- <span class="label-input100">Password</span> -->
+					</div>
+					
+					<div id="loginfail">
+					</div>
 
-      <div class="login-help">
-        <a href="/login/help">아이디/비밀번호 찾기</a> | <a href="/login/sign">회원가입</a>
-      </div>
-    </div>
+					<div class="flex-sb-m w-full p-t-3 p-b-32">
+
+						<div>
+							<a href="/login/help" class="txt1">
+								아이디/비밀번호 찾기
+							</a>
+						</div>
+					</div>
+			
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Login
+						</button>
+					</div>
+					
+					<div class="text-center p-t-46 p-b-20">
+						<a href="/login/sign" class="txt2">
+							회원가입
+						</a>
+					</div>
+
+				
+				</form>
+
+				<div class="login100-more" style="background-image: url('/resources/img/bg-01.jpg');">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+<!--===============================================================================================-->
+	<!-- <script src="vendor/jquery/jquery-3.2.1.min.js"></script> -->
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="/resources/js/login.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script>
+	  $(document).ready(function () {
+	      function login(e){
+	    	  e.preventDefault();
+	          var id  = $("#id").val();
+	            var password = $("#pass").val();
+	            
+	             if(id == ""){
+	                      alert("아이디를 입력하세요.");
+	                      $("#id").focus();
+	                      return; 
+	                  }
+	                  if(password == ""){
+	                      alert("비밀번호를 입력하세요.");
+	                      $("#pass").focus();
+	                      return;
+	                  }   
+	                  
+	             var query = {id:$("#id").val(), password:$("#pass").val()};
+	             
+	             $.ajax({
+	                type : "POST",
+	                dataType : 'text',
+	                data : query,
+	                url : "/login",
+	                success : function(data) {
+	                 if(data == "success")
+	                    window.location.href = "/";
+	                 else
+	                    document.getElementById("loginfail").innerHTML="아이디 또는 비밀번호가 틀렸습니다.";
+
+	                }
+	            });
+	      }
+	      
+	      $('.login100-form-btn').click(function(e) {
+	    	  	e.preventDefault();
+	            login(e);
+	      }); // 로그인 클릭 이벤트 종료
+
+	      //패스워드에 커서를 두고 엔터키를 누르면 로그인 함
+	      $("#pass").keydown(function(key) {
+	    	  e.preventDefault();
+	         if (key.keyCode == 13) {
+	            login();
+	         }
+	      });
+	      
+	      //아이디에 커서를 두고 엔터키를 누르면 로그인 함
+	      $("#id").keydown(function(key) {
+	    	  e.preventDefault();
+	         if (key.keyCode == 13) {
+	            login();
+	         }
+	      });
+
+	      
+	   });
+
+	</script>
+
 </body>
 </html>
