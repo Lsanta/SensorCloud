@@ -438,7 +438,8 @@ public class MessageController {
 	      List<AlarmMemberVO> member = new ArrayList<AlarmMemberVO>();
 	      //site_id를 받아온다면 대입
 	      member = siteservice.getLimitAlarm_member("1");
-	      
+	      System.out.println(member);
+	      System.out.println(member.size());
 	      // 2. 관리자들 중에서 APP_Token이 존재하면 앱 푸쉬, 존재하지 않으면 SMS알림
 	      for(int i=0; i < member.size(); i++) {
 	    	  //가져온 id값이 있다면 (회원 여부체크)
@@ -465,7 +466,7 @@ public class MessageController {
 	              .setRestrictedPackageName("kr.yju.wdb.sensor")
 	              .setNotification(AndroidNotification.builder()
 	                  .setTitle("임계값 초과시 푸쉬 제목")
-	                  .setBody("임계값 초과시 푸쉬 내용")
+	                  .setBody(content)
 //	                  .setIcon("stock_ticker_update")
 	                  .setIcon("res/icon/android/hdpi.png")
 	                  .setColor("#f45342")

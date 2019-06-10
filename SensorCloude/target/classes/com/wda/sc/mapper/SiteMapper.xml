@@ -280,7 +280,7 @@
            + POWER(( #{longitude} - x) *  88907.949, 2)
            ) z , a.site_id, a.type_no, a.site_name, a.address, a.start_date, a.site_status
   FROM site a,
-     (SELEC T #{latitude} v_x    
+     (SELECT #{latitude} v_x    
              ,#{longitude} v_y  
              ,110979.309     r_x   
              ,88907.949     r_y   
