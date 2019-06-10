@@ -42,7 +42,7 @@ var sa = a[0].address;
 var sitemainname = a[0].site_name;
 
 var str="";
-str +='<p style="margin-top: -7px;">'+ sitemainname + '</p>';
+str +='<p id="sitemainname">'+ sitemainname + '</p>';
 $("#sn").html(str);
     getData(sa);
             } // success 함수 종료

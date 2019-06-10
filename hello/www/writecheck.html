@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, 
-        maximum-scale=1, minimum-scale=1, width=device-width">
-    <link rel="stylesheet" type="text/css" href="css/writecheck.css">
-
-    <title>6-1 점검이력 글쓰기 + 갤러리 </title>
-</head>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+        <title>점검이력글쓰기</title>
+        <link rel="stylesheet" type="text/css" href="./css/jquery.mobile-1.4.5.css" />
+        <link rel="stylesheet" type="text/css" href="css/writecheck.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
 
 <body>
-    <div class="header">
-
-
-        <h1>점검이력 글쓰기</h1>
+        <div data-role="page" style="background:#F4F6FD;">
+    <div data-role="header"  data-position="fixed" id="header">
+        <!-- <img src="img/logo.png" id="aa"> -->
+        <h1 style="font-size: 30px">SENSOR CLOUD</h1>
     </div>
     <div id="writecontent">
-
         <div id="writecontent1">
-
+            
             <input type="text" id="checktitle" name="checktitle" placeholder="title">
-
+            
+            <button id="cameraTakePicture"><img src="img/camera.png" style="width:25px; height:25px;"></button>
+            <button id="cameraGetPicture"><img src="img/library.png" style="width:25px; height:25px;"></button>
 
             <select id='status'>
                 <option value='open' selected>open</option>
@@ -39,8 +38,6 @@
 
         <div id="selectcamrea">
 
-            <button id="cameraTakePicture">Camera</button>
-            <button id="cameraGetPicture">Library</button>
 
 
         </div>
@@ -64,11 +61,32 @@
 
     <div id="bottom">
 
-        <button id="confirmbutton">확인</button>
+        <button id="confirmbutton" style="background:#2F2F38;">확인</button>
 
     </div>
+    <div data-role="footer"  data-position="fixed" data-id="footerid1">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="main.html" rel="external" data-icon="home"></a></li>
+                    <li><a href="search.html" rel="external" data-icon="search"></a></li>
+                    <li><a href="timeline.html" rel="external" data-icon="comment"></a></li>
+                    <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <!-- <div id="page-loading">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>   
+    </div> -->
+
+    <script src="./js/jquery.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
+    <script src="./js/jquery.mobile-1.4.5.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script type="text/javascript">
 
         // 사용자가 선택한 사진의 경로
