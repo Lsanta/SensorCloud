@@ -46,8 +46,9 @@ public class mChecklistController {
    @CrossOrigin(origins = "*", maxAge = 3600)
    @RequestMapping(value = "/mgetAttachList", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    @ResponseBody
-   public ResponseEntity<List<CheckBoardFileVO>> mgetAttachList(@RequestParam int board_no) {
-      System.out.println("getAttachList" + board_no);
+   public ResponseEntity<List<CheckBoardFileVO>> mgetAttachList(@RequestBody String no) {
+      System.out.println("getAttachList" + no);
+      int board_no = Integer.parseInt(no);
       System.out.println(Checkboardservice.mgetAttachList(board_no));
       return new ResponseEntity<>(Checkboardservice.mgetAttachList(board_no), HttpStatus.OK);
    }
