@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -107,7 +106,9 @@ public class SiteController {
 			// response.sendRedirect("/sitelist/1");
 		}
 
-		model.addAttribute("joinSite", siteservice.joinSite(site_id));
+		model.addAttribute("joinSite", siteservice.joinSite(site_id)); // 현장에 관한 값
+		model.addAttribute("insSen", siteservice.getsiteModSensor(Integer.parseInt(site_id)));//설치센서에 관한 값
+		System.out.println(siteservice.getsiteModSensor(Integer.parseInt(site_id)));
 		return "site/sitemodify";
 	}
 
@@ -465,8 +466,7 @@ public class SiteController {
 			return "false";
 		} else {
 			int site_id = siteservice.getSiteNum();
-			
-			
+						
 			String command = "C:\\Users\\bon300-27\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
 			ArrayList<String> rawPid = new Cmd().exeCmd(command);
 			System.out.println(rawPid);
@@ -1039,6 +1039,7 @@ public class SiteController {
 				return "false";
 		}	
 }
+
 class Ascending implements Comparator<Integer> { 
     @Override
     public int compare(Integer o1, Integer o2) {

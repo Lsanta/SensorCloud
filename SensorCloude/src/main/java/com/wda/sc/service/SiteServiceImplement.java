@@ -268,5 +268,17 @@ public class SiteServiceImplement implements SiteService {
 		// TODO Auto-generated method stub
 		return mapper.addInstallSensor(test);
 	}
+	
+	@Override
+	public ArrayList<InstallSensorVO> getInstallSensor(int site_id) {
+		// TODO Auto-generated method stub
+		return mapper.getInstallSensor(site_id);
+	}
+
+	@Override
+	public List<InstallSensorVO> getsiteModSensor(int site_id) {
+		//현장 수정눌렀을때 가져올 센서들에대한 정보 
+		return mapper.getsiteModSensor(site_id);
+	}
 
 }
