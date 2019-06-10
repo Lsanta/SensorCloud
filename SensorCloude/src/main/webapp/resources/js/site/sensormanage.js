@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 	$("#add").click(function(){
 		window.open("/site/installsensoradd/"+url[2], "pop",
-		"width=500,height=510,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+		"width=500,height=620,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 	});
 	
 	var num = 0;

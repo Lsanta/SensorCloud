@@ -66,6 +66,7 @@ a {
 	-webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
+  text-decoration: none;
 }
 
 a:focus {
@@ -74,7 +75,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #6675df;
+  	color: #6675df;
 }
 
 /*---------------------------------------------*/
@@ -159,14 +160,14 @@ iframe {
 [ Text ]*/
 .txt1 {
   font-family: Montserrat-Regular;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.4;
   color: #555555;
 }
 
 .txt2 {
   font-family: Montserrat-Regular;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.4;
   color: #999999;
 }
@@ -481,7 +482,7 @@ input.input100 {
   background: #6675df;
 
   font-family: Montserrat-Bold;
-  font-size: 12px;
+  font-size: 20px;
   color: #fff;
   line-height: 1.2;
   text-transform: uppercase;
