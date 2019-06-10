@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100);
-
 body {
   background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -7,6 +6,7 @@ body {
   -o-background-size: cover;
   background-size: cover;
   font-family: 'Roboto', sans-serif;
+ 
 }
 
 #loginfail{
@@ -14,7 +14,7 @@ body {
 }
 .login-card {
   padding: 40px;
-  background-color: rgb(250, 251, 255);
+  /* background-color: rgb(250, 251, 255); */
   margin: 0 auto 10px;
   margin-top: 40%;
   border-radius: 2px;

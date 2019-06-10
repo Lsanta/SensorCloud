@@ -1,3 +1,10 @@
+@font-face {
+  font-family: a신그래픽L;
+  src: url('/font/a신그래픽L.TTF');
+}
+
+html, body{font-family: 'a신그래픽L';}
+
 #chartdiv {
     border: 1px solid black;
     width: 100%;
@@ -59,5 +66,8 @@ table td{
   display: table-cell;
   font-size: 60px;
 }
-
+#sitemainname{
+font-weight: bolder;
+margin: 1%;
+}
 
