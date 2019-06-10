@@ -507,6 +507,7 @@ public class MessageController {
 	    		  .setAndroidConfig(config)
 	    		  .putData("type", "limit") //넘어가는값
 	    		  .putData("site_id", site_id)
+	    		  .putData("content", con)
 	    		  .setToken(tokenlist.get(i))
 	    		  .build();
 		  
