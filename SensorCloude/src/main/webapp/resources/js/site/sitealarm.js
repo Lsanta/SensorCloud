@@ -225,16 +225,6 @@ $(document).ready(function(){
 			      
 			});
 		
-		$('#test').click(function(){
-			$.ajax({
-				type: 'post',
-				url : '/app/send/WebLimit.do',
-				data : '내용',
-				successs : function() {
-					
-				}
-			});
-		});
 	
 });
 
