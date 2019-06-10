@@ -26,6 +26,8 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -139,9 +141,10 @@ public class UploadController {
 		return result;
 	}
 	
-	@GetMapping("/mdisplay")
+	
 	   @ResponseBody
-	   public ResponseEntity<byte[]> mgetFile(String fileName){
+	   @RequestMapping(value="/mdisplay", method = RequestMethod.GET)
+	   public ResponseEntity<byte[]> mdisplay(String fileName){
 	      
 	      System.out.println("/display경로로 들어오나");
 	      File file = new File("c:\\upload\\" + fileName);
