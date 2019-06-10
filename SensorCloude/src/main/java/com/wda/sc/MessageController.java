@@ -55,6 +55,7 @@ import com.wda.sc.service.MyPageService;
 import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 
 
@@ -402,9 +403,25 @@ public class MessageController {
 	   @CrossOrigin(maxAge = 3600)
 	   public String pushTest5(@RequestBody String content) {
 	      
-		  System.out.println("몰라요..");
-		  System.out.println(content); 
-		  
+		   String reContent = "";
+	        try {
+	           reContent = URLDecoder.decode(content, "UTF-8");
+	      } catch (UnsupportedEncodingException e2) {
+	         // TODO Auto-generated catch block
+	         e2.printStackTrace();
+	      }
+	      System.out.println(reContent);
+	      //오차 계산 
+	      String[] array = reContent.split(",");
+	      String limit = array[0];
+	      String data = array[1];
+	      String site_id = array[2];
+	      String sensor_sn = array[3];
+	      
+	      String site_name = siteservice.getSiteName(Integer.parseInt(site_id));
+	      
+	      String con = site_name + "에서 " + sensor_sn + "의  " +  limit + "이  초과되었습니다." + "Data :" + data;
+	      
 		  FirebaseApp defaultApp = null;
 	      List<FirebaseApp> apps=FirebaseApp.getApps();
 	      FileInputStream serviceAccount;
@@ -432,27 +449,37 @@ public class MessageController {
 	         defaultApp = FirebaseApp.initializeApp(options);
 	      }
 	      
-	      List<AppTokenVO> tokenlist = new ArrayList<AppTokenVO>();
+	      List<String> tokenlist = new ArrayList<String>();
 	      
 	      // 1. 임계값이 벗어난 현장을 관리하는 관리자들을 가지고 옴.
 	      List<AlarmMemberVO> member = new ArrayList<AlarmMemberVO>();
 	      //site_id를 받아온다면 대입
-	      member = siteservice.getLimitAlarm_member("1");
+	      member = siteservice.getLimitAlarm_member(site_id);
+	      System.out.println("member" + member);
 	      
 	      // 2. 관리자들 중에서 APP_Token이 존재하면 앱 푸쉬, 존재하지 않으면 SMS알림
 	      for(int i=0; i < member.size(); i++) {
 	    	  //가져온 id값이 있다면 (회원 여부체크)
 	    	  if( member.get(i).getUser_id() != null ) {
 	    		  //id를 통해 토큰을 가져오고 토큰값이 없다면 sms 있으면 tokenlist에 저장
-	    		  tokenlist = mypageservice.getappToken(member.get(i).getUser_id());
+	    		  System.out.println(member.get(i).getUser_id());
+	    		  List<AppTokenVO> tokenL = mypageservice.getappToken(member.get(i).getUser_id());
+	    		  System.out.println(tokenL);
 	    		  //if문 한번더 
-	    		  if(tokenlist == null) {
+	    		  if(tokenL.size() == 0) {
 	    			  //sms 푸쉬보내기
-	    			  SMS();
+	    			  String tel = member.get(i).getTel();
+	    			  SMSController sms = new SMSController(siteservice);
+	    			  sms.sms(tel, con);
+	    		  } else {
+		    		  String token = tokenL.get(0).getToken_id();
+		    		  tokenlist.add(token);
 	    		  }
 	    		  
 	    	  } else {
-	    		  SMS();
+	    		  String tel = member.get(i).getTel();
+	    		  SMSController sms = new SMSController(siteservice);
+	    		  sms.sms(tel, con);
 	    	  }
 	    	  
 	      }
@@ -464,8 +491,8 @@ public class MessageController {
 	              .setPriority(AndroidConfig.Priority.HIGH)
 	              .setRestrictedPackageName("kr.yju.wdb.sensor")
 	              .setNotification(AndroidNotification.builder()
-	                  .setTitle("임계값 초과시 푸쉬 제목")
-	                  .setBody("임계값 초과시 푸쉬 내용")
+	                  .setTitle("센서 데이터 " + limit + " 초과")
+	                  .setBody(site_name + "에서 " + sensor_sn + "의  " +  limit + "이  초과되었습니다. \n데이터 " + data)
 //	                  .setIcon("stock_ticker_update")
 	                  .setIcon("res/icon/android/hdpi.png")
 	                  .setColor("#f45342")
@@ -479,7 +506,8 @@ public class MessageController {
 	      Message message = Message.builder()
 	    		  .setAndroidConfig(config)
 	    		  .putData("type", "limit") //넘어가는값
-	    		  .setToken(tokenlist.get(i).getToken_id())
+	    		  .putData("site_id", site_id)
+	    		  .setToken(tokenlist.get(i))
 	    		  .build();
 		  
 	      try {
@@ -494,15 +522,6 @@ public class MessageController {
 		      return "ok";
 	   }
 	   
-	   
-	   
-	   
-	   
-	private void SMS() {
-		// TODO Auto-generated method stub
-		System.out.println("문자 보낼거임");
-	}
-
 
 	@SuppressWarnings({ "null", "unused" })
 	   @ResponseBody

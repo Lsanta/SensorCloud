@@ -133,4 +133,5 @@ public interface SiteMapper {
 	
 	//현장 수정눌렀을때 가져올 센서들에대한 정보 
 	public List<InstallSensorVO> getsiteModSensor(int site_id);
+	
 }
