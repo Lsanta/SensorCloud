@@ -311,7 +311,7 @@
 	</insert>
 	
 	<select id="getLimitAlarm_member" resultType="com.wda.sc.domain.AlarmMemberVO">
-		select a.user_id, b.name
+		select a.user_id, b.tel, b.name
 		from member a, ( select * from alarm_member where site_id = #{site_id}) b
 		where a.name(+) = b.name
 	</select>
