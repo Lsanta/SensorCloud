@@ -61,7 +61,7 @@ $(document).ready(function() {
 								 str += "</li>";
 							
 							} else {
-								 str += "<img src='./img/user.png' id='img'>";
+								 str += "<img src='./img/manager.svg' id='img'>";
 								 
 							}
 							 
