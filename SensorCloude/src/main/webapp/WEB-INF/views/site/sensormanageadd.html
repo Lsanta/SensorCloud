@@ -19,13 +19,13 @@
 			for(var i=0; i < input_size; i++ ) {
 					
 					$(".sensoradd").append( 
-							$('<input class="vert'+i+'" placeholder = "데이터 로거의 변수값과 똑같은 값을 적어주십시오" >', 
+							$('<input type="text" class="vert'+i+'" placeholder = "데이터 로거의 변수값과 동일" >', 
 									{ type: 'text'}
 							),
-							$('<input class="up'+i+'" placeholder = "상한값" >', 
+							$('<input type="text" class="up'+i+'" placeholder = "상한값" >', 
 									{ type: 'text'},
 							),
-							$('<input class="down'+i+'" placeholder = "하한값" >', 
+							$('<input type="text" class="down'+i+'" placeholder = "하한값" >', 
 									{ type: 'text'}
 							)
 						)

@@ -6,7 +6,7 @@ $(document).ready(function() {
 	$(document).on("click", "#sensorlist tr", function() {
 
 		var openWin = window.open("/site/installsensormod/"+url[2], "pop",
-				 "width=500,height=550,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+				 "width=500,height=510,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 		
 		var tr = $(this);
 		var sensor_sn = tr.children().eq(0).addClass("1");
@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 	$("#add").click(function(){
 		window.open("/site/installsensoradd/"+url[2], "pop",
-		"width=500,height=600,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+		"width=500,height=510,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 	});
 	
 	var num = 0;

@@ -402,8 +402,15 @@ public class MessageController {
 	   @CrossOrigin(maxAge = 3600)
 	   public String pushTest5(@RequestBody String content) {
 	      
-		  System.out.println("몰라요..");
-		  System.out.println(content); 
+		   String reContent = "";
+	        System.out.println("몰라요..");
+	        try {
+	           reContent = URLDecoder.decode(content, "UTF-8");
+	      } catch (UnsupportedEncodingException e2) {
+	         // TODO Auto-generated catch block
+	         e2.printStackTrace();
+	      }
+	        System.out.println(reContent);
 		  
 		  FirebaseApp defaultApp = null;
 	      List<FirebaseApp> apps=FirebaseApp.getApps();
@@ -466,7 +473,7 @@ public class MessageController {
 	              .setRestrictedPackageName("kr.yju.wdb.sensor")
 	              .setNotification(AndroidNotification.builder()
 	                  .setTitle("임계값 초과시 푸쉬 제목")
-	                  .setBody(content)
+	                  .setBody(reContent)
 //	                  .setIcon("stock_ticker_update")
 	                  .setIcon("res/icon/android/hdpi.png")
 	                  .setColor("#f45342")
