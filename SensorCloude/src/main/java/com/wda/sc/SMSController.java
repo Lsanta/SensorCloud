@@ -121,4 +121,35 @@ public class SMSController {
 
 		return "false";
 	}
+	
+	public String sms(String tel, String con) {
+		
+		System.out.println("문자 메소드 ");
+		
+		System.out.println(tel);
+		System.out.println(con);
+		
+		String api_key = "NCSUHVPGXGVJOVA2";
+	    String api_secret = "FCIGN0PTFU97R3KHOOD7HR6WUDRF6PPU";
+	    Message coolsms = new Message(api_key, api_secret);
+	    
+	    // 4 params(to, from, type, text) are mandatory. must be filled
+	    HashMap<String, String> params = new HashMap<String, String>();
+	    params.put("to", tel);
+	    params.put("from", "01046037101");
+	    params.put("type", "SMS");	
+	    params.put("text", con);
+	    params.put("app_version", "test app 1.2"); // application name and version
+
+	    try {
+	      JSONObject obj = (JSONObject) coolsms.send(params);
+	      System.out.println(obj.toString());
+	      return "success";
+	    } catch (CoolsmsException e) {
+	      System.out.println(e.getMessage());
+	      System.out.println(e.getCode());
+	      return "false";
+	    }
+	}
+	
 }

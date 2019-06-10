@@ -42,11 +42,13 @@ import lombok.AllArgsConstructor;
 public class mChecklistController {
    private static final Logger logger = LoggerFactory.getLogger(mChecklistController.class);
    private CheckboardService Checkboardservice;
-
-   @GetMapping(value = "/mgetAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+   
+   @CrossOrigin(origins = "*", maxAge = 3600)
+   @RequestMapping(value = "/mgetAttachList", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    @ResponseBody
-   public ResponseEntity<List<CheckBoardFileVO>> mgetAttachList(int board_no) {
-      System.out.println("getAttachList" + board_no);
+   public ResponseEntity<List<CheckBoardFileVO>> mgetAttachList(@RequestBody String no) {
+      System.out.println("getAttachList" + no);
+      int board_no = Integer.parseInt(no);
       System.out.println(Checkboardservice.mgetAttachList(board_no));
       return new ResponseEntity<>(Checkboardservice.mgetAttachList(board_no), HttpStatus.OK);
    }
@@ -88,7 +90,7 @@ public class mChecklistController {
        System.out.println("originalname:"+ file.getOriginalFilename());
        System.out.println("size:"+ file.getSize());
        System.out.println("contentType:"+ file.getContentType());
-       
+       System.out.println("file.getBytes():"+ file.getBytes());
        String savedName = uploadFile(uploadPath,file.getOriginalFilename(), file.getBytes());
        
 //       <insert id="insert">
@@ -149,6 +151,9 @@ public class mChecklistController {
       
       File target = new File(uploadPath + savedPath , savedName);
       
+      System.out.println("uid" + uid);
+      System.out.println("savedName" + savedName);
+      
       FileCopyUtils.copy(fileData, target);
       
       String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
@@ -161,6 +166,8 @@ public class mChecklistController {
       else {
          uploadedFileName = makeIcon(uploadPath , savedPath , savedName);
       }
+      
+      System.out.println("uploadedFileName" + uploadedFileName);
       return uploadedFileName;
       
    }
