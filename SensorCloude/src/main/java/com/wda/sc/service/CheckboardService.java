@@ -59,5 +59,8 @@ public interface CheckboardService {
 	public ArrayList<CheckBoardVO> apprepairList(String site_id);
 
 	public void mfileinsert(CheckBoardFileVO checkboardfilevo);
+	
+	public List<CheckBoardFileVO> mgetAttachList(int board_no);
+
 
 }

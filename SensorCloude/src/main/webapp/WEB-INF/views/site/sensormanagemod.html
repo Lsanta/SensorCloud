@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>센서 관리 수정 팝업창</title>
+<link href="/resources/css/site/sensormanagemod.css" rel="stylesheet" type="text/css"/>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+	$("#sensor_sn").val($(".1", opener.document).text());
+	$("#program_var").val($(".2", opener.document).text());
+	$("#upper_limit").val($(".3", opener.document).text());
+	$("#lower_limit").val($(".4", opener.document).text());
+	$("#sensor_id").val($(".5", opener.document).text());
+	function remove(){
+		$(".1" ,opener.document).removeClass();
+		$(".2" ,opener.document).removeClass();
+		$(".3" ,opener.document).removeClass();
+		$(".4" ,opener.document).removeClass();
+		$(".5" ,opener.document).removeClass();
+	}
+	
+	
+	$("#mod").click(function(){
+		
+		if($("#sensor_sn").val() == "" || $("#program_var").val() == "" || $("#upper_limit").val() == ""
+ 			|| $("#lower_limit").val() == "") {
+ 		alert("빈 값이 있어 등록되지 않습니다.");
+ 		return false;
+ 	}
+ 
+	var query = { 
+					sensor_sn : $("#sensor_sn").val(),
+					program_var : $("#program_var").val(),
+					upper_limit : $("#upper_limit").val(),
+					lower_limit : $("#lower_limit").val(),
+					sensor_id : $("#sensor_id").val()
+				}
+	
+	console.log(query);
+		
+		$.ajax({
+			  type : "POST",
+			  url : "/site/installsensormod.do",
+			  data : query,
+			  success : function(data){
+				  if( data == "success"){
+					  alert("수정되었습니다");
+					  window.opener.location.reload();
+					  remove();
+					  window.close();
+				  } else{
+					  alert("수정에 실패했습니다");
+				  }
+			  }
+			  
+		}); // ajax 종료
+	}); // mod 클릭 종료
+	
+	$("#remove").click(function(){
+		if( confirm("삭제하시겠습니까?") ) {
+			
+			$.ajax({
+				type : "POST",
+				url : "/site/installsensorDel.do",
+				data : {sensor_id : $("#sensor_id").val()},
+				success: function(data) {
+					if( data == "success"){
+						  alert("삭제되었습니다");
+						  window.opener.location.reload();
+						  remove();
+						  window.close();
+					  } else{
+						  alert("삭제에 실패했습니다");
+					  }
+				}
+			
+			});
+		}
+	});
+	
+	$(window).bind("beforeunload", function(e){
+			remove();
+	});
+	
+});
+</script>
+</head>
+<body>
+<center><h2>센서정보수정</h2></center>
+<div class="sensormodify">
+	시리얼넘버<input type="text" id="sensor_sn" name="sensor_sn" disabled/><br/>
+	변수이름<input type="text" id="program_var" name="program_var" /><br/>
+	상한값<input type="text" id="upper_limit" name="upper_limit" /><br/>
+         하한값<input type="text" id="lower_limit" name="lower_limit" /><br/> 
+	<input type="text" id="sensor_id" name="sensor_id" style="display : none"/><br/>
+	<input type="button"  value="삭제" id="remove" /> 
+	<input type="button"  value="수정" id="mod" />	
+	</div>
+</body> 
+</html>

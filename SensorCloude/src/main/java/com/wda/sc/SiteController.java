@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 
@@ -17,13 +18,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.ProcessPidVO;
@@ -31,11 +35,14 @@ import com.wda.sc.domain.Search;
 import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CheckboardService;
+import com.wda.sc.service.MysensorService;
 import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+
+
 
 @Controller
 @AllArgsConstructor
@@ -44,6 +51,7 @@ public class SiteController {
 
 	private SiteService siteservice;
 	private CheckboardService checkboardservice;
+	private MysensorService mysensorservice;
 
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
 	public String address(Locale locale, Model model) {
@@ -69,6 +77,11 @@ public class SiteController {
 			// response.sendRedirect("/sitelist/1");
 		}
 
+		//보유 센서 넘기기
+		ArrayList<MysensorVO> arr2 = mysensorservice.getMysensor();
+		System.out.println(arr2);
+		
+		model.addAttribute("siteSensor", arr2);
 		return "site/siteadd";
 
 	}
@@ -93,7 +106,9 @@ public class SiteController {
 			// response.sendRedirect("/sitelist/1");
 		}
 
-		model.addAttribute("joinSite", siteservice.joinSite(site_id));
+		model.addAttribute("joinSite", siteservice.joinSite(site_id)); // 현장에 관한 값
+		model.addAttribute("insSen", siteservice.getsiteModSensor(Integer.parseInt(site_id)));//설치센서에 관한 값
+		System.out.println(siteservice.getsiteModSensor(Integer.parseInt(site_id)));
 		return "site/sitemodify";
 	}
 
@@ -420,8 +435,19 @@ public class SiteController {
 	// 현장추가
 	@RequestMapping(value = "siteadd.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String insertSite(SiteVO site) {
+	public String insertSite(SiteVO site, @RequestBody Map<String,Object> map) {
+		System.out.println("현장 추가");
+		System.out.println(map);
 		
+		site.setType_no((String) map.get("type_no"));
+		site.setAddress((String) map.get("address"));
+		site.setSite_name((String)map.get("site_name"));
+
+	    site.setRperiod((String) map.get("rperiod"));
+	    site.setSig_port_num((String) map.get("sig_port_num"));
+	    site.setVirtual_port((String) map.get("virtual_port"));
+		
+	    System.out.println("사이트" +site);
 		ProcessPidVO setPid = new ProcessPidVO();
 		
 		switch (site.getType_no()) {
@@ -440,8 +466,7 @@ public class SiteController {
 			return "false";
 		} else {
 			int site_id = siteservice.getSiteNum();
-			
-			
+						
 			String command = "C:\\Users\\bon300-27\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
 			ArrayList<String> rawPid = new Cmd().exeCmd(command);
 			System.out.println(rawPid);
@@ -480,11 +505,58 @@ public class SiteController {
 					setPid.setPid(rawPid_int.get(i).toString());
 				}
 			}
-			System.out.println("4");
-			setPid.setSite_id(site.getSite_id());
-			System.out.println("5");
+		
+//			setPid.setSite_id(site.getSite_id());	//site_id 불러오기
+			setPid.setSite_id(site_id);	//site_id 불러오기
+			System.out.println("사이트아이디" + site_id);
+			System.out.println("setPid" + setPid);
 			siteservice.setProcessPid(setPid);
-			System.out.println("6");
+
+			//
+			JSONArray naArr = JSONArray.fromObject(map.get("sensorData"));
+			JSONObject na = JSONObject.fromObject(map.get("sensorData"));
+			
+			System.out.println(na);
+			
+			
+			Iterator Iter = na.keys();
+			InstallSensorVO test = new InstallSensorVO();
+			System.out.println(naArr);
+			  while(Iter.hasNext())
+			    {
+			        String b1 = Iter.next().toString();
+			        test.setSensor_sn(b1);
+			        
+			        JSONArray na2 = JSONArray.fromObject(na.get(b1));
+			        
+			        for(int i = 0; i <na2.size(); i++) {
+			        	JSONObject na3 = JSONObject.fromObject(na2.get(i));
+			        	Iterator Iter2 = na3.keys();
+			        	
+			        	System.out.println(i+" : "+na2.get(i));
+			        			        	
+			        	for(int j = 0; j < 1; j++) {
+			        		String c = Iter2.next().toString();
+			        		test.setProgram_var(c);
+			        		
+				        	System.out.println(na3.get(c));
+				        	
+				        	String[] spl = ((String) na3.get(c)).split(",");
+				        	test.setUpper_limit(spl[0]);
+				        	test.setLower_limit(spl[1]);
+				        	test.setSite_id(site_id);
+				        	
+				        	// insert DB 
+				        	int resultNum = siteservice.addInstallSensor(test);
+				        	
+			        	}
+			        }		        
+
+			    }
+			
+			
+			
+			
 			return "success";
 		}
 	}
@@ -536,23 +608,6 @@ public class SiteController {
 		return "site/sitealarmmod";
 	}
 
-	@RequestMapping(value = "alarmadd.do")
-	@ResponseBody
-	public String alarmadd(AlarmVO vo, HttpSession session) {
-		// 연락망 추가 폼을 이용한 추가
-		String user = (String) session.getAttribute("id");
-		vo.setSend_user(user);
-
-		int a = siteservice.insertAlarm(vo);
-
-		if (a == 0) {
-			return "false";
-		} else if (a == 1) {
-			return "success";
-		}
-
-		return "false";
-	}
 
 	@RequestMapping(value = "alarmmod.do")
 	@ResponseBody
@@ -795,7 +850,7 @@ public class SiteController {
 
 		Paging p = new Paging();
 		Search s = new Search();
-		ArrayList<MysensorVO> searchArr = new ArrayList<MysensorVO>();
+		ArrayList<InstallSensorVO> searchArr = new ArrayList<InstallSensorVO>();
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		Map<Object, Object> parm = new HashMap<Object, Object>();
 		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
@@ -881,6 +936,108 @@ public class SiteController {
 
 		return "/site/sensormanage";
 	}
+	
+	@RequestMapping(value = "/installsensoradd/" + "{site_id}", method = RequestMethod.GET)
+	public String installsensor(Locale locale, Model model, HttpSession session, HttpServletResponse response, @PathVariable String site_id)
+			throws IOException {
+
+		int mlevel = (int) session.getAttribute("mlevel");
+
+		if (mlevel < 4) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n4등급(수정권한)이상이 열람가능합니다'); window.opener.location.reload(); window.close();");
+			out.println("</script>");
+			
+			
+		}
+		model.addAttribute("install", mysensorservice.getMysensor());
+		
+		return "site/sensormanageadd";
+	}
+
+	@RequestMapping(value = "/installsensormod/" + "{site_id}", method = RequestMethod.GET)
+	public String installsensorm(Locale locale, Model model, HttpSession session , HttpServletResponse response, @PathVariable String site_id) throws IOException {
+
+		int mlevel = (int) session.getAttribute("mlevel");
+
+		if (mlevel < 4) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script langauge='javascript'>");
+			out.println("alert('권한이 없습니다.\\n4등급(수정권한)이상이 열람가능합니다'); window.opener.location.reload(); window.close(); ");
+			out.println("</script>");
+			
+		}
+		
+		model.addAttribute("installmod", mysensorservice.getMysensor());
+		
+		return "site/sensormanagemod";
+	}
+		// 설치 센서 Insert
+		@RequestMapping(value = "/installsensoradd.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String installsensoradd(InstallSensorVO vo, @RequestBody Map<String,Object> map) {
+
+			vo.setSensor_sn((String) map.get("sensor_sn"));
+			String cl = (String) map.get("site_id");
+			int site_id = Integer.parseInt(cl);
+			vo.setSite_id(site_id);
+			
+			JSONArray examArr = JSONArray.fromObject(map.get("sensorData"));
+			
+			for(int i=0; i < examArr.size(); i++) { 
+				
+				JSONObject jobj = examArr.getJSONObject(i);
+				
+				Iterator Iter = jobj.keys();
+				 while(Iter.hasNext())
+				    {
+					 	String var = Iter.next().toString();
+					 	vo.setProgram_var(var);
+					 	
+					 	String[] spl = ((String) jobj.get(var)).split(",");
+					 	vo.setUpper_limit(spl[0]);
+					 	vo.setLower_limit(spl[1]);
+					 	
+					 	int a = mysensorservice.insertInstallsensor(vo);
+					 	
+					 	return "success";
+				    }
+			}
+			
+			return "false";
+		}
+
+		// 설치센서 수정
+		@RequestMapping(value = "/installsensormod.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String installsensormod(InstallSensorVO vo) {
+		
+			int a = mysensorservice.modInstallsensor(vo);
+
+			if (a == 1) {
+				return "success";
+			}
+			return "false";
+		}	
+	   
+		// 설치센서 삭제
+		@RequestMapping(value = "/installsensorDel.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String installsensordel(@RequestParam int sensor_id) {
+				System.out.println(sensor_id);
+			
+				int a = mysensorservice.delInstallsensor(sensor_id);
+				
+				if (a == 1) {
+					return "success";
+				}
+				return "false";
+		}	
 }
 
 class Ascending implements Comparator<Integer> { 

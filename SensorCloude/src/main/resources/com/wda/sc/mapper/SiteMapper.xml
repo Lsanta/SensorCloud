@@ -182,17 +182,16 @@
 	
 	<!-- 설치센서조회 -->
 
-	<select id="installSensorList" resultType="com.wda.sc.domain.MysensorVO" parameterType="map">
+	<select id="installSensorList" resultType="com.wda.sc.domain.InstallSensorVO" parameterType="map">
 	 <![CDATA[
 	 	select x.rnum, x.* from
     	(select rownum as rnum, p.* from
-        	(select m.sensor_sn, m.model_name, m.sensor_kind, m.manufacturer, m.voltage, substr(create_day,0,14) as create_day
-		from install_sensor i, my_sensor m
-		where i.site_id = #{site_id}
-		and i.sensor_sn = m.sensor_sn
-   		order by create_day desc) p where rownum < #{paging.endnum}) x
+        	(select sensor_sn, program_var, upper_limit, lower_limit, sensor_id
+		from install_sensor
+		where site_id = #{site_id}
+   		order by sensor_sn) p where rownum < #{paging.endnum}) x
 		where x.rnum >= #{paging.startnum}
-		order by x.create_day desc
+		order by x.sensor_sn
     ]]>
 	</select>
 	
@@ -207,26 +206,22 @@
 	</select>
 	
 	<!-- 센서관리 검색  -->
-	<select id="smSearch" resultType="com.wda.sc.domain.MysensorVO" >
-		select my_sensor.sensor_sn, my_sensor.model_name, my_sensor.sensor_kind, my_sensor.manufacturer, my_sensor.voltage, substr(my_sensor.create_day,0,14) as create_day, install_sensor.site_id
-		from my_sensor FULL OUTER JOIN install_sensor
-		on my_sensor.sensor_sn = install_sensor.sensor_sn
-		where site_id = ${site_id} and ${searchType} LIKE '%' || '${keyword}' || '%'
+	<select id="smSearch" resultType="com.wda.sc.domain.InstallSensorVO" >
+		 select sensor_id, sensor_sn, program_var, upper_limit, lower_limit, site_id
+    	 from install_sensor 
+   	 	 where site_id = ${site_id} and ${searchType} LIKE '%' || '${keyword}' || '%'
 	</select>
 
 	<!-- 센서관리 검색 + 페이징 -->
-	<select id="getSearchResultSM" resultType="com.wda.sc.domain.MysensorVO" parameterType="map">
+	<select id="getSearchResultSM" resultType="com.wda.sc.domain.InstallSensorVO" parameterType="map">
 	<![CDATA[	
 	select x.rnum, x.* from
     ( select rownum as rnum, p.* from
-    ( select c.sensor_sn, c.model_name, c.sensor_kind, c.manufacturer, c.voltage, c.create_day, c.site_id, s.site_name
-    from (select my_sensor.sensor_sn, my_sensor.model_name, my_sensor.sensor_kind, my_sensor.manufacturer, my_sensor.voltage, substr(my_sensor.create_day,0,14) as create_day, install_sensor.site_id
-    from my_sensor FULL OUTER JOIN install_sensor
-    on my_sensor.sensor_sn = install_sensor.sensor_sn where site_id = ${Search.site_id} and ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%') c  LEFT OUTER JOIN site s
-    on c.site_id = s.site_id 
-    order by create_day desc ) p where rownum < #{Paging.endnum}) x
+    	( select sensor_id, sensor_sn, program_var, upper_limit, lower_limit, site_id
+    from install_sensor where site_id = ${Search.site_id} and ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%') p 
+    where rownum < #{Paging.endnum}) x
     where x.rnum >= #{Paging.startnum}
-    order by x.create_day desc
+    order by x.sensor_sn desc
     ]]>
 	</select>
 	
@@ -316,8 +311,24 @@
 	</insert>
 	
 	<select id="getLimitAlarm_member" resultType="com.wda.sc.domain.AlarmMemberVO">
-		select a.user_id, b.name
+		select a.user_id, b.tel, b.name
 		from member a, ( select * from alarm_member where site_id = #{site_id}) b
-		where a.name(+) = b.name;
+		where a.name(+) = b.name
 	</select>
+	
+	<!-- 현장 추가하면서 설치 센서에 추가 -->
+	<insert id="addInstallSensor" parameterType="com.wda.sc.domain.InstallSensorVO">
+		insert into install_sensor values(sensor_seq.nextval,#{sensor_sn},#{site_id},#{program_var},#{upper_limit},#{lower_limit})
+	</insert>
+	
+	<select id="getInstallSensor" resultType="com.wda.sc.domain.InstallSensorVO">
+		select * from install_sensor where site_id=#{site_id}
+	</select>
+	<!-- 현장 수정눌렀을때 가져오는 센서들에 대한 정보  -->
+	<select id="getsiteModSensor" resultType="com.wda.sc.domain.InstallSensorVO">
+		select m.sensor_sn, m.sensor_kind, m.vertical, i.sensor_id, i.site_id, i.program_var, i.upper_limit, i.lower_limit
+		from my_sensor m, install_sensor i
+		where m.sensor_sn = i.sensor_sn and i.site_id= #{site_id}
+	</select>
+	
 </mapper>

@@ -59,6 +59,29 @@ public class MysensorServiceImplement implements MysensorService {
 		return mapper.getSearchResult(parm);
 	}
 
-	
+	@Override
+	public ArrayList<MysensorVO> getMysensor() {
+		//현장 추가에 넘길 보유센서 목록
+		
+		return mapper.getMysensor();
+	}
+
+	@Override
+	public int insertInstallsensor(InstallSensorVO vo) {
+		//현장 설치되어있는 센서 추가
+		return mapper.insertInstallsensor(vo);
+	}
+
+	@Override
+	public int modInstallsensor(InstallSensorVO vo) {
+		//현장 설치되어 있는 센서 수정
+		return mapper.modInstallsensor(vo);
+	}
+
+	@Override
+	public int delInstallsensor(int sensor_id) {
+		//현장 설치되어 있는 센서 삭제
+		return mapper.delInstallsensor(sensor_id);
+	}
 	
 }

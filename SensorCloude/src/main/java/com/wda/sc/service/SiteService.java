@@ -87,13 +87,16 @@ public interface SiteService {
 	// 설치센서조회
 	public ArrayList<InstallSensorVO> installSensorList(Map<String, Object> parm);
 	
+	//install_sensor 받아오기
+	public ArrayList<InstallSensorVO> getInstallSensor(int site_id);
+	
 	public int sensorPageNum(String site_id);
 	//센서정보 가져오기
 	public ArrayList<MysensorVO> getSensor(String sensor_sn);
 
-	public ArrayList<MysensorVO> smSearch(Search s);
+	public ArrayList<InstallSensorVO> smSearch(Search s);
 
-	public ArrayList<MysensorVO> getSearchResultSM(Map<Object, Object> parm);
+	public ArrayList<InstallSensorVO> getSearchResultSM(Map<Object, Object> parm);
 
 	//그래프 그릴려고 데이터 가져오기
 	public ArrayList<SensorDataVO> getSensingDate(String site_id);
@@ -124,4 +127,11 @@ public interface SiteService {
 	
 	//임계값 넘었을 시 가져올 연락망
 	public List<AlarmMemberVO> getLimitAlarm_member(String site_id);
+
+	//설치 센서에 센서 정보 추가
+	public int addInstallSensor(InstallSensorVO test);
+
+	//현장 수정눌렀을때 가져올 센서들에대한 정보 
+	public List<InstallSensorVO> getsiteModSensor(int site_id);
+
 }

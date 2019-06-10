@@ -3,14 +3,14 @@ $(document).ready(function() {
 	
 	$("#add").click(function(){
 		window.open("/mysensor/mysensoradd", "pop",
-		"width=500,height=600,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+		"width=500,height=660,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 	});
 	
 
 	 $(document).on("click", "#list tr" , function(){
 		 
 		var openWin = window.open("/mysensor/mysensormod", "pop",
-				 "width=500,height=600,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+				 "width=500,height=620,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 		
 		var tr = $(this);
 		var sensor_sn = tr.children().eq(0).addClass("1");
@@ -18,6 +18,7 @@ $(document).ready(function() {
 		var model_name = tr.children().eq(2).addClass("3");
 		var voltage = tr.children().eq(3).addClass("4");
 		var manufacturer = tr.children().eq(4).addClass("5");
+		var vertical = tr.children().eq(7).addClass("6");
 			
 	 });
 	

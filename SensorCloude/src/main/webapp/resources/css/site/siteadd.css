@@ -4,13 +4,30 @@ html {
 /* 	width: 65%; */
 	margin: 0 auto;
 }
+
+#addSensor {
+	margin: 0 auto;
+	width: 95%;
+	margin-bottom: 20px;
+	/* border: 2px solid #7f9eb2; */
+	background-color: #fff;
+}
+	
 #container {
     width: 65%;
     height: 740px;
     margin: 20px auto;
     margin-top: 125px;
     }
-    
+
+.sensorset {
+	width: 95%;
+	margin: 0 auto;
+	margin-bottom: 30px;
+	background-color: #fff;
+	padding: 20px;
+}   
+ 
 h1 {
 	text-align: center;
 	padding: 25px 0;
@@ -127,6 +144,38 @@ input.addnetwork_right_input {
 	position: relative;
 }
 
+#setbtn {
+	margin-left: 5%;	
+}
+
+.sensorset input[type=button] {
+    width: 75px;
+    height: 30px;
+    font-size: 15px;
+    border:none;
+    border-bottom: 2px solid #d8e9ef;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    margin: 2% 0;
+    margin-top: 0;
+}
+
+/* .sensorset input[type=button]:hover {
+    width: 60px;
+    height: 25px;
+    font-size: 15px;
+    border: 1px solid #2c3e50;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    margin: 2% 0;
+} */
+
+.sensor_box {
+	margin-left: 5%;
+}
+
 #addcontent_right input[type=button] {
 	position: relative;
 	left: 82%;
@@ -161,6 +210,18 @@ button {
     cursor:pointer;
 }
 
+.my_sensor {
+	height: 30px;
+	background: #d8e9ef;
+	border:none;
+}
+
+.sensor_box input[type=text] {
+	width: 40%;
+	height: 30px;	
+	margin: 1%;
+	margin-left:0;
+}
 
 @media screen and (max-width: 768px) {
 #container {
@@ -316,7 +377,7 @@ input.addnetwork_right_input {
 		margin-bottom: 0;
 		height: 290px;
 		position: relative;
-	}
+		}
 	
 	button {
 	font-size: 20px;
@@ -327,5 +388,6 @@ input.addnetwork_right_input {
     height: 50px;
     cursor:pointer;
 	}	
+	
 	
 }

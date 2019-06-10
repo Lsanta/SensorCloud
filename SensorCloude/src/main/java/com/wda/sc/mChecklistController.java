@@ -5,6 +5,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -13,11 +14,14 @@ import javax.imageio.ImageIO;
 import org.imgscalr.Scalr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.wda.sc.domain.AttachFileVO;
 import com.wda.sc.domain.CheckBoardFileVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.service.CheckboardService;
@@ -36,31 +41,45 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/app/checklist")
 public class mChecklistController {
    private static final Logger logger = LoggerFactory.getLogger(mChecklistController.class);
-   private CheckboardService checkboardservice;
+   private CheckboardService Checkboardservice;
+   
+   @CrossOrigin(origins = "*", maxAge = 3600)
+   @RequestMapping(value = "/mgetAttachList", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+   @ResponseBody
+   public ResponseEntity<List<CheckBoardFileVO>> mgetAttachList(@RequestBody String no) {
+      System.out.println("getAttachList" + no);
+      int board_no = Integer.parseInt(no);
+      System.out.println(Checkboardservice.mgetAttachList(board_no));
+      return new ResponseEntity<>(Checkboardservice.mgetAttachList(board_no), HttpStatus.OK);
+   }
 
    // 점검이력
    @CrossOrigin(origins = "*", maxAge = 3600)
    @RequestMapping(value = "/writecheck", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    @ResponseBody
-   public String insertchecklist(@RequestBody CheckBoardVO vo) {
-
-      checkboardservice.insertcheckboard(vo);
-      System.out.println(checkboardservice.insertcheckboard(vo));
-
-      return "success";
+   public int insertchecklist(@RequestBody CheckBoardVO vo) {
+	  
+	 //글쓰기 컨텐트 db 저장 
+	      Checkboardservice.register(vo);
+	      //insert 직후 해당 열의 primary키를 뽑아내 vo에 저장후  찍어봄 
+	      //CheckBoardVO vo1 = new CheckBoardVO();
+	      int board_no  = vo.getBoard_no();
+	      System.out.println("보드넘버" + board_no);
+	      	      
+      return board_no;
 
    }
    
    // file_transfer 데이터 받기
+   
    @SuppressWarnings("null")
    @CrossOrigin(origins = "*", maxAge = 3600)
    @RequestMapping(value = "/insertfile", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    @ResponseBody
    public void insertfile(@RequestParam Map<String,String> allRequestParams, MultipartFile file, Model model) throws Exception {
        
+
       String uploadPath = "C:\\upload";
-     
-     
       
       Iterator<String> keys = allRequestParams.keySet().iterator();
        while( keys.hasNext() ){
@@ -71,7 +90,7 @@ public class mChecklistController {
        System.out.println("originalname:"+ file.getOriginalFilename());
        System.out.println("size:"+ file.getSize());
        System.out.println("contentType:"+ file.getContentType());
-       
+       System.out.println("file.getBytes():"+ file.getBytes());
        String savedName = uploadFile(uploadPath,file.getOriginalFilename(), file.getBytes());
        
 //       <insert id="insert">
@@ -83,12 +102,12 @@ public class mChecklistController {
        
              //2019/05/31/s_71728aa0-9d4d-4b2c-a50a-22039e4b8827_.Pic.jpg
        
-       CheckBoardVO checkboardvo = null;
-       CheckBoardFileVO checkboardfilevo = null;
+//       CheckBoardVO checkboardvo = null;
+//       CheckBoardFileVO checkboardfilevo = null;
+       		
        
-       
-			int board_no = checkboardvo.getBoard_no();
-             System.out.println(board_no);
+//         int board_no = checkboardvo.getBoard_no();
+//             System.out.println(board_no);
              String[] array = savedName.split("/");
            
             String year = array[1];
@@ -104,17 +123,20 @@ public class mChecklistController {
             String realname = array2[2];
             
             
-            checkboardfilevo.setFile_Path(uploadPath2);
-            checkboardfilevo.setBoard_no(board_no);
+            int boardno = Integer.parseInt(allRequestParams.get("value2"));
+            System.out.println("넘어온 키값"+boardno);
+            
+            
+            CheckBoardFileVO checkboardfilevo = new CheckBoardFileVO();
+            
+            checkboardfilevo.setBoard_no(boardno);
             checkboardfilevo.setUuid(uuid);
-            checkboardfilevo.setFile_Path(realname);
+            checkboardfilevo.setFile_name(realname);
+            checkboardfilevo.setFile_Path(uploadPath2);
             checkboardfilevo.setFileType(true);
             
-            checkboardservice.mfileinsert(checkboardfilevo);
-       
-       model.addAttribute("savedName" , savedName);
-       
-       
+            Checkboardservice.mfileinsert(checkboardfilevo);
+              
    }
    
    
@@ -129,6 +151,9 @@ public class mChecklistController {
       
       File target = new File(uploadPath + savedPath , savedName);
       
+      System.out.println("uid" + uid);
+      System.out.println("savedName" + savedName);
+      
       FileCopyUtils.copy(fileData, target);
       
       String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
@@ -141,6 +166,8 @@ public class mChecklistController {
       else {
          uploadedFileName = makeIcon(uploadPath , savedPath , savedName);
       }
+      
+      System.out.println("uploadedFileName" + uploadedFileName);
       return uploadedFileName;
       
    }

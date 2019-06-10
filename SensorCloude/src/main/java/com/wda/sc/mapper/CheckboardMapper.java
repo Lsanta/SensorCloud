@@ -58,6 +58,6 @@ public interface CheckboardMapper {
 	// 앱 현장 클릭시 해당 현장에대한 점검이력 글
 	public ArrayList<CheckBoardVO> apprepairList(String site_id);
 	
-	
+	public List<CheckBoardFileVO> mgetAttachList(int board_no);
 }
 

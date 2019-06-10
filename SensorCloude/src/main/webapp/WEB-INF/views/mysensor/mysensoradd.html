@@ -21,7 +21,8 @@
 // 								voltage : $("#voltage").val(),
 // 								manufacturer : $("#manufacturer").val()
 								voltage : $("#voltage option:selected").val(),
-								manufacturer : $("#manufacturer option:selected").val()
+								manufacturer : $("#manufacturer option:selected").val(),
+								vertical : $("#vertical option:selected").val()
 							}
 				
 				console.log(query);
@@ -66,6 +67,12 @@
 			<option>프리콘</option>
 			<option>(주)로텍인스투르먼트</option>
 			<option>(주)엠텍</option>
+		</select><br/>
+	축 개수<select id="vertical">
+		<option></option>
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
 		</select><br/>
 	<input type="button"  value="추가" id="plus" />
 	</div>

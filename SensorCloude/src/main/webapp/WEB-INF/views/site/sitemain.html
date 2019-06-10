@@ -170,12 +170,7 @@ geocoder.addressSearch(site, function(result, status) {
 	                    str12 +='<p id="nodata">'+ '데이터 없음' + '</p>';
 	                    $("#chartdiv").html(str12);
 	           }else{
-	        	   
-	           
-				
-				//////////////////////////////////////////////////////////////////////////////////
-				/* 									그래프 그리기 시작									*/
-				// Themes begin
+	        	  
 				console.log(result);
 				//////////////////////////////////////////////////////////////////////////////////
 				/* 									그래프 그리기 시작									*/
@@ -184,8 +179,8 @@ geocoder.addressSearch(site, function(result, status) {
 				// Themes end
 				
 				// Create chart
-				var chart = am4core.create("chartdiv", am4charts.XYChart);
-					
+				var chart = am4core.create("chartdiv", am4charts.XYChart);				
+				
 				var data = [];
 				var color = ["#890E0E","#850C8E","#26BC9E","#ACFA58","#58FAD0","#81BEF7","#5858FA","#FA58F4","#2E2E2E"];
 				var colorNum = 0;
@@ -208,15 +203,25 @@ geocoder.addressSearch(site, function(result, status) {
 					
 				}
 				
+				
 					//////////////////////////////////////////////////////////////
 					console.log(data);
 					chart.data = data; // 값들을 차트에 그리기 위해 data 배열에 json으로 넣는 부분
 					
+					 chart.dateFormatter.inputDateFormat = "yyyy-MM-dd HH:mm:ss";
+
 					///////////////////////////////////////////////////////////////
 					/*					           축 관련 설정들 	 						*/
 					var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-					dateAxis.renderer.grid.template.location = 100;  //x축 간격? 줄 생기는 밀집도 같은거
-					dateAxis.renderer.labels.template.fill = am4core.color("#000000");  //x축 글씨 색깔
+					//dateAxis.renderer.grid.template.location = 100;  //x축 간격? 줄 생기는 밀집도 같은거
+					
+
+							
+					dateAxis.dateFormats.setKey("day", "MMM-dd");
+					dateAxis.tooltipDateFormat = "yyyy MMMM dd hh:mm a";
+
+					//dateAxis.periodChangeDateFormats.setKey("second", "mm-dd mm:ss"); 
+					//dateAxis.renderer.labels.template.fill = am4core.color("#000000");  //x축 글씨 색깔
 		
 					var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 					valueAxis.tooltip.disabled = true;

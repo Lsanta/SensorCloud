@@ -26,6 +26,8 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -122,6 +124,8 @@ public class UploadController {
 	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String fileName){
+		System.out.println("들어오나 ????");
+		
 		File file = new File("c:\\upload\\" + fileName);
 		
 		ResponseEntity<byte[]> result = null;
@@ -136,6 +140,31 @@ public class UploadController {
 		}
 		return result;
 	}
+	
+	
+	   @ResponseBody
+	   @RequestMapping(value="/mdisplay", method = RequestMethod.GET)
+	   public ResponseEntity<byte[]> mdisplay(String fileName){
+	      
+	      System.out.println("/display경로로 들어오나");
+	      File file = new File("c:\\upload\\" + fileName);
+	      System.out.println("fileCallPath"+"c:\\upload\\" + fileName );
+	      ResponseEntity<byte[]> result = null;
+	      
+	      try {
+	         HttpHeaders header = new HttpHeaders();
+	         
+	         header.add("Content-Type", Files.probeContentType(file.toPath()));
+	         result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),header,HttpStatus.OK);
+	      }catch(IOException e) {
+	         e.printStackTrace();
+	      }
+	      return result;
+	   }
+	
+	
+	
+	
 	 @GetMapping(value="/download" ,
 		 produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
 		 @ResponseBody

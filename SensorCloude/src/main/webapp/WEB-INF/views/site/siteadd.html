@@ -69,7 +69,7 @@
       	<div id="addnetwork_right1">
          <p>수신 주기:</p>
         
-        <p>포트 번호:</p>
+        <p>통신 속도:</p>
        
          <p>가상시리얼 포트 번호:</p>
        
@@ -81,7 +81,7 @@
       <div id ="addnetwork_right2">
       
       	<input type="text" name="hostaddress" placeholder = "초 단위로 적어주세요" class="addnetwork_right_input" id="rperiod"><br>
-      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="sig_port_num"><br>
+      	<input type="text" name="hostaddress" placeholder = "Baudrate를 적어주세요"class="addnetwork_right_input" id="sig_port_num"><br>
       	<input type="text" name="hostaddress" placeholder = "미리 설정 후 적어주세요" class="addnetwork_right_input" id="virtualport"><br>
       
       </div>
@@ -90,10 +90,30 @@
       </div>
 
    </div>
-
+   
+   <h2 class="sensor_option">센서 설정</h2>
+   <div class="sensorset">
+	   <div id="setbtn">
+	   		<input type="button" class="plus_select" value="행 추가" />
+	   		<input type="button" class="delete_select" value="행 삭제" />
+	   </div>     
+   
+	<div class="sensor_box">
+		<div id="addSensor0" style="margin-bottom:3px">
+			<select class="my_sensor">
+				<option>선택</option>
+             	<option th:each="ss : ${siteSensor}" th:text=" ${ss.sensor_sn} + '[' + ${ss.sensor_kind} + ']'" th:value="${ss.vertical}">
+            	</option>
+			</select>
+			
+		</div>
+	</div>  
+   </div>
+   
    <div id="btn">
       <button type="button" id="plus">확인</button>
    </div>
+
    </div>
 </th:block>
 
@@ -174,9 +194,112 @@
 <script>
 $(document).ready(function(){
 	
+	var count = 0;
+	
+	$('.delete_select').click(function(){
+		 if(count == 0)
+			 return false;
+		 $("#addSensor" + count).remove();
+		
+// 		for(var i=1; i < count+1; i++){
+// 		 $("#addSensor" + i).remove();
+// 		}
+		 count--;
+	});
+	
+	$('.plus_select').click(function(){
+		count++;		
+		
+		var html = $('#addSensor0').clone(true);
+		html.attr("id","addSensor" + count);
+		$(".sensor_box").append(html);
+		$('#addSensor' + count).children().siblings().remove('input');
+	});
+	
+	//select 의 값이 바뀌면 ? 
+	$('.my_sensor').on("change", function(){
+		
+		var divId = $(this).parent().attr("id"); //선택한 selece 박스 위에 div id 값
+		var lastChar = divId.substr(divId.length - 1)
+		console.log("lastChar" + lastChar); // count로 넣을 div id 마지막에 있는 숫자
+		
+		count = lastChar;
+		console.log("count" + count);
+		
+		var aa = $(this);
+		var input_size = aa.val();
+		console.log("input_size" + input_size);
+		
+		var asdf = $('#addSensor' + count).children().siblings();
+		asdf.not('select').remove();
+	
+		
+		for(var i=0; i < input_size; i++ ) {
+			
+			$("#addSensor" + count).append( 
+					$('<br><input type="text" class="vert'+i+'" placeholder = "데이터 로거의 변수값과 똑같은 값을 적어주십시오." >', 
+// 							{ type: 'text', val: $('#div1').text() }
+							{ type: 'text'}
+					),
+					$('<input type="text" class="up'+i+'" placeholder = "상한값" style="width:20%">', 
+// 							{ type: 'text', val: $('#div1').text() }
+							{ type: 'text'}
+					),
+					$('<input type="text" class="down'+i+'" placeholder = "하한값" style="width:20%">', 
+// 							{ type: 'text', val: $('#div1').text() }
+							{ type: 'text'}
+					)
+				)
+		} // for문 종료
+		
+		
+		
+	});
+	
+
 
 	$("#plus").click(function(){
 	
+		var check = $('.sensor_box').children().length;
+		console.log("check 의 수 " + check);
+		
+		var totalInfo = new Object();    
+		for(var i=0; i < check; i++){
+			var jarray = new Array();
+			
+			
+			var aa = $('#addSensor'+i);
+			var bb = aa.find('.my_sensor option:selected').text();
+			var bbSplit = bb.split('[');
+			
+			//jobj 생성
+			for( var j=0; j < aa.find('input').length/3; j++) {
+				var jobj = new Object();
+				
+				var cc = aa.find('input.vert'+j).val(); //tilt 같은 이름
+				var dd = aa.find('input.up'+j).val(); //상한값
+				var ee = aa.find('input.down'+j).val(); //하한값
+				
+				console.log(cc);
+				console.log(dd);
+				console.log(ee);
+				
+				jobj[cc] = dd + "," + ee; 
+				jarray.push(jobj);
+				
+			}
+			totalInfo[bbSplit[0]]= jarray ;
+// 			console.log(aa.find('input').eq(0).val());
+
+			console.log("이값은 전체 sneser의 추가 갯수입니다 " +check);
+			console.log("이값은 안의 input값 갯수입니다 : " +aa.find('input').length);
+		
+			
+		}
+	
+		console.log(totalInfo);
+        var stringJson = JSON.stringify(totalInfo);
+	    console.log(stringJson);
 	
 	 	
 		var query = { 
@@ -190,15 +313,19 @@ $(document).ready(function(){
 						//네트워크 데이터
 						rperiod : $("#rperiod").val(),
 						sig_port_num : $("#sig_port_num").val(),
-						virtual_port : $("#virtualport").val()
+						virtual_port : $("#virtualport").val(),
+						sensorData : totalInfo
 					}
+		
+		
 		
 		console.log(query);
 		
 		 $.ajax({
 			  type : "POST",
 			  url : "/site/siteadd.do",
-			  data : query,
+			  data : JSON.stringify(query),
+			  contentType: 'application/json;',
 			  success : function(data){
 				  if( data == "success"){
 					  alert("추가되었습니다");
