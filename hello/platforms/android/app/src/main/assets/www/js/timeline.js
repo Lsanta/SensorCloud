@@ -245,8 +245,8 @@ $(document).on('deviceready', function() {
 function page(index){
     $.ajax({
         type : "POST",
-        // url : "http://52.79.242.145:8080/app/timeline/mtimeline",
-        url : "http://39.127.7.58:8080/app/timeline/mtimeline",
+        url : "http://52.79.242.145:8080/app/timeline/mtimeline",
+        //url : "http://39.127.7.58:8080/app/timeline/mtimeline",
         data : {pagenum : index},
         success : function(result){
             console.log(result);
