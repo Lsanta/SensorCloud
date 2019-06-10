@@ -47,13 +47,13 @@ public class mMypageController {
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value ="/mypagemain", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	   public JSONObject mainlist(Locale locale, Model model, Criteria criteria) {
+	   public JSONObject mainlist(@RequestBody String id,Locale locale, Model model, Criteria criteria) {
 			System.out.println("확인");
-		      
+			
 	      int pagenum = criteria.getPagenum();
 	       
 	       	 Paging page = new Paging();   //최대한 코드를 수정 안하기 위한 기존 페이징
-	         criteria.setTotalcount(checkboardservice.getPageNum());   //전체 게시글 개수를 지정
+	         criteria.setTotalcount(mypageservice.getPageNum(id.toString()));   //전체 게시글 개수를 지정
 	         criteria.setContentnum(5);
 	         criteria.setPagenum(pagenum);   //현재 페이지를 페이지 객체에 지정
 	         criteria.setStartnum(pagenum);   //컨텐츠 시작 번호 지정
@@ -66,9 +66,9 @@ public class mMypageController {
 	         page.setEndnum(criteria.getEndnum()+1);   //기존 코드를 유지하기 위해 +1함 (기존은 endnum이 5면 4까지 나온다 )
 	         page.setStartnum(criteria.getStartnum());
 		         
-	       ArrayList<CheckBoardVO> result = checkboardservice.getList(page);
+	       int result = mypageservice.getPageNum(id.toString());
 	       System.out.println(result);
-	       System.out.println(result.size());
+	       //ystem.out.println(result.size());
 
 	         Map<String, Object> map = new HashMap<String, Object>();
 	         map.put("mpcheckList", result);
