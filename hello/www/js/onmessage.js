@@ -54,18 +54,21 @@
     else { // data.Type site 이면 임계값 관련 앱 푸쉬 실행
         if(data.wasTapped){
                 alert( "백그라운드 + 현장임계값푸쉬" + JSON.stringify(data) );
+
                 //백그라운드로 왔으면
                 if(localStorage.getItem("id") != null && sessionStorage.getItem("id") != null ){
-                    location.href = "site.html";
+                    window.location.href = "site.html?sid=" + site_id;
                 }
 
 
             }else{
                 // alert("포그라운드 + 현장임계값푸쉬" + JSON.stringify(data))
-                
+                alert(data.site_id) ;
+                alert(data.con);
+
                 Swal.fire({
                     title: '제목?',
-                    text: "내용!",
+                    text:  data.con,
                     type: 'warning',
                     customClass: 'popup : swal2-popup',
                     showCancelButton: true,
@@ -79,14 +82,14 @@
                     '내용',
                     'success'
                 )
-                location.href = "site.html";
+                window.location.href = "site.html?sid=" + site_id;
             }else {
                 Swal.fire(
                     '신경쓰지 않기',
                     '내용',
                     'error'
                 )
-                
+                location.reload();
             }
             }) //swal 끝
             }
