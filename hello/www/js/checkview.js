@@ -2,7 +2,7 @@ $(document).ready(function() {
   
     var boardno = location.href.split("=");
     var board_no =boardno[1];
-   console.log(board_no);
+    console.log(board_no);
 
    $.ajax({
         type : "POST",
@@ -12,9 +12,8 @@ $(document).ready(function() {
         success : function(result){
             
             alert("점검이력 내용");
-           $.each(result,function(i,q){
+            $.each(result,function(i,q){
                 
-
                console.log(q.board_content);
                console.log(q.title);
                console.log(q.reg_date);
@@ -34,7 +33,7 @@ $(document).ready(function() {
                $("#content").html(q.board_content);
               
             
-});
+        });
         }
   });
 
@@ -94,7 +93,7 @@ $.ajax({
 
                 str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' ><div>";
                 //"<img class='delete1' src='https://www.sensorcloud.site:8443/display?fileName="+fileCallPath+"'>";
-                str += "<img src='http://39.127.7.58:8080/display?fileName="+fileCallPath+"'/>";
+                str += "<img src='http://39.127.7.58:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'/>";
                 str += "</div>";
                 str += "</li>";
             }else{

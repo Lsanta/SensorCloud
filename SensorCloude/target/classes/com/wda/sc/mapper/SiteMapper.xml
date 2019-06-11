@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="getAlarm" resultType="com.wda.sc.domain.AlarmVO">
-		select alarm_no,site_id,alarm_content,substr(alarm_time,0,14) as alarm_time,send_user from alarm where site_id = #{site_id}
+		select alarm_no,site_id,alarm_content,substr(alarm_time,0,14) as alarm_time,send_user from alarm where site_id = #{site_id} order by alarm_time desc
 	</select>
 	
 	<select id="getPageNum" resultType="int">
