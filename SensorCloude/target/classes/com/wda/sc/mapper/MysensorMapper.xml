@@ -80,8 +80,14 @@
 		where sensor_id=#{sensor_id} 
 	</update>
 	
+	<!--  현장에 설치된 센서 삭제[1개] -->
 	<delete id="delInstallsensor">
 		delete from install_sensor where sensor_id = #{sensor_id}
+	</delete>
+	
+	<!-- 현장에 있는 설치센서 모두 삭제 -->
+	<delete id="delSiteInstallsensor">
+		delete from install_sensor where site_id = #{site_id}
 	</delete>
 
 </mapper>

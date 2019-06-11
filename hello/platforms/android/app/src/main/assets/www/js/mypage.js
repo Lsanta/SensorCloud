@@ -81,8 +81,6 @@ $(document).ready(function() {
 				async:false,
 				data : {pagenum : 1, id : id},
 				success : function(result){
-						alert(result);
-						alert(JSON.stringify(result));
 						var page="";
 						var str = "";  
 						$.each(result.mpcheckList,function(i,s){

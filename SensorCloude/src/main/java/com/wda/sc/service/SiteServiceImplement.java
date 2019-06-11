@@ -281,4 +281,28 @@ public class SiteServiceImplement implements SiteService {
 		return mapper.getsiteModSensor(site_id);
 	}
 
+	@Override
+	public int deletePid(String site_id) {
+		//현장에 대한 PID를 테이블에서 삭제
+		return mapper.deletePid(site_id);
+	}
+
+	@Override
+	public int modStatus(SiteVO sitevo) {
+		//현장의 상태 변경
+		return mapper.modStatus(sitevo);
+	}
+
+	@Override
+	public String getSitePid(String site_id) {
+		//현장에 맞는 pid를 불러온다.
+		return mapper.getSitePid(site_id);
+	}
+
+	@Override
+	public int addProcessPid(ProcessPidVO setPid) {
+		// 현장 비활성화 -> 활성화 pid 추가
+		return mapper.addProcessPid(setPid);
+	}
+
 }

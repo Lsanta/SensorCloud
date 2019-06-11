@@ -63,12 +63,15 @@
 			<span class="addr" th:text="${siteInfo.site_name}"></span> 
 			
 			<span th:text="${siteInfo.address}" id="addr"></span><br>
+			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 0}" th:class ="${siteInfo.site_id}">현장 활성화</button>
+			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 1}" th:class ="${siteInfo.site_id}">현장 비활성화</button>
 			<button id="modify" th:class ="${siteInfo.site_id}">현장수정</button>
 			<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
 
 			<div id="chartdiv"></div>
 
 			<div id="dataDiv">
+				<a id="btnExport" href="#" download="" >엑셀 다운로드</a>
 				<div id="main-content">
 					<table id="sensordata">
 						<thead id="sensing-data-head">
@@ -102,6 +105,7 @@
 	<script src="/resources/js/charts.js"></script>
 	<script src="/resources/js/animated.js"></script>
 	<!-- <script src="/resources/js/charttest.js"></script> -->
+	<script src="/resources/js/jquery.techbytarun.excelexportjs.min.js"></script>
 
    <script th:inline="javascript">
     /*<![CDATA[*/
@@ -384,6 +388,44 @@ geocoder.addressSearch(site, function(result, status) {
 	$("#modify").click(function(){
 		var site_id = $("#modify").attr('class');
 		window.location.href = "/site/sitemodify/"+site_id;
+	});
+	
+	function itoStr($num)
+    {
+        $num < 10 ? $num = '0'+$num : $num;
+        return $num.toString();
+    }
+	var btn = $('#btnExport');
+    var tbl = 'sensordata';
+
+    btn.on('click', function () {
+        var dt = new Date();
+        var year =  itoStr( dt.getFullYear() );
+        var month = itoStr( dt.getMonth() + 1 );
+        var day =   itoStr( dt.getDate() );
+        var hour =  itoStr( dt.getHours() );
+        var mins =  itoStr( dt.getMinutes() );
+
+        var postfix = year + month + day + "_" + hour + mins;
+        var fileName = $('.addr').text() + postfix + ".xls";
+
+        var uri = $("#"+tbl).excelexportjs({
+            containerid: tbl
+            , datatype: 'table'
+            , returnUri: true
+        });
+
+        $(this).attr('download', fileName).attr('href', uri).attr('target', '_blank');
+    });
+
+	
+	$("#status").click(function() {
+		if( window.confirm("현장 비활성화 시 설치되어있던 센서가 삭제되며 다시 복구 할 수 없습니다. 진짜 비활성화 하시겠습니까?") ) {
+			
+			var site_id = $("#modify").attr('class');
+			window.location.href = "/site/statusChange/"+site_id;
+			
+		} 
 	});
 
 	
