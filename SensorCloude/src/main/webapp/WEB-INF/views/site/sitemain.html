@@ -38,15 +38,18 @@
 
 				<li>
 					<span id="num">연락망</span>
-					<span id="down" style="display: inline"><img src="/resources/img/down-arrow.svg"></span>
-					<span id="up" style="display: none"><img src="/resources/img/up-arrow.svg"></span>
+					<!-- <span id="down" style="display: inline"><img src="/resources/img/down-arrow.svg"></span>
+					<span id="up" style="display: none"><img src="/resources/img/up-arrow.svg"></span> -->
 				</li>
 
 				<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
 					<span class="mang" th:text="${alarmMember.name}"></span>
 					<span class="mang" th:text="${alarmMember.tel}"></span>
 				</div>
+			
 			</ul>
+			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 0}" th:class ="${siteInfo.site_id}">현장 활성화</button>
+			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 1}" th:class ="${siteInfo.site_id}">현장 비활성화</button>
 		</nav>
 	</aside>
 
@@ -63,13 +66,13 @@
 			<span class="addr" th:text="${siteInfo.site_name}"></span> 
 			
 			<span th:text="${siteInfo.address}" id="addr"></span><br>
-			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 0}" th:class ="${siteInfo.site_id}">현장 활성화</button>
-			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 1}" th:class ="${siteInfo.site_id}">현장 비활성화</button>
+			<!-- <button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 0}" th:class ="${siteInfo.site_id}">현장 활성화</button>
+			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 1}" th:class ="${siteInfo.site_id}">현장 비활성화</button> -->
 			<button id="modify" th:class ="${siteInfo.site_id}">현장수정</button>
 			<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
 
 			<div id="chartdiv"></div>
-				<a id="btnExport" href="#" download="" >엑셀 다운로드</a>
+				<a id="btnExport" href="#" download=""  ><img src="/resources/img/excel.svg" style="width:30px; height:30px;"></a>
 			<div id="dataDiv">
 				
 				<div id="main-content">
