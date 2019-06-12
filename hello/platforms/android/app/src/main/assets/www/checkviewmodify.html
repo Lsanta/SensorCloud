@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, 
         maximum-scale=1, minimum-scale=1, width=device-width">
-    <link rel="stylesheet" type="text/css" href="css/checkview.css">
+    <link rel="stylesheet" type="text/css" href="css/checkviewmodify.css">
 
     
 
@@ -27,10 +27,13 @@
 
         <div id="checkcontent1">
 
-            <h3 id="title"></h3>
+            <textarea id ="ttitle" name="content" rows="1" cols="20"></textarea>
 
 
-            <p id ="status"></p>
+           <select name="status" id="sse">
+            <option value="open">open</option>
+            <option value="fixed">fixed</option>
+            </select>
 
             <p id ="regdate"></p>
 
@@ -38,21 +41,18 @@
 
 
         <div id="checkcontent2">
-            <p id= "content"></p>
+            <textarea id ="tcontent" name="content" cols="50" rows="10"></textarea>
 
-            
             </div>
 
-
-           
+            <div id="imagespot">
 
                 <div class="uploadResult">
                     <ul>
     
                     </ul>
     
-            
-
+            </div>
 
         </div>
 
@@ -60,8 +60,9 @@
         
 
         <div id="bottom">
-            <button id="modifybutton">수정</button>
-            <button id="deletebutton">삭제</button>
+
+            <button id="modifybutton">수정완료</button>
+            <button id="returnlist">목록으로</button>
     
         </div>
 
@@ -69,7 +70,8 @@
 
     <script src="./js/jquery.js"></script>
     <script src="./js/checkview.js"></script>
-    <script type="text/javascript" src="cordova.js"></script>   
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="./js/jquery.mobile-1.4.5.js"></script>    
 
 <script src="./js/onmessage.js"></script>
 <script type="text/javascript" src="cordova.js"></script>

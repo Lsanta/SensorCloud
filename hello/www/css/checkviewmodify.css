@@ -6,7 +6,7 @@
     display: inline-block;
     border: 1.2px solid #000000c7;
     border-radius: 4px;
-    box-sizing: border-box;
+    box-sizing: border-box
     
   }
 
@@ -17,37 +17,37 @@
     border: 1px solid #ccc;
 }
 
-#title {
-    width: 100%;
-    padding: 5px 10px;
-    /* margin-left: 2px; */
+
+
+#ttitle {
     margin-top: 10px;
-    margin-bottom: 3px;
-    /* display: inline-block; */
-    /* border: 1px solid #ccc; */
-    /* border-radius: 4px; */
-    box-sizing: border-box;
+    width: 200px;
+    margin-left: 5px;
+    font-size: 18px;
+    height: 30px;
 }
 
-#status {
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1.4em;
+
+#sse {
+    font-size: 1.1em;
     margin-left: 15px;
-    box-sizing: border-box;
+    display: inline-block;
 }
 
 #regdate {
     display: inline-block;
-    /* margin-left: 4px; */
-    /* float: right; */
-    margin-left: 15px;
+    margin-left: 4px; 
+   
+   
+}
+
+#tcontent {
+    font-size: 13px;
 }
 
 #checkcontent2 {
     width: 100%;
-    height: 50%;
+    height: 60%;
     resize: none;
     border: 1px solid #ccc;
 }
@@ -58,16 +58,15 @@
 
 #imagespot {
     width: 100%;
+    height: 20%;
     margin-top: 2px;
-    border: 1px solid #ccc;
-    height: 32%
 }
 
 
 #bottom {
     
     width: 100%;
-    margin-top: 5%;
+    margin-top: 3%;
     
 }
 
@@ -86,29 +85,25 @@
 }
 
 .uploadResult {
-    width: 100%;
-    background-color: #8080809c;
-    height: 32%;
-    margin-top: 2px;
-    border: 1px solid #ccc;
+    width:100%;
+    background-color: gray;
 }
 
 .uploadResult ul{
-    display: flex;
+    display :flex;
     flex-flow: row;
     justify-content: center;
     align-items: center;
-   
 
 }
 
 .uploadResult ul li {
-    width:130px;
+    display: none;
 }
 
-.uploadResult ul li img {
+.upload ul li div img {
 
-    width:80%;
+    width:100%;
     height: 100%;
 }
 
@@ -123,8 +118,8 @@
     justify-content: center;
     align-items: center;
     top:0%;
-    width:100%;
-    height: 40%;
+    width:70%;
+    height: 50%;
     z-index: 100;
     background:rgba(red, green, blue, alpha);
 
@@ -139,6 +134,6 @@
 }
 
 .bigPicture img {
-    width: 250px;
+    width: 600px;
 
 }
