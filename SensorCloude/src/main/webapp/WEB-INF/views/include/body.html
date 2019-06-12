@@ -43,7 +43,17 @@
 					return messaging.getToken();
 				})
 				.then(function(token){
-					console.log(token);
+					 if(sessionid == "admin"){
+						 $.ajax({
+								type : "POST",
+								url : "/app/send/WebTokenSave.do",
+								data : token,
+								contentType : 'application/json',
+								success : function(data){
+								}
+							});
+					 }
+					
 				})
 				.catch(function(err){
 					console.log('요청 거절');
