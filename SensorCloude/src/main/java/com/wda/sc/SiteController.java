@@ -442,7 +442,10 @@ public class SiteController {
 		site.setType_no((String) map.get("type_no"));
 		site.setAddress((String) map.get("address"));
 		site.setSite_name((String)map.get("site_name"));
-
+		
+		site.setX((double)map.get("x"));
+		site.setY((double)map.get("y"));
+		
 	    site.setRperiod((String) map.get("rperiod"));
 	    site.setSig_port_num((String) map.get("sig_port_num"));
 	    site.setVirtual_port((String) map.get("virtual_port"));
@@ -467,7 +470,7 @@ public class SiteController {
 		} else {
 			int site_id = siteservice.getSiteNum();
 						
-			String command = "C:\\Users\\bon300-27\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
+			String command = "C:\\Users\\user\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
 			ArrayList<String> rawPid = new Cmd().exeCmd(command);
 			System.out.println(rawPid);
 			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
@@ -1075,7 +1078,7 @@ public class SiteController {
 							sitevo.setSite_status(0);
 							System.out.println("site_vo" + sitevo);
 							siteservice.modStatus(sitevo);
-							return "redirect:/" + site_id;
+							return "redirect:/site/" + site_id;
 						}
 					} else {
 						//pid가없기 때문에 바로 site_status를 변경시켜준다.
@@ -1084,7 +1087,7 @@ public class SiteController {
 						sitevo.setSite_status(0);
 						System.out.println("site_vo" + sitevo);
 						siteservice.modStatus(sitevo);
-						return "redirect:/" + site_id;
+						return "redirect:/site/" + site_id;
 					}
 					
 			  //만약 상태가 0(종료된 현장)이면 활성화를 수행
@@ -1145,12 +1148,12 @@ public class SiteController {
 				sitevo.setSite_status(1);
 				siteservice.modStatus(sitevo);
 				
-				return "redirect:/"+ site_id;
+				return "redirect:/site/"+ site_id;
 			}
 			
 			
 			
-			return "redirect:/" + site_id;
+			return "redirect:/site/" + site_id;
 		}	
 }
 

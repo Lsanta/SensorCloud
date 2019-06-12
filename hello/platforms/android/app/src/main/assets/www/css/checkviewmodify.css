@@ -1,0 +1,139 @@
+#checkcontent{
+    width: 100%;
+    height: 660px;
+    padding: 4px 7px;
+    margin-bottom: 3px;
+    display: inline-block;
+    border: 1.2px solid #000000c7;
+    border-radius: 4px;
+    box-sizing: border-box
+    
+  }
+
+
+#checkcontent1 {
+    width: 100%;
+    height: 17%;
+    border: 1px solid #ccc;
+}
+
+#title {
+    width: 100%;
+    padding: 5px 10px;
+    /* margin-left: 2px; */
+    margin-top: 10px;
+    margin-bottom: 3px;
+    /* display: inline-block; */
+    /* border: 1px solid #ccc; */
+    /* border-radius: 4px; */
+    box-sizing: border-box;
+}
+
+#status {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1.4em;
+    margin-left: 15px;
+    box-sizing: border-box;
+}
+
+#regdate {
+    display: inline-block;
+    /* margin-left: 4px; */
+    /* float: right; */
+    margin-left: 15px;
+}
+
+#checkcontent2 {
+    width: 100%;
+    height: 52%;
+    resize: none;
+    border: 1px solid #ccc;
+}
+
+#content {
+    margin-left: 10px;
+}
+
+#imagespot {
+    width: 100%;
+    height: 20%;
+    margin-top: 2px;
+}
+
+
+#bottom {
+    
+    width: 100%;
+    margin-top: 3%;
+    
+}
+
+
+#modifybutton {
+    float: right;
+    margin-left: 7px;
+    width: 30%;
+    height: 45px;;
+}
+
+#deletebutton {
+    float: right;
+    width: 30%;
+    height: 45px;
+}
+
+.uploadResult {
+    width:100%;
+    background-color: gray;
+}
+
+.uploadResult ul{
+    display :flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.uploadResult ul li {
+    display: none;
+}
+
+.upload ul li div img {
+
+    width:100%;
+    height: 100%;
+}
+
+.uploadResult ul li span {
+    color:white;
+
+}
+
+.bigPictureWrapper {
+    position : absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top:0%;
+    width:70%;
+    height: 50%;
+    z-index: 100;
+    background:rgba(red, green, blue, alpha);
+
+}
+
+.bigPicture {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.bigPicture img {
+    width: 600px;
+
+}

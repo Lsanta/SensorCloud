@@ -54,9 +54,9 @@
 		<article>
 			<span class="sitestatus" th:each="siteStatus : ${siteStatus}"
 				th:switch="${siteStatus.site_status}"> 
-				<img src="/resources/img/gray.svg" th:case="'0'"> 
-				<img src="/resources/img/green.svg" th:case="'1'"> 
-				<img src="/resources/img/red.svg" th:case="'2'">
+				<img alt="stop" src="/resources/img/gray.svg" th:case="'0'"> 
+				<img alt="start" src="/resources/img/green.svg" th:case="'1'"> 
+				<img alt="error" src="/resources/img/red.svg" th:case="'2'">
 
 			</span> 
 			
@@ -69,9 +69,9 @@
 			<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
 
 			<div id="chartdiv"></div>
-
-			<div id="dataDiv">
 				<a id="btnExport" href="#" download="" >엑셀 다운로드</a>
+			<div id="dataDiv">
+				
 				<div id="main-content">
 					<table id="sensordata">
 						<thead id="sensing-data-head">
@@ -420,13 +420,26 @@ geocoder.addressSearch(site, function(result, status) {
 
 	
 	$("#status").click(function() {
-		if( window.confirm("현장 비활성화 시 설치되어있던 센서가 삭제되며 다시 복구 할 수 없습니다. 진짜 비활성화 하시겠습니까?") ) {
+		var stat = $(".sitestatus > img").attr("alt");
+		
+		if(stat == "stop") {
 			
-			var site_id = $("#modify").attr('class');
-			window.location.href = "/site/statusChange/"+site_id;
+			if( window.confirm("현장을 활성화 하시겠습니까?") ) {
+				var site_id = $("#modify").attr('class');
+				window.location.href = "/site/statusChange/"+site_id;		
+			} 	
 			
+		} else if(stat == "start" || stat == "error") {
+			if( window.confirm("현장 비활성화 시 설치되어있던 센서가 삭제되며 다시 복구 할 수 없습니다. 진짜 비활성화 하시겠습니까?") ) {
+				
+				var site_id = $("#modify").attr('class');
+				window.location.href = "/site/statusChange/"+site_id;
+				
+			} 
 		} 
-	});
+		
+		
+	}); // status 종료
 
 	
 	

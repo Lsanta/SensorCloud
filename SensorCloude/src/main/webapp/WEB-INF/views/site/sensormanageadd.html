@@ -99,8 +99,8 @@
 <body>
 <h2>센서 추가</h2>
  <div class="sensoradd">
-	시리얼넘버<select class="my_sensor">
-				<option>선택</option>
+	시리얼넘버<select required class="my_sensor">
+				<option value="" disabled selected >센서를 선택하세요</option>
              	<option th:each="ss : ${install}" th:text="${ss.sensor_sn}" th:value="${ss.vertical}">
             	</option>
     </select>
