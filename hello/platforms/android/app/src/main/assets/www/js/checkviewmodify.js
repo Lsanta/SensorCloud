@@ -7,22 +7,16 @@ $(document).ready(function() {
      console.log(board_no);
  
 
-   //수정버튼 눌렀을 
-    $("#modifybutton").on("click" , function(e){
-    
-        window.location.href="checkviewmodify.html?board_no="+board_no;
-        
-     });
- 
+
      //점검이력 글 내용 불러오기 
     $.ajax({
      type : "POST",
-     url : "http://52.79.242.145:8080/app/siterepairview",
+     url : "http://39.127.7.58:8080/app/siterepairview",
      data : board_no,
      contentType : "application/json; charset=UTF-8",
      success : function(result){
          
-         alert("점검이력 내용");
+         alert("수정위한 점검내용");
          $.each(result,function(i,q){
              
             console.log(q.board_content);
@@ -38,10 +32,12 @@ $(document).ready(function() {
                 var board_status = "fixed";
             }
           
-            $("#title").html(q.title);
-            $("#status").html(board_status);
+            
+            $("#ttitle").val(q.title);
+            $("#sse").val(board_status).attr("selected","selected");
             $("#regdate").html(q.reg_date);
-            $("#content").html(q.board_content);
+          
+            $("#tcontent").val(q.title);
            
          
      });
@@ -60,15 +56,17 @@ $(document).ready(function() {
           var str = "";
           copyarr = arr;
           $(arr).each(function(i , attach){
-        
+             //<img class='delete1' src='https://www.sensorcloud.site:8443/display?fileName="+fileCallPath+"'>";
+             //image type 
+             
+ 
              if(attach.fileType){
                  // var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
                  var fileCallPath = encodeURIComponent(attach.file_Path+"/s_"+attach.uuid+"_"+attach.file_name);
-                alert(fileCallPath);
+
                 
-                 str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"'><div>";
-                 str += "<img src='http://39.127.7.58:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'/>";
-                 str += "</div>";
+                 str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' >";
+                 str += "<img src='http://39.127.7.58:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'/>"+"<span data-file=\'"+fileCallPath+"\' data-type='image'>x</span>";
                  str += "</li>";
              }else{
                  alert("picture display fail");
@@ -81,7 +79,7 @@ $(document).ready(function() {
      } // success 함수 종료
  }); // ajax함수 종료
  
-    
+ 
  
      //썸네일 클릭 시 원본이미지 띄우기
      $(".uploadResult").on("click" , "li" , function(e){

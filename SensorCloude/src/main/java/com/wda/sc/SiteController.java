@@ -442,7 +442,10 @@ public class SiteController {
 		site.setType_no((String) map.get("type_no"));
 		site.setAddress((String) map.get("address"));
 		site.setSite_name((String)map.get("site_name"));
-
+		
+		site.setX((double)map.get("x"));
+		site.setY((double)map.get("y"));
+		
 	    site.setRperiod((String) map.get("rperiod"));
 	    site.setSig_port_num((String) map.get("sig_port_num"));
 	    site.setVirtual_port((String) map.get("virtual_port"));
@@ -467,7 +470,7 @@ public class SiteController {
 		} else {
 			int site_id = siteservice.getSiteNum();
 						
-			String command = "C:\\Users\\bon300-27\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
+			String command = "C:\\Users\\user\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
 			ArrayList<String> rawPid = new Cmd().exeCmd(command);
 			System.out.println(rawPid);
 			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
@@ -1094,7 +1097,7 @@ public class SiteController {
 				ArrayList<SiteVO> site = siteservice.joinSite(site_id);
 				System.out.println("사이트들고온 네트워크정보" + site);
 				
-				String command = "C:\\Users\\bon300-27\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.get(0).getRperiod()+" "+site.get(0).getVirtual_port()+" "+site.get(0).getSig_port_num()+" "+site_id;
+				String command = "C:\\Users\\user\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.get(0).getRperiod()+" "+site.get(0).getVirtual_port()+" "+site.get(0).getSig_port_num()+" "+site_id;
 				ArrayList<String> rawPid = new Cmd().exeCmd(command);
 				System.out.println(rawPid);
 				ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 

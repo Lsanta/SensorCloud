@@ -25,4 +25,8 @@ public interface UsermanageMapper {
 	public ArrayList<MemberVO> getSearchResult(Map<Object, Object> parm);
 	
 	public int mrequestlevel(Map<String, String> map);
+	
+	public int userlevelup(Map<String, String> map);
+	
+	public int releveldel(Map<String, String> map);
 }

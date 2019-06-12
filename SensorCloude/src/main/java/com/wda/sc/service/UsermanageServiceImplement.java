@@ -62,5 +62,17 @@ public class UsermanageServiceImplement implements UsermanageService{
 		// TODO Auto-generated method stub
 		return mapper.mrequestlevel(map);
 	}
+	
+	@Override
+	public int userlevelup(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return mapper.userlevelup(map);
+	}
+	
+	@Override
+	public int releveldel(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return mapper.releveldel(map);
+	}
 
 }
