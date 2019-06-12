@@ -37,5 +37,8 @@ public interface MysensorService {
 	//현장 설치되어 있는 센서 삭제
 	public int delInstallsensor(int sensor_id);
 
+	//현장에 있는 설치 센서 모두 삭제 (현장 비활성화 시)
+	public int delSiteInstallsensor(String site_id);
+
 
 }

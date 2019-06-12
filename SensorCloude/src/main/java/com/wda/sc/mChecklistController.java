@@ -57,7 +57,7 @@ public class mChecklistController {
    }
    
    
-	
+   @CrossOrigin(origins = "*", maxAge = 3600)	
    @ResponseBody
    @RequestMapping(value="/mdisplay", method = RequestMethod.GET)
    public ResponseEntity<byte[]> mdisplay(String fileName){

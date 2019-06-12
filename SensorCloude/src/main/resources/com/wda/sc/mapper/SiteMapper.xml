@@ -7,8 +7,9 @@
 	<select id="getList" resultType="com.wda.sc.domain.SiteVO">
 	<![CDATA[
 		select site_id,type_no,site_name,address,site_status,substr(start_date,0,14) as start_date 
-		from (select * from site order by site_status desc)
+		from (select * from site order by start_date desc)
 		where rownum < 17
+		order by site_status desc, start_date desc
 	]]>
 	</select>
 
@@ -39,7 +40,7 @@
 	</select>
 	
 	<select id="getAlarm" resultType="com.wda.sc.domain.AlarmVO">
-		select alarm_no,site_id,alarm_content,substr(alarm_time,0,14) as alarm_time,send_user from alarm where site_id = #{site_id}
+		select alarm_no,site_id,alarm_content,substr(alarm_time,0,14) as alarm_time,send_user from alarm where site_id = #{site_id} order by alarm_time desc
 	</select>
 	
 	<select id="getPageNum" resultType="int">
@@ -57,9 +58,9 @@
 			  from (select rownum as before_num, s.* 
                     from (select * 
                           from site
-                          order by site_status desc)s)a
+                          order by site_status desc, start_date desc)s)a
                 where a.before_num < ${endnum}) x
-		where x.before_num >= ${startnum}
+		where x.before_num >= ${startnum}        
 		]]>
 	</select>
 	
@@ -310,6 +311,11 @@
 		insert into processpid values(processpid_seq.nextval,site_seq.currval,${pid})
 	</insert>
 	
+	<!-- 현장 비활성화 -> 활성화 pid 추가 -->
+	<insert id="addProcessPid" parameterType="com.wda.sc.domain.ProcessPidVO">
+		insert into processpid values(processpid_seq.nextval,${site_id},${pid})
+	</insert>
+	
 	<select id="getLimitAlarm_member" resultType="com.wda.sc.domain.AlarmMemberVO">
 		select a.user_id, b.tel, b.name
 		from member a, ( select * from alarm_member where site_id = #{site_id}) b
@@ -330,5 +336,21 @@
 		from my_sensor m, install_sensor i
 		where m.sensor_sn = i.sensor_sn and i.site_id= #{site_id}
 	</select>
+	
+	<!-- 현장에 맞는 pid 가져오기 -->
+	<select id="getSitePid" resultType="String">
+		select pid from processpid where site_id = #{site_id}
+	</select>
+	
+	<!-- 현장에 맞는 pid 삭제 -->
+	<delete id="deletePid" >
+		delete from processpid where site_id = #{site_id}
+	</delete>
+	
+	<!-- 현장 상태 업데이트 -->
+	<update id="modStatus" parameterType="com.wda.sc.domain.SiteVO">
+		update site set site_status = #{site_status}
+    	where site_id = #{site_id}
+	</update>
 	
 </mapper>

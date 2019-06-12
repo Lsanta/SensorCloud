@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, 
+        maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/checkviewmodify.css">
+
+    
+
+    <title>점검내용</title>
+
+</head>
+
+<body>
+
+    <div class='bigPictureWrapper'>
+        <div class='bigPicture'>
+        </div>
+      </div>
+
+
+
+    <div id="checkcontent">
+
+        <div id="checkcontent1">
+
+            <textarea id ="ttitle" name="content" rows="1" cols="20"></textarea>
+
+
+           <select name="status" id="sse">
+            <option value="open">open</option>
+            <option value="fixed">fixed</option>
+            </select>
+
+            <p id ="regdate"></p>
+
+        </div>
+
+
+        <div id="checkcontent2">
+            <textarea id ="tcontent" name="content" cols="50" rows="10"></textarea>
+
+            </div>
+
+            <div id="imagespot">
+
+                <div class="uploadResult">
+                    <ul>
+    
+                    </ul>
+    
+            </div>
+
+        </div>
+
+
+        
+
+        <div id="bottom">
+
+            <button id="modifybutton">수정완료</button>
+            <button id="returnlist">목록으로</button>
+    
+        </div>
+
+    </div>
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/checkview.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="./js/jquery.mobile-1.4.5.js"></script>    
+
+<script src="./js/onmessage.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+       
+</body>
+
+</html>
