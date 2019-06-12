@@ -9,7 +9,7 @@ $(document).ready(function() {
 	$(document).on("click", "#user tr" , function(){
 
 		var tr = $("#user tr").index(this);
-		var id = $("#user tr:eq("+tr+") td:eq(0)").text();		 
+		var id = $("#user tr:eq("+tr+") td:eq(0)").text();
 		goPopup(id);
 
 	}); 
@@ -20,6 +20,28 @@ $(document).ready(function() {
 
 	}
 
+	
+
+
+	
+	$(".accept").on("click", function() { 
+		var level = $(this).parent().siblings().eq(4).text();
+		var re_level =  $(this).parent().siblings().eq(5).text();
+		
+		 if(confirm('현재 사용자의 등급은'+' ' + level +'등급 ' + '입니다' + '\n' + '사용자가 요청한 ' + re_level + '등급 ' + '으로 승급을 수락하시겠습니까?') == true){
+		
+          }else{
+			return false;
+         }
+		});
+	
+	$(".cancel").on("click", function() { 
+		 if(confirm('취소하시겠습니까?') == true){
+         
+          }else{
+           return false;
+          }
+		});
 
 	/*pagination*/
 	var num = 0;

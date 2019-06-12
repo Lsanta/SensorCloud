@@ -134,4 +134,16 @@ public interface SiteService {
 	//현장 수정눌렀을때 가져올 센서들에대한 정보 
 	public List<InstallSensorVO> getsiteModSensor(int site_id);
 
+	//현장에 대한 PID를 테이블에서 삭제
+	public int deletePid(String site_id);
+	
+	//현장의 상태 변경
+	public int modStatus(SiteVO sitevo);
+
+	//현장에 맞는 pid를 불러온다.
+	public String getSitePid(String site_id);
+
+	//현장 비활성화 -> 활성화 pid 추가
+	public int addProcessPid(ProcessPidVO setPid);
+
 }

@@ -58,16 +58,8 @@
 
 #imagespot {
     width: 100%;
-    height: 20%;
+    height: 40%;
     margin-top: 2px;
-}
-
-.repairpicturespot{
-
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-
 }
 
 
@@ -78,11 +70,6 @@
     
 }
 
-img {
-   
-    width: 100%;
-    height: 100%;
-  }
 
 #modifybutton {
     float: right;
@@ -95,4 +82,54 @@ img {
     float: right;
     width: 30%;
     height: 45px;
+}
+
+.uploadResult {
+    width:100%;
+    background-color: gray;
+}
+
+.uploadResult ul{
+    display :flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.upload ul li img {
+
+    width:100px;
+    height: 100px;
+}
+
+.uploadResult ul li span {
+    color:white;
+
+}
+
+.bigPictureWrapper {
+    position : absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top:0%;
+    width:100%;
+    height: 100%;
+    z-index: 100;
+    background:rgba(red, green, blue, alpha);
+
+}
+
+.bigPicture {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.bigPicture img {
+    width: 600px;
+
 }

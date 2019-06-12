@@ -27,6 +27,7 @@ import com.wda.sc.domain.Criteria;
 import com.wda.sc.domain.MemberFileVO;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.TimelineVO;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.MyPageService;
 import com.wda.sc.service.UsermanageService;
@@ -55,7 +56,8 @@ public class mMypageController {
 			String[] id2 = array[1].split("=");
 			
 			String id = id2[1];
-	      int pagenum = criteria.getPagenum();
+			criteria.setPagenum(Integer.parseInt(page2[1]));
+			int pagenum = criteria.getPagenum();
 	       
 	       	 Paging page = new Paging();   //최대한 코드를 수정 안하기 위한 기존 페이징
 	         criteria.setTotalcount(mypageservice.getPageNum(id.toString()));   //전체 게시글 개수를 지정
@@ -71,9 +73,16 @@ public class mMypageController {
 	         page.setEndnum(criteria.getEndnum()+1);   //기존 코드를 유지하기 위해 +1함 (기존은 endnum이 5면 4까지 나온다 )
 	         page.setStartnum(criteria.getStartnum());
 		         
-	       int result = mypageservice.getPageNum(id.toString());
-	       System.out.println(result);
-	       //ystem.out.println(result.size());
+//	       int result = mypageservice.getPageNum(id.toString());
+	       
+	        Map<String, Object> parm = new HashMap<String, Object>();
+	        
+	        parm.put("paging", page);
+	 		parm.put("user_id", id);
+	 		
+	 		ArrayList<CheckBoardVO> result = mypageservice.myList(parm);
+	 		System.out.println(result);
+	 		System.out.println(result.size());
 
 	         Map<String, Object> map = new HashMap<String, Object>();
 	         map.put("mpcheckList", result);
