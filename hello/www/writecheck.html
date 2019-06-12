@@ -167,10 +167,7 @@
                     user_id = sessionStorage.getItem("id");
                 }
 
-                alert(content);
-                alert(checktitle);
-              
-                alert(status);
+               
             
                 var checkcontent = { //유저가 입력한 정보를 js오브젝트로
                         title : checktitle, 
@@ -192,7 +189,7 @@
                      
                     success: function (boardno) {
                         
-                        alert(boardno);
+                        
                          getboard_no = boardno;
 
                         window.location.href="site.html?sid="+siteid;
@@ -210,9 +207,9 @@
             /** 파일경로로부터 이름만 추출한다. */
                 //string.substring( start, end ) start필수 end 없으면 끝까지
 
-               alert(file_path);
+               
                 var name = file_path.substring(file_path.lastIndexOf('/') + 1);
-                alert(name);
+                
                 // 안드로이드는 파일이름 뒤에 ?123234234 형식의 내용이 붙어 오는 경우가 있으므로,
                 // 이 경우 ? 이하 내용을 잘라버린다.
                
@@ -254,7 +251,7 @@
                 var ft = new FileTransfer();    
                  
                 /** 업로드를 수행한다.(전송할 파일 경로, 서버 주소, 성공콜백, 실패콜백, 옵션) *///"http://39.127.7.58:8080/app/checklist/insertfile"
-                ft.upload(file_path,  "http:///52.79.242.145:8080/app/checklist/insertfile", 
+                ft.upload(file_path,  "http:///http://39.127.7.58:8080/app/checklist/insertfile", 
                
                     function(r) {//성공콜백시 fileuploadresult객체와 함께 호출
                         // HTTP 결과코드 받기

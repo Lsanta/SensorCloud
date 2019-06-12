@@ -70,6 +70,7 @@ $(document).ready(function() {
                  str += "<img src='http://39.127.7.58:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'/>";
                  str += "</div>";
                  str += "</li>";
+
              }else{
                  alert("picture display fail");
              }
@@ -77,6 +78,15 @@ $(document).ready(function() {
              });//end each
              
              $(".uploadResult ul").html(str);
+
+             //파일삭제로 인해 요소값이 비어있는경우 썸네일 삭제
+             if (!$('#uploadResult ul').length) {
+                $('.uploadResult ul').remove();
+            }
+
+
+
+             
  
      } // success 함수 종료
  }); // ajax함수 종료
