@@ -177,5 +177,52 @@ private UsermanageService usermanageservice;
 		  
 		  return "manage/manage";
 	  }
-	
+	  
+	  
+	//승급요청 수락
+		@RequestMapping(value ="userlevelup.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String userlevelup(String user_id,String re_level) { 
+		String id = user_id;
+		String m_level = re_level;
+		
+
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("id",id);
+		map.put("m_level",m_level);
+		
+		int level =usermanageservice.userlevelup(map);
+		
+		if(level == 0) {
+			
+			return "false";
+			}
+			
+			else {
+				return "success";
+			}
+		}
+		
+		//승급요청 삭제
+				@RequestMapping(value ="releveldel.do", method = RequestMethod.POST)
+				@ResponseBody
+				public String releveldel(String user_id) { 
+				String id = user_id;
+
+				
+
+				Map<String,String> map = new HashMap<String, String>();
+				map.put("id",id);
+				
+				int level =usermanageservice.releveldel(map);
+				
+				if(level == 0) {
+					
+					return "false";
+					}
+					
+					else {
+						return "success";
+					}
+				}
 }

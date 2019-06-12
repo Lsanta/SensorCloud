@@ -38,8 +38,8 @@
 						<td th:text="${userlist.m_level}"></td>
 						<td th:text="${userlist.re_level}" style = "display:none"></td>
 						<td th:if="${userlist.re_level != 0}">
-						<input class="accept" type='button' value='수락'/>
-						<input class="cancel" type='button' value='취소'/>
+							<a class="accept" type="button" >수락</a>
+							<a class="cancel" type="button" >취소</a>
 						</td>
 						<td th:if="${userlist.re_level == 0}"></td>
 			        </tr>
