@@ -442,7 +442,10 @@ public class SiteController {
 		site.setType_no((String) map.get("type_no"));
 		site.setAddress((String) map.get("address"));
 		site.setSite_name((String)map.get("site_name"));
-
+		
+		site.setX((double)map.get("x"));
+		site.setY((double)map.get("y"));
+		
 	    site.setRperiod((String) map.get("rperiod"));
 	    site.setSig_port_num((String) map.get("sig_port_num"));
 	    site.setVirtual_port((String) map.get("virtual_port"));
