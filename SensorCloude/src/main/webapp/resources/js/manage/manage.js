@@ -6,7 +6,7 @@ $(document).ready(function() {
 	});
 
 
-	$(document).on("click", "#user tr" , function(){
+	$(document).on("click", "#user>tr>td:not(:last-child)" , function(){
 
 		var tr = $("#user tr").index(this);
 		var id = $("#user tr:eq("+tr+") td:eq(0)").text();
@@ -27,17 +27,48 @@ $(document).ready(function() {
 	$(".accept").on("click", function() { 
 		var level = $(this).parent().siblings().eq(4).text();
 		var re_level =  $(this).parent().siblings().eq(5).text();
+		var user_id =  $(this).parent().siblings().eq(0).text();
+		
+		var query = {
+				user_id : user_id,
+				re_level :re_level
+		}
 		
 		 if(confirm('현재 사용자의 등급은'+' ' + level +'등급 ' + '입니다' + '\n' + '사용자가 요청한 ' + re_level + '등급 ' + '으로 승급을 수락하시겠습니까?') == true){
 		
+			 
+			 $.ajax({
+					type : "POST",
+					url : "/manage/userlevelup.do",
+					data : query,
+					success : function(data) {
+						alert("사용자의 승급이 완료 되었습니다.");
+						location.reload();
+					}
+				}); // ajax 종료
           }else{
 			return false;
          }
 		});
 	
 	$(".cancel").on("click", function() { 
+		
+		var user_id =  $(this).parent().siblings().eq(0).text();
+		
+		var query = {
+				user_id : user_id,
+		}
 		 if(confirm('취소하시겠습니까?') == true){
          
+			 $.ajax({
+					type : "POST",
+					url : "/manage/releveldel.do",
+					data : query,
+					success : function(data) {
+						alert("사용자의 승급요청이 취소 되었습니다.");
+						location.reload();
+					}
+				}); // ajax 종료
           }else{
            return false;
           }

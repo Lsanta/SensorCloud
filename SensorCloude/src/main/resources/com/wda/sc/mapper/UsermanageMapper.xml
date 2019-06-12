@@ -57,7 +57,22 @@
 	
 	<!-- 승급요청 시 요청 레벨을 update해서 사용자관리에 띄우기위함 -->
 	<update id="mrequestlevel" parameterType="map">
-		update MEMBER set re_level = #{mlevel}
+		update MEMBER set re_level = #{m_level}
+    	where user_id = #{id}
+	</update>
+	
+	<!-- 승급	요청 수락시 -->
+	<update id="userlevelup" parameterType="map">
+		update MEMBER set 
+		m_level = #{m_level},
+		re_level = null
+    	where user_id = #{id}
+	</update>
+	
+	<!-- 승급	요청 수락시 -->
+	<update id="releveldel" parameterType="map">
+		update MEMBER set 
+		re_level = null
     	where user_id = #{id}
 	</update>
 </mapper>
