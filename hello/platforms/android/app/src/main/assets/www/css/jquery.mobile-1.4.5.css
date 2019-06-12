@@ -2820,7 +2820,7 @@ li.ui-block-e {
 	background: #fff;
 	background: rgba(255,255,255,0);
 	filter: Alpha(Opacity=0);
-	opacity: .1;
+	/* opacity: .1; */
 	font-size: 1px;
 	text-indent: -9999px;
 	z-index: 2;
