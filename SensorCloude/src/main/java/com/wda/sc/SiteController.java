@@ -1075,7 +1075,7 @@ public class SiteController {
 							sitevo.setSite_status(0);
 							System.out.println("site_vo" + sitevo);
 							siteservice.modStatus(sitevo);
-							return "redirect:/" + site_id;
+							return "redirect:/site/" + site_id;
 						}
 					} else {
 						//pid가없기 때문에 바로 site_status를 변경시켜준다.
@@ -1084,7 +1084,7 @@ public class SiteController {
 						sitevo.setSite_status(0);
 						System.out.println("site_vo" + sitevo);
 						siteservice.modStatus(sitevo);
-						return "redirect:/" + site_id;
+						return "redirect:/site/" + site_id;
 					}
 					
 			  //만약 상태가 0(종료된 현장)이면 활성화를 수행
@@ -1145,12 +1145,12 @@ public class SiteController {
 				sitevo.setSite_status(1);
 				siteservice.modStatus(sitevo);
 				
-				return "redirect:/"+ site_id;
+				return "redirect:/site/"+ site_id;
 			}
 			
 			
 			
-			return "redirect:/" + site_id;
+			return "redirect:/site/" + site_id;
 		}	
 }
 

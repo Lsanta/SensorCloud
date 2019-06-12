@@ -136,7 +136,7 @@ input[type=text]:focus {
 	border: 3px solid #555;
 }
 
-input.addnetwork_right_input {
+.addnetwork_right_input {
 	width: 200px;
 }
 
@@ -189,7 +189,7 @@ input.addnetwork_right_input {
     cursor:pointer;
 }
 
-input[type=text] {
+input[type=text], #addnetwork_right2 > select {
 	width: 80%;
 	padding: 8px 20px;
 	margin-top: 20px;
@@ -198,6 +198,16 @@ input[type=text] {
 	-webkit-transition: 0.5s;
 	transition: 0.5s;
 	outline: none;
+}
+
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
 }
 
 button {

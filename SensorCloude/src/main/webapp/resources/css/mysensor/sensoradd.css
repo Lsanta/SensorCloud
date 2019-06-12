@@ -108,3 +108,12 @@ h2{
 .sensoradd a:hover {
   opacity: 1;
 }
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
+}

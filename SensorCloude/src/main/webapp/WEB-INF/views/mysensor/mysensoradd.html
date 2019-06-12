@@ -49,27 +49,27 @@
 <body>
 <h2>센서 추가</h2>
  <div class="sensoradd">
-	시리얼넘버<input type="text" id="sensor_sn" name="sensor_sn" /><br/>
-	종류<input type="text" id="sensor_kind" name="sensor_kind" /><br/>
-	모델명<input type="text" id="model_name" name="model_name" /><br/>
+	시리얼넘버<input type="text" id="sensor_sn" name="sensor_sn" placeholder="ex) s000001"/><br/>
+	종류<input type="text" id="sensor_kind" name="sensor_kind" placeholder="ex) 가속도"/><br/>
+	모델명<input type="text" id="model_name" name="model_name" placeholder="ex) CR1000"/><br/>
 <!-- 	전압<input type="text" id="voltage" name="voltage" /><br/> -->
 <!-- 	제조사<input type="text" id="manufacturer" name="manufacturer" /><br/> -->
-	전압<select id="voltage">
-			<option>전압</option>
+	전압<select required id="voltage">
+			<option value="" disabled selected >선택</option>
 			<option>300mv</option>
 			<option>500mv</option>
 			<option>1000mv</option>
 		</select><br/>
-	제조사<select id="manufacturer">
-			<option>제조사</option>
+	제조사<select required id="manufacturer">
+			<option value="" disabled selected >선택</option>
 			<option>Campbell Soup Company</option>
 			<option>SICK</option>
 			<option>프리콘</option>
 			<option>(주)로텍인스투르먼트</option>
 			<option>(주)엠텍</option>
 		</select><br/>
-	축 개수<select id="vertical">
-		<option></option>
+	축 개수<select required id="vertical">
+			<option value="" disabled selected >선택</option>
 		<option>1</option>
 		<option>2</option>
 		<option>3</option>
