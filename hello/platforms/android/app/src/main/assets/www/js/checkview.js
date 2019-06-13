@@ -1,11 +1,8 @@
 
 $(document).ready(function() {
-  
     // var copyarr;
-     var boardno = location.href.split("=");
-     var board_no =boardno[1];
-     console.log(board_no);
- 
+      var boardno = location.href.split("=");
+      var board_no =boardno[1];
 
    //수정버튼 눌렀을 
     $("#modifybutton").on("click" , function(e){
@@ -22,7 +19,6 @@ $(document).ready(function() {
      contentType : "application/json; charset=UTF-8",
      success : function(result){
          
-         alert("점검이력 내용");
          $.each(result,function(i,q){
              
             console.log(q.board_content);
@@ -60,11 +56,10 @@ $(document).ready(function() {
           var str = "";
           copyarr = arr;
           $(arr).each(function(i , attach){
-        
              if(attach.fileType){
                  // var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
-                 var fileCallPath = encodeURIComponent(attach.file_Path+"/s_"+attach.uuid+"_"+attach.file_name);
-                alert(fileCallPath);
+                 var fileCallPath = attach.file_Path+"/s_"+attach.uuid+"_"+attach.file_name;
+                 // alert(fileCallPath);
                 
                  str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"'><div>";
                  str += "<img src='http://39.127.7.58:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'/>";
@@ -72,7 +67,7 @@ $(document).ready(function() {
                  str += "</li>";
 
              }else{
-                 alert("picture display fail");
+                 alert("이미지 불러오기가 실패했습니다.");
              }
      
              });//end each
@@ -80,14 +75,10 @@ $(document).ready(function() {
              $(".uploadResult ul").html(str);
 
              //파일삭제로 인해 요소값이 비어있는경우 썸네일 삭제
-             if (!$('#uploadResult ul').length) {
-                $('.uploadResult ul').remove();
-            }
-
-
-
-             
- 
+            //  if (!$('#uploadResult ul').length) {
+                
+            //     $('.uploadResult ul').remove();
+            //   }
      } // success 함수 종료
  }); // ajax함수 종료
  

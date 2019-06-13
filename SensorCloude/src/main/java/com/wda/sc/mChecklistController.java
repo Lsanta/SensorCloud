@@ -86,8 +86,14 @@ public class mChecklistController {
    @CrossOrigin(origins = "*", maxAge = 3600)
    @PostMapping("/mdeleteFile")
    @ResponseBody
-   public ResponseEntity<String> mdeleteFile(String fileName, String type){
-	   	
+   public ResponseEntity<String> mdeleteFile(String fileName, String type, String board_no){
+	   int boardno = Integer.parseInt(board_no);
+	      
+	  System.out.println("mdeleteFile에 넘어오는 board_no"+boardno);
+	     
+	   //해당 board_no에 해당하는 파일 db에서 삭제
+	   Checkboardservice.filedelete(boardno);
+	    
 	   System.out.println("deleteFile :"+ fileName);
 	   
 	   File file;
@@ -146,7 +152,7 @@ public class mChecklistController {
    @ResponseBody
    public void insertfile(@RequestParam Map<String,String> allRequestParams, MultipartFile file, Model model) throws Exception {
        
-
+	  System.out.println("오나?");
       String uploadPath = "C:\\upload";
       
       Iterator<String> keys = allRequestParams.keySet().iterator();
