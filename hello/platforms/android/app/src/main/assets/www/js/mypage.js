@@ -34,7 +34,10 @@ $(document).ready(function() {
 					}
 					str3 +='</p>';
 	
-						 $(".name01").html(str3);
+					 $(".name01").html(str3);
+
+					 localStorage.removeItem("level");
+					 localStorage.setItem("level",s[0].m_level);
 				 });
 			}
 	});
