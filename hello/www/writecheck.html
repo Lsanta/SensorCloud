@@ -35,11 +35,6 @@
             <textarea name="checkcontent" id="checkcontent" cols="45" rows="20"></textarea>
         </div>
 
-
-        <div id="selectcamrea">
-        </div>
-
-
         <div id="imagespot">
 
             <div class="repairpicturespot">
@@ -82,6 +77,9 @@
         // 사용자가 선택한 사진의 경로
         var file_path = null;
 
+        $("#checkcontent").textinput({
+             autogrow: false
+        });
         /** 카메라 혹은 갤러리 호출 */
         function takePicture(source) {
             // 표시영역을 비운다.
