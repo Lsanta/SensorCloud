@@ -1,6 +1,6 @@
 #checkcontent{
     width: 100%;
-    height: 660px;
+    height: 720px;
     padding: 4px 7px;
     margin-bottom: 3px;
     display: inline-block;
@@ -21,15 +21,15 @@
 
 #ttitle {
     margin-top: 10px;
-    width: 200px;
+    width: 260px;
     margin-left: 5px;
     font-size: 18px;
-    height: 30px;
+    height: 32px;
 }
 
 
 #sse {
-    font-size: 1.1em;
+    font-size: 1.2em;
     margin-left: 15px;
     display: inline-block;
 }
@@ -47,7 +47,7 @@
 
 #checkcontent2 {
     width: 100%;
-    height: 60%;
+    height: 50%;
     resize: none;
     border: 1px solid #ccc;
 }
@@ -56,11 +56,7 @@
     margin-left: 10px;
 }
 
-#imagespot {
-    width: 100%;
-    height: 20%;
-    margin-top: 2px;
-}
+
 
 
 #bottom {
@@ -85,12 +81,16 @@
 }
 
 .uploadResult {
-    width:100%;
-    background-color: gray;
+    width: 100%;
+    background-color: whitesmoke;
+    height: 32%;
+    margin-top: 2px;
+    border: 1px solid #ccc;
 }
 
 .uploadResult ul{
-    display :flex;
+    overflow: hidden;
+    display: flex;
     flex-flow: row;
     justify-content: center;
     align-items: center;
@@ -98,17 +98,25 @@
 }
 
 .uploadResult ul li {
-    display: none;
+    width:130px;
+    list-style: none;
+    padding: 10px;
+    align-content: center;
+    text-align: center;
 }
 
-.upload ul li div img {
+.uploadResult ul li img {
 
-    width:100%;
+    width:80%;
     height: 100%;
 }
 
+
 .uploadResult ul li span {
-    color:white;
+    color:black;
+    display:inline-block;
+     width:50px;
+    height: 50px;
 
 }
 
@@ -118,8 +126,8 @@
     justify-content: center;
     align-items: center;
     top:0%;
-    width:70%;
-    height: 50%;
+    width:100%;
+    height: 100%;
     z-index: 100;
     background:rgba(red, green, blue, alpha);
 
@@ -134,6 +142,6 @@
 }
 
 .bigPicture img {
-    width: 600px;
+    width: 250px;
 
 }

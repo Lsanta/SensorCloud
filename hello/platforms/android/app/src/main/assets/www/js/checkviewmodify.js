@@ -66,8 +66,12 @@ $(document).ready(function() {
 
                 
                  str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' >";
-                 str += "<img src='http://39.127.7.58:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'/>"+"<span data-file=\'"+fileCallPath+"\' data-type='image'>x</span>";
+                 str += "<img src='http://39.127.7.58:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'/>"
                  str += "</li>";
+                 str +="<div id='deletespot'>";
+                 str +="<span data-file=\'"+fileCallPath+"\' data-type='image'>x</span>";
+                 str += "</div>";
+                 
              }else{
                  alert("picture display fail");
              }
@@ -75,6 +79,10 @@ $(document).ready(function() {
              });//end each
              
              $(".uploadResult ul").html(str);
+              //파일삭제로 인해 요소값이 비어있는경우 썸네일 삭제
+              if (!$('#uploadResult ul').length) {
+                $('.uploadResult ul').remove();
+            }
  
      } // success 함수 종료
  }); // ajax함수 종료
@@ -108,7 +116,30 @@ $(document).ready(function() {
               });
         
  
-     });  
+     }); 
+     
+     //span x 버튼 클릭시 수정 버튼 누르기 전 미리 파일 삭제 
+     //파일이 업로드 후에 생성되기 때문에 이벤트 위임방식으로 처리 ajax를 이용해 첨부파일의 경로와 이름 , 파일의 종류를 전송
+     $(".uploadResult").on("click" , "span" ,function(e){
+
+        var targetFile = $(this).data("file");
+        var type = $(this).data("type");
+        console.log(targetFile);
+
+        $.ajax({
+            url : 'http://39.127.7.58:8080/app/checklist/mdeleteFile',
+            data :{fileName : targetFile , type:type},
+            dataType : 'text',
+            type:"POST",
+            success: function(result){
+                alert(result);
+                //파일삭제후 동적으로 업로드 썸네일 부분을 삭제한다.
+                $(".uploadResult *").remove();
+            }
+
+        });//파일삭제 ajax end
+
+     });
  
      
      });
