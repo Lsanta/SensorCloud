@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     
 
@@ -81,7 +80,7 @@ $(document).ready(function() {
         $("#cameraGetPicture").click(function () {
             takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
         });
-    }
+    });
 
 
 

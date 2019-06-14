@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     
 
@@ -18,7 +17,7 @@ $(document).ready(function() {
       function takePicture(source) {
         // 표시영역을 비운다.
 
-        $(".imagespot").empty();
+        $(".uploadResult ul").empty();
         file_path = null;
 
         navigator.camera.cleanup();
@@ -35,6 +34,8 @@ $(document).ready(function() {
                     // 탐색하는 문자열이 마지막으로 등장하는 위치에 대한 index를 반환
                     file_path += "?" + new Date().getTime();
                 }
+
+                alert("수정페이지 카메라 이미지 경로"+file_path);
 
                 // 이미지 화면 표시
                 str += "<li>";
@@ -79,7 +80,7 @@ $(document).ready(function() {
         $("#cameraGetPicture").click(function () {
             takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
         });
-    }
+    });
 
 
 
