@@ -262,7 +262,7 @@ $.ajax({
         var tr = $("#bbb tr").index(this);
         var boardno =$("#bbb tr:eq("+tr+") td:eq(5)").text();
 
-      //내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
+        //내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
        
         window.location.href="checkview.html?board_no="+boardno;
         

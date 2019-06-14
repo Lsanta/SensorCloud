@@ -34,7 +34,10 @@ $(document).ready(function() {
 					}
 					str3 +='</p>';
 	
-						 $(".name01").html(str3);
+					 $(".name01").html(str3);
+
+					 localStorage.removeItem("level");
+					 localStorage.setItem("level",s[0].m_level);
 				 });
 			}
 	});
@@ -95,6 +98,7 @@ $(document).ready(function() {
 							default  : str +='<td>'+'null'+'</td>'; break;
 							}
 						str +='<td>'+s.reg_date+'</td>';       // 날짜
+						str +='<td style="display:none">'+s.board_no+'</td>';	  // 보드넘버
 						str +='</tr>';
 	
 						$("#mypagechecklist").html(str);
@@ -120,6 +124,7 @@ $(document).ready(function() {
 		 $('.mpmodify-level').on('click', function() {
 				$("#content").load("usermodify.html");
 		 });
+
 	
 	});
 	
@@ -146,6 +151,7 @@ $(document).ready(function() {
 							default  : str +='<td>'+'null'+'</td>'; break;
 							}
 							str +='<td>'+s.reg_date+'</td>';       // 날짜
+							str +='<td style="display:none">'+s.board_no+'</td>';	  // 보드넘버
 							str +='</tr>';
 		
 							$("#mypagechecklist").html(str);
@@ -177,8 +183,8 @@ $(document).ready(function() {
 	
 		 var board_no = $("#mypagechecklist tr:eq(" + tr + ") td:eq(4)").text();
 		 // 내가클릭한 테이블의 행을 판별해야하기위해 board_no 정보를 넘긴다
-		 
-		 window.location.href = "/checkboard/" + board_no; //바꾸기~~
+		
+		 window.location.href="checkview.html?board_no="+board_no;
 	});
 	
 	

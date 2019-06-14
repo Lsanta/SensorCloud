@@ -3,6 +3,8 @@ package com.wda.sc;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -25,6 +27,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,6 +60,8 @@ public class mChecklistController {
    }
    
    
+   
+   
    @CrossOrigin(origins = "*", maxAge = 3600)	
    @ResponseBody
    @RequestMapping(value="/mdisplay", method = RequestMethod.GET)
@@ -77,6 +82,50 @@ public class mChecklistController {
       }
       return result;
    }
+   
+   @CrossOrigin(origins = "*", maxAge = 3600)
+   @PostMapping("/mdeleteFile")
+   @ResponseBody
+   public ResponseEntity<String> mdeleteFile(String fileName, String type, String board_no){
+	   int boardno = Integer.parseInt(board_no);
+	      
+	  System.out.println("mdeleteFile에 넘어오는 board_no"+boardno);
+	     
+	   //해당 board_no에 해당하는 파일 db에서 삭제
+	   Checkboardservice.filedelete(boardno);
+	    
+	   System.out.println("deleteFile :"+ fileName);
+	   
+	   File file;
+	   
+	   try {
+		   
+		   file = new File("c:\\upload\\"+URLDecoder.decode(fileName , "UTF-8"));
+		   
+		   file.delete();
+		   
+		   if(type.equals("image")) {
+			   //이미지의 경우 섬네일이 존재. 그래서 파일이름의 중간에 s_ 가 들어잇다. 이부분을 변경해서 원본 이미지 파일도 같이삭제
+			   
+			   String largeFileName = file.getAbsolutePath().replace("s_" ,"");
+			   
+			   System.out.println("largeFileName:"+largeFileName);
+			   
+			   file = new File(largeFileName);
+			   
+			   file.delete();
+			   
+		   }
+		   
+	   }catch(UnsupportedEncodingException e) {
+		   e.printStackTrace();
+		   return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	   }
+	   	
+	   return new ResponseEntity<String>("deleted" , HttpStatus.OK);
+	   
+   }
+	 
 
    // 점검이력
    @CrossOrigin(origins = "*", maxAge = 3600)
@@ -103,7 +152,7 @@ public class mChecklistController {
    @ResponseBody
    public void insertfile(@RequestParam Map<String,String> allRequestParams, MultipartFile file, Model model) throws Exception {
        
-
+	  System.out.println("오나?");
       String uploadPath = "C:\\upload";
       
       Iterator<String> keys = allRequestParams.keySet().iterator();

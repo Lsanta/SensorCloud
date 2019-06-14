@@ -99,19 +99,6 @@ b{
   background-color: #357ae8;
 }
 
-.login-card a {
-  text-decoration: none;
-  color: #666;
-  font-weight: 400;
-  text-align: center;
-  display: inline-block;
-  opacity: 0.6;
-  transition: opacity ease 0.5s;
-}
-
-.login-card a:hover {
-  opacity: 1;
-}
 
 .login-help {
   width: 100%;
