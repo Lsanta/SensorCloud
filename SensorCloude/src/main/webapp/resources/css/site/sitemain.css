@@ -59,8 +59,8 @@ p{
 #dataDiv #main-content table thead tr {
     position: absolute;
     top: 0;
-    color: #2E2E2E;
-    background-color: #eaecf4;
+    color: #000;
+    background-color: #dbe2fc;
 }
 #dataDiv #main-content table thead tr th {
    font-weight: normal;
@@ -73,6 +73,7 @@ p{
     text-align: center;
     height: 50px;
     border-top: 1px solid #ccc;
+    color:#595959;
 }
 #dataDiv #main-content table tr {
      display: inline-table;
