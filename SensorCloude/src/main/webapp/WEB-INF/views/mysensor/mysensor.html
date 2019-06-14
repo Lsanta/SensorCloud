@@ -22,13 +22,13 @@
 			<table id="mysensor">
 				<thead>
 					<tr>
-						<th scope="col">시리얼넘버</th>
-						<th scope="col">종류</th>
-						<th scope="col">모델명</th>
-						<th scope="col">전압</th>
-						<th scope="col">제조사</th>
-						<th scope="col">현장이름</th>
-						<th scope="col">등록일</th>
+						<th scope="col" style="width:13%">시리얼넘버</th>
+						<th scope="col" style="width:13%">종류</th>
+						<th scope="col" style="width:13%">모델명</th>
+						<th scope="col" style="width:13%">전압</th>
+						<th scope="col" style="width:20%">제조사</th>
+						<th scope="col" style="width:20%">현장이름</th>
+<!-- 					<th scope="col">등록일</th> -->
 					</tr>
 				</thead>
 				<tbody id="list" th:if="${sensor == null}">
@@ -39,7 +39,7 @@
 						<td th:text="${sensorlist.voltage}"></td>
 						<td th:text="${sensorlist.manufacturer}"></td>
 						<td th:text="${sensorlist.site_name}"></td>
-						<td th:text="${sensorlist.create_day}"></td>
+						<td style="display : none" th:text="${sensorlist.create_day}"></td>
 						<td style="display : none" th:text="${sensorlist.vertical}"></td>
 					</tr> 
 				</tbody>
@@ -52,7 +52,7 @@
 						<td th:text="${sensor.voltage}"></td>
 						<td th:text="${sensor.manufacturer}"></td>
 						<td th:text="${sensor.site_name}"></td>
-						<td th:text="${sensor.create_day}"></td>
+ 						<td style="display : none" th:text="${sensor.create_day}"></td> 
 						<td style="display : none" th:text="${sensor.vertical}"></td>
 					</tr> 
 				</tbody>
