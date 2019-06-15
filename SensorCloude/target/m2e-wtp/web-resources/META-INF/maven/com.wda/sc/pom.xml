@@ -16,6 +16,22 @@
 	</properties>
 	<dependencies>
 		<!-- Spring -->
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-coyote -->
+<dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>tomcat-coyote</artifactId>
+    <version>9.0.21</version>
+</dependency>
+		
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina -->
+		<dependency>
+    		<groupId>org.apache.tomcat</groupId>
+    		<artifactId>tomcat-catalina</artifactId>
+    		<version>9.0.21</version>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/net.java.dev.jna/jna -->
 		<dependency>
     		<groupId>net.java.dev.jna</groupId>
