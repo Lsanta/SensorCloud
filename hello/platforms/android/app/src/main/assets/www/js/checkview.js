@@ -59,7 +59,7 @@ $(document).ready(function() {
              if(attach.fileType){
                  // var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
                  var fileCallPath = attach.file_Path+"/s_"+attach.uuid+"_"+attach.file_name;
-                 // alert(fileCallPath);
+                //  alert(fileCallPath);
                 
                  str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"'><div>";
                  str += "<img src='http://15.164.166.25:80/app/checklist/mdisplay?fileName="+fileCallPath+"'/>";
