@@ -99,17 +99,17 @@
 						<button id="submit">전송</button>
 					</div>
 					
-					<div class="scroll-table2">
-						<div>
-							<table>
-								<thead>
+					<div id="sidebar2">
+						<div class="scroll-table2">
+							<table id="smsdata">
+								<thead id="sms-data-head">
 									<tr>
-										<th>날짜</th>
-										<th>내용</th>
-										<th>보낸이</th>
+										<td>날짜</td>
+										<td>내용</td>
+										<td>보낸이</td>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="sms-data">
 									<tr th:each="alarm : ${alarm}">
 										<td th:text="${alarm.alarm_time}"></td>
 										<td th:text="${alarm.alarm_content}"></td>
@@ -117,10 +117,9 @@
 									</tr>
 								</tbody>
 							</table>
-							
+						</div>
 						</div>
 					</div>
-				</div>
 				<div id="footer">
 					
 				</div>

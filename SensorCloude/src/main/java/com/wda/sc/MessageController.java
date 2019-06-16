@@ -47,6 +47,7 @@ import com.google.firebase.messaging.WebpushConfig;
 import com.google.firebase.messaging.WebpushNotification;
 import com.google.firebase.messaging.internal.MessagingServiceErrorResponse;
 import com.wda.sc.domain.AlarmMemberVO;
+import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.AppTokenVO;
 import com.wda.sc.domain.TokenVO;
 import com.wda.sc.service.AndroidPushNotificationService;
@@ -401,7 +402,7 @@ public class MessageController {
 	   @ResponseBody
 	   @RequestMapping(value="/WebLimit.do", method= RequestMethod.POST, consumes = {"application/x-www-form-urlencoded"}, produces = {"application/json"})
 	   @CrossOrigin(maxAge = 3600)
-	   public String pushTest5(@RequestBody String content) {
+	   public String pushTest5(@RequestBody String content, HttpSession session) {
 	      
 		   String reContent = "";
 	        try {
@@ -422,8 +423,17 @@ public class MessageController {
 	      
 	      String con = site_name + "에서 " + sensor_sn + "의  " +  limit + "이  초과되었습니다." + "Data :" + data;
 	      
+	      	// 연락망 추가 폼을 이용한 추가
+	      	AlarmVO vo = new AlarmVO();
+			String user = (String) session.getAttribute("id");
+			vo.setAlarm_content(con);
+			vo.setSite_id(Integer.parseInt(site_id));
+			vo.setSend_user(user);
+			
+			int a = siteservice.insertAlarm(vo);
+	      
 		  FirebaseApp defaultApp = null;
-	      List<FirebaseApp> apps=FirebaseApp.getApps();
+	      List<FirebaseApp> apps=FirebaseApp.getApps(); 
 	      FileInputStream serviceAccount;
 	      FirebaseOptions options=null;
 	      //파이어베이스 옵션 설정
