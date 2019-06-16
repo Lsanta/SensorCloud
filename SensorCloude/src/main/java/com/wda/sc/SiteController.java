@@ -206,7 +206,8 @@ public class SiteController {
 		model.addAttribute("siteInfo", siteservice.getSite(site_id));
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
 		model.addAttribute("alarm", siteservice.getAlarm(site_id)); // 알람 내용 정
-
+		System.out.println("알람 내용" + siteservice.getAlarm(site_id));
+		
 		return "site/sitealarm";
 	}
 
@@ -470,7 +471,7 @@ public class SiteController {
 		} else {
 			int site_id = siteservice.getSiteNum();
 						
-			String command = "C:\\Users\\bon300-27\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
+			String command = "C:\\Users\\Administrator\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
 			ArrayList<String> rawPid = new Cmd().exeCmd(command);
 			System.out.println(rawPid);
 			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
@@ -1097,7 +1098,7 @@ public class SiteController {
 				ArrayList<SiteVO> site = siteservice.joinSite(site_id);
 				System.out.println("사이트들고온 네트워크정보" + site);
 				
-				String command = "C:\\Users\\user\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.get(0).getRperiod()+" "+site.get(0).getVirtual_port()+" "+site.get(0).getSig_port_num()+" "+site_id;
+				String command = "C:\\Users\\Administrator\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.get(0).getRperiod()+" "+site.get(0).getVirtual_port()+" "+site.get(0).getSig_port_num()+" "+site_id;
 				ArrayList<String> rawPid = new Cmd().exeCmd(command);
 				System.out.println(rawPid);
 				ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 

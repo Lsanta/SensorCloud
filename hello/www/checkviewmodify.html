@@ -6,15 +6,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, 
         maximum-scale=1, minimum-scale=1, width=device-width">
-    <link rel="stylesheet" type="text/css" href="css/checkviewmodify.css">
-
     
+    <link rel="stylesheet" type="text/css" href="./css/jquery.mobile-1.4.5.css" />
+    <link rel="stylesheet" type="text/css" href="css/checkviewmodify.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
 
     <title>점검내용</title>
 
 </head>
 
 <body>
+
+        <div data-role="page" style="background:#F4F6FD;">
+                <div data-role="header"  data-position="fixed" id="header">
+                    <!-- <img src="img/logo.png" id="aa"> -->
+                    <h1 style="font-size: 30px">SENSOR CLOUD</h1>
+                </div>
+
+
 
     <div class='bigPictureWrapper'>
         <div class='bigPicture'>
@@ -27,8 +36,10 @@
 
         <div id="checkcontent1">
 
-            <textarea id="ttitle" name="content" rows="2" cols="20" maxlength="30"></textarea>
+            <input type="text" id="ttitle" name="ttitle" placeholder="title">
 
+            <button id="cameraTakePicture"><img src="img/camera.png" style="width:25px; height:25px;"></button>
+            <button id="cameraGetPicture"><img src="img/library.png" style="width:25px; height:25px;"></button>
 
            <select name="status" id="sse">
             <option value="open">open</option>
@@ -66,12 +77,27 @@
     
         </div>
 
+        
     </div>
+
+    <div data-role="footer"  data-position="fixed" data-id="footerid1">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="main.html" rel="external" data-icon="home"></a></li>
+                    <li><a href="search.html" rel="external" data-icon="search"></a></li>
+                    <li><a href="timeline.html" rel="external" data-icon="clock"></a></li>
+                    <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div><!--data role end-->
 
     <script src="./js/jquery.js"></script>
     <script src="./js/checkviewmodify.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
-    <!-- <script src="./js/jquery.mobile-1.4.5.js"></script>     -->
+    <script src="./js/jquery.mobile-1.4.5.js"></script>    
 
 <script src="./js/onmessage.js"></script>
 <script type="text/javascript" src="cordova.js"></script>

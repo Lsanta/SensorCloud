@@ -6,15 +6,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, 
         maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <link rel="stylesheet" type="text/css" href="./css/jquery.mobile-1.4.5.css" />
     <link rel="stylesheet" type="text/css" href="css/checkview.css">
-
-    
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">    
     <title>점검내용</title>
-
 </head>
 
 <body>
+        <div data-role="page" style="background:#F4F6FD;">
+                <div data-role="header"  data-position="fixed" id="header">
+                    <!-- <img src="img/logo.png" id="aa"> -->
+                    <h1 style="font-size: 30px">SENSOR CLOUD</h1>
+                </div>
+
     <a href="javascript:history.go(-1)">뒤로 가기</a>
     
     <div class='bigPictureWrapper'>
@@ -31,15 +36,21 @@
             <h3 id="title"></h3>
 
 
-            <p id ="status"></p>
+            
 
-            <p id ="regdate"></p>
-
+            <button id="cameraTakePicture"><img src="img/camera.png" style="width:30px; height:30px;"></button>
+            <button id="cameraGetPicture"><img src="img/library.png" style="width:30px; height:30px;"></button>
+            
+            
         </div>
 
-
         <div id="checkcontent2">
-            <p id= "content"></p>
+                <p id ="status"></p>
+                <p id ="regdate"></p>
+            </div>
+
+        <div id="checkcontent3">
+                <p id= "content"></p>
         </div>
 
         <div class="uploadResult">
@@ -48,17 +59,34 @@
             </ul>
         </div>
 
-        <div id="bottom">
-            <button id="modifybutton">수정</button>
-            <button id="deletebutton">삭제</button>
+        
+
+    </div><!--checkcontent end-->
+
+    <div id="bottom">
+            <button id="modifybutton" style="background:#2F2F38;">수정</button>
+            <button id="deletebutton" style="background:#2F2F38;">삭제</button>
     
         </div>
 
-    </div>
+    <div data-role="footer"  data-position="fixed" data-id="footerid1">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="main.html" rel="external" data-icon="home"></a></li>
+                    <li><a href="search.html" rel="external" data-icon="search"></a></li>
+                    <li><a href="timeline.html" rel="external" data-icon="clock"></a></li>
+                    <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
+                </ul>
+            </div>
+        </div>
+
+
+
+    </div><!--data role end-->
 
 <script src="./js/jquery.js"></script>
+<script src="./js/jquery.mobile-1.4.5.js"></script>
 <script src="./js/checkview.js"></script>
-
 <script src="./js/onmessage.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>

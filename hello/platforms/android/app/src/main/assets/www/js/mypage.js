@@ -13,7 +13,7 @@ $(document).ready(function() {
 	};
 	$.ajax({
 			type : "POST",
-			url : "http://52.79.242.145:8080/app/mypage/usermodify",
+			url : "http://15.164.166.25:80/app/mypage/usermodify",
 			//url : "http://39.127.7.58:8080/app/mypage/usermodify",
 			data : query,
 			dataType : 'json',
@@ -44,7 +44,7 @@ $(document).ready(function() {
 
 			 $.ajax({
 				type : "POST",
-				url : "http://52.79.242.145:8080/app/mypage/mgetAttachListmypage",
+				url : "http://15.164.166.25:80/app/mypage/mgetAttachListmypage",
 				//url : "http://39.127.7.58:8080/app/mypage/mgetAttachListmypage",
 				data : id,
 				async : false,
@@ -59,7 +59,7 @@ $(document).ready(function() {
 								 var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
 								
 								 str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";
-								 str += "<img class='delete1' src='http://52.79.242.145:8080/display?fileName="+fileCallPath+"'>";
+								 str += "<img class='delete1' src='http://15.164.166.25:80/display?fileName="+fileCallPath+"'>";
 								 str += "</div>";
 								 str += "</li>";
 							
@@ -79,7 +79,7 @@ $(document).ready(function() {
 		 //점검이력 불러오기
 		 $.ajax({
 				type : "POST",
-				url : "http://52.79.242.145:8080/app/mypage/mypagemain",
+				url : "http://15.164.166.25:80/app/mypage/mypagemain",
 				//url : "http://39.127.7.58:8080/app/mypage/mypagemain",
 				async:false,
 				data : {pagenum : 1, id : id},
@@ -131,7 +131,7 @@ $(document).ready(function() {
 	function page(index) {
 		 $.ajax({
 				 type : "POST",
-				url : "http://52.79.242.145:8080/app/mypage/mypagemain",
+				url : "http://15.164.166.25:80/app/mypage/mypagemain",
 				//url : "http://39.127.7.58:8080/app/mypage/mypagemain",
 				 async:false,
 				 data : {pagenum : index,  id : id},
@@ -216,7 +216,7 @@ $(document).ready(function() {
 				console.log(query);
 				$.ajax({
 					 type : "POST",
-					 url : "http://52.79.242.145:8080/app/mypage/mypageconfirmpasswd.do",
+					 url : "http://15.164.166.25:80/app/mypage/mypageconfirmpasswd.do",
 					 //url : "http://39.127.7.58:8080/app/mypage/mypageconfirmpasswd.do",
 					 async: false,
 					 data: query,
@@ -226,7 +226,7 @@ $(document).ready(function() {
 							
 							if (data == "success") {
 								 alert("비밀번호 일치");
-								//  window.location.href = "http://52.79.242.145:8080/app/mypage/usermodify";
+								//  window.location.href = "http://15.164.166.25:80/app/mypage/usermodify";
 								// window.location.href = "http://39.127.7.58:8080/app/mypage/usermodify";
 								window.location.href = "usermodify.html";
 							} else {
@@ -262,7 +262,7 @@ $(document).ready(function() {
 	
 				 $.ajax({
 					 type : "POST",
-					 url : "http://52.79.242.145:8080/app/mypage/levelup",
+					 url : "http://15.164.166.25:80/app/mypage/levelup",
 					 //url : "http://39.127.7.58:8080/app/mypage/levelup",
 					 data : JSON.stringify(query),
 					 contentType : "application/json; charset=UTF-8",
@@ -274,7 +274,7 @@ $(document).ready(function() {
 								 //푸쉬 메시지 요청(웹으로)
 								 $.ajax({
 											 type : "POST",
-											 url : "http://52.79.242.145:8080/app/send/message.do",
+											 url : "http://15.164.166.25:80/app/send/message.do",
 											 //url : "http://39.127.7.58:8080/app/send/message.do",
 											 data : JSON.stringify(payload),
 											 contentType : "application/json; charset=UTF-8",
@@ -299,7 +299,7 @@ $(document).ready(function() {
 			
 				$.ajax({
 					type : "POST",
-					url : "http://52.79.242.145:8080/app/mypage/deleteappToken",
+					url : "http://15.164.166.25:80/app/mypage/deleteappToken",
 					//url : "http://39.127.7.58:8080/app/mypage/deleteappToken",
 					data : id,
 					contentType : "text/plain; charset=UTF-8",

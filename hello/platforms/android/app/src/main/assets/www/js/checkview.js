@@ -14,7 +14,7 @@ $(document).ready(function() {
      //점검이력 글 내용 불러오기 
     $.ajax({
      type : "POST",
-     url : "http://52.79.242.145:8080/app/siterepairview",
+     url : "http://15.164.166.25:80/app/siterepairview",
      data : board_no,
      contentType : "application/json; charset=UTF-8",
      success : function(result){
@@ -47,7 +47,7 @@ $(document).ready(function() {
  //썸네읿 불러오기
  $.ajax({
      type : "POST",
-     url : "http://39.127.7.58:8080/app/checklist/mgetAttachList",
+     url : "http://15.164.166.25:80/app/checklist/mgetAttachList",
      data : board_no,
      async : false,
      contentType : "application/json; charset=UTF-8",
@@ -62,7 +62,7 @@ $(document).ready(function() {
                  // alert(fileCallPath);
                 
                  str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"'><div>";
-                 str += "<img src='http://39.127.7.58:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'/>";
+                 str += "<img src='http://15.164.166.25:80/app/checklist/mdisplay?fileName="+fileCallPath+"'/>";
                  str += "</div>";
                  str += "</li>";
 
@@ -98,7 +98,7 @@ $(document).ready(function() {
                 $(".bigPictureWrapper").css("display","flex").show();
                 
                 $(".bigPicture")
-                .html("<img src='http://39.127.7.58:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'>")
+                .html("<img src='http://15.164.166.25:80/app/checklist/mdisplay?fileName="+fileCallPath+"'>")
                 .animate({width:'100%', height: '100%'}, 1000);
                 
               }
