@@ -248,19 +248,19 @@ $(document).ready(function() {
 	$(document).ready(function() {
 		 //승급요청 확인 클릭시
 		 $("#ok").click(function(){
-		
 				 var select = $("#select_level option:selected").val();
 				
 				 var query = {
 						id : id,
-						mlevel : select
+						m_level : select
 				 }
 	
 				 var payload = {
 					 message : "앱에서" + id + "님의" + select + "등급 승급요청이 왔습니다."
 				 }   
-	
+				 
 				 $.ajax({
+					 
 					 type : "POST",
 					 url : "http://15.164.166.25:80/app/mypage/levelup",
 					 //url : "http://39.127.7.58:8080/app/mypage/levelup",
