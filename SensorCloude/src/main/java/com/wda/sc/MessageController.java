@@ -423,7 +423,7 @@ public class MessageController {
 	      
 	      String con = site_name + "에서 " + sensor_sn + "의  " +  limit + "이  초과되었습니다." + "Data :" + data;
 	      
-	      // 연락망 추가 폼을 이용한 추가
+	        // 연락망 추가 폼을 이용한 추가
 //	        System.out.println("11");
 //	      	AlarmVO vo = new AlarmVO();
 //			String user = (String) session.getAttribute("id");
