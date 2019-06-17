@@ -16,6 +16,10 @@ p{
    color: #000;
 }
 
+.sitestatus img {
+	width : 25px;
+}
+
 #btnExport {
 	float: right;
 	margin-right: 3%;
