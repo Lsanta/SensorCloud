@@ -28,9 +28,9 @@
         <div data-role="tabs">
             <div data-role="navbar" >
                <ul>
-                  <li><a href="#tab1" style="background:white; ">메인</a></li>
-                  <li><a href="#tab1" style="background:white;" id="logout">로그아웃</a></li>
-                  <li><a href="#tab2" style="background:white;">정보수정</a></li>
+                  <li><a href="#tab1" style="background:#2F2F38;">메인</a></li>
+                  <li><a href="#tab1" id="logout"  style="background:#2F2F38;">로그아웃</a></li>
+                  <li><a href="#tab2"  style="background:#2F2F38;">정보수정</a></li>
                </ul>               
             </div>
 
@@ -71,14 +71,14 @@
                     <input type="button" name="confirm" id="confirm-modify" class="mpmodify-submit" value="확인">
                 </div>
       
-                <a data-rel="popup" href="#levelpop" class="ui-btn ui-btn-b">승급요청</a>
+                <a data-rel="popup" href="#levelpop" class="ui-btn ui-btn-b"  style="background:#2F2F38; margin-top:-8%;">승급요청</a>
 
                 <div data-role="popup" id="levelpop">      
                   <center><h2>승급요청</h2></center>
 
                   <div id="levelcontent">
                      <div id="now-level">      
-                        <p>현재 김개발 님의 등급은 5등급 입니다.</p>
+                        <!-- <p>현재 김개발 님의 등급은 5등급 입니다.</p> -->
                            
                         <!-- <p th:text="${userInfo.user_id}" id="user_id" style="display: none"></p>
                            승급요청시 사용자 관리에 id를 넘기기위함 -->
@@ -98,7 +98,7 @@
                      
                   </div>
       
-                  <input type="button" id="ok" value="확인" />
+                  <input type="button" id="ok" value="확인"/>
                   
                </div>
                 
@@ -114,7 +114,7 @@
             <ul>
                 <li><a href="main.html" rel="external" data-icon="home"></a></li>
                 <li><a href="search.html" rel="external" data-icon="search"></a></li>
-                <li><a href="timeline.html" rel="external" data-icon="comment"></a></li>
+                <li><a href="timeline.html" rel="external" data-icon="clock"></a></li>
                 <li><a href="mypage.html" rel="external" data-icon="user"></a></li>
             </ul>
         </div>

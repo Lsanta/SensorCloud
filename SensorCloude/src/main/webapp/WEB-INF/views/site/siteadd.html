@@ -79,10 +79,40 @@
       </div>
       
       <div id ="addnetwork_right2">
-      
-      	<input type="text" name="hostaddress" placeholder = "초 단위로 적어주세요" class="addnetwork_right_input" id="rperiod"><br>
-      	<input type="text" name="hostaddress" placeholder = "Baudrate를 적어주세요"class="addnetwork_right_input" id="sig_port_num"><br>
-      	<input type="text" name="hostaddress" placeholder = "미리 설정 후 적어주세요" class="addnetwork_right_input" id="virtualport"><br>
+
+	    <input type="text" name="hostaddress" placeholder = "초 단위로 적어주세요" class="addnetwork_right_input" id="rperiod"><br>      	
+      	
+      	<select required name="hostaddress" class="addnetwork_right_input" id="sig_port_num">
+      		<option value="" disabled selected >Baudrate를 선택해 주세요</option>
+      		<option>1200</option>
+      		<option>2400</option>
+      		<option>4800</option>
+      		<option>9600</option>
+      		<option>14400</option>
+      		<option>19200</option>
+      		<option>28800</option>
+      		<option>38400</option>
+      		<option>57600</option>
+      		<option>115200</option>
+      	</select>
+      	
+      	<select required name="hostaddress" class="addnetwork_right_input" id="virtualport">
+      		<option value="" disabled selected >미리 설정 후 적어주세요</option>
+      		<option value="10">com10</option>
+      		<option value="11">com11</option>
+      		<option value="12">com12</option>
+      		<option value="13">com13</option>
+      		<option value="14">com14</option>
+      		<option value="15">com15</option>
+      		<option value="16">com16</option>
+      		<option value="17">com17</option>
+      		<option value="18">com18</option>
+      		<option value="19">com19</option>
+      		<option value="20">com20</option>
+      	</select>
+
+<!--       	<input type="text" name="hostaddress" placeholder = "Baudrate를 적어주세요"class="addnetwork_right_input" id="sig_port_num"><br> -->
+<!--       	<input type="text" name="hostaddress" placeholder = "미리 설정 후 적어주세요" class="addnetwork_right_input" id="virtualport"><br> -->
       
       </div>
         
@@ -100,8 +130,8 @@
    
 	<div class="sensor_box">
 		<div id="addSensor0" style="margin-bottom:3px">
-			<select class="my_sensor">
-				<option>선택</option>
+			<select required class="my_sensor">
+				<option value="" disabled selected >센서를 선택하세요</option>
              	<option th:each="ss : ${siteSensor}" th:text=" ${ss.sensor_sn} + '[' + ${ss.sensor_kind} + ']'" th:value="${ss.vertical}">
             	</option>
 			</select>
@@ -119,6 +149,7 @@
 
 <th:block layout:fragment="page_js">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src='https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js'></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d&libraries=services"></script>
 <script>
@@ -312,8 +343,10 @@ $(document).ready(function(){
 	
 						//네트워크 데이터
 						rperiod : $("#rperiod").val(),
-						sig_port_num : $("#sig_port_num").val(),
-						virtual_port : $("#virtualport").val(),
+// 						sig_port_num : $("#sig_port_num").val(),
+// 						virtual_port : $("#virtualport").val(),
+						sig_port_num : $("#sig_port_num option:selected").val(),
+						virtual_port : $("#virtualport option:selected").val(),
 						sensorData : totalInfo
 					}
 		

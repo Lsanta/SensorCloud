@@ -36,27 +36,26 @@
 <!-- 				<li style="line-height: 40px; margin-top: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트</a></li>
 				<li style="line-height: 40px; margin-bottom: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">다운로드</a></li>
 				 -->
-				<li><span id="num">연락망</span> 
-				<span id="down" style="display: inline"> 
-					<img src="/resources/img/down-arrow.svg">
-				</span> 
-				<span id="up" style="display: none"> 
-					<img src="/resources/img/up-arrow.svg">
-				</span>
+				<li>
+					<span id="num">연락망</span>
+					<!-- <span id="down" style="display: inline"><img src="/resources/img/down-arrow.svg"></span>
+					<span id="up" style="display: none"><img src="/resources/img/up-arrow.svg"></span> -->
 				</li>
-			<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
-				<span class="mang" th:text="${alarmMember.name}"></span>
-				<span class="mang" th:text="${alarmMember.tel}"></span>
-			</div>	
-		
+
+				<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
+					<span class="mang" th:text="${alarmMember.name}"></span>
+					<span class="mang" th:text="${alarmMember.tel}"></span>
+				</div>
+			
 			</ul>
+			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 0}" th:class ="${siteInfo.site_id}">현장 활성화</button>
+			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 1}" th:class ="${siteInfo.site_id}">현장 비활성화</button>
 		</nav>
 	</aside>
 
 <div id="container" style="margin-top:8%">
 		<div id="main-content">
 			<div class="title-header">
-				<h1>보유센서</h1>
 				<button id="add" value="add">설치센서 추가</button>
 			</div>
 

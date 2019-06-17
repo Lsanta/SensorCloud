@@ -76,7 +76,7 @@ $(document).ready(function(){
 
       $.ajax({
             type : "POST",
-            url : "http://52.79.242.145:8080/app/login/mlog", 
+            url : "http://15.164.166.25:80/app/login/mlog", 
             //url : "http://39.127.7.58:8080/app/login/mlog", 
             data : query,
             contentType : "application/json; charset=UTF-8",
@@ -142,7 +142,7 @@ $(document).ready(function(){
 
 // $.ajax({
 //       type : "POST",
-//       // url : "http://52.79.242.145:8080/app/login/mlog", 
+//       // url : "http://15.164.166.25:80/app/login/mlog", 
 //       url : "http://39.127.7.58:8080/app/login/mlog", 
 //       data : query,
 //       contentType : "application/json; charset=UTF-8",

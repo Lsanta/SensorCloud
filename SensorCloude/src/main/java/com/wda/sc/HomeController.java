@@ -19,9 +19,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.TimelineVO;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.MyPageService;
 import com.wda.sc.service.MysensorService;
@@ -562,6 +564,7 @@ public class HomeController {
 
 		return "mypage/mypage";
 	}
+	
 
 }
 

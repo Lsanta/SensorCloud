@@ -13,7 +13,7 @@ $(document).ready(function() {
 	};
 	$.ajax({
 			type : "POST",
-			url : "https://www.sensorcloud.site:8443/app/mypage/usermodify",
+			url : "http://15.164.166.25:80/app/mypage/usermodify",
 			//url : "http://39.127.7.58:8080/app/mypage/usermodify",
 			data : query,
 			dataType : 'json',
@@ -34,14 +34,17 @@ $(document).ready(function() {
 					}
 					str3 +='</p>';
 	
-						 $(".name01").html(str3);
+					 $(".name01").html(str3);
+
+					 localStorage.removeItem("level");
+					 localStorage.setItem("level",s[0].m_level);
 				 });
 			}
 	});
 
 			 $.ajax({
 				type : "POST",
-				url : "https://www.sensorcloud.site:8443/app/mypage/mgetAttachListmypage",
+				url : "http://15.164.166.25:80/app/mypage/mgetAttachListmypage",
 				//url : "http://39.127.7.58:8080/app/mypage/mgetAttachListmypage",
 				data : id,
 				async : false,
@@ -56,12 +59,12 @@ $(document).ready(function() {
 								 var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
 								
 								 str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";
-								 str += "<img class='delete1' src='https://www.sensorcloud.site:8443/display?fileName="+fileCallPath+"'>";
+								 str += "<img class='delete1' src='http://15.164.166.25:80/display?fileName="+fileCallPath+"'>";
 								 str += "</div>";
 								 str += "</li>";
 							
 							} else {
-								 str += "<img src='./img/user.png' id='img'>";
+								 str += "<img src='./img/manager.svg' id='img'>";
 								 
 							}
 							 
@@ -76,12 +79,11 @@ $(document).ready(function() {
 		 //점검이력 불러오기
 		 $.ajax({
 				type : "POST",
-				url : "https://www.sensorcloud.site:8443/app/mypage/mypagemain",
+				url : "http://15.164.166.25:80/app/mypage/mypagemain",
 				//url : "http://39.127.7.58:8080/app/mypage/mypagemain",
 				async:false,
-				data : {pagenum : 1},
+				data : {pagenum : 1, id : id},
 				success : function(result){
-						
 						var page="";
 						var str = "";  
 						$.each(result.mpcheckList,function(i,s){
@@ -96,6 +98,7 @@ $(document).ready(function() {
 							default  : str +='<td>'+'null'+'</td>'; break;
 							}
 						str +='<td>'+s.reg_date+'</td>';       // 날짜
+						str +='<td style="display:none">'+s.board_no+'</td>';	  // 보드넘버
 						str +='</tr>';
 	
 						$("#mypagechecklist").html(str);
@@ -121,16 +124,17 @@ $(document).ready(function() {
 		 $('.mpmodify-level').on('click', function() {
 				$("#content").load("usermodify.html");
 		 });
+
 	
 	});
 	
 	function page(index) {
 		 $.ajax({
 				 type : "POST",
-				url : "https://www.sensorcloud.site:8443/app/mypage/mypagemain",
+				url : "http://15.164.166.25:80/app/mypage/mypagemain",
 				//url : "http://39.127.7.58:8080/app/mypage/mypagemain",
 				 async:false,
-				 data : {pagenum : index},
+				 data : {pagenum : index,  id : id},
 				 success : function(result){
 						 
 							var page="";
@@ -147,6 +151,7 @@ $(document).ready(function() {
 							default  : str +='<td>'+'null'+'</td>'; break;
 							}
 							str +='<td>'+s.reg_date+'</td>';       // 날짜
+							str +='<td style="display:none">'+s.board_no+'</td>';	  // 보드넘버
 							str +='</tr>';
 		
 							$("#mypagechecklist").html(str);
@@ -178,8 +183,8 @@ $(document).ready(function() {
 	
 		 var board_no = $("#mypagechecklist tr:eq(" + tr + ") td:eq(4)").text();
 		 // 내가클릭한 테이블의 행을 판별해야하기위해 board_no 정보를 넘긴다
-		 
-		 window.location.href = "/checkboard/" + board_no; //바꾸기~~
+		
+		 window.location.href="checkview.html?board_no="+board_no;
 	});
 	
 	
@@ -211,7 +216,7 @@ $(document).ready(function() {
 				console.log(query);
 				$.ajax({
 					 type : "POST",
-					 url : "https://www.sensorcloud.site:8443/app/mypage/mypageconfirmpasswd.do",
+					 url : "http://15.164.166.25:80/app/mypage/mypageconfirmpasswd.do",
 					 //url : "http://39.127.7.58:8080/app/mypage/mypageconfirmpasswd.do",
 					 async: false,
 					 data: query,
@@ -221,7 +226,7 @@ $(document).ready(function() {
 							
 							if (data == "success") {
 								 alert("비밀번호 일치");
-								//  window.location.href = "http://52.79.242.145:8080/app/mypage/usermodify";
+								//  window.location.href = "http://15.164.166.25:80/app/mypage/usermodify";
 								// window.location.href = "http://39.127.7.58:8080/app/mypage/usermodify";
 								window.location.href = "usermodify.html";
 							} else {
@@ -243,21 +248,21 @@ $(document).ready(function() {
 	$(document).ready(function() {
 		 //승급요청 확인 클릭시
 		 $("#ok").click(function(){
-		
 				 var select = $("#select_level option:selected").val();
 				
 				 var query = {
 						id : id,
-						mlevel : select
+						m_level : select
 				 }
 	
 				 var payload = {
 					 message : "앱에서" + id + "님의" + select + "등급 승급요청이 왔습니다."
 				 }   
-	
+				 
 				 $.ajax({
+					 
 					 type : "POST",
-					 url : "https://www.sensorcloud.site:8443/app/mypage/levelup",
+					 url : "http://15.164.166.25:80/app/mypage/levelup",
 					 //url : "http://39.127.7.58:8080/app/mypage/levelup",
 					 data : JSON.stringify(query),
 					 contentType : "application/json; charset=UTF-8",
@@ -269,7 +274,7 @@ $(document).ready(function() {
 								 //푸쉬 메시지 요청(웹으로)
 								 $.ajax({
 											 type : "POST",
-											 url : "https://www.sensorcloud.site:8443/app/send/message.do",
+											 url : "http://15.164.166.25:80/app/send/message.do",
 											 //url : "http://39.127.7.58:8080/app/send/message.do",
 											 data : JSON.stringify(payload),
 											 contentType : "application/json; charset=UTF-8",
@@ -294,7 +299,7 @@ $(document).ready(function() {
 			
 				$.ajax({
 					type : "POST",
-					url : "https://www.sensorcloud.site:8443/app/mypage/deleteappToken",
+					url : "http://15.164.166.25:80/app/mypage/deleteappToken",
 					//url : "http://39.127.7.58:8080/app/mypage/deleteappToken",
 					data : id,
 					contentType : "text/plain; charset=UTF-8",

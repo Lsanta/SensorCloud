@@ -206,7 +206,8 @@ public class SiteController {
 		model.addAttribute("siteInfo", siteservice.getSite(site_id));
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
 		model.addAttribute("alarm", siteservice.getAlarm(site_id)); // 알람 내용 정
-
+		System.out.println("알람 내용" + siteservice.getAlarm(site_id));
+		
 		return "site/sitealarm";
 	}
 
@@ -442,7 +443,10 @@ public class SiteController {
 		site.setType_no((String) map.get("type_no"));
 		site.setAddress((String) map.get("address"));
 		site.setSite_name((String)map.get("site_name"));
-
+		
+		site.setX((double)map.get("x"));
+		site.setY((double)map.get("y"));
+		
 	    site.setRperiod((String) map.get("rperiod"));
 	    site.setSig_port_num((String) map.get("sig_port_num"));
 	    site.setVirtual_port((String) map.get("virtual_port"));
@@ -467,7 +471,7 @@ public class SiteController {
 		} else {
 			int site_id = siteservice.getSiteNum();
 						
-			String command = "C:\\Users\\bon300-27\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
+			String command = "C:\\Users\\Administrator\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
 			ArrayList<String> rawPid = new Cmd().exeCmd(command);
 			System.out.println(rawPid);
 			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
@@ -500,11 +504,18 @@ public class SiteController {
 			
 			System.out.println("3");
 			/* db에 들어있지 않는 pid를 얻어와서 배열에 저장*/
-			for(int i = 0; i < rawPid_int.size(); i++) {
-				if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
-					setPid.setPid(rawPid_int.get(i).toString());
+			
+			if(dbPid_int.size() == 0) {
+				setPid.setPid(rawPid_int.get(0).toString());
+			}else {
+				for(int i = 0; i < rawPid_int.size(); i++) {
+					if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
+						setPid.setPid(rawPid_int.get(i).toString());
+					}
 				}
 			}
+			
+			
 		
 //			setPid.setSite_id(site.getSite_id());	//site_id 불러오기
 			setPid.setSite_id(site_id);	//site_id 불러오기
@@ -1037,6 +1048,120 @@ public class SiteController {
 					return "success";
 				}
 				return "false";
+		}	
+		
+		// 설치센서 삭제
+		@RequestMapping(value = "/statusChange/" + "{site_id}", method = RequestMethod.GET)
+		public String statusChange(@PathVariable String site_id) {
+			System.out.println(site_id);
+			//site_id를 통해 그 현장의 status를 파악
+			ArrayList<SiteVO> vo = siteservice.getStatus(site_id);
+			ProcessPidVO setPid = new ProcessPidVO();
+			//가져온 현장의 상태 
+			System.out.println(vo.get(0).getSite_status());
+			
+			//만약 상태가 1(진행중인 현장)이면 비활성화를 수행
+			if( vo.get(0).getSite_status() == 1) {
+				// 1. 그 현장에 대한 설치 센서를 모두 삭제한다.
+				System.out.println("현장의 상태가 현재 진행중이다");
+				mysensorservice.delSiteInstallsensor(site_id);
+				
+					System.out.println("설치 센서 삭제 완료");
+					//1.5 종료를 위해 켜져있는 pid를 가져온다.
+					String pid = siteservice.getSitePid(site_id);
+					System.out.println("pid번호" + pid);
+					if(pid != null) {
+						// 2. 현재 켜져있는 현장의 CMD 를 종료한다.
+						String command = "taskkill /f /pid "+ Integer.parseInt(pid) ;
+						new Cmd().runCommandAsAdmin(command);
+						
+						// 3. 현재 현장의 PID를 삭제한다.
+						int result2 = siteservice.deletePid(site_id);
+						
+						//현장 PID 삭제가 되었다면
+						if(result2 == 1) {
+							// 4. SITE_STATUS 를 변경한다.
+							SiteVO sitevo = new SiteVO();
+							sitevo.setSite_id(Integer.parseInt(site_id));
+							sitevo.setSite_status(0);
+							System.out.println("site_vo" + sitevo);
+							siteservice.modStatus(sitevo);
+							return "redirect:/site/" + site_id;
+						}
+					} else {
+						//pid가없기 때문에 바로 site_status를 변경시켜준다.
+						SiteVO sitevo = new SiteVO();
+						sitevo.setSite_id(Integer.parseInt(site_id));
+						sitevo.setSite_status(0);
+						System.out.println("site_vo" + sitevo);
+						siteservice.modStatus(sitevo);
+						return "redirect:/site/" + site_id;
+					}
+					
+			  //만약 상태가 0(종료된 현장)이면 활성화를 수행
+			} else if( vo.get(0).getSite_status() == 0){
+				// 1. 그 현장에 대한 cmd를 작동
+				// 2. PID를 db에 저장
+				ArrayList<SiteVO> site = siteservice.joinSite(site_id);
+				System.out.println("사이트들고온 네트워크정보" + site);
+				
+				String command = "C:\\Users\\Administrator\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.get(0).getRperiod()+" "+site.get(0).getVirtual_port()+" "+site.get(0).getSig_port_num()+" "+site_id;
+				ArrayList<String> rawPid = new Cmd().exeCmd(command);
+				System.out.println(rawPid);
+				ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
+				ArrayList<String> temp = new ArrayList<String>();
+				
+				/* String형 list를 Int형으로 변환 */
+				ArrayList<Integer> rawPid_int = new ArrayList<Integer>();
+				ArrayList<Integer> dbPid_int = new ArrayList<Integer>();
+				ArrayList<String> dbPid = new ArrayList<String>();
+				
+				System.out.println("1");
+				for(int i = 0; i < dbPid_object.size(); i++) {
+					dbPid.add(dbPid_object.get(i).getPid());
+				}
+				
+				for(int i = 0; i < rawPid.size(); i++) {
+					rawPid_int.add(Integer.parseInt(rawPid.get(i)));
+				}
+				
+				for(int i = 0; i < dbPid.size(); i++) {
+					dbPid_int.add(Integer.parseInt(dbPid.get(i)));
+				}
+				System.out.println("2");
+				/* 배열 정렬 */
+				
+				Ascending ascending = new Ascending();
+				
+				Collections.sort(rawPid_int, ascending);
+				Collections.sort(dbPid_int, ascending);
+				
+				System.out.println("3");
+				/* db에 들어있지 않는 pid를 얻어와서 배열에 저장*/
+				for(int i = 0; i < rawPid_int.size(); i++) {
+					if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
+						setPid.setPid(rawPid_int.get(i).toString());
+					}
+				}
+			
+//				setPid.setSite_id(site.getSite_id());	//site_id 불러오기
+				setPid.setSite_id(Integer.parseInt(site_id));	//site_id 불러오기
+				System.out.println("사이트아이디" + site_id);
+				System.out.println("setPid" + setPid);
+				siteservice.addProcessPid(setPid);
+				
+				// 3. site_status 변경
+				SiteVO sitevo = new SiteVO();
+				sitevo.setSite_id(Integer.parseInt(site_id));
+				sitevo.setSite_status(1);
+				siteservice.modStatus(sitevo);
+				
+				return "redirect:/site/"+ site_id;
+			}
+			
+			
+			
+			return "redirect:/site/" + site_id;
 		}	
 }
 

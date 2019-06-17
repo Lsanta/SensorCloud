@@ -115,3 +115,13 @@ input[type=text]:hover{
 	margin: 1%;
 	margin-left:0;
 }
+
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
+}

@@ -29,7 +29,7 @@ function getQueryStringObject() {
 
       $.ajax({
             type : "POST",
-            url : "https://www.sensorcloud.site:8443/app/sitemain",
+            url : "http://15.164.166.25:80/app/sitemain",
             //url : "http://39.127.7.58:8080/app/sitemain",
             data : site_id,
             async:false,
@@ -42,7 +42,7 @@ var sa = a[0].address;
 var sitemainname = a[0].site_name;
 
 var str="";
-str +='<p style="margin-top: -7px;">'+ sitemainname + '</p>';
+str +='<p id="sitemainname">'+ sitemainname + '</p>';
 $("#sn").html(str);
     getData(sa);
             } // success 함수 종료
@@ -50,7 +50,7 @@ $("#sn").html(str);
 
       $.ajax({
         type : "POST",
-        url : "https://www.sensorcloud.site:8443/app/sitemainsensor",
+        url : "http://15.164.166.25:80/app/sitemainsensor",
         //url : "http://39.127.7.58:8080/app/sitemainsensor",
         data : site_id,
         async:false,
@@ -157,7 +157,7 @@ $("#sn").html(str);
 
   $.ajax({
     type : "POST",
-    url : "https://www.sensorcloud.site:8443/app/sitedata",
+    url : "http://15.164.166.25:80/app/sitedata",
     //url : "http://39.127.7.58:8080/app/sitedata",
     data : site_id,
     async:false,
@@ -228,7 +228,7 @@ str +='<td>시간</td>';
 
 $.ajax({
             type : "POST",
-            url : "https://www.sensorcloud.site:8443/app/siterepairlist",
+            url : "http://15.164.166.25:80/app/siterepairlist",
             //url : "http://39.127.7.58:8080/app/siterepairlist",
             data : site_id,
             async : false,
@@ -262,7 +262,7 @@ $.ajax({
         var tr = $("#bbb tr").index(this);
         var boardno =$("#bbb tr:eq("+tr+") td:eq(5)").text();
 
-      //내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
+        //내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
        
         window.location.href="checkview.html?board_no="+boardno;
         
@@ -333,7 +333,7 @@ infowindow.open(map, marker);
 $(document).on("click", "#spanel" , function(){
     $.ajax({
     type : "POST",
-    url : "https://www.sensorcloud.site:8443/app/installsensor",
+    url : "http://15.164.166.25:80/app/installsensor",
     //url : "http://39.127.7.58:8080/app/installsensor",
     data: site_id,
     contentType : "application/json; charset=UTF-8",

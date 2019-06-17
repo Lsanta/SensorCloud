@@ -47,6 +47,7 @@ import com.google.firebase.messaging.WebpushConfig;
 import com.google.firebase.messaging.WebpushNotification;
 import com.google.firebase.messaging.internal.MessagingServiceErrorResponse;
 import com.wda.sc.domain.AlarmMemberVO;
+import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.AppTokenVO;
 import com.wda.sc.domain.TokenVO;
 import com.wda.sc.service.AndroidPushNotificationService;
@@ -311,7 +312,7 @@ public class MessageController {
 	      FirebaseOptions options=null;
 	      //파이어베이스 옵션 설정
 	      try {
-	    	  //serviceAccount = new FileInputStream("/home/ec2-user/sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
+	    	 //serviceAccount = new FileInputStream("/home/ec2-user/sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
 	    	 serviceAccount = new FileInputStream("C:\\sensorcloud-cb820-firebase-adminsdk-uiem3-c328071df6.json");
 	         options = new FirebaseOptions.Builder()
 	               .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -401,7 +402,7 @@ public class MessageController {
 	   @ResponseBody
 	   @RequestMapping(value="/WebLimit.do", method= RequestMethod.POST, consumes = {"application/x-www-form-urlencoded"}, produces = {"application/json"})
 	   @CrossOrigin(maxAge = 3600)
-	   public String pushTest5(@RequestBody String content) {
+	   public String pushTest5(@RequestBody String content, HttpSession session) {
 	      
 		   String reContent = "";
 	        try {
@@ -422,8 +423,23 @@ public class MessageController {
 	      
 	      String con = site_name + "에서 " + sensor_sn + "의  " +  limit + "이  초과되었습니다." + "Data :" + data;
 	      
+	      // 연락망 추가 폼을 이용한 추가
+//	        System.out.println("11");
+//	      	AlarmVO vo = new AlarmVO();
+//			String user = (String) session.getAttribute("id");
+//	        System.out.println("22");
+//			vo.setAlarm_content(con);
+//	        System.out.println("33");
+//			vo.setSite_id(Integer.parseInt(site_id));
+//	        System.out.println("44");
+//			vo.setSend_user(user);
+//	        System.out.println("55");
+//			
+//			int a = siteservice.insertAlarm(vo);
+//	        System.out.println("66");
+	      
 		  FirebaseApp defaultApp = null;
-	      List<FirebaseApp> apps=FirebaseApp.getApps();
+	      List<FirebaseApp> apps=FirebaseApp.getApps(); 
 	      FileInputStream serviceAccount;
 	      FirebaseOptions options=null;
 	      //파이어베이스 옵션 설정
@@ -507,6 +523,7 @@ public class MessageController {
 	    		  .setAndroidConfig(config)
 	    		  .putData("type", "limit") //넘어가는값
 	    		  .putData("site_id", site_id)
+	    		  .putData("content", con)
 	    		  .setToken(tokenlist.get(i))
 	    		  .build();
 		  
@@ -523,7 +540,7 @@ public class MessageController {
 	   }
 	   
 
-	@SuppressWarnings({ "null", "unused" })
+	   @SuppressWarnings({ "null", "unused" })
 	   @ResponseBody
 	   @RequestMapping(value="/WebTokenSave.do", method= RequestMethod.POST, produces = {"application/json"})
 	   public String webtokenSave(@RequestBody String Token, HttpSession session) {

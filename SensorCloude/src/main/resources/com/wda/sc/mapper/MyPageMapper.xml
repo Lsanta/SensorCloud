@@ -32,11 +32,10 @@
         	from (select c.board_no,c.user_id, c.title, substr(c.reg_date,0,14) as reg_date,c.board_status,c.site_id, s.site_name
             	from check_board c,site s
                 where c.site_id = s.site_id) before_tab, member m
-            where before_tab.user_id = m.user_id and m.user_id = 'admin'
+            where before_tab.user_id = m.user_id and m.user_id = #{user_id}
             order by before_tab.reg_date desc
         ]]>
 	</select>
-	
 	
 	<select id="myListView" resultType="com.wda.sc.domain.CheckBoardVO">
 	select c.board_no,m.name, c.user_id, c.title, c.board_content, c.reg_date,c.board_status,c.site_name 
