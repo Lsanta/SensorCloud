@@ -36,8 +36,8 @@ $(document).on('deviceready', function() {
                    str +='<h5>'+s.time+'</h5>';
                    
                    if(s.user_id == idt){
-                    str +='<a class="modify">수정 </a>';
-                    str +='<a class="delete">| 삭제</a>';
+                    str +='<a class="modify" style="font-size:12px;  margin-left:5px;"> 수정 </a>';
+                    str +='<a class="delete"  style="font-size:12px;">| 삭제</a>';
                    } else{
                     str +='<a style="visibility:hidden" class="modify">수정</a>';
                     str +='<a style="visibility:hidden" class="delete">삭제</a>';
@@ -258,8 +258,8 @@ function page(index){
                str +='<h3 id="name">'+s.name+'</h3>';        
                str +='<h5>'+s.time+'</h5>';
                if(s.user_id == idt){
-                str +='<a class="modify">수정 </a>';
-                str +='<a class="delete">| 삭제</a>';
+                str +='<a class="modify"  style="font-size:12px; margin-left:5px;"> 수정 </a>';
+                str +='<a class="delete"  style="font-size:12px;">| 삭제</a>';
                } else{
                 str +='<a style="visibility:hidden" class="modify">수정</a>';
                 str +='<a style="visibility:hidden" class="delete">삭제</a>';
