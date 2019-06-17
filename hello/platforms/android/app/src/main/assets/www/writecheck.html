@@ -110,7 +110,7 @@
                 },
                 // 사진 가져오기에 실패한 경우 호출될 함수
                 function (message) {
-                    alert('Failed because: ' + message);
+                    // alert('Failed because: ' + message);
                 },
                 // 카메라,갤러리 호출 옵션
                 {
@@ -186,7 +186,7 @@
 
                 $.ajax({
                     type: "POST",
-                     url: "http:///52.79.242.145:8080/app/checklist/writecheck",
+                     url: "http://15.164.166.25:80/app/checklist/writecheck",
                     //url: "http://39.127.7.58:8080/app/checklist/writecheck",
                     contentType :"application/json; charset=utf-8",//전송할데이터타입
                     data: JSON.stringify(checkcontent),
@@ -252,7 +252,7 @@
             var ft = new FileTransfer();    
                  
             /** 업로드를 수행한다.(전송할 파일 경로, 서버 주소, 성공콜백, 실패콜백, 옵션) *///"http://39.127.7.58:8080/app/checklist/insertfile"
-            ft.upload(file_path,"http://39.127.7.58:8080/app/checklist/insertfile", 
+            ft.upload(file_path,"http://15.164.166.25:80/app/checklist/insertfile", 
                
             function(r) {
                         alert(r.responseCode+"upload is complete");

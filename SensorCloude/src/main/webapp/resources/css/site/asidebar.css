@@ -93,9 +93,7 @@ h2 {
 }
 
 button {
-    margin-top: 250px;
     height: 30px;
-    font-size: 1.3em;
     cursor: pointer;
     border: none;
     color: #fff;
@@ -104,6 +102,10 @@ button {
     bottom: 10px;
   } 
   
+  #status {
+  margin-top: 250px;
+  font-size: 1.3em;
+  }
   button:hover {
   	color: red;
   }

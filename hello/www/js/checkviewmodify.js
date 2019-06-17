@@ -1,17 +1,93 @@
-
 $(document).ready(function() {
-  
+    
+
+
+    $("#tcontent").textinput({
+        autogrow: false
+   });
     // var copyarr;
      var boardno = location.href.split("=");
      var board_no =boardno[1];
      console.log(board_no);
  
 
+     var file_path = null;
+
+      /** 카메라 혹은 갤러리 호출 */
+      function takePicture(source) {
+        // 표시영역을 비운다.
+
+        $(".uploadResult ul").empty();
+        file_path = null;
+
+        navigator.camera.cleanup();
+
+        navigator.camera.getPicture(
+            // 사진 가져오기에 성공한 경우 호출될 함수
+            function (choice) {
+                // 사진파일의 경로를 전역변수에 보관한다.
+                file_path = choice;
+
+                // Cordova의 WebView가 이미지를 캐시하는 것을 방지하기 위하여
+                // 파일 경로 뒤에 timestamp를 덧붙인다.
+                if (file_path.lastIndexOf('?') < 0) {//문자열에서
+                    // 탐색하는 문자열이 마지막으로 등장하는 위치에 대한 index를 반환
+                    file_path += "?" + new Date().getTime();
+                }
+
+                alert("수정페이지 카메라 이미지 경로"+file_path);
+
+                // 이미지 화면 표시
+                str += "<li>";
+                str += "<img src='"+file_path +"'/>"
+                str += "</li>";
+                str +="<div id='deletespot'>";
+                 str +="<span data-file=\'"+file_path+"\' data-type='image'>x</span>";
+                 str += "</div>";
+
+                $(".uploadResult ul").html(str);
+
+                // var img = $("#repairpicture2").attr('src', file_path);
+                // 외부 저장소(SD카드)의 최상위 경로 /storage/emulated/0
+                // $("#result").append(info).append(img);
+            },
+            // 사진 가져오기에 실패한 경우 호출될 함수
+            function (message) {
+                alert('Failed because: ' + message);
+            },
+            // 카메라,갤러리 호출 옵션
+            {
+                destinationType: Camera.DestinationType.FILE_URI,   // 리턴타입 형식(파일경로)
+                encodingType: Camera.EncodingType.JPEG, // 이미지 형식
+                quality: 100,            // 퀄리티 (0~100)
+                sourceType: source,      // 카메라 or 갤러리 설정
+                allowEdit: true,        // 가져오기 완료 후 편집 여부
+                correctOrientation: true, // 카메라를 세로로 촬영한 경우 이미지 방향을 회전시킴
+                saveToPhotoAlbum: true,
+                popoverOptions: CameraPopoverOptions,
+                allowEdit: true
+            }
+        );
+    }
+
+    $(function () {
+        // 카메라 버튼 이벤트 정의
+        $("#cameraTakePicture").click(function () {
+            takePicture(Camera.PictureSourceType.CAMERA);
+        });
+
+        // 갤러리 버튼 이벤트 정의
+        $("#cameraGetPicture").click(function () {
+            takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
+        });
+    });
+
+
 
      //점검이력 글 내용 불러오기 
     $.ajax({
      type : "POST",
-     url : "http://39.127.7.58:8080/app/siterepairview",
+     url : "http://15.164.166.25:80/app/siterepairview",
      data : board_no,
      contentType : "application/json; charset=UTF-8",
      success : function(result){
@@ -47,7 +123,7 @@ $(document).ready(function() {
  //썸네읿 불러오기
  $.ajax({
      type : "POST",
-     url : "http://39.127.7.58:8080/app/checklist/mgetAttachList",
+     url : "http://15.164.166.25:80/app/checklist/mgetAttachList",
      data : board_no,
      async : false,
      contentType : "application/json; charset=UTF-8",
@@ -66,7 +142,7 @@ $(document).ready(function() {
 
                 
                  str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"' >";
-                 str += "<img src='http://39.127.7.58:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'/>"
+                 str += "<img src='http://15.164.166.25:80/app/checklist/mdisplay?fileName="+fileCallPath+"'/>"
                  str += "</li>";
                  str +="<div id='deletespot'>";
                  str +="<span data-file=\'"+fileCallPath+"\' data-type='image'>x</span>";
@@ -78,11 +154,11 @@ $(document).ready(function() {
      
              });//end each
              
-             $(".uploadResult ul").html(str);
-              //파일삭제로 인해 요소값이 비어있는경우 썸네일 삭제
-              if (!$('#uploadResult ul').length) {
-                $('.uploadResult ul').remove();
-            }
+            $(".uploadResul t ul").html(str);
+            //   파일삭제로 인해 요소값이 비어있는경우 썸네일 삭제
+            //   if (!$('#uploadResult ul').length) {
+            //     $('.uploadResult ul').remove();
+            // }
  
      } // success 함수 종료
  }); // ajax함수 종료
@@ -103,7 +179,7 @@ $(document).ready(function() {
                 $(".bigPictureWrapper").css("display","flex").show();
                 
                 $(".bigPicture")
-                .html("<img src='http://39.127.7.58:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'>")
+                .html("<img src='http://15.164.166.25:80/app/checklist/mdisplay?fileName="+fileCallPath+"'>")
                 .animate({width:'100%', height: '100%'}, 1000);
                 
               }
@@ -127,8 +203,8 @@ $(document).ready(function() {
         console.log(targetFile);
 
         $.ajax({
-            url : 'http://39.127.7.58:8080/app/checklist/mdeleteFile',
-            data :{fileName : targetFile , type:type},
+            url : 'http://15.164.166.25:80/app/checklist/mdeleteFile',
+            data :{fileName : targetFile , type:type ,board_no : board_no},
             dataType : 'text',
             type:"POST",
             success: function(result){
