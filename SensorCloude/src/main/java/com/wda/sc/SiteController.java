@@ -1138,9 +1138,18 @@ public class SiteController {
 				
 				System.out.println("3");
 				/* db에 들어있지 않는 pid를 얻어와서 배열에 저장*/
-				for(int i = 0; i < rawPid_int.size(); i++) {
-					if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
-						setPid.setPid(rawPid_int.get(i).toString());
+//				for(int i = 0; i < rawPid_int.size(); i++) {
+//					if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
+//						setPid.setPid(rawPid_int.get(i).toString());
+//					}
+//				}
+				if(dbPid_int.size() == 0) {
+					setPid.setPid(rawPid_int.get(0).toString());
+				}else {
+					for(int i = 0; i < rawPid_int.size(); i++) {
+						if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
+							setPid.setPid(rawPid_int.get(i).toString());
+						}
 					}
 				}
 			

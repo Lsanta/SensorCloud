@@ -36,11 +36,11 @@ $(document).on('deviceready', function() {
                    str +='<h5>'+s.time+'</h5>';
                    
                    if(s.user_id == idt){
-                    str +='<button class="modify">수정</button>';
-                    str +='<button class="delete">삭제</button>';
+                    str +='<a class="modify">수정 </a>';
+                    str +='<a class="delete">| 삭제</a>';
                    } else{
-                    str +='<button style="visibility:hidden" class="modify">수정</button>';
-                    str +='<button style="visibility:hidden" class="delete">삭제</button>';
+                    str +='<a style="visibility:hidden" class="modify">수정</a>';
+                    str +='<a style="visibility:hidden" class="delete">삭제</a>';
                    }
                    str +='<p>'+s.content+'</p>';
                    str +='</div>';
@@ -258,11 +258,11 @@ function page(index){
                str +='<h3 id="name">'+s.name+'</h3>';        
                str +='<h5>'+s.time+'</h5>';
                if(s.user_id == idt){
-                str +='<button class="modify">수정</button>';
-                str +='<button class="delete">삭제</button>';
+                str +='<a class="modify">수정 </a>';
+                str +='<a class="delete">| 삭제</a>';
                } else{
-                str +='<button style="visibility:hidden" class="modify">수정</button>';
-                str +='<button style="visibility:hidden" class="delete">삭제</button>';
+                str +='<a style="visibility:hidden" class="modify">수정</a>';
+                str +='<a style="visibility:hidden" class="delete">삭제</a>';
                }
                str +='<p>'+s.content+'</p>';
                str +='</div>';
