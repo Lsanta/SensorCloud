@@ -6,7 +6,7 @@
 
 	<select id="getList" resultType="com.wda.sc.domain.SiteVO">
 	<![CDATA[
-		select site_id,type_no,site_name,address,site_status,substr(start_date,0,14) as start_date 
+		select site_id,type_no,site_name,address,site_status,start_date 
 		from (select * from site order by start_date desc)
 		where rownum < 17
 		order by site_status desc, start_date desc
@@ -15,7 +15,7 @@
 
 	<select id="getSite" resultType="com.wda.sc.domain.SiteVO">
 	<![CDATA[ 
-		select site_id,type_no,site_name,address,site_status,substr(start_date,0,8) as start_date
+		select site_id,type_no,site_name,address,site_status,start_date as start_date
 		from site where site_id = #{site_id}
 		]]>
 	</select>
@@ -25,7 +25,7 @@
 	select x.rnum, x.* from
     (select rownum as rnum, p.* from
         (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
-         from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+         from (select board_no,check_board.user_id, check_board.title, check_board.reg_date as reg_date,check_board.board_status,check_board.site_id, site.site_name
                from check_board,site
                where check_board.site_id = site.site_id and check_board.site_id = #{site_id}) c,member m
          where c.user_id = m.user_id
@@ -40,7 +40,7 @@
 	</select>
 	
 	<select id="getAlarm" resultType="com.wda.sc.domain.AlarmVO">
-		select alarm_no,site_id,alarm_content,substr(alarm_time,0,14) as alarm_time,send_user from alarm where site_id = #{site_id} order by alarm_time desc
+		select alarm_no,site_id,alarm_content,alarm_time as alarm_time,send_user from alarm where site_id = #{site_id} order by alarm_time desc
 	</select>
 	
 	<select id="getPageNum" resultType="int">
@@ -54,7 +54,7 @@
 	<select id="getContent" resultType="com.wda.sc.domain.SiteVO" parameterType="com.wda.sc.domain.Paging">
 		<![CDATA[
 		select x.* 
-		from (select rownum as rnum,site_id,type_no,site_name,address,site_status,substr(start_date,0,14) as start_date, before_num
+		from (select rownum as rnum,site_id,type_no,site_name,address,site_status,start_date as start_date, before_num
 			  from (select rownum as before_num, s.* 
                     from (select * 
                           from site
@@ -127,7 +127,7 @@
 
 	<!-- 현장 검색 -->
 	<select id="siteSearch" resultType="com.wda.sc.domain.SiteVO">
-		select site_id,type_no,site_name,address,site_status,substr(start_date,0,14) as start_date 
+		select site_id,type_no,site_name,address,site_status,start_date as start_date 
 		from (select * from site order by site_status desc) 
 		where ${searchType} LIKE '%' || '${keyword}' || '%'
 	</select>
@@ -136,7 +136,7 @@
 	<select id="getSearchResult" resultType="com.wda.sc.domain.SiteVO" parameterType="map">
 	<![CDATA[	
 		select x.* 
-		from (select rownum as rnum,site_id,type_no,site_name,address,site_status,substr(start_date,0,14) as start_date, before_num
+		from (select rownum as rnum,site_id,type_no,site_name,address,site_status,start_date as start_date, before_num
 			  from (select rownum as before_num, s.* 
                     from (select * 
                           from site
@@ -150,7 +150,7 @@
 	<!-- 수리내역 검색 -->
 	<select id="repairSearch" resultType="com.wda.sc.domain.CheckBoardVO">
 		select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
-         from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+         from (select board_no,check_board.user_id, check_board.title, check_board.reg_date as reg_date,check_board.board_status,check_board.site_id, site.site_name
                from check_board,site
                where check_board.site_id = site.site_id and check_board.site_id = ${site_id}) c,member m
          where c.user_id = m.user_id and ${searchType} LIKE '%' || '${keyword}' || '%'
@@ -163,7 +163,7 @@
 		select x.rnum, x.* from
    		(select rownum as rnum, p.* from
         (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
-         from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+         from (select board_no,check_board.user_id, check_board.title, check_board.reg_date as reg_date,check_board.board_status,check_board.site_id, site.site_name
                from check_board,site
                where check_board.site_id = site.site_id and check_board.site_id = ${Search.site_id} ) c,member m
          where c.user_id = m.user_id  and ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%'

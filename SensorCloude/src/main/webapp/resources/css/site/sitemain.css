@@ -5,6 +5,20 @@
   font-family: A신그래픽L;
   src: url('/resources/font/A신그래픽L.TTF');
 }
+#floatMenu {
+	position: absolute;
+	width: 150px;
+	height: 200px;
+/* 	left: 50px; */
+  	top: 260px;  
+	background-color: #606060;
+	color: #fff;
+	right : 0;
+} 
+
+#hiddenList {
+	text-align : center;
+}
 
 body {
    font-family: 'A신그래픽L';
@@ -268,5 +282,7 @@ h3 {
     margin-left: 2%;
     margin-top: 10%;
 }
+ 
+
  
 }

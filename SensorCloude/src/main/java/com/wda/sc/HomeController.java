@@ -48,8 +48,9 @@ public class HomeController {
 	@Autowired private ServletContext servletContext;
 
 	@RequestMapping(value ="/", method = RequestMethod.GET)
+	//사이트의 메인화면으로 보내주는 컨트롤러
 	public String main(Locale locale, Model model, HttpSession session) {
-
+		
 		System.out.println(servletContext.getRealPath("/"));
 		//메인화면 점검이력 제목 substring
 		ArrayList<CheckBoardVO> arr = checkboardservice.mainList();
