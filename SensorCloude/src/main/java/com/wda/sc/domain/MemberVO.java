@@ -14,6 +14,9 @@ public class MemberVO {
 	private int m_level;
 	private int re_level;
 	private String key;
+	private String company;
+	//사업자 번호
+	private int BisNumber;
 	
 	
 	private String uuid;

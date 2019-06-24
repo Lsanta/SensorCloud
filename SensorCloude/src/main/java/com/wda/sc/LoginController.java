@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.LoginService;
+import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
 
@@ -37,6 +38,7 @@ import lombok.AllArgsConstructor;
 public class LoginController {
 
 	private LoginService loginservice;
+	private SiteService siteservice;
 	private CheckboardService checkboardservice;
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -219,6 +221,25 @@ public class LoginController {
 			return "no";
 
 	}
+	
+	//인증번호 전송
+	@RequestMapping(value = "/sendAuth", method = RequestMethod.POST)
+	@ResponseBody
+	public String sendAuth(Model model, @RequestParam Map<String,String> map) {
+		
+		System.out.println(map);
+		MemberVO vo = new MemberVO();
+		vo.setUser_id(map.get("id"));
+		vo.setPhone(map.get("phone"));
+		
+		SMSController sms = new SMSController(siteservice);
+		String authnumber = sms.authSms(vo);
+		
+		System.out.println("인증번호" + authnumber);
+		
+		return authnumber;
+	}
+	
 }
 
 
