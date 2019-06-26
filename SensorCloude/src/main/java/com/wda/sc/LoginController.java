@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.wda.sc.domain.CompanyVO;
 import com.wda.sc.domain.MemberVO;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.LoginService;
@@ -86,16 +87,60 @@ public class LoginController {
 	public String signup(MemberVO m) {
 
 		System.out.println(m);
-		int checknum = loginservice.signup(m);
+		String comName = m.getCompany();
+		if(comName.equals("STR")) {
+			System.out.println("STR이면 그냥 바로 회원가입");
+			m.setCompany_num(1);
+			
+			//4. 회사 번호를 같이 넣음 (회원가입할때)
+			int checknum = loginservice.signup(m);
+			if(checknum == 1) {
+				return "login/login";
+			}
+			else if(checknum == 0) {
+				return "login/sign";
+			}
+		} else {
+			CompanyVO vo = new CompanyVO();
+			//회원에 대한 정보 + 회사에 대한 정보
+			//1. 회사에 대한 정보 부터 db에 넣음
+			//2. 회사 이름을 기준 으로 잡아서 DB에 있으면 안넣고 없으면 넣음
+			ArrayList<CompanyVO> arr = new ArrayList<CompanyVO>();
+			System.out.println(1);
+			arr = loginservice.findCompany(m.getCompany());
+			System.out.println("2 " + arr);
+			
+			if(arr.size() == 0) {
+				//들고 온 회사가 없으면 DB에 추가
+				vo.setName(m.getCompany());
+				vo.setReg_number(m.getRegnumber());
+				System.out.println("회사" + vo);
+				loginservice.insertCompany(vo);
+			}
+			
+			//들고 온 회사가 있으면 (DB에 이미 존재)
+			//3. SELECT 하는데 이름으로 찾아서 회사 번호를 가져옴
+			System.out.println("3");
+			
+			int num = loginservice.getCompanyNum(m.getCompany());
+			System.out.println("회사 번호 : " + num);
+			
+			m.setCompany_num(num);
+			System.out.println("멤버에 넣은 것 " + m.getCompany_num());
+			
+			//4. 회사 번호를 같이 넣음 (회원가입할때)
+			int checknum = loginservice.signup(m);
 
-		if(checknum == 1) {
-			return "login/login";
+			if(checknum == 1) {
+				return "login/login";
+			}
+			else if(checknum == 0) {
+				return "login/sign";
+			}
 		}
-		else if(checknum == 0) {
-			return "login/sign";
-		}
-
-		return "login/sign";
+		System.out.println("if문을 벗어남");
+		return "login/sign";	
+		
 	}
 
 	@RequestMapping(value ="idFind.do")

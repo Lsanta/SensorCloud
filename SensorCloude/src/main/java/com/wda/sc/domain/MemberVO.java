@@ -16,8 +16,8 @@ public class MemberVO {
 	private String key;
 	private String company;
 	//사업자 번호
-	private int BisNumber;
-	
+	private int regnumber;
+	private int company_num;
 	
 	private String uuid;
 	private String file_path;

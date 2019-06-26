@@ -14,6 +14,7 @@ import com.wda.sc.domain.ProcessPidVO;
 import com.wda.sc.domain.Search;
 import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.CompanyVO;
 import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
@@ -303,6 +304,48 @@ public class SiteServiceImplement implements SiteService {
 	public int addProcessPid(ProcessPidVO setPid) {
 		// 현장 비활성화 -> 활성화 pid 추가
 		return mapper.addProcessPid(setPid);
+	}
+
+	@Override
+	public int getCompanyNum(String user_id) {
+		//로그인한 유저의 회사 번호(시퀀스)
+		return mapper.getCompanyNum(user_id);
+	}
+
+	@Override
+	public ArrayList<SiteVO> getCompanySiteList(int company_num) {
+		//로그인한 유저의 회사 현장
+		return mapper.getCompanySiteList(company_num);
+	}
+
+	@Override
+	public int getCompanySitePageNum(int company_num) {
+		//현장 관리에서의 자신의 회사 현장 개수
+		return mapper.getCompanySitePageNum(company_num);
+	}
+
+	@Override
+	public ArrayList<SiteVO> getCompanySiteContent(Paging p) {
+		// 현장 관리에서의 자신의 회사 현장 내용(리스트 개수)
+		return mapper.getCompanySiteContent(p);
+	}
+
+	@Override
+	public ArrayList<SiteVO> companySiteSearch(Search s) {
+		//현장 관리에서의 자신의 회사 검색 
+		return mapper.companySiteSearch(s);
+	}
+
+	@Override
+	public ArrayList<SiteVO> companySiteSearchResult(Map<Object, Object> parm) {
+		//현장 관리에서의 자신의 회사 검색 최종
+		return mapper.companySiteSearchResult(parm);
+	}
+
+	@Override
+	public ArrayList<CompanyVO> CompanySearch(String name) {
+		//현장 추가에서의 회사 검색 (이름으로 )
+		return mapper.CompanySearch(name);
 	}
 
 }

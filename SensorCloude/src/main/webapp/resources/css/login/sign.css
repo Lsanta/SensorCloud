@@ -29,10 +29,12 @@ body {
   border-radius: 2px;
   display : inline-block;
   border : 1px solid black;
-  margin-bottom : 45%;
   margin-left : 20%;
   height : 200px;
-  vertical-align : middle;
+  position : relative;
+  bottom : 400px;
+  
+  
 }
 .login-card {
   padding: 40px;
@@ -157,23 +159,6 @@ body {
   font-size: 0.88em;
  
 }
-
-.company-card input[type=text] {
-  height: 30px;
-  font-size: 16px;
-  width: 100%;
-  margin-bottom: 10px;
-  -webkit-appearance: none;
-  background: #fff;
-  border: 1px solid #d9d9d9;
-  border-top: 1px solid #c0c0c0;
-  padding: 0 8px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  margin-top : 10px;
-  position: relative;
-}
-
 
 @media screen and (max-width: 1150px) {
 .company-card {

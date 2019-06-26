@@ -43,14 +43,20 @@
 		select alarm_no,site_id,alarm_content,alarm_time as alarm_time,send_user from alarm where site_id = #{site_id} order by alarm_time desc
 	</select>
 	
+	<!-- 전체 현장의 개수 -->
 	<select id="getPageNum" resultType="int">
 			select count(site_id) from site
+	</select>
+	
+	<!-- 자신의 회사 현장 개수 -->
+	<select id="getCompanySitePageNum" resultType="int">
+			select count(site_id) from site where company_num = #{company_num}
 	</select>
 	
 	<select id="repairPageNum" resultType="int">
 			select count(site_id) from check_board where site_id = #{site_id}
 	</select>
-	
+	<!-- 현장 관리에서의 전체 현장 내용 -->
 	<select id="getContent" resultType="com.wda.sc.domain.SiteVO" parameterType="com.wda.sc.domain.Paging">
 		<![CDATA[
 		select x.* 
@@ -62,7 +68,22 @@
                 where a.before_num < ${endnum}) x
 		where x.before_num >= ${startnum}        
 		]]>
+		
 	</select>
+	<!-- 현장 관리에서의 자신의 회사 현장 내용 -->
+	<select id="getCompanySiteContent" resultType="com.wda.sc.domain.SiteVO" parameterType="com.wda.sc.domain.Paging">
+		<![CDATA[
+		select x.* 
+		from (select rownum as rnum,site_id,type_no,site_name,address,site_status,start_date as start_date, before_num
+			  from (select rownum as before_num, s.* 
+                    from (select * 
+                          from site where company_num = ${company_num}
+                          order by site_status desc, start_date desc)s)a
+                where a.before_num < ${endnum}) x
+		where x.before_num >= ${startnum}        
+		]]>
+	</select>
+	
 	
 	<!-- 현장 클릭시 현장상태  -->
 	<select id="getStatus" resultType="com.wda.sc.domain.SiteVO">	
@@ -141,6 +162,28 @@
                     from (select * 
                           from site
                           where ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%'
+                          order by site_status desc)s)a
+                where a.before_num < ${Paging.endnum}) x
+		where x.before_num >= ${Paging.startnum}
+		]]>
+	</select>
+		
+	<!-- 자신의 회사 현장 검색 -->
+	<select id="companySiteSearch" resultType="com.wda.sc.domain.SiteVO">
+		select site_id,type_no,site_name,address,site_status,start_date as start_date 
+		from (select * from site where company_num = ${company_num} order by site_status desc) 
+		where ${searchType} LIKE '%' || '${keyword}' || '%'
+	</select>
+	
+	<!-- 자신의 회사 현장 검색 + 페이징-->
+	<select id="companySiteSearchResult" resultType="com.wda.sc.domain.SiteVO" parameterType="map">
+	<![CDATA[	
+		select x.* 
+		from (select rownum as rnum,site_id,type_no,site_name,address,site_status,start_date as start_date, before_num
+			  from (select rownum as before_num, s.* 
+                    from (select * 
+                          from site
+                          where company_num = ${Paging.company_num} and ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%'
                           order by site_status desc)s)a
                 where a.before_num < ${Paging.endnum}) x
 		where x.before_num >= ${Paging.startnum}
@@ -353,4 +396,25 @@
     	where site_id = #{site_id}
 	</update>
 	
+	<!-- 로그인 한 유저의 회사 번호(시퀀스) 가져오기 -->
+	<select id="getCompanyNum" resultType="int">
+		select company_num from member where user_id = #{user_id}
+	</select>
+	
+	<!-- 로그인한 유저의 회사 현장 가져오기 -->
+	<select id="getCompanySiteList" resultType="com.wda.sc.domain.SiteVO">
+		<![CDATA[
+		select site_id,type_no,site_name,address,site_status,start_date,company_num
+		from (select * from site where company_num = #{company_num} order by start_date desc)
+		where rownum < 17
+		order by site_status desc, start_date desc
+	]]>
+	</select>
+	
+	<!--회사 검색(이름으로) -->
+	<select id="CompanySearch" resultType="com.wda.sc.domain.CompanyVO">
+		select * from company
+		where name LIKE '%' || #{name} || '%'
+		order by company_num 
+	</select>
 </mapper>

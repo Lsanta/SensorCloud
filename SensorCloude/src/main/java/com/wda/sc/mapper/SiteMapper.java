@@ -13,6 +13,7 @@ import com.wda.sc.domain.ProcessPidVO;
 import com.wda.sc.domain.Search;
 import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.CompanyVO;
 import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
@@ -145,5 +146,27 @@ public interface SiteMapper {
 	
 	//현장 비활성화 -> 활성화 pid 추가
 	public int addProcessPid(ProcessPidVO setPid);
+	
+	//로그인한 유저의 회사 번호(시퀀스)
+	public int getCompanyNum(String user_id);
+		
+	//로그인한 유저의 회사 현장
+	public ArrayList<SiteVO> getCompanySiteList(int company_num);
+	
+	//현장 관리에서의 자신의 회사 현장 개수
+	public int getCompanySitePageNum(int company_num);
+	
+	//현장 관리에서의 자신의 회사 현장 내용(리스트 개수)
+	public ArrayList<SiteVO> getCompanySiteContent(Paging p);
+	
+	//현장 관리에서의 자신의 회사 검색 
+	public ArrayList<SiteVO> companySiteSearch(Search s);
+	
+	//현장 관리에서의 자신의 회사 검색 최종
+	public ArrayList<SiteVO> companySiteSearchResult(Map<Object, Object> parm);
+	
+	//현장 추가에서의 회사 검색 (이름으로 )
+	public ArrayList<CompanyVO> CompanySearch(String name);
 }
+
 
