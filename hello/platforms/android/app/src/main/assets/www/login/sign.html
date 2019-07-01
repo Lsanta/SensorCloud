@@ -12,7 +12,7 @@
 	
 
 	<div class="login-card">
-		<a href="javascript:history.go(-1)">뒤로 가기</a>
+		<!-- <a href="javascript:history.go(-1)">뒤로 가기</a> -->
 		<img src="../img/logo.png">            
 		<br>
 		<!-- <form method="post" action="http://39.127.7.58:8080/app/signup"></form> -->
@@ -61,7 +61,7 @@
     				    type : "POST",
     				    dataType : 'text',
     				    data : query,
-								url : "http://15.164.166.25:80/app/signup_logincheck.do",
+								url : "http://183.106.6.74:8080/app/signup_logincheck.do",
 								//url : "http://39.127.7.58:8080/app/signup_logincheck.do",
     				    success : function(data) {
     				    	if( data == "ok") {
@@ -139,7 +139,7 @@
 							type : "POST",
     				  dataType : 'text',
     				  data : query,
-							url : "http://15.164.166.25:80/app/signup",
+							url : "http://183.106.6.74:8080/app/signup",
 							//url : "http://39.127.7.58:8080/app/signup",
 							success:function(result){
 									

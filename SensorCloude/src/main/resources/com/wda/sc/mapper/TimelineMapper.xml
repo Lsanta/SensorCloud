@@ -8,7 +8,7 @@
 	<![CDATA[
 	  select c.*
     from(select b.*
-        from(select rownum as rnum, a.timeline_n, a.user_id, a.content, substr(a.time,0,14)as time,a.name
+        from(select rownum as rnum, a.timeline_n, a.user_id, a.content, a.time as time,a.name
             from(select t.*, m.name from timeline t, member m 
                   where t.user_id = m.user_id
                 order by time desc)a)b
@@ -18,7 +18,7 @@
 	</select>
 	
 	<select id="getListm" resultType="com.wda.sc.domain.TimelineVO">
-	  select timeline.timeline_n, timeline.content, substr(time,0,14) as time, member.name
+	  select timeline.timeline_n, timeline.content, time as time, member.name
 	  from timeline,member
 	  where timeline.user_id = member.user_id
       order by timeline_n desc
@@ -26,7 +26,7 @@
 	
 	<select id="timedesc" resultType="com.wda.sc.domain.TimelineVO">
 		<![CDATA[
-		select timeline.timeline_n, timeline.content, substr(time,0,14) as time, member.name
+		select timeline.timeline_n, timeline.content, time , member.name
 		from timeline,member
 		where timeline.user_id = member.user_id and 
 		rownum < 5

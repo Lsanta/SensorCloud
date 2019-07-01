@@ -30,6 +30,11 @@
 	  <input type="hidden" id="x" ><br>
 	  <input type="hidden" id="y" ><br>
 	  <input type="button" id="addressBtn" onclick="DaumPostcode()" value="조회" class="addcontent_right_button" ><br>
+	  
+	  <p id="p">회사이름:</p>
+	  <input type="text" id="Cname" placeholder="회사 이름" class="addcontent_right_input" disabled><br>
+	  <input type="button" id="addressBtn" value="선택" class="addCompany_right_button"><br>
+	  
 	  <p id="p">현장이름:</p>
 	  <input type="text" id="sample6_detailAddress" placeholder="현장이름" class="addcontent_right_input">
 	  <!-- <input type="text" id="sample6_extraAddress" placeholder="참고항목" class="addcontent_right_input"> -->
@@ -148,7 +153,8 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<!-- <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> -->
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <script src='https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js'></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d&libraries=services"></script>
@@ -221,6 +227,12 @@
         }).open();
         
     } 
+    
+    $('.addCompany_right_button').click(function(){
+    	
+    	var openWin = window.open("/site/findCompany/", "pop",
+				 "width=500,height=510,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+    });
 </script>
 <script>
 $(document).ready(function(){
@@ -338,6 +350,7 @@ $(document).ready(function(){
 						type_no : $('input[name="chk_scene"]:checked').val(),
 						address : $("#sample6_address").val(),
 						site_name : $("#sample6_detailAddress").val(),
+						name : $("#Cname").val(),
 						x : Number($("#x").val()),
 						y : Number($("#y").val()),
 	

@@ -15,6 +15,8 @@ public class SiteVO {
 	private double y;
 	private double z;
 	
+	private int company_num;
+	
 	//network table
 	private int sig_id;
 	private String sig_protocol;

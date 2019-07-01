@@ -9,7 +9,7 @@
 	</select>
 	
 	<insert id="signup" parameterType="com.wda.sc.domain.MemberVO">
-		insert into MEMBER(user_id,name,password,phone,email) values(#{user_id},#{name},#{password},#{phone},#{email})
+		insert into MEMBER(user_id,name,password,phone,email,company_num) values(#{user_id},#{name},#{password},#{phone},#{email},#{company_num})
 	</insert>
 	
 	<select id="idFind" resultType="com.wda.sc.domain.MemberVO">
@@ -26,5 +26,21 @@
 	
 	<select id="nameFind" resultType="String">
 		select name from MEMBER where user_id = #{user_id}
+	</select>
+	
+	<select id="findCompany" resultType="com.wda.sc.domain.CompanyVO">
+		select * from company where name = #{name}
+	</select>
+	
+	<insert id="insertCompany" parameterType="com.wda.sc.domain.CompanyVO">
+		insert into COMPANY(company_num,name,reg_number) values(company_seq.nextval,#{name},#{reg_number})
+	</insert>
+	
+	<select id="getCompanyNum" resultType="int">
+		select company_num from company where name = #{name}
+	</select>
+	
+	<select id="getAllCompany" resultType="com.wda.sc.domain.CompanyVO">
+		select * from company
 	</select>
 </mapper>

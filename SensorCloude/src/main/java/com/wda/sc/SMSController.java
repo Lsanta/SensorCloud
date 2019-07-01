@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wda.sc.domain.AlarmVO;
+import com.wda.sc.domain.MemberVO;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.SiteService;
 
@@ -145,6 +146,41 @@ public class SMSController {
 	      JSONObject obj = (JSONObject) coolsms.send(params);
 	      System.out.println(obj.toString());
 	      return "success";
+	    } catch (CoolsmsException e) {
+	      System.out.println(e.getMessage());
+	      System.out.println(e.getCode());
+	      return "false";
+	    }
+	}
+	
+	public String authSms(MemberVO vo) {
+		
+		System.out.println("문자 인증 메소드 ");
+		
+		System.out.println(vo.getPhone());
+		System.out.println(vo.getUser_id());
+		
+		String api_key = "NCSUHVPGXGVJOVA2";
+	    String api_secret = "FCIGN0PTFU97R3KHOOD7HR6WUDRF6PPU";
+	    Message coolsms = new Message(api_key, api_secret);
+	    
+	    AuthNumber ge = new AuthNumber();
+	    ge.setCertNumLength(6);
+	    String key = ge.excuteGenerate();
+	    System.out.println(key);
+	    
+	    // 4 params(to, from, type, text) are mandatory. must be filled
+	    HashMap<String, String> params = new HashMap<String, String>();
+	    params.put("to", vo.getPhone());
+	    params.put("from", "01046037101");
+	    params.put("type", "SMS");	
+	    params.put("text", "안녕하세요 SensorCloud입니다. 인증번호는 [" + key + "] 입니다.");
+	    params.put("app_version", "test app 1.2"); // application name and version
+
+	    try {
+	      JSONObject obj = (JSONObject) coolsms.send(params);
+	      System.out.println(obj.toString());
+	      return key;
 	    } catch (CoolsmsException e) {
 	      System.out.println(e.getMessage());
 	      System.out.println(e.getCode());

@@ -9,7 +9,7 @@
       select x.rnum, x.* from
          (select rownum as rnum, p.* from
                (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
-                from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+                from (select board_no,check_board.user_id, check_board.title, check_board.reg_date as reg_date,check_board.board_status,check_board.site_id, site.site_name
                      from check_board,site
                      where check_board.site_id = site.site_id) c,member m
                  where c.user_id = m.user_id
@@ -22,7 +22,7 @@
    <select id="viewgetList" resultType="com.wda.sc.domain.CheckBoardVO">
    select c.board_no,m.name, c.user_id, c.title, c.board_content, c.reg_date,c.board_status,c.site_name
       from (select board_no,check_board.user_id, check_board.title, check_board.board_content,
-             substr(check_board.reg_date,0,14) as reg_date,
+             check_board.reg_date as reg_date,
              check_board.board_status,check_board.site_id, site.site_name
            from check_board,site
            where check_board.site_id = site.site_id) c,member m
@@ -49,6 +49,7 @@ where a.site_id = b.site_id
 and a.user_id = c.user_id
 and a.board_no = d.board_no(+)
 and rownum < 7
+order by reg_date desc
    ]]>
    </select>
    
@@ -95,7 +96,7 @@ and rownum < 7
    <!-- 점검이력 검색 -->
     <select id="checkSearch" resultType="com.wda.sc.domain.CheckBoardVO">
       select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
-	from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+	from (select board_no,check_board.user_id, check_board.title, check_board.reg_date as reg_date,check_board.board_status,check_board.site_id, site.site_name
       from check_board,site
       where check_board.site_id = site.site_id) c,member m
 	where c.user_id = m.user_id and ${searchType} LIKE '%' || '${keyword}' || '%'
@@ -107,7 +108,7 @@ and rownum < 7
       select x.rnum, x.* from
          (select rownum as rnum, p.* from
                (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
-                from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+                from (select board_no,check_board.user_id, check_board.title, check_board.reg_date as reg_date,check_board.board_status,check_board.site_id, site.site_name
                      from check_board,site
                      where check_board.site_id = site.site_id) c,member m
                  where c.user_id = m.user_id and ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%'
@@ -142,7 +143,7 @@ and rownum < 7
       select x.rnum, x.* from
          (select rownum as rnum, p.* from
                (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
-                from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+                from (select board_no,check_board.user_id, check_board.title, check_board.reg_date as reg_date,check_board.board_status,check_board.site_id, site.site_name
                      from check_board,site
                      where check_board.site_id = site.site_id and reg_date BETWEEN add_months(sysdate, -#{data}) and sysdate) c,member m
                  where c.user_id = m.user_id
@@ -156,7 +157,7 @@ and rownum < 7
    <select id="apprepairList" resultType="com.wda.sc.domain.CheckBoardVO">
    <![CDATA[
    		 select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
-         from (select board_no,check_board.user_id, check_board.title, substr(check_board.reg_date,0,14) as reg_date,check_board.board_status,check_board.site_id, site.site_name
+         from (select board_no,check_board.user_id, check_board.title, check_board.reg_date as reg_date,check_board.board_status,check_board.site_id, site.site_name
                from check_board,site
                where check_board.site_id = site.site_id and check_board.site_id = #{site_id}) c,member m
          where c.user_id = m.user_id

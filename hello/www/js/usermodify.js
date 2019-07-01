@@ -13,7 +13,7 @@ var query = {
 
 $.ajax({
     type : "POST",
-    url : "http://15.164.166.25:80/app/mypage/usermodify",
+    url : "http://183.106.6.74:8080/app/mypage/usermodify",
     //url : "http://39.127.7.58:8080/app/mypage/usermodify",
     data : query,
     dataType : 'json',
@@ -71,7 +71,7 @@ $(document).on("click",".confirm-modify",function() {
             type : "POST",
             data : query,
             dataType : "text",
-            url : "http://15.164.166.25:80/app/mypage/updatemyinfo.do",
+            url : "http://183.106.6.74:8080/app/mypage/updatemyinfo.do",
             //url : "http://39.127.7.58:8080/app/mypage/updatemyinfo.do",
             success : function(data) {
                 if (data == "success") {
