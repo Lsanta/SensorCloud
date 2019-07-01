@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#site tr td img {
+	width : 25px;
+}
+
 .none{
    display : none;
 }

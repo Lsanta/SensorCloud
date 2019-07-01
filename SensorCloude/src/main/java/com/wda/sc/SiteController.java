@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wda.sc.domain.AlarmMemberVO;
 import com.wda.sc.domain.AlarmVO;
 import com.wda.sc.domain.CheckBoardVO;
+import com.wda.sc.domain.CompanyVO;
 import com.wda.sc.domain.InstallSensorVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
@@ -35,6 +36,7 @@ import com.wda.sc.domain.Search;
 import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CheckboardService;
+import com.wda.sc.service.LoginService;
 import com.wda.sc.service.MysensorService;
 import com.wda.sc.service.SiteService;
 
@@ -52,6 +54,7 @@ public class SiteController {
 	private SiteService siteservice;
 	private CheckboardService checkboardservice;
 	private MysensorService mysensorservice;
+	private LoginService loginservice;
 
 	@RequestMapping(value = "/address", method = RequestMethod.GET)
 	public String address(Locale locale, Model model) {
@@ -82,6 +85,7 @@ public class SiteController {
 		System.out.println(arr2);
 		
 		model.addAttribute("siteSensor", arr2);
+		
 		return "site/siteadd";
 
 	}
@@ -107,8 +111,9 @@ public class SiteController {
 		}
 
 		model.addAttribute("joinSite", siteservice.joinSite(site_id)); // 현장에 관한 값
+		System.out.println("현장에 관한 값" + siteservice.joinSite(site_id));
 		model.addAttribute("insSen", siteservice.getsiteModSensor(Integer.parseInt(site_id)));//설치센서에 관한 값
-		System.out.println(siteservice.getsiteModSensor(Integer.parseInt(site_id)));
+		System.out.println("설치센서에 관한 값" +siteservice.getsiteModSensor(Integer.parseInt(site_id)));
 		return "site/sitemodify";
 	}
 
@@ -440,6 +445,14 @@ public class SiteController {
 		System.out.println("현장 추가");
 		System.out.println(map);
 		
+		//회사 이름으로 회사 번호 찾아서 siteVO에 추가
+		String name = (String) map.get("name");
+		System.out.println("회사 이름" + name);
+		ArrayList<CompanyVO> comVO = siteservice.CompanySearch(name);
+		System.out.println("회사 번호" + comVO.get(0).getCompany_num());
+		
+		//site VO에 저장
+		site.setCompany_num(comVO.get(0).getCompany_num());
 		site.setType_no((String) map.get("type_no"));
 		site.setAddress((String) map.get("address"));
 		site.setSite_name((String)map.get("site_name"));
@@ -447,6 +460,7 @@ public class SiteController {
 		site.setX((double)map.get("x"));
 		site.setY((double)map.get("y"));
 		
+		//netwrok VO에 저장 
 	    site.setRperiod((String) map.get("rperiod"));
 	    site.setSig_port_num((String) map.get("sig_port_num"));
 	    site.setVirtual_port((String) map.get("virtual_port"));
@@ -471,7 +485,7 @@ public class SiteController {
 		} else {
 			int site_id = siteservice.getSiteNum();
 						
-			String command = "C:\\Users\\Administrator\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
+			String command = "C:\\Users\\str\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
 			ArrayList<String> rawPid = new Cmd().exeCmd(command);
 			System.out.println(rawPid);
 			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
@@ -674,7 +688,7 @@ public class SiteController {
 	// 현장관리 검색
 	@RequestMapping(value = "/search" + "/{page}" + "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
 	public String sitelistSearch(@PathVariable int page, @PathVariable String searchType, @PathVariable String keyword,
-			Model model) {
+			Model model, HttpSession session) {
 
 		Paging p = new Paging();
 		Search s = new Search();
@@ -682,18 +696,24 @@ public class SiteController {
 		ArrayList<Integer> arr = new ArrayList<Integer>();
 		Map<Object, Object> parm = new HashMap<Object, Object>();
 		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
-
+		String user_id = (String) session.getAttribute("id");
+		int company_num = siteservice.getCompanyNum(user_id);
+		
 		p.getOnePageBoard(); // 페이지 당 보여지는 데이터 수
 
 		s.setPage(page);
 		s.setKeyword(keyword);
 		s.setSearchType(searchType);
-
+		s.setCompany_num(company_num);
+		
 		System.out.println(page); // 현재 페이지 번호
 		System.out.println(searchType); // 검색 옵션
 		System.out.println(keyword); // 검색 키워드
-
-		searchArr = siteservice.siteSearch(s);
+		if(company_num == 1) {
+			searchArr = siteservice.siteSearch(s);
+		} else {
+			searchArr = siteservice.companySiteSearch(s);
+		}
 
 		System.out.println(searchArr);
 
@@ -702,7 +722,7 @@ public class SiteController {
 		int sendPageNum = 0;
 		int realNum = page;
 		p.setTotalNum(searchArr.size());
-
+		
 		System.out.println("전체숫자" + p.getTotalNum());
 
 		if (p.getTotalNum() <= p.getOnePageBoard()) {
@@ -734,20 +754,25 @@ public class SiteController {
 		}
 
 		sendPageNum = (realNum - 1) / 5;
-
+		
 		p.setEndnum((realNum * 10) + 1);
 		p.setStartnum(p.getEndnum() - 10);
-
+		p.setCompany_num(company_num);
 		parm.put("Paging", p);
 		parm.put("Search", s);
 
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		System.out.println("pageNum" + arr);
-
-		model.addAttribute("site", siteservice.getSearchResult(parm));
-		System.out.println("site" + siteservice.getSearchResult(parm));
-
+		
+		if(company_num == 1) {
+			model.addAttribute("site", siteservice.getSearchResult(parm));
+			System.out.println("site" + siteservice.getSearchResult(parm));
+		} else {
+			model.addAttribute("site", siteservice.companySiteSearchResult(parm));
+			System.out.println("site" + siteservice.getSearchResult(parm));
+		}
+	
 		if (realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
 			return "redirect:/site/search/" + pageNum + "/" + searchType + "/" + keyword;
@@ -1105,7 +1130,7 @@ public class SiteController {
 				ArrayList<SiteVO> site = siteservice.joinSite(site_id);
 				System.out.println("사이트들고온 네트워크정보" + site);
 				
-				String command = "C:\\Users\\Administrator\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.get(0).getRperiod()+" "+site.get(0).getVirtual_port()+" "+site.get(0).getSig_port_num()+" "+site_id;
+				String command = "C:\\Users\\str\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.get(0).getRperiod()+" "+site.get(0).getVirtual_port()+" "+site.get(0).getSig_port_num()+" "+site_id;
 				ArrayList<String> rawPid = new Cmd().exeCmd(command);
 				System.out.println(rawPid);
 				ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
@@ -1172,6 +1197,28 @@ public class SiteController {
 			
 			return "redirect:/site/" + site_id;
 		}	
+		
+		@RequestMapping(value = "/findCompany", method = RequestMethod.GET)
+		public String findCompany(Locale locale, Model model) {
+
+//			//회사 넘기기
+//			ArrayList<CompanyVO> arr3 = loginservice.getAllCompany();
+//			System.out.println(arr3);
+//			model.addAttribute("Allcompany", arr3);
+			
+			return "site/findCompany";	
+		}
+		
+		@RequestMapping(value = "/searchCompany", method = RequestMethod.POST)
+		@ResponseBody
+		public ArrayList<CompanyVO> searchCompany(Locale locale, Model model,@RequestBody Map<String, String> map) {
+			System.out.println("넘어온 값" + map);
+			String name = map.get("word");
+			
+			ArrayList<CompanyVO> vo = siteservice.CompanySearch(name);
+			System.out.println(vo);
+			return vo;	
+		}
 }
 
 class Ascending implements Comparator<Integer> { 

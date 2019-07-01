@@ -9,5 +9,6 @@ public class Search {
 	private String searchType;
 	private String keyword;
 	private String site_id;
+	private int company_num;
 
 }

@@ -14,7 +14,7 @@
 	<div id="wrapper">
 
 		<div id ="header">
-			<a href="javascript:history.go(-1)">뒤로 가기</a>
+			<!-- <a href="javascript:history.go(-1)">뒤로 가기</a> -->
 			<h2>아이디/비밀번호 찾기</h2>
 		</div>
 
@@ -106,7 +106,7 @@
 			$.ajax({
         	type : "POST",
         	data : query,
-			url : "http://15.164.166.25:80/app/appidFind",
+			url : "http://183.106.6.74:8080/app/appidFind",
 			//url : "http://39.127.7.58:8080/app/appidFind",
 			contentType : "application/json; charset=UTF-8",
         	success : function(data){

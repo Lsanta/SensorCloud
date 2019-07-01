@@ -126,14 +126,15 @@
 
 .timeline {
   width: 340px;
-  height: 60px;
+  height: auto;
   padding: 10px;
   margin: 20px;
   border: 1px solid #bcbcbc;
   -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.03) inset;
   -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.03) inset;
        box-shadow:0 1px 4px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.03) inset;
-}
+  background:white;
+      }
 
 .pagination li{
   display:inline-block;
@@ -295,7 +296,7 @@
 }
 } 
 .timeline {
-    height: 150px;
+    height: auto;
   }
   
   .timeline h3 {
@@ -311,7 +312,7 @@
   
   .timeline {
     width: 780px;
-    height: 60px;
+    height: auto;
     padding: 10px;
     margin-left: -60px;
     margin-bottom: 10px;

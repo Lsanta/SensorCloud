@@ -48,8 +48,9 @@ public class HomeController {
 	@Autowired private ServletContext servletContext;
 
 	@RequestMapping(value ="/", method = RequestMethod.GET)
+	//사이트의 메인화면으로 보내주는 컨트롤러
 	public String main(Locale locale, Model model, HttpSession session) {
-
+		
 		System.out.println(servletContext.getRealPath("/"));
 		//메인화면 점검이력 제목 substring
 		ArrayList<CheckBoardVO> arr = checkboardservice.mainList();
@@ -63,8 +64,18 @@ public class HomeController {
 			}
 		}
 		
+		//예전에는 모든 사이트의 현장을 가지고왔다.
+		//model.addAttribute("sitelist",siteservice.getList());
 		
-		model.addAttribute("sitelist",siteservice.getList());
+		String user_id = (String) session.getAttribute("id");
+		int company_num = siteservice.getCompanyNum(user_id);
+		if(company_num == 1) {
+			//예전에는 모든 사이트의 현장을 가지고왔다.
+			model.addAttribute("sitelist",siteservice.getList());
+		} else {
+			//지금은 해당 로그인한 유저의 회사가 관리하는 현장만 가지고온다.
+			model.addAttribute("sitelist",siteservice.getCompanySiteList(company_num));
+		}	
 		model.addAttribute("timelinelist",timelineservice.timedesc());
 		model.addAttribute("mainchecklist",arr);
 		String id = (String)session.getAttribute("id");
@@ -157,12 +168,11 @@ public class HomeController {
 	@RequestMapping(value = "/sitelist"+"/{num}", method = RequestMethod.GET)
 	public String siteList(@PathVariable String num, Model model,HttpServletResponse response,HttpSession session) throws IOException {
 
-
+		
 		int mlevel = (int) session.getAttribute("mlevel");
 		System.out.println("레벨" + mlevel);
-
+		
 		if (mlevel == 1) {
-
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script langauge='javascript'>");
@@ -171,7 +181,9 @@ public class HomeController {
 
 		}
 
-
+		String user_id = (String) session.getAttribute("id");
+		int company_num = siteservice.getCompanyNum(user_id);
+		
 		Paging page = new Paging();
 		ArrayList<Integer> arr=null;
 		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
@@ -181,8 +193,13 @@ public class HomeController {
 		int sendPageNum=0;
 		int realNum = Integer.parseInt(num);
 		
-		page.setTotalNum(siteservice.getPageNum());
-
+		if(company_num == 1) {
+			page.setTotalNum(siteservice.getPageNum());
+		} else {
+			page.setTotalNum(siteservice.getCompanySitePageNum(company_num));
+		}
+		
+		
 		if(page.getTotalNum() <= page.getOnePageBoard() ) {
 			pageNum = 1;
 		}else {
@@ -215,9 +232,14 @@ public class HomeController {
 
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
+		page.setCompany_num(company_num);
 		
 		model.addAttribute("lastNum", pageNum);
-		model.addAttribute("content",siteservice.getContent(page));
+		if(company_num == 1) {
+			model.addAttribute("content",siteservice.getContent(page));
+		} else {
+			model.addAttribute("content",siteservice.getCompanySiteContent(page));
+		}
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("sitelist",siteservice.getList());
 
