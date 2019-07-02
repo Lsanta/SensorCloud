@@ -164,4 +164,96 @@ order by reg_date desc
          order by reg_date desc
    ]]>    
    </select>
+   
+   <!-- 점검이력 개수 가져오기 -->
+   <select id="checkManagePageNum" resultType="int">
+         select count(board_no) from check_board where board_status = #{status}
+   </select>
+   <!-- open인 점검이력만 가져오기 -->
+   <select id="getOpenList" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="com.wda.sc.domain.Paging">
+      <![CDATA[
+     select x.rnum, x.* from
+         (select rownum as rnum, p.* from
+               (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
+                from (select board_no,check_board.user_id, check_board.title, check_board.reg_date as reg_date,check_board.board_status,check_board.site_id, site.site_name
+                     from check_board,site
+                     where check_board.site_id = site.site_id and board_status = 0) c,member m
+                 where c.user_id = m.user_id
+                 order by reg_date desc) p where rownum < #{endnum}) x
+      where x.rnum >= #{startnum}
+      order by x.reg_date desc
+      ]]>
+   </select>
+   
+   <!-- fixed인 점검이력만 가져오기 -->
+   <select id="getFixedList" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="com.wda.sc.domain.Paging">
+      <![CDATA[
+     select x.rnum, x.* from
+         (select rownum as rnum, p.* from
+               (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
+                from (select board_no,check_board.user_id, check_board.title, check_board.reg_date as reg_date,check_board.board_status,check_board.site_id, site.site_name
+                     from check_board,site
+                     where check_board.site_id = site.site_id and board_status = 1) c,member m
+                 where c.user_id = m.user_id
+                 order by reg_date desc) p where rownum < #{endnum}) x
+      where x.rnum >= #{startnum}
+      order by x.reg_date desc
+      ]]>
+   </select>
+   
+   <!-- close인 점검이력만 가져오기 -->
+   <select id="getCloseList" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="com.wda.sc.domain.Paging">
+      <![CDATA[
+     select x.rnum, x.* from
+         (select rownum as rnum, p.* from
+               (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
+                from (select board_no,check_board.user_id, check_board.title, check_board.reg_date as reg_date,check_board.board_status,check_board.site_id, site.site_name
+                     from check_board,site
+                     where check_board.site_id = site.site_id and board_status = 2) c,member m
+                 where c.user_id = m.user_id
+                 order by reg_date desc) p where rownum < #{endnum}) x
+      where x.rnum >= #{startnum}
+      order by x.reg_date desc
+      ]]>
+   </select>
+   
+    <!-- 날짜별 검색 -->
+	<select id="adminDateChange" resultType="int">
+      	select * from check_board
+		where reg_date BETWEEN add_months(sysdate, -#{data}) and sysdate and board_status = #{status}
+		order by reg_date
+    </select>
+    
+    <!-- 날짜별 검색 + 페이징 -->
+      <select id="getAdminTermList" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="map">
+      <![CDATA[
+      select x.rnum, x.* from
+         (select rownum as rnum, p.* from
+               (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
+                from (select board_no,check_board.user_id, check_board.title, check_board.reg_date as reg_date,check_board.board_status,check_board.site_id, site.site_name
+                     from check_board,site
+                     where check_board.site_id = site.site_id and reg_date BETWEEN add_months(sysdate, -#{data.data}) and sysdate and check_board.board_status = #{data.status}) c,member m
+                 where c.user_id = m.user_id
+                 order by reg_date desc) p where rownum < #{paging.endnum}) x
+      where x.rnum >= #{paging.startnum}
+      order by x.reg_date desc
+      ]]>
+   	</select>
+   	
+   	<!-- 상태에 따른 점검이력만 가져오기 -->
+   <select id="getStatusList" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="com.wda.sc.domain.Paging">
+      <![CDATA[
+     select x.rnum, x.* from
+         (select rownum as rnum, p.* from
+               (select c.board_no, m.name, c.user_id, c.title,c.reg_date,c.board_status,c.site_name 
+                from (select board_no,check_board.user_id, check_board.title, check_board.reg_date as reg_date,check_board.board_status,check_board.site_id, site.site_name
+                     from check_board,site
+                     where check_board.site_id = site.site_id and board_status = #{board_status}) c,member m
+                 where c.user_id = m.user_id
+                 order by reg_date desc) p where rownum < #{endnum}) x
+      where x.rnum >= #{startnum}
+      order by x.reg_date desc
+      ]]>
+   </select>
+   	
 </mapper>

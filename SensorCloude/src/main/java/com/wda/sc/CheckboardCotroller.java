@@ -554,4 +554,27 @@ public class CheckboardCotroller {
 		}
 
 	}
+	
+	//점검이력 관리 검색
+	@RequestMapping(value = "/dataSearch" + "/{page}" + "/{data}" + "/{status}", method = RequestMethod.GET)
+	public String adminDataSearch(@PathVariable int page, @PathVariable int data, @PathVariable int status, Model model) {
+		
+		if(data != 0) {
+			CheckboardManage cm = new CheckboardManage();
+			for(int i=0; i < 3 ; i++) {
+				if( i == status) {
+					cm.dataSearch(Checkboardservice, model, page, data, i);
+				} else {
+					
+					cm.adminPaging(Checkboardservice, model, i , "1");			
+				}
+			}  
+		} else {
+			return "redirect: /adminCheckPage/1/1/1";
+		}
+		
+		return "adminCheck/adminCheck";
+	
+	}
+
 }

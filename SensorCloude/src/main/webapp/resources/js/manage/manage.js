@@ -8,8 +8,12 @@ $(document).ready(function() {
 
 	$(document).on("click", "#user>tr>td:not(:last-child)" , function(){
 
-		var tr = $("#user tr").index(this);
-		var id = $("#user tr:eq("+tr+") td:eq(0)").text();
+//		var tr = $("#user tr").index(this);
+//		console.log(tr);
+//		var id = $("#user tr:eq("+tr+") td:eq(0)").text();
+//		console.log(id);
+		var id = $(this).siblings().eq(0).text();
+		console.log(id);
 		goPopup(id);
 
 	}); 
