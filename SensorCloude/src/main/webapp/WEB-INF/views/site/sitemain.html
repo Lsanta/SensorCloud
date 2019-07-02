@@ -50,6 +50,7 @@
 			</ul>
 			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 0}" th:class ="${siteInfo.site_id}">현장 활성화</button>
 			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 1}" th:class ="${siteInfo.site_id}">현장 비활성화</button>
+			
 		</nav>
 	</aside>
 
@@ -57,8 +58,8 @@
 		<article>
 			<span class="sitestatus" th:each="siteStatus : ${siteStatus}"
 				th:switch="${siteStatus.site_status}"> 
-				<img alt="stop" src="/resources/img/gray.svg" th:case="'0'"> 
-				<img alt="start" src="/resources/img/green.svg" th:case="'1'"> 
+				<img alt="stop" src="/resources/img/gray2.png" th:case="'0'"> 
+				<img alt="start" src="/resources/img/green.png" th:case="'1'"> 
 				<img alt="error" src="/resources/img/red.svg" th:case="'2'">
 
 			</span> 
@@ -66,12 +67,22 @@
 			<span class="addr" th:text="${siteInfo.site_name}"></span> 
 			
 			<span th:text="${siteInfo.address}" id="addr"></span><br>
-			<!-- <button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 0}" th:class ="${siteInfo.site_id}">현장 활성화</button>
-			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 1}" th:class ="${siteInfo.site_id}">현장 비활성화</button> -->
 			<button id="modify" th:class ="${siteInfo.site_id}">현장수정</button>
 			<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
 
 			<div id="chartdiv"></div>
+			
+			
+			
+			<div id="floatMenu" th:each="alarmMember : ${alarmMember}">
+			<button id="spreadBtn" style='width : 100%;'><h4 id="phoneH4">연락망 접기</h4></button>
+					<ul id="hiddenList">
+						<li>
+							<span th:text="${alarmMember.name}"></span>
+							<span th:text="${alarmMember.tel}"></span>
+						</li>
+					</ul>
+			</div>
 				<a id="btnExport" href="#" download=""  ><img src="/resources/img/excel.svg" style="width:30px; height:30px;"></a>
 			<div id="dataDiv">
 				
@@ -444,8 +455,39 @@ geocoder.addressSearch(site, function(result, status) {
 		
 	}); // status 종료
 
+	// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+	var floatPosition = parseInt($("#floatMenu").css('top'));
+	// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+
+	$(window).scroll(function() {
+		// 현재 스크롤 위치를 가져온다.
+		var scrollTop = $(window).scrollTop();
+		var newPosition = scrollTop + floatPosition + "px";
+
+		/* 애니메이션 없이 바로 따라감
+		 $("#floatMenu").css('top', newPosition);
+		 */
+
+		$("#floatMenu").stop().animate({
+			"top" : newPosition
+		})
+
+	}).scroll();
 	
-	
+	$("#spreadBtn").click(function(){
+		if($("#hiddenList").is(":visible")){
+            $("#hiddenList").slideUp();
+            $("#floatMenu").css("background-color","white");
+            $("#phoneH4").text("연락망 보기");
+        }else{
+            $("#hiddenList").slideDown();
+            setTimeout(function() {
+            	$("#floatMenu").css("background-color","#606060")
+            	  $("#phoneH4").text("연락망 접기")
+          	}, 350);
+          
+        }
+    });	
 	
 /* 	$('#append_row').on("click", function () {
 		$('#list_table').append(

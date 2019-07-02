@@ -8,6 +8,10 @@ html {
 	display : none;
 }
 
+img {
+	width : 25px;
+}
+
 #container {
     width: 1130px;
     height: 750px;

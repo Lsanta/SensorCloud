@@ -22,7 +22,20 @@ body {
 .end{
 	margin-top : 20px;
 }
-
+.company-card {
+  padding: 40px;
+  padding-top: 5px;
+  width: 200px;
+  border-radius: 2px;
+  display : inline-block;
+  border : 1px solid black;
+  margin-left : 20%;
+  height : 200px;
+  position : relative;
+  bottom : 400px;
+  
+  
+}
 .login-card {
   padding: 40px;
   padding-top: 5px;
@@ -30,8 +43,9 @@ body {
   background-color: rgb(250, 251, 255);
   margin: 0 auto 10px;
   margin-top: 3%;
-  border-radius: 2px;z
-  overflow: hidden;
+  border-radius: 2px;
+  margin-left : 10%;
+  display : inline-block;
 }
 
 .login-card h1 {
@@ -63,6 +77,21 @@ body {
   position: relative;
 }
 
+.login-card input[type=text], input[type=password], input[type=email],input[type=tel] {
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  margin-top : 10px;
+  position: relative;
+}
 .login-card input[type=text]:hover, input[type=password]:hover, input[type=email]:hover, input[type=tel]:hover {
   border: 1px solid #b9b9b9;
   border-top: 1px solid #a0a0a0;
@@ -131,7 +160,21 @@ body {
  
 }
 
-
+@media screen and (max-width: 1150px) {
+.company-card {
+  padding: 40px;
+  padding-top: 5px;
+  width: 200px;
+  border-radius: 2px;
+  display : inline-block;
+  border : 1px solid black;
+  margin-left : 20%;
+  height : 200px;
+  vertical-align : middle;
+  margin-bottom : 0;
+ }
+ 
+}
 @media screen and (max-width: 360px) {
 .login-card {
   padding: 40px;
@@ -139,7 +182,7 @@ body {
   width: 70%;
   background-color: rgb(250, 251, 255);
   margin: 0 auto;
-  border-radius: 2px;z
+  border-radius: 2px;
   overflow: hidden;
 }
 

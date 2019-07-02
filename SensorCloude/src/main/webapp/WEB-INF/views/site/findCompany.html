@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회사 찾기 팝업</title>
+<link href="/resources/css/site/findCompany.css" rel="stylesheet" type="text/css"/>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+	 <input type="text" placeholder="회사 이름" class="searchInputBox"><br>
+	 <div id="nameContent">
+	 
+	 </div>
+<script>
+$(document).ready(function() {
+	$(document).keyup('.searchInputBox', function(){
+		 var text = $(".searchInputBox").val();   
+		 console.log(text);
+		 
+		 var query = { word : text } 
+		 
+		 var sendText = JSON.stringify(query);
+		 if( text != ''){
+	         $.ajax({
+	             type : 'POST',
+	             url : "/site/searchCompany",
+	             dataType : 'json',
+	             data : sendText,
+	             contentType : "application/json; charset=UTF-8",
+	             success : function(result){
+	            	 	console.log(result);
+	            	 	
+	            	 	var result2 = result.json
+	            	 	var str="";
+	            	 	$.each(result, function(i,s){
+	            	 		str +='<div id='+s.company_num+ '>'+ s.name + '</div>';
+	            	 		 $("#nameContent").html(str);
+	            	 	});
+	            	 	
+	             } //success 함수 종료
+	         }); //ajax종료
+	     } else {
+	    	   $("#nameContent").empty();
+	     }
+	});
+	
+	$(document).on('click','#nameContent > div', function(){
+		var div = $(this);
+		
+		var name = div.text();
+		var cnum = div.attr("id");
+		
+		window.opener.document.getElementById("Cname").value = name; 
+	    window.close();
+		
+	});
+});
+
+</script>
+</body>
+</html>

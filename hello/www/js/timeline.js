@@ -21,7 +21,7 @@ $(document).on('deviceready', function() {
     } else {
         $.ajax({
             type : "POST",
-            url : "http://15.164.166.25:80/app/timeline/mtimeline",
+            url : "http://183.106.6.74:8080/app/timeline/mtimeline",
             //url : "http://39.127.7.58:8080/app/timeline/mtimeline",
             data : {pagenum : 1},
             success : function(result){
@@ -36,11 +36,11 @@ $(document).on('deviceready', function() {
                    str +='<h5>'+s.time+'</h5>';
                    
                    if(s.user_id == idt){
-                    str +='<button class="modify">수정</button>';
-                    str +='<button class="delete">삭제</button>';
+                    str +='<a class="modify" style="font-size:12px;  margin-left:5px;"> 수정 </a>';
+                    str +='<a class="delete"  style="font-size:12px;">| 삭제</a>';
                    } else{
-                    str +='<button style="visibility:hidden" class="modify">수정</button>';
-                    str +='<button style="visibility:hidden" class="delete">삭제</button>';
+                    str +='<a style="visibility:hidden" class="modify">수정</a>';
+                    str +='<a style="visibility:hidden" class="delete">삭제</a>';
                    }
                    str +='<p>'+s.content+'</p>';
                    str +='</div>';
@@ -94,7 +94,7 @@ $(document).on('deviceready', function() {
     
              $.ajax({
                  type : "POST",
-                 url : "http://15.164.166.25:80/app/timeline/mtimeline.do",
+                 url : "http://183.106.6.74:8080/app/timeline/mtimeline.do",
                  //url : "http://39.127.7.58:8080/app/timeline/mtimeline.do",
                  data : log,
                  dataType : 'text',
@@ -106,7 +106,7 @@ $(document).on('deviceready', function() {
     
                          $.ajax({
                             type : "POST",
-                            url : "http://15.164.166.25:80/app/send/Timelinemessage.do",
+                            url : "http://183.106.6.74:8080/app/send/Timelinemessage.do",
                             //url : "http://39.127.7.58:8080/app/send/Timelinemessage.do",
                             data : log,
                             contentType : "application/json; charset=UTF-8",
@@ -137,7 +137,7 @@ $(document).on('deviceready', function() {
                 $.ajax({
                     async : true,
                     type : "POST",
-                    url : "http://15.164.166.25:80/app/timeline/mtimelinedelete.do",
+                    url : "http://183.106.6.74:8080/app/timeline/mtimelinedelete.do",
                     //url : "http://39.127.7.58:8080/app/timeline/mtimelinedelete.do",
                     data : sig, 
                     dataType : 'text',
@@ -171,7 +171,7 @@ $(document).on('deviceready', function() {
             $.ajax({
                 async : true,
                 type : "POST",
-                 url :  "http://15.164.166.25:80/app/timeline/mtimelinemodify.do",
+                 url :  "http://183.106.6.74:8080/app/timeline/mtimelinemodify.do",
                 //url :  "http://39.127.7.58:8080/app/timeline/mtimelinemodify.do",
                 data : sig, 
                 dataType : 'json',
@@ -218,7 +218,7 @@ $(document).on('deviceready', function() {
         $.ajax({
             async : true,
             type : "POST",
-             url :  "http://15.164.166.25:80/app/timeline/mtimelinemodifyy.do",
+             url :  "http://183.106.6.74:8080/app/timeline/mtimelinemodifyy.do",
             // url :  "http://39.127.7.58:8080/app/timeline/mtimelinemodifyy.do",
             data : sig, 
             dataType : 'text',
@@ -245,7 +245,7 @@ $(document).on('deviceready', function() {
 function page(index){
     $.ajax({
         type : "POST",
-        url : "http://15.164.166.25:80/app/timeline/mtimeline",
+        url : "http://183.106.6.74:8080/app/timeline/mtimeline",
         //url : "http://39.127.7.58:8080/app/timeline/mtimeline",
         data : {pagenum : index},
         success : function(result){
@@ -258,11 +258,11 @@ function page(index){
                str +='<h3 id="name">'+s.name+'</h3>';        
                str +='<h5>'+s.time+'</h5>';
                if(s.user_id == idt){
-                str +='<button class="modify">수정</button>';
-                str +='<button class="delete">삭제</button>';
+                str +='<a class="modify"  style="font-size:12px; margin-left:5px;"> 수정 </a>';
+                str +='<a class="delete"  style="font-size:12px;">| 삭제</a>';
                } else{
-                str +='<button style="visibility:hidden" class="modify">수정</button>';
-                str +='<button style="visibility:hidden" class="delete">삭제</button>';
+                str +='<a style="visibility:hidden" class="modify">수정</a>';
+                str +='<a style="visibility:hidden" class="delete">삭제</a>';
                }
                str +='<p>'+s.content+'</p>';
                str +='</div>';
