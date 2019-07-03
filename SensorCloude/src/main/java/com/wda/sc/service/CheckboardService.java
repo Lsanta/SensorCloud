@@ -83,5 +83,11 @@ public interface CheckboardService {
 	//상태에 따른 점검이력 리스트
 	public ArrayList<CheckBoardVO> getStatusList(Paging page);
 
+	//점검이력 관리에서의 검색
+	public ArrayList<CheckBoardVO> checkManageSearch(Map<String, Object> data);
+
+	//점검이력 관리에서의 검색2
+	public ArrayList<CheckBoardVO> getcheckManageSearch(Map<Object, Object> parm);
+
 
 }

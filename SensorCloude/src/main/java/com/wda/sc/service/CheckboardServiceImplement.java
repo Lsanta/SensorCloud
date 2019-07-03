@@ -233,4 +233,17 @@ public class CheckboardServiceImplement implements CheckboardService {
 		return mapper.getStatusList(page);
 	}
 
+	@Override
+	public ArrayList<CheckBoardVO> checkManageSearch(Map<String, Object> data) {
+		//점검이력 관리에서의 검색
+		System.out.println("검색 데이터" + data);
+		return mapper.checkManageSearch(data);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> getcheckManageSearch(Map<Object, Object> parm) {
+		//점검이력 관리에서의 검색2
+		return mapper.getcheckManageSearch(parm);
+	}
+
 }

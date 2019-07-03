@@ -1,5 +1,7 @@
 package com.wda.sc;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.Paging;
+import com.wda.sc.domain.Search;
 import com.wda.sc.service.CheckboardService;
 
 public class CheckboardManage {
@@ -145,11 +148,106 @@ public class CheckboardManage {
 			
 			if (realNum > pageNum) {
 				System.out.println("pageNum : " + pageNum);
-				return "redirect:/checkboard/dataSearch/" + pageNum  + "/" + data + "/" + status;
+				return "false";
+				
+						
 			}	
 			
 			return "";
 		
+	}
+	
+	public String checkSearch(CheckboardService checkboardservice, Model model, int page, String searchType, String keyword, int status) {
+		Paging p = new Paging();
+		Search s = new Search();
+		ArrayList<CheckBoardVO> searchArr = new ArrayList<CheckBoardVO>();
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		Map<Object, Object> parm = new HashMap<Object, Object>();
+		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
+
+		Map<String, Object> data = new HashMap<String, Object>();
+		
+		s.setPage(page);
+		s.setKeyword(keyword);
+		s.setSearchType(searchType);
+
+		System.out.println(page); // 현재 페이지 번호
+		System.out.println(searchType);  // 검색 옵션
+		System.out.println(keyword); // 검색 키워드
+		
+		data.put("search" , s);
+		data.put("status" , status);
+
+		searchArr = checkboardservice.checkManageSearch(data);
+
+		System.out.println("체크 검색 :" + searchArr);
+
+		int pageNum = 0;
+		int mapNum=0;
+		int sendPageNum=0;
+		int realNum = page;
+		p.setTotalNum(searchArr.size());
+		p.setOnePageBoard(5);
+
+		System.out.println("체크 전체숫자" + p.getTotalNum());
+
+		if (p.getTotalNum() <= p.getOnePageBoard()) {
+			pageNum = 1;
+		} else {
+			pageNum = p.getTotalNum() / p.getOnePageBoard();
+			if (p.getTotalNum() % p.getOnePageBoard() > 0) {
+				pageNum = pageNum + 1;
+			}
+		}
+
+		if(pageNum%5 != 0) {
+			mapNum=pageNum/5+1;
+		}else {
+			mapNum=pageNum/5;
+		}
+
+		for(int i=0; i<mapNum; i++) {
+			arr = new ArrayList<Integer>();
+			for(int j=0; j<5; j++) {
+				
+				if((i*5)+j+1 > pageNum) {
+					break;
+				}
+				
+				arr.add((i*5)+j+1);
+			}
+			map.put(i,arr);
+		}
+
+		sendPageNum = (realNum-1)/5;
+
+		p.setEndnum((realNum * 5) + 1);
+		p.setStartnum(p.getEndnum() - 5);
+		p.setBoard_status(status);
+		
+		parm.put("Paging", p);
+		parm.put("Search", s);
+		
+		model.addAttribute("lastNum" + status , pageNum);
+		model.addAttribute("pageNum" + status , map.get(sendPageNum));
+		model.addAttribute("check" + status , checkboardservice.getcheckManageSearch(parm));
+		
+		if(realNum > pageNum) {
+			System.out.println("pageNum : " + pageNum);
+			System.out.println("keyword : " + keyword);
+			try {
+				keyword = URLEncoder.encode(keyword, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "false";
+//			return "redirect:/checkboard/search/"+pageNum+"/"+searchType+"/"+keyword+"";
+		}
+		
+		
+		
+		return "";
 	}
 
 	

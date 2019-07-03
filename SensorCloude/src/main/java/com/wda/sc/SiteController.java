@@ -199,7 +199,7 @@ public class SiteController {
 		int mlevel = (int) session.getAttribute("mlevel");
 		System.out.println("레벨" + mlevel);
 		// 관리자만 알림 메시지 보내기 가능
-		if (mlevel != 5) {
+		if (mlevel < 5) {
 
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();

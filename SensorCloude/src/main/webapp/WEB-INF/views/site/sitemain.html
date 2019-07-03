@@ -74,9 +74,9 @@
 			
 			
 			
-			<div id="floatMenu" th:each="alarmMember : ${alarmMember}">
+			<div id="floatMenu">
 			<button id="spreadBtn" style='width : 100%;'><h4 id="phoneH4">연락망 접기</h4></button>
-					<ul id="hiddenList">
+					<ul id="hiddenList" th:each="alarmMember : ${alarmMember}">
 						<li>
 							<span th:text="${alarmMember.name}"></span>
 							<span th:text="${alarmMember.tel}"></span>
