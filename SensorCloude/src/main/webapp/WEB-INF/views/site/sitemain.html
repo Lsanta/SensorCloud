@@ -36,11 +36,11 @@
 <!-- 				<li style="line-height: 40px; margin-top: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트</a></li>
 				<li style="line-height: 40px; margin-bottom: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">다운로드</a></li> -->
 
-				<li>
+				<!-- <li>
 					<span id="num">연락망</span>
-					<!-- <span id="down" style="display: inline"><img src="/resources/img/down-arrow.svg"></span>
-					<span id="up" style="display: none"><img src="/resources/img/up-arrow.svg"></span> -->
-				</li>
+					<span id="down" style="display: inline"><img src="/resources/img/down-arrow.svg"></span>
+					<span id="up" style="display: none"><img src="/resources/img/up-arrow.svg"></span>
+				</li> -->
 
 				<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
 					<span class="mang" th:text="${alarmMember.name}"></span>
@@ -75,7 +75,10 @@
 			
 			
 			<div id="floatMenu" th:each="alarmMember : ${alarmMember}">
-			<button id="spreadBtn" style='width : 100%;'><h4 id="phoneH4">연락망 접기</h4></button>
+			<button id="spreadBtn">
+				<!-- <h4 id="phoneH4">연락망 접기</h4> -->
+				<img src="/resources/img/phone.svg"  />
+			</button>
 					<ul id="hiddenList">
 						<li>
 							<span th:text="${alarmMember.name}"></span>
@@ -89,7 +92,7 @@
 				<div id="main-content">
 					<table id="sensordata">
 						<thead id="sensing-data-head">
-							
+							                  
 						</thead>
 						<tbody id="sensing-data">
 						
@@ -482,7 +485,7 @@ geocoder.addressSearch(site, function(result, status) {
         }else{
             $("#hiddenList").slideDown();
             setTimeout(function() {
-            	$("#floatMenu").css("background-color","#606060")
+            	/* $("#floatMenu").css("background-color","#606060") */
             	  $("#phoneH4").text("연락망 접기")
           	}, 350);
           
