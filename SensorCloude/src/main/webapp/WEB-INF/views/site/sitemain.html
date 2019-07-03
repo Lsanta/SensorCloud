@@ -74,12 +74,10 @@
 			
 
 			<div id="floatMenu">
-			<button id="spreadBtn">
 				<!-- <h4 id="phoneH4">연락망 접기</h4> -->
-				<img src="/resources/img/phone.svg" id="phoneH4" />
-			</button>
-					<ul id="hiddenList" th:each="alarmMember : ${alarmMember}">
-						<li>
+				<img src="/resources/img/phone.svg" id="spreadBtn" />
+					<ul id="hiddenList">
+						<li th:each="alarmMember : ${alarmMember}">
 							<span th:text="${alarmMember.name}"></span>
 							<span th:text="${alarmMember.tel}"></span>
 						</li>
@@ -467,14 +465,13 @@ geocoder.addressSearch(site, function(result, status) {
 		if($("#hiddenList").is(":visible")){
             $("#hiddenList").slideUp();
             $("#floatMenu").css("background-color","white");
-            $("#phoneH4").text("연락망 보기");
-            
+            $("#phoneH4").text("연락망 보기");        
         }else{
             $("#hiddenList").slideDown();
-            setTimeout(function() {
-            	/* $("#floatMenu").css("background-color","#606060") */
-            	  $("#phoneH4").text("연락망 접기")
-          	}, 350);
+//             setTimeout(function() {
+//             	/* $("#floatMenu").css("background-color","#606060") */
+//             	  $("#phoneH4").text("연락망 접기")
+//           	}, 350);
           
         }
     });	
