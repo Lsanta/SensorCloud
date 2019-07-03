@@ -1,5 +1,41 @@
 @charset "UTF-8";
+@font-face {
+  font-family: A이끌림M;
+  src: url('/resources/font/A이끌림M.TTF');
+}
 
 .searchInputBox {
-	width : 100%;
+	width : 90%;
+	height: 50px;
+	border: none;
+	font-size: 1.5em;
 }
+
+#nameContent { 
+	font-size: 1.5em;
+	cursor: pointer;
+	height: 300px;
+/* 	border: 1px solid; */
+}
+
+img {
+	width: 7%;
+	float: right;
+	cursor: pointer;
+	margin-top: 2%;
+}
+
+#copyright {
+	background-color: #ececec;
+	height: 90px;
+	display: table;
+	width: 100%;
+	margin:0 auto;
+}
+
+p {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+

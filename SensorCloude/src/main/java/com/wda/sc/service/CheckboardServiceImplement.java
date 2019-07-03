@@ -190,4 +190,60 @@ public class CheckboardServiceImplement implements CheckboardService {
 	      return attachMapper.findByBno(board_no);
 	 }
 
+	@Override
+	public ArrayList<CheckBoardVO> getOpenList(Paging page) {
+		// 상태가 open인 점검이력만 가져오기
+		return mapper.getOpenList(page);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> getFixedList(Paging page) {
+		// 상태가 fixed인 점검이력만 가져오기
+		return mapper.getFixedList(page);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> getCloseList(Paging page) {
+		// 상태가 close인 점검이력만 가져오기
+		return mapper.getCloseList(page);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> adminDateChange(Map<String, Integer> date) {
+		// 점검이력 관리에서의 날짜 검색
+		return mapper.adminDateChange(date);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> getAdminTermList(Map<Object, Object> parm) {
+		// 점검이력 관리에서의 기간 검색 + 페이징
+		System.out.println("parm" + parm);
+		return mapper.getAdminTermList(parm);
+	}
+
+	@Override
+	public int checkManagePageNum(int status) {
+		//점검이력 관리 에서 총 점검이력 개수 받기
+		return mapper.checkManagePageNum(status);
+	}
+	
+	@Override
+	public ArrayList<CheckBoardVO> getStatusList(Paging page) {
+		//상태에 따른 점검이력 리스트 
+		return mapper.getStatusList(page);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> checkManageSearch(Map<String, Object> data) {
+		//점검이력 관리에서의 검색
+		System.out.println("검색 데이터" + data);
+		return mapper.checkManageSearch(data);
+	}
+
+	@Override
+	public ArrayList<CheckBoardVO> getcheckManageSearch(Map<Object, Object> parm) {
+		//점검이력 관리에서의 검색2
+		return mapper.getcheckManageSearch(parm);
+	}
+
 }

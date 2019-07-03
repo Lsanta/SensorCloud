@@ -29,11 +29,11 @@
 	  <input type="text" id="sample6_address" placeholder="주소" class="addcontent_right_input" disabled><br>
 	  <input type="hidden" id="x" ><br>
 	  <input type="hidden" id="y" ><br>
-	  <input type="button" id="addressBtn" onclick="DaumPostcode()" value="조회" class="addcontent_right_button" ><br>
+	  <input type="button" id="addressBtn" onclick="DaumPostcode()" value="조회" class="addcontent_right_button" >
 	  
 	  <p id="p">회사이름:</p>
 	  <input type="text" id="Cname" placeholder="회사 이름" class="addcontent_right_input" disabled><br>
-	  <input type="button" id="addressBtn" value="선택" class="addCompany_right_button"><br>
+	  <input type="button" id="pBtn" value="선택" class="addCompany_right_button"><br>
 	  
 	  <p id="p">현장이름:</p>
 	  <input type="text" id="sample6_detailAddress" placeholder="현장이름" class="addcontent_right_input">
@@ -231,7 +231,7 @@
     $('.addCompany_right_button').click(function(){
     	
     	var openWin = window.open("/site/findCompany/", "pop",
-				 "width=500,height=510,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+				 "width=500,height=480,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
     });
 </script>
 <script>

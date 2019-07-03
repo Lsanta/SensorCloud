@@ -554,4 +554,92 @@ public class CheckboardCotroller {
 		}
 
 	}
+	
+	//점검이력 관리 날짜 검색
+	@RequestMapping(value = "/admindataSearch" +"/{num0}"+"/{num1}"+"/{num2}"+ "/{data}", method = RequestMethod.GET)
+	public String adminDataSearch(@PathVariable int num0, @PathVariable int num1, @PathVariable int num2, @PathVariable int data , Model model) {
+		
+		String result = "";
+		if(data != 0) {
+			CheckboardManage cm = new CheckboardManage();
+			for(int i=0; i < 3 ; i++) {
+			if( i == 0) {
+				result = cm.dataSearch(Checkboardservice, model, num0, data, i);
+				if(result == "false") {
+					int number =num0-1;
+					return "redirect:/checkboard/admindataSearch/" + number + "/" + num1 + "/" + num2 +"/"+ data;
+				}
+			} else if ( i == 1) {
+				result = cm.dataSearch(Checkboardservice, model, num1, data, i);
+				if(result == "false") {
+					int number = num1-1;
+					return "redirect:/checkboard/admindataSearch/" + num0 + "/" + number+ "/" + num2 +"/"+ data;
+				}
+			} else if ( i == 2 ) {
+				result = cm.dataSearch(Checkboardservice, model, num2, data, i);
+				if(result == "false") {
+					int number = num2-1;
+					return "redirect:/checkboard/admindataSearch/" + num0 + "/" + num1 + "/" + number +"/"+ data;
+				}
+			}
+			
+			}  
+		} else {
+			return "redirect: /adminCheckPage/1/1/1";
+		}
+		
+		return "adminCheck/adminCheck";
+	
+	}
+	
+		// 점검이력관리 검색
+		@RequestMapping(value = "/checkManagesearch" +"/{num0}"+"/{num1}"+"/{num2}"+ "/{searchType}" + "/{keyword}", method = RequestMethod.GET)
+		public String checkManagesearch(@PathVariable int num0, @PathVariable int num1, @PathVariable int num2, @PathVariable String searchType, @PathVariable String keyword,
+				Model model) {
+
+			String result = "";
+			CheckboardManage cm = new CheckboardManage();
+			for(int i=0; i < 3 ; i++) {
+				if( i == 0) {
+					result = cm.checkSearch(Checkboardservice, model, num0, searchType, keyword, i);
+					if(result == "false") {
+						int number =num0-1;
+						try {
+							keyword = URLEncoder.encode(keyword, "UTF-8");
+						} catch (UnsupportedEncodingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return "redirect:/checkboard/checkManagesearch/"+number+"/"+num1+"/"+num2+"/"+searchType+"/"+keyword+"";
+					}
+				} else if ( i == 1) {
+					result = cm.checkSearch(Checkboardservice, model, num1, searchType, keyword, i);
+					if(result == "false") {
+						int number = num1-1;
+						try {
+							keyword = URLEncoder.encode(keyword, "UTF-8");
+						} catch (UnsupportedEncodingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return "redirect:/checkboard/checkManagesearch/"+num0+"/"+number+"/"+num2+"/"+searchType+"/"+keyword+"";
+					}
+				} else if ( i == 2 ) {
+					result = cm.checkSearch(Checkboardservice, model, num2, searchType, keyword, i);
+					if(result == "false") {
+						int number = num2-1;
+						try {
+							keyword = URLEncoder.encode(keyword, "UTF-8");
+						} catch (UnsupportedEncodingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return "redirect:/checkboard/checkManagesearch/"+num0+"/"+num1+"/"+number+"/"+searchType+"/"+keyword+"";
+					}
+				}
+				
+			}
+			return "adminCheck/adminCheck";
+		}
+
 }

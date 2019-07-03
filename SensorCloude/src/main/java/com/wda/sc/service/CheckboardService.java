@@ -62,5 +62,32 @@ public interface CheckboardService {
 	
 	public List<CheckBoardFileVO> mgetAttachList(int board_no);
 
+	// 상태가 open인 점검이력만 가져오기
+	public ArrayList<CheckBoardVO> getOpenList(Paging page);
+
+	// 상태가 fixed인 점검이력만 가져오기
+	public ArrayList<CheckBoardVO> getFixedList(Paging page);
+
+	// 상태가 close인 점검이력만 가져오기
+	public ArrayList<CheckBoardVO> getCloseList(Paging page);
+
+	// 점검이력 관리에서의 날짜 검색
+	public ArrayList<CheckBoardVO> adminDateChange(Map<String, Integer> date);
+
+	// 점검이력 관리에서의 기간 검색 + 페이징
+	public ArrayList<CheckBoardVO> getAdminTermList(Map<Object, Object> parm);
+
+	//점검이력 관리 에서 총 점검이력 개수 받기
+	public int checkManagePageNum(int status);
+
+	//상태에 따른 점검이력 리스트
+	public ArrayList<CheckBoardVO> getStatusList(Paging page);
+
+	//점검이력 관리에서의 검색
+	public ArrayList<CheckBoardVO> checkManageSearch(Map<String, Object> data);
+
+	//점검이력 관리에서의 검색2
+	public ArrayList<CheckBoardVO> getcheckManageSearch(Map<Object, Object> parm);
+
 
 }

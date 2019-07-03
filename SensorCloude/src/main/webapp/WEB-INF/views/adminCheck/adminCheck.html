@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	data-layout-decorate="~{include/layout}">
+
+<th:block layout:fragment="page_head">
+	<title>점검이력관리</title>
+</th:block>
+
+<th:block layout:fragment="page_css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/adminCheck/adminCheck.css">
+</th:block>
+
+<th:block layout:fragment="contents">
+<div class="allContainer">
+	<div id="container">
+	<div id="main-content"> <!-- 현장 상태가 open일 때 -->
+			<div class="title-header">
+				<h1>OPEN</h1>
+				<select id="dateChange" class="openchange" name="term">
+				<option value="0">전체날짜</option>
+				<option value="1">최근 1개월</option>
+				<option value="3">최근 3개월</option>
+			</select>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th scope="col" style="width:10%;">현장이름</th>
+						<th scope="col" style="width:20%;">제목</th>
+						<th scope="col" style="width:8%;">상태</th>
+						<th scope="col" style="width:8%;">글쓴이</th>
+						<th scope="col" style="width:10%;">날짜</th>
+					</tr>
+				</thead>
+				<tbody id="checklist0" th:if="${check == null}">
+				 	<tr th:each="checkboardlist : ${check0}" >
+						<td th:text="${checkboardlist.site_name}"></td>
+						<td th:text="${checkboardlist.title}"></td>
+						<td th:switch="${checkboardlist.board_status}">
+							<span th:case="'0'">open</span>
+							<span th:case="'1'">fixed</span>
+							<span th:case="'2'">closed</span>
+						</td>
+						<td th:text="${checkboardlist.name}"></td>
+						<td th:text="${checkboardlist.reg_date}"></td>
+						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
+					</tr> 
+				</tbody>
+				
+				<tbody id="checklist0" th:if="${check != null}">
+				 	<tr th:each="checkboardlist : ${check}" >
+						<td th:text="${checkboardlist.site_name}"></td>
+						<td th:text="${checkboardlist.title}"></td>
+						<td th:switch="${checkboardlist.board_status}">
+						<span th:case="'0'">open</span>
+						<span th:case="'1'">fixed</span>
+						<span th:case="'2'">closed</span>
+						</td>
+						<td th:text="${checkboardlist.name}"></td>
+						<td th:text="${checkboardlist.reg_date}"></td>
+						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
+					</tr> 
+				</tbody>
+			</table>
+		</div>
+
+		<div class="pagination-container">
+			<nav class="pagination-content">
+				<div class="pagination" id="openPage">
+					<a class="firstpage"> << </a>
+					<a class="pagination-newer"> < </a> 
+					
+					<span class="pagination-inner" th:each="pageNum0 : ${pageNum0}">
+						 <a th:id="${pageNum0}" th:text="${pageNum0}"></a>
+					</span> 
+					
+					<a class="pagination-older"> > </a>
+					<a class="lastpage"> >> </a>
+					<span id="lastNum0" th:text="${lastNum0}" style=display:none></span>
+				</div>
+			</nav>
+		</div>
+		</div> <!-- 첫번째 메인 div 끝-->
+		
+		<div id="container">
+		<div id="main-content"> <!-- 현장 상태가 fixed일 때 -->
+			<div class="title-header">
+				<h1>FIXED</h1>
+			</div>
+			
+			<table>
+				<thead>
+					<tr>
+						<th scope="col" style="width:10%;">현장이름</th>
+						<th scope="col" style="width:20%;">제목</th>
+						<th scope="col" style="width:8%;">상태</th>
+						<th scope="col" style="width:8%;">글쓴이</th>
+						<th scope="col" style="width:10%;">날짜</th>
+					</tr>
+				</thead>
+				<tbody id="checklist1" th:if="${check == null}">
+				 	<tr th:each="checkboardlist : ${check1}" >
+						<td th:text="${checkboardlist.site_name}"></td>
+						<td th:text="${checkboardlist.title}"></td>
+						<td th:switch="${checkboardlist.board_status}">
+							<span th:case="'0'">open</span>
+							<span th:case="'1'">fixed</span>
+							<span th:case="'2'">closed</span>
+						</td>
+						<td th:text="${checkboardlist.name}"></td>
+						<td th:text="${checkboardlist.reg_date}"></td>
+						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
+					</tr> 
+				</tbody>
+				
+				<tbody id="checklist1" th:if="${check != null}">
+				 	<tr th:each="checkboardlist : ${check}" >
+						<td th:text="${checkboardlist.site_name}"></td>
+						<td th:text="${checkboardlist.title}"></td>
+						<td th:switch="${checkboardlist.board_status}">
+						<span th:case="'0'">open</span>
+						<span th:case="'1'">fixed</span>
+						<span th:case="'2'">closed</span>
+						</td>
+						<td th:text="${checkboardlist.name}"></td>
+						<td th:text="${checkboardlist.reg_date}"></td>
+						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
+					</tr> 
+				</tbody>
+			</table>
+		</div>
+
+		<div class="pagination-container">
+			<nav class="pagination-content">
+				<div class="pagination" id="fixedPage">
+					<a class="firstpage"> << </a>
+					<a class="pagination-newer"> < </a> 
+					
+					<span class="pagination-inner" th:each="pageNum1 : ${pageNum1}">
+						 <a th:id="${pageNum1}" th:text="${pageNum1}"></a>
+					</span> 
+					
+					<a class="pagination-older"> > </a>
+					<a class="lastpage"> >> </a>
+					<span id="lastNum1" th:text="${lastNum1}" style=display:none></span>
+				</div>
+			</nav>
+		</div>
+		</div> <!-- 두번째  메인 div 종료-->
+		
+		<div id="container">
+		<div id="main-content"> <!-- 현장 상태가 close일 때 -->
+			<div class="title-header">
+				<h1>CLOSE</h1>
+			</div>
+			
+			<table>
+				<thead>
+					<tr>
+						<th scope="col" style="width:10%;">현장이름</th>
+						<th scope="col" style="width:20%;">제목</th>
+						<th scope="col" style="width:8%;">상태</th>
+						<th scope="col" style="width:8%;">글쓴이</th>
+						<th scope="col" style="width:10%;">날짜</th>
+					</tr>
+				</thead>
+				<tbody id="checklist2" th:if="${check == null}">
+				 	<tr th:each="checkboardlist : ${check2}" >
+						<td th:text="${checkboardlist.site_name}"></td>
+						<td th:text="${checkboardlist.title}"></td>
+						<td th:switch="${checkboardlist.board_status}">
+							<span th:case="'0'">open</span>
+							<span th:case="'1'">fixed</span>
+							<span th:case="'2'">closed</span>
+						</td>
+						<td th:text="${checkboardlist.name}"></td>
+						<td th:text="${checkboardlist.reg_date}"></td>
+						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
+					</tr> 
+				</tbody>
+				
+				<tbody id="checklist2" th:if="${check != null}">
+				 	<tr th:each="checkboardlist : ${check}" >
+						<td th:text="${checkboardlist.site_name}"></td>
+						<td th:text="${checkboardlist.title}"></td>
+						<td th:switch="${checkboardlist.board_status}">
+						<span th:case="'0'">open</span>
+						<span th:case="'1'">fixed</span>
+						<span th:case="'2'">closed</span>
+						</td>
+						<td th:text="${checkboardlist.name}"></td>
+						<td th:text="${checkboardlist.reg_date}"></td>
+						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
+					</tr> 
+				</tbody>
+			</table>
+		</div>
+
+		<div class="pagination-container">
+			<nav class="pagination-content">
+				<div class="pagination" id="closePage">
+					<a class="firstpage"> << </a>
+					<a class="pagination-newer"> < </a> 
+					
+					<span class="pagination-inner" th:each="pageNum2 : ${pageNum2}">
+						 <a th:id="${pageNum2}" th:text="${pageNum2}"></a>
+					</span> 
+					
+					<a class="pagination-older"> > </a>
+					<a class="lastpage"> >> </a>
+					<span id="lastNum2" th:text="${lastNum2}" style=display:none></span>
+				</div>
+			</nav>
+		</div>
+	</div> <!-- 마지막 메인 div 끝-->
+	
+	
+	<div class="search">
+			<div class="select">
+				<select id="search-select">
+					<option value="site_name">현장이름</option>
+					<option value="name">글쓴이</option>
+					<option value="title">제목</option>
+				</select>
+			</div>
+			<section class="search-box">
+				<div class="search-content">
+					<input type="text" id="keyword"/>
+				</div>
+				<div class="search-button">
+					<button id="search">Search</button>
+				</div>
+			</section>
+	</div>
+	
+	</div>
+</th:block>
+
+<th:block layout:fragment="page_js">
+	<script src="/resources/js/adminCheck/adminCheck.js"></script>
+</th:block>
+</html>

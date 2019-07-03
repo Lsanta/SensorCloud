@@ -12,12 +12,12 @@
 <body>
 	
 	<form onsubmit="return check()" method="post" action="/login/signup" >
-	<div class="company-card">
+<!-- 	<div class="company-card">
 		<p>회사</p>
   		 본사<input type="radio" name="company" checked="checked" value="STR" /> 
   		 타 회사<input type="radio" id="DEF"name="company"/><br/>
   		<div class="createbox"></div>
-	</div>
+	</div> -->
     <div class="login-card">
     	<center>
         <a href="/login"><img src="/resources/img/logo.png" width="160" height="100" ></a>
@@ -25,27 +25,31 @@
       <br>
    
       
-        아이디<input type="text" name="user_id" id="user" placeholder="UserId">
+        아이디<input type="text" name="user_id" id="user" placeholder="UserId" style="margin-left:15%">
          <div class="errorstr" id="userstr"></div>
-        비밀번호<input type="password" name="password" placeholder="Password" id="password">
+        비밀번호<input type="password" name="password" placeholder="Password" id="password" style="margin-left:11%">
          <div class="errorstr" id="pwstr"></div>
         비밀번호 확인<input type="password" name="password2" placeholder="확인" id="password2">
          <div class="errorstr" id="pwconfirmstr"></div>
-        이름<input type="text" name="name" placeholder="이름">
-        이메일<input type="email" name="email" placeholder="yjc@ac.kr">
+        이름<input type="text" name="name" placeholder="이름" style="margin-left:19%"><br>
+        이메일<input type="email" name="email" placeholder="yjc@ac.kr" style="margin-left:15%"><br>
         휴대폰번호<input type="tel" id="phone" name="phone" placeholder="01012345678"> 
         <div class="errorstr" id="phonestr"></div>
-        <button type="button" id="sendAuth" class="ijn">인증번호 전송</button>
+        <button type="button" id="sendAuth" class="ijn1">인증번호 전송</button>
         
-        <input type="text" class="end" placeholder="인증번호">
+        <input type="text" class="end" placeholder="인증번호" style="width: 53%; margin-left:21%">
 
-		<button type="button" id="checkAuth" class="ijn">인증번호 확인</button>
+		<button type="button" id="checkAuth" class="ijn2">인증번호 확인</button><br>
+	사업자번호 <select required id="companynum">
+			<option value="" disabled selected >선택</option>
+			<option>123-45-67890 (STR)</option>
+		</select><br/>
 <!--         <div class="errorstr" id="authstr"></div> -->
         <input type="submit" name="login" class="login login-submit" value="가입하기">
+       </div>
+      
       </form>
-    </div>
-    
-    </div>
+  
     
     <script>
 	var count = 0;
@@ -81,7 +85,7 @@
     					id : id
     			}
     			if(id.length < 5 || id.length > 12)
-    				document.getElementById("userstr").innerHTML="5자리 이상 12자리 이하로 작성해주세요";
+    				document.getElementById("userstr").innerHTML="5자리 이상 12자리 이하로 작성해주세요.";
     			else{
     				$.ajax({
     				    type : "POST",
@@ -110,7 +114,7 @@
     			if(passwd.length < 8 || passwd.length > 16){
     				$("#pwstr").removeClass();
 					$("#pwstr").addClass("errorstr");
-    				document.getElementById("pwstr").innerHTML="8자리 이상 16자리 이하로 작성해주세요";
+    				document.getElementById("pwstr").innerHTML="8자리 이상 16자리 이하로 작성해주세요.";
     			} else{
     				$("#pwstr").removeClass();
     				document.getElementById("pwstr").innerHTML="";
@@ -145,7 +149,7 @@
 				} else {
 					$("#phonestr").removeClass();
 					$("#phonestr").addClass("errorstr");
-					document.getElementById("phonestr").innerHTML="10자리, 11자리로 작성해주세요";
+					document.getElementById("phonestr").innerHTML="10자리, 11자리로 작성해주세요.";
 				}
 			});
     		

@@ -35,25 +35,10 @@ public class UsermanageController {
 private UsermanageService usermanageservice;
 	
 	@RequestMapping(value = "usermodify" + "/{id}", method = RequestMethod.GET)
-	public String address(@PathVariable String id, Model model, HttpSession session, HttpServletResponse response) throws IOException {
-		
-		
+	public String address(@PathVariable String id, Model model) throws IOException {
 
-		int mlevel = (int) session.getAttribute("mlevel");
-		
-		
-		if (mlevel !=5) {
-
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script langauge='javascript'>");
-			out.println("alert('권한이 없습니다.\\n 관리자만 열람가능합니다');history.go(-1);");
-			out.println("</script>");
-
-		}
-		
-		
-		
+		System.out.println("넘겨오는 아이디 " + id);
+			
 		model.addAttribute("userInfo",usermanageservice.getInfo(id));
 		System.out.println(usermanageservice.getInfo(id));
 		return "manage/usermodify";
