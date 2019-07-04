@@ -10,6 +10,5 @@ public class SensorDataVO {
 	private String cur_date;
 	private String sensor_name;
 	private double sensing_data;
-
 }
 
