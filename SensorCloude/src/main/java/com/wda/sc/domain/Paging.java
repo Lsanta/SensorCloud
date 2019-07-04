@@ -13,5 +13,7 @@ public class Paging {
 	
 	private int startnum;
 	private int endnum;
+	
+	private int board_status;
 
 }

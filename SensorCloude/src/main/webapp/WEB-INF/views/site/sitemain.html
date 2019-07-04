@@ -36,11 +36,11 @@
 <!-- 				<li style="line-height: 40px; margin-top: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트</a></li>
 				<li style="line-height: 40px; margin-bottom: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">다운로드</a></li> -->
 
-				<li>
+				<!-- <li>
 					<span id="num">연락망</span>
-					<!-- <span id="down" style="display: inline"><img src="/resources/img/down-arrow.svg"></span>
-					<span id="up" style="display: none"><img src="/resources/img/up-arrow.svg"></span> -->
-				</li>
+					<span id="down" style="display: inline"><img src="/resources/img/down-arrow.svg"></span>
+					<span id="up" style="display: none"><img src="/resources/img/up-arrow.svg"></span>
+				</li> -->
 
 				<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
 					<span class="mang" th:text="${alarmMember.name}"></span>
@@ -72,12 +72,12 @@
 
 			<div id="chartdiv"></div>
 			
-			
-			
-			<div id="floatMenu" th:each="alarmMember : ${alarmMember}">
-			<button id="spreadBtn" style='width : 100%;'><h4 id="phoneH4">연락망 접기</h4></button>
+
+			<div id="floatMenu">
+				<!-- <h4 id="phoneH4">연락망 접기</h4> -->
+				<img src="/resources/img/phone.svg" id="spreadBtn" />
 					<ul id="hiddenList">
-						<li>
+						<li th:each="alarmMember : ${alarmMember}">
 							<span th:text="${alarmMember.name}"></span>
 							<span th:text="${alarmMember.tel}"></span>
 						</li>
@@ -89,7 +89,7 @@
 				<div id="main-content">
 					<table id="sensordata">
 						<thead id="sensing-data-head">
-							
+							                  
 						</thead>
 						<tbody id="sensing-data">
 						
@@ -318,84 +318,71 @@ geocoder.addressSearch(site, function(result, status) {
          
          var time = new Array();
          for(var i=0; i < data.data.length; i++){
-        	 time[i] = data.data[i].cur_date;
+        	 
+        	 if(i > 0){
+               	 var old = new Date(time[i-1]);
+            	 var now = new Date(data.data[i].cur_date);
+            	 var gap = old.getTime() - now.getTime();
+            	 if(gap == 1000) {
+
+            		 time[i] = time[i-1];
+            	 } else {
+            		 time[i] = data.data[i].cur_date;
+            	 }
+            	 
+        	 } else {
+        		 time[i] = data.data[i].cur_date;
+        	 }
          }
          
          var single2 = time.filter( (item, idx, array) => {
         		return array.indexOf( item ) === idx ;
-        	});
-        	 
-         
-         
-         
+         });
+        	  
          for(var i=0; i < single2.length; i++){
         	 str2 +='<tr>';
         	 str2 +='<td>'+single2[i]+'</td>';
-        	 
-        	 for(var j=0; j < data.data.length; j++) {
-        		 if ( single2[i] === data.data[j].cur_date){
-        			 str2 += '<td>'+data.data[j].sensing_data+'</td>'
-        		 }
-        	 }
-        	 
-        	 
-        	 
-        	 
-        	 
+        	 str2 +='<td class="1"></td>';
+        	 str2 +='<td class="2"></td>';
+        	 str2 +='<td class="3"></td>';
         	 str2 +='</tr>';
          	 $("#sensing-data").html(str2);	
          }
-        }
          
-//          for(var i=0; i < data.data.length; i++){
-         	
-//         	 for(var j=0; j < single2.length; j++) {
-//         		 str2 +='<td>'+single2[j]+'</td>';
-//         		if ( single2[j] === data.data[i].cur_date){
-//         			for(var k=0; k < headername.length; k++) {
-//         			  	if( data.data[i].sensor_name == headername[k]){
-//         			  		str2 += '<td>'+data.data[i].sensing_data+'</td>'
-//         			  	}
-//         			}		
-//         		} 	
-        			
-//         	 }
-//         	 str2 +='</tr>';
-//         	 $("#sensing-data").html(str2);	
+         for(var i=0; i < single2.length; i++){
         	 
-//          }
-         
-         
-         
-         /* for(var i=0; i < data.data.length; i++){
- 			str2 +='<tr>';
-        	time[i] = data.data[i].cur_date;
-      			
-        	 
-			 str2 +='<td>'+data.data[i].cur_date+'</td>';
-        	 
-        	 for(var j=1; j < headername.length; j++){
-     			 
+        	 for(var j=0; j < data.data.length; j++) { 
+        		 var old = new Date(single2[i]);
+            	 var now = new Date(data.data[j].cur_date);
+            	 var gap = old.getTime() - now.getTime();
         		 
-        		 if( data.data[i].sensor_name == headername[j]) {
+        		 if ( single2[i] === data.data[j].cur_date) {
+        			 if( headername[1] === data.data[j].sensor_name )  {
+        				 $("#sensing-data tr:eq("+i+") td.1").text(data.data[j].sensing_data);
+        			 } else if( headername[2] === data.data[j].sensor_name )  {
+        				 $("#sensing-data tr:eq("+i+") td.2").text(data.data[j].sensing_data);
+        			 } else if( headername[3] === data.data[j].sensor_name )  {
+        				 $("#sensing-data tr:eq("+i+") td.3").text(data.data[j].sensing_data);
+        			 }
         			
-        			str2 += '<td>'+data.data[i].sensing_data+'</td>'
-        			
-        			
-        		 }else{
-        			str2 += '<td>없음</td>'
+        			 //str2 += '<td>'+data.data[j].sensing_data+'</td>';
+        		 } else if ( gap == 1000) {
+        			 if( headername[1] === data.data[j].sensor_name )  {
+        				 $("#sensing-data tr:eq("+i+") td.1").text(data.data[j].sensing_data);
+        			 } else if( headername[2] === data.data[j].sensor_name )  {
+        				 $("#sensing-data tr:eq("+i+") td.2").text(data.data[j].sensing_data);
+        			 } else if( headername[3] === data.data[j].sensor_name )  {
+        				 $("#sensing-data tr:eq("+i+") td.3").text(data.data[j].sensing_data);
+        			 } 
         		 }
-        	 }
-        	 
-        	 str2 +='</tr>';
-        	 $("#sensing-data").html(str2);	
-        	 
-         } */
+        			 
+        				
+        		 } // for문 ( j 종료 )
+        	
+           } // for문 ( i 종료)
          
          
-         
-         
-        
+         } //else문 종료 
 		} //success 함수 종료
 	});
 	
@@ -478,13 +465,13 @@ geocoder.addressSearch(site, function(result, status) {
 		if($("#hiddenList").is(":visible")){
             $("#hiddenList").slideUp();
             $("#floatMenu").css("background-color","white");
-            $("#phoneH4").text("연락망 보기");
+            $("#phoneH4").text("연락망 보기");        
         }else{
             $("#hiddenList").slideDown();
-            setTimeout(function() {
-            	$("#floatMenu").css("background-color","#606060")
-            	  $("#phoneH4").text("연락망 접기")
-          	}, 350);
+//             setTimeout(function() {
+//             	/* $("#floatMenu").css("background-color","#606060") */
+//             	  $("#phoneH4").text("연락망 접기")
+//           	}, 350);
           
         }
     });	
