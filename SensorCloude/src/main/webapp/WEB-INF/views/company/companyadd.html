@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>팝업창</title>
+<link href="/resources/css/company/companyadd.css" rel="stylesheet" type="text/css"/>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	 $(document).ready(function(){
+		 
+		 $("#reg_number").blur(function(){
+			$("#reg_number").val(); 
+			var query = {
+					number : $("#reg_number").val()
+			}
+			$.ajax({
+				 type : "POST",
+				 url : "/company/companyCheck",
+				 data :	query,
+				 success : function(data){
+					 if(data == "success") {
+						 $("#numberstr").removeClass();
+						 $("#numberstr").addClass("successstr");
+				    	 document.getElementById("numberstr").innerHTML="중복 되지 않은 사업자 번호입니다.";
+					 } else {
+						 $("#numberstr").removeClass();
+						 $("#numberstr").addClass("errorstr");
+				    	 document.getElementById("numberstr").innerHTML="중복 된 사업자 번호입니다.";
+					 }
+				 }
+			});
+		 });
+		 
+		 
+		 
+		 $("#plus").click(function(){
+			 	if($("#name").val() == "" || $("#reg_number").val() == "" ) {
+			 		alert("빈 값이 있어 등록되지 않습니다.");
+			 		return false;
+			 	}
+ 	
+			 	if($('.sensoradd').children().is('.errorstr')){
+					alert("회원가입란에 적절하지 않은 요소가 있습니다. 다시 확인해 주세요.");
+					return false;
+				}
+			 	
+				var query = { 
+						name : $("#name").val(),
+						reg_number : $("#reg_number").val()
+				}
+				
+				console.log(query);
+				$.ajax({
+					  type : "POST",
+					  url : "/company/companyadd.do",
+					  data : query,
+					  success : function(data){
+						  if( data == "success"){
+							  alert("추가되었습니다");
+							  window.opener.location.reload();
+							  window.close();
+						  } else{
+							  alert("추가에 실패했습니다");
+						  }
+					  }
+					  
+				}); // ajax 종료
+				
+			}); // #plus 종료
+	 });		
+</script>
+</head>
+<body>
+<h2>협력사 추가</h2>
+ <div class="sensoradd">
+	협력사 이름<input type="text" id="name" name="name" placeholder="ex) 협력사 이름"/><br/>
+	사업자 번호<input type="text" id="reg_number" name="reg_number" placeholder="ex) 사업자 번호"/><br/>
+	<div class="errorstr" id="numberstr"></div>
+	<input type="button"  value="추가" id="plus" />
+	</div>
+</body> 
+</html>

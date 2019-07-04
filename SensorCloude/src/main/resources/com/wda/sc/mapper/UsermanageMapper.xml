@@ -8,7 +8,8 @@
 		<![CDATA[
 		select x.* 
 		from (select rownum as rnum,before_ord.*
-			  from (select * from member order by name) before_ord
+			  from (select m.user_id, m.password, m.phone, m.m_level, m.email, m.name, m.re_level, c.name as cname
+					from member m,company c where m.company_num = c.company_num) before_ord
               where rownum < #{endnum}) x
 		where x.rnum >= #{startnum}
 		order by x.name

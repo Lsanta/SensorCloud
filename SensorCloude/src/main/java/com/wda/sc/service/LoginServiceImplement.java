@@ -45,29 +45,5 @@ public class LoginServiceImplement implements LoginService {
 		// TODO Auto-generated method stub
 		return mapper.nameFind(user_id);
 	}
-
-	@Override
-	public ArrayList<CompanyVO> findCompany(String name) {
-		// 회사 이름을 기준으로 회사 존재여부 찾기 
-		return mapper.findCompany(name);
-	}
-
-	@Override
-	public int insertCompany(CompanyVO vo) {
-		// 회사 추가
-		return mapper.insertCompany(vo);
-	}
-
-	@Override
-	public int getCompanyNum(String name) {
-		//이름으로 회사번호 찾기
-		return mapper.getCompanyNum(name);
-	}
-
-	@Override
-	public ArrayList<CompanyVO> getAllCompany() {
-		//모든 회사 가져오기
-		return mapper.getAllCompany();
-	}
 	
 }

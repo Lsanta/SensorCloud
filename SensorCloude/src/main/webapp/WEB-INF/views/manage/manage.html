@@ -26,6 +26,7 @@
 						<th scope="col" style="width:18%;">이메일</th>
 						<th scope="col" style="width:15%;">전화번호</th>
 						<th scope="col" style="width:8%;">등급</th>
+						<th scope="col" style="width:8%;">소속회사</th>
 						<th style="width:8%;">승급요청</th>
 					</tr>
 				</thead>
@@ -41,6 +42,7 @@
 							<a class="accept" type="button" >수락</a>
 							<a class="cancel" type="button" >취소</a>
 						</td>
+						<td th:text="${userlist.cname}"></td>
 						<td th:if="${userlist.re_level == 0}"></td>
 			        </tr>
 				</tbody>
@@ -57,6 +59,7 @@
 						<input class="accept" type='button' value='수락'/>
 						<input class="cancel" type='button' value='취소'/>
 						</td>
+						<td th:text="${userlist.cname}"></td>
 						<td th:if="${userlist.re_level == 0}"></td>
 			        </tr>
 				</tbody>
