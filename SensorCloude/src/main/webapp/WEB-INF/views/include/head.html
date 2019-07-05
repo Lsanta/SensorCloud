@@ -6,13 +6,43 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
 <meta name="format-detection" content="telephone=no">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="/resources/js/default.js"></script>
-	<link rel="manifest" href="/resources/google/manifest.json">
-	<link rel="stylesheet" href="/resources/css/style.css">
-	<link rel="stylesheet" href="/resources/css/default.css">
-	<link rel="stylesheet" media="(min-width: 701px) and (max-width: 1000px)" href="/resources/css/tablet.css">
-	<link rel="stylesheet" media="(min-width: 0px) and (max-width: 700px)" href="/resources/css/mobile.css">
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
+	<!-- Fonts and icons -->
+	<script src="/resources/font/webfont.min.js"></script>
+	<script>
+		WebFont.load({
+			google: {"families":["Open+Sans:300,400,600,700"]},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ["/resources/css/font/fonts.css"]},
+			active: function() {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="/resources/css/default/bootstrap.min.css" />
+	<link rel="stylesheet" href="/resources/css/default/azzara.min.css" />
+
+	<!--   Core JS Files   -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/resources/js/default/popper.min.js"></script>
+<script src="/resources/js/default/bootstrap.min.js"></script>
+<script type="text/javascript" src="customScript.js"></script>
+<!-- jQuery UI -->
+<script src="/resources/js/default/jquery-ui.min.js"></script>
+<script src="/resources/js/default/jquery.ui.touch-punch.min.js"></script>
+
+<!-- jQuery Scrollbar -->
+<script src="/resources/js/default/jquery.scrollbar.min.js"></script>
+
+<!-- Moment JS -->
+<script src="/resources/js/default/moment.min.js"></script>
+
+<!-- Bootstrap Toggle -->
+<script src="/resources/js/default/bootstrap-toggle.min.js"></script>
+
+<!-- Azzara JS -->
+<script src="/resources/js/default/ready.min.js"></script>
 <!-- 개별 설정 -->
 <th:block layout:fragment="page_head"></th:block>
 <th:block layout:fragment="page_lib"></th:block>
