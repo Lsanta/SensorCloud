@@ -25,6 +25,7 @@ import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.TimelineVO;
 import com.wda.sc.service.CheckboardService;
+import com.wda.sc.service.CompanyService;
 import com.wda.sc.service.MyPageService;
 import com.wda.sc.service.MysensorService;
 import com.wda.sc.service.SiteService;
