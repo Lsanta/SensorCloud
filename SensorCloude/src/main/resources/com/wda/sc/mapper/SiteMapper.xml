@@ -8,7 +8,7 @@
 	<![CDATA[
 		select site_id,type_no,site_name,address,site_status,start_date 
 		from (select * from site order by start_date desc)
-		where rownum < 17
+		where rownum < 8
 		order by site_status desc, start_date desc
 	]]>
 	</select>
