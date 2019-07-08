@@ -8,16 +8,13 @@ body {
    font-family: 'A신그래픽L';
 }
 
-#main {
-    border: 1px solid black;
+#main {   
     width: 83%;
     height: 850px;
     margin-top: 4%;
-    margin-left: 15%;
 }
 
 #site {
-    border: 1px solid orange;
     width: 100%;
     height: 60px;
 }
@@ -27,6 +24,17 @@ body {
     height: 30px;
 }
 
+.addr {
+   font-size: 1.5em;
+   font-weight: bold;
+   color : black;
+   margin-right: 0.4em;
+}
+
+#start_date {
+   font-size: 1.1em;
+}
+
 #site button {
     float: right;
     width: 150px;
@@ -34,7 +42,6 @@ body {
 }
 
 #Btndiv {
-    border: 1px solid pink;
     width: 800px;
     margin: 0 auto;
 }
@@ -68,20 +75,18 @@ body {
 }
 
 #chartdiv {
-    border: 1px solid red;
     margin-bottom: 10px;
     height: 340px;
 }
 
 #datadiv {
-    border: 1px solid blue;
     height: 340px;
     overflow: auto;
     overflow-x: hidden;
 }
 
 #datadiv table{
-     width: 100%;
+    width: 100%;
     table-layout: fixed;
     border-spacing: 0;
     border-collapse: collapse;
@@ -117,12 +122,20 @@ body {
 }
 
 #map {
-    border: 1px solid purple;
     margin-bottom: 10px;
     height: 450px;
 }
 
 #siteinfo {
-    border: 1px solid green;
     height: 230px;
+}
+
+#m-title {
+   font-size: 1.2em;
+   color: black;
+   margin-left: 2%;
+}
+
+#m-addr {
+   margin-left: 2%;
 }

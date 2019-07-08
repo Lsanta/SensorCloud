@@ -11,6 +11,7 @@
 </th:block>
 
 <th:block layout:fragment="contents">
+<div class="card card-stats card-round">
 <div id="main">
         <div id="site" th:each="siteInfo : ${siteInfo}">
             <span class="sitestatus" th:each="siteStatus : ${siteStatus}" th:switch="${siteStatus.site_status}"> 
@@ -35,7 +36,9 @@
 
         <div id="content">
             <div id="section1">
-                <div id="chartdiv">그래프</div>
+                <div id="chartdiv" class="card-body">
+                
+                </div>
 
                 <div id="datadiv">
                     <table id="sensordata">
@@ -50,7 +53,9 @@
             </div>
                 
             <div id="section2">
-                <div id="map">지도</div>
+                <div id="map">
+                
+                </div>
 
                 <div id="siteinfo" th:each="siteInfo : ${siteInfo}">
                     <span id="m-title" th:text="${siteInfo.site_name}"></span><br/>
@@ -59,6 +64,8 @@
             </div> 
         </div>
     </div>
+</div>
+
 </th:block>
 
 <th:block layout:fragment="page_js">
