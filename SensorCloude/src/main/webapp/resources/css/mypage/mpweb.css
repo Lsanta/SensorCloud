@@ -7,7 +7,7 @@
     height: 50px;
     border-bottom: 2px solid #5fc5ee;
     color: #000;
-    margin: 5% 0 0 3%;
+    margin: 5% 0 0 0%;
   }
   
   .title-header h1 {
@@ -45,40 +45,41 @@ input[type="button"] {
 }
 
 table {
-  border: 1px solid #ccc;
-  border-collapse: collapse;
-  margin: 0 0 0 3%;
-  padding: 0;
-  width: 100%;
-  table-layout: fixed;
-}
-
-table caption {
-  /* font-size: 1.5em; */
-  margin: .5em 0 .75em;
-}
-
-table tr {
-  background-color: #f6f8fd;
-  border: 1px solid #ddd;
-  padding: .35em;
-  font-size: 1.2em;
-}
-
-table th,
-table td {
-  padding: .625em;
-  text-align: center;
-  height: 30px;
-}
-
-table th {
-  font-size: 1em;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
-.wrapper{
+    border-left:hidden;
+    border-right:hidden;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+  }
+  
+  table tr {
+    /* background-color:  #f6f8fd; */
+    border: 1px solid #ddd;
+    padding: .35em;
+  }
+  
+  table th,
+  table td {
+    padding: .625em;
+    text-align: center;
+    height: 30px;
+    font-size: 1.1em;
+  }
+  
+  table th {
+    font-size: 1em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  
+.wrapper2{
      width: 65%;
     height: 100%;
     margin: 20px auto;
@@ -153,7 +154,7 @@ table th {
   text-align: left;
   position: relative;
   left: 65px;
-  top: -20px;
+  top: -44px;
 }
 
 
@@ -188,11 +189,12 @@ table th {
 }
 .pagination {
   position: relative;
+  display : block;
 }
 .pagination a {
   position: relative;
   display: inline-block;
-  color: #2c3e50;
+  color: #2c3e50 !important;
   text-decoration: none;
   font-size: 1.2rem;
   padding: 8px 16px 10px;
@@ -205,7 +207,7 @@ table th {
   content: "";
   top: 0;
   left: 0;
-  background-color: #2c3e50;
+  background-color: #2c3e50 
   border-radius: 24px;
   -webkit-transform: scale(0);
           transform: scale(0);
@@ -221,7 +223,7 @@ table th {
           transform: scale(1);
 }
 .pagination .pagination-active {
-  color: #fff;
+  color: #fff !important; 
 }
 .pagination .pagination-active:before {
   -webkit-transform: scale(1);
@@ -230,6 +232,11 @@ table th {
 .pagination-newer {
   margin-right: 50px;
 }
+
 .pagination-older {
   margin-left: 50px;
+}
+
+.card{
+	width: 150vh;
 }
