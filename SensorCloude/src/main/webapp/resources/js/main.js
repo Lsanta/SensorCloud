@@ -3,10 +3,9 @@
  */
 $(document).ready(function(){
 		
-	 $(document).on("click", "#site tr" , function(){
+	 $(document).on("click", ".col-sm-6" , function(){
 		 /*현장 아이디를 가지고와서 /1자리에 넣어야함 */
-		 var tr = $("#site tr").index(this);
-		 var n = $("#site tr:eq("+tr+") td:eq(4)").text();
+		 var n = $(this).find('p').eq(1).text();
 		 window.location.href = "/site/" + n  ;
 		 
 	 });

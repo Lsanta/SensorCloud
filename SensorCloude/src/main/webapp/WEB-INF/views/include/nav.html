@@ -6,12 +6,12 @@
       <!--
             Tip 1: You can change the background color of the main header using: data-background-color="blue | purple | light-blue | green | orange | red"
       -->
-      <div class="main-header" data-background-color="purple">
+      <div class="main-header" data-background-color="light-blue">
          <!-- Logo Header -->
          <div class="logo-header">
             
-            <a href="index.html" class="logo">
-               <img src="assets/img/logoazzara.svg" alt="navbar brand" class="navbar-brand">
+            <a href="/" class="logo">
+               <img src="/resources/img/str.png" alt="navbar brand" class="navbar-brand">
             </a>
             <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon">
@@ -136,13 +136,21 @@
             <div class="sidebar-content">
                <div class="user">
                   <div class="avatar-sm float-left mr-2">
-                     <img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                     <img src="/resources/img/manager.svg" alt="..." class="avatar-img rounded-circle">
                   </div>
                   <div class="info">
                      <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-                        <span>
-                           Hizrian
-                           <span class="user-level">Administrator</span>
+                        <span th:each="userInfo : ${userInfo}">
+                           <p th:text="${userInfo.name}"></p>
+                           <p style="display:none;"class="nonid" th:text="${userInfo.user_id}"></p>
+                           <span class="user-level" th:switch="${userInfo.m_level}">
+                            <span class="user-level" th:case="'1'">(권한없음)</span>
+              			    <span class="user-level" th:case="'2'">(읽기권한)</span>
+             			    <span class="user-level" th:case="'3'">(쓰기권한)</span>
+              	  	  	    <span class="user-level" th:case="'4'">(수정권한)</span>
+              			    <span class="user-level" th:case="'5'">(관리자)</span>
+              			    <span class="user-level" th:case="'6'">(관리자)</span>
+                           </span>
                            <span class="caret"></span>
                         </span>
                      </a>
@@ -152,17 +160,22 @@
                         <ul class="nav">
                            <li>
                               <a href="#profile">
-                                 <span class="link-collapse">My Profile</span>
+                                 <span class="link-collapse">내 점검이력</span>
                               </a>
                            </li>
                            <li>
                               <a href="#edit">
-                                 <span class="link-collapse">Edit Profile</span>
+                                 <span class="link-collapse">정보수정</span>
                               </a>
                            </li>
                            <li>
                               <a href="#settings">
-                                 <span class="link-collapse">Settings</span>
+                                 <span class="link-collapse">승급요청</span>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#settings">
+                                 <span class="link-collapse">로그아웃</span>
                               </a>
                            </li>
                         </ul>
@@ -171,10 +184,9 @@
                </div>
                <ul class="nav">
                   <li class="nav-item">
-                     <a href="#">
-                        <i class="fas fa-home"></i>
-                        <p>Dashboard</p>
-                        
+                     <a href="/">
+                     <i class="fas fa-home"></i>
+                        <p>홈</p>
                      </a>
                   </li>
 
@@ -182,73 +194,64 @@
                      <span class="sidebar-mini-icon">
                         <i class="fa fa-ellipsis-h"></i>
                      </span>
-                     <h4 class="text-section">Components</h4>
+                     <h4 class="text-section">메  뉴</h4>
                   </li>
 
                   <li class="nav-item">
-                     <a href="#base">
-                        <i class="fas fa-layer-group"></i>
-                        <p>Base</p>
+                     <a href="/sitelist/1">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>현장관리</p>
                         
                      </a>   
                   </li>
 
                   <li class="nav-item">
-                     <a href="#forms">
+                     <a href="/check/1">
                         <i class="fas fa-pen-square"></i>
-                        <p>Forms</p>
+                        <p>점검이력</p>
                      </a>
                   </li>
 
                   <li class="nav-item">
-                     <a href="#tables">
+                     <a href="/time/1">
                         <i class="fas fa-table"></i>
-                        <p>Tables</p>
+                        <p>타임라인</p>
                      </a>
                   </li>
 
                   <li class="nav-item">
-                     <a href="#maps">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>Maps</p>
+                     <a href="/mysensor/1">
+                       <i class="fas fa-microchip"></i>
+                        <p>보유센서</p>
                      </a>
                   </li>
 
-                  <li class="nav-item">
-                     <a href="#charts">
-                        <i class="far fa-chart-bar"></i>
-                        <p>Charts</p>
-                     </a>
-                  </li>
+              
                   
                   <li class="nav-item">
                      <a data-toggle="collapse" href="#custompages">
-                        <i class="fas fa-paint-roller"></i>
-                        <p>Custom Pages</p>
+                       <i class="fas fa-cog"></i>
+                        <p>관리</p>
                         <span class="caret"></span>
                      </a>
                      <div class="collapse" id="custompages">
                         <ul class="nav nav-collapse">
                            <li>
-                              <a href="login.html">
-                                 <span class="sub-item">Login & Register 1</span>
+                              <a href="/manage/1">
+                                 <span class="sub-item">사용자관리</span>
                               </a>
                            </li>
                            <li>
-                              <a href="login2.html">
-                                 <span class="sub-item">Login & Register 2</span>
+                              <a href="/adminCheckPage/1/1/1">
+                                 <span class="sub-item">점검이력관리</span>
                               </a>
                            </li>
                            <li>
-                              <a href="userprofile.html">
-                                 <span class="sub-item">User Profile</span>
+                              <a href="/company/1">
+                                 <span class="sub-item">협력사관리</span>
                               </a>
                            </li>
-                           <li>
-                              <a href="404.html">
-                                 <span class="sub-item">404</span>
-                              </a>
-                           </li>
+                          
                         </ul>
                      </div>
                   </li>
@@ -257,4 +260,34 @@
          </div>
       </div>
 </nav>
+<script>
+var user_id = $(".nonid").text();
+
+
+$.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr){
+	   console.log(arr);
+	   
+	   var str = "";
+		 
+		 $(arr).each(function(i, attach){
+			//image type
+			if(attach.filetype){
+				var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
+				console.log(fileCallPath);
+				str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";
+				str += "<img class='delete1' src='/display?fileName="+fileCallPath+"'>";
+				str += "</div>";
+				str += "</li>";
+			
+			} else {
+				str += "<img src='/resources/img/manager.svg'>";
+				
+			}
+			 
+		 });
+		 
+		 $(".avatar-img").attr("src",str);
+		
+	 }); //end getjson
+</script>
 </html>
