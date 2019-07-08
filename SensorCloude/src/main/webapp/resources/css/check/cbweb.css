@@ -3,7 +3,7 @@
     height: 100%;
     overflow: hidden;
     margin:20px auto;
-    background-color: #f8f9fc;
+    background-color: white;
     margin-top: 120px;
 	padding-right: 20px;
 }
@@ -26,7 +26,7 @@
 }
 .th01{
    width: 10%;
-   background-color: #dddfe6;
+   background-color: white;
 }
 .th02{
    width: 55%;
@@ -37,6 +37,7 @@
    height: 70%;
    margin-top: 3px;
    margin-left: 1%;
+   background:#F7F7F7;
 }
 .site1{
    width:97%;
@@ -57,7 +58,7 @@
 }
 .status{
    width: 10%;
-   background-color: #dddfe6;
+   background-color: white;
 }
 .stse{
    width:15%;
@@ -84,7 +85,7 @@
 }
 .th05{
    width: 5%;
-   background-color: #dddfe6;
+   background-color: white;
 }
 
 input[type="file"] {
