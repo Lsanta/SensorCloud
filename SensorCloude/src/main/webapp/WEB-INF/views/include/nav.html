@@ -140,10 +140,10 @@
                   </div>
                   <div class="info">
                      <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-                        <span th:each="userInfo : ${userInfo}">
-                           <p th:text="${userInfo.name}"></p>
-                           <p style="display:none;"class="nonid" th:text="${userInfo.user_id}"></p>
-                           <span class="user-level" th:switch="${userInfo.m_level}">
+                        <span>
+                           <p th:text="${session.name}"></p>
+                           <p style="display:none;"class="nonid" th:text="${session.id}"></p>
+                           <span class="user-level" th:switch="${session.mlevel}">
                             <span class="user-level" th:case="'1'">(권한없음)</span>
               			    <span class="user-level" th:case="'2'">(읽기권한)</span>
              			    <span class="user-level" th:case="'3'">(쓰기권한)</span>
@@ -159,7 +159,7 @@
                      <div class="collapse in" id="collapseExample">
                         <ul class="nav">
                            <li>
-                              <a href="#profile">
+                              <a href="/mypage/1">
                                  <span class="link-collapse">내 점검이력</span>
                               </a>
                            </li>
@@ -174,7 +174,7 @@
                               </a>
                            </li>
                            <li>
-                              <a href="#settings">
+                              <a href="/logout">
                                  <span class="link-collapse">로그아웃</span>
                               </a>
                            </li>
