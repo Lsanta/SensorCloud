@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wda.sc.mapper.CompanyMapper">
+	<select id="getPageNum" resultType="int">
+         select count(company_num) from company
+   </select>
+   
+   <select id="getList" resultType="com.wda.sc.domain.CompanyVO">
+	<![CDATA[
+     select x.rnum, x.* from
+    ( select rownum as rnum, p.* from
+    (  select company_num, name, reg_number from company) p where rownum < #{endnum}) x
+    where x.rnum >= #{startnum}
+    order by x.name
+    ]]>
+	</select>
+	
+	<insert id="insertCompany" parameterType="com.wda.sc.domain.CompanyVO">
+		insert into company(company_num,name,reg_number) values(company_seq.nextval, #{name},#{reg_number})
+	</insert>
+	
+	<update id="modCompany" parameterType="com.wda.sc.domain.CompanyVO">
+		update company set name=#{name}, reg_number=#{reg_number} 
+		where company_num=#{company_num} 
+	</update>
+	
+	<!-- 협력사 관리 검색 -->
+	<select id="companySearch" resultType="com.wda.sc.domain.CompanyVO">
+		select * from company where ${searchType} LIKE '%' || '${keyword}' || '%'
+	</select>
+	
+	<!-- 보유센서 검색 + 페이징 -->
+	<select id="CompanySearchResult" resultType="com.wda.sc.domain.CompanyVO" parameterType="map">
+	<![CDATA[	
+  select x.rnum, x.* from
+    ( select rownum as rnum, p.* from
+    ( select company_num, name, reg_number from company where ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%' ) p where rownum < #{Paging.endnum}) x
+    where x.rnum >= #{Paging.startnum}
+    order by x.name
+    ]]>
+	</select>
+	
+	<!-- 협력사 관리 검색 -->
+	<select id="getAllCompany" resultType="com.wda.sc.domain.CompanyVO">
+		select * from company
+	</select>
+</mapper>

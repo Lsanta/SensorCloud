@@ -245,6 +245,11 @@ button {
 	margin-left:0;
 }
 
+.cancleBtn {
+	width: 5%;
+	height: 30px;
+}
+
 @media screen and (max-width: 768px) {
 #container {
     width: 80%;

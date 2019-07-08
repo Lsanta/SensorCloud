@@ -140,7 +140,7 @@
              	<option th:each="ss : ${siteSensor}" th:text=" ${ss.sensor_sn} + '[' + ${ss.sensor_kind} + ']'" th:value="${ss.vertical}">
             	</option>
 			</select>
-			
+			<button value="취소" id="cancle" class="cancleBtn"></button>
 		</div>
 	</div>  
    </div>
@@ -250,11 +250,16 @@ $(document).ready(function(){
 		 count--;
 	});
 	
+	$('.cancleBtn').click(function(){
+		$(this).parent().remove();
+	});
+	
 	$('.plus_select').click(function(){
 		count++;		
 		
 		var html = $('#addSensor0').clone(true);
 		html.attr("id","addSensor" + count);
+		
 		$(".sensor_box").append(html);
 		$('#addSensor' + count).children().siblings().remove('input');
 	});
