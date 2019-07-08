@@ -19,6 +19,7 @@ h1{
 
 .pagination {
   position: relative;
+  display : block;
 }
 
 .pagination a {
@@ -139,7 +140,7 @@ h1{
   height: 60px;
   padding: 10px;
   margin: 20px;
-  border: 1px solid #bcbcbc;
+/*   border: 1px solid #bcbcbc; */
 }
 
 
@@ -155,7 +156,7 @@ h1{
     }
     textarea {
     	float:left;
-        width:80%;
+        width:50%;
         height:55px;
       }
       #submit {
