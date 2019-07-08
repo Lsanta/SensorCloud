@@ -1,3 +1,11 @@
+@font-face {
+  font-family: A신그래픽L;
+  src: url('/resources/font/A신그래픽L.TTF');
+}
+
+ body {
+  font-family: 'A신그래픽L';
+ }
 .a{
     width: 65%;
     height: 100%;
@@ -10,9 +18,11 @@
 .index{
    width:97%;
    height: 50px;
-   margin :20px 20px 20px 20px;
+   margin-left:20px;
+   margin-bottom:50px;
    font-size: 2em;
    color:#6E6E6E;
+   border-bottom:2px solid #36a3f7!important;
 }
 .title1{
    width:97%;
@@ -112,9 +122,11 @@ input[type="file"] {
 
 button {
 	border: 1px solid #dddfe6;
-	background-color: #f8f9fc;
+	background-color: #36a3f7!important;
 	width: 100px;
 	height: 35px;
+	color:white;
+	border-radius:0.3em;
 	cursor:pointer
 }
 

@@ -3,15 +3,19 @@
   src: url('/resources/font/A신그래픽L.TTF');
 }
 
-
 body {
    font-family: 'A신그래픽L';
+   overflow-y: hidden; 
 }
 
-#main {   
-    width: 83%;
-    height: 850px;
+#main {
+    margin: 0px auto;
     margin-top: 4%;
+}
+
+#main > .card {
+	width: 155vh;
+	height: 90vh;
 }
 
 #site {
@@ -54,24 +58,25 @@ body {
 #Btndiv img {
     width: 50px;
     height: 50px;
+    margin-bottom: 1%;
     margin-left: 1%;
     cursor: pointer;
 }
 
 #content {
-    border: 1px solid black;
+    padding-top: 0;
 }
 
 #section1 {
     float: left;
     width: 65%;
-    padding: 1% 0 3% 3%;
+    padding: 1% 0 2% 2%;
 }
 
 #section2 {
     float: right;
-    width: 33%;
-    padding: 1% 3% 3% 0;
+    width: 30%;
+    padding: 2% 2% 2% 0;
 }
 
 #chartdiv {
@@ -79,10 +84,17 @@ body {
     height: 340px;
 }
 
+#btnExport img{
+	width:30px;
+	height:30px;
+	float: right;
+}
+
 #datadiv {
-    height: 340px;
+    height: 310px;
     overflow: auto;
     overflow-x: hidden;
+    clear: both;
 }
 
 #datadiv table{
@@ -122,12 +134,14 @@ body {
 }
 
 #map {
-    margin-bottom: 10px;
-    height: 450px;
+	margin-top: 5px;
+    margin-bottom: 20px;
+    height: 430px;
 }
 
 #siteinfo {
-    height: 230px;
+    height: 200px;
+    border: 1px solid #36a3f7;
 }
 
 #m-title {
