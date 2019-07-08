@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	data-layout-decorate="~{include/layout}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" data-layout-decorate="~{include/layout}">
 
 <th:block layout:fragment="page_head">
-	<title>하나의 현장을 눌렀을 때</title>
+	<title>현장 메인</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
@@ -13,112 +11,61 @@
 </th:block>
 
 <th:block layout:fragment="contents">
-
-	<aside class="aside" th:each="siteInfo : ${siteInfo}">
-
-		<a> <svg version="1.1" id="nav-btn"
-				xmlns="http://www.w3.org/2000/svg"
-				xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-				viewBox="0 0 512 512" enable-background="new 0 0 512 512"
-				xml:space="preserve">
-    <path id="list-view-icon"
-					d="M462,108.857H50V50h412V108.857z M462,167.714H50v58.857h412V167.714z M462,285.429H50v58.857h412
-      V285.429z M462,403.143H50V462h412V403.143z" />
-  </svg>
-		</a>
-		<h1 th:text="${siteInfo.site_name}"></h1>
-		<span id="sid" th:text="${siteInfo.site_id}" style="display: none"></span>
-		<nav id="nav">
-			<ul>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'">수리내역</a></li>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage/1'">센서관리</a></li>
-<!-- 				<li style="line-height: 40px; margin-top: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트</a></li>
-				<li style="line-height: 40px; margin-bottom: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">다운로드</a></li> -->
-
-				<!-- <li>
-					<span id="num">연락망</span>
-					<span id="down" style="display: inline"><img src="/resources/img/down-arrow.svg"></span>
-					<span id="up" style="display: none"><img src="/resources/img/up-arrow.svg"></span>
-				</li> -->
-
-				<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
-					<span class="mang" th:text="${alarmMember.name}"></span>
-					<span class="mang" th:text="${alarmMember.tel}"></span>
-				</div>
-			
-			</ul>
-			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 0}" th:class ="${siteInfo.site_id}">현장 활성화</button>
-			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 1}" th:class ="${siteInfo.site_id}">현장 비활성화</button>
-			
-		</nav>
-	</aside>
-
-	<div id="scroll" th:each="siteInfo : ${siteInfo}">
-		<article>
-			<span class="sitestatus" th:each="siteStatus : ${siteStatus}"
-				th:switch="${siteStatus.site_status}"> 
+<div id="main">
+        <div id="site" th:each="siteInfo : ${siteInfo}">
+            <span class="sitestatus" th:each="siteStatus : ${siteStatus}" th:switch="${siteStatus.site_status}"> 
 				<img alt="stop" src="/resources/img/gray2.png" th:case="'0'"> 
 				<img alt="start" src="/resources/img/green.png" th:case="'1'"> 
 				<img alt="error" src="/resources/img/red.svg" th:case="'2'">
-
 			</span> 
 			
-			<span class="addr" th:text="${siteInfo.site_name}"></span> 
-			
-			<span th:text="${siteInfo.address}" id="addr"></span><br>
-			<button id="modify" th:class ="${siteInfo.site_id}">현장수정</button>
-			<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
+            <span class="addr" th:text="${siteInfo.site_name}"></span>
+            <span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
+            
+            <button id="sitemod" th:class ="${siteInfo.site_id}">현장수정</button>
+        </div>
 
-			<div id="chartdiv"></div>
-			
+        <div id="Btndiv">
+            <button id="alaram">알림</button>
+            <button id="repair">수리내역</button>
+            <button id="sensormanage">센서관리</button>
+            <!-- <button id="sitestatus">현장 비활성화</button> -->
+            <img src="/resources/img/power.svg" />
+        </div>
 
-			<div id="floatMenu">
-				<!-- <h4 id="phoneH4">연락망 접기</h4> -->
-				<img src="/resources/img/phone.svg" id="spreadBtn" />
-					<ul id="hiddenList">
-						<li th:each="alarmMember : ${alarmMember}">
-							<span th:text="${alarmMember.name}"></span>
-							<span th:text="${alarmMember.tel}"></span>
-						</li>
-					</ul>
-			</div>
-				<a id="btnExport" href="#" download=""  ><img src="/resources/img/excel.svg" style="width:30px; height:30px;"></a>
-			<div id="dataDiv">
-				
-				<div id="main-content">
-					<table id="sensordata">
-						<thead id="sensing-data-head">
-							                  
-						</thead>
-						<tbody id="sensing-data">
-						
-						</tbody>
-					</table>
-				</div>
-			</div>
-			
-		<h3>현장 위치</h3>
-		<div class="map">
-			<div id="map"></div>
-			<div id="m-detail" th:each="siteInfo : ${siteInfo}"><br/>
-				<span id="m-title" th:text="${siteInfo.site_name}"></span><br/>
-				<span id="m-addr" th:text="${siteInfo.address}"></span>			
-			</div>
-		</div>
+        <div id="content">
+            <div id="section1">
+                <div id="chartdiv">그래프</div>
 
-		</article>
-	</div>
+                <div id="datadiv">
+                    <table id="sensordata">
+                        <thead id="sensing-data-head">
+                                              
+                        </thead>
+                        <tbody id="sensing-data">
+                        
+                        </tbody>
+                    </table>
+                </div>       
+            </div>
+                
+            <div id="section2">
+                <div id="map">지도</div>
 
+                <div id="siteinfo" th:each="siteInfo : ${siteInfo}">
+                    <span id="m-title" th:text="${siteInfo.site_name}"></span><br/>
+				    <span id="m-addr" th:text="${siteInfo.address}"></span>
+                </div>    
+            </div> 
+        </div>
+    </div>
 </th:block>
 
 <th:block layout:fragment="page_js">
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d&libraries=services,clusterer,drawing"></script>
 	<script src="/resources/js/core.js"></script>
 	<script src="/resources/js/charts.js"></script>
 	<script src="/resources/js/animated.js"></script>
-	<!-- <script src="/resources/js/charttest.js"></script> -->
 	<script src="/resources/js/jquery.techbytarun.excelexportjs.min.js"></script>
 
    <script th:inline="javascript">
@@ -468,22 +415,10 @@ geocoder.addressSearch(site, function(result, status) {
             $("#phoneH4").text("연락망 보기");        
         }else{
             $("#hiddenList").slideDown();
-//             setTimeout(function() {
-//             	/* $("#floatMenu").css("background-color","#606060") */
-//             	  $("#phoneH4").text("연락망 접기")
-//           	}, 350);
           
         }
     });	
 	
-/* 	$('#append_row').on("click", function () {
-		$('#list_table').append(
-			$('<tr>').append(
-				$('<th>').append($('#add_no').val()),
-				$('<td>').append('13241324').val()),
-			)
-		);
-	}); */
    });
    </script>
    
