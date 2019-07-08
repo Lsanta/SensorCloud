@@ -92,11 +92,12 @@
 
 .timeline {
   width: 340x;
-  height: 45px;
+  height: 70px;
   padding: 10px;
-  margin: 7px;
+  margin: 15px;
   background-color: #f6f8fd;
   border: 1px solid #ddd;
+  border-radius:10px;
 }
 
 .images h5 {

@@ -9,49 +9,60 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
- 	<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+  	<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
 </th:block>
 
 <th:block layout:fragment="contents">
-	 <div id="main-container">
-    <div id="left-content">
-      <div class="title-header">
-          <h2><a href="/sitelist/1">현장목록</a></h2>
-          <a href="/sitelist/1">more</a>
-      </div>
-      <table id="siteTable">
-        <thead>
-          <tr>
-            <th scope="col" class="status" style="width:8%" >현재상태</th>
-            <th scope="col" class="sname" style="width:15%" >현장이름</th>
-            <th scope="col" class="saddr" style="width:22%" >주소</th>
-            <th scope="col" class="stime" style="width:15%" >현장등록날짜</th>
-          </tr>
-        </thead>
-        
-        <tbody id="site">
-          <tr th:each="sitelist : ${sitelist}">
-           <td th:switch="${sitelist.site_status}">
-				<img src="resources/img/gray2.png"  th:case="'0'">
-				<img src="resources/img/green.png" th:case="'1'">
-				<img src="resources/img/red.svg"   th:case="'2'">
-			</td>
-            <td th:text="${sitelist.site_name}"></td>
-            <td th:text="${sitelist.address}"></td>
-            <td th:text="${sitelist.start_date}"></td>
-			<td th:text="${sitelist.site_id}" style="display : none"></td>
-         </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="main-panel">
+			<div class="content">
+				<div class="page-inner">
+					<div class="page-header">
+						<h3 class="page-title">현장목록</h3>
+						<a style="margin: 0 0 0 25px; font-size:1.3em;" href="/sitelist/1">more</a>
+					</div>
+					<div class="row">
 
-    <div id="right-content">
-      <div id="right-top">
-        <div class="title-header">
-            <h2><a href="/check/1">점검이력</a></h2>
-            <a href="/check/1">more</a>
-        </div>
-        <div class="image-container">
+						<div th:each="sitelist : ${sitelist}" class="col-sm-6 col-md-3">
+							<div class="card card-stats card-round">
+								<div class="card-body">
+									<div class="row align-items-center">
+										<div th:switch="${sitelist.site_status}" class="col-icon">
+											<div style="background:gray;" class="icon-big text-center icon-secondary bubble-shadow-small" th:case="'0'">
+												
+											</div>
+											<div style="background:#35cd3a;" class="icon-big text-center icon-secondary bubble-shadow-small" th:case="'1'">
+									
+											</div>
+											<div style="background:red;" class="icon-big text-center icon-secondary bubble-shadow-small" th:case="'2'">
+											
+											</div>
+										</div>
+										<div class="col col-stats ml-3 ml-sm-0">
+											<div class="numbers">
+												<p class="card-category" th:text="${sitelist.site_name}"></p>
+												<h4 class="card-title" th:text="${sitelist.address}"></h4>
+												<p th:text="${sitelist.site_id}" style="display : none"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-8">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-head-row">
+										<div class="card-title">점검 이력</div>
+										<div class="card-tools">
+											<a href="/check/1">more</a>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="chart-container" style="min-height: 375px">
+										<div class="image-container">
           <div class="grid">
             <div class="images" th:each="mainchecklist : ${mainchecklist}">
             	<div class="ddd" th:if="${mainchecklist.filetype != '1'}">
@@ -80,23 +91,34 @@
             
           </div>
         </div> 
-      </div>
-
-      <div id="right-bottom">
-        <div class="title-header">
-          <h2><a href="/time/1">타임라인</a></h2>
-           <a href="/time/1">more</a>
-        </div>
-        <div class="timeline" th:each="timelinelist : ${timelinelist}">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="card card-secondary">
+								<div class="card-header">
+									<div class="card-title">타임라인 <a style="float:right; color:white;" href="/time/1">more</a></div>
+								</div>
+								<div class="card-body pb-0">
+									<div class="mb-4 mt-2">
+										<div class="timeline" th:each="timelinelist : ${timelinelist}">
             <div class="timeline-header">
-                <h3 th:text="${timelinelist.name}">id</h3>
+                <h3 style="color:black;" th:text="${timelinelist.name}">id</h3>
                 <h5 th:text="${timelinelist.time}">date</h5>
             </div>
-            <p th:text="${timelinelist.content}">content</p>
+            <p style="color:black;" th:text="${timelinelist.content}">content</p>
           </div>
-      </div>
-    </div>
-  </div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+			
+		</div>
 </th:block>
 	
 	<th:block layout:fragment="page_js" >

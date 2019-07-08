@@ -4,7 +4,7 @@
 	data-layout-decorate="~{include/layout}">
 
 <th:block layout:fragment="page_head">
-	<title>마이페이지</title>
+	<title>내 점검이력 관리</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
@@ -17,8 +17,10 @@
 
 <th:block layout:fragment="contents">
 
-	<div class="wrapper">
+	<div class="wrapper2">
 
+<div class="card card-stats card-round">
+	<div class="card-body">
       <div class="w1" th:each="userInfo : ${userInfo} ">
         <div class="cell" th:if="${userInfo.filetype = 'false'}">
          <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
@@ -35,7 +37,7 @@
 
          <div class="name01" th:each="userInfo : ${userInfo}">
             <p class="n1" th:text="${userInfo.name}"></p>
-            <p class="n2" th:text="등급 + ${userInfo.m_level}">
+            <p class="n2" th:text="등급 + ${userInfo.m_level}"></p>
             <p class="n3" th:switch="${userInfo.m_level}">
                <span th:case="'1'">(권한없음)</span>
                <span th:case="'2'">(읽기권한)</span>
@@ -43,29 +45,28 @@
                <span th:case="'4'">(수정권한)</span>
                <span th:case="'5'">(관리자)</span>
             </p>
-            </p>
          </div>
 
 
 
-         <div class="name02">
+        <!--  <div class="name02">
             <input class="update" type="button" value="정보수정" />
             <input class="up" type="button" value="승급요청" onClick="goPopup()" />
-         </div>
+         </div> -->
       </div>
 
-      <h3>대표이미지 설정</h3>
-      <div id="buttons">
+      <!-- <h3>대표이미지 설정</h3> -->
+      <!-- <div id="buttons">
          <input type="button" class="imgbtn" id="btnok" onClick="goPopupImg()" value="등록" />
          <input type="button" class="imgbtn" id="btnno" value="삭제" />
-      </div>
+      </div> -->
       
       <!-- <hr color="black" width=100%> -->
 
       <div class="title-header">
          <h1>나의 점검이력</h1>
       </div>
-
+	
       <div class="w2">
          <table>
             <thead>
@@ -93,6 +94,11 @@
          </table>
 
       </div>
+      
+      	
+      			
+      	</div>
+      
       <div class="w3">
          <nav class="pagination-container">
             <div class="pagination">     
@@ -109,7 +115,7 @@
             </div>
          </nav>
       </div>
-
+	</div>
    </div>
 
 </th:block>
