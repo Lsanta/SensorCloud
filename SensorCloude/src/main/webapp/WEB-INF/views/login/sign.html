@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,9 +40,10 @@
         <input type="text" class="end" placeholder="인증번호" style="width: 53%; margin-left:21%">
 
 		<button type="button" id="checkAuth" class="ijn2">인증번호 확인</button><br>
-	사업자번호 <select required id="companynum">
-			<option value="" disabled selected >선택</option>
-			<option>123-45-67890 (STR)</option>
+	사업자번호 <select name="company_num" required id="companynum">
+<!-- 		<option value="" disabled selected >회사 선택</option> -->
+			<option th:each="com : ${Allcompany}" th:text=" ${com.name} + '[' + ${com.reg_number} + ']'" th:value="${com.company_num}">
+            </option>
 		</select><br/>
 <!--         <div class="errorstr" id="authstr"></div> -->
         <input type="submit" name="login" class="login login-submit" value="가입하기">
@@ -69,9 +70,7 @@
 		if($('.login-card').children().is('.errorstr')){
 			alert("회원가입란에 적절하지 않은 요소가 있습니다. 다시 확인해 주세요.");
 			return false;
-		} else {
-			return true;
-		}
+		} 
 		
 	}
     
@@ -216,18 +215,18 @@
     			
 //     		});
     		
-    		$("input:radio[name=company]").click(function(){
-    			if(  $("input[name=company]:checked").val() != "STR")  {
-        			$('.createbox').append("<br/>회사 명 <input type='text' id='companyname'></input>");
-        			$('.createbox').append("<br/>사업자 번호 <input type='text' name='regnumber'></input>");
-        		} else if ($("input[name=company]:checked").val() == "STR"){
-        			$(".createbox").empty();
-        		}
-    		});
+//     		$("input:radio[name=company]").click(function(){
+//     			if(  $("input[name=company]:checked").val() != "STR")  {
+//         			$('.createbox').append("<br/>회사 명 <input type='text' id='companyname'></input>");
+//         			$('.createbox').append("<br/>사업자 번호 <input type='text' name='regnumber'></input>");
+//         		} else if ($("input[name=company]:checked").val() == "STR"){
+//         			$(".createbox").empty();
+//         		}
+//     		});
     		
-    		$(document).on('blur','#companyname', function(){
-    			$("#DEF").val($("#companyname").val());
-    		});
+//     		$(document).on('blur','#companyname', function(){
+//     			$("#DEF").val($("#companyname").val());
+//     		});
     		
     		
     	});
