@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	data-layout-decorate="~{include/layout}">
-<th:block layout:fragment="page_head">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
 	<title>마이페이지 유저 정보 수정</title>
 	<meta charset="utf-8" />
-</th:block>
-
-
-<th:block layout:fragment="page_css">
+	
 	<link rel="stylesheet" href="/resources/css/mypage/modifyuserinfo.css" />
 	<link rel="stylesheet" href="/resources/css/mypage/mpweb.css" />
 	<link rel="stylesheet"
@@ -50,14 +45,12 @@
 				 }); //end getjson
 		});
 		</script> 
-</th:block>
+</head>
 
-<th:block layout:fragment="contents">
-
-
+<body>
 	<div class="wrapper">
 
-		 <div class="w1" th:each="userInfo : ${userInfo} ">
+		<!--  <div class="w1" th:each="userInfo : ${userInfo} ">
         <div class="cell" th:if="${userInfo.filetype = 'false'}">
          <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
            <ul>
@@ -87,11 +80,16 @@
 				<input class="update" type="button" value="정보수정"> <input
 					class="up" type="button" value="승급요청">
 			</div>
-		</div>
+		</div> -->
+		
+	
 
 	<!-- <hr color="black" width=100%> -->
 	
 	<div class="w2">
+	
+	<h1> 정보 수정 </h1>
+	
 		<div class="usermodify-card" th:each="userInfo : ${userInfo}">
 			
 			<div id=inhere1 style="color:red;"></div> 
@@ -120,7 +118,6 @@
 		</div>
 	</div>
 </div>
-</th:block>
-
 </body>
+
 </html>

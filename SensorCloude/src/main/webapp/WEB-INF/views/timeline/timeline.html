@@ -14,66 +14,84 @@
 		href="/resources/css/timeline/timeline2.css">
 </th:block>
 
-
-
 <th:block layout:fragment="contents">
-	<div id="container">
-		<div id="header">
-			<h1>타임라인</h1>
-			<hr size="2" noshade>
-		</div>
-
-		<div id="content">
-			<div id="text">
-				<textarea name="textarea" id="textarea" maxlength="100" autofocus></textarea>
-				<input type="button" value="등록" id="submit" />
-				<div id="the_count">
-					<span id="current">0</span> <span id="maximum">/ 100</span>
-					<!-- <script src="/resources/js/timeline/timeline.js"></script> -->
-				</div>
-			</div>
-
-			<div id="writing">
-
-				<div class="timeline" th:each="timelinelist : ${timelinelist}">
-					<div class="timeline-header" th:id="${timelinelist.timeline_n}">
-						<p style="display:none" th:text="${timelinelist.timeline_n}"></p>
-						<h3 th:text="${timelinelist.name}"></h3>
-						<h5 th:text="${timelinelist.time}"></h5>
-
-						<a type="button" class="modify" th:if="${timelinelist.user_id}==${session.id}">수정</a>
-						<a type="button" class="delete" th:if="${timelinelist.user_id}==${session.id}">| 삭제</a>
-	
+	<div class="main-panel">
+		<div class="content">
+			<div class="page-inner">
+				<!-- TimeLine -->
+				<h4 class="page-title">타임라인</h4>
+				<div id="text">
+					<textarea name="textarea" id="textarea" maxlength="100" autofocus></textarea>
+					<input type="button" value="등록" id="submit" />
+					<div id="the_count">
+						<span id="current">0</span> <span id="maximum">/ 100</span>
 					</div>
-					<p th:text="${timelinelist.content}">content</p>
+				</div>
 
+				<div class="row timelineRow" th:each="timelinelist : ${timelinelist}">
+					<div class="col-md-12">
+						<ul class="timeline">	
+							
+							<li th:if='${timelinelist.timeline_n} % 2 == 0'>
+								<div class="timeline-badge">
+									<i class="flaticon-message"></i>
+								</div>
+								<div class="timeline-panel" style="width : 30%; margin-left : 20%;">
+									<div class="timeline-heading" th:id="${timelinelist.timeline_n}">
+										<p style="display:none" th:text="${timelinelist.timeline_n}"></p>
+										<h4 class="timeline-title" th:text="${timelinelist.name}" style="display:inline"></h4>
+										<a class="modify" th:if="${timelinelist.user_id}==${session.id}">수정</a>
+										<a class="delete" th:if="${timelinelist.user_id}==${session.id}">| 삭제</a>
+										<h4 th:text="${timelinelist.time}" style="display:inline; float:right"></h4>
+										
+									</div>
+									<div class="timeline-body">
+										<p th:text="${timelinelist.content}"></p>
+									</div>
+								</div>
+							</li>
+
+							<li th:if='${timelinelist.timeline_n} % 2 != 0' class="timeline-inverted ">
+								<div class="timeline-badge warning">
+									<i class="flaticon-alarm-1"></i>
+								</div>
+								<div class="timeline-panel" style="width : 30%; margin-right : 20%;">
+									<div class="timeline-heading" th:id="${timelinelist.timeline_n}">
+										<h4 class="timeline-title" th:text="${timelinelist.name}" style="display:inline"></h4>
+										<a type="button" class="modify" th:if="${timelinelist.user_id}==${session.id}">수정</a>
+										<a type="button" class="delete" th:if="${timelinelist.user_id}==${session.id}">| 삭제</a>
+										<h4 th:text="${timelinelist.time}" style="display:inline; float:right"></h4>
+									</div>
+									<div class="timeline-body">
+										<p th:text="${timelinelist.content}"></p>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
 				</div>
 
 			</div>
+			<!-- page inner 종료  -->
+			<!-- 			<div id="footer"> -->
+			<!-- 				<div class="pagination-container"> -->
+			<!-- 					<nav class="pagination-content"> -->
+			<!-- 						<div class="pagination"> -->
+			<!-- 							<a class="firstpage"> << </a> <a class="pagination-newer"> < -->
+			<!-- 							</a> <span class="pagination-inner" th:each="pageNum : ${pageNum}"> -->
+			<!-- 								<a th:id="${pageNum}" th:text="${pageNum}"></a> -->
+			<!-- 							</span> <a class="pagination-older"> > </a> <a class="lastpage"> >> -->
+			<!-- 							</a> <span id="lastNum" th:text="${lastNum}" style="display: none"></span> -->
+			<!-- 						</div> -->
+			<!-- 					</nav> -->
+			<!-- 				</div> -->
+			<!-- 			</div>  -->
+			<!-- 			<!-- footer div 종료 -->
+			-->
 		</div>
 	</div>
-	
-	<div id="footer"> 
-	<div class="pagination-container">
-			<nav class="pagination-content">
-				<div class="pagination">
-					<a class="firstpage"> << </a>
-					<a class="pagination-newer"> < </a> 
-					
-					<span class="pagination-inner" th:each="pageNum : ${pageNum}">
-						 <a th:id="${pageNum}" th:text="${pageNum}"></a>
-					</span> 
-					
-					<a class="pagination-older"> > </a>
-					<a class="lastpage"> >> </a>
-					<span id="lastNum" th:text="${lastNum}" style=display:none></span>
-				</div>
-			</nav>
-		</div>
-	</div>
-</th:block>
-<th:block layout:fragment="page_js">
-	<!-- <script src="/resources/js/check/checklist.js"></script> -->
-	<script src="/resources/js/timeline/timeline.js"></script>
-</th:block>
+
+	<th:block layout:fragment="page_js">
+		<script src="/resources/js/timeline/timeline.js"></script>
+	</th:block>
 </html>

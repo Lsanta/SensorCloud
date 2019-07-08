@@ -121,10 +121,7 @@
 <th:block layout:fragment="page_js">
 	<script src="/resources/js/mypage/mp.js"></script>
 	<script>
-		function goPopup() {
-			var pop = window.open("/mypage/levelup", "pop",
-					"width=500,height=330,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-100)+"resizable=yes");
-		}
+
 		
 		function goPopupImg() {
 			var pop = window.open("/mypage/imgupload", "pop",
@@ -154,7 +151,7 @@
 							str += "</li>";
 						
 						} else {
-							str += "<img src='/resources/img/manager.svg'>";
+							str += "<img class='delete1' src='/resources/img/manager.svg'>";
 							
 						}
 						 

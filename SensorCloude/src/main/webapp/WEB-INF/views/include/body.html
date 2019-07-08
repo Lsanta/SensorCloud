@@ -10,7 +10,7 @@
 		<th:block layout:fragment="contents" />
 	</div>
 	<div id="sessionid" th:text = "${session.id}" style="display : none"></div>
-	</div> <!-- wrappe 종료 바디부분 -->
+
 	<!-- footer -->
 	<th:block th:include="include/footer" />
 	<!-- 공통으로 사용할 js들 -->
@@ -22,7 +22,16 @@
 	<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-messaging.js"></script>
 	
 	<script>
+	function gradePop() {
+		var pop = window.open("/mypage/levelup", "pop",
+				"width=500,height=330,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-100)+"resizable=yes");
+	}
 
+	function updateMyInfo() {
+		var pop = window.open("/mypage/modifymypage", "pop",
+				"width=540,height=350,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-100)+"resizable=yes");
+	}
+	
 	var config = {
 			  apiKey: "AIzaSyCvPX3WEIFtsNbN3JGsQzIvVSDFAOKGoqI",
 			  authDomain: "sensorcloud-cb820.firebaseapp.com",
