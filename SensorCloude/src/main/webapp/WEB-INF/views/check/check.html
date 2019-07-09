@@ -12,95 +12,96 @@
 </th:block>
 
 <th:block layout:fragment="contents">
-	<div id="container">
-		<div id="main-content">
-			<div class="title-header">
-				<h1>점검이력</h1>
-				<select id="dateChange" name="term">
-					<option value="0">전체날짜</option>
-					<option value="1">최근 1개월</option>
-					<option value="3">최근 3개월</option>
-				</select>
-				<a href="/checkboard/checkadd"><button id="write" value="write">글쓰기</button></a>		
-			</div>
-			
-			<table>
-				<thead>
-					<tr>
-						<th scope="col" style="width:10%;">현장이름</th>
-						<th scope="col" style="width:20%;">제목</th>
-						<th scope="col" style="width:8%;">상태</th>
-						<th scope="col" style="width:8%;">글쓴이</th>
-						<th scope="col" style="width:10%;">날짜</th>
-					</tr>
-				</thead>
-				<tbody id="checklist" th:if="${check == null}">
-				 	<tr th:each="checkboardlist : ${checkboardlist}" >
-						<td th:text="${checkboardlist.site_name}"></td>
-						<td th:text="${checkboardlist.title}"></td>
-						<td th:switch="${checkboardlist.board_status}">
-							<span th:case="'0'">open</span>
-							<span th:case="'1'">fixed</span>
-							<span th:case="'2'">closed</span>
-						</td>
-						<td th:text="${checkboardlist.name}"></td>
-						<td th:text="${checkboardlist.reg_date}"></td>
-						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
-					</tr> 
-				</tbody>
-				
-				<tbody id="checklist" th:if="${check != null}">
-				 	<tr th:each="checkboardlist : ${check}" >
-						<td th:text="${checkboardlist.site_name}">status</td>
-						<td th:text="${checkboardlist.title}">status</td>
-						<td th:switch="${checkboardlist.board_status}">
-						<span th:case="'0'">open</span>
-						<span th:case="'1'">fixed</span>
-						<span th:case="'2'">closed</span>
-						</td>
-						<td th:text="${checkboardlist.name}">status</td>
-						<td th:text="${checkboardlist.reg_date}">status</td>
-						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
-					</tr> 
-				</tbody>
-			</table>
-		</div>
+	<div class="main-panel">
+		<div class="content">
+			<div class="page-inner">
+				<div class="card card-stats card-round">
+					<div class="card-body">
+						<div id="main-content">
+							<div class="title-header">
+								<h1>점검이력</h1>
+								<select id="dateChange" name="term">
+									<option value="0">전체날짜</option>
+									<option value="1">최근 1개월</option>
+									<option value="3">최근 3개월</option>
+								</select> <a href="/checkboard/checkadd"><button id="write"
+										value="write">글쓰기</button></a>
+							</div>
 
-		<div class="pagination-container">
-			<nav class="pagination-content">
-				<div class="pagination">
-					<a class="firstpage"> << </a>
-					<a class="pagination-newer"> < </a> 
-					
-					<span class="pagination-inner" th:each="pageNum : ${pageNum}">
-						 <a th:id="${pageNum}" th:text="${pageNum}"></a>
-					</span> 
-					
-					<a class="pagination-older"> > </a>
-					<a class="lastpage"> >> </a>
-					<span id="lastNum" th:text="${lastNum}" style=display:none></span>
-				</div>
-			</nav>
-		</div>
+							<table>
+								<thead>
+									<tr>
+										<th scope="col" style="width: 10%;">현장이름</th>
+										<th scope="col" style="width: 20%;">제목</th>
+										<th scope="col" style="width: 8%;">상태</th>
+										<th scope="col" style="width: 8%;">글쓴이</th>
+										<th scope="col" style="width: 10%;">날짜</th>
+									</tr>
+								</thead>
+								<tbody id="checklist" th:if="${check == null}">
+									<tr th:each="checkboardlist : ${checkboardlist}">
+										<td th:text="${checkboardlist.site_name}"></td>
+										<td th:text="${checkboardlist.title}"></td>
+										<td th:switch="${checkboardlist.board_status}"><span
+											th:case="'0'">open</span> <span th:case="'1'">fixed</span> <span
+											th:case="'2'">closed</span></td>
+										<td th:text="${checkboardlist.name}"></td>
+										<td th:text="${checkboardlist.reg_date}"></td>
+										<td th:text="${checkboardlist.board_no}" style="display: none"></td>
+									</tr>
+								</tbody>
 
-		<div class="search">
-			<div class="select">
-				<select id="search-select">
-					<option value="site_name">현장이름</option>
-					<option value="name">글쓴이</option>
-					<option value="title">제목</option>
-				</select>
+								<tbody id="checklist" th:if="${check != null}">
+									<tr th:each="checkboardlist : ${check}">
+										<td th:text="${checkboardlist.site_name}">status</td>
+										<td th:text="${checkboardlist.title}">status</td>
+										<td th:switch="${checkboardlist.board_status}"><span
+											th:case="'0'">open</span> <span th:case="'1'">fixed</span> <span
+											th:case="'2'">closed</span></td>
+										<td th:text="${checkboardlist.name}">status</td>
+										<td th:text="${checkboardlist.reg_date}">status</td>
+										<td th:text="${checkboardlist.board_no}" style="display: none"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="pagination-container">
+							<nav class="pagination-content">
+								<div class="pagination">
+									<a class="firstpage"> << </a> <a class="pagination-newer">
+										< </a> <span class="pagination-inner"
+										th:each="pageNum : ${pageNum}"> <a th:id="${pageNum}"
+										th:text="${pageNum}"></a>
+									</span> <a class="pagination-older"> > </a> <a class="lastpage">
+										>> </a> <span id="lastNum" th:text="${lastNum}"
+										style="display: none"></span>
+								</div>
+							</nav>
+						</div>
+
+						<div class="search">
+							<div class="select">
+								<select id="search-select">
+									<option value="site_name">현장이름</option>
+									<option value="name">글쓴이</option>
+									<option value="title">제목</option>
+								</select>
+							</div>
+							<section class="search-box">
+								<div class="search-content">
+									<input type="text" id="keyword" />
+								</div>
+								<div class="search-button">
+									<button id="search">Search</button>
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
 			</div>
-			<section class="search-box">
-				<div class="search-content">
-					<input type="text" id="keyword"/>
-				</div>
-				<div class="search-button">
-					<button id="search">Search</button>
-				</div>
-			</section>
 		</div>
-</div>
+	</div>
 </th:block>
 
 <th:block layout:fragment="page_js">
