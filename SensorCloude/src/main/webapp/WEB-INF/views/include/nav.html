@@ -136,7 +136,7 @@
             <div class="sidebar-content">
                <div class="user">
                   <div class="avatar-sm float-left mr-2">
-                     <img src="/resources/img/manager.svg" alt="..." class="avatar-img rounded-circle">
+			 
                   </div>
                   <div class="info">
                      <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -259,35 +259,33 @@
             </div>
          </div>
       </div>
-</nav>
-<script>
+      <script>
 var user_id = $(".nonid").text();
 
 
 $.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr){
-	   console.log(arr);
-	   
+
+ console.log(user_id);
 	   var str = "";
 		 
 		 $(arr).each(function(i, attach){
 			//image type
 			if(attach.filetype){
 				var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
-				console.log(fileCallPath);
-				str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";
-				str += "<img class='delete1' src='/display?fileName="+fileCallPath+"'>";
-				str += "</div>";
-				str += "</li>";
+			
+				str += "<img class='avatar-img rounded-circle' src='/display?fileName="+fileCallPath+"'>";
+
 			
 			} else {
-				str += "<img src='/resources/img/manager.svg'>";
+				str += "<img class='avatar-img rounded-circle' src='/resources/img/manager.svg'>";
 				
 			}
 			 
 		 });
 		 
-		 $(".avatar-img").attr("src",str);
+		 $(".avatar-sm").html(str);
 		
 	 }); //end getjson
 </script>
+</nav>
 </html>
