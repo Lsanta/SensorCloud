@@ -19,58 +19,28 @@
 		<div class="content">
 			<div class="page-inner">
 				<!-- TimeLine -->
-				<h4 class="page-title">타임라인</h4>
-				<div id="text">
-					<textarea name="textarea" id="textarea" maxlength="100" autofocus></textarea>
-					<input type="button" value="등록" id="submit" />
-					<div id="the_count">
-						<span id="current">0</span> <span id="maximum">/ 100</span>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="card">
+							<div class="card-header">
+								<h4 class="page-title">타임라인</h4>
+								<div id="text">
+									<textarea name="textarea" id="textarea" maxlength="100"
+										autofocus></textarea>
+									<input type="button" value="등록" id="submit" />
+									<div id="the_count">
+										<span id="current">0</span> <span id="maximum">/ 100</span>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<ol class="activity-feed">
+									
+								</ol>
+							</div>
+						</div>
 					</div>
 				</div>
-
-				<div class="row timelineRow" th:each="timelinelist : ${timelinelist}">
-					<div class="col-md-12">
-						<ul class="timeline">	
-							
-							<li th:if='${timelinelist.timeline_n} % 2 == 0'>
-								<div class="timeline-badge">
-									<i class="flaticon-message"></i>
-								</div>
-								<div class="timeline-panel" style="width : 30%; margin-left : 20%;">
-									<div class="timeline-heading" th:id="${timelinelist.timeline_n}">
-										<p style="display:none" th:text="${timelinelist.timeline_n}"></p>
-										<h4 class="timeline-title" th:text="${timelinelist.name}" style="display:inline"></h4>
-										<a class="modify" th:if="${timelinelist.user_id}==${session.id}">수정</a>
-										<a class="delete" th:if="${timelinelist.user_id}==${session.id}">| 삭제</a>
-										<h4 th:text="${timelinelist.time}" style="display:inline; float:right"></h4>
-										
-									</div>
-									<div class="timeline-body">
-										<p th:text="${timelinelist.content}"></p>
-									</div>
-								</div>
-							</li>
-
-							<li th:if='${timelinelist.timeline_n} % 2 != 0' class="timeline-inverted ">
-								<div class="timeline-badge warning">
-									<i class="flaticon-alarm-1"></i>
-								</div>
-								<div class="timeline-panel" style="width : 30%; margin-right : 20%;">
-									<div class="timeline-heading" th:id="${timelinelist.timeline_n}">
-										<h4 class="timeline-title" th:text="${timelinelist.name}" style="display:inline"></h4>
-										<a type="button" class="modify" th:if="${timelinelist.user_id}==${session.id}">수정</a>
-										<a type="button" class="delete" th:if="${timelinelist.user_id}==${session.id}">| 삭제</a>
-										<h4 th:text="${timelinelist.time}" style="display:inline; float:right"></h4>
-									</div>
-									<div class="timeline-body">
-										<p th:text="${timelinelist.content}"></p>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-
 			</div>
 			<!-- page inner 종료  -->
 			<!-- 			<div id="footer"> -->
@@ -87,7 +57,6 @@
 			<!-- 				</div> -->
 			<!-- 			</div>  -->
 			<!-- 			<!-- footer div 종료 -->
-			-->
 		</div>
 	</div>
 
