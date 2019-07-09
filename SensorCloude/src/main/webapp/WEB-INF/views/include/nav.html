@@ -265,7 +265,6 @@ var user_id = $(".nonid").text();
 
 $.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr){
 
- console.log(user_id);
 	   var str = "";
 		 
 		 $(arr).each(function(i, attach){
