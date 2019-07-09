@@ -12,7 +12,10 @@
 </th:block>
 
 <th:block layout:fragment="contents">
-	<div id="wrapper2">
+	
+	<div class="main-panel">
+	<div class="content">
+	<div class="page-inner">
 	<div class="card card-stats card-round">
 	<div class="card-body">
 		<div id="main-content">
@@ -26,12 +29,14 @@
 					<tr>
 						<th scope="col" style="width:13%">협력사</th>
 						<th scope="col" style="width:13%">사업자번호</th>
+						<th scope="col" style="width:13%">현장 갯수</th>
 					</tr>
 				</thead>
 				<tbody id="list" th:if="${company == null}">
 				 	<tr th:each="companylist : ${companylist}">
 						<td th:text="${companylist.name}"></td>
 						<td th:text="${companylist.reg_number}"></td>
+						<td th:text="${companylist.num}+'개'"></td>
 						<td th:text="${companylist.company_num}" style="display : none"></td>
 					</tr> 
 				</tbody>
@@ -81,6 +86,8 @@
 		</div>
 		</div>
 		</div>
+</div>
+</div>
 </div>
 </th:block>
 
