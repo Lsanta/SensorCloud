@@ -43,7 +43,7 @@
 }
 
 .title00{
-   width:98%;
+   width:88%;
    height: 70%;
    margin-top: 3px;
    margin-left: 1%;
@@ -56,7 +56,7 @@
    margin :20px 20px 20px 20px;
 }
 .th03{
-   width: 30%;
+   width: 31.5%;
    
    text-align: left;
 }
@@ -64,10 +64,10 @@
    width: 95%;
    height: 60%;
    text-align: center;
-   margin-left: 2%;
+
 }
 .status{
-   width: 10%;
+   width: 5%;
    background-color: white;
 }
 .stse{
