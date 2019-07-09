@@ -19,7 +19,7 @@
 				<h1>현장목록</h1>
 				<a href="/site/siteadd"><button id="add" value="add">현장추가</button></a>
 			</div>
-
+			<div class="main-left">
 			<table class="table-fixed">
 				<thead>
 					<tr>
@@ -32,9 +32,9 @@
 				<tbody id="site" th:if="${site == null}">
 					<tr th:each="content : ${content}">
 						 <td th:switch="${content.site_status}">
-							<img src="/resources/img/gray2.png"  th:case="'0'">
-							<img src="/resources/img/green.png" th:case="'1'">
-							<img src="/resources/img/red.svg"   th:case="'2'">
+							<img class="stat" src="/resources/img/gray2.png"  th:case="'0'">
+							<img class="stat" src="/resources/img/green.png" th:case="'1'">
+							<img class="stat" src="/resources/img/red.svg"   th:case="'2'">
 						</td>
 						<td th:text="${content.site_name}"></td>
 						<td th:text="${content.address}"></td>
@@ -57,7 +57,11 @@
 					</tr>
 				</tbody>
 			</table>
+			</div>
+			<div id="main-right">
 		</div>
+		</div>
+		
 
 		<div class="pagination-container">
 			<nav class="pagination-content">
@@ -97,5 +101,62 @@
 
 <th:block layout:fragment="page_js">
 	<script src="/resources/js/site/sitelist.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d&libraries=services,clusterer,drawing"></script>
+	<script th:inline="javascript">
+
+	var mapContainer = document.getElementById('main-right'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+	 $("#site tr").mouseover(function(){
+		 var add = $(this).children().eq(2).text();
+		 var sname = $(this).children().eq(1).text();
+		
+
+var mapContainer = document.getElementById('main-right'), // 지도를 표시할 div 
+mapOption = {
+    center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};  
+
+//지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+//주소로 좌표를 검색합니다
+geocoder.addressSearch(add, function(result, status) {
+
+// 정상적으로 검색이 완료됐으면 
+ if (status === kakao.maps.services.Status.OK) {
+
+    var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+    // 결과값으로 받은 위치를 마커로 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: coords
+    });
+
+    
+     // 인포윈도우로 장소에 대한 설명을 표시합니다
+    var infowindow = new kakao.maps.InfoWindow({
+    	content : '<div style="width:150px;text-align:center;padding:6px 0;">' + sname + '</div>'
+    });
+    infowindow.open(map, marker); 
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    map.setCenter(coords);
+} 
+});    
+	 });
+/*]]>*/
+   </script>
 </th:block>
 </html>
