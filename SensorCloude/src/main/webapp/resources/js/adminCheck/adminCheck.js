@@ -1,11 +1,33 @@
 $(document).ready(function() {
 
-	$(document).on("click", "#checklist tr" , function(){
+	$(document).on("click", "#checklist0 tr" , function(){
 
 		//클릭한 행을 tr 변수로 
-		var tr = $("#checklist tr").index(this);
+		var tr = $("#checklist0 tr").index(this);
 
-		var s =$("#checklist tr:eq("+tr+") td:eq(5)").text();
+		var s =$("#checklist0 tr:eq("+tr+") td:eq(5)").text();
+
+		//내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
+		window.location.href = "/checkboard/" + s ;
+	});
+	
+	$(document).on("click", "#checklist1 tr" , function(){
+
+		//클릭한 행을 tr 변수로 
+		var tr = $("#checklist1 tr").index(this);
+
+		var s =$("#checklist1 tr:eq("+tr+") td:eq(5)").text();
+
+		//내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
+		window.location.href = "/checkboard/" + s ;
+	});
+	
+	$(document).on("click", "#checklist2 tr" , function(){
+
+		//클릭한 행을 tr 변수로 
+		var tr = $("#checklist2 tr").index(this);
+
+		var s =$("#checklist2 tr:eq("+tr+") td:eq(5)").text();
 
 		//내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
 		window.location.href = "/checkboard/" + s ;
