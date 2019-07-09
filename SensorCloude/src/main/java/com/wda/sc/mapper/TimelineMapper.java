@@ -16,6 +16,8 @@ public interface TimelineMapper {
 	public ArrayList<TimelineVO> getListm();
 	public int timelineselect(String timeline_n);
 	public ArrayList<TimelineVO> getContent(String timeline_n);
+	
+	public ArrayList<TimelineVO> getAllTimeline();
 
 	
 }

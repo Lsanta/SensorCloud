@@ -1,7 +1,10 @@
-@charset "UTF-8";
+@font-face {
+  font-family: A신그래픽L;
+  src: url('/resources/font/A신그래픽L.TTF');
+}
 
-    html {
-  overflow: hidden; 
+ body,tr,h1,td {
+  font-family: 'A신그래픽L';
  }
 
 .none{
@@ -19,7 +22,7 @@
 
 .title-header {
     height: 50px;
-    border-bottom: 2px solid #716aca!important;
+    border-bottom: 2px solid #36a3f7!important;
     color: #000;
   }
   
@@ -117,7 +120,7 @@ table {
   
   table th,
   table td {
-    padding: .625em;
+    padding: .7em;
     text-align: center;
     height: 30px;
     font-size: 1.2em;
@@ -138,11 +141,12 @@ table {
     cursor:pointer;
      border: none;
      border-bottom: 2px solid #3796ca; 
-     background-color: #716aca!important;
+     background-color: #36a3f7!important;
      color: #fff;
      padding: 5px 8px;
      position: relative;
      bottom: 10px;
+     border-radius:0.25rem;
   }
 
   .title-header button:hover {
@@ -178,6 +182,7 @@ table {
 }
 .pagination {
   position: relative;
+  margin-left:35%;
 }
 .pagination a {
   position: relative;
@@ -243,7 +248,7 @@ table {
   padding: .5em 1em; 
   white-space: nowrap;
    border: none;
-   background-color: #716aca!important;
+   background-color: #36a3f7!important;
    color: #FFF;
    cursor:pointer;
    margin-left: 2%;
@@ -312,6 +317,7 @@ table {
     height: 40px;
     font-size: 1.1em;
     bottom: 5px;
+    border-radius:0.25rem;
   }
   
   select { 
