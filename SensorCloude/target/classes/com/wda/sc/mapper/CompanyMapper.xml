@@ -11,7 +11,12 @@
 	<![CDATA[
      select x.rnum, x.* from
     ( select rownum as rnum, p.* from
-    (  select company_num, name, reg_number from company) p where rownum < #{endnum}) x
+    (  select c.name, c.reg_number ,a.num
+		from (select c.company_num, nvl(count(site.company_num),0) as num
+        from company c full outer join site
+        on site.company_num = c.company_num
+        group by c.company_num) a, company c
+		where a.company_num = c.company_num) p where rownum < #{endnum}) x
     where x.rnum >= #{startnum}
     order by x.name
     ]]>
@@ -45,5 +50,13 @@
 	<!-- 협력사 관리 검색 -->
 	<select id="getAllCompany" resultType="com.wda.sc.domain.CompanyVO">
 		select * from company
+	</select>
+	
+	<!-- 연결된 협력사 들고오기 -->
+	<select id="getConnCompany" resultType="com.wda.sc.domain.CompanyVO">
+		select site.company_num, count(site.company_num) as company_connect
+		from company c, site
+		where site.company_num = c.company_num
+		group by site.company_num
 	</select>
 </mapper>

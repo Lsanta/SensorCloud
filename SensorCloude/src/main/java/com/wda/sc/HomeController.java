@@ -34,6 +34,8 @@ import com.wda.sc.service.TimelineService;
 import com.wda.sc.service.UsermanageService;
 
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 @AllArgsConstructor
@@ -350,81 +352,109 @@ public class HomeController {
 		return "manage/manage";
 	}
 
-	@RequestMapping(value = "/time"+"/{num}", method = RequestMethod.GET)
+//	@RequestMapping(value = "/time"+"/{num}", method = RequestMethod.GET)
+//	public String timeline(@PathVariable String num, Locale locale, Model model,HttpSession session , HttpServletResponse response) throws IOException {
+//
+//		int mlevel = (int) session.getAttribute("mlevel");
+//
+//		if (mlevel ==1) {
+//
+//			response.setContentType("text/html; charset=UTF-8");
+//			PrintWriter out = response.getWriter();
+//			out.println("<script langauge='javascript'>");
+//			out.println("alert('권한이 없습니다.\\n 2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
+//			out.println("</script>");
+//
+//		}
+//
+//		Paging page = new Paging();
+//		ArrayList<Integer> arr=null;
+//		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
+//
+//		int pageNum = 0;
+//		int mapNum=0;
+//		int sendPageNum=0;
+//		int realNum = Integer.parseInt(num);
+//
+//		page.setTotalNum(timelineservice.getPageNum());
+//		page.setOnePageBoard(5);
+//
+//
+//		if(page.getTotalNum() < page.getOnePageBoard()) {
+//			pageNum = 1;
+//		}else {
+//			pageNum = page.getTotalNum()/page.getOnePageBoard();
+//			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
+//				pageNum = pageNum + 1;
+//			}
+//		}
+//
+//		if(pageNum%5 != 0) {
+//			mapNum=pageNum/5+1;
+//		}else {
+//			mapNum=pageNum/5;
+//		}
+//
+//		for(int i=0; i<mapNum; i++) {
+//			arr = new ArrayList<Integer>();
+//			for(int j=0; j<5; j++) {
+//
+//				if((i*5)+j+1 > pageNum) {
+//					break;
+//				}
+//
+//				arr.add((i*5)+j+1);
+//			}
+//			map.put(i,arr);
+//		}
+//
+//		sendPageNum = (realNum-1)/5;
+//
+//		page.setEndnum((realNum*5)+1);
+//		page.setStartnum(page.getEndnum()-5);
+//
+//		model.addAttribute("lastNum", pageNum);
+//		model.addAttribute("pageNum",map.get(sendPageNum));
+//		model.addAttribute("timelinelist",timelineservice.getList(page));
+//		System.out.println(timelineservice.getList(page));
+//
+//		if(realNum > pageNum) {
+//			System.out.println("pageNum : " + pageNum);
+//			return "redirect:/time/"+pageNum;
+//		}
+//
+//
+//		return "timeline/timeline";
+//	}
+	@RequestMapping(value = "/time"+"/{num}", method = RequestMethod.GET)	
 	public String timeline(@PathVariable String num, Locale locale, Model model,HttpSession session , HttpServletResponse response) throws IOException {
-
 		int mlevel = (int) session.getAttribute("mlevel");
 
 		if (mlevel ==1) {
-
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script langauge='javascript'>");
 			out.println("alert('권한이 없습니다.\\n 2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
 			out.println("</script>");
-
 		}
-
-		Paging page = new Paging();
-		ArrayList<Integer> arr=null;
-		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
-
-		int pageNum = 0;
-		int mapNum=0;
-		int sendPageNum=0;
-		int realNum = Integer.parseInt(num);
-
-		page.setTotalNum(timelineservice.getPageNum());
-		page.setOnePageBoard(5);
-
-
-		if(page.getTotalNum() < page.getOnePageBoard()) {
-			pageNum = 1;
-		}else {
-			pageNum = page.getTotalNum()/page.getOnePageBoard();
-			if(page.getTotalNum()%page.getOnePageBoard() > 0) {
-				pageNum = pageNum + 1;
-			}
-		}
-
-		if(pageNum%5 != 0) {
-			mapNum=pageNum/5+1;
-		}else {
-			mapNum=pageNum/5;
-		}
-
-		for(int i=0; i<mapNum; i++) {
-			arr = new ArrayList<Integer>();
-			for(int j=0; j<5; j++) {
-
-				if((i*5)+j+1 > pageNum) {
-					break;
-				}
-
-				arr.add((i*5)+j+1);
-			}
-			map.put(i,arr);
-		}
-
-		sendPageNum = (realNum-1)/5;
-
-		page.setEndnum((realNum*5)+1);
-		page.setStartnum(page.getEndnum()-5);
-
-		model.addAttribute("lastNum", pageNum);
-		model.addAttribute("pageNum",map.get(sendPageNum));
-		model.addAttribute("timelinelist",timelineservice.getList(page));
-		System.out.println(timelineservice.getList(page));
-
-		if(realNum > pageNum) {
-			System.out.println("pageNum : " + pageNum);
-			return "redirect:/time/"+pageNum;
-		}
-
-
+		
+		model.addAttribute("timelinelist",timelineservice.getAllTimeline());
+		
 		return "timeline/timeline";
 	}
-
+	
+	@RequestMapping(value="/timeJSON", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONArray timeJSON() {
+		ArrayList<TimelineVO> arr = new ArrayList<TimelineVO>();
+		arr = timelineservice.getAllTimeline();
+		
+		JSONArray jsonarr = JSONArray.fromObject(arr);
+		System.out.println("arr" + jsonarr);
+		
+		
+		return jsonarr;
+	}
 
 	@RequestMapping(value = "/timelinemodify", method = RequestMethod.GET)
 	public String timelinemodify(Locale locale, Model model,HttpServletResponse response,HttpSession session) throws IOException {

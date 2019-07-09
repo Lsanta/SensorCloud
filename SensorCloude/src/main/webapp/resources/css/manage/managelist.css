@@ -11,7 +11,7 @@ html {
 #container {
     width: 1130px;
     height: 750px;
-    margin: 20px auto;
+    margin: 20px 20px 20px 320px;
     padding: 20px;
     margin-top:125px;
     }
@@ -100,7 +100,8 @@ html {
 }
 
 table {
-    border: 1px solid #ccc;
+    border-left:hidden;
+    border-right:hidden;
     border-collapse: collapse;
     margin-bottom: 10px;
     padding: 0;
@@ -114,7 +115,7 @@ table {
   }
   
   table tr {
-    background-color: #f6f8fd;
+    /* background-color:  #f6f8fd; */
     border: 1px solid #ddd;
     padding: .35em;
   }
@@ -124,7 +125,7 @@ table {
     padding: .625em;
     text-align: center;
     height: 30px;
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
   
   table th {
@@ -158,12 +159,13 @@ table {
   margin-left: 200px;
 }
 
- .pagination-container {
-  margin: 40px auto;
+.pagination-container {
+  margin: 60px auto;
   text-align: center;
 }
 .pagination {
   position: relative;
+  display : block;
 }
 .pagination a {
   position: relative;
@@ -187,9 +189,9 @@ table {
           transform: scale(0);
   transition: all 0.2s;
 }
-.pagination a:hover,
-.pagination a .pagination-active {
-  color: #fff;
+.pagination a:hover{
+  z-index: 501;
+  color: #fff !important;
 }
 .pagination a:hover:before,
 .pagination a .pagination-active:before {
@@ -197,17 +199,19 @@ table {
           transform: scale(1);
 }
 .pagination .pagination-active {
-  color: #fff;
+  z-index: 501;
+  color: #fff !important; 
 }
 .pagination .pagination-active:before {
   -webkit-transform: scale(1);
           transform: scale(1);
 }
 .pagination-newer {
-  margin-right: 20px;
+  margin-right: 50px;
 }
+
 .pagination-older {
-  margin-left: 20px;
+  margin-left: 50px;
 }
 
 .search-box { 
@@ -234,6 +238,10 @@ table {
    cursor:pointer;
    margin-left: 2%;
    height: 32px;
+}
+
+.card{
+	width: 150vh;
 }
 
 @media screen and (max-width: 768px) {

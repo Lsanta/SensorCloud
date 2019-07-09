@@ -65,4 +65,11 @@ public class TimelineServiceImplement implements TimelineService {
 		return mapper.getContent(timeline_n);
 	}
 
+	@Override
+	public ArrayList<TimelineVO> getAllTimeline() {
+		// 페이징 없이 타임라인 전부 가져옴
+		System.out.println("3333");
+		return mapper.getAllTimeline();
+	}
+
 }
