@@ -11,76 +11,71 @@
 </th:block>
 
 <th:block layout:fragment="contents">
-	<div id="main" class="col-md-8">
-		<div class="card">
-			<div class="card-header">
-				<div class="card-head-row">
-					<div id="site" th:each="siteInfo : ${siteInfo}">
-						<span class="sitestatus" th:each="siteStatus : ${siteStatus}" th:switch="${siteStatus.site_status}">
-							<img alt="stop" src="/resources/img/gray2.png" th:case="'0'">
-							<img alt="start" src="/resources/img/green.png" th:case="'1'">
-							<img alt="error" src="/resources/img/red.svg" th:case="'2'">
-						</span>
-						
-						<span class="addr" th:text="${siteInfo.site_name}"></span>
-						<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
+<div class="card card-stats card-round">
+<div id="main">
+        <div id="site" th:each="siteInfo : ${siteInfo}">
+            <span class="sitestatus" th:each="siteStatus : ${siteStatus}" th:switch="${siteStatus.site_status}"> 
+				<img alt="stop" src="/resources/img/gray2.png" th:case="'0'"> 
+				<img alt="start" src="/resources/img/green.png" th:case="'1'"> 
+				<img alt="error" src="/resources/img/red.svg" th:case="'2'">
+			</span> 
+			
+            <span class="addr" th:text="${siteInfo.site_name}"></span>
+            <span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
+            
+            <button id="sitemod" th:class ="${siteInfo.site_id}">현장수정</button>
+        </div>
 
-						<button id="modify" th:class="${siteInfo.site_id}">현장수정</button>
-					</div>					
-				</div>
-				
-				<div id="Btndiv" th:each="siteInfo : ${siteInfo}">
-				<span id="sid" th:text="${siteInfo.site_id}" style="display: none"></span>
-					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'"><button id="alaram" >알림</button></a>
-					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'"><button id="repair">수리내역</button></a>
-					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage/1'"><button id="sensormanage">센서관리</button></a>
-					<!-- <button id="sitestatus">현장 비활성화</button> -->
-					<span class="status" th:each="siteStatus : ${siteStatus}" th:switch="${siteStatus.site_status}">
-						<img alt="stop" src="/resources/img/powerOn.svg" th:case="'0'">
-						<img alt="start" src="/resources/img/power.svg" th:case="'1'">
-					</span>
-				</div>
-			</div>
+        <div id="Btndiv">
+            <button id="alaram">알림</button>
+            <button id="repair">수리내역</button>
+            <button id="sensormanage">센서관리</button>
+            <!-- <button id="sitestatus">현장 비활성화</button> -->
+            <img src="/resources/img/power.svg" />
+        </div>
 
-			<div id="content" class="card-body">
-				<div id="section1">
-					<div id="chartdiv" class="card"></div>
+        <div id="content">
+            <div id="section1">
+                <div id="chartdiv" class="card-body">
+                
+                </div>
 
-					<a id="btnExport" href="#" download=""><img src="/resources/img/excel.svg" /></a>
-					<div id="datadiv" class="card">
-						<table id="sensordata">
-							<thead id="sensing-data-head">
+                <div id="datadiv">
+                    <table id="sensordata">
+                        <thead id="sensing-data-head">
+                                              
+                        </thead>
+                        <tbody id="sensing-data">
+                        
+                        </tbody>
+                    </table>
+                </div>       
+            </div>
+                
+            <div id="section2">
+                <div id="map">
+                
+                </div>
 
-							</thead>
-							<tbody id="sensing-data">
+                <div id="siteinfo" th:each="siteInfo : ${siteInfo}">
+                    <span id="m-title" th:text="${siteInfo.site_name}"></span><br/>
+				    <span id="m-addr" th:text="${siteInfo.address}"></span>
+                </div>    
+            </div> 
+        </div>
+    </div>
+</div>
 
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<div id="section2">
-					<div id="map" class="card"></div>
-
-					<div id="siteinfo" class="card" th:each="siteInfo : ${siteInfo}">
-						<span id="m-title" th:text="${siteInfo.site_name}"></span><br />
-						<span id="m-addr" th:text="${siteInfo.address}"></span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 </th:block>
 
 <th:block layout:fragment="page_js">
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d&libraries=services,clusterer,drawing"></script>
 	<script src="/resources/js/core.js"></script>
 	<script src="/resources/js/charts.js"></script>
 	<script src="/resources/js/animated.js"></script>
 	<script src="/resources/js/jquery.techbytarun.excelexportjs.min.js"></script>
 
-	<script th:inline="javascript">
+   <script th:inline="javascript">
     /*<![CDATA[*/
       var arr = new Array();
       arr = [[${siteInfo}]];
@@ -126,8 +121,8 @@ geocoder.addressSearch(site, function(result, status) {
 });    
 /*]]>*/
    </script>
-
-	<script>
+   
+   <script>
    $(document).ready(function(){
    		var newURL =  window.location.pathname;
 		var url = newURL.split('/');
@@ -230,9 +225,14 @@ geocoder.addressSearch(site, function(result, status) {
 						
 						colorNum++;
 	 				}
-					
+				
+				
+				
 				chart.cursor = new am4charts.XYCursor(); //마우스 올렸을때 데이터 나오게 하는 함수
 				chart.legend = new am4charts.Legend();	//그래프 바로밑에 그래프 각각 나오게 해주고 누를때 이벤트 발생
+	
+	
+
 				
 			}
 			}
@@ -248,7 +248,7 @@ geocoder.addressSearch(site, function(result, status) {
 			 if(data.name == ''){
                  var str12="";
                  str12 +='<p id="nodata">'+ '데이터 없음' + '</p>';
-                 $("#datadiv").html(str12);
+                 $("#dataDiv").html(str12);
         }else{
 		
 		//위에 첫 tr(데이터 이름)
@@ -388,9 +388,11 @@ geocoder.addressSearch(site, function(result, status) {
 			if( window.confirm("현장 비활성화 시 설치되어있던 센서가 삭제되며 다시 복구 할 수 없습니다. 진짜 비활성화 하시겠습니까?") ) {
 				
 				var site_id = $("#modify").attr('class');
-				window.location.href = "/site/statusChange/"+site_id;				
+				window.location.href = "/site/statusChange/"+site_id;
+				
 			} 
 		} 
+		
 		
 	}); // status 종료
 
@@ -426,8 +428,8 @@ geocoder.addressSearch(site, function(result, status) {
 	
    });
    </script>
-
-	<script src="/resources/js/site/asidebar.js"></script>
-	<script src="/resources/js/site/sitemodify.js"></script>
+   
+   <script src="/resources/js/site/asidebar.js"></script>
+   <script src="/resources/js/site/sitemodify.js"></script>
 </th:block>
 </html>

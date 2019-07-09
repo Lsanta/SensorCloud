@@ -8,7 +8,7 @@ html {
 	display : none;
 }
 
-img {
+.stat {
 	width : 25px;
 }
 
@@ -42,11 +42,11 @@ img {
 .main-left{
 	width:59%;
 	display:inline-block;
+	height: 500px;
 }
 #main-right{
-
 	width: 40%;
-	height:311px;
+	height:500px;
 	display:inline-block;
 }
 
@@ -192,6 +192,7 @@ table {
      padding: 5px 8px;
      position: relative;
      bottom: 10px;
+     border-radius : 10px;
   }
 
   .select {
@@ -206,13 +207,12 @@ table {
   }
   
   select { 
-  width: 120px; /* 원하는 너비설정 */
   padding: .6em .5em; /* 여백으로 높이 설정 */ 
   height : 36px;
   border: 1px solid #999; 
   border-radius: 20; /* iOS 둥근모서리 제거 */ 
   -moz-appearance: none; appearance: none;
-  margin-left: 200px;
+  margin-left: 335px;
 }
 
  .pagination-container {
