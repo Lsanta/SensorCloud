@@ -34,6 +34,8 @@ import com.wda.sc.service.TimelineService;
 import com.wda.sc.service.UsermanageService;
 
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 @AllArgsConstructor
@@ -429,19 +431,29 @@ public class HomeController {
 		int mlevel = (int) session.getAttribute("mlevel");
 
 		if (mlevel ==1) {
-
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script langauge='javascript'>");
 			out.println("alert('권한이 없습니다.\\n 2등급(읽기권한)이상이 열람가능합니다');history.go(-1);");
 			out.println("</script>");
-
 		}
 		
-		System.out.println("1111");
 		model.addAttribute("timelinelist",timelineservice.getAllTimeline());
-		System.out.println("2222");
+		
 		return "timeline/timeline";
+	}
+	
+	@RequestMapping(value="/timeJSON", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONArray timeJSON() {
+		ArrayList<TimelineVO> arr = new ArrayList<TimelineVO>();
+		arr = timelineservice.getAllTimeline();
+		
+		JSONArray jsonarr = JSONArray.fromObject(arr);
+		System.out.println("arr" + jsonarr);
+		
+		
+		return jsonarr;
 	}
 
 	@RequestMapping(value = "/timelinemodify", method = RequestMethod.GET)
