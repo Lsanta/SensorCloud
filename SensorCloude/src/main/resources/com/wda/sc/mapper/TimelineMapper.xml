@@ -60,4 +60,11 @@
 	<update id="timelinemodify" parameterType="com.wda.sc.domain.TimelineVO">
 		update timeline set content = #{content} where timeline_n = #{timeline_n}
 	</update>
+	
+	<select id="getAllTimeline" resultType="com.wda.sc.domain.TimelineVO">
+	  select timeline.timeline_n, timeline.content, time as time, member.name, member.user_id
+	  from timeline,member
+	  where timeline.user_id = member.user_id
+      order by timeline_n desc
+	</select>
 </mapper>

@@ -21,7 +21,7 @@ h3 {
 	color: #000;
 }
 
-img{
+.delete1{
 	width: 150px;
 	height: 150px;
 	border-radius: 75px;
@@ -236,8 +236,4 @@ table {
 
 .pagination-older {
   margin-left: 50px;
-}
-
-.card{
-	width: 150vh;
 }

@@ -8,16 +8,19 @@ html {
 	display : none;
 }
 
-img {
+.stat {
 	width : 25px;
 }
 
 #container {
-    width: 1130px;
+    width: 1500px;
     height: 750px;
-    margin: 20px auto;
+    margin-left: 300px;
     padding: 20px;
    margin-top:125px;
+   background:white;
+   border-radius : 10px;
+   border:1px solid rgba(0,0,0,0.125);
     }
 
 .title-header {
@@ -35,6 +38,71 @@ img {
   
  #site tr:hover {
 	background-color: #eaecf4;
+}
+.main-left{
+	width:59%;
+	display:inline-block;
+	height: 500px;
+}
+#main-right{
+	width: 40%;
+	height:500px;
+	display:inline-block;
+}
+
+.pagination-container {
+  margin: 60px auto;
+  text-align: center;
+}
+.pagination {
+  position: relative;
+  display : block;
+}
+.pagination a {
+  position: relative;
+  display: inline-block;
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 8px 16px 10px;
+}
+.pagination a:before {
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  content: "";
+  top: 0;
+  left: 0;
+  background-color: #2c3e50;
+  border-radius: 24px;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  transition: all 0.2s;
+}
+.pagination a:hover{
+  z-index: 501;
+  color: #fff !important;
+}
+.pagination a:hover:before,
+.pagination a .pagination-active:before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.pagination .pagination-active {
+  z-index: 501;
+  color: #fff !important; 
+}
+.pagination .pagination-active:before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+.pagination-newer {
+  margin-right: 50px;
+}
+
+.pagination-older {
+  margin-left: 50px;
 }
 
   @media ( max-width: 1001px ) {
@@ -81,7 +149,6 @@ img {
 }
 
 table {
-    border: 1px solid #ccc;
     border-collapse: collapse;
     margin-bottom: 10px;
     padding: 0;
@@ -95,8 +162,6 @@ table {
   }
   
   table tr {
-    background-color: #f6f8fd;
-    border: 1px solid #ddd;
     padding: .35em;
   }
   
@@ -127,6 +192,7 @@ table {
      padding: 5px 8px;
      position: relative;
      bottom: 10px;
+     border-radius : 10px;
   }
 
   .select {
@@ -141,12 +207,12 @@ table {
   }
   
   select { 
-  width: 120px; /* 원하는 너비설정 */
   padding: .6em .5em; /* 여백으로 높이 설정 */ 
+  height : 36px;
   border: 1px solid #999; 
   border-radius: 20; /* iOS 둥근모서리 제거 */ 
   -moz-appearance: none; appearance: none;
-  margin-left: 200px;
+  margin-left: 335px;
 }
 
  .pagination-container {

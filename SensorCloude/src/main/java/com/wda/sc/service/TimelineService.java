@@ -15,6 +15,7 @@ public interface TimelineService {
 	public int getPageNum();
 	public ArrayList<TimelineVO> getListm();
 	public ArrayList<TimelineVO> getContent(String timeline_n);
+	public ArrayList<TimelineVO> getAllTimeline();
 
 	
 	

@@ -1,4 +1,34 @@
+
+
 $(document).ready(function(){
+	
+	$.ajax({
+		type : 'POST',
+		url : '/timeJSON',
+		data : {},
+		dataType : 'JSON',
+		success : function(data) {
+			console.log(data);
+			
+			var str = ""
+			var color = ['','feed-item-secondary','feed-item-waring','feed-item-danger','feed-item-info','feed-item-success' ];
+			
+			$.each(data,function(i,s){
+					var num = i % 6;
+					str += "<li class='feed-item "+color[num]+"'>";
+					if($("#sessionid").text() == data[i].user_id) 
+						str += "<time class='date'><p style='display:none'>"+data[i].timeline_n+"</p><span class='name'>"+data[i].name+"</span><a class='modify'>수정 |</a> <a class='delete'>삭제</a>" + "<span class='time'>"+data[i].time +"</span></time>";
+					else 
+						str += "<time class='date'><p style='display:none'>"+data[i].timeline_n+"</p><span class='name'>"+data[i].name + "</span><span class='time'>"+data[i].time +"</span></time>";
+					str += "<span class='text'>"+data[i].content+"</span>";
+					str += "</li>";
+					$('.activity-feed').html(str);
+			});
+			
+		}
+	});
+	
+	
 	$('textarea').keyup(function() {
 
 		var characterCount = $(this).val().length,
@@ -45,8 +75,8 @@ $(document).ready(function(){
 
 	}); 
 
-	$(".delete").on('click', function() {
-
+	$(document).on('click','.delete', function() {
+		
 		if (confirm("정말 삭제하시겠습니까?") == true) {
 
 		} else {
@@ -55,7 +85,7 @@ $(document).ready(function(){
 
 		if (true) {
 			var timeline_n = $(this).siblings().eq(0).text();
-			
+			console.log(timeline_n);
 			var query = {
 					timeline_n : timeline_n
 			}
@@ -79,21 +109,84 @@ $(document).ready(function(){
 
 	});
 
-	$(".modify").on('click',function() {
-
-		var div = $(this).parent().attr('id');
-
-		var content = $(this).parent();
-		var content2 = content.siblings().first();
-		var content3 = content2.text();
-
-		var query = {
-				content : content3
-		}
-
-		window.location.href = "/timeline/timelinemodify?content="+ content3+"/"+div;
+	$(document).on('click','.modify',function() {
+		
+		var range = $(this).parent().next();
+		var text = $(this).parent().next().text(); //수정 누른 글 내용
+		$(this).remove();
+		range.html(
+		"<textarea  name='textarea' id='textarea2' maxlength='100' autofocus></textarea> " +
+		"<input type='button' id='check2' class='check2' value='수정' />" +
+		"<input type='button' class='delete2' value='취소'/> " +
+		"<div id='the_count2'>" +
+		"<span id='current2'>"+0+"</span><span id='maximum2'>"+ '/'+100+"</span></div>");
+		
+		var textarea = range.children().eq(0).text(text);
+		
+		var current = range.children().eq(3).children().eq(0);
+		var currentNum = range.children().eq(0).text().length;
+		
+		current.text(currentNum);
+		
+//		var div = $(this).parent().attr('id');
+//		
+//		var content = $(this).parent();
+//		var content2 = content.siblings().first();
+//		var content3 = content2.text();
+//
+//		var query = {
+//				content : content3
+//		}
+//
+//		window.location.href = "/timeline/timelinemodify?content="+ content3+"/"+div;
 
 	});
+	
+	$(document).on('keyup','#textarea2',function() {
+
+		var characterCount = $(this).val().length;
+		current2 = $('#current2');
+		maximum = $('#maximum2');
+		theCount = $('#the-count2');
+
+		current2.text(characterCount);
+
+	});
+	
+	$(document).on('click','.delete2',function(){
+		if (confirm("수정을 취소하시겠습니까?") == true) {
+			window.location.href = "/time/1"
+		} else {
+			return;
+		}
+	});
+	
+	$(document).on('click','#check2',function(){
+		var textarea  = $("#textarea2").val();
+		var query = {
+			content: textarea,
+			timeline_n:$('#check2').parent().siblings().first().children().eq(0).text()
+		};
+		
+		console.log(query);
+		
+		$.ajax({
+			  type : "POST",
+			  url : "/timeline/timelinemodify.do",
+			  data : query,
+			  success : function(data){
+				  if( data == "success"){
+					alert("수정에 성공하였습니다.");
+					window.location.href = "/time/1";
+				  } else{
+					alert("수정이 실패하였습니다.");
+				
+				  }
+			  }
+		
+		}); 
+	});
+	
 	$('#textarea').keypress(function(event){
 		if ( event.which == 13 ) {
 			$('#submit').click();

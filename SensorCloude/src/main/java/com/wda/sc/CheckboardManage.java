@@ -65,7 +65,15 @@ public class CheckboardManage {
 		
 		model.addAttribute("lastNum" + status, pageNum);
 		model.addAttribute("pageNum" + status ,map.get(sendPageNum));
-		model.addAttribute("check" + status ,checkboardservice.getStatusList(page)); // open인 점검이력
+		
+		ArrayList<CheckBoardVO> result = checkboardservice.getStatusList(page);
+		for(int i = 0; i < result.size(); i++) {
+			if(result.get(i).getReg_date().length() >16) {
+				result.get(i).setReg_date(result.get(i).getReg_date().substring(0,10));
+			}
+		}
+		
+		model.addAttribute("check" + status ,result); // open인 점검이력
 		
 		System.out.println("realNum" + realNum);
 		System.out.println("페이지넘" + pageNum);
@@ -230,7 +238,14 @@ public class CheckboardManage {
 		
 		model.addAttribute("lastNum" + status , pageNum);
 		model.addAttribute("pageNum" + status , map.get(sendPageNum));
-		model.addAttribute("check" + status , checkboardservice.getcheckManageSearch(parm));
+		ArrayList<CheckBoardVO> result = checkboardservice.getcheckManageSearch(parm);
+		for(int i = 0; i < result.size(); i++) {
+			if(result.get(i).getReg_date().length() >16) {
+				result.get(i).setReg_date(result.get(i).getReg_date().substring(0,10));
+			}
+		}
+		
+		model.addAttribute("check" + status , result);
 		
 		if(realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);

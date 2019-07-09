@@ -57,6 +57,7 @@ $(document).ready(function() {
 	$('.update').click(function() {
 		window.location.href = "/mypage/modifymypage";
 	});
+	
 	$('.up').click(function(){
 		window.open("/mypage/levelup", "pop",
 				"width=570,height=420,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
@@ -84,7 +85,9 @@ $(document).ready(function() {
 			success : function(data) {
 				if (data == "success") {
 					alert("비밀번호 일치");
-					window.location.href = "/mypage/modifymyinfo";
+					window.close();
+					window.open("/mypage/modifymyinfo", "pop2", "width=500,height=700,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-100)+"resizable=yes");
+					
 				} else {
 					alert("비밀번호가 틀렸습니다.");
 				}

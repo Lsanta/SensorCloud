@@ -1,73 +1,17 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	data-layout-decorate="~{include/layout}">
-
-<th:block layout:fragment="page_head">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
 	<title>마이페이지 정보수정 비밀번호 확인</title>
 	<meta charset="utf-8" />
-</th:block>
-
-<th:block layout:fragment="page_css">
+	
 	<link rel="stylesheet" href="/resources/css/mypage/mpweb.css" />
 	<link rel="stylesheet" href="/resources/css/mypage/modifymypage.css" />
-	<link rel="stylesheet" media="(min-width: 701px) and (max-width: 1000px)"
-		href="/resources/css/mypage/mptablet.css" />
-	<link rel="stylesheet" media="(min-width: 0px) and (max-width: 700px)"
-		href="/resources/css/mypage/mpmobile.css" />
-</th:block>
-
-
-<th:block layout:fragment="contents">
-
-
-	<div class="wrapper">
-
-		<div class="w1" th:each="userInfo : ${userInfo} ">
-        <div class="cell" th:if="${userInfo.filetype = 'false'}">
-         <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
-           <ul>
-           </ul>
-         </div>
-         
-         <div class="cell" th:if="${userInfo.filetype = 'true'}">
-         <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
-			<ul>
-			</ul>       
-         </div>
-			
-			
-			<div class="name01" th:each="userInfo : ${userInfo}">
-				<p class="n1" th:text="${userInfo.name}"></p>
-				<p class="n2" th:text="등급 + ${userInfo.m_level}">
-				 <p class="n3" th:switch="${userInfo.m_level}">
-	               <span th:case="'1'">(권한없음)</span>
-	               <span th:case="'2'">(읽기권한)</span>
-	               <span th:case="'3'">(쓰기권한)</span>
-	               <span th:case="'4'">(수정권한)</span>
-	               <span th:case="'5'">(관리자)</span>
-           		 </p>
-				</p>
-			</div>
-			<div class="name02">
-				<input class="update" type="button" value="정보수정"> 
-				<input class="up" type="button" value="승급요청">
-			</div>
-		</div>
-		<hr color="black" width=100%>
-		
-		<div class="usermodify-card">
-			<h1>비밀번호</h1>
-			<input type="password" name="pass" id="pass" placeholder="Password"> <br>		
-			<input type="button" name="confirm" id="confirm-modify" class="mpmodify-submit" value="확인">
-		</div>
-	</div>
-</th:block>
-
-<th:block layout:fragment="page_js">
+	<link rel="stylesheet" media="(min-width: 701px) and (max-width: 1000px)" href="/resources/css/mypage/mptablet.css" />
+	<link rel="stylesheet" media="(min-width: 0px) and (max-width: 700px)" href="/resources/css/mypage/mpmobile.css" />
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	<script src="/resources/js/mypage/mp.js"></script>
 	<script>
-		$(document).ready(function(){
+		/* $(document).ready(function(){
 	
 			var user_id = $(".zzz").text();
 			
@@ -97,7 +41,51 @@
 					 $(".cell ul").html(str);
 					
 				 }); //end getjson
-		});
+		}); */
 		</script> 
-</th:block>
+</head>
+<body>
+<div class="wrapper">
+
+<!-- 		<div class="w1" th:each="userInfo : ${userInfo} ">
+        <div class="cell" th:if="${userInfo.filetype = 'false'}">
+         <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
+           <ul>
+           </ul>
+         </div>
+         
+         <div class="cell" th:if="${userInfo.filetype = 'true'}">
+         <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
+			<ul>
+			</ul>       
+         </div>
+  -->
+			
+<!-- 			<div class="name01" th:each="userInfo : ${userInfo}">
+				<p class="n1" th:text="${userInfo.name}"></p> -->
+				<!-- <p class="n2" th:text="등급 + ${userInfo.m_level}">
+				 <p class="n3" th:switch="${userInfo.m_level}">
+	               <span th:case="'1'">(권한없음)</span>
+	               <span th:case="'2'">(읽기권한)</span>
+	               <span th:case="'3'">(쓰기권한)</span>
+	               <span th:case="'4'">(수정권한)</span>
+	               <span th:case="'5'">(관리자)</span>
+           		 </p>
+				</p> -->
+			</div>
+			<!-- <div class="name02">
+				<input class="update" type="button" value="정보수정"> 
+				<input class="up" type="button" value="승급요청">
+			</div>
+		</div>
+		<hr color="black" width=100%>  -->
+		
+		<div class="usermodify-card">
+			<h1>비밀번호 확인</h1>
+			<input type="password" name="pass" id="pass" placeholder="Password"> <br>		
+			<input type="button" name="confirm" id="confirm-modify" class="mpmodify-submit" value="확인">
+		</div>
+	</div>
+</body>
+
 </html>

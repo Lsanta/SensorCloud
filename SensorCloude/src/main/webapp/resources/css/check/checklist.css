@@ -1,8 +1,11 @@
-@charset "UTF-8";
+@font-face {
+  font-family: A신그래픽L;
+  src: url('/resources/font/A신그래픽L.TTF');
+}
 
-    html {
-  overflow: hidden; 
- }
+ body,tr,h1,td {
+  font-family: 'A신그래픽L';
+ } 
 
 .none{
 	display : none;
@@ -19,7 +22,7 @@
 
 .title-header {
     height: 50px;
-    border-bottom: 2px solid #716aca!important;
+    border-bottom: 2px solid #36a3f7!important;
     color: #000;
   }
   
@@ -110,14 +113,14 @@ table {
   
   table tr {
     background-color:  white;
-    border: 1px solid #ddd;
+    border: 1px solid #dddd;
     padding: .35em;
     
   }
   
   table th,
   table td {
-    padding: .625em;
+    padding: .7em;
     text-align: center;
     height: 30px;
     font-size: 1.2em;
@@ -138,11 +141,12 @@ table {
     cursor:pointer;
      border: none;
      border-bottom: 2px solid #3796ca; 
-     background-color: #716aca!important;
+     background-color: #36a3f7!important;
      color: #fff;
      padding: 5px 8px;
      position: relative;
      bottom: 10px;
+     border-radius:0.25rem;
   }
 
   .title-header button:hover {
@@ -158,7 +162,7 @@ table {
   .search {
     width: 100%;
     padding: 20px 0;
-    margin-left: 8%;
+    margin-left: 13%;
   }
   
   select { 
@@ -171,13 +175,13 @@ table {
   margin-left: 200px;
 }
 
- .pagination-container {
-  margin: 40px auto;
+.pagination-container {
+  margin: 60px auto;
   text-align: center;
-  margin-bottom: 20px;
 }
 .pagination {
   position: relative;
+  display : block;
 }
 .pagination a {
   position: relative;
@@ -201,9 +205,9 @@ table {
           transform: scale(0);
   transition: all 0.2s;
 }
-.pagination a:hover,
-.pagination a .pagination-active {
-  color: #fff;
+.pagination a:hover{
+  z-index: 501;
+  color: #fff !important;
 }
 .pagination a:hover:before,
 .pagination a .pagination-active:before {
@@ -211,17 +215,19 @@ table {
           transform: scale(1);
 }
 .pagination .pagination-active {
-  color: #fff;
+  z-index: 501;
+  color: #fff !important; 
 }
 .pagination .pagination-active:before {
   -webkit-transform: scale(1);
           transform: scale(1);
 }
 .pagination-newer {
-  margin-right: 20px;
+  margin-right: 50px;
 }
+
 .pagination-older {
-  margin-left: 20px;
+  margin-left: 50px;
 }
 
 .search-box { 
@@ -238,15 +244,17 @@ table {
 .search-box div input {
    padding: .5em 1em; 
    width: 100%; 
+   height:100%;
+   margin-left:-15%;
   }
 .search-box div button { 
   padding: .5em 1em; 
   white-space: nowrap;
    border: none;
-   background-color: #716aca!important;
+   background-color: #36a3f7!important;
    color: #FFF;
    cursor:pointer;
-   margin-left: 2%;
+   margin-left: -113%;
    height: 32px;
 }
 
@@ -312,6 +320,7 @@ table {
     height: 40px;
     font-size: 1.1em;
     bottom: 5px;
+    border-radius:0.25rem;
   }
   
   select { 
@@ -322,7 +331,7 @@ table {
   #dateChange {
     margin-left: 0;
 }
- .pagination-container {
+.pagination-container {
   margin: 20px auto;
   text-align: center;
 }
