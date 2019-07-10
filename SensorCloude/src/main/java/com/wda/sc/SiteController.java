@@ -129,6 +129,7 @@ public class SiteController {
 		System.out.println("현장 iD =" + site_id);
 		model.addAttribute("siteInfo", arr);
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
+		model.addAttribute("alarm", siteservice.getAlarm(site_id)); // 알람 내용 정보
 		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
 		System.out.println(siteservice.getStatus(site_id));// 현장클릭시 상태정보
 
@@ -216,7 +217,7 @@ public class SiteController {
 		}
 		model.addAttribute("siteInfo", siteservice.getSite(site_id));
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
-		model.addAttribute("alarm", siteservice.getAlarm(site_id)); // 알람 내용 정
+		model.addAttribute("alarm", siteservice.getAlarm(site_id)); // 알람 내용 정보
 		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
 		System.out.println("알람 내용" + siteservice.getAlarm(site_id));
 
