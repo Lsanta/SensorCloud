@@ -107,6 +107,8 @@ public class CompanyController {
 			System.out.println("pageNum : " + pageNum);
 			return "redirect:/company/"+pageNum;
 		}
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","협력사관리");
 
 
 		return "company/company";
@@ -252,6 +254,9 @@ public class CompanyController {
 
 			model.addAttribute("company", companyservice.CompanySearchResult(parm));
 			System.out.println("company" + companyservice.CompanySearchResult(parm));
+			
+			model.addAttribute("depth0","메인화면");
+			model.addAttribute("depth1","협력사관리");
 
 			if(realNum > pageNum) {
 				System.out.println("pageNum : " + pageNum);

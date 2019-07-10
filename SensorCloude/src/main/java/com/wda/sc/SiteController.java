@@ -85,7 +85,9 @@ public class SiteController {
 		System.out.println(arr2);
 		
 		model.addAttribute("siteSensor", arr2);
-		
+		model.addAttribute("depth0","메인화면");
+  	  	model.addAttribute("depth1","현장관리");
+  	  	
 		return "site/siteadd";
 
 	}
@@ -759,7 +761,9 @@ public class SiteController {
 		p.setCompany_num(company_num);
 		parm.put("Paging", p);
 		parm.put("Search", s);
-
+		
+		model.addAttribute("depth0","메인화면");
+  	  	model.addAttribute("depth1","현장관리");
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		System.out.println("pageNum" + arr);

@@ -83,6 +83,7 @@ public class HomeController {
 		model.addAttribute("mainchecklist",arr);
 		String id = (String)session.getAttribute("id");
 		model.addAttribute("userInfo",mypageservice.getInfo(id));
+		model.addAttribute("depth0","메인화면");
 		return "main";
 	}
 
@@ -156,7 +157,8 @@ public class HomeController {
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("checkboardlist",checkboardservice.getList(page));
-
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","점검이력");
 		System.out.println("realNum : " + realNum);
 		System.out.println("pageNum : " + pageNum);
 		
@@ -245,7 +247,9 @@ public class HomeController {
 		}
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("sitelist",siteservice.getList());
-
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","현장관리");
+		
 		if(realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
 			return "redirect:/sitelist/"+pageNum;
@@ -343,7 +347,9 @@ public class HomeController {
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("userlist",usermanageservice.getList(page));
-
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","사용자관리");
+		
 		if(realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
 			return "redirect:/manage/"+pageNum;
@@ -439,7 +445,8 @@ public class HomeController {
 		}
 		
 		model.addAttribute("timelinelist",timelineservice.getAllTimeline());
-		
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","타임라인");
 		return "timeline/timeline";
 	}
 	
@@ -540,6 +547,8 @@ public class HomeController {
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("sensorlist",mysensorservice.getList(page));
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","보유센서");
 
 		if(realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
@@ -609,7 +618,9 @@ public class HomeController {
 		model.addAttribute("userInfo",mypageservice.getInfo(id.toString()));
 		model.addAttribute("mychecklist",mypageservice.myList(parm));
 		model.addAttribute("pageNum",map.get(sendPageNum));
-
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","내 점검이력");
+		
 		if(realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
 			return "redirect:/mypage/"+pageNum;

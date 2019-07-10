@@ -23,7 +23,13 @@ import lombok.AllArgsConstructor;
 public class adminCheckboardController {
 	private CheckboardService Checkboardservice;
 	
-	   @RequestMapping(value = "/{num0}"+"/{num1}"+"/{num2}", method = RequestMethod.GET)
+		@RequestMapping(value="/{num0}", method = RequestMethod.GET) 
+		public String adminProxy(@PathVariable String num0){
+			return "redirect:/adminCheckPage/1/1/1";
+		}
+	
+
+		@RequestMapping(value = "/{num0}"+"/{num1}"+"/{num2}", method = RequestMethod.GET)
 		public String admincheck(@PathVariable String num0, @PathVariable String num1, @PathVariable String num2, Model model, HttpSession session, HttpServletResponse response) throws IOException {
 			
 			int mlevel = (int) session.getAttribute("mlevel");
