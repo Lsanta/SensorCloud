@@ -24,6 +24,7 @@
     height: 50px;
     border-bottom: 2px solid #36a3f7!important;
     color: #000;
+    margin-top:20px;
   }
   
   .title-header h1 {
@@ -162,7 +163,7 @@ table {
   .search {
     width: 100%;
     padding: 20px 0;
-    margin-left: 13%;
+    margin-left: 16%;
   }
   
   select { 
@@ -172,7 +173,7 @@ table {
   border: 1px solid #999; 
   border-radius: 20; /* iOS 둥근모서리 제거 */ 
   -moz-appearance: none; appearance: none;
-  margin-left: 200px;
+  margin-left: 280%;
 }
 
 .pagination-container {
