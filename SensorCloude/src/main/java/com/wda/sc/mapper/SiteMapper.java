@@ -167,6 +167,7 @@ public interface SiteMapper {
 	
 	//현장 추가에서의 회사 검색 (이름으로 )
 	public ArrayList<CompanyVO> CompanySearch(String name);
+	
 }
 
 

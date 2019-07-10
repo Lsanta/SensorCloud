@@ -8,8 +8,6 @@
 <th:block layout:fragment="page_css">
 	<link rel="stylesheet" type="text/css" href="/resources/css/site/sitemain.css">
 	<link rel="stylesheet" type="text/css" href="/resources/css/site/sitealarm.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/site/schecklist.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/mysensor/sensorlist.css">
 </th:block>
 
 <th:block layout:fragment="contents">
@@ -33,9 +31,9 @@
 				
 				<div id="Btndiv" th:each="siteInfo : ${siteInfo}">
 				<span id="sid" th:text="${siteInfo.site_id}" style="display: none"></span>
-					<button id="alaram" onclick="gogo1()">알림</button>
-					<button id="repair" onclick="gogo2()">수리내역</button>
-					<button id="sensormanage" onclick="gogo3()">센서관리</button>
+					<a><button id="alaram" onclick="gogo1()">알림</button></a>
+					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'"><button id="repair">수리내역</button></a>
+					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage/1'"><button id="sensormanage">센서관리</button></a>
 					<!-- <button id="sitestatus">현장 비활성화</button> -->
 					<span class="status" th:each="siteStatus : ${siteStatus}" th:switch="${siteStatus.site_status}">
 						<img alt="stop" src="/resources/img/powerOn.svg" th:case="'0'">
@@ -67,7 +65,11 @@
 	
 						<div id="siteinfo" class="card" th:each="siteInfo : ${siteInfo}">
 							<span id="m-title" th:text="${siteInfo.site_name}"></span><br />
-							<span id="m-addr" th:text="${siteInfo.address}"></span>
+							<span id="m-addr" th:text="${siteInfo.address}"></span><br />
+							<hr>
+							<span id="m-company">협력사 정보</span><br />
+							<span id="m-cname" th:text="${siteInfo.name}"></span>
+							<span id="m-ctel" th:text="|Tel)${siteInfo.company_tel}|"></span>
 						</div>
 					</div>
 				</div>
@@ -139,165 +141,6 @@
 					</div>
 				</div>
 				
-				<!-- 수리내역 -->
-				<div id="srepair-cont" style="display:none">
-				<div id="scroll">
-		<article>
-			<div id="container" style="margin:0">
-				<div id="main-content">
-					<div class="title-header">
-						<button id="write" value="write">글쓰기</button>
-					</div>
-
-					<table>
-						<thead>
-							<tr>
-								<th scope="col">현장이름</th>
-								<th scope="col">제목</th>
-								<th scope="col">상태</th>
-								<th scope="col">글쓴이</th>
-								<th scope="col">날짜</th>
-							</tr>
-						</thead>
-						<tbody id="repairchecklist"  th:if="${repair == null}">
-							<tr th:each="checkboardlist : ${checkboardlist}">
-								<td th:text="${checkboardlist.site_name}">status</td>
-								<td th:text="${checkboardlist.title}">status</td>
-								<td th:text="${checkboardlist.board_status}">status</td>
-								<td th:text="${checkboardlist.name}">status</td>
-								<td th:text="${checkboardlist.reg_date}">status</td>
-								<td th:text="${checkboardlist.board_no}" style="display: none"></td>
-							</tr>
-						</tbody>
-						
-						<tbody id="repairchecklist"  th:if="${repair != null}">
-							<tr th:each="checkboardlist : ${repair}">
-								<td th:text="${checkboardlist.site_name}">status</td>
-								<td th:text="${checkboardlist.title}">status</td>
-								<td th:text="${checkboardlist.board_status}">status</td>
-								<td th:text="${checkboardlist.name}">status</td>
-								<td th:text="${checkboardlist.reg_date}">status</td>
-								<td th:text="${checkboardlist.board_no}" style="display: none"></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-				<div class="pagination-container">
-					<nav class="pagination-content">
-						<div class="pagination">
-							<a class="firstpage"> << </a>
-							<a class="pagination-newer"> < </a> 
-					
-							<span class="pagination-inner" th:each="pageNum : ${pageNum}">
-						 		<a th:id="${pageNum}" th:text="${pageNum}"></a>
-							</span> 
-					
-					<a class="pagination-older"> > </a>
-					<a class="lastpage"> >> </a>
-					<span id="lastNum" th:text="${lastNum}" style=display:none></span>
-					
-						</div>
-					</nav>
-				</div>
-
-				<div class="search">
-					<div class="select">
-						<select id="search-select">
-							<option value="title">제목</option>
-							<option value="name">글쓴이</option>
-						</select>
-					</div>
-					<section class="search-box">
-						<div class="search-content">
-							<input type="text" id="keyword"/>
-						</div>
-						<div class="search-button">
-							<button id="search">Search</button>
-						</div>
-					</section>
-				</div>
-			</div>
-		</article>
-	</div>
-				</div>
-				
-				<!-- 센서관리 -->
-				<div id="smanage-cont" style="display:none">
-				<div id="container" style="margin-top:8%">
-		<div id="main-content">
-			<div class="title-header">
-				<button id="add" value="add">설치센서 추가</button>
-			</div>
-
-			<table id="mysensor">
-				<thead>
-					<tr>
-						<th scope="col">시리얼넘버</th>
-						<th scope="col">변수이름</th>
-						<th scope="col">상한값</th>
-						<th scope="col">하한값</th>
-					</tr>
-				</thead>
-				
-				<tbody id="sensorlist" th:if="${sensormanage == null}">
-				 	<tr th:each="sensorlist : ${sensorlist}">
-						<td th:text="${sensorlist.sensor_sn}"></td>
-						<td th:text="${sensorlist.program_var}"></td>
-						<td th:text="${sensorlist.upper_limit}"></td>
-						<td th:text="${sensorlist.lower_limit}"></td>
-						<td style="display : none" th:text="${sensorlist.sensor_id}"></td>
-					</tr> 
-				</tbody>
-				
-				<tbody id="sensorlist" th:if="${sensormanage != null}">
-				 	<tr th:each="sensormanage : ${sensormanage}">
-						<td th:text="${sensormanage.sensor_sn}"></td>
-						<td th:text="${sensormanage.program_var}"></td>
-						<td th:text="${sensormanage.upper_limit}"></td>
-						<td th:text="${sensormanage.lower_limit}"></td>
-						<td style="display : none" th:text="${sensormanage.sensor_id}"></td>
-					</tr> 
-				</tbody>
-			</table>
-		</div>
-
-		<div class="pagination-container">
-			<nav class="pagination-content">
-				<div class="pagination">
-					<a class="firstpage"> << </a>
-					<a class="pagination-newer"> < </a> 
-					
-					<span class="pagination-inner" th:each="pageNum : ${pageNum}">
-						 <a th:id="${pageNum}" th:text="${pageNum}"></a>
-					</span> 
-					
-					<a class="pagination-older"> > </a>
-					<a class="lastpage"> >> </a>
-					<span id="lastNum" th:text="${lastNum}" style=display:none></span>
-				</div>
-			</nav>
-		</div>
-
-		<div class="search">
-			<div class="select">
-				<select id="search-select">
-					<option value="sensor_sn">시리얼넘버</option>
-					<option value="program_var">변수이름</option>
-				</select>
-			</div>
-			<section class="search-box">
-				<div class="search-content">
-					<input type="text" id="keyword"/>
-				</div>
-				<div class="search-button">
-					<button id="search" >Search</button>
-				</div>
-			</section>
-		</div>
-</div>
-				</div>
-				
 			</div>
 		</div>
 	</div>
@@ -313,8 +156,6 @@
 <script>
    $(document).ready(function(){
 	    $('#salarm-cont').hide();
-	    $('#srepair-cont').hide();
-	    $('#smanage-cont').hide();
   		$('#smain-cont').show();
   	    
    		var newURL =  window.location.pathname;
@@ -677,23 +518,9 @@
 	    $('#smanage-cont').hide();
 		$('#salarm-cont').show();
 	}
-   function gogo2() {
-		$('#smain-cont').hide();
-		$('#salarm-cont').hide();
-	    $('#smanage-cont').hide();
-		$('#srepair-cont').show();
-	}
-   function gogo3() {
-		$('#smain-cont').hide();
-		$('#salarm-cont').hide();
-		$('#srepair-cont').hide();    
-		$('#smanage-cont').show();
-	}
-   
+  
    </script>
    
    <script src="/resources/js/site/sitealarm.js"></script>
-   <script src="/resources/js/site/siterepair.js"></script>
-   <script src="/resources/js/site/sensormanage.js"></script>
 </th:block>
 </html>

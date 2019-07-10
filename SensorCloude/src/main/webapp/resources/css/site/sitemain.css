@@ -164,16 +164,35 @@ body {
 }
 
 #siteinfo {
-    height: 200px;
+    height: 220px;
     border: 1px solid #36a3f7;
 }
 
 #m-title {
-   font-size: 1.2em;
+   font-size: 1.5em;
    color: black;
+   margin-top: 2%;
    margin-left: 2%;
 }
 
 #m-addr {
-   margin-left: 2%;
+   margin-left: 3%;
+   font-size: 1.2em;
+}
+
+#m-company {
+	color: black;
+	font-size: 1.5em;
+	margin-left: 2%;
+}
+
+#m-cname {
+	color: blue;
+	font-size: 1.2em;
+	margin-left: 3%;
+}
+
+#m-ctel {
+	font-size: 1.2em;
+	margin-left: 3%;
 }
