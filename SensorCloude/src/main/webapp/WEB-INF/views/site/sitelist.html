@@ -114,6 +114,8 @@
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 
 	 $("#site tr").mouseover(function(){
+		 $("#main-right").empty();
+		 	
 		 var add = $(this).children().eq(2).text();
 		 var sname = $(this).children().eq(1).text();
 		
@@ -155,7 +157,11 @@ geocoder.addressSearch(add, function(result, status) {
     map.setCenter(coords);
 } 
 });    
+
 	 });
+// 	 $("#site tr").mouseleave(function(){
+// 		 $("#main-right").empty();
+// 	 });
 /*]]>*/
    </script>
 </th:block>

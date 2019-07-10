@@ -13,11 +13,11 @@ html {
 }
 
 #container {
-    width: 1500px;
-    height: 750px;
-    margin-left: 300px;
+    width: 1630px;
+    height: 780px;
+    margin-left: 260px;
     padding: 20px;
-   margin-top:125px;
+   margin-top:80px;
    background:white;
    border-radius : 10px;
    border:1px solid rgba(0,0,0,0.125);
@@ -105,48 +105,17 @@ html {
   margin-left: 50px;
 }
 
-  @media ( max-width: 1001px ) {
-    #container {
-      width: auto;
-    }
-    #main-content {
-      float: none;
-      width: auto;
-    }
-    .title-header {
-      float: none;
-      width: auto;
-    }
-    .pagination-container {
-      float: none;
-      width: auto;
-    }
-    .pagination{
-      float: none;
-      width: auto;
-    }
-    .search {
-      float: none;
-      width: auto;
-    }
-    .select {
-      float: left;
-      width: auto;
-    }
-    .search-box {
-      float: none;
-      width: auto;
-    }
-    select { 
+   select { 
   width: 120px; /* 원하는 너비설정 */
   padding: .6em .5em; /* 여백으로 높이 설정 */ 
   font-family: inherit; /* 폰트 상속 */ 
   border: 1px solid #999; 
   border-radius: 20; /* iOS 둥근모서리 제거 */ 
   -moz-appearance: none; appearance: none;
-  margin-left: 200px;
+  margin-left: 342px;
+  height:36px;
 }
-}
+
 
 table {
     border-collapse: collapse;
@@ -206,15 +175,6 @@ table {
     margin-left: 8%;
   }
   
-  select { 
-  padding: .6em .5em; /* 여백으로 높이 설정 */ 
-  height : 36px;
-  border: 1px solid #999; 
-  border-radius: 20; /* iOS 둥근모서리 제거 */ 
-  -moz-appearance: none; appearance: none;
-  margin-left: 335px;
-}
-
  .pagination-container {
   margin: 40px auto;
   text-align: center;
@@ -295,6 +255,43 @@ table {
    cursor:pointer;
    margin-left: 2%;
    height: 32px;
+}
+@media ( max-width: 1001px ) {
+    #container {
+      width: 98%;
+      height:95%;
+      margin-left:10px;
+      margin-top:60px;
+    }
+    #main-content {
+      float: none;
+      width: auto;
+    }
+    .title-header {
+      float: none;
+      width: auto;
+    }
+    .pagination-container {
+      float: none;
+      width: auto;
+    }
+    .pagination{
+      float: none;
+      width: auto;
+    }
+    .search {
+      float: none;
+      width: auto;
+    }
+    .select {
+      float: left;
+      width: 150px;
+    }
+    .search-box {
+      float: none;
+      width: auto;
+    }
+ 
 }
 
 @media screen and (max-width: 768px) {
