@@ -20,9 +20,32 @@
             </button>
          
             </div>
+            <!-- Navbar Header -->
+			<nav class="navbar navbar-header navbar-expand-lg">
+				
+				<div class="container-fluid">
+					<div class="collapse" id="search-nav">
+						<form class="navbar-left navbar-form nav-search mr-md-3">
+							<div class="input-group">
+								<div class="input-group-prepend">
+								</div>
+								<div class="form-control">
+									<a style="color:white; font-size : 15px; font-weight : 450;" href="/" th:text="${depth0}"></a>
+									<span th:if="${depth1} != null">
+										> <a id="depth1" style="color:white; font-size : 15px; font-weight : 450;" th:text="${depth1}"></a>
+									</span>
+									<span th:if="${depth2} != null">
+										> <a id="depth2" style="color:white; font-size : 15px; font-weight : 450;" th:text="${depth2}"></a>
+									</span>
+								</div>
+							</div>
+						</form>
+					</div>
+         		</div>
+         	</nav>
          </div>
          <!-- End Logo Header -->
-         <!-- Navbar Header -->
+         
          <!-- <nav class="navbar navbar-header navbar-expand-lg">
             
             <div class="container-fluid">
@@ -285,6 +308,28 @@ $.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr){
 		 $(".avatar-sm").html(str);
 		
 	 }); //end getjson
+	 
+	 var newURL =  window.location.pathname;
+	 var url = newURL.split('/');
+	 
+	 if($("#depth2").text() == "") {
+		 if(url[1] == "checkboard") {
+			 url[1] = "check";
+		 }
+		 if(url[1] == "site") {
+			 url[1] = "sitelist";
+		 }
+		 
+		 var link = "/" + url[1] +"/1"
+		 
+		 $("#depth1").attr("href",link);
+	 } else {
+		 
+		 var link2 = "/" + url[1] + "/" + url[2];
+		 $("#depth2").attr("href",link2);
+	 }
+	
+	 
 </script>
 </nav>
 </html>

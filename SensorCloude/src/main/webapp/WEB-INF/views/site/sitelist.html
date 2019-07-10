@@ -103,20 +103,83 @@
 	<script src="/resources/js/site/sitelist.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=151d4916fe6099f7a1877c5f4619dc4d&libraries=services,clusterer,drawing"></script>
 	<script th:inline="javascript">
+	////////////////////////////////처음 현장관리 페이지에 왔을때
+	var firstaddr = $('#site').children().eq(0).children().eq(2).text();
+	var firstname = $('#site').children().eq(0).children().eq(1).text();
+	var snum = $('#site').children().eq(0).children().eq(4).text();
+var mapContainer = document.getElementById('main-right'), // 지도를 표시할 div 
+mapOption = {
+    center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};  
 
-	var mapContainer = document.getElementById('main-right'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
-
-// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+//지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+//주소로 좌표를 검색합니다
+geocoder.addressSearch(firstaddr, function(result, status) {
+
+// 정상적으로 검색이 완료됐으면 
+ if (status === kakao.maps.services.Status.OK) {
+	
+	 $.ajax({
+			type : "POST",
+			url : "/site/insen.do",
+			data : snum,
+			dataType : "json",
+			success : function(data) {
+		
+
+    var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+    // 결과값으로 받은 위치를 마커로 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: coords
+    });
+     
+	 var temp = ''; 
+	 
+	 temp = '<div class="info" style="width:150px;text-align:left;padding:6px 0;">' + '<h4 style="text-align:center;">'+firstname +'</h4><hr color="black">'+
+	 '<h5 style="text-align:center;">설치된 센서</h5>';
+ 	
+	  for(var i = 0;  i < data.sensor.length; i++ ){
+		  if(data.sensor[0] == 'f'){
+			  temp = temp + '<li style="margin-left:20px;">없음</li>';
+			  break;
+		  }
+		 temp = temp + '<li style="margin-left:20px;">'+data.sensor[i]+'</li>'
+	 }
+	
+	temp = temp + '</ul></div>';
+     // 인포윈도우로 장소에 대한 설명을 표시합니다
+    var infowindow = new kakao.maps.InfoWindow({
+    	content : temp
+    });
+     
+    infowindow.open(map, marker); 
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    map.setCenter(coords);
+} 
+});    
+
+	 }//success종료
+	 });//ajax 종료
+
+
+//////////////////////////////////////////////////////해당 현장위 올릴시
 	 $("#site tr").mouseover(function(){
+		 $("#main-right").empty();
+		 	
 		 var add = $(this).children().eq(2).text();
 		 var sname = $(this).children().eq(1).text();
-		
+		 var snum = $(this).children().eq(4).text();
+		 
+	
 
 var mapContainer = document.getElementById('main-right'), // 지도를 표시할 div 
 mapOption = {
@@ -135,6 +198,14 @@ geocoder.addressSearch(add, function(result, status) {
 
 // 정상적으로 검색이 완료됐으면 
  if (status === kakao.maps.services.Status.OK) {
+	
+	 $.ajax({
+			type : "POST",
+			url : "/site/insen.do",
+			data : snum,
+			dataType : "json",
+			success : function(data) {
+		
 
     var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 
@@ -143,19 +214,39 @@ geocoder.addressSearch(add, function(result, status) {
         map: map,
         position: coords
     });
-
-    
+     
+	 var temp = ''; 
+	 
+	 temp = '<div class="info" style="width:150px;text-align:left;padding:6px 0;">' + '<h4 style="text-align:center;">'+sname +'</h4><hr color="black">'+
+	 '<h5 style="text-align:center;">설치된 센서</h5>';
+ 	
+	  for(var i = 0;  i < data.sensor.length; i++ ){
+		  if(data.sensor[0] == 'f'){
+			  temp = temp + '<li style="margin-left:20px;">없음</li>';
+			  break;
+		  }
+		 temp = temp + '<li style="margin-left:20px;">'+data.sensor[i]+'</li>'
+	 }
+	
+	temp = temp + '</ul></div>';
      // 인포윈도우로 장소에 대한 설명을 표시합니다
     var infowindow = new kakao.maps.InfoWindow({
-    	content : '<div style="width:150px;text-align:center;padding:6px 0;">' + sname + '</div>'
+    	content : temp
     });
+     
     infowindow.open(map, marker); 
 
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
     map.setCenter(coords);
 } 
 });    
+
+	 }//success종료
+	 });//ajax 종료
 	 });
+// 	 $("#site tr").mouseleave(function(){
+// 		 $("#main-right").empty();
+// 	 });
 /*]]>*/
    </script>
 </th:block>

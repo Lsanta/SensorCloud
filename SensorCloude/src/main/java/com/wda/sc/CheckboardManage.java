@@ -74,6 +74,8 @@ public class CheckboardManage {
 		}
 		
 		model.addAttribute("check" + status ,result); // open인 점검이력
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","점검이력관리");
 		
 		System.out.println("realNum" + realNum);
 		System.out.println("페이지넘" + pageNum);
@@ -86,6 +88,72 @@ public class CheckboardManage {
 	}
 	
 	public String dataSearch(CheckboardService checkboardservice, Model model, int page, int data, int status) {
+		if ( data == 0) {
+			Paging page2 = new Paging();
+			ArrayList<Integer> arr=null;
+			Map<Integer, ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
+			
+			int pageNum = 0;
+			int mapNum=0;
+			int sendPageNum=0;
+			int realNum = page;
+
+			page2.setTotalNum(checkboardservice.checkManagePageNum(status));
+			
+			page2.setOnePageBoard(5);
+			if(page2.getTotalNum() < page2.getOnePageBoard()) {
+				pageNum = 1;
+			}else {
+				pageNum = page2.getTotalNum()/page2.getOnePageBoard();
+				if(page2.getTotalNum()%page2.getOnePageBoard() > 0) {
+					pageNum = pageNum + 1;
+				}
+			}
+
+			if(pageNum%5 != 0) {
+				mapNum=pageNum/5+1;
+			}else {
+				mapNum=pageNum/5;
+			}
+
+			for(int i=0; i<mapNum; i++) {
+				arr = new ArrayList<Integer>();
+				for(int j=0; j<5; j++) {
+					
+					if((i*5)+j+1 > pageNum) {
+						break;
+					}
+					
+					arr.add((i*5)+j+1);
+				}
+				map.put(i,arr);
+			}
+
+			sendPageNum = (realNum-1)/5;
+
+			page2.setEndnum((realNum*5)+1);
+			page2.setStartnum(page2.getEndnum()-5);
+			page2.setBoard_status(status);
+			
+			ArrayList<CheckBoardVO> result = checkboardservice.getStatusList(page2);
+			for(int i = 0; i < result.size(); i++) {
+				if(result.get(i).getReg_date().length() >16) {
+					result.get(i).setReg_date(result.get(i).getReg_date().substring(0,10));
+				}
+			}
+			model.addAttribute("lastNum" + status, pageNum);
+			model.addAttribute("pageNum" + status, map.get(sendPageNum)); //arr
+			model.addAttribute("check" + status ,result); // open인 점검이력
+			model.addAttribute("depth0","메인화면");
+			model.addAttribute("depth1","점검이력관리");
+			if (realNum > pageNum) {
+				System.out.println("pageNum : " + pageNum);
+				return "false";
+			}	
+			System.out.println("data가 0일때" + result);
+			return "";
+		} else {
+
 		Paging p = new Paging();
 		ArrayList<CheckBoardVO> term = new ArrayList<CheckBoardVO>();
 		ArrayList<Integer> arr = new ArrayList<Integer>();
@@ -141,6 +209,7 @@ public class CheckboardManage {
 
 			p.setEndnum((realNum * 5) + 1);
 			p.setStartnum(p.getEndnum() - 5);
+			p.setBoard_status(status);
 
 			parm.put("paging", p);
 			parm.put("data", date);
@@ -148,10 +217,17 @@ public class CheckboardManage {
 //			Paging pa = new Paging();
 //			pa.setStartnum(0);
 //			pa.setEndnum(10);
-			
-			model.addAttribute("check" + status, checkboardservice.getAdminTermList(parm));
+			ArrayList<CheckBoardVO> result = checkboardservice.getAdminTermList(parm);
+			for(int i = 0; i < result.size(); i++) {
+				if(result.get(i).getReg_date().length() >16) {
+					result.get(i).setReg_date(result.get(i).getReg_date().substring(0,10));
+				}
+			}
+			model.addAttribute("check" + status, result);
 			model.addAttribute("lastNum" + status, pageNum);
 			model.addAttribute("pageNum" + status, map.get(sendPageNum)); //arr
+			model.addAttribute("depth0","메인화면");
+			model.addAttribute("depth1","점검이력관리");
 			System.out.println("검색완료 점검이력으로");
 			
 			if (realNum > pageNum) {
@@ -162,7 +238,7 @@ public class CheckboardManage {
 			}	
 			
 			return "";
-		
+		}
 	}
 	
 	public String checkSearch(CheckboardService checkboardservice, Model model, int page, String searchType, String keyword, int status) {
@@ -246,6 +322,8 @@ public class CheckboardManage {
 		}
 		
 		model.addAttribute("check" + status , result);
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","점검이력관리");
 		
 		if(realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);

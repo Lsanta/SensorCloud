@@ -8,11 +8,17 @@
  } 
 .none{
 	display : none;
+
 }
 
-html {
-  overflow-x: hidden; 
- }
+body {
+	font-family: 'A신그래픽L';
+	overflow-y: hidden;
+}
+
+.none {
+	display: none;
+}
 
 #wrapper2 {
     width: 65%;

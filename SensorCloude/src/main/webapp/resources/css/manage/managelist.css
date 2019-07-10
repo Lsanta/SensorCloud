@@ -249,10 +249,6 @@ table {
    height: 32px;
 }
 
-.card{
-	width: 150vh;
-}
-
 @media screen and (max-width: 768px) {
   .search {
     float: none;

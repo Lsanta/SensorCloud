@@ -1,139 +1,131 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	data-layout-decorate="~{include/layout}">
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   data-layout-decorate="~{include/layout}">
 
 <th:block layout:fragment="page_head">
-	<title>현장 알림 화면</title>
+   <title>현장 알림 화면</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/site/asidebar.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/site/sitealarm.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/site/sitemain.css">
+   <link rel="stylesheet" type="text/css" href="/resources/css/site/sitealarm.css">
 </th:block>
 
 <th:block layout:fragment="contents">
-		<aside class="aside" th:each="siteInfo : ${siteInfo}">
-		
-		<a> <svg version="1.1" id="nav-btn"
-				xmlns="http://www.w3.org/2000/svg"
-				xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-				viewBox="0 0 512 512" enable-background="new 0 0 512 512"
-				xml:space="preserve">
-    <path id="list-view-icon"
-					d="M462,108.857H50V50h412V108.857z M462,167.714H50v58.857h412V167.714z M462,285.429H50v58.857h412
-      V285.429z M462,403.143H50V462h412V403.143z" />
-  </svg>
-		</a>
-			<h1 th:text="${siteInfo.site_name}"></h1>
-			<span id="sid" th:text="${siteInfo.site_id}" style="display:none"></span>
-			
-		<nav id="nav">
-			<ul>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'" >수리내역</a></li>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage/1'">센서관리</a></li>
-<!-- 				<li style="line-height: 40px; margin-top: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트</a></li>
-				<li style="line-height: 40px; margin-bottom: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">다운로드</a></li>
-				 -->
-				<!-- <li>
-					<span id="num">연락망</span>
-					<span id="down" style="display: inline"><img src="/resources/img/down-arrow.svg"></span>
-					<span id="up" style="display: none"><img src="/resources/img/up-arrow.svg"></span>
-				</li> -->
+<div id="sitemain" class="col-md-8">
+	<div class="card">
+	<div class="card-header">
+				<div class="card-head-row">
+					<div id="site" th:each="siteInfo : ${siteInfo}">
+						<span class="sitestatus" th:each="siteStatus : ${siteStatus}" th:switch="${siteStatus.site_status}">
+							<img alt="stop" src="/resources/img/gray2.png" th:case="'0'">
+							<img alt="start" src="/resources/img/green.png" th:case="'1'">
+							<img alt="error" src="/resources/img/red.svg" th:case="'2'">
+						</span>
+						
+						<span id="sitename" class="addr" th:text="${siteInfo.site_name}"></span>
+						<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
 
-				<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
-					<span class="mang" th:text="${alarmMember.name}"></span>
-					<span class="mang" th:text="${alarmMember.tel}"></span>
+						<button id="modify" th:class="${siteInfo.site_id}">현장수정</button>
+					</div>					
 				</div>
-			
-			</ul>
-			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 0}" th:class ="${siteInfo.site_id}">현장 활성화</button>
-			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 1}" th:class ="${siteInfo.site_id}">현장 비활성화</button>
-		</nav>
-	</aside>
-	
-	<div id="scroll" >
-		<article>
+				
+				<div id="Btndiv" th:each="siteInfo : ${siteInfo}">
+				<span id="sid" th:text="${siteInfo.site_id}" style="display: none"></span>
+					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'"><button id="alaram">알림</button></a>
+					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'"><button id="repair">수리내역</button></a>
+					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage/1'"><button id="sensormanage">센서관리</button></a>
+					<!-- <button id="sitestatus">현장 비활성화</button> -->
+					<span class="status" th:each="siteStatus : ${siteStatus}" th:switch="${siteStatus.site_status}">
+						<img alt="stop" src="/resources/img/powerOn.svg" th:case="'0'">
+						<img alt="start" src="/resources/img/power.svg" th:case="'1'">
+					</span>
+				</div>
+			</div>
+         
+       	<div id="salarm-cont" class="card-body">
+			<div id="alarmmain">
+				<div id="memberdiv" class="card">
+					<div id="membertable">
+						<table id="member">
+							<thead>
+								<tr>
+									<th>전화번호</th>
+									<th>회사</th>
+									<th>이름</th>
+									<th><input type="checkbox" name="checkAll" checked></th>
+								</tr>
+							</thead>
+							<tbody id="amember">
+								<tr class="select" th:each="alarmMember : ${alarmMember}">
+									<td th:text="${alarmMember.tel}"></td>
+									<td th:text="${alarmMember.company}"></td>
+									<td th:text="${alarmMember.name}"></td>
+									<td style="display: none" th:text="${alarmMember.alarm_m_no}"></td>
+									<td><input type="checkbox" name="selected" checked></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<img id="plus-btn" src="/resources/img/plus.svg" />
+				</div>
+
+				<div id="messagediv" class="card">
+					<div id="phonetop">
+						<div id="ptop1"></div>
+						<div id="ptop2"></div>
+					</div>
 		
-		<div id="container">
-			<div class="leftbox">
-				<div id="content">
-					<div class="scroll-table">
-						<div>
-							<table id="member">
-								<thead>
-									<tr>
-										<th>전화번호</th>
-										<th>회사</th>
-										<th>이름</th>
-										<th><input type="checkbox" name="checkAll" checked></th>
-									</tr>
-								</thead>
-								<tbody id="amember">
-									<tr class="select" th:each="alarmMember : ${alarmMember}">
-										<td th:text="${alarmMember.tel}"></td>
-										<td th:text="${alarmMember.company}"></td>
-										<td th:text="${alarmMember.name}"></td>
-										<td style="display : none" th:text="${alarmMember.alarm_m_no}"></td>
-										<td><input type="checkbox" name="selected" checked></td>
-									</tr>
-								</tbody>
-							</table>
+					<div id="message">
+						<textarea name="textarea" id="textarea" maxlength="80"
+							placeholder="문자내용" autofocus></textarea>
+						<div id="mbutton">
+							<span id="current">0</span> <span id="maximum">/ 80</span>
+							<button id="send">전송</button>
 						</div>
 					</div>
-					
-					<button id="plus-btn" type="button">
-						<img id="plus-img" src="/resources/img/plus.png">
-					</button>
-			
+		
+					<div id="pbottom"></div>
+				</div>
+
+				<div id="mlist" class="card">
+				<div id="mtable">
+					<table id="smsdata">
+						<thead id="sms-data-head">
+							<tr>
+								<th scope="col">날짜</th>
+								<th scope="col">내용</th>
+								<th scope="col">보낸이</th>
+							</tr>
+						</thead>
+						<tbody id="sms-data">
+							<tr th:each="alarm : ${alarm}">
+								<td th:text="${alarm.alarm_time}"></td>
+								<td th:text="${alarm.alarm_content}"></td>
+								<td th:text="${alarm.send_user}"></td>
+							</tr>
+						</tbody>
+					</table>
+					</div>
 				</div>
 			</div>
-				
-				
-				<div id="sidebar">
-					<textarea name="textarea" id="textarea" maxlength="80" placeholder="문자내용" autofocus></textarea>
-					
-					<div id="the_count">
-						<span id="current">0</span> <span id="maximum">/ 80</span>
-						<button id="submit">전송</button>
-					</div>
-					
-					<div id="sidebar2">
-						<div class="scroll-table2">
-							<table id="smsdata">
-								<thead id="sms-data-head">
-									<tr>
-										<th scope="col" >날짜</th>
-										<th scope="col" >내용</th>
-										<th scope="col" >보낸이</th>
-									</tr>
-								</thead>
-								<tbody id="sms-data">
-									<tr th:each="alarm : ${alarm}">
-										<td th:text="${alarm.alarm_time}"></td>
-										<td th:text="${alarm.alarm_content}"></td>
-										<td th:text="${alarm.send_user}"></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						</div>
-					</div>
-				<div id="footer">
-					
-				</div>
-			</div>
-		</article>
-	</div>
+		</div>   
+            
+            
+   	  </div>
+   </div>
 </th:block>
 
 <th:block layout:fragment="page_js">
-	
-	<script src="/resources/js/site/asidebar.js"></script>
-	<script src="/resources/js/site/sitealarm.js"></script>
-	<script>
-	
-	</script>
+   <script src="/resources/js/site/sitealarm.js"></script>
+   <script>
+	   $(document).on("click", "#sitename" , function(){
+			 /*현장 아이디를 가지고와서 /1자리에 넣어야함 */
+			 var sid = $("#sid").text();
+			 
+			 window.location.href = "/site/" + sid  ;
+		});
+   </script>
 </th:block>
 </html>

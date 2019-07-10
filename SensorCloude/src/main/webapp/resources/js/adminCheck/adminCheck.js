@@ -1,33 +1,27 @@
 $(document).ready(function() {
 
-	$(document).on("click", "#checklist0 tr" , function(){
+	$(document).on("click", "#checklist0 div.d-flex" , function(){
+	
+		console.log($(this));
+		var s = $(this).children().eq(0).attr("id");
+		console.log(s);
+		
+		window.location.href = "/checkboard/" + s ;
+	});
+	
+	$(document).on("click", "#checklist1 div.d-flex" , function(){
 
-		//클릭한 행을 tr 변수로 
-		var tr = $("#checklist0 tr").index(this);
-
-		var s =$("#checklist0 tr:eq("+tr+") td:eq(5)").text();
+		var s = $(this).children().eq(0).attr("id");
+		console.log(s);
 
 		//내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
 		window.location.href = "/checkboard/" + s ;
 	});
 	
-	$(document).on("click", "#checklist1 tr" , function(){
+	$(document).on("click", "#checklist2 div.d-flex" , function(){
 
-		//클릭한 행을 tr 변수로 
-		var tr = $("#checklist1 tr").index(this);
-
-		var s =$("#checklist1 tr:eq("+tr+") td:eq(5)").text();
-
-		//내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
-		window.location.href = "/checkboard/" + s ;
-	});
-	
-	$(document).on("click", "#checklist2 tr" , function(){
-
-		//클릭한 행을 tr 변수로 
-		var tr = $("#checklist2 tr").index(this);
-
-		var s =$("#checklist2 tr:eq("+tr+") td:eq(5)").text();
+		var s = $(this).children().eq(0).attr("id");
+		console.log(s);
 
 		//내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
 		window.location.href = "/checkboard/" + s ;
@@ -125,7 +119,7 @@ $(document).ready(function() {
 			}
 		});
 
-	} else{
+	} else { 
 		if(url[3] != null){
 			$("#openPage #"+url[3]+"").addClass('pagination-active');
 			$("#fixedPage #"+url[4]+"").addClass('pagination-active');
@@ -239,41 +233,131 @@ $(document).ready(function() {
 
 
 	}); // 검색 이벤트 종료
-
-
-
-	$(".openchange").change(function(){
-		var data = $(".openchange > option:selected").val();
-		window.location.href = "/checkboard/admindataSearch/1/1/1/"+ data;
+	if(url[2] == "checkManagesearch") {
+		$("#pills-today0").addClass('active show');
+		$("#pills-today1").addClass('active show');
+		$("#pills-today2").addClass('active show');	
+	}
+	
+	if(url[1] == "adminCheckPage" && url[5] == null) {
+		$("#pills-today0").addClass('active show');
+		$("#pills-today1").addClass('active show');
+		$("#pills-today2").addClass('active show');	
+	} 
+	
+	if(url[2] == "admindataSearch") {
+		if(url[6] == 0) {
+			$("#pills-today0").addClass('active show');
+		} else if(url[6] == 1) {
+			$("#pills-month0").addClass('active show');
+		} else if(url[6] == 3){
+			$("#pills-tmonth0").addClass('active show');
+		}
+		
+		if(url[7] == 0) {
+			$("#pills-today1").addClass('active show');
+		} else if(url[7] == 1) {
+			$("#pills-month1").addClass('active show');
+		} else if(url[7] == 3){
+			$("#pills-tmonth1").addClass('active show');
+		}
+		
+		if(url[8] == 0) {
+			$("#pills-today2").addClass('active show');
+		} else if(url[8] == 1) {
+			$("#pills-month2").addClass('active show');
+		} else if(url[8] == 3){
+			$("#pills-tmonth2").addClass('active show');
+		}
+		
+	}
+	
+	$("#pills-today0").click(function(){
+		// open인 게시판 전체보기 클릭 시 
+		// page0 / page1 / page2 / data0 / data1 / data2 / status
+		if(url[2] != 'admindataSearch') {
+			window.location.href = "/checkboard/admindataSearch/1/1/1/0/0/0/0";
+		} else {
+			window.location.href = "/checkboard/admindataSearch/1/"+url[4]+"/"+url[5]+"/0/"+url[7]+"/"+url[8]+"/0";
+		}
 	});
 	
-//	$(".fixedchange").change(function(){
-//
-//		var data = $(".fixedchange > option:selected").val();
-//		window.location.href = "/checkboard/dataSearch/1/"+ data + "/1" ;
-//	});
-//	
-//	$(".closechange").change(function(){
-//
-//		var data = $(".closechange > option:selected").val();
-//		window.location.href = "/checkboard/dataSearch/1/"+ data + "/2" ;
-//	});
-
-	if(url[2] == "admindataSearch"){
-
-		var opt_vals = [];
-		$("#dateChange > option").each(function(){
-			opt_vals.push($(this).val()); 
-		});
+	$("#pills-month0").click(function(){
+		// open인 게시판 1개월 클릭 시 
+		if(url[2] != 'admindataSearch') {
+			window.location.href = "/checkboard/admindataSearch/1/1/1/1/0/0/0";
+		} else {
+		window.location.href = "/checkboard/admindataSearch/1/"+url[4]+"/"+url[5]+"/1/"+url[7]+"/"+url[8]+"/0";
+		}
 		
-
-		for(var i=0; i < opt_vals.length; i++ ){ 
-			var optV = opt_vals[i];
-			if(optV == Number(url[6])) {
-				$(".openchange > option").eq(i).prop("selected", true);
-			} 
-		} 
-
+	});
+	
+	$("#pills-tmonth0").click(function(){
+		// open인 게시판 3개월 클릭 시 
+		if(url[2] != 'admindataSearch') {
+			window.location.href = "/checkboard/admindataSearch/1/1/1/3/0/0/0";
+		} else {
+		window.location.href = "/checkboard/admindataSearch/1/"+url[4]+"/"+url[5]+"/3/"+url[7]+"/"+url[8]+"/0";
+		}
+	});
+	
+	$("#pills-today1").click(function(){
+		// fixed인 게시판 전체보기 클릭 시 
+		if(url[2] != 'admindataSearch') {
+			window.location.href = "/checkboard/admindataSearch/1/1/1/0/0/0/1";
+		} else {
+		window.location.href = "/checkboard/admindataSearch/"+url[3]+"/1/"+url[5]+"/"+url[6]+"/0/"+url[8]+"/1";
+		}
+	});
+	
+	$("#pills-month1").click(function(){
+		// fixed인 게시판 1개월 클릭 시
+		if(url[2] != 'admindataSearch') {
+			window.location.href = "/checkboard/admindataSearch/1/1/1/0/1/0/1";
+		} else {
+		window.location.href = "/checkboard/admindataSearch/"+url[3]+"/1/"+url[5]+"/"+url[6]+"/1/"+url[8]+"/1";
+		}
+	});
+	
+	$("#pills-tmonth1").click(function(){
+		// fixed인 게시판 3개월 클릭 시
+		if(url[2] != 'admindataSearch') {
+			window.location.href = "/checkboard/admindataSearch/1/1/1/0/3/0/1";
+		} else {
+		window.location.href = "/checkboard/admindataSearch/"+url[3]+"/1/"+url[5]+"/"+url[6]+"/3/"+url[8]+"/1";
+		}
+	});
+	
+	$("#pills-today2").click(function(){
+		// close인 게시판 전체보기 클릭 시
+		if(url[2] != 'admindataSearch') {
+			window.location.href = "/checkboard/admindataSearch/1/1/1/0/0/0/2";
+		} else {
+		window.location.href = "/checkboard/admindataSearch/"+url[3]+"/"+url[4]+"/1/"+url[6]+"/"+url[7]+"/0/2";
+		}
+	});
+	
+	$("#pills-month2").click(function(){
+		// close인 게시판 1개월 클릭 시
+		if(url[2] != 'admindataSearch') {
+			window.location.href = "/checkboard/admindataSearch/1/1/1/0/0/1/2";
+		} else {
+		window.location.href = "/checkboard/admindataSearch/"+url[3]+"/"+url[4]+"/1/"+url[6]+"/"+url[7]+"/1/2";
+		}
+	});
+	
+	$("#pills-tmonth2").click(function(){
+		// close인 게시판 3개월 클릭 시
+		if(url[2] != 'admindataSearch') {
+			window.location.href = "/checkboard/admindataSearch/1/1/1/0/0/3/2";
+		} else {
+			window.location.href = "/checkboard/admindataSearch/"+url[3]+"/"+url[4]+"/1/"+url[6]+"/"+url[7]+"/3/2";
+		}
+		
+	});
+	
+	
+	if(url[2] == "admindataSearch"){
 
 		if(url[3] != null){
 			$("#openPage #"+url[3]+"").addClass('pagination-active');
@@ -289,33 +373,33 @@ $(document).ready(function() {
 			var clickPage = $(this).parent().parent().attr("id");
 			
 			if(clickPage == "openPage") {
-				window.location.href = "/checkboard/admindataSearch/"+num+"/"+(parseInt(url[4])) + "/" + (parseInt(url[5])) + "/" + (parseInt(url[6]));
+				window.location.href = "/checkboard/admindataSearch/"+num+"/"+(parseInt(url[4])) + "/" + (parseInt(url[5])) + "/" + (parseInt(url[6])) +  "/" + (parseInt(url[7])) + "/" + (parseInt(url[8])) +"/0";
 			} else if(clickPage == "fixedPage") { 
-				window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+ num + "/" + (parseInt(url[5]))+ "/" + (parseInt(url[6]));
+				window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+ num + "/" + (parseInt(url[5]))+ "/" + (parseInt(url[6])) +  "/" (parseInt(url[7])) + "/" + (parseInt(url[8])) +"/1";
 			} else if(clickPage == "closePage") {
-				window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4])) + "/" + num + "/" + (parseInt(url[6]));
+				window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4])) + "/" + num + "/" + (parseInt(url[6])) +  "/" (parseInt(url[7])) + "/" + (parseInt(url[8])) +"/2";
 			}
 		});
 
-		$('.pagination-newer').click(function(){
+		$('.pagination-newer').click(function(){ //이전(<) 버튼 클릭 시 
 			
 			var clickPage = $(this).parent().attr("id");
 			console.log(clickPage);
 			if(clickPage == "openPage") {
 				if(1 > parseInt(url[3])-1 )
-					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+url[6]
+					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+(parseInt(url[6])) + "/" + (parseInt(url[7])) + "/" + (parseInt(url[8])) +"/0";
 				else
-					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3])-1)+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+url[6]
+					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3])-1)+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+(parseInt(url[6])) + "/" + (parseInt(url[7])) + "/" + (parseInt(url[8])) +"/0";
 			} else if(clickPage == "fixedPage") { 
 				if(1 > parseInt(url[4])-1 )
-					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+url[6]
+					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+(parseInt(url[6])) + "/" + (parseInt(url[7])) + "/" + (parseInt(url[8])) +"/1";
 				else
-					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4])-1)+"/"+(parseInt(url[5]))+"/"+url[6]
+					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4])-1)+"/"+(parseInt(url[5]))+"/"(parseInt(url[6])) + "/" + (parseInt(url[7])) + "/" + (parseInt(url[8])) +"/1";
 			}  else if(clickPage == "closePage") {
 				if(1 > parseInt(url[5])-1 )
-					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+url[6]
+					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+(parseInt(url[6])) + "/" + (parseInt(url[7])) + "/" + (parseInt(url[8])) +"/2";
 				else
-					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5])-1)+"/"+url[6]
+					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5])-1)+"/"(parseInt(url[6])) + "/" + (parseInt(url[7])) + "/" + (parseInt(url[8])) +"/2";
 			}
 			
 		});
@@ -330,34 +414,34 @@ $(document).ready(function() {
 			var clickPage = $(this).parent().attr("id");
 			console.log(clickPage);
 			if(clickPage == "openPage") {
-					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3])+1)+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+url[6]
+					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3])+1)+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+(parseInt(url[6])) + "/" +(parseInt(url[7])) + "/" + (parseInt(url[8])) +"/0";
 			} else if(clickPage == "fixedPage") { 
-					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4])+1)+"/"+(parseInt(url[5]))+"/"+url[6]
+					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4])+1)+"/"+(parseInt(url[5]))+"/"+(parseInt(url[6])) + "/" +(parseInt(url[7])) + "/" + (parseInt(url[8])) +"/1";
 			}  else if(clickPage == "closePage") {
-					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5])+1)+"/"+url[6]
+					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5])+1)+"/"+(parseInt(url[6])) + "/" +(parseInt(url[7])) + "/" + (parseInt(url[8])) +"/2";
 			}
 		});
 		
-		$(".firstpage").click(function(){
+		$(".firstpage").click(function(){ // 처음( << ) 버튼 클릭 시 
 			var clickPage = $(this).parent().attr("id");
 			
 			if(clickPage == "openPage") {
-				window.location.href = "/checkboard/admindataSearch/1/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+url[6];
+				window.location.href = "/checkboard/admindataSearch/1/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+(parseInt(url[6])) + "/" +(parseInt(url[7])) + "/" + (parseInt(url[8])) +"/0";
 			} else if(clickPage == "fixedPage") { 
-				window.location.href = "/checkboard/admindataSearch/"+ (parseInt(url[3])) + "/1/" + (parseInt(url[5]))+"/"+url[6];
+				window.location.href = "/checkboard/admindataSearch/"+ (parseInt(url[3])) + "/1/" + (parseInt(url[5]))+"/"+(parseInt(url[6])) + "/" +(parseInt(url[7])) + "/" + (parseInt(url[8])) +"/1";
 			}  else if(clickPage == "closePage") {
-				window.location.href = "/checkboard/admindataSearch/"+ (parseInt(url[3])) + "/" + (parseInt(url[4])) + "/1"+"/"+url[6];
+				window.location.href = "/checkboard/admindataSearch/"+ (parseInt(url[3])) + "/" + (parseInt(url[4])) + "/1"+"/"+(parseInt(url[6])) + "/" +(parseInt(url[7])) + "/" + (parseInt(url[8])) +"/2";
 			}
 		});
 		
-		$(".lastpage").click(function(){
+		$(".lastpage").click(function(){// 마지막( >> ) 버튼 클릭 시 
 			var clickPage = $(this).parent().attr("id");
 			if(clickPage == "openPage") {
-				window.location.href = "/checkboard/admindataSearch/"+$("#lastNum0").text()+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+url[6];
+				window.location.href = "/checkboard/admindataSearch/"+$("#lastNum0").text()+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+(parseInt(url[6])) + "/" +(parseInt(url[7])) + "/" + (parseInt(url[8])) +"/0";
 			} else if(clickPage == "fixedPage") { 
-				window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+ $("#lastNum1").text()+"/"+(parseInt(url[5]))+"/"+url[6];
+				window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+ $("#lastNum1").text()+"/"+(parseInt(url[5]))+"/"+(parseInt(url[6])) + "/" +(parseInt(url[7])) + "/" + (parseInt(url[8])) +"/1";
 			}  else if(clickPage == "closePage") {
-				window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+$("#lastNum2").text()+"/"+url[6];
+				window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+$("#lastNum2").text()+"/"+(parseInt(url[6])) + "/" +(parseInt(url[7])) + "/" + (parseInt(url[8])) +"/2";
 			}
 		});
 	}
