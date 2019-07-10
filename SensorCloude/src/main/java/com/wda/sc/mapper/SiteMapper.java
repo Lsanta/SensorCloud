@@ -168,6 +168,8 @@ public interface SiteMapper {
 	//현장 추가에서의 회사 검색 (이름으로 )
 	public ArrayList<CompanyVO> CompanySearch(String name);
 	
+	//해당현장에 등록된 센서목록 가져오기
+	public String[] insen(String site_id);
 }
 
 

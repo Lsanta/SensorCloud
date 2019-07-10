@@ -170,7 +170,9 @@ public class MySensorController {
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		System.out.println("pageNum" + arr);
-
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","보유센서");
+		
 		model.addAttribute("sensor", mysensorservice.getSearchResult(parm));
 		System.out.println("sensor" + mysensorservice.getSearchResult(parm));
 

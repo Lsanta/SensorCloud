@@ -44,8 +44,6 @@ import lombok.AllArgsConstructor;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-
-
 @Controller
 @AllArgsConstructor
 @RequestMapping("/site")
@@ -80,12 +78,13 @@ public class SiteController {
 			// response.sendRedirect("/sitelist/1");
 		}
 
-		//보유 센서 넘기기
+		// 보유 센서 넘기기
 		ArrayList<MysensorVO> arr2 = mysensorservice.getMysensor();
 		System.out.println(arr2);
-		
+
 		model.addAttribute("siteSensor", arr2);
-		
+		model.addAttribute("depth0","메인화면");
+  	  	model.addAttribute("depth1","현장관리");
 		return "site/siteadd";
 
 	}
@@ -112,16 +111,18 @@ public class SiteController {
 
 		model.addAttribute("joinSite", siteservice.joinSite(site_id)); // 현장에 관한 값
 		System.out.println("현장에 관한 값" + siteservice.joinSite(site_id));
-		model.addAttribute("insSen", siteservice.getsiteModSensor(Integer.parseInt(site_id)));//설치센서에 관한 값
-		System.out.println("설치센서에 관한 값" +siteservice.getsiteModSensor(Integer.parseInt(site_id)));
+		model.addAttribute("insSen", siteservice.getsiteModSensor(Integer.parseInt(site_id)));// 설치센서에 관한 값
+		System.out.println("설치센서에 관한 값" + siteservice.getsiteModSensor(Integer.parseInt(site_id)));
 		return "site/sitemodify";
 	}
 
 	@RequestMapping(value = "{site_id}", method = RequestMethod.GET)
 	public String siteclick(@PathVariable String site_id, Model model, HttpSession session, HttpServletResponse response) throws IOException {
 
+		ArrayList<SiteVO> arr = new ArrayList<SiteVO>();
+		arr = siteservice.getSite(site_id);
 		System.out.println("현장 iD =" + site_id);
-		model.addAttribute("siteInfo", siteservice.getSite(site_id));
+		model.addAttribute("siteInfo", arr);
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
 		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
 		System.out.println(siteservice.getStatus(site_id));// 현장클릭시 상태정보
@@ -137,12 +138,13 @@ public class SiteController {
 			out.println("</script>");
 
 		}
-
 		System.out.println("현장 iD =" + site_id);
 		model.addAttribute("siteInfo", siteservice.getSite(site_id));
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
 		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
-
+		model.addAttribute("depth0","메인화면");
+  	  	model.addAttribute("depth1","현장관리");
+  	  	model.addAttribute("depth2", arr.get(0).getSite_name());
 		return "site/sitemain";
 	}
 
@@ -150,24 +152,24 @@ public class SiteController {
 	@RequestMapping(value = "/graph/" + "{site_id}" + ".do", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject drawG(@PathVariable String site_id) {
-		
+
 		ArrayList<SensorDataVO> getGraph = siteservice.getSensingDate(site_id);
 		ArrayList<SensorDataVO> getGraphName = siteservice.getGraphName(site_id);
-	
+
 		JSONArray name = JSONArray.fromObject(getGraphName);
 		JSONArray graph = JSONArray.fromObject(getGraph);
-	
-		System.out.println("이거 : "+name);
-		
+
+		System.out.println("이거 : " + name);
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", name);
 		map.put("graph", graph);
-	
-		
+
 		JSONObject json = JSONObject.fromObject(map);
 		System.out.println(json);
 		return json;
 	}
+
 	////////////////////////////////////////////////////////////////////
 	@RequestMapping(value = "/sdata/" + "{site_id}" + ".do", method = RequestMethod.POST)
 	@ResponseBody
@@ -176,13 +178,13 @@ public class SiteController {
 		ArrayList<SensorDataVO> dList = siteservice.getData(site_id);
 		System.out.println(dListname);
 		System.out.println(dList);
-		
+
 		JSONArray dListJson = JSONArray.fromObject(dListname);
 		JSONArray dJson = JSONArray.fromObject(dList);
-	
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", dListJson);
-		map.put("data",dJson);
+		map.put("data", dJson);
 		JSONObject json = JSONObject.fromObject(map);
 
 		return json;
@@ -210,8 +212,9 @@ public class SiteController {
 		model.addAttribute("siteInfo", siteservice.getSite(site_id));
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
 		model.addAttribute("alarm", siteservice.getAlarm(site_id)); // 알람 내용 정
+		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
 		System.out.println("알람 내용" + siteservice.getAlarm(site_id));
-		
+
 		return "site/sitealarm";
 	}
 
@@ -279,12 +282,13 @@ public class SiteController {
 
 		parm.put("paging", page);
 		parm.put("site_id", site_id);
-		
+
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		model.addAttribute("siteInfo", siteservice.getSite(site_id.toString())); // 현장정보
 		model.addAttribute("checkboardlist", siteservice.repairList(parm));// 수리내역
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id.toString())); // 연락망
+		model.addAttribute("siteStatus", siteservice.getStatus(site_id.toString()));
 
 		if (realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
@@ -366,6 +370,7 @@ public class SiteController {
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id)); // 연락망
 		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
 		model.addAttribute("sensorlist", siteservice.installSensorList(parm));
+		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
 
 		if (realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
@@ -440,33 +445,33 @@ public class SiteController {
 	// 현장추가
 	@RequestMapping(value = "siteadd.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String insertSite(SiteVO site, @RequestBody Map<String,Object> map) {
+	public String insertSite(SiteVO site, @RequestBody Map<String, Object> map) {
 		System.out.println("현장 추가");
 		System.out.println(map);
-		
-		//회사 이름으로 회사 번호 찾아서 siteVO에 추가
+
+		// 회사 이름으로 회사 번호 찾아서 siteVO에 추가
 		String name = (String) map.get("name");
 		System.out.println("회사 이름" + name);
 		ArrayList<CompanyVO> comVO = siteservice.CompanySearch(name);
 		System.out.println("회사 번호" + comVO.get(0).getCompany_num());
-		
-		//site VO에 저장
+
+		// site VO에 저장
 		site.setCompany_num(comVO.get(0).getCompany_num());
 		site.setType_no((String) map.get("type_no"));
 		site.setAddress((String) map.get("address"));
-		site.setSite_name((String)map.get("site_name"));
-		
-		site.setX((double)map.get("x"));
-		site.setY((double)map.get("y"));
-		
-		//netwrok VO에 저장 
-	    site.setRperiod((String) map.get("rperiod"));
-	    site.setSig_port_num((String) map.get("sig_port_num"));
-	    site.setVirtual_port((String) map.get("virtual_port"));
-		
-	    System.out.println("사이트" +site);
+		site.setSite_name((String) map.get("site_name"));
+
+		site.setX((double) map.get("x"));
+		site.setY((double) map.get("y"));
+
+		// netwrok VO에 저장
+		site.setRperiod((String) map.get("rperiod"));
+		site.setSig_port_num((String) map.get("sig_port_num"));
+		site.setVirtual_port((String) map.get("virtual_port"));
+
+		System.out.println("사이트" + site);
 		ProcessPidVO setPid = new ProcessPidVO();
-		
+
 		switch (site.getType_no()) {
 		case "building":
 			site.setType_no("1");
@@ -478,60 +483,59 @@ public class SiteController {
 
 		int a = siteservice.siteadd(site);
 		int b = siteservice.networkadd(site);
-		
-		if (a == 0 && b == 0) {	
+
+		if (a == 0 && b == 0) {
 			return "false";
 		} else {
 			int site_id = siteservice.getSiteNum();
-						
-			String command = "C:\\Users\\str\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.getRperiod()+" "+site.getVirtual_port()+" "+site.getSig_port_num()+" "+site_id;
+
+			String command = "C:\\Users\\str\\Desktop\\TestExe\\ConsoleApp1.exe" + " " + site.getRperiod() + " "
+					+ site.getVirtual_port() + " " + site.getSig_port_num() + " " + site_id;
 			ArrayList<String> rawPid = new Cmd().exeCmd(command);
 			System.out.println(rawPid);
-			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
+			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid();
 			ArrayList<String> temp = new ArrayList<String>();
-			
+
 			/* String형 list를 Int형으로 변환 */
 			ArrayList<Integer> rawPid_int = new ArrayList<Integer>();
 			ArrayList<Integer> dbPid_int = new ArrayList<Integer>();
 			ArrayList<String> dbPid = new ArrayList<String>();
-			
+
 			System.out.println("1");
-			for(int i = 0; i < dbPid_object.size(); i++) {
+			for (int i = 0; i < dbPid_object.size(); i++) {
 				dbPid.add(dbPid_object.get(i).getPid());
 			}
-			
-			for(int i = 0; i < rawPid.size(); i++) {
+
+			for (int i = 0; i < rawPid.size(); i++) {
 				rawPid_int.add(Integer.parseInt(rawPid.get(i)));
 			}
-			
-			for(int i = 0; i < dbPid.size(); i++) {
+
+			for (int i = 0; i < dbPid.size(); i++) {
 				dbPid_int.add(Integer.parseInt(dbPid.get(i)));
 			}
 			System.out.println("2");
 			/* 배열 정렬 */
-			
+
 			Ascending ascending = new Ascending();
-			
+
 			Collections.sort(rawPid_int, ascending);
 			Collections.sort(dbPid_int, ascending);
-			
+
 			System.out.println("3");
-			/* db에 들어있지 않는 pid를 얻어와서 배열에 저장*/
-			
-			if(dbPid_int.size() == 0) {
+			/* db에 들어있지 않는 pid를 얻어와서 배열에 저장 */
+
+			if (dbPid_int.size() == 0) {
 				setPid.setPid(rawPid_int.get(0).toString());
-			}else {
-				for(int i = 0; i < rawPid_int.size(); i++) {
-					if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
+			} else {
+				for (int i = 0; i < rawPid_int.size(); i++) {
+					if (!(rawPid_int.get(i).equals(dbPid_int.get(i)))) {
 						setPid.setPid(rawPid_int.get(i).toString());
 					}
 				}
 			}
-			
-			
-		
+
 //			setPid.setSite_id(site.getSite_id());	//site_id 불러오기
-			setPid.setSite_id(site_id);	//site_id 불러오기
+			setPid.setSite_id(site_id); // site_id 불러오기
 			System.out.println("사이트아이디" + site_id);
 			System.out.println("setPid" + setPid);
 			siteservice.setProcessPid(setPid);
@@ -539,52 +543,47 @@ public class SiteController {
 			//
 			JSONArray naArr = JSONArray.fromObject(map.get("sensorData"));
 			JSONObject na = JSONObject.fromObject(map.get("sensorData"));
-			
+
 			System.out.println(na);
-			
-			
+
 			Iterator Iter = na.keys();
 			InstallSensorVO test = new InstallSensorVO();
 			System.out.println(naArr);
-			  while(Iter.hasNext())
-			    {
-			        String b1 = Iter.next().toString();
-			        test.setSensor_sn(b1);
-			        
-			        JSONArray na2 = JSONArray.fromObject(na.get(b1));
-			        
-			        for(int i = 0; i <na2.size(); i++) {
-			        	JSONObject na3 = JSONObject.fromObject(na2.get(i));
-			        	Iterator Iter2 = na3.keys();
-			        	
-			        	System.out.println(i+" : "+na2.get(i));
-			        			        	
-			        	for(int j = 0; j < 1; j++) {
-			        		String c = Iter2.next().toString();
-			        		test.setProgram_var(c);
-			        		
-				        	System.out.println(na3.get(c));
-				        	
-				        	String[] spl = ((String) na3.get(c)).split(",");
-				        	test.setUpper_limit(spl[0]);
-				        	test.setLower_limit(spl[1]);
-				        	test.setSite_id(site_id);
-				        	
-				        	// insert DB 
-				        	int resultNum = siteservice.addInstallSensor(test);
-				        	
-			        	}
-			        }		        
+			while (Iter.hasNext()) {
+				String b1 = Iter.next().toString();
+				test.setSensor_sn(b1);
 
-			    }
-			
-			
-			
-			
+				JSONArray na2 = JSONArray.fromObject(na.get(b1));
+
+				for (int i = 0; i < na2.size(); i++) {
+					JSONObject na3 = JSONObject.fromObject(na2.get(i));
+					Iterator Iter2 = na3.keys();
+
+					System.out.println(i + " : " + na2.get(i));
+
+					for (int j = 0; j < 1; j++) {
+						String c = Iter2.next().toString();
+						test.setProgram_var(c);
+
+						System.out.println(na3.get(c));
+
+						String[] spl = ((String) na3.get(c)).split(",");
+						test.setUpper_limit(spl[0]);
+						test.setLower_limit(spl[1]);
+						test.setSite_id(site_id);
+
+						// insert DB
+						int resultNum = siteservice.addInstallSensor(test);
+
+					}
+				}
+
+			}
+
 			return "success";
 		}
 	}
-	
+
 	// 현장수정
 	@RequestMapping(value = "sitemodify.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -631,7 +630,6 @@ public class SiteController {
 
 		return "site/sitealarmmod";
 	}
-
 
 	@RequestMapping(value = "alarmmod.do")
 	@ResponseBody
@@ -697,18 +695,18 @@ public class SiteController {
 		Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
 		String user_id = (String) session.getAttribute("id");
 		int company_num = siteservice.getCompanyNum(user_id);
-		
+
 		p.getOnePageBoard(); // 페이지 당 보여지는 데이터 수
 
 		s.setPage(page);
 		s.setKeyword(keyword);
 		s.setSearchType(searchType);
 		s.setCompany_num(company_num);
-		
+
 		System.out.println(page); // 현재 페이지 번호
 		System.out.println(searchType); // 검색 옵션
 		System.out.println(keyword); // 검색 키워드
-		if(company_num == 1) {
+		if (company_num == 1) {
 			searchArr = siteservice.siteSearch(s);
 		} else {
 			searchArr = siteservice.companySiteSearch(s);
@@ -721,7 +719,7 @@ public class SiteController {
 		int sendPageNum = 0;
 		int realNum = page;
 		p.setTotalNum(searchArr.size());
-		
+
 		System.out.println("전체숫자" + p.getTotalNum());
 
 		if (p.getTotalNum() <= p.getOnePageBoard()) {
@@ -753,25 +751,27 @@ public class SiteController {
 		}
 
 		sendPageNum = (realNum - 1) / 5;
-		
+
 		p.setEndnum((realNum * 10) + 1);
 		p.setStartnum(p.getEndnum() - 10);
 		p.setCompany_num(company_num);
 		parm.put("Paging", p);
 		parm.put("Search", s);
-
+		
+		model.addAttribute("depth0","메인화면");
+  	  	model.addAttribute("depth1","현장관리");
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		System.out.println("pageNum" + arr);
-		
-		if(company_num == 1) {
+
+		if (company_num == 1) {
 			model.addAttribute("site", siteservice.getSearchResult(parm));
 			System.out.println("site" + siteservice.getSearchResult(parm));
 		} else {
 			model.addAttribute("site", siteservice.companySiteSearchResult(parm));
 			System.out.println("site" + siteservice.getSearchResult(parm));
 		}
-	
+
 		if (realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
 			return "redirect:/site/search/" + pageNum + "/" + searchType + "/" + keyword;
@@ -851,12 +851,11 @@ public class SiteController {
 
 		parm.put("Paging", p);
 		parm.put("Search", s);
-		
+
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		System.out.println("pageNum" + arr);
-		
-		
+
 		model.addAttribute("repair", siteservice.getSearchResultRepair(parm));
 		model.addAttribute("siteInfo", siteservice.getSite(site_id.toString())); // 현장정보
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id.toString())); // 연락망
@@ -971,10 +970,10 @@ public class SiteController {
 
 		return "/site/sensormanage";
 	}
-	
+
 	@RequestMapping(value = "/installsensoradd/" + "{site_id}", method = RequestMethod.GET)
-	public String installsensor(Locale locale, Model model, HttpSession session, HttpServletResponse response, @PathVariable String site_id)
-			throws IOException {
+	public String installsensor(Locale locale, Model model, HttpSession session, HttpServletResponse response,
+			@PathVariable String site_id) throws IOException {
 
 		int mlevel = (int) session.getAttribute("mlevel");
 
@@ -985,16 +984,16 @@ public class SiteController {
 			out.println("<script langauge='javascript'>");
 			out.println("alert('권한이 없습니다.\\n4등급(수정권한)이상이 열람가능합니다'); window.opener.location.reload(); window.close();");
 			out.println("</script>");
-			
-			
+
 		}
 		model.addAttribute("install", mysensorservice.getMysensor());
-		
+
 		return "site/sensormanageadd";
 	}
 
 	@RequestMapping(value = "/installsensormod/" + "{site_id}", method = RequestMethod.GET)
-	public String installsensorm(Locale locale, Model model, HttpSession session , HttpServletResponse response, @PathVariable String site_id) throws IOException {
+	public String installsensorm(Locale locale, Model model, HttpSession session, HttpServletResponse response,
+			@PathVariable String site_id) throws IOException {
 
 		int mlevel = (int) session.getAttribute("mlevel");
 
@@ -1005,224 +1004,257 @@ public class SiteController {
 			out.println("<script langauge='javascript'>");
 			out.println("alert('권한이 없습니다.\\n4등급(수정권한)이상이 열람가능합니다'); window.opener.location.reload(); window.close(); ");
 			out.println("</script>");
-			
+
 		}
-		
+
 		model.addAttribute("installmod", mysensorservice.getMysensor());
-		
+
 		return "site/sensormanagemod";
 	}
-		// 설치 센서 Insert
-		@RequestMapping(value = "/installsensoradd.do", method = RequestMethod.POST)
-		@ResponseBody
-		public String installsensoradd(InstallSensorVO vo, @RequestBody Map<String,Object> map) {
 
-			vo.setSensor_sn((String) map.get("sensor_sn"));
-			String cl = (String) map.get("site_id");
-			int site_id = Integer.parseInt(cl);
-			vo.setSite_id(site_id);
-			
-			JSONArray examArr = JSONArray.fromObject(map.get("sensorData"));
-			
-			for(int i=0; i < examArr.size(); i++) { 
-				
-				JSONObject jobj = examArr.getJSONObject(i);
-				
-				Iterator Iter = jobj.keys();
-				 while(Iter.hasNext())
-				    {
-					 	String var = Iter.next().toString();
-					 	vo.setProgram_var(var);
-					 	
-					 	String[] spl = ((String) jobj.get(var)).split(",");
-					 	vo.setUpper_limit(spl[0]);
-					 	vo.setLower_limit(spl[1]);
-					 	
-					 	int a = mysensorservice.insertInstallsensor(vo);
-					 	
-					 	return "success";
-				    }
-			}
-			
-			return "false";
-		}
+	// 설치 센서 Insert
+	@RequestMapping(value = "/installsensoradd.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String installsensoradd(InstallSensorVO vo, @RequestBody Map<String, Object> map) {
 
-		// 설치센서 수정
-		@RequestMapping(value = "/installsensormod.do", method = RequestMethod.POST)
-		@ResponseBody
-		public String installsensormod(InstallSensorVO vo) {
-		
-			int a = mysensorservice.modInstallsensor(vo);
+		vo.setSensor_sn((String) map.get("sensor_sn"));
+		String cl = (String) map.get("site_id");
+		int site_id = Integer.parseInt(cl);
+		vo.setSite_id(site_id);
 
-			if (a == 1) {
+		JSONArray examArr = JSONArray.fromObject(map.get("sensorData"));
+
+		for (int i = 0; i < examArr.size(); i++) {
+
+			JSONObject jobj = examArr.getJSONObject(i);
+
+			Iterator Iter = jobj.keys();
+			while (Iter.hasNext()) {
+				String var = Iter.next().toString();
+				vo.setProgram_var(var);
+
+				String[] spl = ((String) jobj.get(var)).split(",");
+				vo.setUpper_limit(spl[0]);
+				vo.setLower_limit(spl[1]);
+
+				int a = mysensorservice.insertInstallsensor(vo);
+
 				return "success";
 			}
-			return "false";
-		}	
-	   
-		// 설치센서 삭제
-		@RequestMapping(value = "/installsensorDel.do", method = RequestMethod.POST)
-		@ResponseBody
-		public String installsensordel(@RequestParam int sensor_id) {
-				System.out.println(sensor_id);
-			
-				int a = mysensorservice.delInstallsensor(sensor_id);
-				
-				if (a == 1) {
-					return "success";
+		}
+
+		return "false";
+	}
+
+	// 설치센서 수정
+	@RequestMapping(value = "/installsensormod.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String installsensormod(InstallSensorVO vo) {
+
+		int a = mysensorservice.modInstallsensor(vo);
+
+		if (a == 1) {
+			return "success";
+		}
+		return "false";
+	}
+
+	// 설치센서 삭제
+	@RequestMapping(value = "/installsensorDel.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String installsensordel(@RequestParam int sensor_id) {
+		System.out.println(sensor_id);
+
+		int a = mysensorservice.delInstallsensor(sensor_id);
+
+		if (a == 1) {
+			return "success";
+		}
+		return "false";
+	}
+
+	// 설치센서 삭제
+	@RequestMapping(value = "/statusChange/" + "{site_id}", method = RequestMethod.GET)
+	public String statusChange(@PathVariable String site_id) {
+		System.out.println(site_id);
+		// site_id를 통해 그 현장의 status를 파악
+		ArrayList<SiteVO> vo = siteservice.getStatus(site_id);
+		ProcessPidVO setPid = new ProcessPidVO();
+		// 가져온 현장의 상태
+		System.out.println(vo.get(0).getSite_status());
+
+		// 만약 상태가 1(진행중인 현장)이면 비활성화를 수행
+		if (vo.get(0).getSite_status() == 1) {
+			// 1. 그 현장에 대한 설치 센서를 모두 삭제한다.
+			System.out.println("현장의 상태가 현재 진행중이다");
+			mysensorservice.delSiteInstallsensor(site_id);
+
+			System.out.println("설치 센서 삭제 완료");
+			// 1.5 종료를 위해 켜져있는 pid를 가져온다.
+			String pid = siteservice.getSitePid(site_id);
+			System.out.println("pid번호" + pid);
+			if (pid != null) {
+				// 2. 현재 켜져있는 현장의 CMD 를 종료한다.
+				String command = "taskkill /f /pid " + Integer.parseInt(pid);
+				new Cmd().runCommandAsAdmin(command);
+
+				// 3. 현재 현장의 PID를 삭제한다.
+				int result2 = siteservice.deletePid(site_id);
+
+				// 현장 PID 삭제가 되었다면
+				if (result2 == 1) {
+					// 4. SITE_STATUS 를 변경한다.
+					SiteVO sitevo = new SiteVO();
+					sitevo.setSite_id(Integer.parseInt(site_id));
+					sitevo.setSite_status(0);
+					System.out.println("site_vo" + sitevo);
+					siteservice.modStatus(sitevo);
+					return "redirect:/site/" + site_id;
 				}
-				return "false";
-		}	
-		
-		// 설치센서 삭제
-		@RequestMapping(value = "/statusChange/" + "{site_id}", method = RequestMethod.GET)
-		public String statusChange(@PathVariable String site_id) {
-			System.out.println(site_id);
-			//site_id를 통해 그 현장의 status를 파악
-			ArrayList<SiteVO> vo = siteservice.getStatus(site_id);
-			ProcessPidVO setPid = new ProcessPidVO();
-			//가져온 현장의 상태 
-			System.out.println(vo.get(0).getSite_status());
-			
-			//만약 상태가 1(진행중인 현장)이면 비활성화를 수행
-			if( vo.get(0).getSite_status() == 1) {
-				// 1. 그 현장에 대한 설치 센서를 모두 삭제한다.
-				System.out.println("현장의 상태가 현재 진행중이다");
-				mysensorservice.delSiteInstallsensor(site_id);
-				
-					System.out.println("설치 센서 삭제 완료");
-					//1.5 종료를 위해 켜져있는 pid를 가져온다.
-					String pid = siteservice.getSitePid(site_id);
-					System.out.println("pid번호" + pid);
-					if(pid != null) {
-						// 2. 현재 켜져있는 현장의 CMD 를 종료한다.
-						String command = "taskkill /f /pid "+ Integer.parseInt(pid) ;
-						new Cmd().runCommandAsAdmin(command);
-						
-						// 3. 현재 현장의 PID를 삭제한다.
-						int result2 = siteservice.deletePid(site_id);
-						
-						//현장 PID 삭제가 되었다면
-						if(result2 == 1) {
-							// 4. SITE_STATUS 를 변경한다.
-							SiteVO sitevo = new SiteVO();
-							sitevo.setSite_id(Integer.parseInt(site_id));
-							sitevo.setSite_status(0);
-							System.out.println("site_vo" + sitevo);
-							siteservice.modStatus(sitevo);
-							return "redirect:/site/" + site_id;
-						}
-					} else {
-						//pid가없기 때문에 바로 site_status를 변경시켜준다.
-						SiteVO sitevo = new SiteVO();
-						sitevo.setSite_id(Integer.parseInt(site_id));
-						sitevo.setSite_status(0);
-						System.out.println("site_vo" + sitevo);
-						siteservice.modStatus(sitevo);
-						return "redirect:/site/" + site_id;
-					}
-					
-			  //만약 상태가 0(종료된 현장)이면 활성화를 수행
-			} else if( vo.get(0).getSite_status() == 0){
-				// 1. 그 현장에 대한 cmd를 작동
-				// 2. PID를 db에 저장
-				ArrayList<SiteVO> site = siteservice.joinSite(site_id);
-				System.out.println("사이트들고온 네트워크정보" + site);
-				
-				String command = "C:\\Users\\str\\Desktop\\TestExe\\ConsoleApp1.exe"+" "+site.get(0).getRperiod()+" "+site.get(0).getVirtual_port()+" "+site.get(0).getSig_port_num()+" "+site_id;
-				ArrayList<String> rawPid = new Cmd().exeCmd(command);
-				System.out.println(rawPid);
-				ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid(); 
-				ArrayList<String> temp = new ArrayList<String>();
-				
-				/* String형 list를 Int형으로 변환 */
-				ArrayList<Integer> rawPid_int = new ArrayList<Integer>();
-				ArrayList<Integer> dbPid_int = new ArrayList<Integer>();
-				ArrayList<String> dbPid = new ArrayList<String>();
-				
-				System.out.println("1");
-				for(int i = 0; i < dbPid_object.size(); i++) {
-					dbPid.add(dbPid_object.get(i).getPid());
-				}
-				
-				for(int i = 0; i < rawPid.size(); i++) {
-					rawPid_int.add(Integer.parseInt(rawPid.get(i)));
-				}
-				
-				for(int i = 0; i < dbPid.size(); i++) {
-					dbPid_int.add(Integer.parseInt(dbPid.get(i)));
-				}
-				System.out.println("2");
-				/* 배열 정렬 */
-				
-				Ascending ascending = new Ascending();
-				
-				Collections.sort(rawPid_int, ascending);
-				Collections.sort(dbPid_int, ascending);
-				
-				System.out.println("3");
-				/* db에 들어있지 않는 pid를 얻어와서 배열에 저장*/
+			} else {
+				// pid가없기 때문에 바로 site_status를 변경시켜준다.
+				SiteVO sitevo = new SiteVO();
+				sitevo.setSite_id(Integer.parseInt(site_id));
+				sitevo.setSite_status(0);
+				System.out.println("site_vo" + sitevo);
+				siteservice.modStatus(sitevo);
+				return "redirect:/site/" + site_id;
+			}
+
+			// 만약 상태가 0(종료된 현장)이면 활성화를 수행
+		} else if (vo.get(0).getSite_status() == 0) {
+			// 1. 그 현장에 대한 cmd를 작동
+			// 2. PID를 db에 저장
+			ArrayList<SiteVO> site = siteservice.joinSite(site_id);
+			System.out.println("사이트들고온 네트워크정보" + site);
+
+			String command = "C:\\Users\\str\\Desktop\\TestExe\\ConsoleApp1.exe" + " " + site.get(0).getRperiod() + " "
+					+ site.get(0).getVirtual_port() + " " + site.get(0).getSig_port_num() + " " + site_id;
+			ArrayList<String> rawPid = new Cmd().exeCmd(command);
+			System.out.println(rawPid);
+			ArrayList<ProcessPidVO> dbPid_object = siteservice.getProcessPid();
+			ArrayList<String> temp = new ArrayList<String>();
+
+			/* String형 list를 Int형으로 변환 */
+			ArrayList<Integer> rawPid_int = new ArrayList<Integer>();
+			ArrayList<Integer> dbPid_int = new ArrayList<Integer>();
+			ArrayList<String> dbPid = new ArrayList<String>();
+
+			System.out.println("1");
+			for (int i = 0; i < dbPid_object.size(); i++) {
+				dbPid.add(dbPid_object.get(i).getPid());
+			}
+
+			for (int i = 0; i < rawPid.size(); i++) {
+				rawPid_int.add(Integer.parseInt(rawPid.get(i)));
+			}
+
+			for (int i = 0; i < dbPid.size(); i++) {
+				dbPid_int.add(Integer.parseInt(dbPid.get(i)));
+			}
+			System.out.println("2");
+			/* 배열 정렬 */
+
+			Ascending ascending = new Ascending();
+
+			Collections.sort(rawPid_int, ascending);
+			Collections.sort(dbPid_int, ascending);
+
+			System.out.println("3");
+			/* db에 들어있지 않는 pid를 얻어와서 배열에 저장 */
 //				for(int i = 0; i < rawPid_int.size(); i++) {
 //					if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
 //						setPid.setPid(rawPid_int.get(i).toString());
 //					}
 //				}
-				if(dbPid_int.size() == 0) {
-					setPid.setPid(rawPid_int.get(0).toString());
-				}else {
-					for(int i = 0; i < rawPid_int.size(); i++) {
-						if(!(rawPid_int.get(i).equals(dbPid_int.get(i)))){
-							setPid.setPid(rawPid_int.get(i).toString());
-						}
+			if (dbPid_int.size() == 0) {
+				setPid.setPid(rawPid_int.get(0).toString());
+			} else {
+				for (int i = 0; i < rawPid_int.size(); i++) {
+					if (!(rawPid_int.get(i).equals(dbPid_int.get(i)))) {
+						setPid.setPid(rawPid_int.get(i).toString());
 					}
 				}
-			
-//				setPid.setSite_id(site.getSite_id());	//site_id 불러오기
-				setPid.setSite_id(Integer.parseInt(site_id));	//site_id 불러오기
-				System.out.println("사이트아이디" + site_id);
-				System.out.println("setPid" + setPid);
-				siteservice.addProcessPid(setPid);
-				
-				// 3. site_status 변경
-				SiteVO sitevo = new SiteVO();
-				sitevo.setSite_id(Integer.parseInt(site_id));
-				sitevo.setSite_status(1);
-				siteservice.modStatus(sitevo);
-				
-				return "redirect:/site/"+ site_id;
 			}
-			
-			
-			
+
+//				setPid.setSite_id(site.getSite_id());	//site_id 불러오기
+			setPid.setSite_id(Integer.parseInt(site_id)); // site_id 불러오기
+			System.out.println("사이트아이디" + site_id);
+			System.out.println("setPid" + setPid);
+			siteservice.addProcessPid(setPid);
+
+			// 3. site_status 변경
+			SiteVO sitevo = new SiteVO();
+			sitevo.setSite_id(Integer.parseInt(site_id));
+			sitevo.setSite_status(1);
+			siteservice.modStatus(sitevo);
+
 			return "redirect:/site/" + site_id;
-		}	
-		
-		@RequestMapping(value = "/findCompany", method = RequestMethod.GET)
-		public String findCompany(Locale locale, Model model) {
+		}
+
+		return "redirect:/site/" + site_id;
+	}
+
+	@RequestMapping(value = "/findCompany", method = RequestMethod.GET)
+	public String findCompany(Locale locale, Model model) {
 
 //			//회사 넘기기
 //			ArrayList<CompanyVO> arr3 = loginservice.getAllCompany();
 //			System.out.println(arr3);
 //			model.addAttribute("Allcompany", arr3);
-			
-			return "site/findCompany";	
+
+		return "site/findCompany";
+	}
+
+	@RequestMapping(value = "/searchCompany", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<CompanyVO> searchCompany(Locale locale, Model model, @RequestBody Map<String, String> map) {
+		System.out.println("넘어온 값" + map);
+		String name = map.get("word");
+
+		ArrayList<CompanyVO> vo = siteservice.CompanySearch(name);
+		System.out.println(vo);
+		return vo;
+	}
+
+	@RequestMapping(value = "insen.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject insen(@RequestBody String snum) {
+		String ste = snum;
+		String[] ins = ste.split("=");
+
+		String[] sensor = null;
+
+		String site_id = ins[0].toString();
+		System.out.println(site_id);
+		sensor = siteservice.insen(site_id);
+
+		if (sensor.length > 0) {
+
+			JSONArray name = JSONArray.fromObject(sensor);
+			System.out.println("두번째" + sensor);
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("sensor", name);
+
+			JSONObject json = JSONObject.fromObject(map);
+
+			return json;
+		} else {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("sensor", "fail");
+
+			JSONObject json = JSONObject.fromObject(map);
+
+			return json;
 		}
-		
-		@RequestMapping(value = "/searchCompany", method = RequestMethod.POST)
-		@ResponseBody
-		public ArrayList<CompanyVO> searchCompany(Locale locale, Model model,@RequestBody Map<String, String> map) {
-			System.out.println("넘어온 값" + map);
-			String name = map.get("word");
-			
-			ArrayList<CompanyVO> vo = siteservice.CompanySearch(name);
-			System.out.println(vo);
-			return vo;	
-		}
+
+	}
 }
 
-class Ascending implements Comparator<Integer> { 
-    @Override
-    public int compare(Integer o1, Integer o2) {
-        return o1.compareTo(o2);
-    }
+class Ascending implements Comparator<Integer> {
+	@Override
+	public int compare(Integer o1, Integer o2) {
+		return o1.compareTo(o2);
+	}
 }

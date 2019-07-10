@@ -424,4 +424,13 @@
 		where name LIKE '%' || #{name} || '%'
 		order by company_num 
 	</select>
+	
+	<!-- 해당현장에 등록된 센서목록 가져오기 -->
+	<select id="insen" resultType="String">
+	<![CDATA[ 
+		select distinct m.sensor_kind, i.site_id
+		from install_sensor i, my_sensor m
+		where i.site_id=#{site_id} and i.sensor_sn = m.sensor_sn
+		]]>
+	</select>
 </mapper>

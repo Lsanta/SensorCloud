@@ -5,7 +5,7 @@
 
 body {
    font-family: 'A신그래픽L';
-   /* overflow-y: hidden; */
+   overflow-y: hidden;
 }
 
 #alarmmain {
@@ -124,7 +124,7 @@ body {
 }
 
 #current {
-    margin-left: 4%;
+    margin-left: 6%;
 }
 
 #message button {
@@ -145,6 +145,7 @@ body {
     margin: 2%;
     width: 30%;
     height: 600px;
+    position: relative;
 }
 
 /* #sidebar2 .scroll-table2 {
@@ -153,43 +154,50 @@ body {
 	overflow-x: hidden;
 } */
 
-#mlist table {
+#mtable {
+	width: 100%;
+    height: 550px;
+    overflow: auto;
+	overflow-x: hidden;	
+}
+
+#mtable table {
 	width: 100%;
 	table-layout: fixed;
 	border-spacing: 0;
 	border-collapse: collapse;
 }
 
-#mlist table thead tr {
-	position: absolute;
-	top: 0;
+#mtable table thead tr {
+/* 	position: absolute;
+	top: 0; */
 	color: #000;
     background-color: #dbe2fc;
 }
 
-#mlist table thead tr th {
+#mtable table thead tr th {
 	font-weight: normal;
-	width: 100px;
+	width: 100%;
 	height: 40px;
 	background:#eaecf4;
     color:#000;
     text-align: center;
 }
 
-#mlist table td {
+#mtable table td {
 	text-align: center;
-	/* width: 100%; */
+	width: 100%;
 	height: 40px;
     color:#595959;
 }
 
-#mlist table tr {
+#mtable table tr {
 	display: inline-table;
 	width: 100%;
 	table-layout: fixed;
 }
 
-#mlist table tbody tr {
+#mtable table tbody tr {
    display: table-row;
    background-color:#f6f8fd;
 }
