@@ -23,4 +23,9 @@ public class SiteVO {
 	private String rperiod;
 	private String sig_port_num;
 	private String virtual_port;
+	
+	//company table
+	private String name;
+	private String company_tel;
+	
 }

@@ -1,140 +1,97 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	data-layout-decorate="~{include/layout}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" data-layout-decorate="~{include/layout}">
 
 <th:block layout:fragment="page_head">
-	<title>수리내역</title>
+   <title>수리내역</title>
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/site/schecklist.css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/site/asidebar.css">
+   <link rel="stylesheet" type="text/css" href="/resources/css/site/schecklist.css">
 </th:block>
 
 <th:block layout:fragment="contents">
-	<aside class="aside" th:each="siteInfo : ${siteInfo}">
+   <div id="scroll" class="card">
+      <article>
+         <div id="container" style="margin:0">
+            <div id="main-content">
+               <div class="title-header">
+                  <button id="write" value="write">글쓰기</button>
+               </div>
 
-		<a> <svg version="1.1" id="nav-btn"
-				xmlns="http://www.w3.org/2000/svg"
-				xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-				viewBox="0 0 512 512" enable-background="new 0 0 512 512"
-				xml:space="preserve">
-    <path id="list-view-icon"
-					d="M462,108.857H50V50h412V108.857z M462,167.714H50v58.857h412V167.714z M462,285.429H50v58.857h412
-      V285.429z M462,403.143H50V462h412V403.143z" />
-  </svg>
-		</a>
-		<h1 th:text="${siteInfo.site_name}"></h1>
-		<span id="sid" th:text="${siteInfo.site_id}" style="display: none"></span>
+               <table>
+                  <thead>
+                     <tr>
+                        <th scope="col">현장이름</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">상태</th>
+                        <th scope="col">글쓴이</th>
+                        <th scope="col">날짜</th>
+                     </tr>
+                  </thead>
+                  <tbody id="repairchecklist"  th:if="${repair == null}">
+                     <tr th:each="checkboardlist : ${checkboardlist}">
+                        <td th:text="${checkboardlist.site_name}">status</td>
+                        <td th:text="${checkboardlist.title}">status</td>
+                        <td th:text="${checkboardlist.board_status}">status</td>
+                        <td th:text="${checkboardlist.name}">status</td>
+                        <td th:text="${checkboardlist.reg_date}">status</td>
+                        <td th:text="${checkboardlist.board_no}" style="display: none"></td>
+                     </tr>
+                  </tbody>
+                  
+                  <tbody id="repairchecklist"  th:if="${repair != null}">
+                     <tr th:each="checkboardlist : ${repair}">
+                        <td th:text="${checkboardlist.site_name}">status</td>
+                        <td th:text="${checkboardlist.title}">status</td>
+                        <td th:text="${checkboardlist.board_status}">status</td>
+                        <td th:text="${checkboardlist.name}">status</td>
+                        <td th:text="${checkboardlist.reg_date}">status</td>
+                        <td th:text="${checkboardlist.board_no}" style="display: none"></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
 
-		<nav id="nav">
-			<ul>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'">알림</a></li>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'">수리내역</a></li>
-				<li><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage/1'">센서관리</a></li>
-<!-- 				<li style="line-height: 40px; margin-top: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">스크립트</a></li>
-				<li style="line-height: 40px; margin-bottom: 40px;"><a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/download'">다운로드</a></li>
-				 -->
-				<!-- <li>
-					<span id="num">연락망</span>
-					<span id="down" style="display: inline"><img src="/resources/img/down-arrow.svg"></span>
-					<span id="up" style="display: none"><img src="/resources/img/up-arrow.svg"></span>
-				</li> -->
+            <div class="pagination-container">
+               <nav class="pagination-content">
+                  <div class="pagination">
+                     <a class="firstpage"> << </a>
+                     <a class="pagination-newer"> < </a> 
+               
+                     <span class="pagination-inner" th:each="pageNum : ${pageNum}">
+                         <a th:id="${pageNum}" th:text="${pageNum}"></a>
+                     </span> 
+               
+               <a class="pagination-older"> > </a>
+               <a class="lastpage"> >> </a>
+               <span id="lastNum" th:text="${lastNum}" style=display:none></span>
+               
+                  </div>
+               </nav>
+            </div>
 
-				<div class="phonenumber" style="display: none" th:each="alarmMember : ${alarmMember}">
-					<span class="mang" th:text="${alarmMember.name}"></span>
-					<span class="mang" th:text="${alarmMember.tel}"></span>
-				</div>
-			
-			</ul>
-			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 0}" th:class ="${siteInfo.site_id}">현장 활성화</button>
-			<button id="status"  th:each="siteStatus : ${siteStatus}" th:if="${siteStatus.site_status == 1}" th:class ="${siteInfo.site_id}">현장 비활성화</button>
-		</nav>
-	</aside>
-	<div id="scroll">
-		<article>
-			<div id="container" style="margin:0">
-				<div id="main-content">
-					<div class="title-header">
-						<button id="write" value="write">글쓰기</button>
-					</div>
-
-					<table>
-						<thead>
-							<tr>
-								<th scope="col">현장이름</th>
-								<th scope="col">제목</th>
-								<th scope="col">상태</th>
-								<th scope="col">글쓴이</th>
-								<th scope="col">날짜</th>
-							</tr>
-						</thead>
-						<tbody id="repairchecklist"  th:if="${repair == null}">
-							<tr th:each="checkboardlist : ${checkboardlist}">
-								<td th:text="${checkboardlist.site_name}">status</td>
-								<td th:text="${checkboardlist.title}">status</td>
-								<td th:text="${checkboardlist.board_status}">status</td>
-								<td th:text="${checkboardlist.name}">status</td>
-								<td th:text="${checkboardlist.reg_date}">status</td>
-								<td th:text="${checkboardlist.board_no}" style="display: none"></td>
-							</tr>
-						</tbody>
-						
-						<tbody id="repairchecklist"  th:if="${repair != null}">
-							<tr th:each="checkboardlist : ${repair}">
-								<td th:text="${checkboardlist.site_name}">status</td>
-								<td th:text="${checkboardlist.title}">status</td>
-								<td th:text="${checkboardlist.board_status}">status</td>
-								<td th:text="${checkboardlist.name}">status</td>
-								<td th:text="${checkboardlist.reg_date}">status</td>
-								<td th:text="${checkboardlist.board_no}" style="display: none"></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-				<div class="pagination-container">
-					<nav class="pagination-content">
-						<div class="pagination">
-							<a class="firstpage"> << </a>
-							<a class="pagination-newer"> < </a> 
-					
-							<span class="pagination-inner" th:each="pageNum : ${pageNum}">
-						 		<a th:id="${pageNum}" th:text="${pageNum}"></a>
-							</span> 
-					
-					<a class="pagination-older"> > </a>
-					<a class="lastpage"> >> </a>
-					<span id="lastNum" th:text="${lastNum}" style=display:none></span>
-					
-						</div>
-					</nav>
-				</div>
-
-				<div class="search">
-					<div class="select">
-						<select id="search-select">
-							<option value="title">제목</option>
-							<option value="name">글쓴이</option>
-						</select>
-					</div>
-					<section class="search-box">
-						<div class="search-content">
-							<input type="text" id="keyword"/>
-						</div>
-						<div class="search-button">
-							<button id="search">Search</button>
-						</div>
-					</section>
-				</div>
-			</div>
-		</article>
-	</div>
+            <div class="search">
+               <div class="select">
+                  <select id="search-select">
+                     <option value="title">제목</option>
+                     <option value="name">글쓴이</option>
+                  </select>
+               </div>
+               <section class="search-box">
+                  <div class="search-content">
+                     <input type="text" id="keyword"/>
+                  </div>
+                  <div class="search-button">
+                     <button id="search">Search</button>
+                  </div>
+               </section>
+            </div>
+         </div>
+      </article>
+   </div>
 </th:block>
 
 <th:block layout:fragment="page_js">
-	<script src="/resources/js/site/siterepair.js"></script>
-	<script src="/resources/js/site/asidebar.js"></script>
+   <script src="/resources/js/site/siterepair.js"></script>
 </th:block>
 </html>
