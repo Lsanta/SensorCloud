@@ -347,5 +347,9 @@ public class SiteServiceImplement implements SiteService {
 		//현장 추가에서의 회사 검색 (이름으로 )
 		return mapper.CompanySearch(name);
 	}
+	@Override
+	public String[] insen(String site_id) {
+		return mapper.insen(site_id);
+	}
 
 }
