@@ -138,11 +138,6 @@ public class SiteController {
 
 		}
 
-		System.out.println("현장 iD =" + site_id);
-		model.addAttribute("siteInfo", siteservice.getSite(site_id));
-		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
-		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
-
 		return "site/sitemain";
 	}
 
@@ -210,6 +205,7 @@ public class SiteController {
 		model.addAttribute("siteInfo", siteservice.getSite(site_id));
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
 		model.addAttribute("alarm", siteservice.getAlarm(site_id)); // 알람 내용 정
+		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
 		System.out.println("알람 내용" + siteservice.getAlarm(site_id));
 		
 		return "site/sitealarm";
@@ -285,6 +281,7 @@ public class SiteController {
 		model.addAttribute("siteInfo", siteservice.getSite(site_id.toString())); // 현장정보
 		model.addAttribute("checkboardlist", siteservice.repairList(parm));// 수리내역
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id.toString())); // 연락망
+		model.addAttribute("siteStatus", siteservice.getStatus(site_id.toString()));
 
 		if (realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
@@ -366,6 +363,7 @@ public class SiteController {
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id)); // 연락망
 		model.addAttribute("sensor_kind", siteservice.getSensorKind()); // 센서종류
 		model.addAttribute("sensorlist", siteservice.installSensorList(parm));
+		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
 
 		if (realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
