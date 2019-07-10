@@ -1,5 +1,14 @@
 @charset "UTF-8";
+.bg-grey {
+	background-color : #808080!important;
+} 
 
+.card .card-body {
+	padding : 0.3rem;
+}
+.card-body {
+	flex : 1 1 auto;
+}
 html {
   overflow-x: hidden; 
  }
@@ -8,6 +17,19 @@ html {
 	display : none;
 }
 
+.col-md-6 {
+	flex: 0 0 33%;
+    max-width: 33%;
+    display : inline-block;
+}
+
+.namediv {
+	margin-right : 1.25rem;
+}
+
+.nav-pills.nav-secondary .nav-link.active {
+	    background: #36a3f7;
+}
 .allContainer {
 	margin-left : 15%;
 	width : 100%;
@@ -41,68 +63,16 @@ html {
     margin-top: 2%;
  }
  
- 
-
-#checklist0 tr:hover, #checklist1 tr:hover, #checklist2 tr:hover {
-	background-color:  #eaecf4;
-}
-
-
-
-  @media ( max-width: 1001px ) {
-    #container {
-      width: auto;
-      
-    }
-    
-    .allContainer {
-	margin-left : 0;
-	width : 100%;
-	}
-    #main-content {
-      float: none;
-      width: auto;
-    }
-    .title-header {
-      float: none;
-      width: auto;
-    }
-    .button-container {
-      float: none;
-      width: auto;
-    }
-    .pagination-container {
-      float: none;
-      width: auto;
-    }
-    .pagination{
-      float: none;
-      width: auto;
-    }
-    .search {
-      float: none;
-      width: auto;
-    }
-    .select {
-      float: none;
-      width: auto;
-    }
-    .search-box {
-      float: none;
-      width: auto;
-    }
-    select { 
+ select { 
   width: 120px; /* 원하는 너비설정 */
   padding: .6em .5em; /* 여백으로 높이 설정 */ 
   font-family: inherit; /* 폰트 상속 */ 
   border: 1px solid #999; 
   border-radius: 20; /* iOS 둥근모서리 제거 */ 
   -moz-appearance: none; appearance: none;
-/*   margin-left: 200px; */
-  }
-} 
-
-#dateChange {
+  margin-left: -100px;
+}
+ #dateChange {
     margin-left: 2%;
 }
 table {
@@ -163,23 +133,13 @@ table {
   .search {
     width: 100%;
     padding: 20px 0;
-/*     margin-left: 8%; */
+    margin-left: 13%; 
   }
   
-  select { 
-  width: 120px; /* 원하는 너비설정 */
-  padding: .6em .5em; /* 여백으로 높이 설정 */ 
-  font-family: inherit; /* 폰트 상속 */ 
-  border: 1px solid #999; 
-  border-radius: 20; /* iOS 둥근모서리 제거 */ 
-  -moz-appearance: none; appearance: none;
-/*    margin-left: 200px;  */
-}
-
+  
  .pagination-container {
-  margin: 40px auto;
+  margin: 60px auto;
   text-align: center;
-  margin-bottom: 20px;
 }
 .pagination {
   position: relative;
@@ -207,9 +167,9 @@ table {
           transform: scale(0);
   transition: all 0.2s;
 }
-.pagination a:hover,
-.pagination a .pagination-active {
-  color: #fff;
+.pagination a:hover{
+  z-index: 501;
+  color: #fff !important;
 }
 .pagination a:hover:before,
 .pagination a .pagination-active:before {
@@ -217,17 +177,19 @@ table {
           transform: scale(1);
 }
 .pagination .pagination-active {
-  color: #fff;
+  z-index: 501;
+  color: #fff !important; 
 }
 .pagination .pagination-active:before {
   -webkit-transform: scale(1);
           transform: scale(1);
 }
 .pagination-newer {
-  margin-right: 20px;
+  margin-right: 10px;
 }
+
 .pagination-older {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .search-box { 
@@ -255,8 +217,83 @@ table {
    margin-left: 2%;
    height: 32px;
 }
+ 
 
-@media screen and (max-width: 768px) {
+#checklist0 tr:hover, #checklist1 tr:hover, #checklist2 tr:hover {
+	background-color:  #eaecf4;
+}
+
+@media screen and (max-width: 1200px) {
+	.col-md-6 {
+	flex: 0 0 33%;
+    max-width: 33%;
+    display : inline;
+ 	}
+ 	select { 
+ 	margin-left : -50px;
+ 	}	
+ 	.search {
+    width: 100%;
+    padding: 20px 0;
+    margin-left: 5%; 
+  }
+}
+  @media ( max-width: 1001px ) {
+    #container {
+      width: auto;
+      
+    }
+    
+    .allContainer {
+	margin-left : 0;
+	width : 100%;
+	}
+    #main-content {
+      float: none;
+      width: auto;
+    }
+    .title-header {
+      float: none;
+      width: auto;
+    }
+    .button-container {
+      float: none;
+      width: auto;
+    }
+    .pagination-container {
+      float: none;
+      width: auto;
+    }
+    .pagination{
+      float: none;
+      width: auto;
+    }
+    .search {
+      float: none;
+      width: auto;
+    }
+/*     .select { */
+/*       float: none; */
+/*       width: auto; */
+/*     } */
+    .search-box {
+      float: none;
+      width: auto;
+    }
+    select { 
+  width: 120px; /* 원하는 너비설정 */
+  padding: .6em .5em; /* 여백으로 높이 설정 */ 
+  font-family: inherit; /* 폰트 상속 */ 
+  border: 1px solid #999; 
+  border-radius: 20; /* iOS 둥근모서리 제거 */ 
+  -moz-appearance: none; appearance: none;
+   margin-left: -50px; 
+  }
+  
+  
+} 
+
+@media screen and (max-width: 768px) {	
   .search {
     float: none;
     width: auto;
@@ -266,12 +303,13 @@ table {
     clear: both;
     height: 0;
     width: auto;
+    margin-left : -30px;
   }
   .search-box {
     clear: both;
    /*  width: auto; */
-    margin-left: 180px;
-    width: 450px;
+    margin-left: 150px;
+    width: 270px;
   }
   select { 
   width: 120px; /* 원하는 너비설정 */

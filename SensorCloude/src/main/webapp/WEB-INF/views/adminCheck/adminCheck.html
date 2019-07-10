@@ -8,233 +8,398 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/adminCheck/adminCheck.css">
+	<link rel="stylesheet" type="text/css"
+		href="/resources/css/adminCheck/adminCheck.css">
 </th:block>
 
 <th:block layout:fragment="contents">
-<div class="allContainer">
-	<div id="container">
-	<div id="main-content"> <!-- 현장 상태가 open일 때 -->
-			<div class="title-header">
-				<h1>OPEN</h1>
-				<select id="dateChange" class="openchange" name="term">
-				<option value="0">전체날짜</option>
-				<option value="1">최근 1개월</option>
-				<option value="3">최근 3개월</option>
-			</select>
-			</div>
-			<table>
-				<thead>
-					<tr>
-						<th scope="col" style="width:10%;">현장이름</th>
-						<th scope="col" style="width:20%;">제목</th>
-						<th scope="col" style="width:8%;">상태</th>
-						<th scope="col" style="width:8%;">글쓴이</th>
-						<th scope="col" style="width:10%;">날짜</th>
-					</tr>
-				</thead>
-				<tbody id="checklist0" th:if="${check == null}">
-				 	<tr th:each="checkboardlist : ${check0}" >
-						<td th:text="${checkboardlist.site_name}"></td>
-						<td th:text="${checkboardlist.title}"></td>
-						<td th:switch="${checkboardlist.board_status}">
-							<span th:case="'0'">open</span>
-							<span th:case="'1'">fixed</span>
-							<span th:case="'2'">closed</span>
-						</td>
-						<td th:text="${checkboardlist.name}"></td>
-						<td th:text="${checkboardlist.reg_date}"></td>
-						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
-					</tr> 
-				</tbody>
-				
-				<tbody id="checklist0" th:if="${check != null}">
-				 	<tr th:each="checkboardlist : ${check}" >
-						<td th:text="${checkboardlist.site_name}"></td>
-						<td th:text="${checkboardlist.title}"></td>
-						<td th:switch="${checkboardlist.board_status}">
-						<span th:case="'0'">open</span>
-						<span th:case="'1'">fixed</span>
-						<span th:case="'2'">closed</span>
-						</td>
-						<td th:text="${checkboardlist.name}"></td>
-						<td th:text="${checkboardlist.reg_date}"></td>
-						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
-					</tr> 
-				</tbody>
-			</table>
-		</div>
+	<div class="main-panel">
+		<div class="content">
+			<div class="page-inner">
+				<!-- 일반 open -->
+				<div class="col-md-6" th:if="${check == null}">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-head-row">
+								<div class="card-title">
+								<div class="avatar avatar-online">
+									<span class="avatar-title rounded-circle border border-white bg-success">O</span>
+								</div>
+								대기 중(Open)
+								</div>
+								<div class="card-tools">
+									<ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm"
+										id="pills-tab" role="tablist">
+										<li class="nav-item"><a class="nav-link" id="pills-today0"
+											data-toggle="pill" role="tab">전체보기</a></li>
+										<li class="nav-item"><a class="nav-link" id="pills-month0"
+											data-toggle="pill" role="tab">1개월</a></li>
+										<li class="nav-item"><a class="nav-link" id="pills-tmonth0"
+											data-toggle="pill" role="tab">3개월</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="card-body" id="checklist0" th:each="checkboardlist : ${check0}">
+							<div class="d-flex">
 
-		<div class="pagination-container">
-			<nav class="pagination-content">
-				<div class="pagination" id="openPage">
-					<a class="firstpage"> << </a>
-					<a class="pagination-newer"> < </a> 
-					
-					<span class="pagination-inner" th:each="pageNum0 : ${pageNum0}">
-						 <a th:id="${pageNum0}" th:text="${pageNum0}"></a>
-					</span> 
-					
-					<a class="pagination-older"> > </a>
-					<a class="lastpage"> >> </a>
-					<span id="lastNum0" th:text="${lastNum0}" style=display:none></span>
-				</div>
-			</nav>
-		</div>
-		</div> <!-- 첫번째 메인 div 끝-->
-		
-		<div id="container">
-		<div id="main-content"> <!-- 현장 상태가 fixed일 때 -->
-			<div class="title-header">
-				<h1>FIXED</h1>
-			</div>
+								<div class="flex-1 ml-3 pt-1" th:id="${checkboardlist.board_no}">
+									<h5 class="text-uppercase fw-bold mb-1">
+										<span th:text="${checkboardlist.title}"></span> 
+										<span class="text-success pl-3">OPEN</span>
+									</h5>
+									<span class="text-muted" th:text="${checkboardlist.site_name}"></span>
+								</div>
+
+								<div class="float-right pt-1 namediv">
+									<!--  fw-blod 가 글씨 굵기 -->
+									<small class="text-muted fw-bold" th:text="${checkboardlist.name}"></small>
+								</div>
+								<div class="float-right pt-1">
+									<small class="text-muted" th:text="${checkboardlist.reg_date}"></small>
+								</div>	
+							</div>
+					        <div class="separator-dashed"></div>
+						</div> <!-- card-body 종료 -->
+								<div class="pagination-container">
+									<nav class="pagination-content">
+										<div class="pagination" id="openPage">
+											<a class="firstpage"> << </a> 
+											<a class="pagination-newer"> < </a> 
+											<span class="pagination-inner" th:each="pageNum0 : ${pageNum0}"> 
+												<a th:id="${pageNum0}" th:text="${pageNum0}"></a>
+											</span> 
+											<a class="pagination-older"> > </a> 
+											<a class="lastpage"> >> </a> 
+											<span id="lastNum0" th:text="${lastNum0}" style="display: none"></span>
+										</div>
+									</nav>
+								</div>
+					</div> <!-- card 종료 -->
+				</div> <!-- COL-MD-6 종료 -->
+				
+				<!-- 검색 open -->
+				<div class="col-md-6" th:if="${check != null}"> 
+					<div class="card">
+						<div class="card-header">
+							<div class="card-head-row">
+								<div class="card-title">
+								<div class="avatar avatar-online">
+									<span class="avatar-title rounded-circle border border-white .bg-success">O</span>
+								</div>
+								대기 중(Open)
+								</div>
+								<div class="card-tools">
+									<ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm"
+										id="pills-tab" role="tablist">
+										<li class="nav-item"><a class="nav-link" id="pills-today0"
+											data-toggle="pill" href="#pills-today" role="tab">전체보기</a></li>
+										<li class="nav-item"><a class="nav-link" id="pills-month0"
+											data-toggle="pill" href="#pills-week" role="tab">1개월</a></li>
+										<li class="nav-item"><a class="nav-link" id="pills-tmonth0"
+											data-toggle="pill" href="#pills-month" role="tab">3개월</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="card-body" id="checklist0" th:each="checkboardlist : ${check}">
+							<div class="d-flex">
+								<div class="flex-1 ml-3 pt-1" th:id="${checkboardlist.board_no}">
+									<h5 class="text-uppercase fw-bold mb-1">
+										<span th:text="${checkboardlist.title}"></span> <span
+											class="text-success pl-3">OPEN</span>
+									</h5>
+									<span class="text-muted" th:text="${checkboardlist.site_name}"></span>
+								</div>
+								<div class="float-right pt-1 namediv">
+									<!--  fw-blod 가 글씨 굵기 -->
+									<small class="text-muted fw-bold" th:text="${checkboardlist.name}"></small>
+								</div>
+								<div class="float-right pt-1">
+									<small class="text-muted" th:text="${checkboardlist.reg_date}"></small>
+								</div>
+							</div>
+							<div class="separator-dashed"></div>
+						</div> <!-- card-body 종료 -->
+						<div class="pagination-container">
+									<nav class="pagination-content">
+										<div class="pagination" id="openPage">
+											<a class="firstpage"> << </a> 
+											<a class="pagination-newer"> < </a> 
+											<span class="pagination-inner" th:each="pageNum0 : ${pageNum0}"> 
+												<a th:id="${pageNum0}" th:text="${pageNum0}"></a>
+											</span> 
+											<a class="pagination-older"> > </a> 
+											<a class="lastpage"> >> </a> 
+											<span id="lastNum0" th:text="${lastNum0}" style="display: none"></span>
+										</div>
+									</nav>
+							</div>
+					</div> <!-- card 종료 -->
+				</div> <!-- COL-MD-6 종료 -->
+											
 			
-			<table>
-				<thead>
-					<tr>
-						<th scope="col" style="width:10%;">현장이름</th>
-						<th scope="col" style="width:20%;">제목</th>
-						<th scope="col" style="width:8%;">상태</th>
-						<th scope="col" style="width:8%;">글쓴이</th>
-						<th scope="col" style="width:10%;">날짜</th>
-					</tr>
-				</thead>
-				<tbody id="checklist1" th:if="${check == null}">
-				 	<tr th:each="checkboardlist : ${check1}" >
-						<td th:text="${checkboardlist.site_name}"></td>
-						<td th:text="${checkboardlist.title}"></td>
-						<td th:switch="${checkboardlist.board_status}">
-							<span th:case="'0'">open</span>
-							<span th:case="'1'">fixed</span>
-							<span th:case="'2'">closed</span>
-						</td>
-						<td th:text="${checkboardlist.name}"></td>
-						<td th:text="${checkboardlist.reg_date}"></td>
-						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
-					</tr> 
-				</tbody>
-				
-				<tbody id="checklist1" th:if="${check != null}">
-				 	<tr th:each="checkboardlist : ${check}" >
-						<td th:text="${checkboardlist.site_name}"></td>
-						<td th:text="${checkboardlist.title}"></td>
-						<td th:switch="${checkboardlist.board_status}">
-						<span th:case="'0'">open</span>
-						<span th:case="'1'">fixed</span>
-						<span th:case="'2'">closed</span>
-						</td>
-						<td th:text="${checkboardlist.name}"></td>
-						<td th:text="${checkboardlist.reg_date}"></td>
-						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
-					</tr> 
-				</tbody>
-			</table>
-		</div>
-
-		<div class="pagination-container">
-			<nav class="pagination-content">
-				<div class="pagination" id="fixedPage">
-					<a class="firstpage"> << </a>
-					<a class="pagination-newer"> < </a> 
-					
-					<span class="pagination-inner" th:each="pageNum1 : ${pageNum1}">
-						 <a th:id="${pageNum1}" th:text="${pageNum1}"></a>
-					</span> 
-					
-					<a class="pagination-older"> > </a>
-					<a class="lastpage"> >> </a>
-					<span id="lastNum1" th:text="${lastNum1}" style=display:none></span>
-				</div>
-			</nav>
-		</div>
-		</div> <!-- 두번째  메인 div 종료-->
-		
-		<div id="container">
-		<div id="main-content"> <!-- 현장 상태가 close일 때 -->
-			<div class="title-header">
-				<h1>CLOSE</h1>
-			</div>
+				<!-- 일반 fixed -->
+				<div class="col-md-6" th:if="${check == null}">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-head-row">
+								<div class="card-title">
+								<div class="avatar avatar-online">
+									<span class="avatar-title rounded-circle border border-white bg-warning">F</span>
+								</div>
+								처리 대기 중(Fixed)
+								</div>
+								<div class="card-tools">
+									<ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm"
+										id="pills-tab" role="tablist">
+										<li class="nav-item"><a class="nav-link" id="pills-today1"
+											data-toggle="pill" href="#pills-today" role="tab">전체보기</a></li>
+										<li class="nav-item"><a class="nav-link" id="pills-month1"
+											data-toggle="pill" href="#pills-week" role="tab">1개월</a></li>
+										<li class="nav-item"><a class="nav-link" id="pills-tmonth1"
+											data-toggle="pill" href="#pills-month" role="tab">3개월</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="card-body" id="checklist1" th:each="checkboardlist : ${check1}">
+							<div class="d-flex">
+								<div class="flex-1 ml-3 pt-1" th:id="${checkboardlist.board_no}">
+									<h5 class="text-uppercase fw-bold mb-1">
+										<span th:text="${checkboardlist.title}"></span> <span
+											class="text-warning pl-3">Fixed</span>
+									</h5>
+									<span class="text-muted" th:text="${checkboardlist.site_name}"></span>
+								</div>
+								<div class="float-right pt-1 namediv">
+									<!--  fw-blod 가 글씨 굵기 -->
+									<small class="text-muted fw-bold" th:text="${checkboardlist.name}"></small>
+								</div>
+								<div class="float-right pt-1">
+									<small class="text-muted" th:text="${checkboardlist.reg_date}"></small>
+								</div>
+							</div>
+							<div class="separator-dashed"></div>		
+						</div> <!-- card-body 종료 -->
+						<div class="pagination-container">
+									<nav class="pagination-content">
+										<div class="pagination" id="fixedPage">
+											<a class="firstpage"> << </a> <a class="pagination-newer">
+												< </a> <span class="pagination-inner"
+												th:each="pageNum1 : ${pageNum1}"> <a
+												th:id="${pageNum1}" th:text="${pageNum1}"></a>
+											</span> <a class="pagination-older"> > </a> <a class="lastpage">
+												>> </a> <span id="lastNum1" th:text="${lastNum1}" style="display: none"></span>
+										</div>
+									</nav>
+								</div>
+					</div> <!-- card 종료 -->
+				</div> <!-- COL-MD-6 종료 -->
 			
-			<table>
-				<thead>
-					<tr>
-						<th scope="col" style="width:10%;">현장이름</th>
-						<th scope="col" style="width:20%;">제목</th>
-						<th scope="col" style="width:8%;">상태</th>
-						<th scope="col" style="width:8%;">글쓴이</th>
-						<th scope="col" style="width:10%;">날짜</th>
-					</tr>
-				</thead>
-				<tbody id="checklist2" th:if="${check == null}">
-				 	<tr th:each="checkboardlist : ${check2}" >
-						<td th:text="${checkboardlist.site_name}"></td>
-						<td th:text="${checkboardlist.title}"></td>
-						<td th:switch="${checkboardlist.board_status}">
-							<span th:case="'0'">open</span>
-							<span th:case="'1'">fixed</span>
-							<span th:case="'2'">closed</span>
-						</td>
-						<td th:text="${checkboardlist.name}"></td>
-						<td th:text="${checkboardlist.reg_date}"></td>
-						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
-					</tr> 
-				</tbody>
-				
-				<tbody id="checklist2" th:if="${check != null}">
-				 	<tr th:each="checkboardlist : ${check}" >
-						<td th:text="${checkboardlist.site_name}"></td>
-						<td th:text="${checkboardlist.title}"></td>
-						<td th:switch="${checkboardlist.board_status}">
-						<span th:case="'0'">open</span>
-						<span th:case="'1'">fixed</span>
-						<span th:case="'2'">closed</span>
-						</td>
-						<td th:text="${checkboardlist.name}"></td>
-						<td th:text="${checkboardlist.reg_date}"></td>
-						<td th:text="${checkboardlist.board_no}" style="display : none"></td>
-					</tr> 
-				</tbody>
-			</table>
-		</div>
+				<!-- 검색 fixed -->
+				<div class="col-md-6" th:if="${check != null}">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-head-row">
+								<div class="card-title">
+								<div class="avatar avatar-online">
+									<span class="avatar-title rounded-circle border border-white bg-warning">F</span>
+								</div>
+								처리 대기 중(Fixed)
+								</div>
+								<div class="card-tools">
+									<ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm"
+										id="pills-tab" role="tablist">
+										<li class="nav-item"><a class="nav-link" id="pills-today1"
+											data-toggle="pill" href="#pills-today" role="tab">전체보기</a></li>
+										<li class="nav-item"><a class="nav-link" id="pills-month1"
+											data-toggle="pill" href="#pills-week" role="tab">1개월</a></li>
+										<li class="nav-item"><a class="nav-link" id="pills-tmonth1"
+											data-toggle="pill" href="#pills-month" role="tab">3개월</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="card-body" id="checklist1" th:each="checkboardlist : ${check}" >
+							<div class="d-flex">
+								<div class="flex-1 ml-3 pt-1" th:id="${checkboardlist.board_no}">
+									<h5 class="text-uppercase fw-bold mb-1">
+										<span th:text="${checkboardlist.title}"></span> <span
+											class="text-warning pl-3">Fixed</span>
+									</h5>
+									<span class="text-muted" th:text="${checkboardlist.site_name}"></span>
+								</div>
+								<div class="float-right pt-1 namediv">
+									<!--  fw-blod 가 글씨 굵기 -->
+									<small class="text-muted fw-bold" th:text="${checkboardlist.name}"></small>
+								</div>
+								<div class="float-right pt-1">
+									<small class="text-muted" th:text="${checkboardlist.reg_date}"></small>
+								</div>
+							</div>
+							<div class="separator-dashed"></div> 
+						</div> <!-- card-body 종료 -->
+						<div class="pagination-container">
+									<nav class="pagination-content">
+										<div class="pagination" id="fixedPage">
+											<a class="firstpage"> << </a> <a class="pagination-newer">
+												< </a> <span class="pagination-inner"
+												th:each="pageNum1 : ${pageNum1}"> <a
+												th:id="${pageNum1}" th:text="${pageNum1}"></a>
+											</span> <a class="pagination-older"> > </a> <a class="lastpage">
+												>> </a> <span id="lastNum1" th:text="${lastNum1}" style="display: none"></span>
+										</div>
+									</nav>
+								</div>
+					</div> <!-- card 종료 -->
+				</div> <!-- COL-MD-6 종료 -->
+			
+				<!-- 일반 closed -->
+				<div class="col-md-6" th:if="${check == null}">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-head-row">
+								<div class="card-title">
+								<div class="avatar avatar-online">
+									<span class="avatar-title rounded-circle border border-white bg-grey">C</span>
+								</div>
+								처리 완료
+								</div>
+								<div class="card-tools">
+									<ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm"
+										id="pills-tab" role="tablist">
+										<li class="nav-item"><a class="nav-link" id="pills-today2"
+											data-toggle="pill" href="#pills-today" role="tab">전체보기</a></li>
+										<li class="nav-item"><a class="nav-link" id="pills-month2"
+											data-toggle="pill" href="#pills-week" role="tab">1개월</a></li>
+										<li class="nav-item"><a class="nav-link" id="pills-tmonth2"
+											data-toggle="pill" href="#pills-month" role="tab">3개월</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="card-body" id="checklist2" th:each="checkboardlist : ${check2}">
+							<div class="d-flex">
+								<div class="flex-1 ml-3 pt-1" th:id="${checkboardlist.board_no}">
+									<h5 class="text-uppercase fw-bold mb-1">
+										<span th:text="${checkboardlist.title}"></span> <span
+											class="text-muted pl-3">Close</span>
+									</h5>
+									<span class="text-muted" th:text="${checkboardlist.site_name}"></span>
+								</div>
+								<div class="float-right pt-1 namediv">
+									<!--  fw-blod 가 글씨 굵기 -->
+									<small class="text-muted fw-bold" th:text="${checkboardlist.name}"></small>
+								</div>
+								<div class="float-right pt-1">
+									<small class="text-muted" th:text="${checkboardlist.reg_date}"></small>
+								</div>
 
-		<div class="pagination-container">
-			<nav class="pagination-content">
-				<div class="pagination" id="closePage">
-					<a class="firstpage"> << </a>
-					<a class="pagination-newer"> < </a> 
-					
-					<span class="pagination-inner" th:each="pageNum2 : ${pageNum2}">
-						 <a th:id="${pageNum2}" th:text="${pageNum2}"></a>
-					</span> 
-					
-					<a class="pagination-older"> > </a>
-					<a class="lastpage"> >> </a>
-					<span id="lastNum2" th:text="${lastNum2}" style=display:none></span>
+							</div>
+							<div class="separator-dashed"></div> 
+						</div> <!-- card-body 종료 -->
+						<div class="pagination-container">
+									<nav class="pagination-content">
+										<div class="pagination" id="closePage">
+											<a class="firstpage"> << </a> <a class="pagination-newer">
+												< </a> <span class="pagination-inner"
+												th:each="pageNum2 : ${pageNum2}"> <a
+												th:id="${pageNum2}" th:text="${pageNum2}"></a>
+											</span> <a class="pagination-older"> > </a> <a class="lastpage">
+												>> </a> <span id="lastNum2" th:text="${lastNum2}" style="display: none"></span>
+										</div>
+									</nav>
+								</div>
+					</div> <!-- card 종료 -->
+				</div> <!-- COL-MD-6 종료 -->
+				
+				<!-- 검색 closed -->
+				<div class="col-md-6" th:if="${check != null}">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-head-row">
+								<div class="card-title">
+								<div class="avatar avatar-online">
+									<span class="avatar-title rounded-circle border border-white bg-grey">C</span>
+								</div>
+								처리 완료(Close)
+								</div>
+								<div class="card-tools">
+									<ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm"
+										id="pills-tab" role="tablist">
+										<li class="nav-item"><a class="nav-link" id="pills-today2"
+											data-toggle="pill" href="#pills-today" role="tab">전체보기</a></li>
+										<li class="nav-item"><a class="nav-link" id="pills-month2"
+											data-toggle="pill" href="#pills-week" role="tab">1개월</a></li>
+										<li class="nav-item"><a class="nav-link" id="pills-tmonth2"
+											data-toggle="pill" href="#pills-month" role="tab">3개월</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="card-body" id="checklist2" th:each="checkboardlist : ${check}" >
+							<div class="d-flex">
+								<div class="avatar avatar-online">
+									<span class="avatar-title rounded-circle border border-white bg-danger">C</span>
+								</div>
+	
+								<div class="flex-1 ml-3 pt-1" th:id="${checkboardlist.board_no}">
+									<h5 class="text-uppercase fw-bold mb-1">
+										<span th:text="${checkboardlist.title}"></span> <span
+											class="text-muted pl-3">Close</span>
+									</h5>
+									<span class="text-muted" th:text="${checkboardlist.site_name}"></span>
+								</div>
+								<div class="float-right pt-1 namediv">
+									<!--  fw-blod 가 글씨 굵기 -->
+									<small class="text-muted fw-bold" th:text="${checkboardlist.name}"></small>
+								</div>
+								<div class="float-right pt-1">
+									<small class="text-muted" th:text="${checkboardlist.reg_date}"></small>
+								</div>
+
+							</div>
+							<div class="separator-dashed"></div>
+						</div> <!-- card-body 종료 -->
+						<div class="pagination-container">
+									<nav class="pagination-content">
+										<div class="pagination" id="closePage">
+											<a class="firstpage"> << </a> <a class="pagination-newer">
+												< </a> <span class="pagination-inner"
+												th:each="pageNum2 : ${pageNum2}"> <a
+												th:id="${pageNum2}" th:text="${pageNum2}"></a>
+											</span> <a class="pagination-older"> > </a> <a class="lastpage">
+												>> </a> <span id="lastNum2" th:text="${lastNum2}" style="display: none"></span>
+										</div>
+									</nav>
+							</div>
+					</div> <!-- card 종료 -->
+				</div> <!-- COL-MD-6 종료 -->
+
+				<div class="search">
+					<div class="select">
+						<select id="search-select">
+							<option value="site_name">현장이름</option>
+							<option value="name">글쓴이</option>
+							<option value="title">제목</option>
+						</select>
+					</div>
+					<section class="search-box">
+						<div class="search-content">
+							<input type="text" id="keyword" />
+						</div>
+						<div class="search-button">
+							<button id="search">Search</button>
+						</div>
+					</section>
 				</div>
-			</nav>
-		</div>
-	</div> <!-- 마지막 메인 div 끝-->
+
+			</div><!-- page-inner 종료 -->
+		</div><!-- content 종료 -->
+	</div><!-- main-panel 종료 -->
 	
 	
-	<div class="search">
-			<div class="select">
-				<select id="search-select">
-					<option value="site_name">현장이름</option>
-					<option value="name">글쓴이</option>
-					<option value="title">제목</option>
-				</select>
-			</div>
-			<section class="search-box">
-				<div class="search-content">
-					<input type="text" id="keyword"/>
-				</div>
-				<div class="search-button">
-					<button id="search">Search</button>
-				</div>
-			</section>
-	</div>
-	
-	</div>
 </th:block>
 
 <th:block layout:fragment="page_js">
