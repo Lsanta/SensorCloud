@@ -15,9 +15,9 @@
 
 	<select id="getSite" resultType="com.wda.sc.domain.SiteVO">
 	<![CDATA[ 
-		select site_id,type_no,site_name,address,site_status,start_date as start_date
-		from site where site_id = #{site_id}
-		]]>
+		select site_id,type_no,site_name,address,site_status,start_date as start_date, c.name, c.company_tel
+		from site s, company c where site_id = #{site_id} and s.company_num = c.company_num
+	]]>
 	</select>
 	
 	<select id="repairList" resultType="com.wda.sc.domain.CheckBoardVO" parameterType="map">
@@ -188,6 +188,11 @@
                 where a.before_num < ${Paging.endnum}) x
 		where x.before_num >= ${Paging.startnum}
 		]]>
+	</select>
+	
+	<!-- 현장메인에 협력사 정보 불러오기 -->
+	<select id="getCompany" resultType="com.wda.sc.domain.CompanyVO">
+		select * from company where company_num = ${company_num} 
 	</select>
 		
 	<!-- 수리내역 검색 -->
