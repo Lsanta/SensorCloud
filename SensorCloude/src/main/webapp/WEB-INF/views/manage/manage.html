@@ -8,107 +8,105 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
-	<link rel="stylesheet" type="text/css" href="/resources/css/manage/managelist.css">
+	<link rel="stylesheet" type="text/css"
+		href="/resources/css/manage/managelist.css">
 </th:block>
 
 <th:block layout:fragment="contents">
 
 
-	<div id="container">
-	<div id="main" class="col-md-8">
-	<div class="card card-stats card-round">
-	<div class="card-body">
-		<div id="main-content">
-			<div class="title-header">
-				<h1>사용자관리</h1>
+	<div class="main-panel">
+		<div class="content">
+			<div class="page-inner">
+					<div class="card card-stats card-round">
+						<div class="card-body">
+							<div id="main-content">
+								<div class="title-header">
+									<h1>사용자관리</h1>
+								</div>
+
+								<table>
+									<thead>
+										<tr>
+											<th scope="col" style="width: 10%;">아이디</th>
+											<th scope="col" style="width: 10%;">이름</th>
+											<th scope="col" style="width: 18%;">이메일</th>
+											<th scope="col" style="width: 15%;">전화번호</th>
+											<th scope="col" style="width: 8%;">등급</th>
+											<th scope="col" style="width: 8%;">소속회사</th>
+											<th style="width: 8%;">승급요청</th>
+										</tr>
+									</thead>
+									<tbody id="user" th:if="${manage == null}">
+										<tr th:each="userlist : ${userlist}">
+											<td th:text="${userlist.user_id}"></td>
+											<td th:text="${userlist.name}"></td>
+											<td th:text="${userlist.email}"></td>
+											<td th:text="${userlist.phone}"></td>
+											<td th:text="${userlist.m_level}"></td>
+											<td th:text="${userlist.re_level}" style="display: none"></td>
+											<td th:text="${userlist.cname}"></td>
+											<td th:if="${userlist.re_level != 0}"><a class="accept"
+												type="button">수락</a> <a class="cancel" type="button">취소</a>
+											</td>
+											<td th:if="${userlist.re_level == 0}"></td>
+										</tr>
+									</tbody>
+
+									<tbody id="user" th:if="${manage != null}">
+										<tr th:each="userlist : ${manage}">
+											<td th:text="${userlist.user_id}"></td>
+											<td th:text="${userlist.name}"></td>
+											<td th:text="${userlist.email}"></td>
+											<td th:text="${userlist.phone}"></td>
+											<td th:text="${userlist.m_level}"></td>
+											<td th:text="${userlist.re_level}" style="display: none"></td>
+
+											<td th:text="${userlist.cname}"></td>
+											<td th:if="${userlist.re_level != 0}"><input
+												class="accept" type='button' value='수락' /> <input
+												class="cancel" type='button' value='취소' /></td>
+											<td th:if="${userlist.re_level == 0}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="pagination-container">
+								<nav class="pagination-content">
+									<div class="pagination">
+										<a class="firstpage"> << </a> <a class="pagination-newer">
+											< </a> <span class="pagination-inner"
+											th:each="pageNum : ${pageNum}"> <a th:id="${pageNum}"
+											th:text="${pageNum}"></a>
+										</span> <a class="pagination-older"> > </a> <a class="lastpage">
+											>> </a> <span id="lastNum" th:text="${lastNum}"
+											style="display: none"></span>
+									</div>
+								</nav>
+							</div>
+
+							<div class="search">
+								<div class="select">
+									<select id="search-select">
+										<option value="name">이름</option>
+										<option value="user_id">아이디</option>
+									</select>
+								</div>
+								<section class="search-box">
+									<div class="search-content">
+										<input type="text" id="keyword" />
+									</div>
+									<div class="search-button">
+										<button id="search">Search</button>
+									</div>
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-
-			<table>
-				<thead>
-					<tr>
-						<th scope="col" style="width:10%;">아이디</th>
-						<th scope="col" style="width:10%;">이름</th>
-						<th scope="col" style="width:18%;">이메일</th>
-						<th scope="col" style="width:15%;">전화번호</th>
-						<th scope="col" style="width:8%;">등급</th>
-						<th scope="col" style="width:8%;">소속회사</th>
-						<th style="width:8%;">승급요청</th>
-					</tr>
-				</thead>
-				<tbody id="user" th:if="${manage == null}">
-				 	<tr th:each="userlist : ${userlist}" >
-						<td th:text="${userlist.user_id}"></td>
-						<td th:text="${userlist.name}"></td>
-						<td th:text="${userlist.email}"></td>
-						<td th:text="${userlist.phone}"></td>
-						<td th:text="${userlist.m_level}"></td>
-						<td th:text="${userlist.re_level}" style = "display:none"></td>
-						<td th:text="${userlist.cname}"></td>
-						<td th:if="${userlist.re_level != 0}">
-							<a class="accept" type="button" >수락</a>
-							<a class="cancel" type="button" >취소</a>
-						</td>
-						<td th:if="${userlist.re_level == 0}"></td>
-			        </tr>
-				</tbody>
-				
-				<tbody id="user" th:if="${manage != null}">
-				 	<tr th:each="userlist : ${manage}" >
-						<td th:text="${userlist.user_id}"></td>
-						<td th:text="${userlist.name}"></td>
-						<td th:text="${userlist.email}"></td>
-						<td th:text="${userlist.phone}"></td>
-						<td th:text="${userlist.m_level}"></td>
-						<td th:text="${userlist.re_level}" style = "display:none"></td>
-						
-						<td th:text="${userlist.cname}"></td>
-						<td th:if="${userlist.re_level != 0}">
-						<input class="accept" type='button' value='수락'/>
-						<input class="cancel" type='button' value='취소'/>
-						</td>
-						<td th:if="${userlist.re_level == 0}"></td>
-			        </tr>
-				</tbody>
-			</table>
 		</div>
-
-		<div class="pagination-container">
-			<nav class="pagination-content">
-				<div class="pagination">
-					<a class="firstpage"> << </a>
-					<a class="pagination-newer"> < </a>
-					
-					<span class="pagination-inner" th:each="pageNum : ${pageNum}">
-						 <a th:id="${pageNum}" th:text="${pageNum}"></a>
-					</span> 
-					
-					<a class="pagination-older"> > </a>
-					<a class="lastpage"> >> </a>
-					<span id="lastNum" th:text="${lastNum}" style=display:none></span>
-				</div>
-			</nav>
-		</div>
-
-		<div class="search">
-			<div class="select">
-				<select id="search-select">
-					<option value="name">이름</option>
-					<option value="user_id">아이디</option>
-				</select>
-			</div>
-			<section class="search-box">
-				<div class="search-content">
-					<input type="text" id="keyword"/>
-				</div>
-				<div class="search-button">
-					<button id="search">Search</button>
-				</div>
-			</section>
-		</div>
-</div>
-</div>
-</div>
-</div>
 </th:block>
 
 <th:block layout:fragment="page_js">
