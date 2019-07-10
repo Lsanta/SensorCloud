@@ -108,11 +108,16 @@ public class SiteController {
 
 			// response.sendRedirect("/sitelist/1");
 		}
-
+		ArrayList<SiteVO> arr = new ArrayList<SiteVO>();
+		arr = siteservice.joinSite(site_id);
+		
 		model.addAttribute("joinSite", siteservice.joinSite(site_id)); // 현장에 관한 값
 		System.out.println("현장에 관한 값" + siteservice.joinSite(site_id));
 		model.addAttribute("insSen", siteservice.getsiteModSensor(Integer.parseInt(site_id)));// 설치센서에 관한 값
 		System.out.println("설치센서에 관한 값" + siteservice.getsiteModSensor(Integer.parseInt(site_id)));
+		model.addAttribute("depth0","메인화면");
+  	  	model.addAttribute("depth1","현장관리");
+  	  	model.addAttribute("depth2", arr.get(0).getSite_name());
 		return "site/sitemodify";
 	}
 
@@ -283,6 +288,15 @@ public class SiteController {
 		parm.put("paging", page);
 		parm.put("site_id", site_id);
 
+		ArrayList<SiteVO> depthArr = new ArrayList<SiteVO>();
+		depthArr = siteservice.getSite(site_id.toString());
+		
+		model.addAttribute("depth0","메인화면");
+  	  	model.addAttribute("depth1","현장관리");
+  	  	model.addAttribute("depth2", depthArr.get(0).getSite_name());
+  	  	model.addAttribute("depth3", "수리내역");
+		
+		
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
 		model.addAttribute("siteInfo", siteservice.getSite(site_id.toString())); // 현장정보
@@ -362,7 +376,15 @@ public class SiteController {
 
 		parm.put("paging", page);
 		parm.put("site_id", site_id);
-
+		
+		ArrayList<SiteVO> depthArr = new ArrayList<SiteVO>();
+		depthArr = siteservice.getSite(site_id.toString());
+		
+		model.addAttribute("depth0","메인화면");
+  	  	model.addAttribute("depth1","현장관리");
+  	  	model.addAttribute("depth2", depthArr.get(0).getSite_name());
+  	  	model.addAttribute("depth3", "센서관리");
+		
 		model.addAttribute("lastNum", pageNum);
 		System.out.println("pageNum : " + pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
