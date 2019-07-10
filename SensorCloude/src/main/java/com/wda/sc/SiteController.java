@@ -116,8 +116,7 @@ public class SiteController {
 	}
 
 	@RequestMapping(value = "{site_id}", method = RequestMethod.GET)
-	public String siteclick(@PathVariable String site_id, Model model, HttpSession session,
-			HttpServletResponse response) throws IOException {
+	public String siteclick(@PathVariable String site_id, Model model, HttpSession session, HttpServletResponse response) throws IOException {
 
 		System.out.println("현장 iD =" + site_id);
 		model.addAttribute("siteInfo", siteservice.getSite(site_id));
