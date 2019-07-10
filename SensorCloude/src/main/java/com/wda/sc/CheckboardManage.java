@@ -74,6 +74,8 @@ public class CheckboardManage {
 		}
 		
 		model.addAttribute("check" + status ,result); // open인 점검이력
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","점검이력관리");
 		
 		System.out.println("realNum" + realNum);
 		System.out.println("페이지넘" + pageNum);
@@ -142,6 +144,8 @@ public class CheckboardManage {
 			model.addAttribute("lastNum" + status, pageNum);
 			model.addAttribute("pageNum" + status, map.get(sendPageNum)); //arr
 			model.addAttribute("check" + status ,result); // open인 점검이력
+			model.addAttribute("depth0","메인화면");
+			model.addAttribute("depth1","점검이력관리");
 			if (realNum > pageNum) {
 				System.out.println("pageNum : " + pageNum);
 				return "false";
@@ -222,6 +226,8 @@ public class CheckboardManage {
 			model.addAttribute("check" + status, result);
 			model.addAttribute("lastNum" + status, pageNum);
 			model.addAttribute("pageNum" + status, map.get(sendPageNum)); //arr
+			model.addAttribute("depth0","메인화면");
+			model.addAttribute("depth1","점검이력관리");
 			System.out.println("검색완료 점검이력으로");
 			
 			if (realNum > pageNum) {
@@ -316,6 +322,8 @@ public class CheckboardManage {
 		}
 		
 		model.addAttribute("check" + status , result);
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","점검이력관리");
 		
 		if(realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);

@@ -60,7 +60,9 @@ public class CheckboardCotroller {
 
          
       }
-
+      model.addAttribute("depth0","메인화면");
+	  model.addAttribute("depth1","점검이력");
+	  
       System.out.println("글쓰기누름");
       model.addAttribute("checksitelist", siteservice.getchecksite());
       return "check/checkadd";
@@ -115,6 +117,9 @@ public class CheckboardCotroller {
       model.addAttribute("board_no", board_no);
 
       System.out.println("사이트아이디=" + Checkboardservice.getsiteid(board_no));
+      
+      model.addAttribute("depth0","메인화면");
+	  model.addAttribute("depth1","점검이력");
       return "check/checkview";
    }
 
@@ -199,7 +204,9 @@ public class CheckboardCotroller {
 
       // 현장아이디
       model.addAttribute("siteid", Checkboardservice.getsiteid(board_no));
-
+     
+      model.addAttribute("depth0","메인화면");
+	  model.addAttribute("depth1","점검이력");
       return "check/checklistmodify";
    }
 
@@ -458,6 +465,8 @@ public class CheckboardCotroller {
       parm.put("Paging", p);
       parm.put("Search", s);
       
+      model.addAttribute("depth0","메인화면");
+	  model.addAttribute("depth1","점검이력");
       model.addAttribute("lastNum", pageNum);
       model.addAttribute("pageNum", map.get(sendPageNum));
       model.addAttribute("check", Checkboardservice.getSearchResult(parm));
@@ -536,6 +545,8 @@ public class CheckboardCotroller {
          parm.put("paging", p);
          parm.put("data", data);
          
+         model.addAttribute("depth0","메인화면");
+   	  	 model.addAttribute("depth1","점검이력");
          model.addAttribute("lastNum", pageNum);
          model.addAttribute("pageNum", map.get(sendPageNum)); //arr
          model.addAttribute("checkboardlist", Checkboardservice.getTermList(parm));
