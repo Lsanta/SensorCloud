@@ -119,8 +119,10 @@ public class SiteController {
 	@RequestMapping(value = "{site_id}", method = RequestMethod.GET)
 	public String siteclick(@PathVariable String site_id, Model model, HttpSession session, HttpServletResponse response) throws IOException {
 
+		ArrayList<SiteVO> arr = new ArrayList<SiteVO>();
+		arr = siteservice.getSite(site_id);
 		System.out.println("현장 iD =" + site_id);
-		model.addAttribute("siteInfo", siteservice.getSite(site_id));
+		model.addAttribute("siteInfo", arr);
 		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
 		model.addAttribute("alarm", siteservice.getAlarm(site_id)); // 알람 내용 정보
 		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
@@ -137,7 +139,13 @@ public class SiteController {
 			out.println("</script>");
 
 		}
-
+		System.out.println("현장 iD =" + site_id);
+		model.addAttribute("siteInfo", siteservice.getSite(site_id));
+		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
+		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
+		model.addAttribute("depth0","메인화면");
+  	  	model.addAttribute("depth1","현장관리");
+  	  	model.addAttribute("depth2", arr.get(0).getSite_name());
 		return "site/sitemain";
 	}
 
