@@ -144,6 +144,8 @@ private UsermanageService usermanageservice;
 		  parm.put("Paging", p);
 		  parm.put("Search", s);
 		  
+		  model.addAttribute("depth0","메인화면");
+		  model.addAttribute("depth1","사용자관리");
 		  model.addAttribute("pageNum",map.get(sendPageNum));
 		  model.addAttribute("manage",usermanageservice.getSearchResult(parm));
 		  System.out.println("사용자 관리검색 결과 :" + usermanageservice.getSearchResult(parm));

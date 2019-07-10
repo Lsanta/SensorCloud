@@ -83,6 +83,7 @@ public class HomeController {
 		model.addAttribute("mainchecklist",arr);
 		String id = (String)session.getAttribute("id");
 		model.addAttribute("userInfo",mypageservice.getInfo(id));
+		model.addAttribute("depth0","메인화면");
 		return "main";
 	}
 
@@ -156,7 +157,8 @@ public class HomeController {
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("checkboardlist",checkboardservice.getList(page));
-
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","점검이력");
 		System.out.println("realNum : " + realNum);
 		System.out.println("pageNum : " + pageNum);
 		
@@ -245,7 +247,9 @@ public class HomeController {
 		}
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("sitelist",siteservice.getList());
-
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","현장관리");
+		
 		if(realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
 			return "redirect:/sitelist/"+pageNum;
@@ -343,7 +347,9 @@ public class HomeController {
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("userlist",usermanageservice.getList(page));
-
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","사용자관리");
+		
 		if(realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
 			return "redirect:/manage/"+pageNum;
@@ -439,7 +445,8 @@ public class HomeController {
 		}
 		
 		model.addAttribute("timelinelist",timelineservice.getAllTimeline());
-		
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","타임라인");
 		return "timeline/timeline";
 	}
 	
@@ -540,6 +547,8 @@ public class HomeController {
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("sensorlist",mysensorservice.getList(page));
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","보유센서");
 
 		if(realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
@@ -609,7 +618,9 @@ public class HomeController {
 		model.addAttribute("userInfo",mypageservice.getInfo(id.toString()));
 		model.addAttribute("mychecklist",mypageservice.myList(parm));
 		model.addAttribute("pageNum",map.get(sendPageNum));
-
+		model.addAttribute("depth0","메인화면");
+		model.addAttribute("depth1","내 점검이력");
+		
 		if(realNum > pageNum) {
 			System.out.println("pageNum : " + pageNum);
 			return "redirect:/mypage/"+pageNum;
@@ -618,48 +629,5 @@ public class HomeController {
 		return "mypage/mypage";
 	}
 	
-	@RequestMapping(value = "/adminCheckPage"+"/{num0}"+"/{num1}"+"/{num2}", method = RequestMethod.GET)
-	public String admincheck(@PathVariable String num0, @PathVariable String num1, @PathVariable String num2, Model model, HttpSession session, HttpServletResponse response) throws IOException {
-		
-		int mlevel = (int) session.getAttribute("mlevel");
-
-		if (mlevel != 6) {
-
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script langauge='javascript'>");
-			out.println("alert('권한이 없습니다. \\n 관리자만 열람가능합니다'); history.go(-1);");
-			out.println("</script>");
-
-
-		}
-		String result = "";
-		for(int i=0; i < 3 ; i++) {
-			CheckboardManage cm = new CheckboardManage();
-			if( i == 0) {
-				result = cm.adminPaging(checkboardservice, model, i , num0);
-				if(result == "false") {
-					int number = Integer.parseInt(num0)-1;
-					return "redirect:/adminCheckPage/"+number+"/"+num1+"/"+num2;
-				}
-			} else if ( i == 1) {
-				result = cm.adminPaging(checkboardservice, model, i , num1);
-				if(result == "false") {
-					int number = Integer.parseInt(num1)-1;
-					return "redirect:/adminCheckPage/"+num0+"/"+number+"/"+num2;
-				}
-			} else if ( i == 2 ) {
-				result = cm.adminPaging(checkboardservice, model, i , num2);
-				if(result == "false") {
-					int number = Integer.parseInt(num2)-1;
-					return "redirect:/adminCheckPage/"+num0+"/"+num1+"/"+number;
-				}
-			}
-		}
-		
-		return "adminCheck/adminCheck";
-	}
-	
-
 }
 

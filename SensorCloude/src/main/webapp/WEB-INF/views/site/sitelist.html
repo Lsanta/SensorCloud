@@ -118,7 +118,9 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 		 	
 		 var add = $(this).children().eq(2).text();
 		 var sname = $(this).children().eq(1).text();
-		
+		 var snum = $(this).children().eq(4).text();
+		 
+	
 
 var mapContainer = document.getElementById('main-right'), // 지도를 표시할 div 
 mapOption = {
@@ -137,6 +139,14 @@ geocoder.addressSearch(add, function(result, status) {
 
 // 정상적으로 검색이 완료됐으면 
  if (status === kakao.maps.services.Status.OK) {
+	
+	 $.ajax({
+			type : "POST",
+			url : "/site/insen.do",
+			data : snum,
+			dataType : "json",
+			success : function(data) {
+		
 
     var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 
@@ -145,12 +155,30 @@ geocoder.addressSearch(add, function(result, status) {
         map: map,
         position: coords
     });
-
     
+    /* var iwcontent = '';
+    $.each(data,function(key,value){ 
+    	iwcontent = value;
+	 }); */
+	 
+	 var temp = ''; 
+	 
+	 temp = '<div style="width:150px;text-align:center;padding:6px 0;">' + '<h4>'+sname +'</h4><hr color="black">설치된 센서</div>';
+ 	
+	  for(var i = 0;  i < data.sensor.length; i++ ){
+		  if(data.sensor[0] == 'f'){
+			  temp = temp + '<li>없음</li>';
+			  break;
+		  }
+		 temp = temp + '<li>'+data.sensor[i]+'</li>'
+	 }
+	
+	temp = temp + '</ul></div>';
      // 인포윈도우로 장소에 대한 설명을 표시합니다
     var infowindow = new kakao.maps.InfoWindow({
-    	content : '<div style="width:150px;text-align:center;padding:6px 0;">' + sname + '</div>'
+    	content : temp
     });
+     
     infowindow.open(map, marker); 
 
     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
@@ -158,6 +186,8 @@ geocoder.addressSearch(add, function(result, status) {
 } 
 });    
 
+	 }//success종료
+	 });//ajax 종료
 	 });
 // 	 $("#site tr").mouseleave(function(){
 // 		 $("#main-right").empty();

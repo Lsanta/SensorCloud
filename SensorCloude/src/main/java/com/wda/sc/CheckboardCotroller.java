@@ -60,7 +60,9 @@ public class CheckboardCotroller {
 
          
       }
-
+      model.addAttribute("depth0","메인화면");
+	  model.addAttribute("depth1","점검이력");
+	  
       System.out.println("글쓰기누름");
       model.addAttribute("checksitelist", siteservice.getchecksite());
       return "check/checkadd";
@@ -115,6 +117,9 @@ public class CheckboardCotroller {
       model.addAttribute("board_no", board_no);
 
       System.out.println("사이트아이디=" + Checkboardservice.getsiteid(board_no));
+      
+      model.addAttribute("depth0","메인화면");
+	  model.addAttribute("depth1","점검이력");
       return "check/checkview";
    }
 
@@ -199,7 +204,9 @@ public class CheckboardCotroller {
 
       // 현장아이디
       model.addAttribute("siteid", Checkboardservice.getsiteid(board_no));
-
+     
+      model.addAttribute("depth0","메인화면");
+	  model.addAttribute("depth1","점검이력");
       return "check/checklistmodify";
    }
 
@@ -458,6 +465,8 @@ public class CheckboardCotroller {
       parm.put("Paging", p);
       parm.put("Search", s);
       
+      model.addAttribute("depth0","메인화면");
+	  model.addAttribute("depth1","점검이력");
       model.addAttribute("lastNum", pageNum);
       model.addAttribute("pageNum", map.get(sendPageNum));
       model.addAttribute("check", Checkboardservice.getSearchResult(parm));
@@ -536,6 +545,8 @@ public class CheckboardCotroller {
          parm.put("paging", p);
          parm.put("data", data);
          
+         model.addAttribute("depth0","메인화면");
+   	  	 model.addAttribute("depth1","점검이력");
          model.addAttribute("lastNum", pageNum);
          model.addAttribute("pageNum", map.get(sendPageNum)); //arr
          model.addAttribute("checkboardlist", Checkboardservice.getTermList(parm));
@@ -556,39 +567,86 @@ public class CheckboardCotroller {
    }
    
    //점검이력 관리 날짜 검색
-   @RequestMapping(value = "/admindataSearch" +"/{num0}"+"/{num1}"+"/{num2}"+ "/{data}", method = RequestMethod.GET)
-   public String adminDataSearch(@PathVariable int num0, @PathVariable int num1, @PathVariable int num2, @PathVariable int data , Model model) {
+   @RequestMapping(value = "/admindataSearch" +"/{num0}"+"/{num1}"+"/{num2}"+ "/{data0}" + "/{data1}" + "/{data2}"  + "/{status}", method = RequestMethod.GET)
+   public String adminDataSearch(@PathVariable int num0, @PathVariable int num1, @PathVariable int num2, 
+		   @PathVariable int data0 , @PathVariable int data1 , @PathVariable int data2 ,
+		   @PathVariable int status, Model model) {
       
       String result = "";
-      if(data != 0) {
-         CheckboardManage cm = new CheckboardManage();
-         for(int i=0; i < 3 ; i++) {
-         if( i == 0) {
-            result = cm.dataSearch(Checkboardservice, model, num0, data, i);
-            if(result == "false") {
-               int number =num0-1;
-               return "redirect:/checkboard/admindataSearch/" + number + "/" + num1 + "/" + num2 +"/"+ data;
-            }
-         } else if ( i == 1) {
-            result = cm.dataSearch(Checkboardservice, model, num1, data, i);
-            if(result == "false") {
-               int number = num1-1;
-               return "redirect:/checkboard/admindataSearch/" + num0 + "/" + number+ "/" + num2 +"/"+ data;
-            }
-         } else if ( i == 2 ) {
-            result = cm.dataSearch(Checkboardservice, model, num2, data, i);
-            if(result == "false") {
-               int number = num2-1;
-               return "redirect:/checkboard/admindataSearch/" + num0 + "/" + num1 + "/" + number +"/"+ data;
-            }
-         }
-         
-         }  
-      } else {
-         return "redirect: /adminCheckPage/1/1/1";
-      }
+      CheckboardManage cm = new CheckboardManage();
+    	  if(status == 0) {
+    		  for(int i=0; i < 3 ; i++) {
+                  if( i == 0) {
+                     result = cm.dataSearch(Checkboardservice, model, num0, data0, i);
+                     if(result == "false") {
+                    	System.out.println("여기는 오픈");
+                        int number =num0-1;
+                        return "redirect:/checkboard/admindataSearch/" + number + "/" + num1 + "/" + num2 +"/"+ data0 +"/"+ data1 +"/"+ data2 + "/0";
+                     }
+                  } else if ( i == 1) {
+                     result = cm.dataSearch(Checkboardservice, model, num1, data1, i);
+                     if(result == "false") {
+                    	 System.out.println("여기는 수정");
+                        int number = num1-1;
+                        return "redirect:/checkboard/admindataSearch/" + num0 + "/" + number+ "/" + num2 +"/"+ data0 +"/"+ data1 +"/"+ data2 + "/0";
+                     }
+                  } else if ( i == 2 ) {
+                     result = cm.dataSearch(Checkboardservice, model, num2, data2, i);
+                     if(result == "false") {
+                    	System.out.println("여기는 종료");
+                        int number = num2-1;
+                        return "redirect:/checkboard/admindataSearch/" + num0 + "/" + num1 + "/" + number +"/"+ data0 +"/"+ data1 +"/"+ data2 + "/0";
+                     }
+                  } 
+               }  
+    	  } else if(status == 1) {
+    		  for(int i=0; i < 3 ; i++) {
+                  if( i == 0) {
+                     result = cm.dataSearch(Checkboardservice, model, num0, data0, i);
+                     if(result == "false") {
+                        int number =num0-1;
+                        return "redirect:/checkboard/admindataSearch/" + number + "/" + num1 + "/" + num2 +"/"+ data0 +"/"+ data1 +"/"+ data2 + "/1";
+                     }
+                  } else if ( i == 1) {
+                     result = cm.dataSearch(Checkboardservice, model, num1, data1, i);
+                     if(result == "false") {
+                        int number = num1-1;
+                        return "redirect:/checkboard/admindataSearch/" + num0 + "/" + number+ "/" + num2 +"/"+ data0 +"/"+ data1 +"/"+ data2 + "/1";
+                     }
+                  } else if ( i == 2 ) {
+                     result = cm.dataSearch(Checkboardservice, model, num2, data2, i);
+                     if(result == "false") {
+                        int number = num2-1;
+                        return "redirect:/checkboard/admindataSearch/" + num0 + "/" + num1 + "/" + number +"/"+ data0 +"/"+ data1 +"/"+ data2 + "/1";
+                     }
+                  } 
+               }  
+    	  } else if(status == 2) {
+    		  for(int i=0; i < 3 ; i++) {
+                  if( i == 0) {
+                     result = cm.dataSearch(Checkboardservice, model, num0, data0, i);
+                     if(result == "false") {
+                        int number =num0-1;
+                        return "redirect:/checkboard/admindataSearch/" + number + "/" + num1 + "/" + num2 +"/"+ data0 +"/"+ data1 +"/"+ data2 + "/2";
+                     }
+                  } else if ( i == 1) {
+                     result = cm.dataSearch(Checkboardservice, model, num1, data1, i);
+                     if(result == "false") {
+                        int number = num1-1;
+                        return "redirect:/checkboard/admindataSearch/" + num0 + "/" + number+ "/" + num2 +"/"+ data0 +"/"+ data1 +"/"+ data2 + "/2";
+                     }
+                  } else if ( i == 2 ) {
+                     result = cm.dataSearch(Checkboardservice, model, num2, data2, i);
+                     if(result == "false") {
+                        int number = num2-1;
+                        return "redirect:/checkboard/admindataSearch/" + num0 + "/" + num1 + "/" + number +"/"+ data0 +"/"+ data1 +"/"+ data2 + "/2";
+                     }
+                  } 
+               }  
+    	  }
+    	 
       
-      return "adminCheck/adminCheck";
+    	  return "adminCheck/adminCheck";
    
    }
    
