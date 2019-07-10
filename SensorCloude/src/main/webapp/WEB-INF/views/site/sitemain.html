@@ -68,8 +68,8 @@
 							<span id="m-addr" th:text="${siteInfo.address}"></span><br />
 							<hr>
 							<span id="m-company">협력사 정보</span><br />
-							<span id="m-cname" th:text="${siteInfo.name}"></span>
-							<span id="m-ctel" th:text="|Tel)${siteInfo.company_tel}|"></span>
+							<span id="m-cinfo" th:text="|${siteInfo.name}   Tel) ${siteInfo.company_tel}|"></span>
+							<!-- <span id="m-ctel" th:text="|Tel)${siteInfo.company_tel}|"></span> -->
 						</div>
 					</div>
 				</div>
@@ -121,6 +121,7 @@
 						</div>
 	
 						<div id="mlist" class="card">
+						<div id="mtable">
 							<table id="smsdata">
 								<thead id="sms-data-head">
 									<tr>
@@ -138,6 +139,7 @@
 								</tbody>
 							</table>
 						</div>
+				</div>
 					</div>
 				</div>
 				
@@ -514,8 +516,6 @@
    
    function gogo1() {
 		$('#smain-cont').hide();
-		$('#srepair-cont').hide();
-	    $('#smanage-cont').hide();
 		$('#salarm-cont').show();
 	}
   

@@ -6,13 +6,43 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
+   <link rel="stylesheet" type="text/css" href="/resources/css/site/sitemain.css">
    <link rel="stylesheet" type="text/css" href="/resources/css/site/schecklist.css">
 </th:block>
 
 <th:block layout:fragment="contents">
-   <div id="scroll" class="card">
-      <article>
-         <div id="container" style="margin:0">
+	<div id="sitemain" class="col-md-8">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-head-row">
+					<div id="site" th:each="siteInfo : ${siteInfo}">
+						<span class="sitestatus" th:each="siteStatus : ${siteStatus}" th:switch="${siteStatus.site_status}">
+							<img alt="stop" src="/resources/img/gray2.png" th:case="'0'">
+							<img alt="start" src="/resources/img/green.png" th:case="'1'">
+							<img alt="error" src="/resources/img/red.svg" th:case="'2'">
+						</span>
+						
+						<span id="sitename" class="addr" th:text="${siteInfo.site_name}"></span>
+						<span id="start_date" th:text="|등록날짜: ${siteInfo.start_date}|"></span>
+
+						<button id="modify" th:class="${siteInfo.site_id}">현장수정</button>
+					</div>					
+				</div>
+				
+				<div id="Btndiv" th:each="siteInfo : ${siteInfo}">
+				<span id="sid" th:text="${siteInfo.site_id}" style="display: none"></span>
+					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'"><button id="alaram">알림</button></a>
+					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'"><button id="repair">수리내역</button></a>
+					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage/1'"><button id="sensormanage">센서관리</button></a>
+					<!-- <button id="sitestatus">현장 비활성화</button> -->
+					<span class="status" th:each="siteStatus : ${siteStatus}" th:switch="${siteStatus.site_status}">
+						<img alt="stop" src="/resources/img/powerOn.svg" th:case="'0'">
+						<img alt="start" src="/resources/img/power.svg" th:case="'1'">
+					</span>
+				</div>
+			</div>
+  
+         <div id="container" class="card-body">
             <div id="main-content">
                <div class="title-header">
                   <button id="write" value="write">글쓰기</button>
@@ -28,7 +58,7 @@
                         <th scope="col">날짜</th>
                      </tr>
                   </thead>
-                  <tbody id="repairchecklist"  th:if="${repair == null}">
+                  <tbody id="repairchecklist" th:if="${repair == null}">
                      <tr th:each="checkboardlist : ${checkboardlist}">
                         <td th:text="${checkboardlist.site_name}">status</td>
                         <td th:text="${checkboardlist.title}">status</td>
@@ -86,12 +116,22 @@
                   </div>
                </section>
             </div>
-         </div>
-      </article>
+ 
+   </div>
+   </div>
    </div>
 </th:block>
 
 <th:block layout:fragment="page_js">
    <script src="/resources/js/site/siterepair.js"></script>
+   <script>
+	   $(document).on("click", "#sitename" , function(){
+			 /*현장 아이디를 가지고와서 /1자리에 넣어야함 */
+			 var sid = $("#sid").text();
+			 
+			 window.location.href = "/site/" + sid  ;
+			 
+		});
+   </script>
 </th:block>
 </html>
