@@ -24,7 +24,7 @@
 			<nav class="navbar navbar-header navbar-expand-lg">
 				
 				<div class="container-fluid">
-					<div class="collapse" id="search-nav">
+					<div class="collapse" id="search-nav" style="max-width : 450px;">
 						<form class="navbar-left navbar-form nav-search mr-md-3">
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -36,6 +36,9 @@
 									</span>
 									<span th:if="${depth2} != null">
 										> <a id="depth2" style="color:white; font-size : 15px; font-weight : 450;" th:text="${depth2}"></a>
+									</span>
+									<span th:if="${depth3} != null">
+										> <a id="depth3" style="color:white; font-size : 15px; font-weight : 450;" th:text="${depth3}"></a>
 									</span>
 								</div>
 							</div>
@@ -312,23 +315,68 @@ $.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr){
 	 var newURL =  window.location.pathname;
 	 var url = newURL.split('/');
 	 
-	 if($("#depth2").text() == "") {
+		 //점검 이력과 점검이력 관리 페이지 때문에 IF문
 		 if(url[1] == "checkboard") {
 			 url[1] = "check";
-		 }
+			 
+			 if(url[2] == "admindataSearch" && url[2] == "checkManagesearch") {
+				 url[1] = "adminCheckPage";
+			 }				 
+		 }	 
+		 
+		 //현장 관리 때문에 IF문
 		 if(url[1] == "site") {
 			 url[1] = "sitelist";
 		 }
-		 
 		 var link = "/" + url[1] +"/1"
-		 
-		 $("#depth1").attr("href",link);
-	 } else {
+		  $("#depth1").attr("href",link);
+
+		//현장 안에 depth때문에 IF문
+		 if(url[1] == "sitelist") {
+			 url[1] = "site";
+		 }
 		 
 		 var link2 = "/" + url[1] + "/" + url[2];
 		 $("#depth2").attr("href",link2);
-	 }
-	
+		 
+	 	 var link3 = "/"+url[1] +"/"+url[2]+"/"+url[3]+"/1"
+	 	 $("#depth3").attr("href",link3);
+	 	 
+	 	 //수리내역에서 글쓰기 때문에 IF문
+	 	 if(url[2] == "checkadd") {
+	 		$("#depth1").attr("href","/sitelist/1");
+	 		$("#depth2").attr("href","/site/" + url[3]);
+	 		$("#depth3").attr("href","/site/" + url[3] + "/siterepair/1");
+	 	 }
+	 	 
+	 	//수리내역에서 글 수정 IF문
+	 	 if(url[2] == "checkmod") {
+	 		$("#depth1").attr("href","/sitelist/1");
+	 		$("#depth2").attr("href","/site/" + url[4]);
+	 		$("#depth3").attr("href","/site/" + url[4] + "/siterepair/1");
+	 	 }
+	 	
+	 	//수리내역에서 글 클릭 시 IF문
+	 	 if(url[3] == "sitecheckview") {
+	 		$("#depth1").attr("href","/sitelist/1");
+	 		$("#depth2").attr("href","/site/" + url[2]);
+	 		$("#depth3").attr("href","/site/" + url[2] + "/siterepair/1");
+	 	 }
+	 	
+	 	//수리내역에서 검색 IF문
+	 	 if(url[3] == "search") {
+		 		$("#depth1").attr("href","/sitelist/1");
+		 		$("#depth2").attr("href","/site/" + url[2]);
+		 		$("#depth3").attr("href","/site/" + url[2] + "/siterepair/1");
+	 	 }
+	 	//센서관리에서 검색 IF문
+	 	 if(url[3] == "search1") {
+	 		$("#depth1").attr("href","/sitelist/1");
+	 		$("#depth2").attr("href","/site/" + url[2]);
+	 		$("#depth3").attr("href","/site/" + url[2] + "/sensormanage/1");
+	 	 }
+	 	
+	 	
 	 
 </script>
 </nav>

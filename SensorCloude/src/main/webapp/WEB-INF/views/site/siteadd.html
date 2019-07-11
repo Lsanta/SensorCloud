@@ -13,8 +13,10 @@
 </th:block>
 
 <th:block layout:fragment="contents">
-	 <div id="container">
+ 
+	 <div id="container" class="card">
 	<h1>현장 추가</h1>
+	
    
    <div id="addcontent">
    
@@ -25,25 +27,25 @@
 
    <div id="addcontent_right">
       <!-- <input type="text" id="sample6_postcode" class="addcontent_right_input" placeholder="우편번호" > -->
-      <p id="p">주소:</p>
+      <span id="p">주소:</span>
 	  <input type="text" id="sample6_address" placeholder="주소" class="addcontent_right_input" disabled><br>
-	  <input type="hidden" id="x" ><br>
-	  <input type="hidden" id="y" ><br>
+	  <input type="hidden" id="x" >
+	  <input type="hidden" id="y" >
 	  <input type="button" id="addressBtn" onclick="DaumPostcode()" value="조회" class="addcontent_right_button" >
 	  
-	  <p id="p">회사이름:</p>
+	  <span id="p2">회사이름:</span>
 	  <input type="text" id="Cname" placeholder="회사 이름" class="addcontent_right_input" disabled><br>
-	  <input type="button" id="pBtn" value="선택" class="addCompany_right_button"><br>
+	  <input type="button" id="pBtn" value="선택" class="addCompany_right_button">
 	  
-	  <p id="p">현장이름:</p>
+	  <span id="p3">현장이름:</span>
 	  <input type="text" id="sample6_detailAddress" placeholder="현장이름" class="addcontent_right_input">
 	  <!-- <input type="text" id="sample6_extraAddress" placeholder="참고항목" class="addcontent_right_input"> -->
       </div>
-   </div>
+   
 
    
 
-
+<div id="addnetwork1">
    <h2>네트워크 설정</h2>
    
    <div id="addnetwork">
@@ -82,7 +84,9 @@
          <!--<input type="submit" name="확인" style="float:right;" > -->
 
       </div>
-      
+      </div>
+      </div>
+      </div>
       <div id ="addnetwork_right2">
 
 	    <input type="text" name="hostaddress" placeholder = "초 단위로 적어주세요" class="addnetwork_right_input" id="rperiod"><br>      	
@@ -124,9 +128,9 @@
 
       </div>
 
-   </div>
    
-   <h2 class="sensor_option">센서 설정</h2>
+   
+   <h2 id="sensor_option">센서 설정</h2>
    <div class="sensorset">
 	   <div id="setbtn">
 	   		<input type="button" class="plus_select" value="행 추가" />
@@ -140,16 +144,16 @@
              	<option th:each="ss : ${siteSensor}" th:text=" ${ss.sensor_sn} + '[' + ${ss.sensor_kind} + ']'" th:value="${ss.vertical}">
             	</option>
 			</select>
-			<button value="취소" id="cancle" class="cancleBtn"></button>
+			<button type="button" value="삭제" id="cancle" class="cancleBtn">삭제</button>
 		</div>
 	</div>  
    </div>
-   
+   </div>
    <div id="btn">
       <button type="button" id="plus">확인</button>
    </div>
 
-   </div>
+   
 </th:block>
 
 <th:block layout:fragment="page_js">

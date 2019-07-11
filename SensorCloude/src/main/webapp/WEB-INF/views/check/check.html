@@ -43,8 +43,9 @@
 										<td th:text="${checkboardlist.site_name}"></td>
 										<td th:text="${checkboardlist.title}"></td>
 										<td th:switch="${checkboardlist.board_status}"><span
-											th:case="'0'">open</span> <span th:case="'1'">fixed</span> <span
-											th:case="'2'">closed</span></td>
+											th:case="'0'" style="color:#35cd3a; font-weight:bold; font-size:1.15em;">open</span> 
+											<span th:case="'1'" style="color:#ffa534; font-weight:bold; font-size:1.15em;">fixed</span> 
+											<span th:case="'2'" style="color:gray; font-weight:bold; font-size:1.15em;">closed</span></td>
 										<td th:text="${checkboardlist.name}"></td>
 										<td th:text="${checkboardlist.reg_date}"></td>
 										<td th:text="${checkboardlist.board_no}" style="display: none"></td>
