@@ -22,5 +22,8 @@ public interface CompanyMapper {
 	public ArrayList<CompanyVO> CompanySearchResult(Map<Object, Object> parm);
 	
 	public ArrayList<CompanyVO> getAllCompany();
+	
+	//COMPANY_num으로 속한 현장이름 , site_id 가져오기
+	public ArrayList<SiteVO> SiteCompany(int company_num);
 
 }
