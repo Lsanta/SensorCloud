@@ -107,10 +107,6 @@ input[type="button"]:hover {
     cursor: pointer;
 }
 
-input[type="button"] #add {
-	margin-right: 1%;
-}
-
 #phonetop {
     height: 60px;
 }
