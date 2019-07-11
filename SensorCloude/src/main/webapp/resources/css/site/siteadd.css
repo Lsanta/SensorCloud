@@ -489,12 +489,3 @@ input.addnetwork_right_input {
 	margin-left:30%;
 }
 
-#cancle {
-	font-size: 15px;
-	border: none;
-    background-color: #36a3f7!important;
-    color: #FFF;
-    cursor:pointer;
-     border-radius:0.25rem;
-     margin-bottom:1%;
-}
