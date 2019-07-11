@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="/resources/css/login/sign.css" rel="stylesheet" type="text/css"/>
     <title>회원가입</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="  crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -46,6 +46,7 @@
             </option>
 		</select><br/>
 <!--         <div class="errorstr" id="authstr"></div> -->
+		<input type="text" class="color" name="color" style="display : none" />
         <input type="submit" name="login" class="login login-submit" value="가입하기">
        </div>
       
@@ -75,6 +76,9 @@
 	}
     
     	$(document).ready(function() {
+    		var colorCode = "#" + Math.round(Math.random() * 0xffffff).toString(16);
+    		
+    		$(".color").val(colorCode);
     		
     		$('#user').blur(function(){
     			var id  = $("#user").val();

@@ -167,7 +167,15 @@
                   <div class="info">
                      <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
-                           <p th:text="${session.name}"></p>
+                           <div>
+                            	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="18px" height="18px" viewBox="0 0 510 510" style="enable-background:new 0 0 510 510;" xml:space="preserve"><g><g>
+								<g id="check-circle-blank">
+								<path d="M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255S395.25,0,255,0z" data-original="#000000" class="active-path" data-old_color="#766F6F" th:fill="${session.color}" />
+								</g>
+								</g></g> </svg>
+                            	<span th:text="${session.name}"></span>
+
+                           </div>
                            <p style="display:none;"class="nonid" th:text="${session.id}"></p>
                            <span class="user-level" th:switch="${session.mlevel}">
                             <span class="user-level" th:case="'1'">(권한없음)</span>
@@ -342,8 +350,14 @@ $.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr){
 	 	 var link3 = "/"+url[1] +"/"+url[2]+"/"+url[3]+"/1"
 	 	 $("#depth3").attr("href",link3);
 	 	 
+	 	 //현장 들어가서 현장 수정
+	 	 if(url[2] == "sitemodify") {
+	 		$("#depth1").attr("href","/sitelist/1");
+	 		$("#depth2").attr("href","/site/" + url[3]);
+	 	 }
+	 	 
 	 	 //수리내역에서 글쓰기 때문에 IF문
-	 	 if(url[2] == "checkadd") {
+	 	 if(url[2] == "checkadd" && url[3] != null) {
 	 		$("#depth1").attr("href","/sitelist/1");
 	 		$("#depth2").attr("href","/site/" + url[3]);
 	 		$("#depth3").attr("href","/site/" + url[3] + "/siterepair/1");

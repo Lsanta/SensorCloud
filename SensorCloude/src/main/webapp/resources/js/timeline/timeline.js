@@ -12,19 +12,28 @@ $(document).ready(function(){
 			
 			var str = ""
 			var color = ['','feed-item-secondary','feed-item-waring','feed-item-danger','feed-item-info','feed-item-success' ];
+			var stylesheet = "";
 			
 			$.each(data,function(i,s){
 					var num = i % 6;
-					str += "<li class='feed-item "+color[num]+"'>";
+//					str += "<li class='feed-item "+color[num]+"'>";
+					str += "<li class='feed-item'>";
 					if($("#sessionid").text() == data[i].user_id) 
 						str += "<time class='date'><p style='display:none'>"+data[i].timeline_n+"</p><span class='name'>"+data[i].name+"</span><a class='modify'>수정 |</a> <a class='delete'>삭제</a>" + "<span class='time'>"+data[i].time +"</span></time>";
 					else 
 						str += "<time class='date'><p style='display:none'>"+data[i].timeline_n+"</p><span class='name'>"+data[i].name + "</span><span class='time'>"+data[i].time +"</span></time>";
 					str += "<span class='text'>"+data[i].content+"</span>";
 					str += "</li>";
-					$('.activity-feed').html(str);
+					$('.activity-feed').html(str);	
 			});
 			
+			for(var i=0; i < data.length; i++) {
+				var li = $(".activity-feed").children().eq(i);
+				stylesheet = ".add"+i+":after{background-color : "+ data[i].color +" !important}";
+				$('#dd').append(stylesheet);
+				
+				li.addClass('add'+i);
+			}
 		}
 	});
 	
