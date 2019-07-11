@@ -14,7 +14,10 @@ $(document).ready(function(){
 	 
 	 
 	//현재 접속한 아이디와 점검이력 글쓴이의 아이디와 같지 않을시 수정버튼 hide
-	 if(writer_id != user_id){
+	 if(writer_id == user_id || user_id == "admin"){
+		 $("#mb").show();
+		 $("#db").show();
+	 } else {
 		 $("#mb").hide();
 		 $("#db").hide();
 	 }
@@ -24,11 +27,14 @@ $(document).ready(function(){
 	 //수정버튼 클릭시
 	 $('#mb').click(function() {
 		 
-		
-		//url[4] = board_no , url[2] = site_id
-		window.location.href = "/checkboard/checkmod2/"+board_no;
-		 
-		 
+		if(url[1] == "mypage") {
+			window.location.href = "/mypage/checkmod2/"+board_no;
+		} else if(url[1] == "adminCheckPage"){
+			window.location.href = "/adminCheckPage/checkmod2/"+board_no;
+		} else {
+			//url[4] = board_no , url[2] = site_id
+			window.location.href = "/checkboard/checkmod2/"+board_no;
+		}
 		  
 	 });
 	 

@@ -15,7 +15,7 @@ public class MemberVO {
 	private int re_level;
 	private String key;
 	private String company;
-	
+	private String color;
 
 	private int company_num;
 	private String cname;

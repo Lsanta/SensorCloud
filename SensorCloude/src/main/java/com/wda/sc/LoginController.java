@@ -65,6 +65,8 @@ public class LoginController {
 				session.setAttribute("name", arr.get(0).getName());
 				//권한별 페이지 interceptor 실행을 위해 m_level을 session에 저장//로그인 쿼리에 m_level추가
 				session.setAttribute("mlevel" , arr.get(0).getM_level());
+				System.out.println(arr.get(0).getColor());
+				session.setAttribute("color" , arr.get(0).getColor());
 				System.out.println(session.getAttribute("mlevel"));
 
 				return "success";
@@ -92,9 +94,10 @@ public class LoginController {
 	public String signup(MemberVO m) {
 
 			System.out.println(m);
-			
+					
 			int checknum = loginservice.signup(m);
 			if(checknum == 1) {
+				
 				return "login/login";
 			}
 			else if(checknum == 0) {

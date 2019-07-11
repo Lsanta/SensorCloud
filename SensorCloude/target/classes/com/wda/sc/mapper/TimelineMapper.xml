@@ -62,7 +62,7 @@
 	</update>
 	
 	<select id="getAllTimeline" resultType="com.wda.sc.domain.TimelineVO">
-	  select timeline.timeline_n, timeline.content, time as time, member.name, member.user_id
+	  select timeline.timeline_n, timeline.content, time as time, member.name, member.user_id, member.color
 	  from timeline,member
 	  where timeline.user_id = member.user_id
       order by timeline_n desc
