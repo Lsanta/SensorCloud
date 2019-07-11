@@ -23,5 +23,4 @@ public interface CompanyMapper {
 	
 	public ArrayList<CompanyVO> getAllCompany();
 
-	public ArrayList<SiteVO> getSname(int company_num);
 }
