@@ -6,6 +6,7 @@ import java.util.Map;
 import com.wda.sc.domain.CompanyVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
+import com.wda.sc.domain.SiteVO;
 
 public interface CompanyMapper {
 	public int getPageNum();
@@ -21,4 +22,6 @@ public interface CompanyMapper {
 	public ArrayList<CompanyVO> CompanySearchResult(Map<Object, Object> parm);
 	
 	public ArrayList<CompanyVO> getAllCompany();
+
+	public ArrayList<SiteVO> getSname(int company_num);
 }

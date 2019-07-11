@@ -59,4 +59,9 @@
 		where site.company_num = c.company_num
 		group by site.company_num
 	</select>
+	
+	<!--협력사 관리에 현장정보 가져오기  -->
+	<select id="getSname" resultType="com.wda.sc.domain.SiteVO">
+         select site_name from site where company_num = #{company_num}
+    </select>
 </mapper>

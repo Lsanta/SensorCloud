@@ -6,7 +6,7 @@ $(document).ready(function() {
 		var s = $(this).children().eq(0).attr("id");
 		console.log(s);
 		
-		window.location.href = "/checkboard/" + s ;
+		window.location.href = "/adminCheckPage/checkboard/" + s ;
 	});
 	
 	$(document).on("click", "#checklist1 div.d-flex" , function(){
@@ -15,7 +15,7 @@ $(document).ready(function() {
 		console.log(s);
 
 		//내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
-		window.location.href = "/checkboard/" + s ;
+		window.location.href = "/adminCheckPage/checkboard/" + s ;
 	});
 	
 	$(document).on("click", "#checklist2 div.d-flex" , function(){
@@ -24,7 +24,7 @@ $(document).ready(function() {
 		console.log(s);
 
 		//내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
-		window.location.href = "/checkboard/" + s ;
+		window.location.href = "/adminCheckPage/checkboard/" + s ;
 	});
 
 	/*pagination*/

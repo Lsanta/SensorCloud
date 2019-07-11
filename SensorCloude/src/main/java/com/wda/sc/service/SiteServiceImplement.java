@@ -351,5 +351,5 @@ public class SiteServiceImplement implements SiteService {
 	public String[] insen(String site_id) {
 		return mapper.insen(site_id);
 	}
-
+	
 }

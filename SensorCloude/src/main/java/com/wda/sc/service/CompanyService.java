@@ -7,6 +7,7 @@ import com.wda.sc.domain.CompanyVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
+import com.wda.sc.domain.SiteVO;
 
 public interface CompanyService {
 	public int getPageNum();
@@ -22,5 +23,7 @@ public interface CompanyService {
 	public ArrayList<CompanyVO> CompanySearchResult(Map<Object, Object> parm);
 
 	public ArrayList<CompanyVO> getAllCompany();
+
+	public ArrayList<SiteVO> getSname(int company_num);
 
 }

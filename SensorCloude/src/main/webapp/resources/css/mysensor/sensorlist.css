@@ -111,14 +111,14 @@ table {
   
   table th,
   table td {
-    padding: .625em;
+    padding: .7em;
     text-align: center;
     height: 30px;
-    font-size: 1.1em;
+    font-size: 1.2em;
   }
   
   table th {
-    font-size: 1em;
+    font-size: 1.3em;
     letter-spacing: .1em;
     text-transform: uppercase;
   }
