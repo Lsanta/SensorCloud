@@ -309,6 +309,7 @@ button:hover {
 .cancleBtn {
 	width: 5%;
 	height: 30px;
+	font-size: 1.3em;
 }
 
 @media screen and (max-width: 768px) {

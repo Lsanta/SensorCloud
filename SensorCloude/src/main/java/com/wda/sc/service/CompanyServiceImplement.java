@@ -54,10 +54,5 @@ public class CompanyServiceImplement implements CompanyService{
 		// TODO Auto-generated method stub
 		return mapper.getAllCompany();
 	}
-	@Override
-	public ArrayList<SiteVO> getSname(int company_num) {
-		// TODO Auto-generated method stub
-		return mapper.getSname(company_num);
-	}
 
 }

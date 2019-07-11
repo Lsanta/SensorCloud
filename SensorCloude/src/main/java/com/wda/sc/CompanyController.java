@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,20 +29,19 @@ import com.wda.sc.service.CompanyService;
 import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 @AllArgsConstructor
 @RequestMapping("/company")
 public class CompanyController {
 	private CompanyService companyservice;
-	private SiteService siteservice;
 	
 	@RequestMapping(value = ""+"/{num}", method = RequestMethod.GET)
 	public String companyPage(@PathVariable String num, Locale locale, Model model ,HttpServletResponse response,HttpSession session) throws IOException {
-
-
+	
 		int mlevel = (int) session.getAttribute("mlevel");
-
 
 		if (mlevel != 6) {
 
@@ -52,8 +52,6 @@ public class CompanyController {
 			out.println("</script>");
 
 		}
-		String user_id = (String) session.getAttribute("id");
-		int company_num = siteservice.getCompanyNum(user_id);
 		
 		// 회사 테이블 + 페이징
 		Paging page = new Paging();
@@ -101,7 +99,6 @@ public class CompanyController {
 
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
-		page.setCompany_num(company_num);
 
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum",map.get(sendPageNum));
@@ -113,13 +110,13 @@ public class CompanyController {
 			System.out.println("pageNum : " + pageNum);
 			return "redirect:/company/"+pageNum;
 		}
+		
 		model.addAttribute("depth0","메인화면");
 		model.addAttribute("depth1","협력사관리");
-		model.addAttribute("sitename",companyservice.getSname(company_num));
-
 
 		return "company/company";
 	}
+	
 	@RequestMapping(value = "companyadd", method = RequestMethod.GET)
 	public String address(Locale locale, Model model, HttpSession session, HttpServletResponse response)
 			throws IOException {
@@ -133,8 +130,7 @@ public class CompanyController {
 			out.println("<script langauge='javascript'>");
 			out.println("alert('권한이 없습니다.\\n4등급(수정권한)이상이 열람가능합니다'); window.opener.location.reload(); window.close();");
 			out.println("</script>");
-			
-			
+	
 		}
 
 		return "company/companyadd";

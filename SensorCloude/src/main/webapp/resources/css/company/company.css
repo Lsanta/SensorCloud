@@ -27,11 +27,13 @@ html {
 	max-width: 100%
 }
 
+
+
 .title-header {
     height: 50px;
     border-bottom: 2px solid #36a3f7;
     color: #000;
-    margin-top:10px;
+    margin-top:20px;
   }
   
   .title-header h1 {
@@ -113,7 +115,7 @@ table {
     padding: .625em;
     text-align: center;
     height: 30px;
-    font-size: 1.1em;
+    font-size: 1.3em;
   }
   
   table th {
@@ -245,7 +247,7 @@ table {
    height: 32px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 991px) {
   .search {
     float: none;
     width: auto;
@@ -271,6 +273,10 @@ table {
   -moz-appearance: none; appearance: none;
   margin-left: 50px;
 }
+.title-header button { 
+    display:none;
+
+  }
 }
 
 @media screen and (max-width: 360px) {
@@ -299,11 +305,9 @@ table {
     width: auto;
     margin-left: 100px;
   }
-  .title-header button { 
-    float: right;
-    width: 40%;
-    height: 40px;
-    font-size: 1.2em;
+.title-header button { 
+    display:none;
+ 
   }
   select { 
   width: 95px;

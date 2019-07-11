@@ -299,7 +299,10 @@ table {
   -moz-appearance: none; appearance: none;
   height:36px;
 }
+ .title-header button { 
+    display:none;
  
+  }
 }
 
 @media screen and (max-width: 768px) {
