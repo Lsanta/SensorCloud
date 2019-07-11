@@ -31,7 +31,7 @@
 				
 				<div id="Btndiv" th:each="siteInfo : ${siteInfo}">
 				<span id="sid" th:text="${siteInfo.site_id}" style="display: none"></span>
-					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm'"><button id="alaram">알림</button></a>
+					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sitealarm/1'"><button id="alaram">알림</button></a>
 					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/siterepair/1'"><button id="repair">수리내역</button></a>
 					<a href="/site/" th:attrappend="href=${siteInfo.site_id} + '/sensormanage/1'"><button id="sensormanage">센서관리</button></a>
 					<!-- <button id="sitestatus">현장 비활성화</button> -->

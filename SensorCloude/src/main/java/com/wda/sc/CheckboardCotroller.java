@@ -154,6 +154,12 @@ public class CheckboardCotroller {
       // 사이트 이름 등등의 정보
       model.addAttribute("checksitelist", siteservice.getchecksite());
 
+      String site_name = siteservice.getSiteName(site_id);
+		  
+	  model.addAttribute("depth0","메인화면");
+	  model.addAttribute("depth1","현장관리");
+	  model.addAttribute("depth2", site_name);
+	  model.addAttribute("depth3", "수리내역");
       // 파일 정보
       System.out.println("modlist" + cvo);
       return "check/checkaddInSite";

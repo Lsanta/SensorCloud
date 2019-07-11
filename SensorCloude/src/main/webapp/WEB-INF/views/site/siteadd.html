@@ -145,7 +145,7 @@
              	<option th:each="ss : ${siteSensor}" th:text=" ${ss.sensor_sn} + '[' + ${ss.sensor_kind} + ']'" th:value="${ss.vertical}">
             	</option>
 			</select>
-			<input type="button" value="삭제" id="cancle" class="cancleBtn"></input>
+			<button type="button" value="삭제" id="cancle" class="cancleBtn">삭제</button>
 		</div>
 	</div>  
    </div>
@@ -292,15 +292,15 @@ $(document).ready(function(){
 		for(var i=0; i < input_size; i++ ) {
 			
 			$("#addSensor" + count).append( 
-					$('<br><input type="text" class="vert'+i+'" placeholder = "데이터 로거의 변수값과 똑같은 값을 적어주십시오." >', 
+					$('<br><input type="text" class="vert'+i+'" id="cvert'+i+'" placeholder = "데이터 로거의 변수값과 똑같은 값을 적어주십시오." >', 
 // 							{ type: 'text', val: $('#div1').text() }
 							{ type: 'text'}
 					),
-					$('<input type="text" class="up'+i+'" placeholder = "상한값" style="width:20%">', 
+					$('<input type="text" class="up'+i+'" id="cup'+i+'"placeholder = "상한값" style="width:20%">', 
 // 							{ type: 'text', val: $('#div1').text() }
 							{ type: 'text'}
 					),
-					$('<input type="text" class="down'+i+'" placeholder = "하한값" style="width:20%">', 
+					$('<input type="text" class="down'+i+'" id="cdown'+i+'"placeholder = "하한값" style="width:20%">', 
 // 							{ type: 'text', val: $('#div1').text() }
 							{ type: 'text'}
 					)
@@ -351,6 +351,46 @@ $(document).ready(function(){
 		
 			
 		}
+		
+		 if(sample6_address.value.trim() == ""){
+	            alert("주소를 조회하여 선택해주세요.");
+	            sample6_address.val('');
+	            sample6_address.focus();
+	            return false;
+	        }else if(Cname.value.trim()==""){
+	            alert("회사를 조회하여 선택해주세요.");
+	            Cname.val('');
+	            Cname.focus();
+	            return false;
+	        }else if(sample6_detailAddress.value.trim()==""){
+	            alert("현장 이름을 입력해주세요.");
+	            sample6_defailAddress.val('');
+	            sample6_defailAddress.focus();
+	            return false;
+	        }else if(rperiod.value.trim()==""){
+	            alert("수신주기를 입력해주세요.");
+	            rperiod.val('');
+	            rperiod.focus();
+	            return false;
+	        }else if($("#sig_port_num > option:selected").val() == ""){
+	        	alert("통신속도를 선택하세요.")
+	        	return false;
+	        }else if($("#virtualport > option:selected").val() == ""){
+	        	alert("가상시리얼 포트번호를 선택하세요.")
+	        	return false;
+	        }else if($(".my_sensor > option:selected").val() == ""){
+	        	alert("센서를 선택하세요.")
+	        	return false;
+	        }else if(cvert0.value.trim()==""){
+	            alert("데이터 로거의 변수명을 입력해주세요.");
+	            return false;
+	        }else if(cup0.value.trim()==""){
+	            alert("상한값을 입력해주세요.");
+	            return false;
+	        }else if(cdown0.value.trim()==""){
+	            alert("하한값을 입력해주세요.");
+	            return false;
+	        }
 	
 		console.log(totalInfo);
         var stringJson = JSON.stringify(totalInfo);
