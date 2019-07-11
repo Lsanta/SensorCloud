@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.wda.sc.domain.CompanyVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
+import com.wda.sc.domain.SiteVO;
 import com.wda.sc.mapper.CompanyMapper;
 import com.wda.sc.mapper.MyPageMapper;
 
@@ -52,6 +53,11 @@ public class CompanyServiceImplement implements CompanyService{
 	public ArrayList<CompanyVO> getAllCompany() {
 		// TODO Auto-generated method stub
 		return mapper.getAllCompany();
+	}
+	@Override
+	public ArrayList<SiteVO> getSname(int company_num) {
+		// TODO Auto-generated method stub
+		return mapper.getSname(company_num);
 	}
 
 }
