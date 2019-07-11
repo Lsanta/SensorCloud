@@ -171,4 +171,5 @@ public interface SiteService {
 	//해당현장에 등록된 센서목록 가져오기
 	public String[] insen(String site_id);
 
+
 }

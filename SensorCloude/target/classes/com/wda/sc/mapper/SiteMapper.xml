@@ -110,7 +110,7 @@
 	</select>
 	
 	<update id="updatesite" parameterType="com.wda.sc.domain.SiteVO">
-		update site set type_no = #{type_no}, site_name = #{site_name}, address = #{address}
+		update site set type_no = #{type_no}, site_name = #{site_name}, address = #{address} ,x = #{x},y = #{y}
     	where site_id = #{site_id}
 	</update>
 	

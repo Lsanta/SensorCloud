@@ -25,6 +25,7 @@ import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
 import com.wda.sc.service.CompanyService;
+import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
 
@@ -33,6 +34,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/company")
 public class CompanyController {
 	private CompanyService companyservice;
+	private SiteService siteservice;
 	
 	@RequestMapping(value = ""+"/{num}", method = RequestMethod.GET)
 	public String companyPage(@PathVariable String num, Locale locale, Model model ,HttpServletResponse response,HttpSession session) throws IOException {
@@ -50,6 +52,9 @@ public class CompanyController {
 			out.println("</script>");
 
 		}
+		String user_id = (String) session.getAttribute("id");
+		int company_num = siteservice.getCompanyNum(user_id);
+		
 		// 회사 테이블 + 페이징
 		Paging page = new Paging();
 		ArrayList<Integer> arr=null;
@@ -96,6 +101,7 @@ public class CompanyController {
 
 		page.setEndnum((realNum*10)+1);
 		page.setStartnum(page.getEndnum()-10);
+		page.setCompany_num(company_num);
 
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum",map.get(sendPageNum));
@@ -109,6 +115,7 @@ public class CompanyController {
 		}
 		model.addAttribute("depth0","메인화면");
 		model.addAttribute("depth1","협력사관리");
+		model.addAttribute("sitename",companyservice.getSname(company_num));
 
 
 		return "company/company";
