@@ -32,6 +32,7 @@ import com.wda.sc.domain.CheckBoardFileVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
+import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CheckboardService;
 import com.wda.sc.service.SiteService;
 
@@ -324,8 +325,15 @@ public class CheckboardCotroller {
          
       }
       
-      
+  	  ArrayList<SiteVO> depthArr = new ArrayList<SiteVO>();
+	  depthArr = siteservice.getSite(site_id.toString());
+	  
+	  model.addAttribute("depth0","메인화면");
+	  model.addAttribute("depth1","현장관리");
+	  model.addAttribute("depth2", depthArr.get(0).getSite_name());
+	  model.addAttribute("depth3", "수리내역");
       model.addAttribute("site_id", site_id);
+     
       model.addAttribute("checksitelist", siteservice.getchecksite());
       return "check/checkaddInSite";
    }
