@@ -859,7 +859,7 @@ label.ui-btn {
 .ui-btn-icon-bottom:after,
 .ui-btn-icon-notext:after {
 	background-color: 					#666 /*{global-icon-color}*/;
-	background-color: 					rgba(65,92,124,.9) /*{global-icon-disc}*/;
+	background-color: 					#36a3f7 /*{global-icon-disc}*/;
 	background-position: center center;
 	background-repeat: no-repeat;
 	-webkit-border-radius: 1em;
@@ -1010,7 +1010,7 @@ html .ui-bar-a .ui-btn:visited,
 html .ui-body-a .ui-btn:visited,
 html body .ui-group-theme-a .ui-btn:visited,
 html head + body .ui-btn.ui-btn-a:visited {
-	background-color: 			#415C7C /*{a-bup-background-color}*/;
+	background-color: 			#36a3f7 /*{a-bup-background-color}*/;
 	border-color:	 		#ddd /*{a-bup-border}*/;
 	color: 					white /*{a-bup-color}*/;
 	font-weight:100;
@@ -1486,7 +1486,7 @@ div.ui-mobile-viewport {
 	overflow: hidden;
 	white-space: nowrap;
 	outline: 0 !important;
-	background:#415C7C;
+	background:#36a3f7;
 	color:white;
 }
 .ui-footer .ui-title {
