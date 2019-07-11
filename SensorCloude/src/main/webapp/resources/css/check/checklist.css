@@ -3,6 +3,10 @@
   src: url('/resources/font/A신그래픽L.TTF');
 }
 
+body {
+   overflow-y: hidden;
+}
+
  body,tr,h1,td {
   font-family: 'A신그래픽L';
  } 
