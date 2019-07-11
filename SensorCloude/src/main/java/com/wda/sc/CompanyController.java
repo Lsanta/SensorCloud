@@ -25,6 +25,7 @@ import com.wda.sc.domain.CompanyVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
+import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CompanyService;
 import com.wda.sc.service.SiteService;
 
@@ -291,5 +292,19 @@ public class CompanyController {
 			}
 			
 			return "success";
+		}
+		
+		@RequestMapping(value = "/companyJSON", method = RequestMethod.POST)
+		@ResponseBody
+		public JSONArray companyJSON(Model model, @RequestParam int company_num) {
+			
+			ArrayList<SiteVO> vo = companyservice.SiteCompany(company_num);
+			System.out.println(vo);
+			
+			JSONArray jsonarr = JSONArray.fromObject(vo);
+			System.out.println("arr" + jsonarr);
+			
+			
+			return jsonarr;
 		}
 }
