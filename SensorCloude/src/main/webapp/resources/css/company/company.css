@@ -245,7 +245,7 @@ table {
    height: 32px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 991px) {
   .search {
     float: none;
     width: auto;
@@ -271,6 +271,10 @@ table {
   -moz-appearance: none; appearance: none;
   margin-left: 50px;
 }
+.title-header button { 
+    display:none;
+
+  }
 }
 
 @media screen and (max-width: 360px) {
@@ -299,11 +303,9 @@ table {
     width: auto;
     margin-left: 100px;
   }
-  .title-header button { 
-    float: right;
-    width: 40%;
-    height: 40px;
-    font-size: 1.2em;
+.title-header button { 
+    display:none;
+ 
   }
   select { 
   width: 95px;
