@@ -3,6 +3,10 @@
   src: url('/resources/font/A신그래픽L.TTF');
 }
 
+body {
+   overflow-y: hidden;
+}
+
  body,tr,h1,td {
   font-family: 'A신그래픽L';
  } 
@@ -258,7 +262,10 @@ table {
    height: 32px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 991px) {
+	.title-header button { 
+    display:none;
+  }
   .search {
     float: none;
     width: auto;
@@ -315,12 +322,8 @@ table {
   }
   
     .title-header button { 
-    float: right;
-    width: 30%;
-    height: 40px;
-    font-size: 1.1em;
-    bottom: 5px;
-    border-radius:0.25rem;
+    display:none;
+
   }
   
   select { 

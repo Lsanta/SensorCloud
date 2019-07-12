@@ -27,6 +27,8 @@ html {
     height: 50px;
     border-bottom: 2px solid #36a3f7;
 	color: #000;
+	margin-top:20px;
+	
  }
   
   .title-header h1 {
@@ -132,11 +134,11 @@ table {
     padding: .625em;
     text-align: center;
     height: 30px;
-    font-size: 1.1em;
+    font-size: 1.3em;
   }
   
   table th {
-    font-size: 1em;
+    font-size: 1.3em;
     letter-spacing: .1em;
     text-transform: uppercase;
   }
