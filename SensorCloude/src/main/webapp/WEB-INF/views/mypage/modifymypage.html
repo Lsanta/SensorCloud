@@ -11,40 +11,78 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	<script src="/resources/js/mypage/mp.js"></script>
 	<script>
-		/* $(document).ready(function(){
+	var pop;
 	
-			var user_id = $(".zzz").text();
-			
-			
-			   $.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr){
-				
-				   
-				   var str = "";
-					 
-					 $(arr).each(function(i, attach){
-						//image type
-						if(attach.filetype){
-							var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
-							console.log(fileCallPath);
-							str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";
-							str += "<img class='delete1' src='/display?fileName="+fileCallPath+"'>";
-							str += "</div>";
-							str += "</li>";
-						
-						} else {
-							str += "<img src='/resources/img/manager.svg'>";
+	function WindowReset( win /* Window Object */ ){ // 새창의 크기와 위치 재설정
+        
+		  // 
+		  // 새창의 진행상황 체크 완료되면 코드실행 
+		  // 
+		  //while(win.document.readyState != 'complete'){}
+		   
+		  var winBody = win.document.body; 
+		  // 
+		  // 새창의 사이즈에 더해줄 marginWidth와 marginHeight 
+		  // 
+
+		  // 
+		  // 새창의 사이즈 설정 
+		  // 
+		  var wid = winBody.scrollWidth + (winBody.offsetWidth+100)-5; 
+		  var hei = winBody.scrollHeight + (winBody.offsetHeight - 100)+17; 
+		  // 
+		  // 사이즈 재조정 
+		  // 
+		  win.resizeTo(wid, hei); 
+	}
+	
+		$(document).ready(function(){
+			$(".mpmodify-submit").on('click', function() {
+				var passwd = $("#pass").val();
+
+				if (passwd = "") {
+					alert("사용자 정보 수정을위해 비밀번호를 입력해주세요");
+					$("#pass").focus();
+					return;
+				}
+
+				var query = {
+						password : $("#pass").val()
+				};
+
+				$.ajax({
+					type : "POST",
+					dataType : "text",
+					data : query,
+					url : "/mypage/mypageconfirmpasswd.do",
+					success : function(data) {
+						if (data == "success") {
+							alert("비밀번호 일치");
 							
+						/*	 window.open("/mypage/modifymyinfo", "pop2", "status=no,toolbar=no,resizable=no,scrollbars="+scrollbars+",menubar=no, width=1, height=1, left="+left+", top="+top);
+							 */
+							 /* var win;
+						     win = window.open("/mypage/modifymyinfo", "pop2", "status=no,toolbar=no,resizable=no,scrollbars="+scrollbars+",menubar=no, width=1, height=1, left="+(screen.availWidth/2-300)+", top="+(screen.availHeight/2-300)); 
+
+						     win.opener = self.opener; */
+						     /* 	console.log(opener)
+							   pop = window.open("/mypage/modifymyinfo", "pop3",  "width=400,height=800,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+						     	pop.opener = self.opener; */
+						     	
+						       window.location.href = "/mypage/modifymyinfo";
+						     	
+								
+						} else {
+							alert("비밀번호가 틀렸습니다.");
 						}
-						 
-					 });
-					 
-					 $(".cell ul").html(str);
-					
-				 }); //end getjson
-		}); */
+					}
+				});
+			});
+			
+		}); 
 		</script> 
 </head>
-<body>
+<body OnLoad="WindowReset(this)">
 <div class="wrapper">
 
 <!-- 		<div class="w1" th:each="userInfo : ${userInfo} ">
@@ -85,7 +123,7 @@
 			<input type="password" name="pass" id="pass" placeholder="Password"> <br>		
 			<input type="button" name="confirm" id="confirm-modify" class="mpmodify-submit" value="확인">
 		</div>
-	</div>
+
 </body>
 
 </html>

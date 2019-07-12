@@ -61,8 +61,7 @@
 	</select>
 	<!-- 연결된 협력사 들고오기 -->
 	<select id="SiteCompany" resultType="com.wda.sc.domain.SiteVO">
-		select site_id, site_name 
-		from site
+		select * from site
     	where company_num = #{company_num}
 	</select>
 </mapper>
