@@ -132,18 +132,18 @@ $(document).ready(function() {
 		     }
 		});
 		
-		/*화면 줄어들 때 리스트 자르기 */
-		var tr = $("#list tr:gt(3)");
-		
-		if($(window).width() <= 700){
-				tr.addClass("none");
-			} 
-		 
-		 $( window ).resize(function(){
-			 if($(window).width() <= 700){
-					tr.addClass("none");	
-				} else{
-					tr.removeClass("none");
-				} 
-		 });
+//		/*화면 줄어들 때 리스트 자르기 */
+//		var tr = $("#list tr:gt(3)");
+//		
+//		if($(window).width() <= 700){
+//				tr.addClass("none");
+//			} 
+//		 
+//		 $( window ).resize(function(){
+//			 if($(window).width() <= 700){
+//					tr.addClass("none");	
+//				} else{
+//					tr.removeClass("none");
+//				} 
+//		 });
 });
