@@ -34,6 +34,7 @@ table tr {
 table th,
 table td {
  text-align: center;
+ background:white;
 }
 
 table th {

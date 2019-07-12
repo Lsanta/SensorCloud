@@ -2,12 +2,15 @@ body {
 	background-color: #f8f9fc;
 }
 .a {
-	width: 65%;
+	width: 70%;
 	margin: 20px auto;
 	padding: 20px;
 	border: none;
 	background-color: #fff;
-	margin-top: 120px;
+	margin-top: 80px;
+	margin-left: 21%;
+	border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.125);
 }
 
 .index {
@@ -113,14 +116,15 @@ body {
 }
 
 .but0 {
-	margin-top: 20px;
+	float: right;
 	text-align: center;
+    margin-right: 6.5%;
 }
 
 button {
 	border: 1px solid #dddfe6;
 	background-color: #FFF;
-	width: 100px;
+	width: 80px;
 	height: 35px;
 	cursor:pointer
 }

@@ -22,7 +22,7 @@ html {
 	
 #container {
     width: 83%;
-    height: 740px;
+    height: 450px;
     margin: 20px auto;
     margin-top: 125px;
     margin-left:15%;
@@ -35,6 +35,13 @@ html {
 	background-color: #fff;
 	padding: 20px;
 }   
+
+#sensordiv {
+	width: 83%;
+    height: auto;
+    margin: 20px auto;
+    margin-left: 15%;
+}
  
 h1 {
 	text-align: center;
@@ -302,6 +309,7 @@ button:hover {
 .cancleBtn {
 	width: 5%;
 	height: 30px;
+	font-size: 1.3em;
 }
 
 @media screen and (max-width: 768px) {

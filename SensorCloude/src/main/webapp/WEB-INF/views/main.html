@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	data-layout-decorate="~{include/layout}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" data-layout-decorate="~{include/layout}">
 
 
 <th:block layout:fragment="page_head">
@@ -9,171 +7,168 @@
 </th:block>
 
 <th:block layout:fragment="page_css">
-  	<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
 </th:block>
 
 <th:block layout:fragment="contents">
-<div class="main-panel">
-			<div class="content">
-				<div class="page-inner">
-					<div class="page-header">
-						<h3 class="page-title">현장목록</h3>
-						<a style="margin: 0 0 0 25px; font-size:1.3em;" href="/sitelist/1">more</a>
-					</div>
-					<div class="row">
-
-						<div th:each="sitelist : ${sitelist}" class="col-sm-6 col-md-3">
-							<div class="card card-stats card-round">
-								<div class="card-body">
-									<div class="row align-items-center">
-										<div th:switch="${sitelist.site_status}" class="col-icon">
-											<div style="background:gray;" class="icon-big text-center icon-secondary bubble-shadow-small" th:case="'0'">
-												
-											</div>
-											<div style="background:#35cd3a;" class="icon-big text-center icon-secondary bubble-shadow-small" th:case="'1'">
-									
-											</div>
-											<div style="background:red;" class="icon-big text-center icon-secondary bubble-shadow-small" th:case="'2'">
-											
-											</div>
+	<div class="main-panel">
+		<div class="content">
+			<div class="page-inner">
+				<div class="page-header">
+					<h3 class="page-title">현장목록</h3>
+					<a style="margin: 0 0 0 25px; font-size: 1.3em;" href="/sitelist/1">more</a>
+				</div>
+				<div class="row">
+					<div th:each="sitelist : ${sitelist}" class="col-sm-6 col-md-3">
+						<div class="card card-stats card-round">
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div th:switch="${sitelist.site_status}" class="col-icon">
+										<div style="background: gray;" class="icon-big text-center icon-secondary bubble-shadow-small" th:case="'0'">
+											<span th:each="sitelist : ${sitelist}" th:switch="${sitelist.type_no}">
+												<img src="/resources/img/building2.svg" style="width: 50px; height:50px;" th:case="'1'">
+												<img src="/resources/img/mountain.svg" style="width: 50px; height:50px;" th:case="'2'">	
+											</span>
 										</div>
-										<div class="col col-stats ml-3 ml-sm-0">
-											<div class="numbers">
-												<p class="card-category" th:text="${sitelist.site_name}"></p>
-												<h4 class="card-title" th:text="${sitelist.address}"></h4>
-												<p th:text="${sitelist.site_id}" style="display : none"></p>
-											</div>
+										<div style="background: #35cd3a;" class="icon-big text-center icon-secondary bubble-shadow-small" th:case="'1'">
+											<span th:each="sitelist : ${sitelist}" th:switch="${sitelist.type_no}">
+												<img src="/resources/img/building2.svg" style="width: 50px; height:50px;" th:case="'1'">
+												<img src="/resources/img/mountain.svg" style="width: 50px; height:50px;" th:case="'2'">	
+											</span>
+										</div>
+										<div style="background: red;" class="icon-big text-center icon-secondary bubble-shadow-small" th:case="'2'"></div>
+									</div>
+									<div class="col col-stats ml-3 ml-sm-0">
+										<div class="numbers">
+											<p class="card-category" th:text="${sitelist.site_name}"></p>
+											<h4 class="card-title" th:text="${sitelist.address}"></h4>
+											<p th:text="${sitelist.site_id}" style="display: none"></p>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-8">
-							<div class="card">
-								<div class="card-header">
-									<div class="card-head-row">
-										<div class="card-title">점검 이력</div>
-										<div class="card-tools">
-											<a href="/check/1">more</a>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="card">
+							<div class="card-header">
+								<div class="card-head-row">
+									<div class="card-title">점검 이력</div>
+									<div class="card-tools">
+										<a href="/check/1">more</a>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="chart-container" style="min-height: 375px">
+									<div class="image-container">
+										<div class="grid">
+											<div class="images" th:each="mainchecklist : ${mainchecklist}">
+												<div class="ddd" th:if="${mainchecklist.filetype != '1'}">
+													<img src="/resources/img/addimage.svg" class="responsive-image">
+												</div>
+
+												<div class="ddd" th:if="${mainchecklist.filetype == '1'}">
+													<div th:text="${mainchecklist.board_no}" style="display: none;"></div>
+													<ul>
+
+													</ul>
+												</div>
+
+												<h5 th:text="${mainchecklist.title}"></h5>
+												<h5 th:text=${mainchecklist.name}></h5>
+												<span th:text="${mainchecklist.board_no}" style="display: none;"></span>
+												<span id="chdate" th:text=${mainchecklist.reg_date}></span></br>
+												<span id="chstatus" th:switch=${mainchecklist.board_status}>
+													<span class="status00" th:case="'0'">open</span>
+													<span class="status00" th:case="'1'">fixed</span>
+													<span class="status00" th:case="'2'">closed</span>
+												</span>
+											</div>
 										</div>
 									</div>
 								</div>
-								<div class="card-body">
-									<div class="chart-container" style="min-height: 375px">
-										<div class="image-container">
-          <div class="grid">
-            <div class="images" th:each="mainchecklist : ${mainchecklist}">
-            	<div class="ddd" th:if="${mainchecklist.filetype != '1'}">
-
-              		<img src="/resources/img/addimage.svg" class="responsive-image">
-    			</div>
-    			
-    			<div class="ddd" th:if="${mainchecklist.filetype == '1'}">
-    		 	<div th:text="${mainchecklist.board_no}" style="display:none;"></div>
-            		<ul>
-            
-            		</ul>
-    			</div>
-    			
-              	<h5 th:text="${mainchecklist.title}"></h5>
-              	<h5 th:text=${mainchecklist.name}></h5>
-              	<span th:text="${mainchecklist.board_no}" style="display:none;"></span>
-              	<span id="chdate" th:text=${mainchecklist.reg_date}></span></br>
-              	
-              	<span id="chstatus" th:switch=${mainchecklist.board_status}>
-              		<span class="status00" th:case="'0'">open</span>
-              		<span class="status00" th:case="'1'">fixed</span>
-              		<span class="status00" th:case="'2'">closed</span>
-              	</span>
-            </div>
-            
-          </div>
-        </div> 
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card card-secondary">
+							<div class="card-header">
+								<div class="card-title">
+									타임라인 <a style="float: right; color: white;" href="/time/1">more</a>
+								</div>
+							</div>
+							<div class="card-body pb-0">
+								<div class="mb-4 mt-2">
+									<div class="timeline" th:each="timelinelist : ${timelinelist}">
+										<div class="timeline-header">
+											<h3 style="color: black;" th:text="${timelinelist.name}">id</h3>
+											<h5 th:text="${timelinelist.time}">date</h5>
+										</div>
+										<p style="color: black;" th:text="${timelinelist.content}">content</p>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-4">
-							<div class="card card-secondary">
-								<div class="card-header">
-									<div class="card-title">타임라인 <a style="float:right; color:white;" href="/time/1">more</a></div>
-								</div>
-								<div class="card-body pb-0">
-									<div class="mb-4 mt-2">
-										<div class="timeline" th:each="timelinelist : ${timelinelist}">
-            <div class="timeline-header">
-                <h3 style="color:black;" th:text="${timelinelist.name}">id</h3>
-                <h5 th:text="${timelinelist.time}">date</h5>
-            </div>
-            <p style="color:black;" th:text="${timelinelist.content}">content</p>
-          </div>
-									</div>
-									
-								</div>
-							</div>
-						</div>
-					</div>	
+					</div>
 				</div>
 			</div>
-			
 		</div>
+	</div>
 </th:block>
-	
-	<th:block layout:fragment="page_js" >
-<!-- 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
-		
-		
-		<script>
-		$(document).ready(function(){
-	
+
+<th:block layout:fragment="page_js">
+	<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+
+	<script>
+		$(document).ready(function() {
 			var bno = $(".ddd").text();
-			
-			
+	
 			var board_no = Number(bno);
 			var count = 0;
-		 	var check_num = 0;
-		 	var str = "";
+			var check_num = 0;
+			var str = "";
 			var arr2 = {};
-			for(var i=0; i < 6; i++){
+			
+			for (var i = 0; i < 6; i++) {
 				arr2[i] = $(".ddd").eq(i).text();
-			   $.getJSON("/checkboard/getAttachListmain",{board_no : arr2[i]},function(arr0){
-				
-				  
-					 $(arr0).each(function(i, attach){
-	
-						 str="";
-						//image type
-						if(attach.fileType){
-							console.log("board_no : "+attach.board_no);
-							console.log("count : "+count+","+attach.uuid);
-							console.log(attach.file_name);
-							
-							var fileCallPath = encodeURIComponent( attach.file_Path+ "/s_"+attach.uuid + "_"+attach.file_name);
-							
-							str += "<img src='/display?fileName="+fileCallPath+"'>";
-						} else {	
-							str += "<img src='/resources/img/attach.png'>";
-						}
-						check_num = attach.board_no;
-						
-						/* if(check_num != attach.board_no && check_num !=0){								
-							$(".ddd ul").text(attach.board_no).html(str);
-							count=count+1;
-							check_num = attach.board_no;
-						}else{
-							check_num = attach.board_no;
-						} */
-						/*  $(".imagearea").eq(i).children('ul').html(str); */
-					 });
-					
-					 	$('.ddd:contains("'+check_num+'")').html(str);
-				 }); //end getjson
-			}
-			   });
-		</script>
-		<script src="/resources/js/main.js"></script>
-	</th:block>
-	
+				$.getJSON(
+					"/checkboard/getAttachListmain",
+					{ board_no : arr2[i] },
+						function(arr0) {
+							$(arr0).each(function(i,attach) {
+								str = "";
+								//image type
+								if (attach.fileType) {
+									console.log("board_no : " + attach.board_no);
+									console.log("count : " + count + "," + attach.uuid);
+									console.log(attach.file_name);
+
+									var fileCallPath = encodeURIComponent(attach.file_Path + "/s_" + attach.uuid + "_" + attach.file_name);
+
+									str += "<img src='/display?fileName=" + fileCallPath\ + "'>";
+								} else {
+									str += "<img src='/resources/img/attach.png'>";
+								}
+								check_num = attach.board_no;
+
+								/* if(check_num != attach.board_no && check_num !=0){								
+									$(".ddd ul").text(attach.board_no).html(str);
+									count=count+1;
+									check_num = attach.board_no;
+								}else{
+									check_num = attach.board_no;
+								} */
+								/*  $(".imagearea").eq(i).children('ul').html(str); */
+							});
+
+						$('.ddd:contains("'+ check_num+ '")').html(str);
+					}); //end getjson
+				}
+			});
+	</script>
+	<script src="/resources/js/main.js"></script>
+</th:block>
 </html>

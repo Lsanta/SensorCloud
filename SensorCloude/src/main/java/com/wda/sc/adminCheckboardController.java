@@ -2,6 +2,7 @@ package com.wda.sc;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/adminCheckPage")
 public class adminCheckboardController {
 	private CheckboardService Checkboardservice;
+	private SiteService siteservice;
 	
 		@RequestMapping(value="/{num0}", method = RequestMethod.GET) 
 		public String adminProxy(@PathVariable String num0){
@@ -70,4 +72,79 @@ public class adminCheckboardController {
 			
 			return "adminCheck/adminCheck";
 		}
+		
+		   // 마이페이지에서 점검이력 content보기
+		   @RequestMapping(value = "/checkboard/" + "{board_no}", method = RequestMethod.GET)
+		   public String checkin(Locale locale, @PathVariable String board_no, Model model, HttpSession session ,HttpServletResponse response) throws IOException {
+		      
+		      System.out.println("보드넘버=" + board_no);
+		      
+		      int mlevel = (int) session.getAttribute("mlevel");
+
+		      if (mlevel < 2) {
+
+		         response.setContentType("text/html; charset=UTF-8");
+		         PrintWriter out = response.getWriter();
+		         out.println("<script langauge='javascript'>");
+		         out.println("alert('권한이 없습니다. \\n 2등급(읽기권한)이상이 열람가능합니다'); history.go(-1);");
+		         out.println("</script>");
+
+		         
+		      }
+
+		      // 수정클릭시 권한체크 위해 id에 해당하는 m_level을 넘긴다.
+		      String user_id = (String) session.getAttribute("id");
+		      model.addAttribute("checkauthority", Checkboardservice.checkauthority(user_id));
+		      System.out.println(Checkboardservice.checkauthority(user_id));
+
+		      model.addAttribute("cklist", Checkboardservice.viewgetList(board_no));
+		      System.out.println(Checkboardservice.viewgetList(board_no));
+		      model.addAttribute("siteid", Checkboardservice.getsiteid(board_no));
+		      model.addAttribute("board_no", board_no);
+
+		      System.out.println("사이트아이디=" + Checkboardservice.getsiteid(board_no));
+		      
+		      model.addAttribute("depth0","메인화면");
+			  model.addAttribute("depth1","점검이력관리");
+			  
+		      return "check/checkview";
+		   }
+		   
+		   /// 마이페이지 -> 점검이력에서 해당글 클릭후 수정버튼을 누를시 글쓰기폼에 해당 데이터 전달
+		   @RequestMapping(value = "/checkmod2" + "/{board_no}", method = RequestMethod.GET)
+		   public String checkmod2(Locale locale, Model model, @PathVariable String board_no, HttpSession session,HttpServletResponse response) throws IOException {
+
+		      int mlevel = (int) session.getAttribute("mlevel");
+
+		      if (mlevel < 3) {
+
+		         response.setContentType("text/html; charset=UTF-8");
+		         PrintWriter out = response.getWriter();
+		         out.println("<script langauge='javascript'>");
+		         out.println("alert('권한이 없습니다. \\n 3등급(쓰기권한)이상이 열람가능합니다'); history.go(-1);");
+		         out.println("</script>");
+
+		         
+		      }
+		      
+		      System.out.println(board_no);
+		      // board_no를 통해 점검이력 내용 가져오기
+		      model.addAttribute("modlist", Checkboardservice.viewgetList(board_no));
+
+		      // ID를 통해 권한레벨 가져오기
+		      String user_id = (String) session.getAttribute("id");
+		      model.addAttribute("auth", Checkboardservice.checkauthority(user_id));
+		      System.out.println(Checkboardservice.viewgetList(board_no));
+		      // 사이트 이름,점검이력 제목,점검이력내용 정보 가져오기
+		      model.addAttribute("checksitelist", siteservice.getchecksite());
+
+		      // 현장아이디
+		      model.addAttribute("siteid", Checkboardservice.getsiteid(board_no));
+		     
+		      model.addAttribute("depth0","메인화면");
+			  model.addAttribute("depth1","점검이력관리");
+			  System.out.println("뭐해뭐해");
+			  
+		      return "check/checklistmodify";
+		   }
 }

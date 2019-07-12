@@ -19,6 +19,7 @@
 }
 
 .modify {
+	margin-left : 0.5%;
 	cursor : pointer;
 }
 .delete {

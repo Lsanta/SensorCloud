@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,9 +25,13 @@ import com.wda.sc.domain.CompanyVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
+import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CompanyService;
+import com.wda.sc.service.SiteService;
 
 import lombok.AllArgsConstructor;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 @AllArgsConstructor
@@ -36,20 +41,19 @@ public class CompanyController {
 	
 	@RequestMapping(value = ""+"/{num}", method = RequestMethod.GET)
 	public String companyPage(@PathVariable String num, Locale locale, Model model ,HttpServletResponse response,HttpSession session) throws IOException {
-
-
+	
 		int mlevel = (int) session.getAttribute("mlevel");
-
 
 		if (mlevel != 6) {
 
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script langauge='javascript'>");
-			out.println("alert('권한이 없습니다.\\n3등급(쓰기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("alert('권한이 없습니다.\\n관리자에게 문의하세요');history.go(-1);");
 			out.println("</script>");
 
 		}
+		
 		// 회사 테이블 + 페이징
 		Paging page = new Paging();
 		ArrayList<Integer> arr=null;
@@ -107,12 +111,13 @@ public class CompanyController {
 			System.out.println("pageNum : " + pageNum);
 			return "redirect:/company/"+pageNum;
 		}
+		
 		model.addAttribute("depth0","메인화면");
 		model.addAttribute("depth1","협력사관리");
 
-
 		return "company/company";
 	}
+	
 	@RequestMapping(value = "companyadd", method = RequestMethod.GET)
 	public String address(Locale locale, Model model, HttpSession session, HttpServletResponse response)
 			throws IOException {
@@ -126,8 +131,7 @@ public class CompanyController {
 			out.println("<script langauge='javascript'>");
 			out.println("alert('권한이 없습니다.\\n4등급(수정권한)이상이 열람가능합니다'); window.opener.location.reload(); window.close();");
 			out.println("</script>");
-			
-			
+	
 		}
 
 		return "company/companyadd";
@@ -288,5 +292,19 @@ public class CompanyController {
 			}
 			
 			return "success";
+		}
+		
+		@RequestMapping(value = "/companyJSON", method = RequestMethod.POST)
+		@ResponseBody
+		public JSONArray companyJSON(Model model, @RequestParam int company_num) {
+			
+			ArrayList<SiteVO> vo = companyservice.SiteCompany(company_num);
+			System.out.println(vo);
+			
+			JSONArray jsonarr = JSONArray.fromObject(vo);
+			System.out.println("arr" + jsonarr);
+			
+			
+			return jsonarr;
 		}
 }
