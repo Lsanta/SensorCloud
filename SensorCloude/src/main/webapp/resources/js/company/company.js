@@ -4,6 +4,9 @@ $(document).ready(function() {
 		$("#snameDiv").empty();		
 		
 		var cid = $(this).children().eq(3).text();
+		var index = $(this).index();
+		
+		console.log(index);
 		var query = {
 				company_num : cid
 		}
@@ -33,6 +36,7 @@ $(document).ready(function() {
 				snameList += "</ul>";
 				
 				$("#snameDiv").html(snameList);
+				$("#snameDiv").css("padding-top",(index+1)*46+'px');
 			}
 		});
 	});

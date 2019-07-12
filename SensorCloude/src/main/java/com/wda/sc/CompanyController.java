@@ -49,7 +49,7 @@ public class CompanyController {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script langauge='javascript'>");
-			out.println("alert('권한이 없습니다.\\n3등급(쓰기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("alert('권한이 없습니다.\\n관리자에게 문의하세요');history.go(-1);");
 			out.println("</script>");
 
 		}
