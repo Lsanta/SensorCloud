@@ -44,6 +44,7 @@
 										<tr th:each="companySearch : ${company}">
 											<td th:text="${companySearch.name}"></td>
 											<td th:text="${companySearch.reg_number}"></td>
+											<td th:text="${companySearch.num}+'개'"></td>
 											<td th:text="${companySearch.company_num}" style="display: none"></td>
 										</tr>
 									</tbody>

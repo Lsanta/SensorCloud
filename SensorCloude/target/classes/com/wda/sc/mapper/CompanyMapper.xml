@@ -18,7 +18,7 @@
         group by c.company_num) a, company c
 		where a.company_num = c.company_num) p where rownum < #{endnum}) x
     where x.rnum >= #{startnum}
-    order by x.name
+    order by x.company_num
     ]]>
 	</select>
 	

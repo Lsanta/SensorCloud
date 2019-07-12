@@ -161,7 +161,7 @@ public class CompanyController {
 			// 보유센서 추가
 
 			int a = companyservice.insertCompany(vo);
-
+				
 			System.out.println("추가됨");
 			if (a == 0) {
 				return "false";
@@ -207,7 +207,6 @@ public class CompanyController {
 			s.setSearchType(searchType);
 
 			searchArr = companyservice.companySearch(s);
-
 			System.out.println(searchArr);
 
 			int pageNum = 0;
@@ -284,8 +283,9 @@ public class CompanyController {
 			model.addAttribute("Allcompany", vo);
 			System.out.println(vo);
 			System.out.println(number);
+
 			for(int i=0; i < vo.size(); i++) {
-				if( Integer.parseInt(number) == vo.get(i).getReg_number()) {
+				if( number == vo.get(i).getReg_number()) {
 					System.out.println(vo.get(i).getReg_number());
 					return "false";
 				}
