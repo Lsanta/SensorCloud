@@ -18,16 +18,21 @@ $(document).ready(function() {
 			dataType : 'JSON',
 			success : function(data) {
 				console.log(data);
-				
+				console.log("데이터 개수" + data.length);
 				var str = "";
 				
-				$.each(data,function(i,s){
-					str += "<ul id='sitenamelist'>";
-					str += "<li>"+data[i].site_name+"</li>";
-					str += "<li style='display:none'>"+data[i].site_id+"</li>";
-					str += "</ul>";
-				});
-				
+				if(data.length == 0) {
+						str += "<ul id='sitenamelist'>";
+						str += "<li>관리하고 있는 현장이 없습니다.</li>";
+						str += "</ul>";
+				} else {
+					$.each(data,function(i,s){
+						str += "<ul id='sitenamelist'>";
+						str += "<li>"+data[i].site_name+"</li>";
+						str += "<li style='display:none'>"+data[i].site_id+"</li>";
+						str += "</ul>";
+					});
+				}
 				var snameList = "";
 				snameList += "<ul class='timeline'>";
 				snameList += "<li class='timeline-inverted'>";
@@ -58,7 +63,7 @@ $(document).ready(function() {
 		var tr = $(this);
 		var name = tr.children().eq(0).addClass("1");
 		var reg_number = tr.children().eq(1).addClass("2");
-		var company_num = tr.children().eq(2).addClass("3");
+		var company_num = tr.children().eq(3).addClass("3");
 	 });
 	
 

@@ -6,7 +6,7 @@ import lombok.Data;
 public class CompanyVO {
 	private int company_num;
 	private String name;
-	private int reg_number;
+	private String reg_number;
 	
 	//협력사와 몇개의 현장을 같이 하고 있는지 보여주기 위한 컬럼
 	private int num;

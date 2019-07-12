@@ -9,7 +9,7 @@
 	 $(document).ready(function(){
 		 
 		 $("#reg_number").blur(function(){
-			$("#reg_number").val(); 
+		
 			var query = {
 					number : $("#reg_number").val()
 			}
@@ -73,8 +73,8 @@
 <body>
 <h2>협력사 추가</h2>
  <div class="sensoradd">
-	협력사 이름<input type="text" id="name" name="name" placeholder="ex) 협력사 이름"/><br/>
-	사업자 번호<input type="text" id="reg_number" name="reg_number" placeholder="ex) 사업자 번호"/><br/>
+	협력사 이름<input type="text" id="name" name="name" placeholder="ex) 협력사 이름"/ maxlength="33"><br/>
+	사업자 번호<input type="text" id="reg_number" name="reg_number" placeholder="ex) 사업자 번호" maxlength="15" /><br/>
 	<div class="errorstr" id="numberstr"></div>
 	<input type="button"  value="추가" id="plus" />
 	</div>

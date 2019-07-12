@@ -1103,6 +1103,7 @@ public class SiteController {
 	@ResponseBody
 	public String installsensormod(InstallSensorVO vo) {
 
+		System.out.println("설치센서 수정" + vo);
 		int a = mysensorservice.modInstallsensor(vo);
 
 		if (a == 1) {

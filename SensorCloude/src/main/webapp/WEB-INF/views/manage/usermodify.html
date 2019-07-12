@@ -7,7 +7,11 @@
 <script src="/resources/js/manage/manage.js"></script>
 <script>
 /*사용자 수정*/
-$(document).ready(function() {
+$(document).ready(function() {	
+	 var level = $("#level").text();
+	 console.log(level);
+	 $("#selectBox").val(level);
+	 
 	var user_id = $(".zzz").text();
 	
 	   $.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr){
@@ -85,7 +89,7 @@ $("#confirm-modify").on("click", function() {
 				<input type="text" name="modify_name" id="id" th:value="${userInfo.user_id}" disabled="disabled"><br>
 
 				<label id="name">이름</label><br>
-				<input type="text" name="name" id="modify_name" th:value="${userInfo.name}"><br>
+				<input type="text" name="name" id="modify_name" th:value="${userInfo.name}" maxlength="5"><br>
 			</div>
 
 			<div>
@@ -99,21 +103,25 @@ $("#confirm-modify").on("click", function() {
 					<ul></ul>
 				</div>
 			</div>
+			
+			<div id="level" style="display : none" th:text="${userInfo.m_level}"></div>
 
 			<div id="ep">
 				<label>이메일</label><br> <input type="text" name="modify_name"
 					id="email" th:value="${userInfo.email}" disabled="disabled"><br>
 
 				<label>휴대폰번호</label><br> <input type="text" name="modify_name"
-					id="phonenumber" th:value="${userInfo.phone}"><br> <label
-					id="level">등급</label><br> <select id="selectBox">
+					id="phonenumber" th:value="${userInfo.phone}" maxlength="11"><br> 
+					<label id="level">등급</label><br> <select id="selectBox">
 					<option value="1">1. 권한없음</option>
 					<option value="2">2. 읽기권한</option>
 					<option value="3">3. 쓰기권한</option>
 					<option value="4">4. 수정권한</option>
 					<option value="5">5. 관리자</option>
+					<option value="6">6. 관리자</option>
 				</select>
-
+	
+				
 
 
 				<p id="re_level" th:each="userInfo : ${userInfo}"
