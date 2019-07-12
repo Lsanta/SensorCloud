@@ -20,39 +20,42 @@
 								<h1>협력사 관리</h1>
 								<button id="companyadd" value="add">협력사 추가</button>
 							</div>
+							<div class="left_div">
+								<table id="company">
+									<thead>
+										<tr>
+											<th scope="col" style="width: 13%">협력사</th>
+											<th scope="col" style="width: 13%">사업자번호</th>
+											<th scope="col" style="width: 13%">현장 갯수</th>
+										</tr>
+									</thead>
+									<tbody id="list" th:if="${company == null}">
+										<tr th:each="companylist : ${companylist}">
+											<td th:text="${companylist.name}"></td>
+											<td th:text="${companylist.reg_number}"></td>
+											<td th:text="${companylist.num}+'개'"></td>
+											<td th:text="${companylist.company_num}" style="display: none"></td>
+										</tr>
+										
+										<tr></tr>
+									</tbody>
+	
+									<tbody id="list" th:if="${company != null}">
+										<tr th:each="companySearch : ${company}">
+											<td th:text="${companySearch.name}"></td>
+											<td th:text="${companySearch.reg_number}"></td>
+											<td th:text="${companySearch.company_num}" style="display: none"></td>
+										</tr>
+									</tbody>
+								</table>
+															<div id="snameDiv">
 							
-							<table id="company">
-								<thead>
-									<tr>
-										<th scope="col" style="width: 13%">협력사</th>
-										<th scope="col" style="width: 13%">사업자번호</th>
-										<th scope="col" style="width: 13%">현장 갯수</th>
-									</tr>
-								</thead>
-								<tbody id="list" th:if="${company == null}">
-									<tr th:each="companylist : ${companylist}">
-										<td th:text="${companylist.name}"></td>
-										<td th:text="${companylist.reg_number}"></td>
-										<td th:text="${companylist.num}+'개'"></td>
-										<td th:text="${companylist.company_num}" style="display: none"></td>
-									</tr>
-									
-									<tr></tr>
-								</tbody>
-
-								<tbody id="list" th:if="${company != null}">
-									<tr th:each="companySearch : ${company}">
-										<td th:text="${companySearch.name}"></td>
-										<td th:text="${companySearch.reg_number}"></td>
-										<td th:text="${companySearch.company_num}" style="display: none"></td>
-									</tr>
-								</tbody>
-							</table>
+							</div>
+							</div>
+							
 
 						</div>
-
-						<div id="site_name"></div>
-
+					
 						<div class="pagination-container">
 							<nav class="pagination-content">
 								<div class="pagination">
@@ -76,11 +79,11 @@
 								</select>
 							</div>
 							<section class="search-box">
-								<div class="search-content">
-									<input type="text" id="keyword" />
+								<div class="search-content" >
+									<input type="text" id="keyword" placeholder="search" /> 
 								</div>
 								<div class="search-button">
-									<button id="search">Search</button>
+									<button id="search"><img src="/resources/img/search.svg" id="search" style="width: 30px; height:30px;"/></button>
 								</div>
 							</section>
 						</div>

@@ -25,6 +25,7 @@ import com.wda.sc.domain.CompanyVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.Paging;
 import com.wda.sc.domain.Search;
+import com.wda.sc.domain.SiteVO;
 import com.wda.sc.service.CompanyService;
 import com.wda.sc.service.SiteService;
 
@@ -48,7 +49,7 @@ public class CompanyController {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script langauge='javascript'>");
-			out.println("alert('권한이 없습니다.\\n3등급(쓰기권한)이상이 열람가능합니다');history.go(-1);");
+			out.println("alert('권한이 없습니다.\\n관리자에게 문의하세요');history.go(-1);");
 			out.println("</script>");
 
 		}
@@ -291,5 +292,19 @@ public class CompanyController {
 			}
 			
 			return "success";
+		}
+		
+		@RequestMapping(value = "/companyJSON", method = RequestMethod.POST)
+		@ResponseBody
+		public JSONArray companyJSON(Model model, @RequestParam int company_num) {
+			
+			ArrayList<SiteVO> vo = companyservice.SiteCompany(company_num);
+			System.out.println(vo);
+			
+			JSONArray jsonarr = JSONArray.fromObject(vo);
+			System.out.println("arr" + jsonarr);
+			
+			
+			return jsonarr;
 		}
 }

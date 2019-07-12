@@ -61,7 +61,7 @@
 // 			return false;
 // 		}
 		
-    	if( $("#user").val() == "" || $('#password').val() == "" || $('#password2').val() == "" ||	$("#phone").val() == "" // || $(".end").val() == ""
+    	if( $("#user").val() == "" || $('#password').val() == "" || $('#password2').val() == "" ||	$("#phone").val() == "" || $(".end").val() == ""
     			){
     		alert("회원가입란에  빈값이 있습니다. 다시 확인해 주세요.");
     		return false;
@@ -155,82 +155,82 @@
 				}
 			});
     		
-//     		//인증번호 전송 클릭 시
-//     		$("#sendAuth").click(function(){
-//     			//문자를 통해 인증번호를 전송 및 난수로 생성된 인증번호를 ajax return 값으로 받아 DB가아닌 스토리지에 저장 후 확인 ?
-//     			if( $("#user").val() == "") {
-//     				alert("아이디를 입력해주세요.");
-//     				return false;
-//     			}
+    		//인증번호 전송 클릭 시
+    		$("#sendAuth").click(function(){
+    			//문자를 통해 인증번호를 전송 및 난수로 생성된 인증번호를 ajax return 값으로 받아 DB가아닌 스토리지에 저장 후 확인 ?
+    			if( $("#user").val() == "") {
+    				alert("아이디를 입력해주세요.");
+    				return false;
+    			}
     			
-//     			if( $("#phone").val() == "") {
-//     				alert("휴대폰번호를 입력해주세요.");
-//     				return false;
-//     			}	
+    			if( $("#phone").val() == "") {
+    				alert("휴대폰번호를 입력해주세요.");
+    				return false;
+    			}	
     					
-//     			var query = {
-//     				id  : $("#user").val(),
-//     				phone : $("#phone").val()
-//     			};
+    			var query = {
+    				id  : $("#user").val(),
+    				phone : $("#phone").val()
+    			};
     			
-//     			$.ajax({
-//     				type : "POST",
-//     				dataType : 'text',
-//     				url : "/login/sendAuth",
-//     				data : query,
-//     				success : function(data2) {
-//     					if( data2 != '') {
-//     						alert("인증번호 전송이 완료되었습니다.");
-//     						console.log(data2);
-//     						sessionStorage.setItem("number", data2);
+    			$.ajax({
+    				type : "POST",
+    				dataType : 'text',
+    				url : "/login/sendAuth",
+    				data : query,
+    				success : function(data2) {
+    					if( data2 != '') {
+    						alert("인증번호 전송이 완료되었습니다.");
+    						console.log(data2);
+    						sessionStorage.setItem("number", data2);
     						
-//     					} else {
-//     						alert("인증번호 전송이 실패했습니다. 다시 시도해 주세요.");
+    					} else {
+    						alert("인증번호 전송이 실패했습니다. 다시 시도해 주세요.");
     						
-//     					}
+    					}
     					
-//     				}
-//     			});
+    				}
+    			});
     			
-//     		});
+    		});
     		
-//     		//인증번호 확인 클릭 시
-//     		$("#checkAuth").click(function(){
-//     			//스토리지에 저장되어있는 인증번호를 가져와서 검사 ?
-//     			count++;
-//     			var inputNum = $(".end").val();
-//     			console.log(inputNum);
+    		//인증번호 확인 클릭 시
+    		$("#checkAuth").click(function(){
+    			//스토리지에 저장되어있는 인증번호를 가져와서 검사 ?
+    			count++;
+    			var inputNum = $(".end").val();
+    			console.log(inputNum);
     			
-//     			var authNum = sessionStorage.getItem("number");
-//     			console.log(authNum);
+    			var authNum = sessionStorage.getItem("number");
+    			console.log(authNum);
     			
-//     			if(inputNum == authNum) {
-//     				alert("인증번호가 일치합니다.");
-//     				$("#authstr").removeClass();
-// 					$("#authstr").addClass("successstr");
-// 		    		document.getElementById("authstr").innerHTML="인증번호가 일치합니다.";
-//     			} else {
-//     				alert("인증번호가 다릅니다. 다시 시도해 주세요.");
-//     				$("#authstr").removeClass();
-// 					$("#authstr").addClass("errorstr");
-// 		    		document.getElementById("authstr").innerHTML="인증번호가 일치하지 않습니다.";
-//     			}
+    			if(inputNum == authNum) {
+    				alert("인증번호가 일치합니다.");
+    				$("#authstr").removeClass();
+					$("#authstr").addClass("successstr");
+		    		document.getElementById("authstr").innerHTML="인증번호가 일치합니다.";
+    			} else {
+    				alert("인증번호가 다릅니다. 다시 시도해 주세요.");
+    				$("#authstr").removeClass();
+					$("#authstr").addClass("errorstr");
+		    		document.getElementById("authstr").innerHTML="인증번호가 일치하지 않습니다.";
+    			}
     			
     			
-//     		});
+    		});
     		
-//     		$("input:radio[name=company]").click(function(){
-//     			if(  $("input[name=company]:checked").val() != "STR")  {
-//         			$('.createbox').append("<br/>회사 명 <input type='text' id='companyname'></input>");
-//         			$('.createbox').append("<br/>사업자 번호 <input type='text' name='regnumber'></input>");
-//         		} else if ($("input[name=company]:checked").val() == "STR"){
-//         			$(".createbox").empty();
-//         		}
-//     		});
+    		$("input:radio[name=company]").click(function(){
+    			if(  $("input[name=company]:checked").val() != "STR")  {
+        			$('.createbox').append("<br/>회사 명 <input type='text' id='companyname'></input>");
+        			$('.createbox').append("<br/>사업자 번호 <input type='text' name='regnumber'></input>");
+        		} else if ($("input[name=company]:checked").val() == "STR"){
+        			$(".createbox").empty();
+        		}
+    		});
     		
-//     		$(document).on('blur','#companyname', function(){
-//     			$("#DEF").val($("#companyname").val());
-//     		});
+    		$(document).on('blur','#companyname', function(){
+    			$("#DEF").val($("#companyname").val());
+    		});
     		
     		
     	});

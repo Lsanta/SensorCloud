@@ -1,4 +1,13 @@
 @charset "UTF-8";
+@font-face {
+  font-family: A신그래픽L;
+  src: url('/resources/font/A신그래픽L.TTF');
+}
+
+body {
+   font-family: 'A신그래픽L';
+   overflow-y: hidden;
+}
 
 #site tr td img {
 	width : 25px;

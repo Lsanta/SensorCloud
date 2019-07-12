@@ -23,13 +23,20 @@
 	
 	<script>
 	function gradePop() {
-		var pop = window.open("/mypage/levelup", "pop",
+		
+/* 		 var win;
+	        win = window.open("/mypage/levelup", "pop", "status=no,toolbar=no,resizable=no,scrollbars="+scrollbars+",menubar=no, width=1, height=1, left="+left+", top="+top); 
+	        win.opener.self; */
+	        
+ 		var pop = window.open("/mypage/levelup", "pop",
 				"width=500,height=330,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-100)+"resizable=yes");
-	}
+		}
 
-	function updateMyInfo() {
-		var pop = window.open("/mypage/modifymypage", "pop",
-				"width=540,height=350,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-100)+"resizable=yes");
+	function updateMyInfo() {		
+
+        
+        var win;
+        win = window.open("/mypage/modifymypage", "pop2", "status=no,toolbar=no,resizable=no,scrollbars="+scrollbars+",menubar=no, width=1, height=1, left="+(screen.availWidth/2-300)+", top="+(screen.availHeight/2-300));
 	}
 	
 	var config = {

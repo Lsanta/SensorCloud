@@ -54,5 +54,11 @@ public class CompanyServiceImplement implements CompanyService{
 		// TODO Auto-generated method stub
 		return mapper.getAllCompany();
 	}
+	@Override
+	public ArrayList<SiteVO> SiteCompany(int company_num) {
+		//COMPANY_num으로 속한 현장이름 , site_id 가져오기
+		System.out.println("회사번호" + company_num);
+		return mapper.SiteCompany(company_num);
+	}
 
 }

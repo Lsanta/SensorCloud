@@ -1,123 +1,148 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>마이페이지 유저 정보 수정</title>
-	<meta charset="utf-8" />
-	
-	<link rel="stylesheet" href="/resources/css/mypage/modifyuserinfo.css" />
-	<link rel="stylesheet" href="/resources/css/mypage/mpweb.css" />
-	<link rel="stylesheet"
-		media="(min-width: 701px) and (max-width: 1000px)"
-		href="/resources/css/mypage/mptablet.css" />
-	<link rel="stylesheet" media="(min-width: 0px) and (max-width: 700px)"
-		href="/resources/css/mypage/mpmobile.css" />
-	<script src="/resources/js/mypage/mp.js"></script>
-	<script>
-		$(document).ready(function(){
-	
-			var user_id = $(".zzz").text();
-			
-			
-			   $.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr){
-				
-				   
-				   var str = "";
-					 
-					 $(arr).each(function(i, attach){
-						//image type
-						if(attach.filetype){
-							var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
-							
-							str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";
-							str += "<img class='delete1' src='/display?fileName="+fileCallPath+"'>";
-							str += "</div>";
-							str += "</li>";
-						
-						} else {
-							str += "<img src='/resources/img/manager.svg'>";
-							
+<title>마이페이지 유저 정보 수정</title>
+<meta charset="utf-8" />
+
+<link rel="stylesheet" href="/resources/css/mypage/modifyuserinfo.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/resources/js/mypage/mp.js"></script>
+<script>
+
+function WindowReset( win /* Window Object */ ){ // 새창의 크기와 위치 재설정
+      self.moveTo(700,150);
+	  win.resizeTo(500, 800); 
+}
+	function goPopupImg() {
+		var pop = window.open("/mypage/imgupload", "image", "width=400,height=300,top="+(screen.availHeight/2-300)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+	}
+		
+	$(document).ready(function() {
+		
+		$('.confirm-modify').click(function() {
+
+			var value = $('input[name=modify_name]').val();
+
+			var id = $("#id").val();
+			var password = $("#password").val();
+			var passwordconfirm = $("#passwordconfirm").val();
+			var modify_name = $("#modify_name").val();
+			var phonenumber = $("#phonenumber").val();
+
+			if (passwordconfirm != password) {
+				document.getElementById("inhere2").innerHTML = "비밀번호확인이 일치하지 않습니다";
+			} else if (passwordconfirm == password) {
+
+				var query = {
+						user_id : id,
+						name : modify_name,
+						password : password,
+						phone : phonenumber
+				}
+
+				$.ajax({
+					type : "POST",
+					data : query,
+					url : "/mypage/mypagemodifymyinfo",
+					success : function(data) {
+						if (data == "success") {
+							window.opener.location.reload();
+							self.close();
 						}
-						 
-					 });
-					 
-					 $(".cell ul").html(str);
-					
-				 }); //end getjson
+						if (data == "false") {
+							document.getElementById("inhere1").innerHTML = "수정 정보를 모두 입력해 주세요";
+						}
+					}
+				});
+			}
 		});
-		</script> 
+		
+		var user_id = $(".zzz").text();
+		console.log(user_id);
+		$.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr) {				
+			console.log(arr);
+			var str = "";
+		
+			$(arr).each(function(i, attach) {
+				//image type
+				if (attach.filetype) {
+					console.log("1");
+					var fileCallPath = encodeURIComponent(attach.file_path+ "/s_"+ attach.uuid+ "_"+ attach.file_name);
+			
+					str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";
+					str += "<img class='delete1' src='/display?fileName="+ fileCallPath+ "'>";
+					str += "</div>";
+					str += "</li>";
+				} else {
+					str += "<img src='/resources/img/manager.svg'>";
+				}
+			});
+		
+		$(".cell ul").html(str);
+		
+		}); //end getjson
+	});
+</script>
 </head>
 
-<body>
+<body onload="WindowReset(self)">
 	<div class="wrapper">
 
-		<!--  <div class="w1" th:each="userInfo : ${userInfo} ">
-        <div class="cell" th:if="${userInfo.filetype = 'false'}">
-         <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
-           <ul>
-           </ul>
-         </div>
-         
-         <div class="cell" th:if="${userInfo.filetype = 'true'}">
-         <div class="zzz" th:text="${userInfo.user_id}" style="display:none;"></div>
-			<ul>
-			</ul>       
-         </div>
-			
-			<div class="name01" th:each="userInfo : ${userInfo}">
-				<p class="n1" th:text="${userInfo.name}"></p>
-				<p class="n2" th:text="등급 + ${userInfo.m_level}">
-				<p class="n3" th:switch="${userInfo.m_level}">
-	               <span th:case="'1'">(권한없음)</span>
-	               <span th:case="'2'">(읽기권한)</span>
-	               <span th:case="'3'">(쓰기권한)</span>
-	               <span th:case="'4'">(수정권한)</span>
-	               <span th:case="'5'">(관리자)</span>
-            	</p>
-				</p>
-			</div>
-			
-			<div class="name02">
-				<input class="update" type="button" value="정보수정"> <input
-					class="up" type="button" value="승급요청">
-			</div>
-		</div> -->
-		
-	
+		<div class="w2">
 
-	<!-- <hr color="black" width=100%> -->
-	
-	<div class="w2">
-	
-	<h1> 정보 수정 </h1>
-	
-		<div class="usermodify-card" th:each="userInfo : ${userInfo}">
-			
-			<div id=inhere1 style="color:red;"></div> 
-			<label>아이디</label><br>
-			<input type="text" name="modify_name" id="id" th:value="${userInfo.user_id}" disabled><br>
-			
-			
-			<label>비밀번호</label><br>
-			<input type="password" name="modify_name" id="password"><br> 
-			
-			<label>비밀번호 확인</label><div id="inhere2" style="color:red;"></div>
-			<input type="password" name="modify_name" id="passwordconfirm"><br>
-			<br>
-			
-			<label>이름</label><br>
-			<input type="text" name="name" id="modify_name" th:value="${userInfo.name}"><br>
-			
-			<label>이메일</label><br>
-			<input type="text" name="name" id="modify_email" th:value="${userInfo.email}" disabled><br>
-			
-			<label>휴대폰번호</label><br>
-			<input type="text" name="modify_name" id="phonenumber" th:value="${userInfo.phone}"><br>
-			
-			<input type="submit" name="confirm-modify" id="confirm-modify" class="confirm-modify" value="확인">
+			<h1>정보 수정</h1>
 
+			<div class="usermodify-card" th:each="userInfo : ${userInfo}">
+			
+				<div id=inhere1 style="color: red;"></div>
+				
+				<div>
+					<label>아이디</label><br>
+					<input type="text" name="modify_name" id="id" th:value="${userInfo.user_id}" disabled><br>
+
+					<label>비밀번호</label><br>
+					<input type="password" name="modify_name" id="password"><br>
+					
+					<label>비밀번호 확인</label>
+					<div id="inhere2" style="color: red;"></div>
+					<input type="password" name="modify_name" id="passwordconfirm"><br>
+				</div>
+
+				<div>
+					<div class="cell" id="images" th:if="${userInfo.filetype = 'false'}">
+						<div class="zzz" id="images" th:text="${userInfo.user_id}" style="display: none;"></div>
+						<ul></ul>
+						
+						<div id="buttons">
+         					<input type="button" class="imgbtn" id="btnok" onClick="goPopupImg()" value="등록" />
+         					<input type="button" class="imgbtn" id="btnno" value="삭제" />
+      					</div>
+					</div>
+					
+					<div class="cell" id="images" th:if="${userInfo.filetype = 'true'}">
+						<div class="zzz" id="images" th:text="${userInfo.user_id}" style="display: none;"></div>
+						<ul></ul>
+						
+						<div id="buttons">
+         					<input type="button" class="imgbtn" id="btnok" onClick="goPopupImg()" value="등록" />
+         					<input type="button" class="imgbtn" id="btnno" value="삭제" />
+      					</div>
+					</div>
+				</div>
+				<div>
+						<label>이름</label><br>
+						<input type="text" name="name" id="modify_name" th:value="${userInfo.name}"><br>
+						
+						<label>이메일</label><br>
+						<input type="text" name="name" id="modify_email" th:value="${userInfo.email}" disabled><br>
+						
+						<label>휴대폰번호</label><br>
+						<input type="text" name="modify_name" id="phonenumber" th:value="${userInfo.phone}"><br>
+						<input type="submit" name="confirm-modify" id="confirm-modify" class="confirm-modify" value="확인">
+				</div>
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
 </body>
 
 </html>

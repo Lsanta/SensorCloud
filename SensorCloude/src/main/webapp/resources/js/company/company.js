@@ -1,4 +1,47 @@
 $(document).ready(function() {
+	
+	$("#list tr").mouseover(function(event){
+		$("#snameDiv").empty();		
+		
+		var cid = $(this).children().eq(3).text();
+		var index = $(this).index();
+		
+		console.log(index);
+		var query = {
+				company_num : cid
+		}
+		
+		$.ajax({
+			type : 'POST',
+			url : '/company/companyJSON',
+			data : query,
+			dataType : 'JSON',
+			success : function(data) {
+				console.log(data);
+				
+				var str = "";
+				
+				$.each(data,function(i,s){
+					str += "<ul id='sitenamelist'>";
+					str += "<li>"+data[i].site_name+"</li>";
+					str += "<li style='display:none'>"+data[i].site_id+"</li>";
+					str += "</ul>";
+				});
+				
+				var snameList = "";
+				snameList += "<ul class='timeline'>";
+				snameList += "<li class='timeline-inverted'>";
+				snameList += "<div class='timeline-panel'>";
+				snameList += "<div class='timeline-body'>"+str+"</div></div></li>"
+				snameList += "</ul>";
+				
+				$("#snameDiv").html(snameList);
+				$("#snameDiv").css("padding-top",(index+1)*46+'px');
+			}
+		});
+	});
+	
+	
 
 	
 	$("#companyadd").click(function(){
