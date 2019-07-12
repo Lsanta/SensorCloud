@@ -1,8 +1,13 @@
 @charset "UTF-8";
+@font-face {
+  font-family: A신그래픽L;
+  src: url('/resources/font/A신그래픽L.TTF');
+}
 
-html {
-  overflow-x: hidden; 
- }
+body {
+   font-family: 'A신그래픽L';
+  overflow-x: hidden;
+}
 
 .none{
 	display : none;

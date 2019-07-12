@@ -393,9 +393,9 @@ input.input100 {
   font-size: 13px;
 }
 
-.has-val {
+/* .has-val {
   height: 48px !important;
-}
+} */
 
 .has-val + .focus-input100 + .label-input100 {
   top: 14px;

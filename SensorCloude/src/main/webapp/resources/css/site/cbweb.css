@@ -5,6 +5,7 @@
 
  body {
   font-family: 'A신그래픽L';
+  overflow-x: hidden;
  }
  
 #a{
