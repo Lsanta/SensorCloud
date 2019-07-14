@@ -18,7 +18,7 @@
         group by c.company_num) a, company c
 		where a.company_num = c.company_num) p where rownum < #{endnum}) x
     where x.rnum >= #{startnum}
-    order by x.name
+    order by x.company_num
     ]]>
 	</select>
 	
@@ -36,18 +36,18 @@
 		select * from company where ${searchType} LIKE '%' || '${keyword}' || '%'
 	</select>
 	
-	<!-- 보유센서 검색 + 페이징 -->
+	<!-- 협력사 관리 검색 + 페이징 -->
 	<select id="CompanySearchResult" resultType="com.wda.sc.domain.CompanyVO" parameterType="map">
 	<![CDATA[	
-  select x.rnum, x.* from
+  	select x.rnum, x.* from
     ( select rownum as rnum, p.* from
-    ( select company_num, name, reg_number from company where ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%' ) p where rownum < #{Paging.endnum}) x
+    ( select company_num, name, reg_number, from company where ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%' ) p where rownum < #{Paging.endnum}) x
     where x.rnum >= #{Paging.startnum}
     order by x.name
     ]]>
 	</select>
 	
-	<!-- 협력사 관리 검색 -->
+	<!-- 모든 협력사 가져오기-->
 	<select id="getAllCompany" resultType="com.wda.sc.domain.CompanyVO">
 		select * from company
 	</select>
@@ -59,7 +59,8 @@
 		where site.company_num = c.company_num
 		group by site.company_num
 	</select>
-	<!-- 연결된 협력사 들고오기 -->
+	
+	<!-- 협력사 현장 이름 보여주기 -->
 	<select id="SiteCompany" resultType="com.wda.sc.domain.SiteVO">
 		select * from site
     	where company_num = #{company_num}

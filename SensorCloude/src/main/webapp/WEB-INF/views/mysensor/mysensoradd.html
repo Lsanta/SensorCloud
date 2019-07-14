@@ -9,7 +9,7 @@
 	 $(document).ready(function(){
 		 $("#plus").click(function(){
 			 	if($("#sensor_sn").val() == "" || $("#sensor_kind").val() == "" || $("#model_name").val() == ""
-			 			|| $("#voltage option:selected").val() == "" || $("#manufacturer option:selected").val() == "" ) {
+			 			|| $("#voltage option:selected").val() == "" || $("#manufacturer option:selected").val() == ""  || $("#vertical option:selected").val() == "") {
 			 		alert("빈 값이 있어 등록되지 않습니다.");
 			 		return false;
 			 	}
@@ -49,9 +49,9 @@
 <body>
 <h2>센서 추가</h2>
  <div class="sensoradd">
-	시리얼넘버<input type="text" id="sensor_sn" name="sensor_sn" placeholder="ex) s000001"/><br/>
-	종류<input type="text" id="sensor_kind" name="sensor_kind" placeholder="ex) 가속도"/><br/>
-	모델명<input type="text" id="model_name" name="model_name" placeholder="ex) CR1000"/><br/>
+	시리얼넘버<input type="text" id="sensor_sn" name="sensor_sn" placeholder="ex) s000001" maxlength="20"/><br/>
+	종류<input type="text" id="sensor_kind" name="sensor_kind" placeholder="ex) 가속도" maxlength="10"/><br/>
+	모델명<input type="text" id="model_name" name="model_name" placeholder="ex) CR1000" maxlength="10"/><br/>
 <!-- 	전압<input type="text" id="voltage" name="voltage" /><br/> -->
 <!-- 	제조사<input type="text" id="manufacturer" name="manufacturer" /><br/> -->
 	전압<select required id="voltage">

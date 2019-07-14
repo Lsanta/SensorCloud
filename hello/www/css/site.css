@@ -5,6 +5,15 @@
 
 html, body{font-family: 'a신그래픽L';}
 
+.ui-grid-c li a::after {
+  display:none;
+  background-color: #F4F6FD;  
+}
+
+.ui-btn-icon-top {
+  padding:.6em 1em;
+}
+
 #chartdiv {
     border: 1px solid black;
     width: 100%;
