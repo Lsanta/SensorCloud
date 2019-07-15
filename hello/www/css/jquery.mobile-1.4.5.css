@@ -2823,7 +2823,7 @@ li.ui-block-e {
 	filter: Alpha(Opacity=0);
 	/* opacity: .1; */
 	font-size: 1px;
-	text-indent: -9999px;
+	/* text-indent: -9999px; */
 	z-index: 2;
 }
 /* Fixes IE/WP filter alpha opacity bugs */
