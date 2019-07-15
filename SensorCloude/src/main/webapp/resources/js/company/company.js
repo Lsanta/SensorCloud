@@ -1,5 +1,10 @@
 $(document).ready(function() {
 	
+	if($(window).width() <= 700) {
+		$("#snameDiv").remove();
+		$("#company").css("width",'100%');
+	}
+	
 	$("#list tr").mouseover(function(event){
 		$("#snameDiv").empty();		
 		
@@ -11,6 +16,8 @@ $(document).ready(function() {
 				company_num : cid
 		}
 		
+		
+			
 		$.ajax({
 			type : 'POST',
 			url : '/company/companyJSON',
@@ -41,11 +48,12 @@ $(document).ready(function() {
 				snameList += "</ul>";
 				
 				$("#snameDiv").html(snameList);
-				$("#snameDiv").css("padding-top",(index+1)*46+'px');
+				$("#snameDiv").css("padding-top",(index)*46+'px');
 			}
 		});
-	});
 	
+	});
+
 	
 
 	
@@ -176,18 +184,18 @@ $(document).ready(function() {
 		     }
 		});
 		
-		/*화면 줄어들 때 리스트 자르기 */
-		var tr = $("#list tr:gt(3)");
-		
-		if($(window).width() <= 700){
-				tr.addClass("none");
-			} 
-		 
-		 $( window ).resize(function(){
-			 if($(window).width() <= 700){
-					tr.addClass("none");	
-				} else{
-					tr.removeClass("none");
-				} 
-		 });
+//		/*화면 줄어들 때 리스트 자르기 */
+//		var tr = $("#list tr:gt(3)");
+//		
+//		if($(window).width() <= 700){
+//				tr.addClass("none");
+//			} 
+//		 
+//		 $( window ).resize(function(){
+//			 if($(window).width() <= 700){
+//					tr.addClass("none");	
+//				} else{
+//					tr.removeClass("none");
+//				} 
+//		 });
 });

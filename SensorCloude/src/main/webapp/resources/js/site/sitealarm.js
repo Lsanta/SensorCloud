@@ -101,7 +101,7 @@ $(document).ready(function(){
 			
 	}); // 클릭 햇을시 종료	
 	
-	$("#submit").click(function(){
+	$("#send").click(function(){
 		//주소창 잘라서 site_id 뽑았는데 내가봐도 구림
 		var newURL =  window.location.pathname;
 		var sid = newURL.split("/");
@@ -225,6 +225,30 @@ $(document).ready(function(){
 			      
 			});
 		
+		$("#modify").click(function(){
+			var site_id = $("#modify").attr('class');
+			window.location.href = "/site/sitemodify/"+site_id;
+		});
+		
+		$(".status > img").click(function() {
+			var stat = $(".status > img").attr("alt");
+			
+			if(stat == "stop") {
+				
+				if( window.confirm("현장을 활성화 하시겠습니까?") ) {
+					var site_id = $("#modify").attr('class');
+					window.location.href = "/site/statusChange/"+site_id;		
+				} 	
+				
+			} else if(stat == "start" || stat == "error") {
+				if( window.confirm("현장 비활성화 시 설치되어있던 센서가 삭제되며 다시 복구 할 수 없습니다. 진짜 비활성화 하시겠습니까?") ) {
+					
+					var site_id = $("#modify").attr('class');
+					window.location.href = "/site/statusChange/"+site_id;				
+				} 
+			} 
+			
+		}); // status 종료
 	
 });
 

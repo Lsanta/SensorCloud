@@ -31,7 +31,7 @@
 	  <input type="hidden" id="y" >
 	  <input type="button" id="addressBtn" onclick="DaumPostcode()" value="조회" class="addcontent_right_button" ><br>
 	  <p id="p">현장이름:</p>
-	  <input type="text" id="sample6_detailAddress" th:value="${joinSite.site_name}" placeholder="현장이름" class="addcontent_right_input">
+	  <input type="text" id="sample6_detailAddress" th:text="${joinSite.site_name}" th:value="${joinSite.site_name}" placeholder="현장이름" class="addcontent_right_input">
 	  <!-- <input type="text" id="sample6_extraAddress" placeholder="참고항목" class="addcontent_right_input"> -->
       </div>
     </div>  
