@@ -4,6 +4,10 @@
   src: url('/resources/font/A이끌림M.TTF');
 }
 
+body {
+   font-family: 'A신그래픽L';
+}
+
 .searchInputBox {
 	width : 90%;
 	height: 50px;

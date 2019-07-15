@@ -171,7 +171,8 @@ var config = {
 				<!-- 승급요청시 사용자 관리에 id를 넘기기위함 -->
 			</div>
 
-			<div id="next-level">
+			<div id="next-level" th:each="userInfo : ${userInfo}">
+				<th th:if="${userInfo.m_level < 5}">
 				<select id="select_level">
 					<option value="1">1. 권한없음</option>
 					<option value="2">2. 읽기권한</option>
@@ -180,13 +181,23 @@ var config = {
 					<option value="5">5. 관리자</option>
 				</select>
 				<p>으로 승급 요청 하시겠습니까?</p>
+				</th>
+				<th th:if="${userInfo.m_level >= 5}">
+				<br/>
+				<center>더 이상 승급할 등급이 없습니다.</center>
+				</th>
 			</div>
 		</div>
 
 
-		<div id="submit">
+		<div id="submit" th:each="userInfo : ${userInfo}">
+			<th th:if="${userInfo.m_level < 5}">
 			<input type="button" id="ok" value="확인" />
 			<input type="button" id="no" value="취소" />
+			<th>
+			<th th:if="${userInfo.m_level >= 5}">
+			<center><input type="button" id="no" value="취소" /></center>
+			<th>
 		</div>
 	</div>
 </body>

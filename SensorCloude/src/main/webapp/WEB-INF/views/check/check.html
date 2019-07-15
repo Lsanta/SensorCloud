@@ -9,6 +9,7 @@
 
 <th:block layout:fragment="page_css">
 	<link rel="stylesheet" type="text/css" href="/resources/css/check/checklist.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </th:block>
 
 <th:block layout:fragment="contents">
@@ -24,8 +25,10 @@
 									<option value="0">전체날짜</option>
 									<option value="1">최근 1개월</option>
 									<option value="3">최근 3개월</option>
-								</select> <a href="/checkboard/checkadd"><button id="write"
-										value="write">글쓰기</button></a>
+								</select>
+								<a href="/checkboard/checkadd">
+									<button id="write" value="write">글쓰기</button>
+								</a>
 							</div>
 
 							<table>
@@ -57,8 +60,9 @@
 										<td th:text="${checkboardlist.site_name}">status</td>
 										<td th:text="${checkboardlist.title}">status</td>
 										<td th:switch="${checkboardlist.board_status}"><span
-											th:case="'0'">open</span> <span th:case="'1'">fixed</span> <span
-											th:case="'2'">closed</span></td>
+											th:case="'0'" style="color:#35cd3a; font-weight:bold; font-size:1.15em;">open</span> 
+											<span th:case="'1'" style="color:#ffa534; font-weight:bold; font-size:1.15em;">fixed</span> 
+											<span th:case="'2'" style="color:gray; font-weight:bold; font-size:1.15em;">closed</span></td>
 										<td th:text="${checkboardlist.name}">status</td>
 										<td th:text="${checkboardlist.reg_date}">status</td>
 										<td th:text="${checkboardlist.board_no}" style="display: none"></td>
@@ -90,11 +94,11 @@
 								</select>
 							</div>
 							<section class="search-box">
-								<div class="search-content">
-									<input type="text" id="keyword" />
+								<div class="search-content" >
+									<input type="text" id="keyword" placeholder="search" /> 
 								</div>
 								<div class="search-button">
-									<button id="search">Search</button>
+									<button id="search"><img src="/resources/img/search.svg" id="search" style="width: 30px; height:30px;"/></button>
 								</div>
 							</section>
 						</div>

@@ -1,5 +1,7 @@
 package com.wda.sc;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -7,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.map.HashedMap;
@@ -90,14 +93,19 @@ public class LoginController {
 		return "login/sign";
 	}
 
-	@RequestMapping(value ="/signup", method = RequestMethod.POST)
-	public String signup(MemberVO m) {
+	@RequestMapping(value ="/signup", method = RequestMethod.POST )
+	public String signup(MemberVO m, HttpServletResponse response) throws IOException {
 
 			System.out.println(m);
 					
 			int checknum = loginservice.signup(m);
 			if(checknum == 1) {
 				
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script langauge='javascript'>");
+				out.println("alert('회원가입이 완료되었습니다'); history.go(-1);");
+				out.println("</script>");
 				return "login/login";
 			}
 			else if(checknum == 0) {
@@ -161,7 +169,7 @@ public class LoginController {
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
 		String hostSMTPid = "s2k0j798";
-		String hostSMTPpwd = "wkd0930~~!";
+		String hostSMTPpwd = "	";
 
 		// 보내는 사람 EMail, 제목, 내용
 		String fromEmail = "s2k0j798@naver.com";

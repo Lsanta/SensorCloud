@@ -52,6 +52,12 @@ $(document).ready(function(){
 
 	/*글 등록*/
 	$("#submit").click(function(){
+		
+		if($("#level").text() <= 2) {
+			alert("권한이 없습니다. 3등급(쓰기권한)이상이 작성가능합니다");
+			return false;
+		}
+		
 		var textarea  = $("#textarea").val();
 		var query = {content:$("#textarea").val()};
 
@@ -237,8 +243,6 @@ $(document).ready(function(){
 	$(".lastpage").click(function(){
 		window.location.href = "/time/"+$("#lastNum").text();
 	});
-
-
 
 
 });

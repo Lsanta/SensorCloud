@@ -29,7 +29,7 @@ $(document).ready(function(){
 	$("#mod").click(function(){
 		
 		if($("#sensor_sn").val() == "" || $("#sensor_kind").val() == "" || $("#model_name").val() == ""
- 			|| $("#voltage option:selected").val() == "" || $("#manufacturer option:selected").val() == "" ) {
+ 			|| $("#voltage option:selected").val() == "" || $("#manufacturer option:selected").val() == "" || $("#vertical option:selected").val() == "") {
  		alert("빈 값이 있어 등록되지 않습니다.");
  		return false;
  		}
@@ -49,7 +49,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			  type : "POST",
-			  url : "/site/installsensormod.do",
+			  url : "/mysensor/mysensormod.do",
 			  data : query,
 			  success : function(data){
 				  if( data == "success"){
@@ -77,8 +77,8 @@ $(document).ready(function(){
 <center><h2>센서정보수정</h2></center>
 <div class="sensormodify">
 	시리얼넘버<input type="text" id="sensor_sn" name="sensor_sn" disabled="disabled"/><br/>
-	종류<input type="text" id="sensor_kind" name="sensor_kind" /><br/>
-	모델명<input type="text" id="model_name" name="model_name" /><br/>
+	종류<input type="text" id="sensor_kind" name="sensor_kind" maxlength="10"/><br/>
+	모델명<input type="text" id="model_name" name="model_name" maxlength="10"/><br/>
 <!-- 	전압<input type="text" id="voltage" name="voltage" /><br/> -->
 <!-- 	제조사<input type="text" id="manufacturer" name="manufacturer" /><br/> -->
 	전압<select id="voltage">

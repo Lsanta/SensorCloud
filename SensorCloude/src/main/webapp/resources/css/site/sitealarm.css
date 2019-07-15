@@ -5,7 +5,7 @@
 
 body {
    font-family: 'A신그래픽L';
-   overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 #alarmmain {

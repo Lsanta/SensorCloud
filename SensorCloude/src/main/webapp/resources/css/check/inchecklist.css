@@ -1,5 +1,6 @@
 body {
 	background-color: #f8f9fc;
+	overflow-x: hidden;
 }
 .a {
 	width: 70%;

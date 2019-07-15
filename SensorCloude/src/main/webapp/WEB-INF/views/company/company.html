@@ -44,6 +44,7 @@
 										<tr th:each="companySearch : ${company}">
 											<td th:text="${companySearch.name}"></td>
 											<td th:text="${companySearch.reg_number}"></td>
+											<td th:text="${companySearch.num}+'개'"></td>
 											<td th:text="${companySearch.company_num}" style="display: none"></td>
 										</tr>
 									</tbody>
@@ -79,11 +80,11 @@
 								</select>
 							</div>
 							<section class="search-box">
-								<div class="search-content">
-									<input type="text" id="keyword" />
+								<div class="search-content" >
+									<input type="text" id="keyword" placeholder="search" /> 
 								</div>
 								<div class="search-button">
-									<button id="search">Search</button>
+									<button id="search"><img src="/resources/img/search.svg" id="search" style="width: 30px; height:30px;"/></button>
 								</div>
 							</section>
 						</div>

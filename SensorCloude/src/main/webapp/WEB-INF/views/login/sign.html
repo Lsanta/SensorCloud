@@ -25,19 +25,19 @@
       <br>
    
       
-        아이디<input type="text" name="user_id" id="user" placeholder="UserId" style="margin-left:15%">
+        아이디<input type="text" name="user_id" id="user" placeholder="영문 이나 영문+숫자로만 작성" style="margin-left:15%" maxlength="12">
          <div class="errorstr" id="userstr"></div>
-        비밀번호<input type="password" name="password" placeholder="Password" id="password" style="margin-left:11%">
+        비밀번호<input type="password" name="password" placeholder="Password" id="password" style="margin-left:11%" maxlength="16">
          <div class="errorstr" id="pwstr"></div>
-        비밀번호 확인<input type="password" name="password2" placeholder="확인" id="password2">
+        비밀번호 확인<input type="password" name="password2" placeholder="확인" id="password2" maxlength="16">
          <div class="errorstr" id="pwconfirmstr"></div>
-        이름<input type="text" name="name" placeholder="이름" style="margin-left:19%"><br>
-        이메일<input type="email" name="email" placeholder="yjc@ac.kr" style="margin-left:15%"><br>
-        휴대폰번호<input type="tel" id="phone" name="phone" placeholder="01012345678"> 
-        <div class="errorstr" id="phonestr"></div>
+        이름<input type="text" name="name" placeholder="이름" style="margin-left:19%" maxlength="5"><br>
+        이메일<input type="email" name="email" placeholder="yjc@ac.kr" style="margin-left:15%" maxlength="30"><br>
+        휴대폰번호<input type="tel" id="phone" name="phone" placeholder="01012345678" maxlength="11"> 
+        <div class="successstr" id="phonestr"></div>
         <button type="button" id="sendAuth" class="ijn1">인증번호 전송</button>
         
-        <input type="text" class="end" placeholder="인증번호" style="width: 53%; margin-left:21%">
+        <input type="text" class="end" placeholder="인증번호" style="width: 53%; margin-left:21%" maxlength="6">
 
 		<button type="button" id="checkAuth" class="ijn2">인증번호 확인</button><br>
 	사업자번호 <select name="company_num" required id="companynum">
@@ -45,7 +45,7 @@
 			<option th:each="com : ${Allcompany}" th:text=" ${com.name} + '[' + ${com.reg_number} + ']'" th:value="${com.company_num}">
             </option>
 		</select><br/>
-<!--         <div class="errorstr" id="authstr"></div> -->
+        <div class="errorstr" id="authstr"></div>
 		<input type="text" class="color" name="color" style="display : none" />
         <input type="submit" name="login" class="login login-submit" value="가입하기">
        </div>
@@ -59,17 +59,40 @@
 //     	if(parseInt(count) === 0) {
 // 			alert("인증번호 확인 버튼을 눌러주세요 ");
 // 			return false;
-// 		}
-		
-    	if( $("#user").val() == "" || $('#password').val() == "" || $('#password2').val() == "" ||	$("#phone").val() == "" || $(".end").val() == ""
-    			){
-    		alert("회원가입란에  빈값이 있습니다. 다시 확인해 주세요.");
+// 		}		
+    	if( $(".end").val() == "" ){
+    		alert("인증번호 확인란에  빈값이 있습니다. 다시 확인해 주세요.");
     		return false;
     	}
+    	
+    	if( $("#user").val() == "") {
+    		alert("아이디에  빈값이 있습니다. 다시 확인해 주세요.");
+    		return false;
+    	} 
+    	
+    	if($('#password').val() == "" ) {
+    		alert("비밀번호에  빈값이 있습니다. 다시 확인해 주세요.");
+    		return false;
+    	} 
+    	
+
+    	if($('#password2').val() == "" ) {
+    		alert("비밀번호 확인에  빈값이 있습니다. 다시 확인해 주세요.");
+    		return false;
+    	} 
+    	
+    	if($("#phone").val() == "" ) {
+    		alert("휴대폰번호에  빈값이 있습니다. 다시 확인해 주세요.");
+    		return false;
+    	} 
 		
-    
 		if($('.login-card').children().is('.errorstr')){
-			alert("회원가입란에 적절하지 않은 요소가 있습니다. 다시 확인해 주세요.");
+			
+			if($("#authstr").attr('class') == "errorstr") {
+				alert("인증번호 확인을 해주시길 바랍니다.");
+			} else {
+				alert("회원가입란에 적절하지 않은 요소가 있습니다. 다시 확인해 주세요.");
+			}
 			return false;
 		} 
 		
@@ -141,19 +164,19 @@
     			
     		});
     		
-    		$("#phone").blur(function(){
-				var phone = $("#phone").val();
+//     		$("#phone").blur(function(){
+// 				var phone = $("#phone").val();
 
-				if(phone.length == 10 || phone.length == 11){
-					$("#phonestr").removeClass();
-					$("#phonestr").addClass("successstr");
-					document.getElementById("phonestr").innerHTML="사용 가능 합니다.";
-				} else {
-					$("#phonestr").removeClass();
-					$("#phonestr").addClass("errorstr");
-					document.getElementById("phonestr").innerHTML="10자리, 11자리로 작성해주세요.";
-				}
-			});
+// 				if(phone.length == 10 || phone.length == 11){
+// 					$("#phonestr").removeClass();
+// 					$("#phonestr").addClass("successstr");
+// 					document.getElementById("phonestr").innerHTML="사용 가능 합니다.";
+// 				} else {
+// 					$("#phonestr").removeClass();
+// 					$("#phonestr").addClass("errorstr");
+// 					document.getElementById("phonestr").innerHTML="10자리, 11자리로 작성해주세요.";
+// 				}
+// 			});
     		
     		//인증번호 전송 클릭 시
     		$("#sendAuth").click(function(){
