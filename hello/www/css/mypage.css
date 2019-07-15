@@ -3,7 +3,7 @@
   src: url('/font/a신그래픽L.TTF');
 }
 
-html, body{font-family: 'a신그래픽L';}
+html, body,p,h1,th,a{font-family: 'a신그래픽L';}
 
 .ui-grid-c li a::after {
   display:none;
