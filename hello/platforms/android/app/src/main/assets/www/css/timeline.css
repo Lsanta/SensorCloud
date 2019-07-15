@@ -1,4 +1,14 @@
 @charset "UTF-8";
+.ui-grid-c li a::after {
+  display:none;
+  background-color: #F4F6FD;  
+}
+
+.ui-btn-icon-top {
+  padding:.6em 1em;
+}
+
+
   #timeline_n{
     display:none;
   } 
