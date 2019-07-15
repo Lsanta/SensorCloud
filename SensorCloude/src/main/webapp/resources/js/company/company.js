@@ -54,7 +54,7 @@ $(document).ready(function() {
 	
 	$("#companyadd").click(function(){
 		window.open("/company/companyadd", "pop",
-		"width=500,height=660,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+		"width=500,height=400,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 	});
 	
 
