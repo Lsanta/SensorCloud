@@ -12,7 +12,7 @@ html, body{font-family: 'a신그래픽L';}
 }
 
 .ui-btn-icon-top {
-  padding:.6em 1em;
+  padding:.6em 1em!important;
 }
 
 
