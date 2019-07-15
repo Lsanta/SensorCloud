@@ -327,6 +327,16 @@ table {
   }
 }
 
+@media screen and (max-width: 700px) {
+		#snameDiv {
+			width : 0;
+		}
+		#company {
+			width : 100%;
+		}
+		
+}
+
 @media screen and (max-width: 360px) {
 	#container {
     height: 550px;
