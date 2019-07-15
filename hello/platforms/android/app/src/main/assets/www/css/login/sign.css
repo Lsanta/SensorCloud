@@ -66,6 +66,7 @@ b{
 #phone{
   width : 140px;
   margin-left : 5px;
+  display : block;
 }
 
 .login-card input[type=text]:hover, input[type=password]:hover, input[type=email]:hover, input[type=tel]:hover {
