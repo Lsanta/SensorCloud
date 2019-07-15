@@ -1065,19 +1065,24 @@ public class SiteController {
 	@ResponseBody
 	public String installsensoradd(InstallSensorVO vo, @RequestBody Map<String, Object> map) {
 
-		vo.setSensor_sn((String) map.get("sensor_sn"));
+		
 		String cl = (String) map.get("site_id");
 		int site_id = Integer.parseInt(cl);
+		int checkNum = 0;
+		
+		vo.setSensor_sn((String) map.get("sensor_sn"));
 		vo.setSite_id(site_id);
+		
 
 		JSONArray examArr = JSONArray.fromObject(map.get("sensorData"));
-
+		
 		for (int i = 0; i < examArr.size(); i++) {
 
 			JSONObject jobj = examArr.getJSONObject(i);
 
 			Iterator Iter = jobj.keys();
 			while (Iter.hasNext()) {
+				
 				String var = Iter.next().toString();
 				vo.setProgram_var(var);
 
@@ -1087,11 +1092,19 @@ public class SiteController {
 
 				int a = mysensorservice.insertInstallsensor(vo);
 
-				return "success";
+				if(a == 1) {
+					checkNum += 1;
+				}
+				
 			}
 		}
+		
+		if(checkNum == examArr.size()) {
+			return "success";
+		}else {
+			return "false";
+		}
 
-		return "false";
 	}
 
 	// 설치센서 수정
