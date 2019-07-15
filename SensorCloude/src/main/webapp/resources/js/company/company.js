@@ -1,5 +1,10 @@
 $(document).ready(function() {
 	
+	if($(window).width() <= 700) {
+		$("#snameDiv").remove();
+		$("#company").css("width",'100%');
+	}
+	
 	$("#list tr").mouseover(function(event){
 		$("#snameDiv").empty();		
 		
@@ -11,7 +16,7 @@ $(document).ready(function() {
 				company_num : cid
 		}
 		
-		if($(window).width() >= 700) {
+		
 			
 		$.ajax({
 			type : 'POST',
@@ -43,13 +48,10 @@ $(document).ready(function() {
 				snameList += "</ul>";
 				
 				$("#snameDiv").html(snameList);
-				$("#snameDiv").css("padding-top",(index+1)*46+'px');
+				$("#snameDiv").css("padding-top",(index)*46+'px');
 			}
 		});
-		
-		} else {
-			//표 크기 다시 제대로 만들기
-		}
+	
 	});
 
 	

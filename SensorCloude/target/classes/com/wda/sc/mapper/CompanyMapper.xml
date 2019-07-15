@@ -39,11 +39,17 @@
 	<!-- 협력사 관리 검색 + 페이징 -->
 	<select id="CompanySearchResult" resultType="com.wda.sc.domain.CompanyVO" parameterType="map">
 	<![CDATA[	
-  	select x.rnum, x.* from
-    ( select rownum as rnum, p.* from
-    ( select company_num, name, reg_number, from company where ${Search.searchType} LIKE '%' || '${Search.keyword}' || '%' ) p where rownum < #{Paging.endnum}) x
-    where x.rnum >= #{Paging.startnum}
-    order by x.name
+  	select x.rnum, x.*
+	from (select rownum as rnum, p.*
+      	  from (select c.name, c.company_num, c.reg_number ,a.num
+            	from (select c.company_num, nvl(count(site.company_num),0) as num
+                  	  from company c full outer join site
+                  	  on site.company_num = c.company_num
+                  	  group by c.company_num) a, company c
+            		  where a.company_num = c.company_num and name LIKE '%TR%') p 
+      			where rownum < #{Paging.endnum}) x
+		  where x.rnum >= #{Paging.startnum}
+	order by x.name
     ]]>
 	</select>
 	

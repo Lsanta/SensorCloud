@@ -1,5 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100);
 
+@font-face {
+  font-family: a신그래픽L;
+  src: url('/font/a신그래픽L.TTF');
+}
+
+html, body{font-family: 'a신그래픽L';}
+
 body {
   background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -11,7 +18,8 @@ body {
 
 
 .errorstr{
-   	color : red;
+     color : red;
+     float: left;
 }
 
 .successstr {
@@ -22,6 +30,26 @@ body {
 }
 b{
 	font-size : 20px;
+}
+
+#ijn {
+  background: #4d90fe;
+  width: 80px;
+  color: white;
+  border: #4F86C6;
+  border-radius: 0.2em;
+}
+
+#checkAuth {
+  margin-top:-5px;
+  margin-bottom:20px;
+  margin-bottom: 20px;
+  background: #4d90fe;
+  /* width: 80px; */
+  color: white;
+  height:30px;
+  border: #4F86C6;
+  border-radius:0.2em;
 }
 
 .login-card {
@@ -67,6 +95,7 @@ b{
   width : 140px;
   margin-left : 5px;
   display : block;
+  float: left;
 }
 
 .login-card input[type=text]:hover, input[type=password]:hover, input[type=email]:hover, input[type=tel]:hover {
@@ -91,7 +120,7 @@ b{
   border: 0px;
   color: #fff;
   text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #4d90fe;
+  background-color: #3B6594;
 }
 
 .login-submit:hover {
@@ -108,8 +137,10 @@ b{
 }
 
 .ijn{
+
  float : right;
- margin: 20px 0 0 0;
+ margin: 11px 0 0 0;
+
 }
 
 img {
