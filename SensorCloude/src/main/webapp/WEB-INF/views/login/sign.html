@@ -40,8 +40,8 @@
         <input type="text" class="end" placeholder="인증번호" style="width: 53%; margin-left:21%" maxlength="6">
 
 		<button type="button" id="checkAuth" class="ijn2">인증번호 확인</button><br>
-	사업자번호 <select name="company_num" required id="companynum">
-<!-- 		<option value="" disabled selected >회사 선택</option> -->
+		사업자번호 <select name="company_num" required id="companynum">
+		<!--<option value="" disabled selected >회사 선택</option> -->
 			<option th:each="com : ${Allcompany}" th:text=" ${com.name} + '[' + ${com.reg_number} + ']'" th:value="${com.company_num}">
             </option>
 		</select><br/>

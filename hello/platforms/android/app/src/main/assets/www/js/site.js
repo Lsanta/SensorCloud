@@ -163,7 +163,6 @@ $("#sn").html(str);
     async:false,
     contentType : "application/json; charset=UTF-8",
     success : function(data){
-   
         if(data.data == ''){
             var str13="";
             str13 +='<p>'+ '데이터없음' + '</p>';
@@ -190,41 +189,73 @@ str +='<td>시간</td>';
  
  var time = new Array();
  for(var i=0; i < data.data.length; i++){
-     time[i] = data.data[i].cur_date;
+     
+     if(i > 0){
+            var old = new Date(time[i-1]);
+         var now = new Date(data.data[i].cur_date);
+         var gap = old.getTime() - now.getTime();
+         if(gap == 1000) {
+
+             time[i] = time[i-1];
+         } else {
+             time[i] = data.data[i].cur_date;
+         }
+         
+     } else {
+         time[i] = data.data[i].cur_date;
+     }
  }
  
  var single2 = time.filter( (item, idx, array) => {
         return array.indexOf( item ) === idx ;
-    });
-     
- 
- 
- 
+ });
+      
  for(var i=0; i < single2.length; i++){
      str2 +='<tr>';
      str2 +='<td>'+single2[i]+'</td>';
-     
-     for(var j=0; j < data.data.length; j++) {
-         if ( single2[i] === data.data[j].cur_date){
-             str2 += '<td>'+data.data[j].sensing_data+'</td>'
-         }
-     }
-
+     str2 +='<td class="1"></td>';
+     str2 +='<td class="2"></td>';
+     str2 +='<td class="3"></td>';
      str2 +='</tr>';
       $("#sensing-data").html(str2);	
  }
-
-
-   }
-	
-
-    } // success 함수 종료
-}); // ajax함수 종료
-
-
-
-
-
+ 
+ for(var i=0; i < single2.length; i++){
+     
+     for(var j=0; j < data.data.length; j++) { 
+         var old = new Date(single2[i]);
+         var now = new Date(data.data[j].cur_date);
+         var gap = old.getTime() - now.getTime();
+         
+         if ( single2[i] === data.data[j].cur_date) {
+             if( headername[1] === data.data[j].sensor_name )  {
+                 $("#sensing-data tr:eq("+i+") td.1").text(data.data[j].sensing_data);
+             } else if( headername[2] === data.data[j].sensor_name )  {
+                 $("#sensing-data tr:eq("+i+") td.2").text(data.data[j].sensing_data);
+             } else if( headername[3] === data.data[j].sensor_name )  {
+                 $("#sensing-data tr:eq("+i+") td.3").text(data.data[j].sensing_data);
+             }
+            
+             //str2 += '<td>'+data.data[j].sensing_data+'</td>';
+         } else if ( gap == 1000) {
+             if( headername[1] === data.data[j].sensor_name )  {
+                 $("#sensing-data tr:eq("+i+") td.1").text(data.data[j].sensing_data);
+             } else if( headername[2] === data.data[j].sensor_name )  {
+                 $("#sensing-data tr:eq("+i+") td.2").text(data.data[j].sensing_data);
+             } else if( headername[3] === data.data[j].sensor_name )  {
+                 $("#sensing-data tr:eq("+i+") td.3").text(data.data[j].sensing_data);
+             } 
+         }
+             
+                
+         } // for문 ( j 종료 )
+    
+   } // for문 ( i 종료)
+ 
+ 
+ } //else문 종료 
+} //success 함수 종료
+});
 
 $.ajax({
             type : "POST",

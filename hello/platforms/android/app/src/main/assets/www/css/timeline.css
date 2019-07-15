@@ -1,4 +1,11 @@
 @charset "UTF-8";
+@font-face {
+  font-family: a신그래픽L;
+  src: url('/font/a신그래픽L.TTF');
+}
+
+html, body{font-family: 'a신그래픽L';}
+
 .ui-grid-c li a::after {
   display:none;
   background-color: #F4F6FD;  
