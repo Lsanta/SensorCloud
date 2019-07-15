@@ -1,10 +1,5 @@
 $(document).ready(function() {
-	
-	if($(window).width() <= 700) {
-		$("#snameDiv").remove();
-		$("#company").css("width",'100%');
-	}
-	
+		
 	$("#list tr").mouseover(function(event){
 		$("#snameDiv").empty();		
 		
