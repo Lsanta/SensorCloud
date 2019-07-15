@@ -18,7 +18,9 @@
 			<h2>아이디/비밀번호 찾기</h2>
 		</div>
 
-		<hr id="hr">
+		<hr id="hr" style="
+		margin-bottom: 20px;
+		margin-top: -15px;">
 
 		<div id="find_selcet">	
 			<button type="button" class="find_button" id="find_id">아이디 찾기</button>
@@ -31,7 +33,7 @@
 				<div id="wrapper2">
 						<div id="content2">
 							Name<input type="text" id="name" name="name" placeholder="김개발"><br/>
-							PH<input type="tel" id="tel" name="tel" placeholder="010-XXXX-XXXX"><br/>
+							PH<input type="tel" id="tel" name="tel" placeholder="010XXXXXXXX"><br/>
 				
 							<button type="button" id="confirmbt2">확인</button>
 							
@@ -55,13 +57,13 @@
 
 						<div id="content3">	
 							<p>아이디</p>
-							<input type="text" name="name2" placeholder="이름">
+							<input type="text" id="name2" name="name2" placeholder="이름">
 							<p>이메일</p>
 							<input type="email" id="email" name="email" placeholder="yjc@ac.kr">
 							
 							<button type="button" class="ijn">인증번호 전송</button>
 
-							<input type="text" name="ijn2" id="ijn2" disabled="disabled"/><br />
+							<input type="text" class="end" name="ijn2" id="ijn2" disabled="disabled"/><br />
 							
 							<button type="button" id="confirmbt3">확인</button>
 							<br> <br> <br>
@@ -111,7 +113,7 @@
 			//url : "http://39.127.7.58:8080/app/appidFind",
 			contentType : "application/json; charset=UTF-8",
         	success : function(data){
-        		var s = "아이디 조회 결과 입력하신 정보는 아래와 같습니다.";
+        		var s = "아이디 조회 결과 입력하신 정보는 <br/> 아래와 같습니다.";
         		
         		if( data.signal == "none"){
         			$("#innerfindid").css("visibility","visible");
