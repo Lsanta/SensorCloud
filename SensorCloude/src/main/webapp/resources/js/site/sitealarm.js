@@ -146,11 +146,11 @@ $(document).ready(function(){
 			  contentType: 'application/json; charset=utf-8',
 			  success : function(data){
 				  if( data == "success"){
-					  alert("추가되었습니다");
+					  alert("문자가 전송 되었습니다.");
 					  $("#example").remove();
 					  location.reload();
 				  } else{
-					  alert("추가에 실패했습니다");
+					  alert("문자전송에 실패했습니다.");
 				  }
 			  }
 			  

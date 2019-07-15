@@ -54,18 +54,19 @@
 				<div id="wrapper3">
 
 						<div id="content3">	
-							<p>이름</p>
+							<p>아이디</p>
 							<input type="text" name="name2" placeholder="이름">
 							<p>이메일</p>
-							<input type="email" name="email" placeholder="yjc@ac.kr">
+							<input type="email" id="email" name="email" placeholder="yjc@ac.kr">
 							
 							<button type="button" class="ijn">인증번호 전송</button>
-				
-							
-							<input type="password" class="end" placeholder="인증번호">
+
+							<input type="text" name="ijn2" id="ijn2" disabled="disabled"/><br />
 							
 							<button type="button" id="confirmbt3">확인</button>
-							
+							<br> <br> <br>
+							<hr>
+							<div id="hidden2"></div>
 				
 						</div>
 				
@@ -130,6 +131,55 @@
 
 		}); // id찾기 확인 버튼 클릭시
 
+		$('.ijn').click(function() {
+    	var email = $("#email").val();
+    	var user_id = $("#name2").val();
+    	var query = {user_id:user_id, email:email};
+    	 $.ajax({
+    		type : "POST",
+         	dataType : "text",
+         	data : query,
+         	url :  "http://183.106.6.74:8080/app/sendMsg.do",
+         	success : function(data){
+         		if(data=="0"){
+         			alert("메일발송에 실패했습니다.");
+         		}else if(data == "2"){
+         			alert("입력하신 이메일과 일치하지 않습니다.");
+         		}else if(data == "3"){
+         			alert("존재하지 않는 아이디 입니다.");
+         		}else{
+         			$("#ijn2").attr("disabled",false);
+             		alert("메일발송에 성공하였습니다.");	
+         		}
+         		
+         	}
+    	 });
+    	});
+
+		$("#confirmbt3").click(function() {
+		var key = $("#ijn2").val();
+    	var user_id = $("#name2").val();
+    	var query = {user_id:user_id, key:key};
+    	 $.ajax({
+    		type : "POST",
+         	dataType : "text",
+         	data : query,
+         	url :  "http://183.106.6.74:8080/app/pwFind.do",
+         	success : function(data){
+        		if( data == "0"){
+        			$("#hidden2").css("visibility","visible");
+        			document.getElementById("hidden2").innerHTML="인증번호가 다릅니다.";
+        		} else if( data == "2"){
+        			$("#hidden2").css("visibility","visible");
+        			document.getElementById("hidden2").innerHTML="아이디가 다릅니다.";
+        		} else {
+        			$("#hidden2").css("visibility","visible");
+        			 var s = user_id +" 님의 비밀번호 조회 결과는 아래와 같습니다.";
+        			document.getElementById("hidden2").innerHTML="<br>"+s+"<br><p>"+data+"</p>";
+        		}
+         	}
+    	 });
+		});
 
 		$("#loginbt").click(function() {
 			javascript:history.go(-1);
