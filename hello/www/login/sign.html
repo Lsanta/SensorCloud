@@ -11,7 +11,7 @@
 <body>
 	<div class="login-card">
 		<!-- <a href="javascript:history.go(-1)">뒤로 가기</a> -->
-		<img src="../img/logo.png">            
+		<center><img src="../img/logo.png"></center>            
 		<br>
 		<!-- <form method="post" action="http://39.127.7.58:8080/app/signup"></form> -->
 			
@@ -43,7 +43,7 @@
 
 			<button type="button" id="checkAuth" class="ijn">인증번호 확인</button>
 			<div cl	ass="errorstr" id="authstr"></div>
-			<div id="company">
+			<div id="company" style="margin-top:40px;">
 			
 			</div>
 			<input type="text" class="color" name="color" style="display : none" />
@@ -63,7 +63,7 @@
 				dataType : 'JSON',
 				success : function(data){
 					console.log(data);
-					str += " 사업자번호 <select name='company_num' required id='companynum'>";
+					str += " 사업자번호 <select name='company_num' required id='companynum' style='margin-top:20px; width:267px; margin-bottom:20px; height:40px;'>";
 					$.each(data,function(i,s){
 						str += "<option value="+ data[i].company_num + ">"
 						str += data[i].name + "[" + data[i].reg_number + "]"
