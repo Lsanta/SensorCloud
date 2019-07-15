@@ -104,9 +104,9 @@ public class LoginController {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script langauge='javascript'>");
-				out.println("alert('회원가입이 완료되었습니다'); history.go(-1);");
+				out.println("alert('회원가입이 완료되었습니다');");
 				out.println("</script>");
-				return "login/login";
+				return "redirect:/login/";
 			}
 			else if(checknum == 0) {
 				return "login/sign";
