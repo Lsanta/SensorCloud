@@ -350,3 +350,4 @@ $(document).on("click", "#spanel" , function(){
 
 }); // ajax함수
 }); // click
+
