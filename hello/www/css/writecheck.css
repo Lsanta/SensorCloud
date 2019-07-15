@@ -1,3 +1,20 @@
+@font-face {
+    font-family: a신그래픽L;
+    src: url('/font/a신그래픽L.TTF');
+  }
+  
+  html, body{font-family: 'a신그래픽L';}
+  
+  
+  .ui-grid-c li a::after {
+    display:none;
+    background-color: #F4F6FD;  
+  }
+  
+  .ui-btn-icon-top {
+    padding:.6em 1em!important;
+  }
+
 .header{
     width: 98%;
     margin: 0 auto;
@@ -73,7 +90,7 @@
   }
 
 #status {
-    margin-left: 4px;
+    /* margin-left: 4px; */
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
