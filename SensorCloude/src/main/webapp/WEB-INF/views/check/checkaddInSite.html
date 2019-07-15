@@ -99,7 +99,7 @@
 </form>
 
 <form th:if="${modlist != null}" role="form" name="check" method="post" action="/checkboard/checkmodInSite.do">
-	<div class="a">
+	<div id="a" class="card">
 	<div class="index">점검이력</div>
 	<div class="title1">
 		<table class="table0">
@@ -129,7 +129,13 @@
 			<th class="status">게시글 상태</th>
 			
 			<!-- 비어있지 않고 권한이 5이면 -->
-			<th th:if="${auth != null && auth == 5}" class="stse">
+			<th th:if="${auth < 5}" class="stse">
+			<select name="board_status" id="sse">
+					<option value="0">open</option>
+	  		 	 	<option value="1">fixed</option>
+			</select>
+			</th>
+			<th th:if="${auth >= 5}" class="stse">
 				<select name="board_status" id="sse">
 					<option value="0">open</option>
 	  		 	 	<option value="1">fixed</option>
