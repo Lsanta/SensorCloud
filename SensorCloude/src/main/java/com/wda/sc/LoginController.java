@@ -169,7 +169,7 @@ public class LoginController {
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
 		String hostSMTPid = "s2k0j798";
-		String hostSMTPpwd = "	";
+		String hostSMTPpwd = "wkd3235~!";
 
 		// 보내는 사람 EMail, 제목, 내용
 		String fromEmail = "s2k0j798@naver.com";

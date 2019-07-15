@@ -2823,7 +2823,7 @@ li.ui-block-e {
 	filter: Alpha(Opacity=0);
 	/* opacity: .1; */
 	font-size: 1px;
-	text-indent: -9999px;
+	/* text-indent: -9999px; */
 	z-index: 2;
 }
 /* Fixes IE/WP filter alpha opacity bugs */
@@ -3501,6 +3501,7 @@ fieldset.ui-controlgroup {
 	text-overflow: ellipsis;
 	overflow: hidden !important;
 	white-space: nowrap;
+	color : black;
 }
 .ui-selectmenu.ui-popup {
 	min-width: 11em;
