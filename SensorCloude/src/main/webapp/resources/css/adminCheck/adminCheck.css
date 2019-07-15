@@ -348,6 +348,7 @@ table {
     float: none;
     width: auto;
     padding-top: 10px;
+    margin-left: 10%;
   }
   .select {
     clear: both;
@@ -357,7 +358,7 @@ table {
   .search-box {
     clear: both;
     width: auto;
-    margin-left: 100px;
+    margin-left: 70px;
   }
   
     .title-header button { 
