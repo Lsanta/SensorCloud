@@ -70,8 +70,36 @@
       <div id ="addnetwork_right2" th:each="joinSite : ${joinSite}">
       
       	<input type="text" name="hostaddress" class="addnetwork_right_input" id="rperiod" th:value="${joinSite.rperiod}"><br>
-      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="sig_port_num" th:value="${joinSite.sig_port_num}"><br>
-      	<input type="text" name="hostaddress" class="addnetwork_right_input" id="virtualport" th:value="${joinSite.virtual_port}"><br>
+      	<select required name="hostaddress" class="addnetwork_right_input" id="sig_port_num" >
+      		<option value="" disabled selected >Baudrate를 선택해 주세요</option>
+      		<option>1200</option>
+      		<option>2400</option>
+      		<option>4800</option>
+      		<option>9600</option>
+      		<option>14400</option>
+      		<option>19200</option>
+      		<option>28800</option>
+      		<option>38400</option>
+      		<option>57600</option>
+      		<option>115200</option>
+      	</select>
+      	
+      	<select required name="hostaddress" class="addnetwork_right_input" id="virtualport">
+      		<option value="" disabled selected >미리 설정 후 적어주세요</option>
+      		<option value="10">com10</option>
+      		<option value="11">com11</option>
+      		<option value="12">com12</option>
+      		<option value="13">com13</option>
+      		<option value="14">com14</option>
+      		<option value="15">com15</option>
+      		<option value="16">com16</option>
+      		<option value="17">com17</option>
+      		<option value="18">com18</option>
+      		<option value="19">com19</option>
+      		<option value="20">com20</option>
+      	</select>
+    	<input type="text" id="sig_num" th:value="${joinSite.sig_port_num}" style="display : none"><br> 
+	   	<input type="text" id="port" th:value="${joinSite.virtual_port}" style="display : none"><br> 
       
       </div>
      </div>
@@ -177,9 +205,15 @@
     } 
 </script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
 <script>
 $(document).ready(function(){	
+	var sig = $("#sig_num").val();
+	$("#sig_port_num").val(sig).prop("selected", true);
+	var port = $("#port").val();
+	$("#virtualport").val(port).prop("selected", true);
+	
+	
 	$("#plus").click(function(){	
 		var newURL =  window.location.pathname;
 
@@ -193,8 +227,8 @@ $(document).ready(function(){
 		
 		//네트워크 데이터
 		var rperiod = $("#rperiod").val();
-		var sig_port_num = $("#sig_port_num").val();
-		var virtual_port = $("#virtualport").val();
+		var sig_port_num = $("#sig_port_num option:selected").val();
+		var virtual_port = $("#virtualport option:selected").val();
 		
 		var query = { 
 						site_id : site_id,
@@ -208,7 +242,6 @@ $(document).ready(function(){
 						sig_port_num : sig_port_num,
 						virtual_port : virtual_port						
 					}
-		console.log(query);
 		
 		$.ajax({
 			  type : "POST",

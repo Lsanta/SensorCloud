@@ -8,8 +8,6 @@ $(document).ready(function(){
 		data : {},
 		dataType : 'JSON',
 		success : function(data) {
-			console.log(data);
-			
 			var str = ""
 			var color = ['','feed-item-secondary','feed-item-waring','feed-item-danger','feed-item-info','feed-item-success' ];
 			var stylesheet = "";
@@ -100,7 +98,6 @@ $(document).ready(function(){
 
 		if (true) {
 			var timeline_n = $(this).siblings().eq(0).text();
-			console.log(timeline_n);
 			var query = {
 					timeline_n : timeline_n
 			}
@@ -182,8 +179,6 @@ $(document).ready(function(){
 			content: textarea,
 			timeline_n:$('#check2').parent().siblings().first().children().eq(0).text()
 		};
-		
-		console.log(query);
 		
 		$.ajax({
 			  type : "POST",

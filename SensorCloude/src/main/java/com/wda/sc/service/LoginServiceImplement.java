@@ -24,7 +24,6 @@ public class LoginServiceImplement implements LoginService {
 	@Override
 	public int signup(MemberVO member) {
 		// TODO Auto-generated method stub
-		System.out.println(member);
 		return mapper.signup(member);
 	}
 

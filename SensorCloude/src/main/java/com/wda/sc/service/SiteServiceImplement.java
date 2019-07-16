@@ -225,7 +225,6 @@ public class SiteServiceImplement implements SiteService {
 
 	@Override
 	public ArrayList<SiteVO> getAppSearch(String word) {
-		System.out.println(word);
 		return mapper.getAppSearch(word);
 	}
 	

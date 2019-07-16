@@ -66,7 +66,6 @@ public class CompanyController {
 		
 		// 회사의 총 갯수 가져오기
 		page.setTotalNum(companyservice.getPageNum());
-		System.out.println("회사테이블 안에 내용" + companyservice.getPageNum());
 
 		if(page.getTotalNum() <= page.getOnePageBoard() ) {
 			pageNum = 1;
@@ -104,11 +103,9 @@ public class CompanyController {
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum",map.get(sendPageNum));
 		model.addAttribute("companylist",companyservice.getList(page));
-		System.out.println("lastNum : " + pageNum);
-		System.out.println("pageNum : " + map.get(sendPageNum));
-		System.out.println("확인" + companyservice.getList(page));
+
 		if(realNum > pageNum) {
-			System.out.println("pageNum : " + pageNum);
+		
 			return "redirect:/company/"+pageNum;
 		}
 		
@@ -162,7 +159,7 @@ public class CompanyController {
 
 			int a = companyservice.insertCompany(vo);
 				
-			System.out.println("추가됨");
+			
 			if (a == 0) {
 				return "false";
 			} else if (a == 1) {
@@ -207,7 +204,6 @@ public class CompanyController {
 			s.setSearchType(searchType);
 
 			searchArr = companyservice.companySearch(s);
-			System.out.println(searchArr);
 
 			int pageNum = 0;
 			int mapNum=0;
@@ -253,17 +249,13 @@ public class CompanyController {
 			
 			model.addAttribute("lastNum", pageNum);
 			model.addAttribute("pageNum", map.get(sendPageNum));
-			System.out.println("pageNum" + arr);
 
 			model.addAttribute("company", companyservice.CompanySearchResult(parm));
-			System.out.println("company" + companyservice.CompanySearchResult(parm));
 			
 			model.addAttribute("depth0","메인화면");
 			model.addAttribute("depth1","협력사관리");
 
 			if(realNum > pageNum) {
-				System.out.println("pageNum : " + pageNum);
-				System.out.println("keyword : " + keyword);
 				try {
 					keyword = URLEncoder.encode(keyword, "UTF-8");
 				} catch (UnsupportedEncodingException e) {
@@ -281,16 +273,13 @@ public class CompanyController {
 		public String companyCheck(Model model, @RequestParam String number) {
 			ArrayList<CompanyVO> vo = companyservice.getAllCompany();
 			model.addAttribute("Allcompany", vo);
-			System.out.println(vo);
-			System.out.println(number);
+			
 
 			for(int i=0; i < vo.size(); i++) {
 				if( number == vo.get(i).getReg_number()) {
-					System.out.println(vo.get(i).getReg_number());
 					return "false";
 				}
 			}
-			
 			return "success";
 		}
 		
@@ -299,12 +288,9 @@ public class CompanyController {
 		public JSONArray companyJSON(Model model, @RequestParam int company_num) {
 			
 			ArrayList<SiteVO> vo = companyservice.SiteCompany(company_num);
-			System.out.println(vo);
 			
 			JSONArray jsonarr = JSONArray.fromObject(vo);
-			System.out.println("arr" + jsonarr);
-			
-			
+
 			return jsonarr;
 		}
 }

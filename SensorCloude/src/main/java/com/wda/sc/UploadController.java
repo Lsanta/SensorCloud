@@ -124,7 +124,6 @@ public class UploadController {
 	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String fileName){
-		System.out.println("들어오나 ????");
 		
 		File file = new File("c:\\upload\\" + fileName);
 		
@@ -214,9 +213,6 @@ public class UploadController {
 		public ResponseEntity<String> deleteFilemypage(String fileName, String type, String user_id) {
 		 	
 			File file;
-
-			System.out.println("제발"+user_id);
-			System.out.println("Type"+type);
 			try {
 				file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
 
@@ -230,7 +226,7 @@ public class UploadController {
 
 					
 					file = new File(largeFileName);
-					System.out.println("뭐게" +user_id);
+
 					mypageservice.mypagedelete(user_id);
 					file.delete();
 					

@@ -61,7 +61,6 @@
 			var inputFile = $("input[name='uploadFile']");
 			var files = inputFile[0].files;
 			
-			console.log(files);
 			
 			for(var i =0; i<files.length; i++){
 				if(!checkExtension(files[i].name,files[i].size) ){
@@ -80,7 +79,7 @@
 				type: "POST",
 				dataType:"json",
 				success: function(result){
-					console.log(result);
+					
 					showUploadResult(result);
 					//$(".uploadDiv").html(cloneObj.html());
 				}

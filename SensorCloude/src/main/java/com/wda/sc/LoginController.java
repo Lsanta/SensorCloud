@@ -58,8 +58,6 @@ public class LoginController {
 
 		ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
 		arr = loginservice.login(id);
-		System.out.println(arr);
-
 
 		if(arr.size() != 0) {
 			if(arr.get(0).getPassword().equals(password)) {
@@ -68,9 +66,7 @@ public class LoginController {
 				session.setAttribute("name", arr.get(0).getName());
 				//권한별 페이지 interceptor 실행을 위해 m_level을 session에 저장//로그인 쿼리에 m_level추가
 				session.setAttribute("mlevel" , arr.get(0).getM_level());
-				System.out.println(arr.get(0).getColor());
 				session.setAttribute("color" , arr.get(0).getColor());
-				System.out.println(session.getAttribute("mlevel"));
 
 				return "success";
 			}else {
@@ -96,8 +92,6 @@ public class LoginController {
 	@RequestMapping(value ="/signup", method = RequestMethod.POST )
 	public String signup(MemberVO m, HttpServletResponse response) throws IOException {
 
-			System.out.println(m);
-					
 			int checknum = loginservice.signup(m);
 			if(checknum == 1) {
 				
@@ -111,7 +105,7 @@ public class LoginController {
 			else if(checknum == 0) {
 				return "login/sign";
 			}
-		System.out.println("if문을 벗어남");
+	
 		return "login/sign";	
 		
 	}
@@ -158,18 +152,15 @@ public class LoginController {
 			key += rd.nextInt(10);
 		}
 		
-		System.out.println(user_id+" , "+key);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("name",user_id);
 		map.put("key",key);
 
-		System.out.println(loginservice.keyUpdate(map));
-		
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
 		String hostSMTPid = "s2k0j798";
-		String hostSMTPpwd = "	";
+		String hostSMTPpwd = "wkd3235~!";
 
 		// 보내는 사람 EMail, 제목, 내용
 		String fromEmail = "s2k0j798@naver.com";
@@ -244,16 +235,13 @@ public class LoginController {
 	@RequestMapping(value = "/sendAuth", method = RequestMethod.POST)
 	@ResponseBody
 	public String sendAuth(Model model, @RequestParam Map<String,String> map) {
-		
-		System.out.println(map);
+
 		MemberVO vo = new MemberVO();
 		vo.setUser_id(map.get("id"));
 		vo.setPhone(map.get("phone"));
 		
 		SMSController sms = new SMSController(siteservice);
 		String authnumber = sms.authSms(vo);
-		
-		System.out.println("인증번호" + authnumber);
 		
 		return authnumber;
 	}

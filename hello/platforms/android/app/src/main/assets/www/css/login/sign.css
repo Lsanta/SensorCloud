@@ -92,8 +92,8 @@ b{
 }
 
 #phone{
-  width : 140px;
-  margin-left : 5px;
+  width : 170px;
+  /* margin-left : 5px; */
   display : block;
   float: left;
 }
@@ -139,10 +139,11 @@ b{
 .ijn{
 
  float : right;
- margin: 11px 0 0 0;
+ margin: 12px 0 0 0;
 
 }
 
 img {
-	max-width: 100%; height: auto;
+  max-width: 70%;
+   height: auto;
 }

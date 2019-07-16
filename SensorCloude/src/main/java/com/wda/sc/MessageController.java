@@ -99,7 +99,6 @@ public class MessageController {
 	         defaultApp = FirebaseApp.initializeApp(options);
 	      }
 	      
-	      System.out.println("메시지 전송 들어옴.");
 	      String registrationToken = "";
 //	      String user_id = (String) session.getAttribute("id");
 	      String user_id = "admin";
@@ -108,9 +107,7 @@ public class MessageController {
 	      //token값 select 하기
 	      tokenlist = mypageservice.getToken(user_id);
 	      registrationToken = tokenlist.get(0).getToken_id();
-	      System.out.println("현재 토큰 :" + registrationToken);
 	      
-	       
 	      Message message = Message.builder()
 	    		  .setWebpushConfig(WebpushConfig.builder()
 	    				  .setNotification(new WebpushNotification("승급",(String)paramInfo.get("message"),"https://www.google.com"))
@@ -133,9 +130,7 @@ public class MessageController {
 	     
 	      try {
 	         String response=FirebaseMessaging.getInstance().send(message);
-	         System.out.println("Success : " + response);
 	      } catch (FirebaseMessagingException e) {
-	         System.out.println("Failed and the reason is behind");
 	         e.printStackTrace();
 	      }
 	      return "ok";
@@ -174,8 +169,6 @@ public class MessageController {
 	         defaultApp = FirebaseApp.initializeApp(options);
 	      }
 	      
-	      System.out.println(token);
-	      
 	      String registrationToken= token;
 	     
 	      
@@ -204,7 +197,6 @@ public class MessageController {
 		  
 	      try {
 		         String response=FirebaseMessaging.getInstance().send(message);
-		         System.out.println("Success : " + response);
 		      } catch (FirebaseMessagingException e) {
 		         System.out.println("Failed and the reason is behind");
 		         e.printStackTrace();
@@ -249,7 +241,6 @@ public class MessageController {
 		     
 		  //token값 select 하기
 		  tokenlist = mypageservice.allappToken();
-		  System.out.println(tokenlist);
 		  
 		  String user_id = (String)map.get("user_id");
 		  String content = (String)map.get("content");
@@ -337,7 +328,6 @@ public class MessageController {
 		     
 		  //token값 select 하기
 		  tokenlist = mypageservice.allappToken();
-		  System.out.println(tokenlist);
 		  
 		  String user_id = (String) session.getAttribute("id");
 		  String name = loginservice.nameFind(user_id);
@@ -411,7 +401,7 @@ public class MessageController {
 	         // TODO Auto-generated catch block
 	         e2.printStackTrace();
 	      }
-	      System.out.println(reContent);
+
 	      //오차 계산 
 	      String[] array = reContent.split(",");
 	      String limit = array[0];
@@ -471,16 +461,13 @@ public class MessageController {
 	      List<AlarmMemberVO> member = new ArrayList<AlarmMemberVO>();
 	      //site_id를 받아온다면 대입
 	      member = siteservice.getLimitAlarm_member(site_id);
-	      System.out.println("member" + member);
 	      
 	      // 2. 관리자들 중에서 APP_Token이 존재하면 앱 푸쉬, 존재하지 않으면 SMS알림
 	      for(int i=0; i < member.size(); i++) {
 	    	  //가져온 id값이 있다면 (회원 여부체크)
 	    	  if( member.get(i).getUser_id() != null ) {
 	    		  //id를 통해 토큰을 가져오고 토큰값이 없다면 sms 있으면 tokenlist에 저장
-	    		  System.out.println(member.get(i).getUser_id());
 	    		  List<AppTokenVO> tokenL = mypageservice.getappToken(member.get(i).getUser_id());
-	    		  System.out.println(tokenL);
 	    		  //if문 한번더 
 	    		  if(tokenL.size() == 0) {
 	    			  //sms 푸쉬보내기
@@ -545,7 +532,6 @@ public class MessageController {
 	   @RequestMapping(value="/WebTokenSave.do", method= RequestMethod.POST, produces = {"application/json"})
 	   public String webtokenSave(@RequestBody String Token, HttpSession session) {
 		 
-		   System.out.println("웹토큰 저장 들어옴.");
 		   String webToken = Token;
 		   
 		   String user_id = (String) session.getAttribute("id");
@@ -559,13 +545,12 @@ public class MessageController {
 		    	 tokenvo.setToken_id(webToken);
 		    	 tokenvo.setUser_id(user_id);
 		    	 mypageservice.saveToken(tokenvo);
-		    	 System.out.println("db에 값이 없을때" ); 
 		      } else {
 		    	  String DBToken = tokenlist.get(0).getToken_id();
 		    	  String CurToken = (String) webToken;
 		    	  
 		    	  if( DBToken.equals(CurToken) ) {
-		    		  System.out.println("db에 값이 있고 비교했더니 같은값일때"); 
+
 		    	  } else {
 		    		  //새로운 토큰 저장
 		    		  Map<String, String> map = new HashMap<String, String>();
@@ -573,7 +558,6 @@ public class MessageController {
 		    		  map.put("user_id", user_id);
 		    		  
 		    		  mypageservice.updateToken(map);
-		    		  System.out.println("db에 값이 있고 비교했더니 다른값일때"); 
 		    	  }
 		      }		   
 		   return "";
@@ -587,9 +571,7 @@ public class MessageController {
 	   public String apptokenSave(@RequestBody  Map<String, String> map) {
 		   String user_id = map.get("id");
 		   String appToken = map.get("token");
-		   
-		   System.out.println(user_id + appToken);
-		   
+		     
 		   List<AppTokenVO> tokenlist = new ArrayList<AppTokenVO>();
 		     
 		   //token값 select 하기
@@ -600,14 +582,13 @@ public class MessageController {
 		    	 tokenvo.setToken_id(appToken);
 		    	 tokenvo.setUser_id(user_id);
 		    	 mypageservice.saveappToken(tokenvo);
-		    	 System.out.println("db에 값이 없을때"); 
 		      } else {
 		    	  
 		    	  String DBToken = tokenlist.get(0).getToken_id();
 		    	  String CurToken = (String) appToken;
 		    	  
 		    	  if( DBToken.equals(CurToken) ) {
-		    		  System.out.println("db에 값이 있고 비교했더니 같은값일때"); 
+		    		 
 		    	  } else {
 		    		  //동일한 휴대폰으로 다른 아이디로 들어갔을때 토큰값이 같아 PK가 겹치는 DB에러 발생 
 			    	  //update대신에 delete 와 insert로 수정해야함.
@@ -624,7 +605,7 @@ public class MessageController {
 		    			  tokenvo.setToken_id(appToken);
 		 		    	  tokenvo.setUser_id(user_id);
 		 		    	  mypageservice.saveappToken(tokenvo);
-		 		    	 System.out.println("db에 값이 있고 비교했더니 다른값일때 딜리트 후 인설트 성공"); 
+		 		    	
 		    		  } else {
 		    			  System.out.println("토큰 삭제 실패"); 
 		    		  }

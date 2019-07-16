@@ -64,8 +64,6 @@ $(document).ready(function() {
 	});
 	
 	   $("#btnno").on("click",function(e){
-		    
-		    console.log("delete file");
 		      
 //		    var targetFile = $(".delete1").data("file");
 		    
@@ -76,10 +74,7 @@ $(document).ready(function() {
 		    var type = $(".delete").data("type");
 		    
 		    var targetLi = $(".delete").closest("ul");
-		    console.log(targetFile);
-		    console.log(type);
-		    console.log(targetLi);
-		    
+
 		    $.ajax({
 		      url: '/deleteFilemypage',
 		      data: {fileName: targetFile[1], type:type ,user_id:user_id},

@@ -108,6 +108,8 @@ body {
 	display: inline-block;
 	box-sizing: border-box;
 	width: 45%;
+	position : relative;
+	bottom : 40px;
 }
 
 #addnetwork_right2 {
@@ -152,7 +154,7 @@ input.addnetwork_right_input {
     cursor:pointer;
 }
 
-input[type=text] {
+input[type=text], #addnetwork_right2 > select {
 	width: 80%;
 	padding: 8px 20px;
 	margin-top: 20px;
