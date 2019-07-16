@@ -473,7 +473,7 @@ $(document).ready(function () {
                 board_content :content,
                 board_status : status,
                 board_no: board_no,
-                site_id : $("#sid").val()
+                site_id : $("#sid").text()
              };
 
             $.ajax({
@@ -759,7 +759,7 @@ $(document).ready(function () {
                 console.log(q.title);
                 console.log(q.reg_date);
                 console.log(q.board_status);
-
+                console.log(q.site_id);
                 if (q.board_status == 0) {
                     var board_status = "open";
                 }
@@ -777,7 +777,7 @@ $(document).ready(function () {
                 $("#sse").val(board_status).prop("selected", true);
                 $("#regdate").html(q.reg_date);
                 $("#tcontent").val(q.board_content);
-                $("#sid").val(q.site_id);
+                $("#sid").text(q.site_id);
 
 
             });
