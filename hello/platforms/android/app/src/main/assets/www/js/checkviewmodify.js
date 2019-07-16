@@ -351,6 +351,7 @@ $(document).ready(function () {
 
                 else if (q.board_status == 1) {
                     var board_status = "fixed";
+
                 }  else if (q.board_status == 1) {
                     
                     var board_status = "close";
@@ -358,9 +359,8 @@ $(document).ready(function () {
 
 
                 $("#ttitle").val(q.title);
-                $("#sse").val(board_status).attr("selected", "selected");
+                $("#sse").val(board_status).prop("selected", true);
                 $("#regdate").html(q.reg_date);
-
                 $("#tcontent").val(q.board_content);
 
 
@@ -415,7 +415,7 @@ $(document).ready(function () {
             dataType: 'text',
             type: "POST",
             success: function (result) {
-                alert(result);
+                
                 //사진 삭제후 화면 갱신
                 window.location.href="checkviewmodify.html?board_no="+board_no+"?site_id="+site_id;
 
