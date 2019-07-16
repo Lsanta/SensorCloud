@@ -34,8 +34,6 @@ public class CheckboardServiceImplement implements CheckboardService {
 
 		mapper.insertSelectKey(board);
 		
-		System.out.println("VO값"+board);
-		
 		if (board.getAttachList() == null || board.getAttachList().size() <= 0) {
 			return;
 		}
@@ -52,8 +50,6 @@ public class CheckboardServiceImplement implements CheckboardService {
 	public void fileupdate(CheckBoardVO vo) {
 		
 		filedelete(vo.getBoard_no());
-		
-		System.out.println(vo.getBoard_no());
 		
 		if (vo.getAttachList() == null || vo.getAttachList().size() <= 0) {
 	         return;
@@ -92,7 +88,7 @@ public class CheckboardServiceImplement implements CheckboardService {
 	@Override
 	public int insertcheckboard(CheckBoardVO checkboard) {
 		// TODO Auto-generated method stub
-		System.out.println(checkboard);
+
 		return mapper.insertcheckboard(checkboard);
 	}
 
@@ -125,7 +121,7 @@ public class CheckboardServiceImplement implements CheckboardService {
 	@Override
 	public List<CheckBoardFileVO> getAttachListmain(int board_no) {
 		// 중복된 board_no 제거후 첨부파일 반환
-		System.out.println("맵퍼" + board_no);
+	
 		return attachMapper.findByBnomain(board_no);
 	}
 
@@ -217,7 +213,7 @@ public class CheckboardServiceImplement implements CheckboardService {
 	@Override
 	public ArrayList<CheckBoardVO> getAdminTermList(Map<Object, Object> parm) {
 		// 점검이력 관리에서의 기간 검색 + 페이징
-		System.out.println("parm" + parm);
+		
 		return mapper.getAdminTermList(parm);
 	}
 
@@ -236,7 +232,7 @@ public class CheckboardServiceImplement implements CheckboardService {
 	@Override
 	public ArrayList<CheckBoardVO> checkManageSearch(Map<String, Object> data) {
 		//점검이력 관리에서의 검색
-		System.out.println("검색 데이터" + data);
+		
 		return mapper.checkManageSearch(data);
 	}
 

@@ -77,11 +77,8 @@ public class CheckboardManage {
 		model.addAttribute("depth0","메인화면");
 		model.addAttribute("depth1","점검이력관리");
 		
-		System.out.println("realNum" + realNum);
-		System.out.println("페이지넘" + pageNum);
 		if(realNum > pageNum) {
-			System.out.println("pageNum : " + pageNum);
-			
+
 			return "false";
 		}
 		return "";
@@ -147,10 +144,8 @@ public class CheckboardManage {
 			model.addAttribute("depth0","메인화면");
 			model.addAttribute("depth1","점검이력관리");
 			if (realNum > pageNum) {
-				System.out.println("pageNum : " + pageNum);
 				return "false";
 			}	
-			System.out.println("data가 0일때" + result);
 			return "";
 		} else {
 
@@ -162,7 +157,6 @@ public class CheckboardManage {
 		
 		Map<String, Integer> date = new HashMap<String, Integer>();
 		
-			System.out.println("데이터가 0이아님");
 					
 			date.put("data", data);
 			date.put("status", status);
@@ -228,13 +222,9 @@ public class CheckboardManage {
 			model.addAttribute("pageNum" + status, map.get(sendPageNum)); //arr
 			model.addAttribute("depth0","메인화면");
 			model.addAttribute("depth1","점검이력관리");
-			System.out.println("검색완료 점검이력으로");
 			
 			if (realNum > pageNum) {
-				System.out.println("pageNum : " + pageNum);
-				return "false";
-				
-						
+				return "false";		
 			}	
 			
 			return "";
@@ -255,16 +245,10 @@ public class CheckboardManage {
 		s.setKeyword(keyword);
 		s.setSearchType(searchType);
 
-		System.out.println(page); // 현재 페이지 번호
-		System.out.println(searchType);  // 검색 옵션
-		System.out.println(keyword); // 검색 키워드
-		
 		data.put("search" , s);
 		data.put("status" , status);
 
 		searchArr = checkboardservice.checkManageSearch(data);
-
-		System.out.println("체크 검색 :" + searchArr);
 
 		int pageNum = 0;
 		int mapNum=0;
@@ -273,7 +257,6 @@ public class CheckboardManage {
 		p.setTotalNum(searchArr.size());
 		p.setOnePageBoard(5);
 
-		System.out.println("체크 전체숫자" + p.getTotalNum());
 
 		if (p.getTotalNum() <= p.getOnePageBoard()) {
 			pageNum = 1;
@@ -326,8 +309,7 @@ public class CheckboardManage {
 		model.addAttribute("depth1","점검이력관리");
 		
 		if(realNum > pageNum) {
-			System.out.println("pageNum : " + pageNum);
-			System.out.println("keyword : " + keyword);
+
 			try {
 				keyword = URLEncoder.encode(keyword, "UTF-8");
 			} catch (UnsupportedEncodingException e) {

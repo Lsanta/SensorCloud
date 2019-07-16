@@ -19,7 +19,6 @@ public class TimelineServiceImplement implements TimelineService {
 
 	@Override
 	public int insert(TimelineVO vo) {
-		System.out.println(vo);
 		return mapper.insert(vo);
 	}
 
@@ -68,7 +67,6 @@ public class TimelineServiceImplement implements TimelineService {
 	@Override
 	public ArrayList<TimelineVO> getAllTimeline() {
 		// 페이징 없이 타임라인 전부 가져옴
-		System.out.println("3333");
 		return mapper.getAllTimeline();
 	}
 

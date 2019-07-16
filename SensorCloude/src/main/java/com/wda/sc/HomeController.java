@@ -54,7 +54,7 @@ public class HomeController {
 	//사이트의 메인화면으로 보내주는 컨트롤러
 	public String main(Locale locale, Model model, HttpSession session) {
 		
-		System.out.println(servletContext.getRealPath("/"));
+		
 		//메인화면 점검이력 제목 substring
 		ArrayList<CheckBoardVO> arr = checkboardservice.mainList();
 
@@ -119,7 +119,6 @@ public class HomeController {
 		int realNum = Integer.parseInt(num);
 
 		page.setTotalNum(checkboardservice.getPageNum());
-		System.out.println(page.getTotalNum());
 		
 		if(page.getTotalNum() < page.getOnePageBoard()) {
 			pageNum = 1;
@@ -159,11 +158,8 @@ public class HomeController {
 		model.addAttribute("checkboardlist",checkboardservice.getList(page));
 		model.addAttribute("depth0","메인화면");
 		model.addAttribute("depth1","점검이력");
-		System.out.println("realNum : " + realNum);
-		System.out.println("pageNum : " + pageNum);
 		
 		if(realNum > pageNum) {
-			System.out.println("pageNum : " + pageNum);
 			return "redirect:/check/"+pageNum;
 		}
 		
@@ -175,7 +171,6 @@ public class HomeController {
 
 		
 		int mlevel = (int) session.getAttribute("mlevel");
-		System.out.println("레벨" + mlevel);
 		
 		if (mlevel == 1) {
 			response.setContentType("text/html; charset=UTF-8");
@@ -251,7 +246,6 @@ public class HomeController {
 		model.addAttribute("depth1","현장관리");
 		
 		if(realNum > pageNum) {
-			System.out.println("pageNum : " + pageNum);
 			return "redirect:/sitelist/"+pageNum;
 		}
 		
@@ -284,7 +278,6 @@ public class HomeController {
 	public String manage(@PathVariable String num, Model model ,HttpSession session,HttpServletResponse response) throws IOException {
 
 		int mlevel = (int) session.getAttribute("mlevel");
-		System.out.println("레벨" + mlevel);
 
 		if (mlevel < 5) {
 
@@ -351,7 +344,6 @@ public class HomeController {
 		model.addAttribute("depth1","사용자관리");
 		
 		if(realNum > pageNum) {
-			System.out.println("pageNum : " + pageNum);
 			return "redirect:/manage/"+pageNum;
 		}
 		
@@ -457,9 +449,7 @@ public class HomeController {
 		arr = timelineservice.getAllTimeline();
 		
 		JSONArray jsonarr = JSONArray.fromObject(arr);
-		System.out.println("arr" + jsonarr);
-		
-		
+
 		return jsonarr;
 	}
 
@@ -487,7 +477,6 @@ public class HomeController {
 	public String mysensor(@PathVariable String num, Locale locale, Model model, HttpSession session,HttpServletResponse response) throws IOException {
 
 		int mlevel = (int) session.getAttribute("mlevel");
-		System.out.println("레벨" + mlevel);
 
 		if (mlevel == 1) {
 
@@ -551,7 +540,6 @@ public class HomeController {
 		model.addAttribute("depth1","보유센서");
 
 		if(realNum > pageNum) {
-			System.out.println("pageNum : " + pageNum);
 			return "redirect:/mysensor/"+pageNum;
 		}
 
@@ -622,7 +610,6 @@ public class HomeController {
 		model.addAttribute("depth1","내 점검이력");
 		
 		if(realNum > pageNum) {
-			System.out.println("pageNum : " + pageNum);
 			return "redirect:/mypage/"+pageNum;
 		}
 

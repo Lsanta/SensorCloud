@@ -38,7 +38,7 @@ $(document).ready(function () {
         	url : "/login/idFind.do",
         	success : function(data){
         		var s = "아이디 조회 결과 입력하신 정보는 아래와 같습니다.";
-        		console.log(data);
+        	
         		if( data == "none"){
         			$("#hidden").css("visibility","visible");
         			document.getElementById("hidden").innerHTML="존재하지 않는 회원입니다.";

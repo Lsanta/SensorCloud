@@ -51,27 +51,6 @@ public class mLoginController {
 	@RequestMapping(value = "/login/mlog", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public String mlogin(@RequestBody String idt, String passwordt, HttpSession session) throws Exception {
-//		response.setHeader("Access-Control-Allow-Origin", "*");
-
-//		response.setHeader("Access-Control-Allow-Credentials", "true");
-//		response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-//		response.setHeader("Connection", "close");
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-
-//		response.setHeader("Access-Control-Allow-Origin", "*");
-//        response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
-//        response.setHeader("Access-Control-Max-Age", "3600");
-//        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, origin, content-type, accept");
-
-		System.out.println("안와");
-
-//		 String id = (String)map.get("id");
-//		 String password = (String) map.get("password");
-		System.out.println("====================================");
-		System.out.println(idt);
-		System.out.println(passwordt);
-
 		String[] array = idt.split("&");
 		String[] id2 = array[0].split("=");
 		String[] password2 = array[1].split("=");
@@ -98,7 +77,6 @@ public class mLoginController {
 		} else {
 			json.put("signal", "idfail");
 		}
-		System.out.println(json);
 		return json.toString();
 	}
 
@@ -154,7 +132,6 @@ public class mLoginController {
 	@RequestMapping(value = "/sitemain", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ArrayList<SiteVO> sitemainlist(@RequestBody String site_id, Locale locale, Model model) {
-		System.out.println(site_id);
 
 		ArrayList<SiteVO> result01 = siteservice.getSite(site_id);
 
@@ -165,8 +142,7 @@ public class mLoginController {
 	@RequestMapping(value = "/installsensor", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ArrayList<SensorDataVO> installsensor(@RequestBody String site_id, Locale locale, Model model) {
-		System.out.println(site_id);
-
+		
 		ArrayList<SensorDataVO> result02 = siteservice.getDataName(site_id);
 
 		return result02;
@@ -212,7 +188,6 @@ public class mLoginController {
 	
 		
 		JSONObject json = JSONObject.fromObject(map);
-		System.out.println(json);
 		return json;
    }
 	   
@@ -264,7 +239,6 @@ public class mLoginController {
 				 json.put("signal", "isN"); 
 				 }
 			 }
-			 System.out.println(json);
 			 return json.toString();
 	   }
 	   	
@@ -288,7 +262,6 @@ public class mLoginController {
 	@ResponseBody
 	public String signup(MemberVO m) {
 			
-		System.out.println(m);
 		int checknum = loginservice.signup(m);
 		
 		if(checknum == 1) {
@@ -305,11 +278,8 @@ public class mLoginController {
 	   @RequestMapping(value = "/siterepairview", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	   @ResponseBody
 	   public ArrayList<CheckBoardVO> siterepairview(@RequestBody String board_no, Locale locale, Model model) {
-	      
-	      System.out.println(board_no);
+	     
 	      ArrayList<CheckBoardVO> result = checkboardservice.viewgetList(board_no);
-	      System.out.println(result);
-	      
 	      return result;
 
 	   }
@@ -320,16 +290,13 @@ public class mLoginController {
 		@ResponseBody
 		public String sendAuth(Model model, @RequestParam Map<String,String> map) {
 			
-			System.out.println(map);
 			MemberVO vo = new MemberVO();
 			vo.setUser_id(map.get("id"));
 			vo.setPhone(map.get("phone"));
 			
 			SMSController sms = new SMSController(siteservice);
 			String authnumber = sms.authSms(vo);
-			
-			System.out.println("인증번호" + authnumber);
-			
+		
 			return authnumber;
 		}
 	    
@@ -355,13 +322,10 @@ public class mLoginController {
 				key += rd.nextInt(10);
 			}
 			
-			System.out.println(user_id+" , "+key);
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("name",user_id);
 			map.put("key",key);
-
-			System.out.println(loginservice.keyUpdate(map));
-			
+	
 			// Mail Server 설정
 			String charSet = "utf-8";
 			String hostSMTP = "smtp.naver.com";
@@ -433,7 +397,6 @@ public class mLoginController {
 			model.addAttribute("Allcompany", vo);
 			
 			JSONArray jsonarr = JSONArray.fromObject(vo);
-			System.out.println("arr" + jsonarr);
 			return jsonarr;
 		}
 	    

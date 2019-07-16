@@ -122,9 +122,7 @@ public class MySensorController {
 		s.setSearchType(searchType);
 
 		searchArr = mysensorservice.mysensorSearch(s);
-
-		System.out.println(searchArr);
-
+		
 		int pageNum = 0;
 		int mapNum=0;
 		int sendPageNum=0;
@@ -169,16 +167,13 @@ public class MySensorController {
 		
 		model.addAttribute("lastNum", pageNum);
 		model.addAttribute("pageNum", map.get(sendPageNum));
-		System.out.println("pageNum" + arr);
 		model.addAttribute("depth0","메인화면");
 		model.addAttribute("depth1","보유센서");
 		
 		model.addAttribute("sensor", mysensorservice.getSearchResult(parm));
-		System.out.println("sensor" + mysensorservice.getSearchResult(parm));
 
 		if(realNum > pageNum) {
-			System.out.println("pageNum : " + pageNum);
-			System.out.println("keyword : " + keyword);
+			
 			try {
 				keyword = URLEncoder.encode(keyword, "UTF-8");
 			} catch (UnsupportedEncodingException e) {

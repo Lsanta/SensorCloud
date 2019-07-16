@@ -51,15 +51,12 @@ public class mTimelineController {
 		page.setStartnum(criteria.getStartnum());
 
 		ArrayList<TimelineVO> result = timelineservice.getList(page);
-		System.out.println(result);
-		System.out.println(result.size());
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("mtimelineList", result);
 		map.put("criteria", criteria);
 		JSONObject json = JSONObject.fromObject(map);
 
-		System.out.println(json);
 
 		return json;
 	}
@@ -68,17 +65,15 @@ public class mTimelineController {
 	@RequestMapping(value = "/mtimeline.do", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public String mtimeline(@RequestBody Map<String, String> map, TimelineVO vo) throws Exception {
-		System.out.println("등록");
+	
 		String id = (String)map.get("user_id");
 		String content = (String)map.get("content");  
-		System.out.println(id); 
-		System.out.println(content); 
+
 
 		vo.setUser_id(id);
 		vo.setContent(content);
 		int a = timelineservice.insert(vo);
-		System.out.println(vo);
-
+		
 		if (a == 0) {
 			return "false";
 		} else {
@@ -90,17 +85,12 @@ public class mTimelineController {
 	@RequestMapping(value = "/mtimelinedelete.do",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public String mtimelinedelete(@RequestBody Map<String, String> map, TimelineVO vo) throws Exception {
-		System.out.println("삭제");
-		String timeline_n = (String)map.get("timeline_n");
 
-		System.out.println(timeline_n);
+		String timeline_n = (String)map.get("timeline_n");
 
 		int a = timelineservice.timelinedelete(timeline_n);
 
-		System.out.println(a);
-		System.out.println("진짜 됨?");
 		if (a != 0) {
-			System.out.println("오긴 오냐?");
 			return "success";
 
 		} else {
@@ -113,16 +103,13 @@ public class mTimelineController {
 	@RequestMapping(value = "/mtimelinemodify.do",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public JSONObject mtimelinemodify(@RequestBody Map<String, String> map, TimelineVO vo) throws Exception {
-		System.out.println("수정클릭");
 		String content = (String)map.get("content");
 		String timeline_n = (String)map.get("timeline_n");
 		
 		map.put("content", content);
 		map.put("timeline_n", timeline_n);
 		JSONObject json = JSONObject.fromObject(map);
-     
-        System.out.println(json);
-    
+
      return json;
   }
 	
@@ -130,7 +117,6 @@ public class mTimelineController {
 	@RequestMapping(value = "/mtimelinemodifyy.do",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public String mtimelinemodifyy(@RequestBody Map<String, String> map, TimelineVO vo) throws Exception {
-		System.out.println("수정");
 		String content = (String)map.get("content");
 		String timeline_n = (String)map.get("timeline_n");
 		
@@ -138,7 +124,6 @@ public class mTimelineController {
 		vo.setTimeline_n(timeline_n);
 		
 		int a = timelineservice.timelinemodify(vo);
-		System.out.println(a);
 		
 		if (a != 0) {
 			return "success";

@@ -5,10 +5,9 @@
 $(document).ready(function(){
 	//작성자 와 세션에있는 로그인 아이디를 비교해서 버튼 보여주거나 안보여주기
 	var name = $("#writername").text();
-	console.log(name);
+
 	var id = $("#id").text();
-	console.log(id);
-	
+
 	if(name != id) {
 		$("#mod").hide();
 		$("#del").hide();
@@ -19,7 +18,6 @@ $(document).ready(function(){
 		
 		var newURL =  window.location.pathname;
 		var url = newURL.split('/');
-		console.log(url);
 		
 		//url[4] = board_no , url[2] = site_id
 		window.location.href = "/checkboard/checkmod/"+url[4]+"/"+url[2];

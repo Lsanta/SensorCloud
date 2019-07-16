@@ -27,7 +27,7 @@ var config = {
 		return messaging.getToken();
 	})
 	.then(function(token){
-		console.log(token);
+// 		console.log(token);
 	})
 	.catch(function(err){
 		console.log('요청 거절');
@@ -61,7 +61,6 @@ var config = {
 			
 			messaging.getToken().then(function(currentToken) {
 				  if (currentToken) {
-				    console.log(currentToken);
 					
 // 				    $.ajax({
 // 						type : "POST",
@@ -87,8 +86,7 @@ var config = {
 						data : JSON.stringify(payload),
 						contentType : 'application/json',
 						success : function(data){
-							console.log("갔다옴");
-							console.log(data);
+							
 						}
 					});
 						    

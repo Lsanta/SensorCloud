@@ -76,9 +76,6 @@ public class adminCheckboardController {
 		   // 마이페이지에서 점검이력 content보기
 		   @RequestMapping(value = "/checkboard/" + "{board_no}", method = RequestMethod.GET)
 		   public String checkin(Locale locale, @PathVariable String board_no, Model model, HttpSession session ,HttpServletResponse response) throws IOException {
-		      
-		      System.out.println("보드넘버=" + board_no);
-		      
 		      int mlevel = (int) session.getAttribute("mlevel");
 
 		      if (mlevel < 2) {
@@ -95,14 +92,10 @@ public class adminCheckboardController {
 		      // 수정클릭시 권한체크 위해 id에 해당하는 m_level을 넘긴다.
 		      String user_id = (String) session.getAttribute("id");
 		      model.addAttribute("checkauthority", Checkboardservice.checkauthority(user_id));
-		      System.out.println(Checkboardservice.checkauthority(user_id));
 
 		      model.addAttribute("cklist", Checkboardservice.viewgetList(board_no));
-		      System.out.println(Checkboardservice.viewgetList(board_no));
 		      model.addAttribute("siteid", Checkboardservice.getsiteid(board_no));
 		      model.addAttribute("board_no", board_no);
-
-		      System.out.println("사이트아이디=" + Checkboardservice.getsiteid(board_no));
 		      
 		      model.addAttribute("depth0","메인화면");
 			  model.addAttribute("depth1","점검이력관리");
@@ -127,14 +120,13 @@ public class adminCheckboardController {
 		         
 		      }
 		      
-		      System.out.println(board_no);
 		      // board_no를 통해 점검이력 내용 가져오기
 		      model.addAttribute("modlist", Checkboardservice.viewgetList(board_no));
 
 		      // ID를 통해 권한레벨 가져오기
 		      String user_id = (String) session.getAttribute("id");
 		      model.addAttribute("auth", Checkboardservice.checkauthority(user_id));
-		      System.out.println(Checkboardservice.viewgetList(board_no));
+		     
 		      // 사이트 이름,점검이력 제목,점검이력내용 정보 가져오기
 		      model.addAttribute("checksitelist", siteservice.getchecksite());
 
@@ -143,7 +135,6 @@ public class adminCheckboardController {
 		     
 		      model.addAttribute("depth0","메인화면");
 			  model.addAttribute("depth1","점검이력관리");
-			  System.out.println("뭐해뭐해");
 			  
 		      return "check/checklistmodify";
 		   }

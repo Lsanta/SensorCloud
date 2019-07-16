@@ -6,7 +6,6 @@ $(document).ready(function() {
 		var cid = $(this).children().eq(3).text();
 		var index = $(this).index();
 		
-		console.log(index);
 		var query = {
 				company_num : cid
 		}
@@ -19,8 +18,7 @@ $(document).ready(function() {
 			data : query,
 			dataType : 'JSON',
 			success : function(data) {
-				console.log(data);
-				console.log("데이터 개수" + data.length);
+				
 				var str = "";
 				
 				if(data.length == 0) {
