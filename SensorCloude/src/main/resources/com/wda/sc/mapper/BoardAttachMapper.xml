@@ -19,4 +19,9 @@
 	<insert id="mfileinsert">
   	 insert into check_board_file(uuid,file_path,file_name,filetype,board_no) values(#{uuid},#{file_Path},#{file_name},#{fileType},#{board_no})
    	</insert>
+   	
+   	<select id="findFilenameByBno" resultType="String">
+  	 select file_name from check_board_file where board_no = #{board_no} 
+  	</select>
+   	
 </mapper>

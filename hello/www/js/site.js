@@ -298,10 +298,11 @@ $.ajax({
 
         //내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
        
-        window.location.href="checkview.html?board_no="+boardno;
-        
+        window.location.href="checkview.html?board_no="+boardno+"?site_id="+site_id;
+      
 
       });
+
 
 
 function getData(sa){

@@ -8,12 +8,15 @@ import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpSession;
 
 import org.imgscalr.Scalr;
 import org.slf4j.Logger;
@@ -27,6 +30,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wda.sc.domain.AttachFileVO;
 import com.wda.sc.domain.CheckBoardFileVO;
@@ -49,6 +54,8 @@ public class mChecklistController {
    private static final Logger logger = LoggerFactory.getLogger(mChecklistController.class);
    private CheckboardService Checkboardservice;
    
+   
+   //checkview 점검이력 글만 읽어오기
    @CrossOrigin(origins = "*", maxAge = 3600)
    @RequestMapping(value = "/mgetAttachList", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    @ResponseBody
@@ -61,8 +68,8 @@ public class mChecklistController {
    
    
    
-   
-   @CrossOrigin(origins = "*", maxAge = 3600)	
+   //checkview , checkviewmodfiy 원본이미지 + 썸네일 불러오기 
+   @CrossOrigin(origins = "*", maxAge = 3600)   
    @ResponseBody
    @RequestMapping(value="/mdisplay", method = RequestMethod.GET)
    public ResponseEntity<byte[]> mdisplay(String fileName){
@@ -83,63 +90,156 @@ public class mChecklistController {
       return result;
    }
    
+   //checkviewmodfiy 에서 파일만 삭제 시 
    @CrossOrigin(origins = "*", maxAge = 3600)
    @PostMapping("/mdeleteFile")
    @ResponseBody
-   public ResponseEntity<String> mdeleteFile(String fileName, String type, String board_no){
-	   int boardno = Integer.parseInt(board_no);
-	      
-	  System.out.println("mdeleteFile에 넘어오는 board_no"+boardno);
-	     
-	   //해당 board_no에 해당하는 파일 db에서 삭제
-	   Checkboardservice.filedelete(boardno);
-	    
-	   System.out.println("deleteFile :"+ fileName);
-	   
-	   File file;
-	   
-	   try {
-		   
-		   file = new File("c:\\upload\\"+URLDecoder.decode(fileName , "UTF-8"));
-		   
-		   file.delete();
-		   
-		   if(type.equals("image")) {
-			   //이미지의 경우 섬네일이 존재. 그래서 파일이름의 중간에 s_ 가 들어잇다. 이부분을 변경해서 원본 이미지 파일도 같이삭제
-			   
-			   String largeFileName = file.getAbsolutePath().replace("s_" ,"");
-			   
-			   System.out.println("largeFileName:"+largeFileName);
-			   
-			   file = new File(largeFileName);
-			   
-			   file.delete();
-			   
-		   }
-		   
-	   }catch(UnsupportedEncodingException e) {
-		   e.printStackTrace();
-		   return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	   }
-	   	
-	   return new ResponseEntity<String>("deleted" , HttpStatus.OK);
-	   
+   public ResponseEntity<String> mdeleteFile(String fileName, String type, String boardno ,String uuid){
+      int board_no = Integer.parseInt(boardno);
+         
+     System.out.println("mdeleteFile에 넘어오는 board_no"+board_no);
+     System.out.println("mdeleteFile에 넘어오는 uuid"+uuid);
+      //해당 board_no에 해당하는 파일 db에서 삭제
+     Map<String,Object> map = new HashMap<>();
+     map.put("board_no",board_no);
+     map.put("uuid",uuid);
+      Checkboardservice.mfiledelete(map);
+      File file;
+      
+      try {
+         
+         System.out.println(fileName);
+         file = new File("c:\\upload\\"+URLDecoder.decode(fileName , "UTF-8"));
+         
+         file.delete();
+         
+         if(type.equals("image")) {
+            //이미지의 경우 섬네일이 존재. 그래서 파일이름의 중간에 s_ 가 들어잇다. 이부분을 변경해서 원본 이미지 파일도 같이삭제
+            
+            String largeFileName = file.getAbsolutePath().replace("s_" ,"");
+            
+            System.out.println("largeFileName:"+largeFileName);
+            
+            file = new File(largeFileName);
+            
+            file.delete();
+            
+         }
+         
+      }catch(UnsupportedEncodingException e) {
+         e.printStackTrace();
+         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      }
+         
+      return new ResponseEntity<String>("deleted" , HttpStatus.OK);
+      
    }
-	 
+   
+   
+// 점검이력에서 해당 글을 클릭후 삭제버튼을 누른 후
+   @CrossOrigin(origins = "*", maxAge = 3600)
+   @PostMapping("/mdeletepost")
+   @ResponseBody
+   public String mdeletepost(String boardno) {
+      
+         
+         int board_no = Integer.parseInt(boardno);
+      
+         System.out.println(board_no);
+         
+         //c:경로 파일 삭제를 위해 해당 board_no의  file_name을 받아옴
+//         Checkboardservice.findFilename(board_no);
+//         List<String> list = Checkboardservice.findFilename(board_no);
+//         System.out.println(list);
+//         
+//         System.out.println(list.size());
+//       File file;
+//         
+//       for(int i=0; i<list.size(); i++) {
+//          System.out.println(list.get(i));
+//         try {
+//            
+//            file = new File("c:\\upload\\"+URLDecoder.decode(list.get(i) , "UTF-8"));
+//            
+//            file.delete();
+//            
+//               //이미지의 경우 섬네일이 존재. 그래서 파일이름의 중간에 s_ 가 들어잇다. 이부분을 변경해서 원본 이미지 파일도 같이삭제
+//               String largeFileName = file.getAbsolutePath().replace("s_" ,"");
+//               
+//               System.out.println("largeFileName:"+largeFileName);
+//               
+//               file = new File(largeFileName);
+//               
+//               file.delete();
+//               
+//            
+//            
+//         }catch(UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//            System.out.println("삭제 클릭시 전체 c경로 사진삭제 실패");
+//         }
+//         
+//         }
+//         
+         
+         
+//       board_no를 통해 이미지파일 전체 삭제
+      Checkboardservice.filedelete(board_no);
+      
+      
+      
+      // board_no를 통해 게시글 삭제
+      Checkboardservice.checkboardDelete(board_no);
+
+      
+
+      System.out.println("삭제 완료 점검이력화면으로");
+
+      return "result";
+   }
+   
+   //checkmodfiy에서 수정완료 버튼을 눌렀을 시 
+   
+// 점검이력에서 글쓰기를 누른 후 수정버튼을 누른 후 수정
+   @CrossOrigin(origins = "*", maxAge = 3600)
+   @RequestMapping(value = "/mcheckmodify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+   @ResponseBody
+   public String mcheckmodify(@RequestBody CheckBoardVO vo) {
+
+     
+      System.out.println("수정할 때 vo : " + vo);
+
+      int i = Checkboardservice.updateCheckBoard(vo);
+
+      System.out.println(i);
+      if(i==1) {
+         System.out.println("수정 성공 점검이력으로");
+      }
+      else {
+         System.out.println("수정 다시");
+      }
+      
+      
+      return "success";
+   }
+   
+   
+   
+    
 
    // 점검이력
    @CrossOrigin(origins = "*", maxAge = 3600)
    @RequestMapping(value = "/writecheck", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    @ResponseBody
    public int insertchecklist(@RequestBody CheckBoardVO vo) {
-	  
-	 //글쓰기 컨텐트 db 저장 
-	      Checkboardservice.register(vo);
-	      //insert 직후 해당 열의 primary키를 뽑아내 vo에 저장후  찍어봄 
-	      //CheckBoardVO vo1 = new CheckBoardVO();
-	      int board_no  = vo.getBoard_no();
-	      System.out.println("보드넘버" + board_no);
-	      	      
+     
+    //글쓰기 컨텐트 db 저장 
+         Checkboardservice.register(vo);
+         //insert 직후 해당 열의 primary키를 뽑아내 vo에 저장후  찍어봄 
+         //CheckBoardVO vo1 = new CheckBoardVO();
+         int board_no  = vo.getBoard_no();
+         System.out.println("보드넘버" + board_no);
+                  
       return board_no;
 
    }
@@ -152,7 +252,7 @@ public class mChecklistController {
    @ResponseBody
    public void insertfile(@RequestParam Map<String,String> allRequestParams, MultipartFile file, Model model) throws Exception {
        
-	  System.out.println("오나?");
+     System.out.println("오나?");
       String uploadPath = "C:\\upload";
       
       Iterator<String> keys = allRequestParams.keySet().iterator();
@@ -171,14 +271,14 @@ public class mChecklistController {
 //      insert into check_board_file(uuid,file_path,file_name,filetype,board_no) values(#{uuid},#{file_Path},#{file_name},#{fileType},#{board_no})
 //      </insert>
        
-       System.out.println(savedName);
+       System.out.println("savename"+savedName);
        
        
              //2019/05/31/s_71728aa0-9d4d-4b2c-a50a-22039e4b8827_.Pic.jpg
        
 //       CheckBoardVO checkboardvo = null;
 //       CheckBoardFileVO checkboardfilevo = null;
-       		
+             
        
 //         int board_no = checkboardvo.getBoard_no();
 //             System.out.println(board_no);
@@ -194,9 +294,10 @@ public class mChecklistController {
             String[] array2 = savedName.split("_");
             
             String uuid = array2[1];
-            String realname = array2[2];
-            
-            
+           
+           String realname = array2[2];
+            System.out.println("db에 저장되는 realname:"+realname);
+            System.out.println("db에 저장되는 uuid:"+uuid);
             int boardno = Integer.parseInt(allRequestParams.get("value2"));
             System.out.println("넘어온 키값"+boardno);
             
@@ -210,7 +311,7 @@ public class mChecklistController {
             checkboardfilevo.setFileType(true);
             
             Checkboardservice.mfileinsert(checkboardfilevo);
-              
+           
    }
    
    
@@ -226,7 +327,7 @@ public class mChecklistController {
       File target = new File(uploadPath + savedPath , savedName);
       
       System.out.println("uid" + uid);
-      System.out.println("savedName" + savedName);
+      System.out.println("upload메소드안의 savedname"+savedName);
       
       FileCopyUtils.copy(fileData, target);
       
