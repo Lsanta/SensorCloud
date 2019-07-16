@@ -154,10 +154,6 @@
 				$(".uploadResult ul li").each(function(i, obj) {
 					var jobj = $(obj);
 
-					console.dir(jobj);
-					console.log("-------------------------");
-					console.log(jobj.data("filename"));
-
 					str += "<input type='hidden' name='attachList["+ i+ "].file_name' value='"+ jobj.data("filename")+ "'>";
 					str += "<input type='hidden' name='attachList["+ i+ "].uuid' value='"+ jobj.data("uuid")+ "'>";
 					str += "<input type='hidden' name='attachList["+ i+ "].file_Path' value='"+ jobj.data("path")+ "'>";
@@ -195,8 +191,6 @@
 				var inputFile = $("input[name='uploadFile']");
 				var files = inputFile[0].files;
 
-				console.log(files);
-
 				for (var i = 0; i < files.length; i++) {
 					if (!checkExtension(files[i].name,files[i].size)) {
 						return false;
@@ -212,7 +206,7 @@
 					type : "POST",
 					dataType : "json",
 					success : function(result) {
-						console.log(result);
+
 						showUploadResult(result);
 						//$(".uploadDiv").html(cloneObj.html());
 					}
@@ -259,12 +253,12 @@
 			}
 
 			$(".uploadResult").on("click", "button",function(e) {
-				console.log("delete file");
+
 
 				var targetFile = $(this).data("file");
 				var type = $(this).data("type");
 				var targetLi = $(this).closest("li");
-				console.log(targetFile);
+		
 
 				$.ajax({
 					url : '/deleteFile',

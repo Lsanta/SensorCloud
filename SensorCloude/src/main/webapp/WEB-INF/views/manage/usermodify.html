@@ -9,13 +9,13 @@
 /*사용자 수정*/
 $(document).ready(function() {	
 	 var level = $("#level").text();
-	 console.log(level);
+	
 	 $("#selectBox").val(level);
 	 
 	var user_id = $(".zzz").text();
 	
 	   $.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr){
-		   console.log(arr);
+		   
 		   
 		   var str = "";
 			 

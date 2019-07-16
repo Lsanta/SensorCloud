@@ -280,5 +280,10 @@ order by reg_date desc
       order by x.reg_date desc
       ]]>
    </select>
+   
+   <delete id="mfiledelete">
+      DELETE FROM check_board_file WHERE board_no = #{board_no} and uuid = #{uuid}
+   </delete>
+   
    	
 </mapper>

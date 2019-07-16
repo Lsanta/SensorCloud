@@ -42,7 +42,7 @@
 			 	}
 			 
 			 	var check = $('.sensoradd').children().length;
-				console.log("check 의 수 " + check);
+				
 				
 				var totalInfo = new Object();
 				var jarray = new Array();
@@ -55,15 +55,10 @@
 					var dd = aa.find('input.up'+j).val(); //상한값
 					var ee = aa.find('input.down'+j).val(); //하한값
 					
-					console.log(cc);
-					console.log(dd);
-					console.log(ee);
 					
 					jobj[cc] = dd + "," + ee; 
 					jarray.push(jobj);			
 				}
-				console.log(jarray);
-				
 			 	
 			 	var newURL =  window.location.pathname;
 				var url = newURL.split('/');
@@ -74,7 +69,6 @@
 								site_id : url[3]
 							}
 				
-				console.log(query);
 				$.ajax({
 					  type : "POST",
 					  url : "/site/installsensoradd.do",

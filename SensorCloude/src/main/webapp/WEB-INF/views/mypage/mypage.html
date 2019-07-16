@@ -138,7 +138,7 @@
 			
 			
 			   $.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr){
-				   console.log(arr);
+				  
 				   
 				   var str = "";
 					 
@@ -146,7 +146,7 @@
 						//image type
 						if(attach.filetype){
 							var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
-							console.log(fileCallPath);
+							
 							str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";
 							str += "<img class='delete1' src='/display?fileName="+fileCallPath+"'>";
 							str += "</div>";
@@ -165,7 +165,7 @@
 				 
 			   $("#btnno").on("click",function(e){
 				    
-				    console.log("delete file");
+				    
 				      
 // 				    var targetFile = $(".delete1").data("file");
 				    
@@ -176,9 +176,7 @@
 				    var type = $(".delete").data("type");
 				    
 				    var targetLi = $(".delete").closest("ul");
-				    console.log(targetFile);
-				    console.log(type);
-				    console.log(targetLi);
+		
 				    
 				    $.ajax({
 				      url: '/deleteFilemypage',

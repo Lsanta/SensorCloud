@@ -1,10 +1,7 @@
 $(document).ready(function() {
 
 	$(document).on("click", "#checklist0 div.d-flex" , function(){
-	
-		console.log($(this));
 		var s = $(this).children().eq(0).attr("id");
-		console.log(s);
 		
 		window.location.href = "/adminCheckPage/checkboard/" + s ;
 	});
@@ -12,7 +9,6 @@ $(document).ready(function() {
 	$(document).on("click", "#checklist1 div.d-flex" , function(){
 
 		var s = $(this).children().eq(0).attr("id");
-		console.log(s);
 
 		//내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
 		window.location.href = "/adminCheckPage/checkboard/" + s ;
@@ -21,7 +17,6 @@ $(document).ready(function() {
 	$(document).on("click", "#checklist2 div.d-flex" , function(){
 
 		var s = $(this).children().eq(0).attr("id");
-		console.log(s);
 
 		//내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
 		window.location.href = "/adminCheckPage/checkboard/" + s ;
@@ -63,7 +58,6 @@ $(document).ready(function() {
 		$('.pagination-newer').click(function(){ //이전(<) 버튼 클릭 시 
 			
 			var clickPage = $(this).parent().attr("id");
-			console.log(clickPage);
 			if(clickPage == "openPage") {
 				if(1 > parseInt(url[2])-1 )
 					window.location.href = "/adminCheckPage/"+(parseInt(url[2]))+"/"+(parseInt(url[3]))+"/"+(parseInt(url[4]));
@@ -144,7 +138,7 @@ $(document).ready(function() {
 		
 		$('.pagination-newer').click(function(){
 			var clickPage = $(this).parent().attr("id");
-			console.log(clickPage);
+			
 			if(clickPage == "openPage") {
 				if(1 > parseInt(url[3])-1 )
 					window.location.href = "/checkboard/checkManagesearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+url[6]+"/"+url[7];
@@ -384,7 +378,7 @@ $(document).ready(function() {
 		$('.pagination-newer').click(function(){ //이전(<) 버튼 클릭 시 
 			
 			var clickPage = $(this).parent().attr("id");
-			console.log(clickPage);
+			
 			if(clickPage == "openPage") {
 				if(1 > parseInt(url[3])-1 )
 					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3]))+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+(parseInt(url[6])) + "/" + (parseInt(url[7])) + "/" + (parseInt(url[8])) +"/0";
@@ -412,7 +406,7 @@ $(document).ready(function() {
 //		});
 		$('.pagination-older').click(function(){ // 다음(>) 버튼 클릭 시 
 			var clickPage = $(this).parent().attr("id");
-			console.log(clickPage);
+			
 			if(clickPage == "openPage") {
 					window.location.href = "/checkboard/admindataSearch/"+(parseInt(url[3])+1)+"/"+(parseInt(url[4]))+"/"+(parseInt(url[5]))+"/"+(parseInt(url[6])) + "/" +(parseInt(url[7])) + "/" + (parseInt(url[8])) +"/0";
 			} else if(clickPage == "fixedPage") { 

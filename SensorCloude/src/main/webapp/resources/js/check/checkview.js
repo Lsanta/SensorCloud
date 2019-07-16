@@ -2,16 +2,11 @@ $(document).ready(function(){
 
 	 var writer_id = $("#writerid").text();//글쓴이		
 	 var site_id = $("#site_id").text();
-	 console.log(writer_id);
 	
 	 var board_no = $("#board_no").text();
-	 
-	 console.log(board_no);
 	 ///board_status : checkstatus,
 	 
 	 var user_id =  $("#id").text(); //세션아이디
-	 console.log(user_id);
-	 
 	 
 	//현재 접속한 아이디와 점검이력 글쓴이의 아이디와 같지 않을시 수정버튼 hide
 	 if(writer_id == user_id || user_id == "admin"){

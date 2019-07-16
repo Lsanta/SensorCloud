@@ -27,48 +27,43 @@ public class CheckboardServiceImplement implements CheckboardService {
 
 	@Setter(onMethod_ = @Autowired)
 	private BoardAttachMapper attachMapper;
-	
+
 	@Transactional
 	@Override
 	public void register(CheckBoardVO board) {
 
 		mapper.insertSelectKey(board);
-		
-		System.out.println("VO값"+board);
-		
+
 		if (board.getAttachList() == null || board.getAttachList().size() <= 0) {
 			return;
 		}
-		
+
 		board.getAttachList().forEach(attach -> {
 
 			attach.setBoard_no(board.getBoard_no());
 			attachMapper.insert(attach);
 		});
 	}
-	
+
 	@Transactional
 	@Override
 	public void fileupdate(CheckBoardVO vo) {
-		
+
 		filedelete(vo.getBoard_no());
-		
-		System.out.println(vo.getBoard_no());
-		
+
 		if (vo.getAttachList() == null || vo.getAttachList().size() <= 0) {
-	         return;
-	      }
+			return;
+		}
 
-	      vo.getAttachList().forEach(attach -> {
+		vo.getAttachList().forEach(attach -> {
 
-	         attach.setBoard_no(vo.getBoard_no());
-	         attachMapper.insert(attach);
-	      });
+			attach.setBoard_no(vo.getBoard_no());
+			attachMapper.insert(attach);
+		});
 	}
-	
-	
+
 	@Override
-	public ArrayList<CheckBoardVO> getList(Paging p){
+	public ArrayList<CheckBoardVO> getList(Paging p) {
 		return mapper.getList(p);
 	}
 
@@ -77,25 +72,24 @@ public class CheckboardServiceImplement implements CheckboardService {
 		// TODO Auto-generated method stub
 		return mapper.viewgetList(board_no);
 	}
-	
+
 	@Override
 	public int getPageNum() {
 		// TODO Auto-generated method stub
 		return mapper.getPageNum();
 	}
-	
+
 	@Override
-	public ArrayList<CheckBoardVO> mainList(){
+	public ArrayList<CheckBoardVO> mainList() {
 		return mapper.mainList();
 	}
-	
+
 	@Override
 	public int insertcheckboard(CheckBoardVO checkboard) {
 		// TODO Auto-generated method stub
-		System.out.println(checkboard);
+
 		return mapper.insertcheckboard(checkboard);
 	}
-
 
 	@Override
 	public int checkauthority(String user_id) {
@@ -103,29 +97,28 @@ public class CheckboardServiceImplement implements CheckboardService {
 		return mapper.checkauthority(user_id);
 	}
 
-
 	@Override
 	public int filedelete(int board_no) {
 		// 첨부파일 삭제
 		return mapper.filedelete(board_no);
 	}
 
-
 	@Override
 	public int checkboardDelete(int board_no) {
 		// 게시글 삭제
 		return mapper.checkboardDelete(board_no);
 	}
-	
+
 	@Override
 	public List<CheckBoardFileVO> getAttachList(int board_no) {
 		// 첨부파일 반환
 		return attachMapper.findByBno(board_no);
 	}
+
 	@Override
 	public List<CheckBoardFileVO> getAttachListmain(int board_no) {
 		// 중복된 board_no 제거후 첨부파일 반환
-		System.out.println("맵퍼" + board_no);
+
 		return attachMapper.findByBnomain(board_no);
 	}
 
@@ -141,13 +134,11 @@ public class CheckboardServiceImplement implements CheckboardService {
 		return mapper.checkSearch(s);
 	}
 
-
 	@Override
 	public ArrayList<CheckBoardVO> getSearchResult(Map<Object, Object> parm) {
 		// 검색2
 		return mapper.getSearchResult(parm);
 	}
-
 
 	@Override
 	public int updateCheck(CheckBoardVO vo) {
@@ -157,38 +148,38 @@ public class CheckboardServiceImplement implements CheckboardService {
 
 	@Override
 	public int updateCheckBoard(CheckBoardVO vo) {
-		//점검이력  게시글 수정
+		// 점검이력 게시글 수정
 		return mapper.updateCheckBoard(vo);
 	}
 
 	@Override
 	public ArrayList<CheckBoardVO> dateChange(int data) {
-		// 최근 ?개월 
+		// 최근 ?개월
 		return mapper.dateChange(data);
 	}
 
 	@Override
 	public ArrayList<CheckBoardVO> getTermList(Map<Object, Object> parm) {
-		//기간 검색 + 페이징
+		// 기간 검색 + 페이징
 		return mapper.getTermList(parm);
 	}
 
 	@Override
-	   public ArrayList<CheckBoardVO> apprepairList(String site_id){
-	      return mapper.apprepairList(site_id);
+	public ArrayList<CheckBoardVO> apprepairList(String site_id) {
+		return mapper.apprepairList(site_id);
 	}
 
 	@Override
 	public void mfileinsert(CheckBoardFileVO checkboardfilevo) {
 		// TODO Auto-generated method stub
-	  attachMapper.mfileinsert(checkboardfilevo);
+		attachMapper.mfileinsert(checkboardfilevo);
 	}
-	
+
 	@Override
 	public List<CheckBoardFileVO> mgetAttachList(int board_no) {
-	      // TODO Auto-generated method stub
-	      return attachMapper.findByBno(board_no);
-	 }
+		// TODO Auto-generated method stub
+		return attachMapper.findByBno(board_no);
+	}
 
 	@Override
 	public ArrayList<CheckBoardVO> getOpenList(Paging page) {
@@ -217,33 +208,45 @@ public class CheckboardServiceImplement implements CheckboardService {
 	@Override
 	public ArrayList<CheckBoardVO> getAdminTermList(Map<Object, Object> parm) {
 		// 점검이력 관리에서의 기간 검색 + 페이징
-		System.out.println("parm" + parm);
+
 		return mapper.getAdminTermList(parm);
 	}
 
 	@Override
 	public int checkManagePageNum(int status) {
-		//점검이력 관리 에서 총 점검이력 개수 받기
+		// 점검이력 관리 에서 총 점검이력 개수 받기
 		return mapper.checkManagePageNum(status);
 	}
-	
+
 	@Override
 	public ArrayList<CheckBoardVO> getStatusList(Paging page) {
-		//상태에 따른 점검이력 리스트 
+		// 상태에 따른 점검이력 리스트
 		return mapper.getStatusList(page);
 	}
 
 	@Override
 	public ArrayList<CheckBoardVO> checkManageSearch(Map<String, Object> data) {
-		//점검이력 관리에서의 검색
-		System.out.println("검색 데이터" + data);
+		// 점검이력 관리에서의 검색
+
 		return mapper.checkManageSearch(data);
 	}
 
 	@Override
 	public ArrayList<CheckBoardVO> getcheckManageSearch(Map<Object, Object> parm) {
-		//점검이력 관리에서의 검색2
+		// 점검이력 관리에서의 검색2
 		return mapper.getcheckManageSearch(parm);
 	}
 
+	@Override
+	public int mfiledelete(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.mfiledelete(map);
+	}
+
+	@Override
+	public List<String> findFilename(int board_no) {
+
+		return attachMapper.findFilenameByBno(board_no);
+
+	}
 }

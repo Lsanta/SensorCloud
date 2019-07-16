@@ -37,10 +37,8 @@ private UsermanageService usermanageservice;
 	@RequestMapping(value = "usermodify" + "/{id}", method = RequestMethod.GET)
 	public String address(@PathVariable String id, Model model) throws IOException {
 
-		System.out.println("넘겨오는 아이디 " + id);
-			
 		model.addAttribute("userInfo",usermanageservice.getInfo(id));
-		System.out.println(usermanageservice.getInfo(id));
+	
 		return "manage/usermodify";
 	}
 	
@@ -94,21 +92,13 @@ private UsermanageService usermanageservice;
 		  s.setKeyword(keyword);
 		  s.setSearchType(searchType);
 		  
-		  System.out.println(page); //현재 페이지 번호
-		  System.out.println(searchType); //검색 옵션
-		  System.out.println(keyword); //검색 키워드
-		  
 		  searchArr = usermanageservice.manageSearch(s);
-		  
-		  System.out.println("사용자 관리 검색 :" + searchArr);
 		  
 		  int pageNum = 0;
 		  int mapNum=0;
 		  int sendPageNum=0;
 		  int realNum = page;
 		  p.setTotalNum(searchArr.size());
-		  
-		  System.out.println("사용자 관리 전체숫자" +p.getTotalNum());
 		  
 		  if(p.getTotalNum() <= p.getOnePageBoard() ) {
 				pageNum = 1;
@@ -148,11 +138,9 @@ private UsermanageService usermanageservice;
 		  model.addAttribute("depth1","사용자관리");
 		  model.addAttribute("pageNum",map.get(sendPageNum));
 		  model.addAttribute("manage",usermanageservice.getSearchResult(parm));
-		  System.out.println("사용자 관리검색 결과 :" + usermanageservice.getSearchResult(parm));
 		  
 		  if(realNum > pageNum) {
-				System.out.println("pageNum : " + pageNum);
-				System.out.println("keyword : " + keyword);
+
 				try {
 					keyword = URLEncoder.encode(keyword, "UTF-8");
 				} catch (UnsupportedEncodingException e) {

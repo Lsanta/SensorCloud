@@ -275,15 +275,12 @@ $(document).ready(function(){
 	$('.my_sensor').on("change", function(){
 		
 		var divId = $(this).parent().attr("id"); //선택한 selece 박스 위에 div id 값
-		var lastChar = divId.substr(divId.length - 1)
-		console.log("lastChar" + lastChar); // count로 넣을 div id 마지막에 있는 숫자
+		var lastChar = divId.substr(divId.length - 1) // count로 넣을 div id 마지막에 있는 숫자
 		
 		count = lastChar;
-		console.log("count" + count);
 		
 		var aa = $(this);
 		var input_size = aa.val();
-		console.log("input_size" + input_size);
 		
 		var asdf = $('#addSensor' + count).children().siblings();
 		asdf.not('select').remove();
@@ -316,7 +313,7 @@ $(document).ready(function(){
 	$("#plus").click(function(){
 	
 		var check = $('.sensor_box').children().length;
-		console.log("check 의 수 " + check);
+
 		
 		var totalInfo = new Object();    
 		for(var i=0; i < check; i++){
@@ -334,10 +331,7 @@ $(document).ready(function(){
 				var cc = aa.find('input.vert'+j).val(); //tilt 같은 이름
 				var dd = aa.find('input.up'+j).val(); //상한값
 				var ee = aa.find('input.down'+j).val(); //하한값
-				
-				console.log(cc);
-				console.log(dd);
-				console.log(ee);
+	
 				
 				jobj[cc] = dd + "," + ee; 
 				jarray.push(jobj);
@@ -346,9 +340,6 @@ $(document).ready(function(){
 			totalInfo[bbSplit[0]]= jarray ;
 // 			console.log(aa.find('input').eq(0).val());
 
-			console.log("이값은 전체 sensor의 추가 갯수입니다 " +check);
-			console.log("이값은 안의 input값 갯수입니다 : " +aa.find('input').length);
-		
 			
 		}
 		
@@ -392,9 +383,9 @@ $(document).ready(function(){
 	            return false;
 	        }
 	
-		console.log(totalInfo);
+
         var stringJson = JSON.stringify(totalInfo);
-	    console.log(stringJson);
+
 	
 	 	
 		var query = { 
@@ -417,7 +408,7 @@ $(document).ready(function(){
 		
 		
 		
-		console.log(query);
+
 		
 		 $.ajax({
 			  type : "POST",

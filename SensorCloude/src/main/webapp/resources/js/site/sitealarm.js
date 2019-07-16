@@ -135,7 +135,6 @@ $(document).ready(function(){
 				send : array
 			}
 		
-		console.log(query);
 		
 		var data = JSON.stringify(query);
 		
