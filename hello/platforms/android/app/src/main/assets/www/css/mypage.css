@@ -248,3 +248,10 @@ table td {
 .bt {
   background:white;
 }
+
+#confirm-modify {
+  color: white!important;
+  border: none;
+  background: #156AAB;
+  font-size:large;
+}

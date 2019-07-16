@@ -58,15 +58,15 @@ function WindowReset( win /* Window Object */ ){ // 새창의 크기와 위치 �
 		});
 		
 		var user_id = $(".zzz").text();
-		console.log(user_id);
+		
 		$.getJSON("/mypage/getAttachListmypage",{user_id : user_id},function(arr) {				
-			console.log(arr);
+			
 			var str = "";
 		
 			$(arr).each(function(i, attach) {
 				//image type
 				if (attach.filetype) {
-					console.log("1");
+					
 					var fileCallPath = encodeURIComponent(attach.file_path+ "/s_"+ attach.uuid+ "_"+ attach.file_name);
 			
 					str += "<li class='delete' data-path='"+attach.file_path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.filetype+"' ><div>";

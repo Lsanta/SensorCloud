@@ -86,11 +86,7 @@ public class TimelineController {
 	public String timelinedelete(TimelineVO vo) {
 		String timeline_n = vo.getTimeline_n();
 
-		System.out.println(timeline_n);
-
 		int a = timelineservice.timelinedelete(timeline_n);
-
-		System.out.println(a);
 
 		if (a != 0) {
 
@@ -107,7 +103,6 @@ public class TimelineController {
 	public String timelinemodify(TimelineVO vo, HttpSession session, String timeline_n) {
 
 		int a = timelineservice.timelinemodify(vo);
-		System.out.println(a);
 
 		if (a > 0) {
 			return "success";

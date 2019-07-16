@@ -39,7 +39,7 @@
 			<button type="button" class="ijn" id="ijn">인증번호 전송</button>
 			</div>
 			
-			<input type="password" class="end" placeholder="인증번호">
+			<input type="text" class="end" placeholder="인증번호">
 
 			<button type="button" id="checkAuth" class="ijn">인증번호 확인</button>
 			<div cl	ass="errorstr" id="authstr"></div>
@@ -63,7 +63,7 @@
 				dataType : 'JSON',
 				success : function(data){
 					console.log(data);
-					str += " 사업자번호 <select name='company_num' required id='companynum' style='margin-top:20px; width:267px; margin-bottom:20px; height:40px;'>";
+					str += " 사업자번호 <select name='company_num' required id='companynum' style='margin-top:20px; width:267px; margin-bottom:20px; height:40px; background:white;'>";
 					$.each(data,function(i,s){
 						str += "<option value="+ data[i].company_num + ">"
 						str += data[i].name + "[" + data[i].reg_number + "]"

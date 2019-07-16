@@ -64,7 +64,6 @@ public class CheckboardCotroller {
       model.addAttribute("depth0","메인화면");
 	  model.addAttribute("depth1","점검이력");
 	  
-      System.out.println("글쓰기누름");
       model.addAttribute("checksitelist", siteservice.getchecksite());
       return "check/checkadd";
    }
@@ -74,12 +73,11 @@ public class CheckboardCotroller {
 
       String id = (String) session.getAttribute("id");
       vo.setUser_id(id);
-      System.out.println("------------------------");
-      System.out.println("checkboard:" + vo);
+     
       if (vo.getAttachList() != null) {
          vo.getAttachList().forEach(attach -> System.out.println(attach));
       }
-      System.out.println("-----------------------------");
+      
 
       Checkboardservice.register(vo);
 
@@ -91,8 +89,6 @@ public class CheckboardCotroller {
    // 점검이력 content보기
    @RequestMapping(value = "{board_no}", method = RequestMethod.GET)
    public String checkin(Locale locale, @PathVariable String board_no, Model model, HttpSession session ,HttpServletResponse response) throws IOException {
-      
-      System.out.println("보드넘버=" + board_no);
       
       int mlevel = (int) session.getAttribute("mlevel");
 
@@ -110,14 +106,10 @@ public class CheckboardCotroller {
       // 수정클릭시 권한체크 위해 id에 해당하는 m_level을 넘긴다.
       String user_id = (String) session.getAttribute("id");
       model.addAttribute("checkauthority", Checkboardservice.checkauthority(user_id));
-      System.out.println(Checkboardservice.checkauthority(user_id));
 
       model.addAttribute("cklist", Checkboardservice.viewgetList(board_no));
-      System.out.println(Checkboardservice.viewgetList(board_no));
       model.addAttribute("siteid", Checkboardservice.getsiteid(board_no));
       model.addAttribute("board_no", board_no);
-
-      System.out.println("사이트아이디=" + Checkboardservice.getsiteid(board_no));
       
       model.addAttribute("depth0","메인화면");
 	  model.addAttribute("depth1","점검이력");
@@ -160,24 +152,21 @@ public class CheckboardCotroller {
 	  model.addAttribute("depth1","현장관리");
 	  model.addAttribute("depth2", site_name);
 	  model.addAttribute("depth3", "수리내역");
-      // 파일 정보
-      System.out.println("modlist" + cvo);
+      
       return "check/checkaddInSite";
    }
 
    @GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    @ResponseBody
    public ResponseEntity<List<CheckBoardFileVO>> getAttachList(int board_no) {
-      System.out.println("getAttachList" + board_no);
-
+	   
       return new ResponseEntity<>(Checkboardservice.getAttachList(board_no), HttpStatus.OK);
    }
 
    @GetMapping(value = "/getAttachListmain", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
    @ResponseBody
    public ResponseEntity<List<CheckBoardFileVO>> getAttachListmain(int board_no) {
-      System.out.println("getAttachList" + board_no);
-
+  
       return new ResponseEntity<>(Checkboardservice.getAttachListmain(board_no), HttpStatus.OK);
    }
 
@@ -198,14 +187,13 @@ public class CheckboardCotroller {
          
       }
       
-      System.out.println(board_no);
       // board_no를 통해 점검이력 내용 가져오기
       model.addAttribute("modlist", Checkboardservice.viewgetList(board_no));
 
       // ID를 통해 권한레벨 가져오기
       String user_id = (String) session.getAttribute("id");
       model.addAttribute("auth", Checkboardservice.checkauthority(user_id));
-      System.out.println(Checkboardservice.viewgetList(board_no));
+ 
       // 사이트 이름,점검이력 제목,점검이력내용 정보 가져오기
       model.addAttribute("checksitelist", siteservice.getchecksite());
 
@@ -230,9 +218,7 @@ public class CheckboardCotroller {
       // board_no를 통해 게시글 삭제
       int delN2 = Checkboardservice.checkboardDelete(board_no);
       deleteFiles(attachList);
-
-      System.out.println("삭제 완료 수리내역화면으로");
-
+      
       return "redirect: /site/" + site_id + "/siterepair/1";
    }
 
@@ -250,9 +236,7 @@ public class CheckboardCotroller {
       int delN2 = Checkboardservice.checkboardDelete(board_no);
 
       deleteFiles(attachList);
-
-      System.out.println("삭제 완료 점검이력화면으로");
-
+      
       return "redirect: /check/1";
    }
 
@@ -288,8 +272,6 @@ public class CheckboardCotroller {
       int delN2 = Checkboardservice.checkboardDelete(board_no);
 
       deleteFiles(attachList);
-
-      System.out.println("삭제 완료 마이페이지점검이력화면으로");
 
       return "redirect: /mypage/1";
    }
@@ -352,12 +334,9 @@ public class CheckboardCotroller {
       String id = (String) session.getAttribute("id");
       vo.setUser_id(id);
 
-      System.out.println("------------------------");
-      System.out.println("checkboard:" + vo);
       if (vo.getAttachList() != null) {
-         vo.getAttachList().forEach(attach -> System.out.println(attach));
+//         vo.getAttachList().forEach(attach -> System.out.println(attach));
       }
-      System.out.println("-----------------------------");
 
       Checkboardservice.register(vo);
 
@@ -379,12 +358,10 @@ public class CheckboardCotroller {
 
       int i = Checkboardservice.updateCheck(vo);
 
-      System.out.println("결과 : " + i);
       if (i == 1) {
          Checkboardservice.fileupdate(vo);
       }
 
-      System.out.println("수정 성공 수리내역으로");
       return "redirect: /site/" + site_id + "/siterepair/1";
    }
 
@@ -398,16 +375,12 @@ public class CheckboardCotroller {
       // vo안에 있는 site_id 로 site_name 가져오기
       vo.setSite_name(siteservice.getSiteName(vo.getSite_id()));
 
-      System.out.println("수정할 때 vo : " + vo);
-
       int i = Checkboardservice.updateCheckBoard(vo);
 
-      System.out.println("결과 : " + i);
       if (i == 1) {
          Checkboardservice.fileupdate(vo);
       }
 
-      System.out.println("수정 성공 점검이력으로");
       return "redirect: /check/1";
    }
 
@@ -426,22 +399,13 @@ public class CheckboardCotroller {
       s.setPage(page);
       s.setKeyword(keyword);
       s.setSearchType(searchType);
-
-      System.out.println(page); // 현재 페이지 번호
-      System.out.println(searchType); // 검색 옵션
-      System.out.println(keyword); // 검색 키워드
-
       searchArr = Checkboardservice.checkSearch(s);
-
-      System.out.println("체크 검색 :" + searchArr);
 
       int pageNum = 0;
       int mapNum=0;
       int sendPageNum=0;
       int realNum = page;
       p.setTotalNum(searchArr.size());
-
-      System.out.println("체크 전체숫자" + p.getTotalNum());
 
       if (p.getTotalNum() <= p.getOnePageBoard()) {
          pageNum = 1;
@@ -484,11 +448,8 @@ public class CheckboardCotroller {
       model.addAttribute("lastNum", pageNum);
       model.addAttribute("pageNum", map.get(sendPageNum));
       model.addAttribute("check", Checkboardservice.getSearchResult(parm));
-      System.out.println("체크 검색 결과 :" + Checkboardservice.getSearchResult(parm));
       
       if(realNum > pageNum) {
-         System.out.println("pageNum : " + pageNum);
-         System.out.println("keyword : " + keyword);
          try {
             keyword = URLEncoder.encode(keyword, "UTF-8");
          } catch (UnsupportedEncodingException e) {
@@ -511,7 +472,6 @@ public class CheckboardCotroller {
       Map<Integer, ArrayList<Integer>> map = new HashMap<Integer,ArrayList<Integer>>();
       
       if (data != 0) {
-         System.out.println("데이터가 0이아님");
          term = Checkboardservice.dateChange(data);
 
          int pageNum = 0;
@@ -564,11 +524,8 @@ public class CheckboardCotroller {
          model.addAttribute("lastNum", pageNum);
          model.addAttribute("pageNum", map.get(sendPageNum)); //arr
          model.addAttribute("checkboardlist", Checkboardservice.getTermList(parm));
-
-         System.out.println("검색완료 점검이력으로");
          
          if (realNum > pageNum) {
-            System.out.println("pageNum : " + pageNum);
             return "redirect:/checkboard/dataSearch/" + pageNum  + "/" + data;
          }   
          
@@ -592,22 +549,19 @@ public class CheckboardCotroller {
     		  for(int i=0; i < 3 ; i++) {
                   if( i == 0) {
                      result = cm.dataSearch(Checkboardservice, model, num0, data0, i);
-                     if(result == "false") {
-                    	System.out.println("여기는 오픈");
+                     if(result == "false") {    
                         int number =num0-1;
                         return "redirect:/checkboard/admindataSearch/" + number + "/" + num1 + "/" + num2 +"/"+ data0 +"/"+ data1 +"/"+ data2 + "/0";
                      }
                   } else if ( i == 1) {
                      result = cm.dataSearch(Checkboardservice, model, num1, data1, i);
                      if(result == "false") {
-                    	 System.out.println("여기는 수정");
                         int number = num1-1;
                         return "redirect:/checkboard/admindataSearch/" + num0 + "/" + number+ "/" + num2 +"/"+ data0 +"/"+ data1 +"/"+ data2 + "/0";
                      }
                   } else if ( i == 2 ) {
                      result = cm.dataSearch(Checkboardservice, model, num2, data2, i);
                      if(result == "false") {
-                    	System.out.println("여기는 종료");
                         int number = num2-1;
                         return "redirect:/checkboard/admindataSearch/" + num0 + "/" + num1 + "/" + number +"/"+ data0 +"/"+ data1 +"/"+ data2 + "/0";
                      }

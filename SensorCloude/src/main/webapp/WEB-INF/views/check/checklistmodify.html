@@ -170,17 +170,12 @@ $(document).ready(function(){
 	     
 	     e.preventDefault();
 	     
-	     console.log("submit clicked");
 	     
 	     var str = "";
 	     
 	     $(".uploadResult ul li").each(function(i, obj){
 	       
 	       var jobj = $(obj);
-	       
-	       console.dir(jobj);
-	       console.log("-------------------------");
-	       console.log(jobj.data("filename"));
 	       
 	       
 	       str += "<input type='hidden' name='attachList["+i+"].file_name' value='"+jobj.data("filename")+"'>";
@@ -234,8 +229,6 @@ $(document).ready(function(){
 		var inputFile = $("input[name='uploadFile']");
 		var files = inputFile[0].files;
 		
-		console.log(files);
-		
 		for(var i =0; i<files.length; i++){
 			if(!checkExtension(files[i].name,files[i].size) ){
 				return false;
@@ -252,7 +245,7 @@ $(document).ready(function(){
 			type: "POST",
 			dataType:"json",
 			success: function(result){
-				console.log(result);
+
 				showUploadResult(result);
 				//$(".uploadDiv").html(cloneObj.html());
 			}
@@ -333,7 +326,7 @@ $(document).ready(function(){
 			
 			var board_no = parseInt(url[3]);
 			   $.getJSON("/checkboard/getAttachList",{board_no : board_no},function(arr){
-				   console.log(arr);
+				
 				   
 				   var str = "";
 					 
@@ -369,7 +362,7 @@ $(document).ready(function(){
 		 
 		 $(".uploadResult").on("click", "button", function(e){
 			    
-			    console.log("delete file");
+			  
 			      
 			    if(confirm("이 파일을 삭제 하시겠습니까?")){
 			    	var targetLi = $(this).closest("li");

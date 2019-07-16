@@ -5,7 +5,10 @@
   src: url('/font/a신그래픽L.TTF');
 }
 
-html, body{font-family: 'a신그래픽L';}
+html, body,label,p,select,button,input{
+  font-family: 'a신그래픽L';
+
+}
 
 body {
   background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed; 
@@ -34,7 +37,7 @@ b{
 
 #ijn {
   background: #4d90fe;
-  width: 80px;
+  width: 70px;
   color: white;
   border: #4F86C6;
   border-radius: 0.2em;
@@ -92,7 +95,7 @@ b{
 }
 
 #phone{
-  width : 170px;
+  width : 180px;
   /* margin-left : 5px; */
   display : block;
   float: left;

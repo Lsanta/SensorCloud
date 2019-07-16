@@ -56,26 +56,23 @@ $("#sn").html(str);
         async:false,
         contentType : "application/json; charset=UTF-8",
         success : function(result){
-           
-          
+
            if(result.name == ''){
                     var str12="";
                     str12 +='<p>'+ '데이터없음' + '</p>';
                     $("#chartdiv").html(str12);
            }else{
-                //////////////////////////////////////////////////////////////////////////////////
-				/* 									그래프 그리기 시작									*/
-				// Themes begin
-				
+                //AmCharts.baseHref = true;
+                
 				//////////////////////////////////////////////////////////////////////////////////
 				/* 									그래프 그리기 시작									*/
 				// Themes begin
 				am4core.useTheme(am4themes_animated);
 				// Themes end
 				
-				// Create chart
-				var chart = am4core.create("chartdiv", am4charts.XYChart);
-					
+                // Create chart
+				var chart = am4core.create("chartdiv", am4charts.XYChart);				
+               
 				var data = [];
 				var color = ["#890E0E","#850C8E","#26BC9E","#ACFA58","#58FAD0","#81BEF7","#5858FA","#FA58F4","#2E2E2E"];
 				var colorNum = 0;
@@ -84,7 +81,6 @@ $("#sn").html(str);
 					price[i] = 0;
 				} */
 				var quantity = 1000; //정밀도??
-				
 				///////////////////////////////////////////////////////////////
 				/*					데이터 불러올곳(db값 넣을곳)						*/
 				
@@ -99,20 +95,30 @@ $("#sn").html(str);
 					
 				}
 				
+				
 					//////////////////////////////////////////////////////////////
-					
+		
 					chart.data = data; // 값들을 차트에 그리기 위해 data 배열에 json으로 넣는 부분
 					
+					 chart.dateFormatter.inputDateFormat = "yyyy-MM-dd HH:mm:ss";
+
 					///////////////////////////////////////////////////////////////
 					/*					           축 관련 설정들 	 						*/
 					var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-					dateAxis.renderer.grid.template.location = 100;  //x축 간격? 줄 생기는 밀집도 같은거
-					dateAxis.renderer.labels.template.fill = am4core.color("#000000");  //x축 글씨 색깔
+					//dateAxis.renderer.grid.template.location = 100;  //x축 간격? 줄 생기는 밀집도 같은거
+					
+
+							
+					dateAxis.dateFormats.setKey("day", "MMM-dd");
+					dateAxis.tooltipDateFormat = "yyyy MMMM dd hh:mm a";
+
+					//dateAxis.periodChangeDateFormats.setKey("second", "mm-dd mm:ss"); 
+					//dateAxis.renderer.labels.template.fill = am4core.color("#000000");  //x축 글씨 색깔
 		
 					var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 					valueAxis.tooltip.disabled = true;
 					valueAxis.renderer.labels.template.fill = am4core.color("#000000");  //y축 글씩 색깔
-					valueAxis.renderer.minWidth = 40; // 표 크기같은데 숫자 키우면 표 작아짐
+                    valueAxis.renderer.minWidth = 30; // 표 크기같은데 숫자 키우면 표 작아짐
 			
 					/////////////////////////////////////////////////////////////
 					
@@ -125,7 +131,7 @@ $("#sn").html(str);
 						series.dataFields.dateX = result.name[i].sensor_name;	//data배열안에 json 검색하는거인듯
 						series.dataFields.valueY = result.name[i].sensor_name+"_data"; 
 						series.name = result.name[i].sensor_name;	//센서 타입 그 각도기 이런거 적히는 곳
-						series.tooltipText = result.name[i].sensor_name+" : {valueY.value}";	//뭔지 잘모르겠음
+                        series.tooltipText = result.name[i].sensor_name+" : {valueY.value}";	//뭔지 잘모르겠음
 						//series.fill = am4core.color("#FF0000");
 						if(colorNum > color.length){
 							colorNum = 0;
@@ -133,18 +139,15 @@ $("#sn").html(str);
 						series.stroke = am4core.color(color[colorNum]);
 						series.strokeWidth = 1.3;
 				
-						
+		
 						
 						colorNum++;
 	 				}
-				
-				
-				
+					
 				chart.cursor = new am4charts.XYCursor(); //마우스 올렸을때 데이터 나오게 하는 함수
 				chart.legend = new am4charts.Legend();	//그래프 바로밑에 그래프 각각 나오게 해주고 누를때 이벤트 발생
-	
-	
-           }
+				
+			}
 
 
                
@@ -295,10 +298,11 @@ $.ajax({
 
         //내가클릭한 테이블의 행을 판별해야하기위해  board_no 정보를 넘긴다 
        
-        window.location.href="checkview.html?board_no="+boardno;
-        
+        window.location.href="checkview.html?board_no="+boardno+"?site_id="+site_id;
+      
 
       });
+
 
 
 function getData(sa){
@@ -311,6 +315,7 @@ function getData(sa){
             
             var resultmap = response.v2, // 검색 결과의 컨테이너
                 items = resultmap.addresses; // 검색 결과의 배열
+
                 x = eval(items[0].x);
                 y = eval(items[0].y);
                 var point = new naver.maps.Point(x,y);     

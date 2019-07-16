@@ -41,10 +41,7 @@ public class SMSController {
 	@RequestMapping(value = "/alarmadd.do" ,method = RequestMethod.POST)
 	@ResponseBody
 	public String alarmadd(AlarmVO vo, @RequestBody Map<String,Object> map, HttpSession session) {
-		System.out.println("문자전송 컨트롤러");
-		
-		System.out.println(map);
-		
+
 		String alarm_content = (String) map.get("alarm_content");
 		String site_id = (String) map.get("site_id");
 				
@@ -55,8 +52,7 @@ public class SMSController {
 		vo.setSend_user(user);
 		
 		JSONArray jarr = new JSONArray();
-		
-		System.out.println(vo);
+
 //		System.out.println(map.get("send"));
 				
 		JSONArray name = JSONArray.fromObject(map);
@@ -68,14 +64,11 @@ public class SMSController {
 		 net.sf.json.JSONObject jobj2 = jarr.getJSONObject(0);
 			 
 		 ArrayList<String> list = new ArrayList<String>();
-		 System.out.println(jarr.size());
 		 
 		 for(int i=0; i < jobj2.size(); i++) {
 			 list.add(jobj2.getString(""+i));
 		 }	
-		 
-		 System.out.println(list);
-		 
+		 		 
 		 int a = siteservice.insertAlarm(vo);
 
 		 String phoneNumber = "";
@@ -85,8 +78,6 @@ public class SMSController {
 				 phoneNumber += ",";
 		 }
 		 
-		 System.out.println(phoneNumber);
-		 System.out.println(vo.getAlarm_content().length());
 		
 		if (a == 0) {
 			return "false";
@@ -124,12 +115,7 @@ public class SMSController {
 	}
 	
 	public String sms(String tel, String con) {
-		
-		System.out.println("문자 메소드 ");
-		
-		System.out.println(tel);
-		System.out.println(con);
-		
+				
 		String api_key = "NCSUHVPGXGVJOVA2";
 	    String api_secret = "FCIGN0PTFU97R3KHOOD7HR6WUDRF6PPU";
 	    Message coolsms = new Message(api_key, api_secret);
@@ -154,12 +140,7 @@ public class SMSController {
 	}
 	
 	public String authSms(MemberVO vo) {
-		
-		System.out.println("문자 인증 메소드 ");
-		
-		System.out.println(vo.getPhone());
-		System.out.println(vo.getUser_id());
-		
+				
 		String api_key = "NCSUHVPGXGVJOVA2";
 	    String api_secret = "FCIGN0PTFU97R3KHOOD7HR6WUDRF6PPU";
 	    Message coolsms = new Message(api_key, api_secret);
@@ -167,7 +148,6 @@ public class SMSController {
 	    AuthNumber ge = new AuthNumber();
 	    ge.setCertNumLength(6);
 	    String key = ge.excuteGenerate();
-	    System.out.println(key);
 	    
 	    // 4 params(to, from, type, text) are mandatory. must be filled
 	    HashMap<String, String> params = new HashMap<String, String>();

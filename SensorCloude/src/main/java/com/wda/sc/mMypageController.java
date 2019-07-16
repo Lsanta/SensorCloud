@@ -49,8 +49,7 @@ public class mMypageController {
 	@RequestMapping(value ="/mypagemain", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	   public JSONObject mainlist(@RequestBody String idt,Locale locale, Model model, Criteria criteria) {
-			System.out.println("확인");
-			System.out.println(idt);
+		
 			String[] array = idt.split("&");
 			String[] page2 = array[0].split("=");
 			String[] id2 = array[1].split("=");
@@ -81,16 +80,12 @@ public class mMypageController {
 	 		parm.put("user_id", id);
 	 		
 	 		ArrayList<CheckBoardVO> result = mypageservice.myList(parm);
-	 		System.out.println(result);
-	 		System.out.println(result.size());
 
 	         Map<String, Object> map = new HashMap<String, Object>();
 	         map.put("mpcheckList", result);
 	         map.put("criteria", criteria);
 	         JSONObject json = JSONObject.fromObject(map);
-	         
-	         System.out.println(json);
-	         
+
 	         return json;
 	
 	   }
@@ -100,7 +95,6 @@ public class mMypageController {
 	@RequestMapping(value = "/mypageconfirmpasswd.do", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public String ConfirmPasswd(@RequestBody String id1, String password1) {
-		System.out.println("ID"+id1);
 		
 		String[] array = id1.split("&");
 		String[] idt = array[0].split("=");
@@ -108,14 +102,10 @@ public class mMypageController {
 
 		String user_id = idt[1];
 		String password = passwordt[1];
-		
-		System.out.println(user_id);
-		System.out.println(password);
-		
+
 		ArrayList<MemberVO> arr = new ArrayList<MemberVO>();
 		arr = mypageservice.confirmpasswd(user_id);
 
-		System.out.println(arr);
 		if (arr.size() != 0) {
 			if (arr.get(0).getPassword().equals(password)) {
 				return "success";
@@ -129,22 +119,16 @@ public class mMypageController {
 	@RequestMapping(value = "/usermodify", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public JSONObject modifymyinfo(@RequestBody String id1, Locale locale, Model model) {
-		  System.out.println("내정보");
-		  System.out.println(id1);
-		  
 		  String[] array = id1.split("&");
 		  String[] idt = array[0].split("=");
 		  
 		  String id = idt[1];
-		  
-		  System.out.println(id);
-		  
+
 		  ArrayList<MemberVO> result = mypageservice.getInfo(id);
-		  System.out.println(result);
+
 	      JSONObject json = new JSONObject();
 	      json.put("a",result);
-		
-	      System.out.println(json);
+	
 		
 		return json;
 	}
@@ -154,7 +138,6 @@ public class mMypageController {
 	@RequestMapping(value = "/updatemyinfo.do")
 	@ResponseBody
 	public String updatemyinfo(Locale locale, Model model, MemberVO vo) {
-		 System.out.println("여기~");
 
 		if (vo.getPassword().equals("") || vo.getName().equals("") || vo.getUser_id().equals("") || vo.getPhone().equals("")) {
 
@@ -171,49 +154,24 @@ public class mMypageController {
 	@RequestMapping(value = "/levelup", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public String mlevelup(@RequestBody  Map<String, String> map) throws Exception {
-	System.out.println(map);	
+	
 //	String id = map.get("id");
 //	String mlevel2 = map.get("mlevel");
 	
 	int i = usermanageservice.mrequestlevel(map);
-	System.out.println("결과값" + i);
 	
 	if( i == 1 ) {
-		System.out.println("성공");
-		return "success";
-		
-
+		return "success";	
 	} else {
-		System.out.println("실패");
 		return "false";
-	
 	}
 
 	}
-	
-	
-	/*
-	 * @CrossOrigin(origins = "*" ,maxAge = 3600)
-	 * 
-	 * @GetMapping(value = "/mgetAttachListmypage", produces =
-	 * MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 * 
-	 * @ResponseBody public ResponseEntity<List<MemberFileVO>>
-	 * getAttachListmypage(String user_id) {
-	 * System.out.println("getAttachListmypage" + user_id);
-	 * 
-	 * return new ResponseEntity<>(mypageservice.getAttachListmypage(user_id),
-	 * HttpStatus.OK); }
-	 */
 
-	
 	@CrossOrigin(origins = "*", maxAge = 3600)
 	@RequestMapping(value = "/mgetAttachListmypage", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ArrayList<MemberFileVO> getAttachListmypage(@RequestBody String user_id, Locale locale, Model model) {
-		System.out.println("오나");
-		System.out.println("getAttachListmypage" + user_id);
-		
 		ArrayList<MemberFileVO> arr = (ArrayList<MemberFileVO>) mypageservice.getAttachListmypage(user_id);
 
 		return arr;

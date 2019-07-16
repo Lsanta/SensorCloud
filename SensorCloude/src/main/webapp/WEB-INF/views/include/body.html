@@ -56,7 +56,7 @@
  		navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registartion){
 			 
 			 messaging.requestPermission().then(function(){
-					console.log('요청 허용');
+					
 					return messaging.getToken();
 				})
 				.then(function(token){
@@ -105,7 +105,7 @@
 						 setTimeout(function() {
 							  notify(sender, link);
 						 });
-					  console.log("메시지 출력");	 
+					  
 				}); //onmessage 종료
 				
 			 } // admin 체크 종료

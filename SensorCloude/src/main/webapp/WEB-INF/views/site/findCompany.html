@@ -24,7 +24,6 @@
 $(document).ready(function() {
 	$(document).keyup('.searchInputBox', function(){
 		 var text = $(".searchInputBox").val();   
-		 console.log(text);
 		 
 		 var query = { word : text } 
 		 
@@ -37,7 +36,6 @@ $(document).ready(function() {
 	             data : sendText,
 	             contentType : "application/json; charset=UTF-8",
 	             success : function(result){
-	            	 	console.log(result);
 	            	 	
 	            	 	var result2 = result.json
 	            	 	var str="";

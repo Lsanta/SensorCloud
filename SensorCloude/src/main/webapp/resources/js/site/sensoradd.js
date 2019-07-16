@@ -10,8 +10,6 @@ $(document).ready(function(){
 		$("#sensorcount").attr("max",a);
 		
 		var b = $('.kindSelect option:selected').text();
-		console.log(b);
-		
 		
 	});
 	
