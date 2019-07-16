@@ -1,3 +1,10 @@
+@font-face {
+    font-family: a신그래픽L;
+    src: url('/font/a신그래픽L.TTF');
+  }
+  
+  html, body{font-family: 'a신그래픽L';}
+
 #wrapper {
     width: auto;
     height: 800px;

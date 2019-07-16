@@ -60,6 +60,8 @@ public interface CheckboardMapper {
 	
 	public List<CheckBoardFileVO> mgetAttachList(int board_no);
 	
+	public int mfiledelete(Map<String ,Object> map);
+	
 	// 상태가 open인 점검이력만 가져오기
 	public ArrayList<CheckBoardVO> getOpenList(Paging page);
 	

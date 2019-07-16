@@ -15,5 +15,7 @@ public interface BoardAttachMapper {
 	public List<CheckBoardFileVO> findByBnomain(int board_no);
 	
 	public void mfileinsert(CheckBoardFileVO checkboardfilevo);
+	
+	 public List<String> findFilenameByBno(int board_no);
 
 }

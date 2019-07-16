@@ -1,16 +1,52 @@
 
 $(document).ready(function() {
+    var split = location.href.split("?");
+    var one = split[1].split("=");
+    var board_no = one[1];
+    var two = split[2].split("=");
+    var site_id = two[1];
     // var copyarr;
-      var boardno = location.href.split("=");
-      var board_no =boardno[1];
+    //   var boardno = location.href.split("=");
+    //   var board_no =boardno[1];
 
-   //수정버튼 눌렀을 
+    //  var siteid = site_id[2];
+
+   //수정버튼 눌렀을 시
     $("#modifybutton").on("click" , function(e){
-    
-        window.location.href="checkviewmodify.html?board_no="+board_no;
+        
+        window.location.href="checkviewmodify.html?board_no="+board_no+"?site_id="+site_id;
         
      });
+
+     //삭제버튼 눌럿을 시 deletebutton
  
+     $("#deletebutton").on("click" , function(e){
+    
+        
+        var boardno = board_no;
+
+        if (confirm("정말 삭제하시겠습니까?") == true){    //확인
+            
+          
+            $.ajax({
+                type : "POST",
+                url : "http://183.106.6.74:8080/app/checklist/mdeletepost",
+                data : {boardno: boardno},
+                dataType:'text',
+                success : function(result){
+                    window.location.href="site.html?sid="+site_id; 
+                  
+                 }
+                });
+            
+
+        }else{   //취소
+            return;
+        }
+
+      
+        
+     });
      //점검이력 글 내용 불러오기 
     $.ajax({
      type : "POST",
@@ -32,15 +68,40 @@ $(document).ready(function() {
  
             else if(q.board_status==1){
                 var board_status = "fixed";
+            }  else if(q.board_status == 2){
+                var board_status = "close";
             }
-          
+            
             $("#title").html(q.title);
             $("#status").html(board_status);
             $("#regdate").html(q.reg_date);
             $("#content").html(q.board_content);
            
+            var user_id = q.user_id;
+            
+            console.log(user_id);
+
+            var id;
+            var m_level;
+
+            if(localStorage.getItem("auto") == "true") {
+              id = localStorage.getItem("id");
+              m_level = localStorage.getItem("level");
+            }       
+            else if( localStorage.getItem("auto") == "false"){
+             id = sessionStorage.getItem("id");
+             m_level = localStorage.getItem("level");
+            }
+
+            if(user_id != id)  {
+                if(m_level < 5) {
+                    $('#modifybutton').css("display","none");
+                    $('#deletebutton').css("display","none");
+                }
+            }
          
      });
+
      }
  });
  
@@ -62,7 +123,7 @@ $(document).ready(function() {
                 //  alert(fileCallPath);
                 
                  str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"'><div>";
-                 str += "<img src='http://183.106.6.74:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'/>";
+                 str += "<img src='http://183.106.6.74:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'/>";//172.26.2.227 //183.106.6.74:8080
                  str += "</div>";
                  str += "</li>";
 
