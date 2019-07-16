@@ -37,7 +37,7 @@ b{
 
 #ijn {
   background: #4d90fe;
-  width: 80px;
+  width: 70px;
   color: white;
   border: #4F86C6;
   border-radius: 0.2em;
@@ -95,7 +95,7 @@ b{
 }
 
 #phone{
-  width : 170px;
+  width : 180px;
   /* margin-left : 5px; */
   display : block;
   float: left;
