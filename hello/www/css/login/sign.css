@@ -5,7 +5,10 @@
   src: url('/font/a신그래픽L.TTF');
 }
 
-html, body{font-family: 'a신그래픽L';}
+html, body,label,p,select,button,input{
+  font-family: 'a신그래픽L';
+
+}
 
 body {
   background: url(https://dl.dropboxusercontent.com/u/23299152/Wallpapers/wallpaper-22705.jpg) no-repeat center center fixed; 
