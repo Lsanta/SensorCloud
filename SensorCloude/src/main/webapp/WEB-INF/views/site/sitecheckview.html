@@ -19,6 +19,7 @@
 
 	<!-- 세션로그인 값 -->
 	<div id ="id" th:text="${session.id}" style="display: none"></div>
+	<div id="level"th:text="${session.mlevel}" style="display: none" > </div>
 	<!-- 작성자 -->
 	<div id="writername"  th:each="check : ${sitecheckview}"  th:text="${check.user_id}" style="display : none"></div>
 	
@@ -31,8 +32,9 @@
 		<span class="title00" id="checktitle" name="title" th:each="check : ${sitecheckview}" th:text="${check.title}"></span>
 		<span id="titletext" name="site_name" class="index" th:each="check : ${sitecheckview}" th:text="'|  ' + ${check.site_name}"></span>
 		
-		<span class="sse" th:each="check : ${sitecheckview}" th:if="${check.board_status ==0}" th:text ="open" name="board_status"></span>	
-		<span class="sse" th:each="check : ${sitecheckview}" th:if="${check.board_status ==1}" th:text ="fixed" name="board_status"></span> 	
+		<span class="sse" th:each="check : ${sitecheckview}" th:if="${check.board_status == 0}" th:text ="open" name="board_status"></span>	
+		<span class="sse" th:each="check : ${sitecheckview}" th:if="${check.board_status == 1}" th:text ="fixed" name="board_status"></span>
+		<span class="sse" th:each="check : ${sitecheckview}" th:if="${check.board_status == 2}" th:text ="close" name="board_status"></span> 	
 	</div>
 	
 	
@@ -69,6 +71,8 @@
 
 	<div class="but">
 		<div class="but0">
+		<button type="button" id="ce">처리완료</button>
+		<button type="button" id="ceCheck">완료확인</button>
 		<button type="button" id="mod">수정</button>
         <button type="button" id="del">삭제</button>
     	</div>
@@ -76,8 +80,8 @@
 </th:block>
 
 <th:block layout:fragment="page_js">
+		<script src="/resources/js/jquery-3.2.1.min.js"></script>
 		<script src="/resources/js/site/sitecheckview.js"></script>
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 		<script>
 		$(document).ready(function(){
 	

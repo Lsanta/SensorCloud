@@ -93,5 +93,10 @@ public interface CheckboardService {
 	//점검이력 관리에서의 검색2
 	public ArrayList<CheckBoardVO> getcheckManageSearch(Map<Object, Object> parm);
 
+	//fixed로 업데이트
+	public int fixedUpdate(int board_no);
+	//close로 업데이트
+	public int closeUpdate(int board_no);
+
 
 }

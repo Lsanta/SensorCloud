@@ -165,8 +165,6 @@ $(document).ready(function () {
                     file_path += "?" + new Date().getTime();
                 }
 
-                alert("수정페이지 카메라 이미지 경로" + file_path);
-
                 //수정시 이미지 파일을 추가 할 시 바로 c 경로에 저장 + 썸네일 불러오기
                 if (file_path != null) {
                     uploadP(file_path);
@@ -174,7 +172,6 @@ $(document).ready(function () {
 
                 function uploadP(file_path) {
 
-                    alert("갤러리 이미지 업로드 후 c경로에 upload를 위한"+board_no);
                     /** 파일경로로부터 이름만 추출한다. */
                     //string.substring( start, end ) start필수 end 없으면 끝까지
 
@@ -223,7 +220,6 @@ $(document).ready(function () {
                     ft.upload(file_path, "http://183.106.6.74:8080/app/checklist/insertfile", //183.106.6.74:8080
 
                         function(r) {
-                            alert(r.responseCode + "upload is complete");
 
                             //수정시 갤러리 이미지 업로드 후 다시 읽어옴 
                             //썸네읿 불러오기
@@ -357,7 +353,7 @@ $(document).ready(function () {
                 else if (q.board_status == 1) {
                     var board_status = "fixed";
 
-                }  else if (q.board_status == 1) {
+                }  else if (q.board_status == 2) {
                     
                     var board_status = "close";
                 }
@@ -365,6 +361,7 @@ $(document).ready(function () {
 
                 $("#ttitle").val(q.title);
                 $("#sse").val(board_status).prop("selected", true);
+                $('.ui-select .ui-btn > span:not(.ui-li-count)').text(board_status);
                 $("#regdate").html(q.reg_date);
                 $("#tcontent").val(q.board_content);
 
@@ -575,7 +572,6 @@ $(document).ready(function () {
                     file_path += "?" + new Date().getTime();
                 }
 
-                alert("수정페이지 카메라 이미지 경로" + file_path);
 
                 //수정시 이미지 파일을 추가 할 시 바로 c 경로에 저장 + 썸네일 불러오기
                 if (file_path != null) {
@@ -584,7 +580,6 @@ $(document).ready(function () {
 
                 function uploadP(file_path) {
 
-                    alert("갤러리 이미지 업로드 후 c경로에 upload를 위한"+board_no);
                     /** 파일경로로부터 이름만 추출한다. */
                     //string.substring( start, end ) start필수 end 없으면 끝까지
 
@@ -633,7 +628,6 @@ $(document).ready(function () {
                     ft.upload(file_path, "http://183.106.6.74:8080/app/checklist/insertfile", //183.106.6.74:8080
 
                         function(r) {
-                            alert(r.responseCode + "upload is complete");
 
                             //수정시 갤러리 이미지 업로드 후 다시 읽어옴 
                             //썸네읿 불러오기
@@ -767,7 +761,7 @@ $(document).ready(function () {
                 else if (q.board_status == 1) {
                     var board_status = "fixed";
 
-                }  else if (q.board_status == 1) {
+                }  else if (q.board_status == 2) {
                     
                     var board_status = "close";
                 }
@@ -775,6 +769,7 @@ $(document).ready(function () {
 
                 $("#ttitle").val(q.title);
                 $("#sse").val(board_status).prop("selected", true);
+                $('.ui-select .ui-btn > span:not(.ui-li-count)').text(board_status);
                 $("#regdate").html(q.reg_date);
                 $("#tcontent").val(q.board_content);
                 $("#sid").text(q.site_id);

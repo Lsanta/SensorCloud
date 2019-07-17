@@ -304,7 +304,7 @@ public class mLoginController {
 	    @RequestMapping(value = "/sendMsg.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 		@ResponseBody
 		public String sendMsg(Model model, HttpSession session, @RequestParam String email, @RequestParam String user_id ) {
-			
+	    	
 			ArrayList<MemberVO> arr = loginservice.login(user_id);
 			
 			if(arr.size() > 0) {

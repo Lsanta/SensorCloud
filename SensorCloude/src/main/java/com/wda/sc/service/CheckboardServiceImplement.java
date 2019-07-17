@@ -249,4 +249,16 @@ public class CheckboardServiceImplement implements CheckboardService {
 		return attachMapper.findFilenameByBno(board_no);
 
 	}
+
+	@Override
+	public int fixedUpdate(int board_no) {
+		//close로 업데이트
+		return mapper.fixedUpdate(board_no);
+	}
+
+	@Override
+	public int closeUpdate(int board_no) {
+		//fixed로 업데이트
+		return mapper.closeUpdate(board_no);
+	}
 }
