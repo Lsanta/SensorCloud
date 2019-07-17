@@ -41,6 +41,7 @@
 
 	<!-- 세션로그인 값 -->
 	<div id ="id" th:text="${session.id}" style="display: none"></div>
+	<div id="level"th:text="${session.mlevel}" style="display: none" > </div>
 	<!-- 작성자 -->
 	<div id="writerid"  th:each="check : ${cklist}"  th:text="${check.user_id}" style="display : none"></div>
 
@@ -52,6 +53,7 @@
 			
 		<span class="sse" th:each="check : ${cklist}" th:if="${check.board_status ==0}" th:text ="open"></span>	
 		<span class="sse" th:each="check : ${cklist}" th:if="${check.board_status ==1}" th:text ="fixed"></span> 	
+		<span class="sse" th:each="check : ${cklist}" th:if="${check.board_status == 2}" th:text ="close" name="board_status"></span>
 	</div>
 
 		
@@ -65,8 +67,8 @@
 	<div id="board_no"  th:each="board_no : ${board_no}"  th:text="${board_no}" style="display: none" >	
 	</div>
 
-	<div id="site_id" th:each="siteid : ${siteid}"  th:text="${siteid}" style="display: none" >
-	</div>
+	<div id="site_id" th:each="siteid : ${siteid}"  th:text="${siteid}" style="display: none" > </div>
+
 	
 	
 	<div class="content">
@@ -88,6 +90,8 @@
 </div>
 <div class="but">
 	<div class="but0">
+		<button type="button" id="ce">처리완료</button>
+		<button type="button" id="ceCheck">완료확인</button>
 		<button type="button" id="mb">수정</button>
         <button type="button" id="db">삭제</button>
    	</div>

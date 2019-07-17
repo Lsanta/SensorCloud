@@ -10,12 +10,14 @@ $(document).ready(function(){
 	
 	$("#name").val($(".1", opener.document).text());
 	$("#reg_number").val($(".2", opener.document).text());
-	$("#company_num").val($(".3", opener.document).text());
+	$("#company_tel").val($(".3", opener.document).text());
+	$("#company_num").val($(".4", opener.document).text());
 	
 	function remove(){
 		$(".1" ,opener.document).removeClass();
 		$(".2" ,opener.document).removeClass();
 		$(".3" ,opener.document).removeClass();
+		$(".4" ,opener.document).removeClass();
 	}
 	
 	
@@ -30,7 +32,8 @@ $(document).ready(function(){
 		var query = { 
 					name : $("#name").val(),
 					reg_number : $("#reg_number").val(),
-					company_num : $("#company_num").val()
+					company_num : $("#company_num").val(),
+					company_tel : $("#company_tel").val()
 			}
 	
 		
@@ -65,6 +68,7 @@ $(document).ready(function(){
 <div class="sensormodify">
 	협력사 이름<input type="text" id="name" name="name" maxlength="33"/><br/>
 	사업자 번호<input type="text" id="reg_number" name="reg_number" maxlength="15"/><br/>
+	회사 번호<input type="text" id="company_tel" name="company_tel" placeholder="ex) 회사 번호" maxlength="10" /><br/>
 	<input type="text" id="company_num" name="company_num" style="display : none"/><br/>
 	<input type="button"  value="수정" id="mod" />
 	</div>

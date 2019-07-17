@@ -43,22 +43,11 @@
 	    <div id="repairid" th:if="${siteid != null}" th:text="${siteid}" style="display:none"></div>
 	</th>
 	<th class="status">게시글 상태</th>
-		<!-- 비어있거나 권한이 5 이하면 원래대로 -->
-		<th th:if="${auth < 5}" class="stse">
-			<select name="board_status" id="sse">
-  		 	 	<option value="0">open</option>
-  		 	 	<option value="1">fixed</option>
-			</select>
-		</th>
-		<!-- 비어있지 않고 권한이 5이면 -->
-		<th th:if="${auth >= 5}" class="stse">
-			<select name="board_status" id="sse">
-				<option value="0">open</option>
-  		 	 	<option value="1">fixed</option>
-  		 	 	<option value="2">closed</option>
-  		 	 	<option th:each="modlist : ${modlist}" th:value="${modlist.board_status}" style="display:none"></option>
-			</select>
-		</th>
+	<th class="stse" th:each="modlist : ${modlist}" th:switch="${modlist.board_status}">
+		<span th:case="'0'" style="color:#35cd3a; font-weight:bold; font-size:1.15em;">open</span> 
+		<span th:case="'1'" style="color:#ffa534; font-weight:bold; font-size:1.15em;">fixed</span> 
+		<span th:case="'2'" style="color:gray; font-weight:bold; font-size:1.15em;">closed</span>
+	</th>
 	</table>
 	</div>
 	<div class="content">
@@ -93,6 +82,8 @@
 </div>
 	<!-- 숨겨놓는 board_no -->
 	<input th:if="${modlist != null}" name="board_no" th:each="modlist : ${modlist}" th:value="${modlist.board_no}" style="display:none"></input>
+	<!-- 숨겨놓는 board_status -->
+	<input type="text" id="hidden_status" name="board_status" th:if="${modlist != null}" th:each="modlist : ${modlist}" th:value="${modlist.board_status}" style="display:none"></iuput>
 </form>
 </th:block>
 
@@ -146,23 +137,23 @@ $(document).ready(function(){
 					 $(".se > option").eq(i).prop("selected", true);
 	   }
 	   
-	   //select들 중의 value 값 과 숨겨놓은 board_status가 일치하면 selected 속성 부여 
-	   var opt_vals2 = [];
-	   $("#sse > option").each(function(){
-			  opt_vals2.push($(this).val()); 
-		 });
+// 	   //select들 중의 value 값 과 숨겨놓은 board_status가 일치하면 selected 속성 부여 
+// 	   var opt_vals2 = [];
+// 	   $("#sse > option").each(function(){
+// 			  opt_vals2.push($(this).val()); 
+// 		 });
 	   
-	   //숨겨놓은 board_status
-	   var bb =  $("#sse > option:last").val();
+// 	   //숨겨놓은 board_status
+// 	   var bb =  $("#sse > option:last").val();
 	   
-	   for(var i=0; i < opt_vals2.length-1; i++ ){
-		      var optV2 = opt_vals2[i];
+// 	   for(var i=0; i < opt_vals2.length-1; i++ ){
+// 		      var optV2 = opt_vals2[i];
 		      
-			if(optV2 == bb){
-				 $("#sse > option").eq(i).prop("selected", true);
-	   		}
+// 			if(optV2 == bb){
+// 				 $("#sse > option").eq(i).prop("selected", true);
+// 	   		}
 
-	   }
+// 	   }
 	   
 	   var formObj = $("form[role='form']");
 	   

@@ -11,9 +11,9 @@
 	<![CDATA[
      select x.rnum, x.* from
     ( select rownum as rnum, p.* from
-    (  select c.name, c.company_num, c.reg_number ,a.num
+    (  select c.name, c.company_num, c.reg_number ,a.num, c.company_tel
 		from (select c.company_num, nvl(count(site.company_num),0) as num
-        from company c full outer join site
+       	 	  from company c full outer join site
         on site.company_num = c.company_num
         group by c.company_num) a, company c
 		where a.company_num = c.company_num) p where rownum < #{endnum}) x
@@ -23,11 +23,11 @@
 	</select>
 	
 	<insert id="insertCompany" parameterType="com.wda.sc.domain.CompanyVO">
-		insert into company(company_num,name,reg_number) values(company_seq.nextval, #{name},#{reg_number})
+		insert into company(company_num,name,reg_number,company_tel) values(company_seq.nextval, #{name},#{reg_number},#{company_tel})
 	</insert>
 	
 	<update id="modCompany" parameterType="com.wda.sc.domain.CompanyVO">
-		update company set name=#{name}, reg_number=#{reg_number} 
+		update company set name=#{name}, reg_number=#{reg_number} , company_tel=#{company_tel}
 		where company_num=#{company_num} 
 	</update>
 	

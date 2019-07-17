@@ -37,8 +37,8 @@ body {
 	margin-top: 2%;
 }
 
-#checklist tr:hover {
-	background-color: #f5fafd;
+#repairchecklist tr:hover {
+	background-color:  #f5fafd;
 }
 /* thead {
     background:#5fc5ee21;

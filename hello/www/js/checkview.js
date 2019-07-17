@@ -109,7 +109,7 @@ $(document).ready(function() {
      }
  });
  
- //썸네읿 불러오기
+ //썸네일 불러오기
  $.ajax({
      type : "POST",
      url : "http://183.106.6.74:8080/app/checklist/mgetAttachList",
@@ -123,11 +123,11 @@ $(document).ready(function() {
           $(arr).each(function(i , attach){
              if(attach.fileType){
                  // var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
-                 var fileCallPath = attach.file_Path+"/s_"+attach.uuid+"_"+attach.file_name;
+                 var fileCallPath = encodeURIComponent(attach.file_Path+"/s_"+attach.uuid+"_"+attach.file_name);
                 //  alert(fileCallPath);
                 
                  str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"'><div>";
-                 str += "<img src='http://183.106.6.74:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'/>";//172.26.2.227 //183.106.6.74:8080
+                 str += "<img src='http://183.106.6.74:8080/app/checklist/mdisplay?fileName="+fileCallPath+"'/>";
                  str += "</div>";
                  str += "</li>";
 
@@ -293,7 +293,7 @@ $(document).ready(function() {
           $(arr).each(function(i , attach){
              if(attach.fileType){
                  // var fileCallPath = encodeURIComponent( attach.file_path+ "/s_"+attach.uuid + "_"+attach.file_name);
-                 var fileCallPath = attach.file_Path+"/s_"+attach.uuid+"_"+attach.file_name;
+                 var fileCallPath = encodeURIComponent(attach.file_Path+"/s_"+attach.uuid+"_"+attach.file_name);
                 //  alert(fileCallPath);
                 
                  str += "<li data-path='"+attach.file_Path+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.file_name+"' data-type='"+attach.fileType+"'><div>";

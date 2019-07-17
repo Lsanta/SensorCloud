@@ -285,5 +285,19 @@ order by reg_date desc
       DELETE FROM check_board_file WHERE board_no = #{board_no} and uuid = #{uuid}
    </delete>
    
+    <!-- fixed로 업데이트 -->
+   <update id="fixedUpdate" parameterType="java.lang.Integer">
+		update check_board
+		set board_status = 1
+		where board_no = ${board_no}
+  </update>
+  
+  <!-- close로 업데이트 -->
+   <update id="closeUpdate" parameterType="java.lang.Integer">
+		update check_board
+		set board_status = 2
+		where board_no = ${board_no}
+  </update>
+   
    	
 </mapper>

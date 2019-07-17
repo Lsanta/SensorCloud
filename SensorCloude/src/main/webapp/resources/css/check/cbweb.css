@@ -19,6 +19,13 @@
 	padding: 20px;
 }
 
+.sse {
+	height: 60%;
+	position: relative;
+	font-size: 1.2em;
+	color: #f8ca00;
+}
+
 .index{
    width:97%;
    height: 50px;
