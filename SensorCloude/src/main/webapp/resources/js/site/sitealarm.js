@@ -3,8 +3,44 @@
  */
 $(document).ready(function(){
 	
+	
 	// site/1/sitealarm
 	var newURL =  window.location.pathname;
+	
+	var sid = newURL.split("/");
+	console.log(sid[2]);
+	
+	var query = { 
+			site_id : sid[2], 
+	}
+	$.ajax({
+		  type : "POST",
+		  url : "/site/getCompany_alarm_mem.do",
+		  data : query,
+		  dataType : "json",
+		  success : function(data){
+			 if(data == "fail"){
+				 console.log(data);
+			 }else{
+				 console.log(data);
+				 
+				 var row = "";
+				 for(var i = 0; i < data.name.length; i++){
+					 console.log(data.name[i].name);
+					 	 row +="<tr>"
+						 row += '<td class="json_select">'+data.name[i].phone+'</td>';
+					 	 row += '<td class="json_select">'+data.name[i].company+'</td>';
+						 row += '<td class="json_select">'+data.name[i].name+'</td>';
+					 	 row += '<td class="json_select" style="display:none">'+data.name[i].user_id+'</td>';
+					 	 row += '<td class="json_select"><input type="checkbox" name="selected"></td>';
+					 	 row += "</tr>";				 	
+				 }
+				 $("#amember").prepend(row);
+				 
+			 }
+		  }
+		  
+	}); // ajax 종료
 	
 	//체크박스 맨위 누르면 전부다 선택 or 해제
 	$('input[name=checkAll]').on('change', function(){

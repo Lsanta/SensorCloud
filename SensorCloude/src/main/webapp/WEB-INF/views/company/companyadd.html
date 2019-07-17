@@ -46,7 +46,8 @@
 			 	
 				var query = { 
 						name : $("#name").val(),
-						reg_number : $("#reg_number").val()
+						reg_number : $("#reg_number").val(),
+						company_tel : $("#company_tel").val()
 				}
 				
 				$.ajax({
@@ -74,6 +75,7 @@
  <div class="sensoradd">
 	협력사 이름<input type="text" id="name" name="name" placeholder="ex) 협력사 이름"/ maxlength="33"><br/>
 	사업자 번호<input type="text" id="reg_number" name="reg_number" placeholder="ex) 사업자 번호" maxlength="15" /><br/>
+	회사 번호<input type="text" id="company_tel" name="company_tel" placeholder="ex) 회사 번호" maxlength="10" /><br/>
 	<div class="errorstr" id="numberstr"></div>
 	<input type="button"  value="추가" id="plus" />
 	</div>

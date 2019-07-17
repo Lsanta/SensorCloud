@@ -39,6 +39,14 @@
 		select name,tel,company,alarm_m_no from alarm_member where site_id = #{site_id}
 	</select>
 	
+	<select id="getCompany_Alarm_member" resultType="com.wda.sc.domain.AlarmMemberVO">
+		select a.*, c.name as company
+			from (select name, phone, company_num, user_id
+      			  from member
+      		  	  where company_num = (select company_num from site where site_id = #{site_id}))a, company c
+		where a.company_num = c.company_num
+	</select>
+	
 	<select id="getAlarm" resultType="com.wda.sc.domain.AlarmVO">
 		select alarm_no,site_id,alarm_content,alarm_time as alarm_time,send_user from alarm where site_id = #{site_id} order by alarm_time desc
 	</select>
@@ -97,7 +105,7 @@
 	
 	<!--현장 추가 -->
 	<insert id="siteadd" parameterType="com.wda.sc.domain.SiteVO">
-		insert into site(site_id,type_no,site_name,address,start_date,site_status,x,y) values(site_seq.nextval,#{type_no}, #{site_name},#{address},sysdate,'1',#{x},#{y})
+		insert into site(site_id,type_no,site_name,address,start_date,site_status,x,y,company_num) values(site_seq.nextval,#{type_no}, #{site_name},#{address},sysdate,'1',#{x},#{y},#{company_num})
 	</insert>
 	
 	<insert id="networkadd" parameterType="com.wda.sc.domain.SiteVO">

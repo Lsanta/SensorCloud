@@ -20,7 +20,7 @@
    </select>
       
    <select id="viewgetList" resultType="com.wda.sc.domain.CheckBoardVO">
-   select c.board_no,m.name, c.user_id, c.title, c.board_content, c.reg_date,c.board_status,c.site_name
+   select c.board_no,m.name, c.user_id, c.title, c.board_content, c.reg_date,c.board_status,c.site_name, c.site_id
       from (select board_no,check_board.user_id, check_board.title, check_board.board_content,
              check_board.reg_date as reg_date,
              check_board.board_status,check_board.site_id, site.site_name
@@ -284,6 +284,20 @@ order by reg_date desc
    <delete id="mfiledelete">
       DELETE FROM check_board_file WHERE board_no = #{board_no} and uuid = #{uuid}
    </delete>
+   
+    <!-- fixed로 업데이트 -->
+   <update id="fixedUpdate" parameterType="java.lang.Integer">
+		update check_board
+		set board_status = 1
+		where board_no = ${board_no}
+  </update>
+  
+  <!-- close로 업데이트 -->
+   <update id="closeUpdate" parameterType="java.lang.Integer">
+		update check_board
+		set board_status = 2
+		where board_no = ${board_no}
+  </update>
    
    	
 </mapper>

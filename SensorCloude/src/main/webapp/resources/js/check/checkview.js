@@ -7,9 +7,10 @@ $(document).ready(function(){
 	 ///board_status : checkstatus,
 	 
 	 var user_id =  $("#id").text(); //세션아이디
+	 var level = $("#level").text(); //레벨
 	 
 	//현재 접속한 아이디와 점검이력 글쓴이의 아이디와 같지 않을시 수정버튼 hide
-	 if(writer_id == user_id || user_id == "admin"){
+	 if(writer_id == user_id){
 		 $("#mb").show();
 		 $("#db").show();
 	 } else {
@@ -17,6 +18,24 @@ $(document).ready(function(){
 		 $("#db").hide();
 	 }
 	 
+	 if(writer_id == user_id ) {
+		 
+		 $("#ce").show();
+		 $("#ceCheck").hide(); 
+		  if( level >= 5) {
+			  $("#ce").show();
+			  $("#ceCheck").show();
+		  }
+		 
+	 } else if ( level >= 5) {
+		 $("#ce").hide();
+		 $("#ceCheck").show();
+	 } 
+	 
+	 if( $('.sse').text() == "close") {
+		 $("#ce").hide();
+		 $("#ceCheck").hide();
+	 }
 	 
 
 	 //수정버튼 클릭시
@@ -43,6 +62,25 @@ $(document).ready(function(){
             }
 
 		});
+	 
+	 $("#ce").click(function() {
+		 if(confirm('해당 글을 처리완료 하시겠습니까?') == true){
+			 window.location.href = "/checkboard/fixedUpdate/"+board_no;
+            }else{
+             return false;
+            }
+		 
+		
+	 });
+	 
+	 $("#ceCheck").click(function() {
+		 if(confirm('해당 글을 완료확인 하시겠습니까?') == true){
+			 window.location.href = "/checkboard/closeUpdate/"+board_no;
+            }else{
+             return false;
+            }
+		
+	 });
 	 
 	
 	

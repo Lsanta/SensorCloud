@@ -3,6 +3,9 @@
 	src: url('/resources/font/A신그래픽L.TTF');
 }
 
+#sensorlist tr:hover {
+	background-color:  #f5fafd;
+}
 body {
 	font-family: 'A신그래픽L';
 	overflow-x: hidden;

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.wda.sc.domain.CheckBoardFileVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.Paging;
@@ -88,5 +90,10 @@ public interface CheckboardMapper {
 	
 	//점검이력 관리에서의 검색2
 	public ArrayList<CheckBoardVO> getcheckManageSearch(Map<Object, Object> parm);
+	
+	//fixed로 업데이트
+	public int fixedUpdate(@Param(value = "board_no") int board_no);
+	//close로 업데이트
+	public int closeUpdate(@Param(value = "board_no") int board_no);
 }
 

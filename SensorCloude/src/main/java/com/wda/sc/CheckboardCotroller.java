@@ -668,4 +668,71 @@ public class CheckboardCotroller {
          return "adminCheck/adminCheck";
       }
 
+      
+      //점검이력 fixed로 업데이트
+      @RequestMapping(value = "/fixedUpdate/"+"{board_no}" , method = RequestMethod.GET)
+      public String fixedUpdate(@PathVariable int board_no, Locale locale, Model model,HttpServletResponse response,HttpSession session) throws IOException {
+    	 int a = Checkboardservice.fixedUpdate(board_no);
+    	 
+    	 if( a == 1 ) {
+    		 response.setContentType("text/html; charset=UTF-8");
+             PrintWriter out = response.getWriter();
+             out.println("<script langauge='javascript'>");
+             out.println("alert(처리완료로 수정 완료)");
+             
+             out.println("</script>");
+    	 }
+    	 
+         return "redirect:/check/1";
+      }
+      
+      //점검이력 close로 업데이트
+      @RequestMapping(value = "/closeUpdate/"+"{board_no}" , method = RequestMethod.GET)
+      public String closeUpdate(@PathVariable int board_no, Locale locale, Model model,HttpServletResponse response,HttpSession session) throws IOException {
+    	 int a = Checkboardservice.closeUpdate(board_no); 
+    	 
+    	 if( a == 1 ) {
+    		 response.setContentType("text/html; charset=UTF-8");
+             PrintWriter out = response.getWriter();
+             out.println("<script langauge='javascript'>");
+             out.println("alert(완료확인으로 수정 완료)");
+             
+             out.println("</script>");
+    	 }
+         return "redirect:/check/1";
+      }
+      
+      //점검이력 close로 업데이트
+      @RequestMapping(value = "/sitecloseUpdate/"+"{board_no}" + "/" + "{site_id}" , method = RequestMethod.GET)
+      public String repaircloseUpdate(@PathVariable int board_no, @PathVariable int site_id, Locale locale, Model model,HttpServletResponse response,HttpSession session) throws IOException {
+    	 int a = Checkboardservice.closeUpdate(board_no); 
+    	 
+    	 if( a == 1 ) {
+    		 response.setContentType("text/html; charset=UTF-8");
+             PrintWriter out = response.getWriter();
+             out.println("<script langauge='javascript'>");
+             out.println("alert(완료확인으로 수정 완료)");
+             
+             out.println("</script>");
+    	 }
+    	   return "redirect:/site/"+site_id+"/siterepair/1";
+      }
+      
+      //점검이력 fixed로 업데이트
+      @RequestMapping(value = "/sitefixed/"+"{board_no}" + "/" + "{site_id}" , method = RequestMethod.GET)
+      public String repairfixedUpdate(@PathVariable int board_no, @PathVariable int site_id, Locale locale, Model model,HttpServletResponse response,HttpSession session) throws IOException {
+    	 int a = Checkboardservice.fixedUpdate(board_no);
+    	 
+    	 if( a == 1 ) {
+    		 response.setContentType("text/html; charset=UTF-8");
+             PrintWriter out = response.getWriter();
+             out.println("<script langauge='javascript'>");
+             out.println("alert(처리완료로 수정 완료)");
+             
+             out.println("</script>");
+    	 }
+    	 
+         return "redirect:/site/"+site_id+"/siterepair/1";
+      }
+      
 }

@@ -98,6 +98,7 @@
 <!-- <div id="ddd" th:text="${vo.board_no}" style="display:none"></div> -->
 </form>
 
+<!-- 수리내역 수정페이지 -->
 <form th:if="${modlist != null}" role="form" name="check" method="post" action="/checkboard/checkmodInSite.do">
 	<div id="a" class="card">
 	<div class="index">점검이력</div>
@@ -127,23 +128,11 @@
 			    <div id="repairid" name="site_id" th:if="${site_id != null}" th:text="${site_id}" style="display:none"></div>
 			</th>
 			<th class="status">게시글 상태</th>
-			
-			<!-- 비어있지 않고 권한이 5이면 -->
-			<th th:if="${auth < 5}" class="stse">
-			<select name="board_status" id="sse">
-					<option value="0">open</option>
-	  		 	 	<option value="1">fixed</option>
-			</select>
+			<th class="stse" th:each="modlist : ${modlist}" th:switch="${modlist.board_status}">
+			<span th:case="'0'" style="color:#35cd3a; font-weight:bold; font-size:1.15em;">open</span> 
+			<span th:case="'1'" style="color:#ffa534; font-weight:bold; font-size:1.15em;">fixed</span> 
+			<span th:case="'2'" style="color:gray; font-weight:bold; font-size:1.15em;">closed</span>
 			</th>
-			<th th:if="${auth >= 5}" class="stse">
-				<select name="board_status" id="sse">
-					<option value="0">open</option>
-	  		 	 	<option value="1">fixed</option>
-	  		 	 	<option value="2">closed</option>
-				</select>
-			</th>
-			<!-- 숨겨놓는 board_status -->
-			<div id="hidden_status" name="board_status" th:if="${modlist != null}" th:each="modlist : ${modlist}" th:text="${modlist.board_status}" style="display:none"></div>
 		</tr>
 		</table>
 	</div>
@@ -194,7 +183,10 @@
 
 <!-- 숨겨놓는 board_no -->
 <input th:if="${modlist != null}" name="board_no" th:each="modlist : ${modlist}" th:value="${modlist.board_no}" style="display:none"></input>
+<!-- 숨겨놓는 board_status -->
+	<input type="text" id="hidden_status" name="board_status" th:if="${modlist != null}" th:each="modlist : ${modlist}" th:value="${modlist.board_status}" style="display:none"></input>
 </form>
+
 </th:block>
 
 <th:block layout:fragment="page_js">

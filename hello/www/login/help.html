@@ -58,7 +58,7 @@
 						<div id="content3">	
 
 							<p style="text-align: left; margin-left: 20px;">아이디</p>
-							<input type="text" name="name2" placeholder="이름">
+							<input type="text" name="name2" id="name2" placeholder="이름">
 							<p style="text-align: left; margin-left: 20px; margin-top: 30px;">이메일</p>
 
 							<input type="email" id="email" name="email" placeholder="yjc@ac.kr">
@@ -138,7 +138,7 @@
 		$('.ijn').click(function() {
     	var email = $("#email").val();
     	var user_id = $("#name2").val();
-    	var query = {user_id:user_id, email:email};
+    	var query = {user_id : user_id, email:email};
     	 $.ajax({
     		type : "POST",
          	dataType : "text",

@@ -386,8 +386,6 @@ $(document).ready(function(){
 
         var stringJson = JSON.stringify(totalInfo);
 
-	
-	 	
 		var query = { 
 						//현장 데이터
 						type_no : $('input[name="chk_scene"]:checked').val(),
@@ -406,9 +404,6 @@ $(document).ready(function(){
 						sensorData : totalInfo
 					}
 		
-		
-		
-
 		
 		 $.ajax({
 			  type : "POST",
