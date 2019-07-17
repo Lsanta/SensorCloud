@@ -325,9 +325,9 @@
          for(var i=0; i < single2.length; i++){
         	 str2 +='<tr>';
         	 str2 +='<td>'+single2[i]+'</td>';
-        	 str2 +='<td class="1"></td>';
-        	 str2 +='<td class="2"></td>';
-        	 str2 +='<td class="3"></td>';
+        	 str2 +='<td class="10"></td>';
+        	 str2 +='<td class="20"></td>';
+        	 str2 +='<td class="30"></td>';
         	 str2 +='</tr>';
          	 $("#sensing-data").html(str2);	
          }
@@ -341,21 +341,21 @@
         		 
         		 if ( single2[i] === data.data[j].cur_date) {
         			 if( headername[1] === data.data[j].sensor_name )  {
-        				 $("#sensing-data tr:eq("+i+") td.1").text(data.data[j].sensing_data);
+        				 $("#sensing-data tr:eq("+i+") td.10").text(data.data[j].sensing_data);
         			 } else if( headername[2] === data.data[j].sensor_name )  {
-        				 $("#sensing-data tr:eq("+i+") td.2").text(data.data[j].sensing_data);
+        				 $("#sensing-data tr:eq("+i+") td.20").text(data.data[j].sensing_data);
         			 } else if( headername[3] === data.data[j].sensor_name )  {
-        				 $("#sensing-data tr:eq("+i+") td.3").text(data.data[j].sensing_data);
+        				 $("#sensing-data tr:eq("+i+") td.30").text(data.data[j].sensing_data);
         			 }
         			
         			 //str2 += '<td>'+data.data[j].sensing_data+'</td>';
         		 } else if ( gap == 1000) {
         			 if( headername[1] === data.data[j].sensor_name )  {
-        				 $("#sensing-data tr:eq("+i+") td.1").text(data.data[j].sensing_data);
+        				 $("#sensing-data tr:eq("+i+") td.10").text(data.data[j].sensing_data);
         			 } else if( headername[2] === data.data[j].sensor_name )  {
-        				 $("#sensing-data tr:eq("+i+") td.2").text(data.data[j].sensing_data);
+        				 $("#sensing-data tr:eq("+i+") td.20").text(data.data[j].sensing_data);
         			 } else if( headername[3] === data.data[j].sensor_name )  {
-        				 $("#sensing-data tr:eq("+i+") td.3").text(data.data[j].sensing_data);
+        				 $("#sensing-data tr:eq("+i+") td.30").text(data.data[j].sensing_data);
         			 } 
         		 }
         			 

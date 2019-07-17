@@ -170,6 +170,9 @@ public interface SiteService {
 	
 	//해당현장에 등록된 센서목록 가져오기
 	public String[] insen(String site_id);
+	
+	//해당 현장 회사 소속 멤버들 들고오는 쿼리
+	public ArrayList<AlarmMemberVO> getCompany_Alarm_member(String site_id);
 
 
 }

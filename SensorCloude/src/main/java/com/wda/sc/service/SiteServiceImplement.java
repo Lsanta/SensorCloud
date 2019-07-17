@@ -351,4 +351,9 @@ public class SiteServiceImplement implements SiteService {
 		return mapper.insen(site_id);
 	}
 	
+	@Override
+	public ArrayList<AlarmMemberVO> getCompany_Alarm_member(String site_id) {
+		// TODO Auto-generated method stub
+		return mapper.getCompany_Alarm_member(site_id);
+	}
 }

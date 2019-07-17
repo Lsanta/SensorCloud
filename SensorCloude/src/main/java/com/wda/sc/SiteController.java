@@ -135,7 +135,7 @@ public class SiteController {
 		arr = siteservice.getSite(site_id);
 
 		model.addAttribute("siteInfo", arr);
-		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id));
+		model.addAttribute("alarmMember", siteservice.getAlarm_member(site_id)); //알람 멤버 정보
 		model.addAttribute("alarm", siteservice.getAlarm(site_id)); // 알람 내용 정보
 		model.addAttribute("siteStatus", siteservice.getStatus(site_id));
 		
@@ -1233,6 +1233,36 @@ public class SiteController {
 		} else {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("sensor", "fail");
+
+			JSONObject json = JSONObject.fromObject(map);
+
+			return json;
+		}
+
+	}
+	
+	@RequestMapping(value = "getCompany_alarm_mem.do", method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject getCompany_alarm_mem(@RequestBody String site_id) {
+		
+		String ste = site_id;
+		String[] ins = ste.split("=");
+		System.out.println(ins[1]);
+		ArrayList<AlarmMemberVO> arr = siteservice.getCompany_Alarm_member(ins[1]);
+
+		if (arr.size() > 0) {
+
+			JSONArray name = JSONArray.fromObject(arr);
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("name", name);
+
+			JSONObject json = JSONObject.fromObject(map);
+
+			return json;
+		} else {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("name", "fail");
 
 			JSONObject json = JSONObject.fromObject(map);
 
