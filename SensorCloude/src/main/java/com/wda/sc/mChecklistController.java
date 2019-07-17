@@ -3,6 +3,7 @@ package com.wda.sc;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
@@ -16,6 +17,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.imgscalr.Scalr;
@@ -412,6 +414,27 @@ public class mChecklistController {
             
    }
    
+   //점검이력 fixed로 업데이트
+   @CrossOrigin(origins = "*", maxAge = 3600)
+   @RequestMapping(value = "/fixedUpdate/"+"{board_no}" , method = RequestMethod.GET)
+   @ResponseBody
+   public String fixedUpdate(@PathVariable int board_no, Locale locale, Model model,HttpServletResponse response,HttpSession session) throws IOException {
+	 System.out.println(board_no);
+	 
+     int a = Checkboardservice.fixedUpdate(board_no);
+ 	 	
+      return "success";
+   }
+   
+   //점검이력 close로 업데이트
+   @CrossOrigin(origins = "*", maxAge = 3600)
+   @RequestMapping(value = "/closeUpdate/"+"{board_no}" , method = RequestMethod.GET)
+   @ResponseBody
+   public String closeUpdate(@PathVariable int board_no, Locale locale, Model model,HttpServletResponse response,HttpSession session) throws IOException {
+ 	 int a = Checkboardservice.closeUpdate(board_no); 
+ 	 
+ 	 return "success";
+   }
    
    
    

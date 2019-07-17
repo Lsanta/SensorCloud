@@ -23,7 +23,7 @@ $(document).ready(function(){
 	 } else if ( level >= 5) {
 		 $("#ce").hide();
 		 $("#ceCheck").show();
-	 } 
+	 } 	 
 	 
 	 if( $('.sse').text() == "close") {
 		 $("#ce").hide();
@@ -50,6 +50,10 @@ $(document).ready(function(){
 	});
 	
 	 $("#ce").click(function() {
+		 if($('.sse').text() == "fixed") {
+			 alert("이미 처리완료 된 글입니다.");
+			 return false;
+		 }
 		 if(confirm('해당 글을 처리완료 하시겠습니까?') == true){
 			 window.location.href = "/checkboard/sitefixed/"+ url[4] + "/" + url[2];
             }else{
