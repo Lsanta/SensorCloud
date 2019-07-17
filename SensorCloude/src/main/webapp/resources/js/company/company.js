@@ -3,7 +3,7 @@ $(document).ready(function() {
 	$("#list tr").mouseover(function(event){
 		$("#snameDiv").empty();		
 		
-		var cid = $(this).children().eq(3).text();
+		var cid = $(this).children().eq(4).text();
 		var index = $(this).index();
 		
 		var query = {
@@ -64,7 +64,9 @@ $(document).ready(function() {
 		var tr = $(this);
 		var name = tr.children().eq(0).addClass("1");
 		var reg_number = tr.children().eq(1).addClass("2");
-		var company_num = tr.children().eq(3).addClass("3");
+		var company_tel = tr.children().eq(2).addClass("3");
+		var company_num = tr.children().eq(4).addClass("4");
+	
 	 });
 	
 
