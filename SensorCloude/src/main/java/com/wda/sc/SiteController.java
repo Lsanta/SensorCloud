@@ -480,7 +480,7 @@ public class SiteController {
 			site.setType_no("1");
 			break;
 		case "mountain":
-			site.setType_no("0");
+			site.setType_no("2");
 			break;
 		}
 

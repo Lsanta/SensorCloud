@@ -3,10 +3,11 @@ $(document).ready(function() {
     var split = location.href.split("?");
     var one = split[1].split("=");
     var board_no = one[1];
+    if( split[2] != null) {
     var two = split[2].split("=");
     var site_id = two[1];
 
-    if( site_id != null) {
+
 
     // var copyarr;
     //   var boardno = location.href.split("=");
