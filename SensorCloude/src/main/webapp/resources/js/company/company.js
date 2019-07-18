@@ -52,14 +52,14 @@ $(document).ready(function() {
 	
 	$("#companyadd").click(function(){
 		window.open("/company/companyadd", "pop",
-		"width=500,height=400,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+		"width=500,height=450,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 	});
 	
 
 	 $(document).on("click", "#list tr" , function(){
 		 
 		var openWin = window.open("/company/companymod", "pop",
-				 "width=500,height=400,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
+				 "width=500,height=450,top="+(screen.availHeight/2-350)+",left="+(screen.availWidth/2-300)+"resizable=yes");
 		
 		var tr = $(this);
 		var name = tr.children().eq(0).addClass("1");

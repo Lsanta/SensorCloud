@@ -130,22 +130,35 @@
     width: 100%;
     margin: 0 auto;
 }
-      
+#ce {
+    margin-top: 15px;
+    width: 28%; /* 47px*/
+    height: 60px;
+    margin-left: 10px;
+    display: inline-block;
+}
 
+#ceCheck{
+    margin-top: 15px;
+    width: 28%;
+    height: 60px;
+    margin-left: 10px;
+    display: inline-block;
+}
 
 #modifybutton {
     margin-top: 15px;
-    width: 47%;
+    width: 28%;
     height: 60px;
-    margin-left: 5px;
+    margin-left: 10px;
     display: inline-block;
 }
 
 #deletebutton {
     margin-top: 15px;
-    width: 47%;
+    width: 28%;
     height: 60px;
-    margin-left: 5px;
+    margin-left: 10px;
     display: inline-block;
 }
 

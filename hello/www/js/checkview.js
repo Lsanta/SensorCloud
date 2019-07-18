@@ -38,7 +38,7 @@ $(document).ready(function() {
                 data : {boardno: boardno},
                 dataType:'text',
                 success : function(result){
-                    window.location.href="site.html?sid="+site_id; 
+                    window.location.href="site.html?sid="+site_id+"#tab3"; 
                   
                  }
                 });
@@ -97,11 +97,39 @@ $(document).ready(function() {
              m_level = localStorage.getItem("level");
             }
 
-            if(user_id != id)  {
-                if(m_level < 5) {
-                    $('#modifybutton').css("display","none");
-                    $('#deletebutton').css("display","none");
+            if(user_id == id)  {
+                $('#modifybutton').show();
+                $('#deletebutton').show();
+                if(m_level >= 5) {
+                    $('#modifybutton').css("width","42%");
+                    $('#deletebutton').css("width","42%");
+                    $('#ce').css("width","42%");
+                    $('#ceCheck').css("width","42%");
+
+                    $("#ce").show();
+                    $("#ceCheck").show();
+                } else {
+                    $("#ce").show();
+                    $("#ceCheck").hide();
                 }
+               
+            } else {
+                $('#modifybutton').hide();
+                $('#deletebutton').hide();    
+                
+                if(m_level < 5) {
+                    $("#ce").show();
+                    $("#ceCheck").hide();
+                } else {
+                    $('#ceCheck').css("float","right");
+                    $("#ce").hide();
+                    $("#ceCheck").show();
+                }
+            }
+
+            if( $('#status').text() == "close") {
+                $("#ce").hide();
+                $("#ceCheck").hide();
             }
          
      });
@@ -177,6 +205,49 @@ $(document).ready(function() {
         
  
      });  
+
+     $("#ce").click(function() {
+        if(  $('#status').text() == "fixed") {
+            alert("이미 처리완료 된 글입니다.");
+            $("#ce").hide();
+            return false;
+        }
+
+        if(confirm('해당 글을 처리완료 하시겠습니까?') == true){
+            $.ajax({
+                type : 'GET',
+                url : "http://183.106.6.74:8080/app/checklist/fixedUpdate/"+board_no,
+                success : function(res) {
+                    if( res == "success") {
+                        window.location.href="site.html?sid="+site_id+"#tab3"; 
+                    }
+                }
+            });
+           }else{
+            return false;
+           }
+        
+       
+    });
+    
+    $("#ceCheck").click(function() {
+
+        if(confirm('해당 글을 완료확인 하시겠습니까?') == true){
+            $.ajax({
+                type : 'GET',
+                url : "http://183.106.6.74:8080/app/checklist/closeUpdate/"+board_no,
+                success : function(res) {
+                    if( res == "success") {
+                        window.location.href="site.html?sid="+site_id+"#tab3"; 
+                    }
+                }
+            });
+           }else{
+            return false;
+           }
+       
+    });
+
     } else { //마이페이지에서 클릭
     
     // var copyarr;
@@ -267,11 +338,39 @@ $(document).ready(function() {
              m_level = localStorage.getItem("level");
             }
 
-            if(user_id != id)  {
-                if(m_level < 5) {
-                    $('#modifybutton').css("display","none");
-                    $('#deletebutton').css("display","none");
+            if(user_id == id)  {
+                $('#modifybutton').show();
+                $('#deletebutton').show();
+                if(m_level >= 5) {
+                    $('#modifybutton').css("width","42%");
+                    $('#deletebutton').css("width","42%");
+                    $('#ce').css("width","42%");
+                    $('#ceCheck').css("width","42%");
+
+                    $("#ce").show();
+                    $("#ceCheck").show();
+                } else {
+                    $("#ce").show();
+                    $("#ceCheck").hide();
                 }
+               
+            } else {
+                $('#modifybutton').hide();
+                $('#deletebutton').hide();    
+                
+                if(m_level < 5) {
+                    $("#ce").show();
+                    $("#ceCheck").hide();
+                } else {
+                    $('#ceCheck').css("float","right");
+                    $("#ce").hide();
+                    $("#ceCheck").show();
+                }
+            }
+
+            if( $('#status').text() == "close") {
+                $("#ce").hide();
+                $("#ceCheck").hide();
             }
          
      });
@@ -347,6 +446,51 @@ $(document).ready(function() {
         
  
      });  
+
+     $("#ce").click(function() {
+        if(  $('#status').text() == "fixed") {
+            alert("이미 처리완료 된 글입니다.");
+            $("#ce").hide();
+            return false;
+        }
+
+        if(confirm('해당 글을 처리완료 하시겠습니까?') == true){
+            $.ajax({
+                type : 'GET',
+                url : "http://183.106.6.74:8080/app/checklist/fixedUpdate/"+board_no,
+                success : function(res) {
+                    if( res == "success") {
+                        window.location.href="mypage.html"; 
+                    }
+                }
+            });
+           }else{
+            return false;
+           }
+        
+       
+    });
+    
+    $("#ceCheck").click(function() {
+
+        if(confirm('해당 글을 완료확인 하시겠습니까?') == true){
+            $.ajax({
+                type : 'GET',
+                url : "http://183.106.6.74:8080/app/checklist/closeUpdate/"+board_no,
+                success : function(res) {
+                    if( res == "success") {
+                        window.location.href="mypage.html"; 
+                    }
+                }
+            });
+           }else{
+            return false;
+           }
+       
+    });
+
+
+
     }
      
  });

@@ -32,7 +32,7 @@ $(document).ready(function(){
 					 	 row += '<td class="json_select">'+data.name[i].company+'</td>';
 						 row += '<td class="json_select">'+data.name[i].name+'</td>';
 					 	 row += '<td class="json_select" style="display:none">'+data.name[i].user_id+'</td>';
-					 	 row += '<td class="json_select"><input type="checkbox" name="selected"></td>';
+					 	 row += '<td class="json_select"><input type="checkbox" name="selected" checked></td>';
 					 	 row += "</tr>";				 	
 				 }
 				 $("#amember").prepend(row);

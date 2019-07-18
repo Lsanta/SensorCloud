@@ -28,7 +28,7 @@ $(document).ready(function () {
     //목록으로 버튼을 눌렀을 시 
     $("#returnlistbutton").on("click" , function(e){
         
-        window.location.href="site.html?sid="+site_id; 
+        window.location.href="site.html?sid="+site_id+"#tab3"; 
         
      });
 
@@ -48,7 +48,7 @@ $(document).ready(function () {
             }
 
             else if(status=="fixed"){
-                var status =1;
+                var status = 1;
             }  
             else if(status=="close"){
                 var status = 2;
@@ -74,7 +74,7 @@ $(document).ready(function () {
                 dataType:'text',
                 success : function(result){
                     alert("수정완료");
-                    window.location.href="site.html?sid="+site_id; 
+                    window.location.href="site.html?sid="+site_id+"#tab3"; 
                   
                  }
                 });
