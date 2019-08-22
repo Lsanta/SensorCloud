@@ -16,6 +16,7 @@ import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.CompanyVO;
 import com.wda.sc.domain.InstallSensorVO;
+import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
 import com.wda.sc.mapper.SiteMapper;
@@ -355,5 +356,11 @@ public class SiteServiceImplement implements SiteService {
 	public ArrayList<AlarmMemberVO> getCompany_Alarm_member(String site_id) {
 		// TODO Auto-generated method stub
 		return mapper.getCompany_Alarm_member(site_id);
+	}
+	
+	@Override
+	public ArrayList<MemberVO> getCompanyMember(int company_num) {
+		// TODO Auto-generated method stub
+		return mapper.getCompanyMember(company_num);
 	}
 }

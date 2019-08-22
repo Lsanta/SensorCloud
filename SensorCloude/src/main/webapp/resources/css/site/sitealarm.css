@@ -239,6 +239,6 @@ input[type="button"]:hover {
    display: table-row;
    background-color:#f6f8fd;
 }
-#membertable .json_select {
+#membertable .line {
     background: #e0ecf8;
 }

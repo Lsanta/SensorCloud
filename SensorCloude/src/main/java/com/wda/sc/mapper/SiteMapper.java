@@ -15,6 +15,7 @@ import com.wda.sc.domain.SensorDataVO;
 import com.wda.sc.domain.CheckBoardVO;
 import com.wda.sc.domain.CompanyVO;
 import com.wda.sc.domain.InstallSensorVO;
+import com.wda.sc.domain.MemberVO;
 import com.wda.sc.domain.MysensorVO;
 import com.wda.sc.domain.SiteVO;
 
@@ -174,6 +175,9 @@ public interface SiteMapper {
 	//해당 현장 회사 소속 멤버들 들고오는 쿼리
 	public ArrayList<AlarmMemberVO> getCompany_Alarm_member(String site_id);
 
+	//해당 현장 회사 소속 멤버들 들고오는 쿼리
+	public ArrayList<MemberVO> getCompanyMember(int company_num);
+	
 }
 
 

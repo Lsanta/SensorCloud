@@ -447,4 +447,11 @@
 		where i.site_id=#{site_id} and i.sensor_sn = m.sensor_sn
 		]]>
 	</select>
+	
+	<!-- 협력사 직원들의 정보 불러오기 -->
+	<select id="getCompanyMember" resultType="com.wda.sc.domain.MemberVO">
+		select name,phone, (select name from company where company_num = 1) as company
+		from member
+		where company_num = #{company_num}
+	</select>
 </mapper>
