@@ -178,4 +178,7 @@ public interface SiteService {
 	//해당 현장 회사 소속 멤버들 들고오는 쿼리
 	public ArrayList<MemberVO> getCompanyMember(int company_num);
 
+	// 해당 현장 이름 반환
+	public String getCompanyName(String site_id);
+
 }

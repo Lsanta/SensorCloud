@@ -363,4 +363,10 @@ public class SiteServiceImplement implements SiteService {
 		// TODO Auto-generated method stub
 		return mapper.getCompanyMember(company_num);
 	}
+
+	@Override
+	public String getCompanyName(String site_id) {
+		// TODO Auto-generated method stub
+		return mapper.getCompanyName(site_id);
+	}
 }

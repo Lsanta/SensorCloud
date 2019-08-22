@@ -70,6 +70,7 @@
 							<span id="m-company">협력사 정보</span><br />
 							<span id="m-cinfo" th:text="|${siteInfo.name}   Tel) ${siteInfo.company_tel}|"></span>
 							<!-- <span id="m-ctel" th:text="|Tel)${siteInfo.company_tel}|"></span> -->
+							<span id="m-name" style="display:none" th:text="${siteInfo.name}"></span>
 						</div>
 					</div>
 				</div>
@@ -452,6 +453,22 @@
           
         }
     });	
+	
+	
+	// 현장 메인페이지에 있는 협력사 이름
+	var cname = $("#m-name").text();
+	
+	console.log($("#amember").children().length);
+	// tr 개수만큼 돈다.
+	for(var i=0; i < $("#amember").children().length; i++) {
+		
+		if(cname == $("#amember > tr.select").eq(i).children().eq(1).text()) {
+			//협력사 직원이 아니면 색깔을 넣는다.
+//  		$("#amember > tr.select").eq(i).removeClass();
+			$("#amember > tr.select").eq(i).addClass("line");
+		}
+	}
+
 	
    });
    </script>

@@ -239,6 +239,10 @@ input[type="button"]:hover {
    display: table-row;
    background-color:#f6f8fd;
 }
-#membertable .line {
+#amember .line td{
     background: #e0ecf8;
 }
+
+/* #membertable .line { */
+/*     background: #e0ecf8; */
+/* } */

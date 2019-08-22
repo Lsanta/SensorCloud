@@ -18,6 +18,19 @@ $(document).ready(function(){
 		//팝업창으로 입력폼 띄우고 정보 전달 후 Insert
 		//window.open(newURL + "/add" ,"add","width=300,height=300, scrollbars=no, resizable=yes");
 		
+	// 현장 메인페이지에 있는 협력사 이름
+	var cname = $("#m-name").text();
+	
+	console.log($("#amember").children().length);
+	// tr 개수만큼 돈다.
+	for(var i=0; i < $("#amember").children().length; i++) {
+		
+		if(cname == $("#amember > tr.select").eq(i).children().eq(1).text()) {
+			//협력사 직원이 아니면 색깔을 넣는다.
+			$("#amember > tr.select").eq(i).addClass("line");
+		}
+	}
+	
 	$(document).on("click","#plus-btn",function(){
 		
 		 var row ="<tr class='example'>"
@@ -253,6 +266,7 @@ $(document).ready(function(){
 			
 		}); // status 종료
 	
+		
 });
 
 

@@ -450,8 +450,18 @@
 	
 	<!-- 협력사 직원들의 정보 불러오기 -->
 	<select id="getCompanyMember" resultType="com.wda.sc.domain.MemberVO">
-		select name,phone, (select name from company where company_num = 1) as company
+		select name,phone, (select name from company where company_num = #{company_num}) as company
 		from member
 		where company_num = #{company_num}
+	</select>
+	
+	<!-- site_id로 협력사 이름 가져오기 -->
+	<select id="getCompanyName" resultType="String">
+	<![CDATA[ 
+		select c.name
+		from company c, site s
+		where c.company_num = s.company_num
+		and s.site_id = #{site_id}
+	]]>
 	</select>
 </mapper>
